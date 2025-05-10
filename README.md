@@ -7,7 +7,7 @@
         <h2>なにものか？</h2>
         <p>
             <a href="http://www.stat.ucla.edu/~ywu/ps.pdf">Physics from Symmetry</a>
- の3章(リー群論)を教科書とした<a href="">学習ノート</a> です(作成中)<br>
+ の3章(リー群論)を教科書とした<a href="https://boyoyon.github.io/StudyNote_GroupTheory/data/GroupTheory.html">学習ノート</a> です(作成中)<br>
         </p>
     </body>
 </html>
