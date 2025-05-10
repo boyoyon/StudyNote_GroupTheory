@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>リー群論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+        <h1>リー群論</h1>
+<h2>章の概要</h2>
+<p>
+この章の最終目標は、時空の基本対称群であると仮定するポアンカレ群の二重被覆の基本表現を導出することです。これらの基本表現は、すべての素粒子を記述するために必要なツールであり、それぞれが異なる種類の素粒子を表します。これらの表現は、自然界にどのような種類の素粒子が存在するかを教えてくれます。
+<!--
+The final goal of this chapter is the derivation of the fundamental
+representations of the double cover of the Poincaré group, which
+we assume is the fundamental symmetry group of spacetime. These
+fundamental representations are the tools needed to describe all
+elementary particles, each representation for a different kind of elementary
+particle. The representations will tell us what types of
+elementary particles exist in nature.
+-->
+</p><p>
+まず、2 つの簡単な例に基づいて群の定義から始めます。次に、リー理論への第一歩として、2 次元での回転を記述する 2 つの方法を導入します。<br>
+• 2× 2 回転行列<br>
+• 単位複素数
+</p><p>
+次に、3 次元での回転の同様の 2 つ目の記述を見つけようとします。これは、\(\mathcal{SU}(2)\) と呼ばれる非常に重要な群につながります。その後、リー代数について学習します。リー代数を使用すると、より単純なもの (対応するリー代数) を使用することで、難しいもの (リー群) について多くのことを学ぶことができます。一般に、同じリー代数を持つグループは多数ありますが、その中で本当に基本的なグループは 1 つだけです。この知識を使用して、ポアンカレ群を二重にカバーする、自然の真の基本対称群を明らかにします。通常、いくつかの既知の変換から始めてリー代数を導出し、このリー代数を使用して対称変換のさまざまな表現を取得します。これにより、最初に用いた表現が、数多くある特殊なケースの 1 つに過ぎないことがわかります。この知識は、ポアンカレ群の重要な部分であるローレンツ群について基本的なことを学ぶために使用できます。ローレンツ群の二重被覆のリー代数は、\(\mathcal{SU}(2)\) リー代数の 2 つのコピーで構成されることがわかります。したがって、\(\mathcal{SU}(2)\) について学んだことをすべて直接使用できます。最後に、変換を考慮に入れることで、ポアンカレ群に到達します。ポアンカレ群は、ローレンツ群に変換を加えたものです。この時点で、ポアンカレ群の二重被覆の基本表現を分類するために必要なものがすべて揃います。これらの基本表現は、後の章で物理学の基本法則を導くために使用します。
+<!--
+We start with the definition of a group, which is motivated by two
+easy examples. Then, as a first step towards Lie theory we introduce
+two ways for describing rotations in two dimensions:<br>
+• 2× 2 rotation matrix and<br>
+• unit complex numbers.<br>
+
+Then we will try to find a similar second description of rotations in
+three dimensions. This leads us to an extremely important group,
+called1 SU(2). After that, we will learn about Lie algebras, which en-
+able us to learn a lot about something difficult (a Lie group) by using
+something simpler (the corresponding Lie algebra). There are in general
+many groups with the same Lie algebra, but only one of them
+is truly fundamental. We will use this knowledge to reveal the true
+fundamental symmetry group of nature, which doubly covers the
+Poincaré group. We usually start with some known transformations,
+derive the Lie algebra and use this Lie algebra to get different representations
+of the symmetry transformations. This will enable us to
+see that the representation we started with is just one special case out
+of many. This knowledge can then be used to learn something fundamental
+about the Lorentz group, which is an important part of the
+
+Poincaré group. We will see that the Lie algebra of the double cover
+of the Lorentz group consists of two copies of the SU(2) Lie algebra.
+Therefore, we can directly use everything we learned about SU(2).
+Finally, we include translations into the considerations, which leads
+us to the Poincaré group. The Poincaré group is the Lorentz group
+plus translations. At this point, we will have everything at hand to
+classify the fundamental representations of the double cover of the
+Poincaré group. We use these fundamental representations in later
+chapters to derive the fundamental laws of physics.
+-->
+<p class="margin-large">
+<sup>1</sup> 
+\(\mathcal S\) は special の略で、\(\det(M) = 1\) を意味します。\(\mathcal U\) は unitary の略で、\(M^†M = 1\) です。また、このグループはそもそも 2 × 2 行列によって定義されているため、数字 2 が使用されます。<br>
+<br>
+(ここから蛇足)<br>
+　\(\det(M)\) は線形写像による体積の変化を表す。<br>
+　\(\det(M) = 1\) は写像で体積が変わらないこと、<br>
+　\(\det(M) \neq -1\) 裏返しにならないこと<br>
+　を表している。<br>
+　<br>
+　\(M^†\) は行列を転置(行と列の入れ替え)を行い、各要素の複素共役をとったもの。<br>
+(ここまで蛇足)
+<br>  
+<!--
+The S stands for special, which means
+det(M) = 1. U stands for unitary:
+M†M = 1 and the number 2 is used
+because the group is defined in the first
+place by 2 × 2 matrices.
+-->
+</p><p>
+この図はこの章の構成を説明しています。迷ったときはいつでもここに戻ってきてください。初めて読むときは、ここで長い時間をかける必要はありません。
+<!--
+This diagram explains the structure
+of this chapter. You should come back
+here whenever you feel lost. There is no
+need to spend much time here at a first
+encounter.
+-->
+</p>
+<center><img src="images/fig3_01.svg"></center>
+<center><img src="images/fig3_02.svg"></center>
+<center><img src="images/fig3_03.svg"></center>
+<center><img src="images/fig3_04.svg"></center>
+<h2>3.1 群</h2>
+<!--
+<h2>3.1 Groups</h2>
+-->
+<p>
+対称性の力を活用するには、対称性を数学的に扱うための枠組みが必要です。対称性を扱う数学の分野は群論と呼ばれます。群論の中でも連続対称性を扱う特別な分野がリー理論です。対称性は一連の変換に対する不変性として定義されるため、群は変換の集合として定義されます。では、何をしたいのか理解するために、2つの簡単な例から始めましょう。
+<!--
+If we want to utilize the power of symmetry, we need a framework
+to deal with symmetries mathematically. The branch of mathematics
+that deals with symmetries is called group theory. A special branch
+of group theory that deals with continuous symmetries is Lie Theory.
+Symmetry is defined as invariance under a set of of transformations
+and therefore, one defines a group as a collection of transformations.
+Let us get started with two easy examples to get a feel for what
+we want to do:
+-->
+<div class="styleBullet">
+<ul>
+<li>1. 正方形は数学的には点の集合（例えば、4つの頂点はこの集合の一部）であり、正方形の対称性とは、この点の集合をそれ自身に写す変換です。
+
+正方形の対称性の例としては、原点を中心として \(90^{\circ}, 180^{\circ}, 270^{\circ}\) または \(0^{\circ}\) 回転することが挙げられます。これらの回転は、正方形をそれ自身に写します。つまり、集合内のすべての点を、その集合に再び含まれる点に写すということです。そして、集合はこのような変換に対して不変であると言えます。<br>
+<br>
+
+すべての回転が正方形の対称性となるわけではないことに注意してください。これは、正方形の頂点に注目すると明らかになります。この集合を時計回りに、例えば \(5^{\circ}\)◦ 回転させる変換を行うと、これらの点は正方形を定義する元の集合の外側の点に写像されます。例えば、図 3.2 に示すように、角の点 \(A\) は点 \(A^\prime\) に写像されますが、これはそもそも正方形を定義した集合内には存在しません。したがって、\(5^{\circ}\) 回転は正方形の対称性ではありません。もちろん、回転後の物体は依然として正方形ですが、別の正方形（＝別の点の集合）になります。しかし、\(90^{\circ}\) 回転は正方形の対称性です。なぜなら、点 \(A\) は元の集合内にある点 \(B\) に写像されるからです。これは図 3.3 に示されています。<br>
+<br>
+
+もう 1 つ、役立つ視点があります。少しの間目を閉じて、誰かが目の前で正方形を変形させているところを想像してみてください。目を開けた後、その人が何か変わったかどうか全くわからない場合、その変換は対称変換です。<br>
+<br>
+正方形を不変にする変換の集合は群と呼ばれます。変換パラメータ（ここでは回転角度）は任意の値をとることができず、その群は離散群と呼ばれます。
+</li><br><li>2. もう1つの例は、単位円を不変にする変換の集合です。繰り返しますが、単位円は点の集合として定義され、対称変換はこの集合を自身に写す写像です。<br>
+<br>
+単位円は、原点の周りのいくつかの回転に対して, ではなく, すべての回転に対して不変です。言い換えれば、変換パラメータ（回転角度）は任意の値をとることができ、その群は連続群と呼ばれます。
+</li></ul></div>
+<!--
+<li>1. A square is mathematically a set of points (for example, the four
+corner points are part of this set) and a symmetry of the square is
+a transformation that maps this set of points into itself.
+
+Examples of symmetries of the square are rotations about the
+origin by \(90^{\circ}, 180^{\circ}, 270^{\circ}\) or \(0^{\circ}\). These rotations map the square into
+itself. This means they map every point of the set to a point that
+lies again in the set and one says the set is invariant under such
+transformations.<br>
+<br>
+
+Take note that not every rotation is a symmetry of the square.
+This becomes obvious when we focus on the corner points of the
+square. Transforming the set by a clockwise rotation by, say \(5^{\circ}\)◦,
+maps these points into points outside the original set that defines
+the square. For example, as shown in Figure 3.2, the corner point
+\(A\) is mapped to the point \(A^\prime\), which is not found inside the set that
+defined the square in the first place. Therefore a rotation by \(5^{\circ}\) is
+not a symmetry of the square. Of course the rotated object is still
+a square, but a different square (=different set of points). Nevertheless,
+a rotation by \(90^{\circ}\) is a symmetry of the square because the
+point A is mapped to the point B, which lies again in the original
+set. This is shown in Fig. 3.3.<br>
+<br>
+
+
+
+Here’s another helpful perspective: Imagine you close your eyes
+for a moment, and someone transforms a square in front of you. If
+you can’t tell after opening your eyes whether the person changed
+anything at all, then the transformation was a symmetry transformation.<br>
+<br>
+The set of transformations that leave the square invariant is called
+a group. The transformation parameter, here the rotation angle,
+can’t take on arbitrary values and the group is called a discrete
+group.
+</li><br><li>2. Another example is the set of transformations that leave the unit
+circle invariant. Again, the unit circle is defined as a set of points
+and a symmetry transformation is a map that maps this set into
+itself.<br>
+<br>
+The unit circle is invariant under all rotations about the origin,
+not just a few. In other words: the transformation parameter (the
+rotation angle) can take on arbitrary values, and the group is said
+to be a continuous group.
+</li></ul></div>
+-->
+</p>
+<center><img src="images/fig3_1.png"></center>
+<p>
+<center>図3.1: 正方形の図</center>
+<!--
+<center>Fig. 3.1: Illustration of a square</center>
+-->
+</p>
+<center><img src="images/fig3_2.png"></center>
+<p>
+<center>図3.2: 5度回転した正方形の図</center>
+<!--
+<center>Fig. 3.2: Illustration of a square, rotated by 5◦</center>
+-->
+</p>
+<center><img src="images/fig3_3.png"></center>
+<p>
+<center>図3.3: 90度回転した正方形の図</center>
+<!--
+<center>Fig. 3.3: Illustration of the square rotated by 90◦</center>
+-->
+</p>
+<center><img src="images/fig3_4.png"></center>
+<p class="margin-large">
+図3.4: 単位円の回転の図。原点を中心に任意の回転を行った場合、回転したすべての点は元の集合に戻ります。
+<!--
+Fig. 3.4: Illustration of the rotation of
+the unit circle. For arbitrary rotations
+about the origin, all rotated points lie
+again in the initial set.
+-->
+</p><p>
+もちろん、私たちが関心を持つのは幾何学的形状の対称性だけではありません。例えばベクトルを考えてみると、ベクトルの長さを変えないような変換の集合を見ることができます。
+そのため、本章の冒頭で述べた対称性の定義は非常に一般的なものでした。対称性とは、変換に対して不変であることを意味します。
+幸いなことに、群論と呼ばれる数学理論があり、これによってあらゆる種類の対称性を扱うことができます <sup>2</sup>
+<!--
+We are, of course, not only interested in symmetries of geometric
+shapes. For examples, considering vectors, we can look at the set
+of transformations that leave the length of any vector unchanged.
+For this reason, the definition of symmetry at the beginning of this
+chapter was very general: Symmetry means invariance under a transformation.
+Luckily, there is one mathematical theory, called group
+theory, that lets us work with all kinds of symmetries <sup>2</sup> 
+-->
+</p><p class="margin-large">
+<sup>2</sup> 
+補足：群論は歴史的に方程式の対称性を記述するために発明されました。
+<!--
+As a side-note: Group theory was invented historically to describe symmetries of equations
+-->
+</p><p>
+対称性を扱う数学理論の考え方を正確にするためには、対称性の定義的な特徴を数学的な用語で表現する必要があります。
+<!--
+To make the idea of a mathematical theory that lets us deal with 
+symmetries precise, we need to distill the defining features of symmetries into mathematical terms:
+-->
+<div class="styleBullet">
+<ul><li>
+• 問題の対象を変更しない（「何もしない」）ことは常に対称性であるため、すべての群には単位元が含まれている必要があります。上記の例では、単位元は \(0^{\circ}\) による回転です。
+</li><br><li>• 何かを変換した後、その逆変換を行うことは、何もしないことと等価です。したがって、集合内のすべての要素には、逆元が存在する必要があります。変換の後に逆変換を行うことは、逆変換の定義により、単位変換と同じです。
+上記の例では、これは \(90^{\circ}\) による回転の逆変換は \(-90^{\circ}\) による回転であることを意味します。 \(90^{\circ}\) 回転の後に \(-90^{\circ}\) 回転を行うのは、\(0^{\circ}\) 回転を行うのと同じです。
+</li><br><li>• 対称変換を行った後にさらに対称変換を行うのも、やはり対称変換です。\(90^{\circ}\) 回転の後に \(180^{\circ}\) 回転を行うのは \(270^{\circ}\) 回転であり、これも対称変換です。この変換集合の性質は閉包と呼ばれます。
+
+</li><br><li>• 変換の組み合わせは結合的でなければなりません<sup>3</sup>。 \(90^{\circ}\) 回転の後に \(40^{\circ}\) 回転し、さらに \(110^{\circ}\) 回転する操作は、\(130^{\circ}\) 回転の後に \(110^{\circ}\) 回転する操作と同じであり、さらに \(90^{\circ}\) 回転の後に \(150^{\circ}\) 回転する操作と同じです。記号的に表現すると、
+\[
+R(110^{\circ})R(40^{\circ})R(90^{\circ}) = R(110^{\circ})\left\{R(40^{\circ})R(90^{\circ})\right\}= R(110^{\circ})R(130^{\circ}) \tag{3.1}
+\]
+および
+\[
+R(110^{\circ})R(40^{\circ})R(90^{\circ}) =\left\{R(110^{\circ})R(40^{\circ})\right\}R(90^{\circ}) = R(150^{\circ})R(90^{\circ}) \tag{3.2}
+\]
+この性質は結合性と呼ばれます。
+<!--
+• Leaving the object in question unchanged ("doing nothing") is
+always a symmetry and therefore, every group needs to contain an
+identity element. In the examples above, the identity element is the
+rotation by \(0^{\circ}\).
+</li><br><li>• Transforming something and afterwards doing the inverse transformation
+must be equivalent to doing nothing. Therefore, there
+must be, for every element in the set, an inverse element. A transformation
+followed by its inverse transformation is, by definition
+of the inverse transformation, the same as the identity transformation.
+In the above examples this means that the inverse transformation
+of a rotation by \(90^{\circ}\) is a rotation by \(-90^{\circ}\). A rotation by \(90^{\circ}\)
+followed by a rotation by \(-90^{\circ}\) is the same as a rotation by \(0^{\circ}\).
+</li><br><li>• Performing a symmetry transformation followed by a second
+symmetry transformation is again a symmetry transformation. A
+rotation by \(90^{\circ}\) followed by a rotation by \(180^{\circ}\) is a rotation by \(270^{\circ}\),
+which is a symmetry transformation, too. This property of the set
+of transformations is called closure.
+
+</li><br><li>
+• The combination of transformations must be associative<sup>3</sup>. A rotation by \(90^{\circ}\) followed by a rotation by \(40^{\circ}\), followed by a rotation
+by \(110^{\circ}\) is the same as a rotation by \(130^{\circ}\) followed by a rotation by
+\(110^{\circ}\), which is the same as a rotation by \(90^{\circ}\) followed by a rotation
+by \(150^{\circ}\). In a symbolic form:
+\[
+R(110^{\circ})R(40^{\circ})R(90^{\circ}) = R(110^{\circ})\left\{R(40^{\circ})R(90^{\circ})\right\}= R(110^{\circ})R(130^{\circ}) \tag{3.1}
+\]
+and
+\[
+R(110^{\circ})R(40^{\circ})R(90^{\circ}) =(R(110^{\circ})R(40^{\circ}))R(90^{\circ}) = R(150^{\circ})R(90^{\circ}) \tag{3.2}
+\]
+This property is called associativity.
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<ここから蛇足><br>
+<center><img src="images/fig3_01.png"></center>
+</p><p class="margin-large">
+<ここまで蛇足><br>
+<br>
+<sup>3</sup> 
+しかし、可換ではありません！例えば、異なる軸の周りの回転運動は可換ではありません。これは一般に次のことを意味します。
+<!--
+But not commutative! For example rotarotations around different axes do not commute. This means in general:
+-->
+\[
+R_x(\theta)R_z(\phi)\neq R_z(\phi)R_x(\theta)
+\]
+<ここから蛇足><br>
+<center><img src="images/fig3_02.png"></center>
+</p><p class="margin-large">
+<ここまで蛇足>
+</p><p>
+<div class="styleBullet">
+<ul><li>
+• 上記の事柄について議論するには、群の元を結合するための規則、正確には二項演算が必要です。
+上記の例では、標準的なアプローチは回転行列<sup>4</sup>を用いることであり、群の元（対応する回転行列）を結合するための規則は通常の行列の乗算となります。しかしながら、同じものを記述するのに異なる方法が存在することはよくあり<sup>5</sup>、群論はこれを体系的に研究することを可能にします。同じ変換の異なる記述を扱う群論の分野は、表現論<sup>6</sup>と呼ばれます。
+<!--
+• To be able to talk about the things above, one needs a rule, to be
+precise: a binary operation, for the combination of group elements.
+In the above examples, the standard approach would be
+ to use rotation matrices<sup>4</sup> and the rule for combining the group elements (the corresponding rotation matrices) would be ordinary matrix multiplication. Nevertheless, there are often different
+ ways to describe the same thing<sup>5</sup> and group theory enables us to study this systematically. The branch of group theory that deals with different descriptions of the same transformations is called
+representation theory<sup>6</sup>.
+-->
+</li></ul></div></p>
+<p class="margin-large">
+<sup>4</sup> 回転行列の導出について詳しく知りたい場合は、付録 A.2 を参照してください。<br>
+<br>
+<sup>5</sup> 例えば、平面上の回転は、単位複素数の乗算によっても記述できます。この場合、群の要素を結合する規則は複素数の乗算です。これについては、この章の後半で説明します。<br>
+<br>
+<sup>6</sup> 表現論については、第 3.5 節で説明します。
+<!--
+<sup>4</sup> If you want to know more about the derivation of rotation matrices have a look at Appendix A.2.<br>
+<br>
+<sup>5</sup> For example, rotations in the plane can be described alternatively by multiplication with unit complex numbers. The rule for combining group elements is then complex number multiplication. This will be discussed later in this chapter.<br>
+<br>
+<sup>6</sup> Representation theory is the topic of Section 3.5.
+-->
+</p><p>
+このような考え方を厳密かつ数学的に扱うには、そのような変換の定義的特徴を抽出し、公理へと昇格させる必要があります。これらの公理を満たすすべての構造は、群と呼ばれます。これは、群論と呼ばれる全く新しい数学の分野への道を開きます。群の公理を満たす非常に抽象的な構造を見つけることも可能ですが、ここでは、上で検討した回転に非常によく似た群に絞って考えます。上記の議論の後、群の抽象的な定義は、単に対称変換の（自明な）性質を述べているだけであることがわかります。群 (G, ◦) とは、集合 G と、G 上に定義された二項演算 ◦ が、以下の公理<sup>7</sup>を満たすものです。
+<!--
+To work with ideas like these in a rigorous, mathematical way, one
+distils the defining features of such transformations and promotes
+them to axioms. All structures satisfying these axioms are then called
+groups. This paves the way for a whole new branch of mathematics,
+called group theory. It is possible to find very abstract structures 
+
+satisfying the group axioms, but we will stick with groups that are
+very similar to the rotations we explored above.
+After the discussion above, we can see that the abstract definition
+of a group simply states (obvious) properties of symmetry transformations:
+A group (G, ◦) is a set G, together with a binary operation ◦ defined
+on G, that satisfies the following axioms<sup>7</sup>
+-->
+</p><p class="margin-large">
+<sup>7</sup> これについてはあまり心配する必要はありません。
+実際には、ある種の変換がこれらの公理に従うかどうかを確認します。従う場合、それらの変換は群を形成し、群論の結果を用いて、問題の変換についてより詳しく知ることができます。
+<!--
+<sup>7</sup> Do not worry too much about this.
+In practice one checks for some kind
+of transformation if they obey these
+axioms. If they do, the transformations
+form a group and one can use the
+results of group theory to learn more
+about the transformations in question.
+-->
+</p><p>
+<div class="styleBullet">
+<ul><li>
+• <strong>閉包性</strong>: すべての \(g_1, g_2 ∈ G\) に対して, \(g1 ◦ g2 ∈ G\) 
+</li><br><li>• <strong>単位元の存在</strong>: すべての \(g ∈ G\) に対して, \(g ◦ e = g = e ◦ g\) となる単位元 \(e ∈ G\) が存在する。
+</li><br><li>• <strong>逆元の存在</strong>: すべての \(g ∈ G\) に対して、\(g ◦ g^{−1} ∈ G\) となる逆元 \(g^{−1} ∈ G\) が存在する。
+</li><br><li>• <strong>結合性</strong>: すべての \(g_1, g_2, g_3 ∈ G\) に対して \(g_1 ◦ (g_2 ◦ g_3) = (g_1 ◦ g_2) ◦ g_3\) となる。
+<!--
+• Closure: For all \(g_1, g_2 ∈ G, g1 ◦ g2 ∈ G\)
+</li><br><li>• Identity element: There exists an identity element \(e ∈ G\) such that for all \(g ∈ G, g ◦ e = g = e ◦ g\)
+</li><br><li>• Inverse element: For each \(g ∈ G\), there exists an inverse element \(g^{−1} ∈ G\) such that \(g ◦ g^{−1} = e = g^{−1} ◦ g\).
+</li><br><li>• Associativity: For all \(g_1, g_2, g_3 ∈ G, g_1 ◦ (g_2 ◦ g_3) = (g_1 ◦ g_2) ◦ g_3\).
+-->
+</li></ul></div>
+</p><p>
+要約すると、与えられた対象を不変に保つすべての変換の集合は対称群と呼ばれます。ミンコフスキー時空の場合、不変のまま残される対象はミンコフスキー計量<sup>8</sup>であり、対応する対称群はポアンカレ群と呼ばれます。
+<!--
+To summarize: The set of all transformations that leave a given
+object invariant is called a symmetry group. For Minkowski spacetime,
+the object that is left invariant is the Minkowski metric<sup>8</sup> and the 
+corresponding symmetry group is called the Poincaré group.
+-->
+</p><p class="margin-large">
+<sup>8</sup> これはミンコフスキー空間における距離と長さを計算するために使用するツールです。
+<!--
+<sup>8</sup> Recall, this is the tool which we use
+to compute distances and lengths in
+Minkowski space.
+-->
+</p><p>
+群の特性特性は、変換が作用する対象とは全く独立して定義されることに注意してください。したがって、そのような対称変換は、それを抽出した対象を参照することなく研究することができます。これは非常に便利です。なぜなら、同じ対称性、あるいは少なくとも同じ種類の対称性を持つ対象は多数存在する可能性があるからです。群論を用いることで、個々の対象を個別に調べる必要がなくなり、対称変換の一般的な特性を研究できるようになります。
+<!--
+Take note that the characteristic properties of a group are defined
+completely independent of the object the transformations act on. We
+can therefore study such symmetry transformations without making
+references to any object we extracted them from. This is very useful,
+because there can be many objects with the same symmetry or at
+least the same kind of symmetry. Using group theory we no longer
+have to inspect each object on its own, but are now able to study
+general properties of symmetry transformations.
+-->
+</p>
+    </body>
+</html>

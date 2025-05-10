@@ -1,0 +1,620 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>リー群論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>リー群論</h1>
+<h2>3.2 2次元における回転</h2>
+<!--
+<h1>Lie Group Theory</h1>
+<h2>3.2 Rotations in two Dimensions</h2>
+-->
+<p>
+最初のステップとして、簡単だが重要な例から始めましょう。2次元において、ベクトルの長さを変えずに済む変換は何でしょうか？しばらく考えた後、回転と鏡映変換<sup>9</sup>に行き着きます。これらの変換は、もちろん単位円を単位円に写す変換と同じです。これは、1つの群が異なる種類の物体、つまり幾何学的形状である円とベクトルにどのように作用するかを示す例です。ベクトルを考えると、これらの変換は回転行列<sup>10</sup>で表すことができ、それは次のようになります。
+<!--
+As a first step, we start with an easy, but important, example. What transformations in two dimensions leave the length of any vector unchanged? After thinking about it for a while, we come up with<sup>9</sup> rotations and reflections. These transformations are of course the same ones that map the unit circle into the unit circle. This is an example of how one group may act on different kinds of objects: On the circle, which is a geometric shape, and on a vector. Considering vectors, one can represent these transformations by rotation matrices<sup>10</sup>, which are of the form
+-->
+<p><p class="margin-large">
+<sup>9</sup> ベクトルの長さを変えない別の変換は並進です。並進とは、すべての点を指定された方向に一定距離だけ移動させることを意味します。これらは数学的に少し異なる方法で記述されるため、後ほど説明します。<br>
+<br>
+<sup>10</sup> これらの行列の明示的な導出については、付録A.2を参照してください。
+<!--
+<sup>9</sup> Another kind of transformation that
+leaves the length of a vector unchanged
+are translations, which means we move
+every point a constant distance in a
+specified direction. These are described
+mathematically a bit different and we
+are going to talk about them later.<br>
+<br>
+<sup>10</sup> For an explicit derivation of these
+matrices have a look a look at Appendix A.2.
+-->
+</p><p>
+
+\[
+R_θ =
+\begin{pmatrix}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{pmatrix}
+\tag{3.3}
+\]
+は、原点を中心とした角度 \(θ\) の2次元回転を記述します。
+軸における鏡映変換は、次の行列を用いて行うことができます。
+<!--
+and describe two-dimensional rotations about the origin by angle \(θ\).
+Reflections at the axes can be performed using the matrices:
+-->
+\[
+P_x =
+\begin{pmatrix}
+-1 & 0 \\
+0 & 1
+\end{pmatrix}
+　
+P_y=
+\begin{pmatrix}
+1 & 0 \\
+0 & -1
+\end{pmatrix}
+\tag{3.4}
+\]
+
+これらの行列は、通常の二項演算としての行列乗算 ◦ と合わせて群の公理を満たし、したがってこれらの変換は群を形成することを確認できます。
+<!--
+You can check that these matrices, together with the ordinary
+matrix multiplication as binary operation ◦, satisfy the group axioms
+and therefore these transformations form a group.
+-->
+
+</p><p>
+「任意のベクトルの長さを変えない2次元変換をすべて見つける」という課題を、より抽象的な方法で定式化することができます。ベクトルの長さは、ベクトル自身とのスカラー積で与えられます。もしベクトルの長さが\(a → a^\prime\)変換後も同じであれば、次の式が成り立ちます。
+<!--
+We can formulate the task of finding "all transformations in two
+dimensions that leave the length of any vector unchanged" in a more
+abstract way. The length of a vector is given by the scalar product of
+the vector with itself. If the length of the vector is the same after the
+transformation \(a → a^\prime\), the equation
+-->
+\[
+a^\prime \cdot a^\prime \overset{!}{=}a \cdot a \tag{3.5}
+\]
+
+が成り立つ。変換を\(O\)で表し、変換されたベクトルを\(a → a^\prime = Oa\)と書く。したがって
+<!--
+must hold. We denote the transformation with \(O\) and write the transformed
+vector as \(a → a^\prime = Oa\). Thus
+-->
+
+\[
+a \cdot a = a^Ta \rightarrow {a^\prime}^Ta^\prime = (Oa)^TOa=a^TO^TOa\overset{!}{=}a^Ta=a \cdot a \tag{3.6}
+\]
+ここで、ベクトルの長さを変えずに
+変換が満たさなければならない条件は、
+<!--
+where we can see the condition a transformation must fulfil to leave
+the length of a vector unchanged is
+-->
+\[
+O^TO=I \tag{3.7}
+\]
+ここで \(I\) は単位行列<sup>11</sup>を表す。
+<!--
+where I denotes the unit matrix <sup>11</sup>. 
+-->
+<p><p class="margin-large">
+<sup>11</sup>単位行列
+<!--
+<sup>11</sup> unit matrix
+-->
+\[
+I=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+\]
+</p><p>
+上で引用したよく知られた回転行列と鏡映行列がまさにこの条件を満たしていることを確認できます<sup>12</sup>。
+<!--
+You can check that the well-known rotation and reflection matrices we cited above fulfil exactly
+this condition<sup>12</sup>. 
+-->
+<p><p class="margin-large">
+<sup>12</sup> 
+式3.3の行列を用いると、
+<!--
+With the matrix from Eq. 3.3 we have
+-->
+\[
+\begin{align}
+R_\theta^TR &=
+\begin{pmatrix}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{pmatrix}
+\begin{pmatrix}
+\cos(\theta) & \sin(\theta) \\
+-\sin(\theta) & \cos(\theta)
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+\cos^2(\theta)+\sin^2(\theta) & 0 \\
+0 & \sin^2(\theta)+\cos^2(\theta)
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+\end{align}
+\]
+</p><p>
+2次元行列に対するこの条件は、\(\mathcal O(2)\)群を定義します。これは、すべての直交2×2行列<sup>13</sup>の群です。
+<!--
+This condition for two dimensional matrices defines
+the group \(\mathcal O(2)\), which is the group of all<sup>13</sup> orthogonal 2 × 2 matrices.
+-->
+<p><p class="margin-large">
+<sup>13</sup> 
+すべての直交2×2行列は、式3.3の形、式3.4の形、あるいはこれらの行列の積として表すことができます。
+<!--
+Every orthogonal 2 × 2 matrix can be written either in the form of Eq. 3.3, 
+as in Eq. 3.4, or as a product of these matrices.
+-->
+</p><p>
+この群の回転のみを含む部分群を見つけるには、式3.7の条件から次の式が成り立つことを観察すればよい。
+<!--
+We can find a subgroup of this group that includes only rotations, by
+observing that it follows from the condition in Eq. 3.7 that
+-->
+\[
+\begin{align}
+\det(O^TO) &\overset{!}{=}\det(I)=1\\
+\rightarrow\det(O^TO) &= \det(O^T)\det(O) \overset{!}{=} \det(I) = 1 \\
+\rightarrow (\det(O))^2 &\overset{!}{=}1\rightarrow\det(O)\overset{!}{=}\pm 1
+\end{align}
+\tag{3.8}
+\]
+
+\(\det(O) = 1\)の群の変換は回転<sup>14</sup>であり、2つの条件は
+<!--
+The transformations of the group with \(\det(O) = 1\) are rotations<sup>14</sup> and the two conditions
+-->
+<p><p class="margin-large">
+<sup>14</sup> 
+式3.3と式3.4の行列を見れば簡単にわかるように、\(\det O = −1\)の行列は鏡映行列です。
+<!--
+As can be easily seen by looking at
+the matrices in Eq. 3.3 and Eq. 3.4.
+The matrices with \(\det O = −1\) are
+reflections.
+-->
+</p><p>
+
+\[
+\begin{align}
+O^TO &=I \tag{3.9} \\
+\det O &= 1 \tag{3.10}
+\end{align}
+\]
+
+\(\mathcal{SO}(2)\) 群を定義します。ここで、「\(\mathcal S\)」は特殊(special)、「\(\mathcal O\)」は直交(orthogonal)を表します。\(\mathcal{SO}(2)\) の特別な点は、系の向きを維持する変換に制限することです。つまり、右手<sup>15</sup>座標系は右手座標系のままです。線形代数の言語で言えば、これは行列の行列式が\(+1\)でなければならないことを意味します。
+<!--
+define the \(\mathcal{SO}(2)\) group, where the "\(\mathcal S\)" denotes special and the "\(\mathcal O\)" orthogonal. The special thing about \(\mathcal{SO}(2)\) is that we now restrict
+it to transformations that keep the system orientation, i.e., a righthanded<sup>15</sup> coordinate system stays right-handed. In the language of linear algebra this means that the determinant of our matrices must be \(+1\).
+-->
+<p><p class="margin-large">
+<sup>15</sup> 
+右手座標系と左手座標系の違いがわからない場合は、付録A.5をご覧ください。
+<!--
+If you don’t know the difference
+between a right-handed and a lefthanded
+coordinate system have a look at the Appendix A.5.
+-->
+</p>
+<h3>3.2.1 単位複素数による回転</h3>
+<!--
+<h3>3.2.1 Rotations with Unit Complex Numbers</h3>
+-->
+<p>
+複素数を用いた2次元回転の記述には別の方法があります。原点を中心とした角度\(θ\)の回転は、単位複素数（\(z = a + ib\)）との乗算で記述でき、これは条件 \((|z|^2 = z^*z = 1)\)<sup>16</sup>を満たします。
+<!--
+There is a different way to describe rotations in two dimensions that
+makes use of complex numbers: rotations about the origin by angle
+\(θ\) can be described by multiplication with a unit complex number (
+\(z = a + ib\) which fulfils the condition \(|z|^2 = z^*z = 1)\)<sup>16</sup> .
+-->
+<p><p class="margin-large">
+
+<sup>16</sup> 
+* 記号は複素共役を表します: \(z = a + ib → z^* = a − ib\)
+<!--
+The * symbol denotes complex
+conjugation: \(z = a + ib → z^* = a − ib\)
+-->
+</p><p>
+単位複素数は、通常の複素数の乗算とともに、群公理を見ればわかるように、<sup>17</sup> \(\mathcal U(1)\) と呼ばれる群を構成します。上で紹介した \(\mathcal O(2)\) と \(\mathcal{SO}(2)\) の群定義との関連を確立するために、単位数の定義条件を <sup>18</sup> と書きます。
+<!--
+The unit complex numbers together with ordinary complex number multiplication are a group, called<sup>17</sup> \(\mathcal U(1)\), as you can check by looking at the group axioms. To establish the connection with the
+group definitions for \(\mathcal O(2)\) and \(\mathcal{SO}(2)\) introduced above, we write the
+defining condition for unit numbers as <sup>18</sup>
+-->
+<p><p class="margin-large">
+
+<sup>17</sup> 
+\(\mathcal U\) はユニタリを表し、条件 \(\mathcal U^†\mathcal U = 1\) を意味します。ここで、「ダガー」と呼ばれる記号 "\(†\)" は、転置と複素共役を表します：
+\(\mathcal U^† = {\mathcal U^T}^*\)。数値の場合、ダガー演算 \(†\) は複素共役のみを取ることと同じです。なぜなら、すべての数値は自明に \(z^T = z\) を満たすからです。したがって、この条件は単純に
+\({\mathcal U}^* = \mathcal U\) となります。<br>
+<!--
+The \(\mathcal U\) stands for unitary, which means the condition \(\mathcal U^†\mathcal U = 1\), where the symbol "\(†\)", called "dagger", denotes transposition plus complex conjugation:
+\(\mathcal U^† = {\mathcal U^T}^*\). For numbers, the dagger operation \(†\) is the same as taking only
+the complex conjugate, because every
+number satisfies trivially \(z^T = z\). Hence
+the condition reduces here simply to
+\({\mathcal U}^* = \mathcal U\).<br>
+-->
+<br>
+<sup>18</sup> 
+複素積を含む群の定義に関するより一般的な情報については、セクション3.10の付録を参照してください。
+<!--
+For more general information about
+the definition of groups involving a
+complex product, have a look at the
+appendix in Section 3.10.
+-->
+</p><p>
+\[
+{\mathcal U}^* \mathcal{U}=1 \tag{3.11}
+\]
+単位複素数の別の書き方は<sup>19</sup>
+<!--
+Another way to write a unit complex number is<sup>19</sup>
+-->
+<p><p class="margin-large">
+
+<sup>19</sup> 
+これはオイラーの公式として知られており、付録B.4.2で導出されています。
+複素数 \(z = a + ib\) に対して、\(a\) は
+\(z: Re(z) = a\) の実部、
+\(b\) は虚部: \(Im(z) = b\) と呼ばれます。
+オイラーの公式では、\(cos(θ)\) は \(R_θ\) の実部、
+\(sin(θ)\) は \(R_θ\) の虚部です。
+<!--
+This is known as Euler’s formula,
+which is derived in Appendix B.4.2.
+For a complex number \(z = a + ib\), \(a\) is
+called the real part of \(z: Re(z) = a\) and
+\(b\) the imaginary part: \(Im(z) = b\). In
+Euler’s formula \(cos(θ)\) is the real part,
+and \(sin(θ)\) the imaginary part of \(R_θ\) .
+-->
+</p><p>
+
+\[
+R_\theta = e^{i\theta}=\cos(\theta)+i\sin(\theta) \tag{3.12}
+\]
+<center><img src="images/fig3_5.png"></center>
+<p class="margin-large">
+図3.5: 単位複素数は複素平面上の単位円上に存在します。
+<!--
+Fig. 3.5: The unit complex numbers lie
+on the unit circle in the complex plane.
+-->
+</p>
+なぜならその時
+<!--
+because then
+-->
+\[
+R_\theta^* R_\theta = e^{-i\theta}e^{i\theta}=\left(\cos(\theta)-i\sin(\theta)\right)\left(\cos(\theta)+i\sin(\theta)\right)=1 \tag{3.13}
+\]
+例を見てみましょう。複素数\(z = 3 + 5i\)を\(90^{\circ}\)回転します。
+<!--
+Let’s have a look at an example: we rotate the complex number
+\(z = 3 + 5i\), by \(90^{\circ}\):
+-->
+\[
+z\rightarrow z^\prime=e^{i90^{\circ}}z=(\underbrace{\cos(90^{\circ})}_{=0}+i\underbrace{\sin(90^{\circ})}_{=1})(3+5i)=i(3+5i)=3i-5 \tag{3.14}
+\]
+2つの複素数は図3.6にプロットされており、\(e^{i90^{\circ}}\) との乗算によって複素数が実際に \(90^{\circ}\) 回転することがわかります。この説明では、回転演算子 \(e^{i90^{\circ}}\) はベクトルではなく複素数に作用します。2次元での回転を記述するには、回転角 \(θ\) という1つのパラメーターが必要です。複素数は2つの自由度を持ち、単位複素数 \(|z| = 1\) という制約により、必要に応じて1つの自由度が残されます。
+<!--
+The two complex numbers are plotted in Fig. 3.6 and we see the
+multiplication with \(e^{i90^{\circ}}\) does indeed rotate the complex number by \(90^{\circ}\). In this description, the rotation operator \(e^{i90^{\circ}}\) acts on complex numbers instead of on vectors. To describe a rotation in two dimensions, one parameter is necessary: the angle of rotation \(θ\). A complex number has two degrees of freedom and with the constraint to unit complex numbers \(|z| = 1\), one degree of freedom is left as needed.
+-->
+</p>
+<center><img src="images/fig3_6.png"></center>
+<p class="margin-large">
+図3.6: 複素数の回転（単位複素数との乗算による）
+<!--
+Fig. 3.6: Rotation of a complex number,
+by multiplication with a unit complex
+number
+-->
+</p><p>
+この説明は、回転行列を用いた前の説明と結びつきます。複素数を2×2の実数行列で表すことで、次のように定義します。
+<!--
+We can connect this description to the previous one, where we
+used rotation matrices, by representing complex numbers by real
+2 × 2 matrices. We define
+-->
+\[
+1=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+　i=
+\begin{pmatrix}
+0 & -1 \\
+1 & 0
+\end{pmatrix}
+\tag{3.15}
+\]
+
+これらの行列が以下の条件を満たしているかどうかを確認できます。
+<!--
+You can check that these matrices fulfil
+-->
+\[
+1^2=1　i^2=-1　1i=i1=i \tag{3.16}
+\]
+
+さて、平面の回転の複雑な表現は次のようになります。
+<!--
+So now, the complex representation of rotations of the plane reads
+-->
+
+\[
+\begin{align}
+R_\theta &=\cos(\theta)+i\sin(\theta)=\cos(\theta)
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
++\sin(\theta)
+\begin{pmatrix}
+0 & -1 \\
+1 & 1
+\end{pmatrix} \\
+&=
+\begin{pmatrix}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{pmatrix}
+\end{align}
+\tag{3.17}
+\]
+
+地図を作ることで
+<!--
+By making the map
+-->
+
+\[
+i \rightarrow \text{real matrix}
+\]
+
+平面の回転というおなじみの表現に戻りましょう。
+もしかしたら、ちょっとした微妙な点に気づいたかもしれません。2次元の回転行列はベクトルに作用しますが、ここでは複素数の単位 \(i\) を実数行列と同一視しました（式3.15）。したがって、回転行列は2×2行列に作用します。なぜなら、作用する複素数も行列になるからです。
+<!--
+we go back to the familiar representation of rotations of the plane.
+Maybe you have noticed a subtle point: The familiar rotation matrix
+in 2-dimensions acts on vectors, but here we identified the complex
+unit i with a real matrix (Eq. 3.15). Therefore, the rotation matrix
+will act on a 2 × 2 matrix, because the complex number we act on
+becomes a matrix, too.
+-->
+
+</p><p>
+複素数を表す行列に回転がどのように作用するかを見てみましょう。
+<!--
+Let us take a look at how rotations act on such a matrix that represents
+a complex number:
+-->
+\[
+\begin{align}
+z^\prime &= 
+\begin{pmatrix}
+a^\prime & -b^\prime \\
+b^\prime & a^\prime
+\end{pmatrix}
+=R_\theta z=
+\begin{pmatrix}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{pmatrix} 
+\begin{pmatrix}
+a & -b \\
+b & a
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+\cos(\theta)a-\sin(\theta)b & -\cos(\theta)b-\sin(\theta)a \\
+\sin(\theta)a+\cos(\theta)b & -\sin(\theta)b+\cos(\theta)a
+\end{pmatrix}
+\end{align}
+\tag{3.19}
+\]
+
+左辺と右辺を比較すると、
+<!--
+By comparing the left-hand side with the right-hand side, we get
+-->
+
+\[
+\begin{align}
+&\rightarrow a^\prime=\cos(\theta)a-\sin(\theta)b \\
+&\rightarrow b^\prime=\sin(\theta)a+\cos(\theta)b
+\end{align}
+\tag{3.20}
+\]
+
+これは列ベクトルに対して\(R_θ\)を作用させたときに得られる結果と同じである。
+<!--
+which is the same result that we get when we act with \(R_θ\) on a column vector
+-->
+
+\[
+\begin{pmatrix}
+\cos(\theta) & -\sin(\theta) \\
+\sin(\theta) & \cos(\theta)
+\end{pmatrix}
+\begin{pmatrix}
+a \\
+b
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos(\theta)a-\sin(\theta)b \\
+\sin(\theta)a+\cos(\theta)b
+\end{pmatrix}
+=
+\begin{pmatrix}
+a^\prime \\
+b^\prime
+\end{pmatrix}
+\tag{3.21}
+\]
+
+どちらの表現も全く同じことを行い、数学的に言えば、\(\mathcal{SO}(2)\)と\(\mathcal U(1)\)の間に同型<sup>20</sup>が成立することがわかります。これは非常に重要な発見であり、次章以降でこの考え方について詳しく説明します。
+<!--
+We see that both representations do exactly the same thing and mathematically
+speaking we have an isomorphism<sup>20</sup> between \(\mathcal{SO}(2)\) and \(\mathcal U(1)\). This is a very important discovery and we will elaborate on
+such lines of thought in the following chapters.
+-->
+
+<p><p class="margin-large">
+
+<sup>20</sup> 
+同型写像 \(\Pi\) とは、積構造を保存する1対1写像です。<br>
+\(\Pi(g_1)\Pi(g_2) = \Pi(g_1g_2) 　∀g_1, g_2 ∈ G\)。
+<!--
+An isomorphism is a one-to-one map
+\(\Pi\) that preserves the product structure
+\(\Pi(g_1)\Pi(g_2) = \Pi(g_1g_2) ∀g_1, g_2 ∈ G\).
+-->
+</p><p>
+
+次に、3次元における回転を記述し、
+同様に3次元における回転の2つの記述を見つけます<sup>21</sup>
+<!--
+Next we want to describe rotations in three dimensions and find
+similarly two descriptions for rotations in three dimensions<sup>21</sup>
+-->
+
+<p><p class="margin-large">
+
+<sup>21</sup> 
+これから本当に面白くなっていきます！
+前のセクションで議論した2次元の場合と同様に、3次元における回転の別の記述を見つけます。そして、この別の記述によって、自然に関する根本的な何かが明らかになるでしょう。
+<!--
+Things are about to get really interesting!
+Analogous to the two-dimensional
+case we discussed in the preceding section,
+we will find a second description
+of rotations in three dimensions and
+this alternative description will reveal
+something fundamental about nature.
+-->
+</p>
+    </body>
+</html>
