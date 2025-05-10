@@ -1,0 +1,728 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>リー群論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>リー群論</h1>
+<h2>3.3 3次元における回転</h2>
+<!--
+<h1>Lie Group Theory</h1>
+<h2>3.3 Rotations in three Dimensions</h2>
+-->
+<p>
+3次元でベクトルを回転させる標準的な方法は、3×3回転行列を用いることです。3つの軸の周りの「基底回転」は、以下の行列で表すことができます。
+<!--
+The standard method to rotate vectors in three dimensions is to use
+3 × 3 rotation matrices. The "basis rotations" around the three axes
+can be described by the following matrices:
+-->
+\[
+\begin{align}
+R_x &=
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & \cos(\theta) & -\sin(\theta) \\
+0 & \sin(\theta) & \cos(\theta)
+\end{pmatrix} 
+　
+R_y =
+\begin{pmatrix}
+\cos(\theta) & 0 & \sin(\theta) \\
+0 & 1 & 0 \\
+-\sin(\theta) & 0 & \cos(\theta)
+\end{pmatrix} \\
+\\
+R_z &=
+\begin{pmatrix}
+\cos(\theta) & -\sin(\theta) & 0 \\
+\sin(\theta) & \cos(\theta) & 0 \\
+0 & 0 & 1
+\end{pmatrix} 
+\end{align}
+\tag{3.22}
+\]
+ベクトルを回転させたい場合
+<!--
+If we want to rotate the vector
+-->
+\[
+\vec{v}=
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix}
+\]
+z軸<sup>22</sup>の周りを回転する場合、対応する回転行列を掛け合わせる。
+<!--
+around the z-axis<sup>22</sup>, we multiply it with the corresponding rotation matrix 
+-->
+<p><p class="margin-large">
+
+<sup>22</sup> 
+一般的な回転ベクトルは付録A.2で明示的に導出されています。
+<!--
+A general, rotated vector is derived
+explicitly in Appendix A.2.
+-->
+</p><p>
+\[
+R_z(\theta)\vec{v}=
+\begin{pmatrix}
+\cos(\theta) & -\sin(\theta) & 0 \\
+\sin(\theta) & \cos(\theta) & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos(\theta) \\
+\sin(\theta) \\
+0
+\end{pmatrix}
+\tag{3.23}
+\]
+
+</p><p>
+3次元における回転の第二の記述を得るためには、まず第一に、高次元における複素数の一般化を見つける必要があります。最初の推測としては、2次元複素数から3次元複素数へと進むことが考えられますが、3次元複素数は存在しないことが判明しました。代わりに、四元数と呼ばれる4次元複素数を見つけることができます。四元数は、3次元における回転を記述するための正しい第二のツールであることが証明され、このツールが4次元であるという事実は、宇宙について深い何かを明らかにします。この結果は予測可能でした。なぜなら、3次元における任意の回転を記述するには、3つのパラメータが必要だからです。単位四元数<sup>23</sup>という制約の下で、4次元複素数は、ちょうど3つの自由度を持ちます。
+<!--
+To get a second description for rotations in three dimensions, the
+first thing we have to do is find a generalisation of complex numbers
+in higher dimensions. A first guess may be to go from 2-dimensional
+complex numbers to 3-dimensional complex numbers, but it turns
+out that there are no 3-dimensional complex numbers. Instead, we
+can find 4-dimensional complex numbers, called quaternions. The quaternions will prove to be the correct second tool to describe rotations
+in 3-dimensions and the fact that this tool is 4-dimensional reveals
+something deep about the universe. We could have anticipated
+this result, because to describe an arbitrary rotation in 3-dimensions,
+3 parameters are needed. Four dimensional complex numbers, with
+ the constraint to unit quaternions<sup>23</sup>, have exactly 3 degrees 
+of freedom.
+-->
+
+<p><p class="margin-large">
+
+<sup>23</sup>
+2次元の場合にも、複素数を単位とする制約を使用したことを思い出してください。
+<!--
+Remember that we used the constraint to unit complex numbers in the
+two dimensional case, too.
+-->
+</p>
+<h3>3.3.1 四元数(クォータニオン)</h3>
+<!--
+<h3>3.3.1 Quaternions</h3>
+-->
+<p>
+4次元複素数は、2次元複素数と同様に構築できます。1つの複素「単位」の代わりに、i、j、kという3つの単位を導入します。これらは
+<!--
+The 4-dimensional complex numbers can be constructed analogous
+to the 2-dimensional complex numbers. Instead of just one complex
+"unit" we introduce three, named i, j, k. These fulfil
+-->
+\[
+\mathbf i^2=\mathbf j^2=\mathbf k^2=-1 \tag{3.24}
+\]
+すると、四元数と呼ばれる4次元複素数は次のように書けます。
+<!--
+Then a 4-dimensional complex number, called a quaternion, can be
+written as
+-->
+\[
+q=a\mathbf 1+b\mathbf i+c\mathbf j + d\mathbf k \tag{3.25}
+\]
+ここで、\(ij =?\) などの乗算規則が必要になります。なぜなら、2つの四元数を掛け合わせると、このような積が発生するからです。追加の条件は
+<!--
+We now need multiplication rules for \(ij =?\) etc., because products
+like this will occur when one multiplies two quaternions. The extra
+condition
+-->
+\[
+\mathbf i\mathbf j\mathbf k=-1 \tag{3.26}
+\]
+必要な関係式をすべて計算するのに十分です。例えば、\(ij=k\) は式 3.26 に \(\mathbf k\) を掛けることで得られます。
+<!--
+suffices to compute all needed relations, for example ij=k follows
+from multiplying Eq. 3.26 with \(\mathbf k\):
+-->
+\[
+\mathbf i\mathbf j \underbrace{\mathbf k\mathbf k}_{=-1}=-\mathbf k\rightarrow \mathbf i\mathbf j=\mathbf k \tag{3.27}
+\]
+単位四元数の集合 \(q = a\mathbf 1 + b\mathbf i + c\mathbf j + d\mathbf k\) は次の条件 <sup>24</sup> を満たします。
+<!--
+The set of unit quaternions \(q = a\mathbf 1 + b\mathbf i + c\mathbf j + d\mathbf k\) satisfy the condition <sup>24</sup>
+-->
+\[
+\begin{align}
+&q^\dagger q \overset{!}{=}1\\
+\rightarrow &(a\mathbf 1-b\mathbf i-c\mathbf j-d\mathbf k)(a\mathbf 1+b\mathbf i+c\mathbf +d\mathbf k)=a^2+b^2+c^2+d^2\overset{!}{=}1
+\end{align}
+\tag{3.28}
+\]
+
+<p><p class="margin-large">
+<sup>24</sup> 
+ここでの記号 \(†\) は「ダガー」と呼ばれ、転置と複素共役を表します: \(a^† = (a^*)^T\)。通常のスカラー積には常に転置が含まれます。\(a · b = a^Tb\) は、行列の乗算では行と列を乗算する必要があるためです。さらに、複素数の場合は複素共役を含めることで実数を確実に得ることができます。これは、長さの観点から物事を解釈する場合に重要です。
+<!--
+The symbol \(†\), here is called "dagger" and denotes transposition plus complex
+conjugation: \(a^† = (a^*)^T\). The ordinary
+scalar product always includes a transposition
+\(a · b = a^Tb\), because matrix
+multiplication requires that we multiply
+a row with a column. In addition, for
+complex entities we include complex
+conjugation that makes sure we get
+something real, which is important if
+we want to interpret things in terms of
+length.
+-->
+</p><p>
+
+
+単位複素数が複素数の乗算において群を形成するのと全く同じように、単位四元数は四元数の乗算において群を形成します。
+<!--
+Exactly as the unit complex numbers formed a group under complex
+number multiplication, the unit quaternions form a group under
+quaternion multiplication.
+-->
+</p><p>
+2次元複素数の場合と同様に、3つの複素単位をそれぞれ行列で表します。
+これにはさまざまな方法がありますが、1つの方法として、複素2×2行列を使用するのが効果的です。
+<!--
+Analogous to what we did for two-dimensional complex numbers,
+we now represent each of the three complex units with a matrix.
+There are different ways of doing this, but one choice that does the
+job is as complex 2 × 2 matrices:
+-->
+\[
+\begin{align}
+\mathbf 1 &=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+,　
+\mathbf i=
+\begin{pmatrix}
+0 & 1 \\
+-1 & 0
+\end{pmatrix} \\
+\\
+\mathbf j &=
+\begin{pmatrix}
+0 & i \\
+i & 0
+\end{pmatrix}
+,　
+\mathbf k=
+\begin{pmatrix}
+i & 0 \\
+0 & -i
+\end{pmatrix}
+\end{align}
+\tag{3.29}
+\]
+これらの行列が式3.24と式3.26の定義条件を満たしていることを確認できます。これらの行列を用いて、一般的な四元数を次のように書き表すことができます。
+<!--
+You can check that these matrices fulfil the defining conditions in
+Eq. 3.24 and Eq. 3.26. Using these matrices a generic quaternion can
+then be written
+-->
+\[
+q=a\mathbf 1+b\mathbf i+c\mathbf j+\mathbf k=
+\begin{pmatrix}
+a+di & b+ci \\
+-b+ci & a-di
+\end{pmatrix}
+\tag{3.30}
+\]
+
+さらに
+<!--
+Furthermore, we have
+-->
+\[
+\det(q)=a^2+b^2+c^2+d^2 \tag{3.31}
+\]
+これを式3.28と比較すると、単位四元数の集合は、上記の形式の行列式で表され、行列式は単位行列式であることがわかります。したがって、複素2×2行列として表される単位四元数は、以下の条件を満たします。
+<!--
+Comparing this with Eq. 3.28 tells us that the set of unit quaternions
+is given by matrices of the above form with unit determinant. The
+unit quaternions, written as complex 2 × 2 matrices therefore fulfil
+the conditions
+-->
+\[
+\mathcal U^\dagger \mathcal U=1　and　\det(\mathcal U)=1 \tag{3.32}
+\]
+ここで \(\mathcal{SU}(2)\) を定義する方法は、\(\mathcal{SO}(2)\) の定義方法と類似していることに注意してください。\(\mathcal S\) は特殊性を表し、\(\det(\mathcal U) = 1\) を意味します。また、\(\mathcal U\) はユニタリ性を表し、<sup>25</sup> \(\mathcal U^†\mathcal U = 1\) を意味します。式 3.29 の写像を通して、すべての単位四元数は \(\mathcal{SU}(2)\) の元と同一視できます。
+<!--
+Take note that the way we define \(\mathcal{SU}(2)\) here, is analogously to how
+we defined \(\mathcal{SO}(2)\). The \(\mathcal S\) denotes special, which means \(\det(\mathcal U) = 1\)
+and \(\mathcal U\) stands for unitary, which means the property <sup>25</sup> \(\mathcal U^†\mathcal U = 1\). Through the map in Eq. 3.29, every unit quaternion can be identified with an element of \(\mathcal{SU}(2)\).
+-->
+<p><p class="margin-large">
+<sup>25</sup>  
+これに関する詳しい情報については、この章の最後にある付録3.10をご覧ください。
+<!--
+For some more information about
+this, have a look at the Appendix 3.10 at
+the end of this chapter.
+-->
+</p><p>
+さて、\(\mathcal{SU}(2)\)とそれに伴う単位四元数は回転とどのように関係しているのでしょうか？残念ながら、\(\mathcal{SU}(2)\)と<sup>26</sup> \(\mathcal{SO}(3)\)の間の写像は、\(\mathcal{U}(1)\)と\(\mathcal{SO}(2)\)の間の写像ほど単純ではありません。
+<!--
+Now, how is \(\mathcal{SU}(2)\) and with it the unit quaternions related to
+rotations? Unfortunately, the map between \(\mathcal{SU}(2)\) and <sup>26</sup> \(\mathcal{SO}(3)\) is not as simple as the one between \(\mathcal{U}(1)\) and \(\mathcal{SO}(2)\).
+-->
+<p><p class="margin-large">
+<sup>26</sup>
+\(\mathcal{SO}(3)\)は3次元ベクトルに作用する通常の回転行列の集合であることを思い出してください。
+<!--
+Recall that \(\mathcal{SO}(3)\) is the set of the usual rotation matrices acting on 3 dimensional vectors.
+-->
+</p><p>
+2次元では、複素数\(z = a + ib\)の2つのパラメータは、2つの空間軸、つまり\(v = x + iy\)と容易に同一視できます。単位複素数に制限することで、結果として得られる行列は任意のベクトルの長さを自動的に保存します<sup>27</sup>
+<!--
+In 2-dimensions the 2 parameters of a complex number \(z = a + ib\) could be easily identified with the two spatial axes, i.e. \(v = x + iy\). The restriction to unit complex numbers automatically makes sure
+that the resulting matrix preserves the length of any vector <sup>27</sup>
+-->
+<p><p class="margin-large">
+<sup>27</sup>
+ここで\(R\)は単位複素数であることを思い出してください。複素数は単位複素数の乗算によって回転できるからです。したがって、\(\mathcal U^*\mathcal U = 1\)となり、これが単位複素数の定義条件となります。
+<!--
+Recall that here \(R\) is a unit complex
+number, because complex numbers
+can be rotated by multiplication with
+unit complex numbers. Therefore we
+have \(\mathcal U^*\mathcal U = 1\), which is the defining
+condition for unit complex numbers
+-->
+</p><p>
+
+\[
+(\mathcal Uz)^*\mathcal Uz=z^*\mathcal{U}^*\mathcal{U}z=z^*z
+\]
+四元数は4つのパラメータを持つため、3次元ベクトルの3つの座標との同一視は明らかではありません。定義すると、
+<!--
+The quaternions have 4 parameters, so the identification with the 3
+coordinates of a three-dimensional vector is not obvious. When we
+define
+-->
+\[
+v\equiv x\mathbf i+y\mathbf j+z\mathbf k \tag{3.33}
+\]
+四元数の行列表現（式3.29）を用いると、
+計算できる。
+<!--
+and use the matrix representation of the quaternions (Eq. 3.29), we
+can compute
+-->
+\[
+\det(v)=x^2+y^2+z^2 \tag{3.34}
+\]
+したがって、ベクトル \((x, y, z)\) の長さを保存する変換を考えたい場合、行列式を保存する行列変換を使用する必要があります。したがって、単位四元数への制限は、単位行列式 <sup>28</sup> を持つ行列に制限する必要があることを意味します。
+<!--
+Therefore, if we want to consider transformations that preserve the
+length of the vector \((x, y, z)\), we must use matrix transformations that
+preserve determinants. Therefore the restriction to unit quaternions
+ means that we must restrict to matrices with unit determinant <sup>28</sup>.
+-->
+<p><p class="margin-large">
+<sup>28</sup> 
+これは一般則
+\(\det(BA) = \det(B)\det(A)\) から導かれます。したがって、
+\(B\) の行列式が 1 の場合、積行列
+\(BA\) の行列式は \(A\) と同じになります。
+<!--
+This follows from the general rule
+\(\det(BA) = \det(B)\det(A)\). Therefore, if
+\(B\) has determinant 1, the product matrix
+\(BA\) has the same determinant as \(A\).
+-->
+</p><p>
+ここまで見ればすべてが簡単に思えるかもしれませんが、微妙な点があります。最初の推測は、単位四元数 \(u\) は単純に掛け算することによって \(v\) 上の回転を誘発するだろうということです。しかし、これは正しくありません。なぜなら、\(u\) と \(v\) の積は \(\mathbb R\mathbf i + \mathbb R\mathbf j + \mathbb R\mathbf k\) に属さない可能性があるからです。したがって、変換されたベクトルには、解釈できない要素が含まれる可能性があります <sup>29</sup>。代わりに、この変換は次のように表されます。
+<!--
+Everything may now seem straight forward, but there is a subtle
+point. A first guess would be that a unit quaternion \(u\) induces a
+rotation on \(v\) simply by multiplication. This is not the case, because
+the product of \(u\) and \(v\) may not belong to \(\mathbb R\mathbf i + \mathbb R\mathbf j + \mathbb R\mathbf k\). Therefore,
+the transformed vector can have a component we are not able to
+ interpret <sup>29</sup>. Instead the transformation that does the job is given by
+-->
+
+<p><p class="margin-large">
+<sup>29</sup>
+空間成分 \(x, y, z\) を部分空間 \(\mathbb R\mathbf i + \mathbb R\mathbf j + \mathbb R\mathbf k\) の成分として識別します。変換の結果、この部分空間に属さない係数、つまり \(\mathbf i, \mathbf j\) や \(\mathbf k\) と一緒に現れない係数が得られた場合、それを解釈することはできません。
+<!--
+We identify our spatial components \(x, y, z\) as components in the subspace \(\mathbb R\mathbf i + \mathbb R\mathbf j + \mathbb R\mathbf k\). If, as a result of a
+transformation, we end up with a
+coefficient that does not belong to this
+subspace, i.e. does not appear together
+with \(\mathbf i, \mathbf j\) or \(\mathbf k\), we can’t interpret it.
+-->
+</p><p>
+
+\[
+v^\prime = qvq^{-1} \tag{3.35}
+\]
+この識別単位を作ることで、四元数は3次元の回転を記述できることがわかります。
+<!--
+It turns out that by making this identification unit quaternions can
+describe rotations in 3-dimensions.
+-->
+</p><p>
+具体的な例を見てみましょう。2次元の例との関連を明確にするために、uを\(\mathbb R\mathbf i + \mathbb R\mathbf j + \mathbb R\mathbf k\)の範囲の値のみを取る単位四元数として定義し、一般単位四元数を次のように表します。
+<!--
+Let’s take a look at an explicit example: To make the connection
+to our example in two dimensions, we define u as a unit quaternion
+that only takes values in \(\mathbb R\mathbf i + \mathbb R\mathbf j + \mathbb R\mathbf k\) and denote a general unit
+quaternion with
+-->
+\[
+t=\cos(\theta)+\sin(\theta)u \tag{3.36}
+\]
+式3.33を用いると、一般的なベクトルは次のように書けます。
+<!--
+Using Eq. 3.33 a generic vector can be written
+-->
+\[
+\vec{v}=(v_x,v_y,v_z)^T=v_x\mathbf i+v_y\mathbf j+v_z\mathbf k \underbrace{=}_{Eq.3.30}
+\begin{pmatrix}
+iv_z & v_x+iv_y \\
+-v_x+iv_y & -iv_z
+\end{pmatrix}
+\tag{3.37}
+\]
+上記の識別を用いて、例としてベクトル \(\vec{v} = (1, 0, 0)^T\) を Z 軸を中心に回転させてみます。回転を表すベクトルと四元数に特別な選択をし、それが機能することを示します。四元数の行列表現を用いて、(式 3.29) と書きます。
+<!--
+With the identifications made above, we want to rotate, as an example,
+a vector \(\vec{v} = (1, 0, 0)^T\) around the z-axis. We will make a
+particular choice for the vector and for the quaternion representing
+the rotation and show that it works. We write, using quaternions in
+their matrix representation (Eq. 3.29)
+-->
+\[
+\vec{v}=(1,0,0)^T\rightarrow v=1\mathbf i+0\mathbf j+0\mathbf k=
+\begin{pmatrix}
+0 & 1 \\
+-1 & 0
+\end{pmatrix}
+\tag{3.38}
+\]
+さらに、次の四元数を使用します。
+<!--
+In addition, we use the following quaternion
+-->
+\[
+R_z(\theta)=\cos(\theta)\mathbf 1+\sin(\theta)\mathbf k=
+\begin{pmatrix}
+\cos(\theta)+i\sin(\theta) & 0 \\
+0 & \cos(\theta)-i\sin(\theta)
+\end{pmatrix}
+\tag{3.39}
+\]
+そして、それが\(z\)軸周りの回転を記述する正しい四元数であることを計算します。\(R_z\)はオイラーの公式<sup>30</sup> \(e^{ix} = \cos(x) + i \sin(x)\)を使って書き直すことができます。
+<!--
+and then calculate that it is the correct quaternion that describes a
+rotation around the \(z\)-axis. We can rewrite \(R_z\) using Euler’s formula <sup>30</sup> \(e^{ix} = \cos(x) + i \sin(x)\):
+-->
+<p><p class="margin-large">
+<sup>30</sup>
+導出については、付録 B.4.2 を参照してください。
+<!--
+For a derivation have a look at Appendix B.4.2.
+-->
+</p><p>
+
+\[
+\Rightarrow R_z(\theta)=
+\begin{pmatrix}
+e^{i\theta} & 0 \\
+0 & e^{-i\theta}
+\end{pmatrix}
+\tag{3.40}
+\]
+四元数回転行列を反転すると、
+<!--
+Inverting the quaternion rotation matrix yields
+-->
+\[
+R_z(\theta)^{-1}=
+\begin{pmatrix}
+\cos(\theta)-i\sin(\theta) & 0 \\
+0 & \cos(\theta)+i\sin(\theta)
+\end{pmatrix}
+=
+\begin{pmatrix}
+e^{-i\theta} & 0 \\
+0 & e^{i\theta}
+\end{pmatrix}
+\tag{3.41}
+\]
+式3.35を用いると、回転ベクトルは
+<!--
+Using Eq. 3.35 the rotated vector reads
+-->
+\[
+\begin{align}
+&v^\prime=R_z(\theta)vR_z^{-1}(\theta)=
+\begin{pmatrix}
+e^{i\theta} & 0 \\
+0 & e^{-i\theta}
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+-1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+e^{-i\theta} & 0 \\
+0 & e^{i\theta}
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+0 & e^{i2\theta} \\
+-e^{-2i\theta} & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & \cos(2\theta)+i\sin(2\theta) \\
+-\cos(2\theta)+i\sin(2\theta) & 0
+\end{pmatrix}
+\end{align}
+\tag{3.42}
+\]
+
+</p><p>
+一方、任意のベクトルは、四元数表記（式3.37）で表すことができます。
+<!--
+On the other hand, an arbitrary vector can be written in our
+quaternion notation (Eq. 3.37)
+-->
+\[
+v^\prime = 
+\begin{pmatrix}
+iv_z^\prime & v_x^\prime+iv_y^\prime \\
+-v_x^\prime+iv_y^\prime & -iv_z^\prime
+\end{pmatrix}
+\tag{3.43}
+\]
+これを式3.42と比較すると、
+<!--
+which we now compare with Eq. 3.42. This yields
+-->
+\[
+v_x^\prime = \cos(2\theta)　　v_y^\prime=\sin(2\theta)　　v_z^\prime=0 \tag{3.44}
+\]
+したがって、従来のベクトル表記で書き直すと、
+<!--
+Therefore, written again in the conventional vector notation
+-->
+\[
+\rightarrow \vec{v^\prime}=(\cos(2\theta),\sin(2\theta),0)^T \tag{3.45}
+\]
+我々の同一視は確かに回転を誘発しますが<sup>31</sup>、注意すべき点があります。\(\vec{v}\)を\(θ\)ではなく\(2θ\)回転させたのです。そこで\(\phi ≡ 2θ\)と定義します。こうすると\(\phi\)は実際に回転する角度を表すことになるからです。この定義を用いて式3.36を書き直すと、次のようになります。
+<!--
+Our identifications do indeed induce rotations <sup>31</sup>, but something needs our attention. We haven’t rotated \(\vec{v}\) by \(θ\), but by \(2θ\). Therefore, we define \(\phi ≡ 2θ\), because then \(\phi\) really represents the angle we rotate. Using this definition we rewrite Eq. 3.36, which yields
+-->
+<p><p class="margin-large">
+<sup>31</sup>
+式3.23の例を参照してください。ここでは、従来の回転行列を用いてベクトルを回転しています。
+<!--
+See the example in Eq. 3.23 where we rotated the vector, using the conventional rotation matrix
+-->
+</p><p>
+
+\[
+t=\cos\left(\frac{\phi}{2}\right)+\sin\left(\frac{\phi}{2}\right)u \tag{3.46}
+\]
+ここまでで、私たちが行った同一視は1対1ではなく、同じ回転を表す2つの単位四元数であることがわかります。例えば<sup>32</sup>
+<!--
+We can now see that the identifications we made are not one-toone,
+but rather we have two unit-quaternions describing the same
+rotation. For example <sup>32</sup>
+-->
+<p><p class="margin-large">
+<sup>32</sup>
+通常のベクトルの場合、\(π\) による回転は \(3π = 2π + π\) による回転と同じです。\(2π = 360^{\circ}\) は 1 回転だからです。言い換えると、2 つの四元数 \(u\) と \(−u\) を使ってベクトルを \(π\) 回転できることがわかります。
+<!--
+A rotation by \(π\) is the same as a
+rotation by \(3π = 2π + π\) for ordinary
+vectors, because \(2π = 360^{\circ}\) is a full
+rotation. In other words: We can see
+that two quaternions u and \(−u\) can be
+used to rotate a vector by \(π\).
+-->
+</p>
+<center><img src="images/fig3_05.svg"></center>
+<p>
+これが、\(\mathcal{SU}(2)\) が \(\mathcal{SO}(3)\) の二重被覆と呼ばれる理由です。\(\mathcal{SU}(2)\) から \(\mathcal{SO}(3)\) へは必ず一義的に可能ですが、その逆は不可能です。これは単なる数学的な補足事項だと思う人もいるかもしれませんが、後ほど、他の群を覆う群は実際にはより基本的な群であることがわかります <sup>33</sup>。
+<!--
+This is the reason \(\mathcal{SU}(2)\) is called the double-cover of \(\mathcal{SO}(3)\). It is
+always possible to go unambiguously from \(\mathcal{SU}(2)\) to \(\mathcal{SO}(3)\) but not vice versa. One may think this is just a mathematical side-note, but we will understand later that groups which cover other groups are indeed more fundamental <sup>33</sup>.
+-->
+<p><p class="margin-large">
+<sup>33</sup>
+驚きを台無しにするために、ローレンツ群そのものではなく、ローレンツ群の二重被覆を使用します。そうしないと、重要なことを見逃してしまうからです。スピンです。スピンは一種の内部運動量であり、最も重要な粒子ラベルの一つです。これについては、4.5.4節と8.5.5節で詳しく説明します。
+<!--
+To spoil the surprise: We will use the double cover of the Lorentz group,
+instead of the Lorentz group itself,
+because otherwise we miss something
+important: Spin. Spin is some kind
+of internal momentum and one of the
+most important particle labels. This is
+discussed in detail in Section 4.5.4 and
+Section 8.5.5.
+-->
+</p><p>
+与えられた群を覆う群を発見するためには、リー理論の最も重要なツールであるリー代数を導入する必要があります。
+これが次のセクションのトピックです。
+<!--
+To be able to discover the group that covers a given group, we
+need to introduce the most important tool of Lie theory: Lie algebras.
+This is the topic of the next section.
+-->
+</p><p>
+四元数パラメータが1つ多すぎたという事実は、相対性理論へのヒントとして解釈できるかもしれないことに注意してください。2次元の場合のように、より自然な同定は\(v = t\mathbf 1 + x\mathbf i + y\mathbf j + z\mathbf k\)であったと主張する人もいるかもしれません。純粋数学は、4番目の要素を使用するという考えへと私たちを導きますが、それが時間でなければ何になるでしょうか？私たちが住んでいる宇宙が4次元であることがわかっているので、4次元での回転を記述したい場合、2つの選択肢があります。<br>
+• さらに高次元の複素数を探す、または<br>
+• 再び四元数を使ってみる。
+<!--
+Take note that the fact we had one quaternion parameter too
+many, may be interpreted as a hint towards relativity. One may argue
+that a more natural identification would have been, as in the
+two-dimensional case, \(v = t\mathbf 1 + x\mathbf i + y\mathbf j + z\mathbf k\). We see that pure mathematics
+pushes us towards the idea of using a 4th component and
+what could it be, if not time? If we now want to describe rotations
+in 4-dimensions, because we know that the universe we live in is
+4-dimensional, we have two choices:<br>
+• We could search for even higher dimensional complex numbers or
+<br>
+• we could again try to work with quaternions.
+-->
+</p><p>
+前の段落から、四元数は4次元の回転についても何か言及しているように思われるかもしれません。4次元における任意の回転は、<sup>34</sup> 6個のパラメータで記述されます。複素数の7次元一般化は存在せず、単位対象への制約と合わせて6個の自由パラメータを持つことになります。しかし、2つの単位四元数はちょうど6個の自由パラメータを持ちます。したがって、4次元の回転を2つの四元数で記述できる可能性はあるでしょうか？後で説明しますが、2つの \(\mathcal{SU}(2)\) のコピーと4次元の回転の間には、実際には密接な関係があります。
+<!--
+From the last paragraph it may seem that quaternions have something
+to say about rotations in 4 dimensions, too. An arbitrary rotation in 4 dimensions is described by <sup>34</sup> 6 parameters. There is no
+
+7-dimensional generalisation of complex numbers, which together
+with the constraint to unit objects would have 6 free parameters.
+However, two unit quaternions have exactly 6 free parameters. Therefore,
+maybe it’s possible to describe a rotation in 4-dimensions by two
+quaternions? We will learn later that there is indeed a close connection
+between two copies of \(\mathcal{SU}(2)\) and rotations in four dimensions.
+-->
+<p><p class="margin-large">
+<sup>34</sup>
+通常の行列を用いると、4次元の \(4 \times 4\) 行列が必要になります。
+\(O^TO = 1\) と
+\(\det(O) = 1\) という2つの条件は、任意の \(4 \times 4\) 行列の16個の要素を6個の独立した要素に縮減します。
+<!--
+Using ordinary matrices, we need in four dimensions \(4 \times 4\) matrices.
+The two conditions \(O^TO = 1\) and
+\(\det(O) = 1\) reduce the 16 components
+of an arbitrary \(4 \times 4\) matrix to six
+independent components.
+-->
+
+</p>
+    </body>
+</html>
