@@ -1,0 +1,1698 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>リー群論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>リー群論</h1>
+<h2>3.4 リー代数</h2>
+<!--
+<h1>Lie Group Theory</h1>
+<h2>3.4 Lie Algebras</h2>
+-->
+<p>
+リー群論は連続対称性について論じるものです。一例として、本章の冒頭で論じた単位円の連続対称性があります。ここで連続とは、1つまたは複数のパラメータによって連続的にパラメータ化できる対称変換が無限に存在することを意味します。例えば、円の例における回転角 \(\phi\) は、\(0.1^{\circ}, 0.11^{\circ}, 0.11991^{\circ}, \ldots\) といった任意の値を取ることができます。一方、鏡映対称性のような離散対称性には、連続的な変換パラメータは存在しません。
+<!--
+Lie theory is all about continuous symmetries. An example is the
+continuous symmetry of the unit circle we discussed at the beginning
+of this chapter. Continuous here means that there are infinitely many
+symmetry transformations, that can be parametrized continuously
+by one or several parameters. For example, the rotation angle \(\phi\) in
+the circle example can be any value: \(0.1^{\circ}, 0.11^{\circ}, 0.11991^{\circ}, \ldots\). In
+contrast, for discrete symmetries like a reflection symmetry there is
+no continuous transformation parameter.
+-->
+</p><p>
+リー群論における重要な観察は、連続対称性に対して、群の元が恒等変換<sup>35</sup>にいくらでも近づくことができるということです。
+<!--
+An important observation in Lie theory is that for continuous symmetries
+there are elements of the group which are arbitrarily close to
+the identity transformation <sup>35</sup>. 
+-->
+</p><p class="margin-large">
+<sup>35</sup> 
+恒等変換とは、何も変化させない変換です。例えば、\(0^{\circ}\) による回転は恒等変換です。
+<!--
+The identity transformation is the 
+transformation that changes nothing at
+all. For example, a rotation by \(0^{\circ}\) is an
+identity transformation.
+-->
+</p><p>
+対照的に、離散群には連続的な変換パラメータは存在せず、したがって、恒等変換にいくらでも近い元は存在しません。再び正方形の対称性を考えてみましょう。\(0.000001^{\circ}\) による回転は恒等変換（= \(0^{\circ}\) による回転）に非常に近いですが、正方形の対称変換の集合には含まれません。対照的に、\(0.000001^{\circ}\) による回転は円の対称変換です。円の対称群は連続です。なぜなら、回転パラメータ（回転角度）は任意の（連続的な）値をとることができるからです。数学的には、恒等変換を I とすると、恒等変換に近い元 g は次のように表されます。
+<!--
+In contrast, for a discrete group there is no continuous transformation parameter and therefore no element
+arbitrarily close to the identity. Consider again the symmetries of a square. A rotation by \(0.000001^{\circ}\), which is very close to the identity
+transformation (= a rotation by \(0^{\circ}\)), is not in the set of symmetry
+transformations of the square. In contrast, a rotation by \(0.000001^{\circ}\) is a
+symmetry of the circle. The symmetry group of a circle is continuous,
+because the rotation parameter (the rotation angle) can take on arbitrary
+(continuous) values. Mathematically, with the identity denoted
+I, an element g close to the identity is denoted
+-->
+\[
+g(\epsilon) = I + \epsilon X  \tag{3.47}
+\]
+ここで、\(\epsilon\) は数学では常にそうであるように、非常に小さな数であり、\(X\) は生成元と呼ばれるオブジェクトです。これについては後ほど説明します。
+このような小さな変換は、あるオブジェクトに作用してもほとんど変化しません。可能な限り小さなケースでは、このような変換は無限小変換と呼ばれます。しかし、このような無限小変換を何度も繰り返すと、有限の変換になります。
+回転について考えてみましょう。ある方向への小さな回転を何度も行うことは、同じ方向への大きな回転を1回行うことに相当します。数学的には、小さな変換を何度も繰り返すという考え方は次のように書くことができます。
+<!--
+where \(\epsilon\) is, as always in mathematics, a really, really small number
+and \(X\) is an object, called generator, we will talk about in a moment.
+Such small transformations, when acting on some object change
+barely anything. In the smallest possible case such transformations
+are called infinitesimal transformation. Nevertheless, repeating such
+an infinitesimal transformation often, results in a finite transformation.
+Think about rotations: many small rotations in one direction are
+equivalent to one big rotation in the same direction. Mathematically,
+we can write the idea of repeating a small transformation many times
+-->
+\[
+h(θ) = (I +\epsilon X)(I +\epsilon X)(I +\epsilon X)... = (I +\epsilon X)^k  \tag{3.48}
+\]
+ここで、\(k\) は小さな変換を繰り返す回数を表します。\(θ\) が有限の変換パラメータ（例えば \(50^{\circ}\) 程度）を表し、\(N\) が恒等式に近づくような非常に大きな数である場合、恒等式に近い要素は次のように表すことができます。
+<!--
+where \(k\) denotes how often we repeat the small transformation. If
+\(θ\) denotes some finite transformation parameter, e.g. \(50^{\circ}\) or so, and
+\(N\) is some really big number which makes sure we are close to the
+identity, we can write the element close to the identity as
+-->
+\[
+g(θ) = I +\frac{θ}{N}X  \tag{3.49}
+\]
+
+</p><p>
+我々が検討したい変換は可能な限り小さいものであり、\(N\) は可能な限り大きな数、すなわち \(N → ∞\) でなければならないことを意味します。このような無限小の変換から有限の変換を得るには、無限小の変換を無限に繰り返さなければなりません。数学的には
+<!--
+The transformations we want to consider are the smallest possible,
+which means \(N\) must be the biggest possible number, i.e. \(N → ∞\). To
+get a finite transformation from such a infinitesimal transformation,
+one has to repeat the infinitesimal transformation infinitely. Mathematically
+-->
+\[
+h(θ) = \lim_{N→∞}\left(I +\frac{θ}{N}X\right)^N \tag{3.50}
+\]
+これは極限では指数関数<sup>36</sup>になります。
+<!--
+which is in the limit just the exponential function <sup>36</sup>
+-->
+</p><p class="margin-large">
+<sup>36</sup>
+これは指数関数の定義としてよく用いられます。この極限と付録B.4.1で導出した指数級数との同値性を示す証明は、解析学に関するほとんどの書籍に掲載されています。
+<!--
+This is often used as a definition
+of the exponential function. A proof,
+showing the equivalence of this limit
+and the exponential series we derive in
+Appendix B.4.1, can be found in most
+books about analysis.
+-->
+</p><p>
+\[
+h(θ) = \lim_{N→∞}\left(I +\frac{θ}{N}X\right)^N = e^{θX} \tag{3.51}
+\]
+ある意味で、オブジェクト \(X\) は有限変換 \(h\) を生成するため、生成元と呼ばれます。
+<!--
+In some sense the object X generates the finite transformation \(h\),
+which is why it’s called the generator.
+-->
+</p><p>
+与えられた変換の生成元 \(X\) を計算したい場合、上記の式を微分することで得られます。
+<!--
+If we want to calculate the generator X of a given transformation,
+we can differentiate the above formula
+-->
+\[
+\frac{d}{dθ}h(θ) =\frac{d}{dθ}e^{θX} = Xe^{θX} \tag{3.52}
+\]
+したがって、この式を\(θ = 0\)で評価すると、
+<!--
+Thus, if we evaluate this formula at \(θ = 0\), we get
+-->
+\[
+X =\frac{dh(θ)}{dθ}\Bigg|_{θ=0} \tag{3.53}
+\]
+このような考え方の背後にある考え方は、無限小元（上記で \(X\) と表記）の重要な部分、つまり生成元を見ることで、群について多くのことを学ぶことができるというものです。これは後ほどより明確に説明しますが、まずは別の観点から見てみましょう。生成元がどのような意味で有限変換を生成するのかが、より明確になります。
+<!--
+The idea behind such lines of thought is that one can learn a lot
+about a group by looking at the important part of the infinitesimal
+elements (denoted X above): the generators. This will be made more
+precise in a moment, but first let’s look at this from another perspective
+that makes it even clearer in what sense the generators generate
+a finite transformation:
+-->
+</p><p>
+行列によって与えられる連続的な変換群を考えるとき、その群の元の恒等変換に関するテイラー展開 <sup>37</sup> を行うことができます。
+<!--
+If we consider a continuous group of transformations that are  given by matrices, we can make a Taylor expansion <sup>37</sup> of an element of the group about the identity. 
+-->
+</p><p class="margin-large">
+<sup>37</sup> 
+テイラー展開、あるいはテイラー級数について聞いたことがない方は、
+付録B.3をご覧ください。
+<!--
+If you’ve never heard of the Taylor expansion, or Taylor series before,
+you are encouraged to have a look at
+Appendix B.3.
+-->
+</p><p>
+テイラー級数は次のように与えられます。
+<!--
+The Taylor series is given by
+-->
+\[
+h(θ) = I +\frac{dh}{dθ}\Bigg|_{θ=0}θ +\frac{1}{2}\frac{d^2h}{dθ^2}\Bigg|_{θ=0}θ^2 + ... =\sum_n 
+\frac{1}{n!}\frac{d^nh}{dθ^n}\Bigg|_{θ=0}θ^n \tag{3.54}
+\]
+これは、ジェネレータがどのように変換を生成するかをよく示しています。
+<!--
+This shows nicely how the generators generate transformations.
+-->
+</p><p>
+行列リー群の場合、対応するリー代数は、冪乗したときに群の元を与えるオブジェクトの集合として定義されます。これは、行列リー群に限定した場合に使用できる簡単な定義です。後ほど、より一般的な定義を紹介します。数学的な表現では<sup>38</sup>
+<!--
+For matrix Lie groups one defines the corresponding Lie algebra
+as the collection of objects that give an element of the group when
+exponentiated. This is an easy definition one can use when restricting
+to matrix Lie groups. Later we will introduce a more general
+ definition. In mathematical terms <sup>38</sup>.
+-->
+</p><p class="margin-large">
+<sup>38</sup>
+群 G に属するリー代数は、慣例的に、対応する「フラクトゥール」書体 \(\mathfrak g\) で表記されます。
+<!--
+The Lie algebra which belongs to a
+group G is conventionally denoted by
+the corresponding "Fraktur" letter \(\mathfrak g\)
+-->
+</p><p>
+
+リー群 G (n × n 行列で与えられる) に対して、G のリー代数 \(\mathfrak g\) は、\(t ∈ \mathbb R\) に対して \(e^{tX} ∈ G\) が成り立つような n × n 行列 \(X\) と、これらの行列をどのように組み合わせるかを示すリー括弧 [, ] と呼ばれる演算によって与えられます。
+<!--
+ For a Lie Group G (given by n × n matrices), the Lie algebra \(\mathfrak g\) of
+G is given by those n × n matrices \(X\) such that \(e^{tX} ∈ G\) for \(t ∈ \mathbb R\),
+together with an operation, called the Lie bracket [, ] that tells us how
+we can combine these matrices.
+-->
+
+</p><p>
+
+この定義の最後の部分は少しわかりにくいので、時間をかけて議論しました。
+<!--
+The last part of this definition can be a bit confusing and thus we
+now spent some time discussing it.
+-->
+</p><p>
+群の定義から、群は単なる変換の集まりではないことがわかります。群の定義には、群の元をどのように組み合わせるかを示す二項演算 ◦ が含まれています。行列リー群の場合、これは単なる通常の行列の乗算です。
+単純に考えると、リー代数の元にも同じ組み合わせ規則 ◦ が成り立つと考えるかもしれませんが、そうではありません。リー代数の元は行列 <sup>39</sup> で与えられますが、2つのリー代数の元の乗算はリー代数の元である必要はありません。代わりに、上記の定義で既に述べたように、リー代数には対応するリー群の組み合わせ規則に直接関連する別の組み合わせ規則があります。
+<!--
+We know from the definition of a group, that a group is more
+than just a collection of transformations. The definition of a group
+includes a binary operation ◦ that tells us how to combine group
+elements. For matrix Lie groups this is just ordinary matrix multiplication.
+Naively one may think that the same combination rule ◦
+is valid for elements of the Lie algebra, but this is not the case! The
+elements of the Lie algebra are given by matrices <sup>39</sup>, but the multiplication of two Lie algebra elements doesn’t need to be an element of the Lie algebra. Instead there is another combination rule for the Lie algebra, already mentioned in the definition above, that is directly connected to the combination rule of the corresponding Lie group.
+-->
+</p><p class="margin-large">
+<sup>39</sup> 
+リー群論の有名な定理であるアドーの定理は、すべてのリー代数は行列リー代数と同型であると述べています。
+<!--
+A famous theorem of Lie group theory, 
+called Ado’s Theorem, states
+that every Lie algebra is isomorphic to a
+matrix Lie algebra.
+-->
+</p><p>
+リー群の結合則とリー代数の結合則の関係は、有名なベーカー・キャンベル・ハウスドルフの公式<sup>40</sup>によって表されます。
+<!--
+The connection between the combination rule of the Lie group
+and the combination rule of the Lie algebra is given by the famous
+Baker-Campbell-Hausdorff formula <sup>40</sup> 
+-->
+</p><p class="margin-large">
+<sup>40</sup>
+本書ではこの式の証明については触れません。証明はリー理論に関するほとんどの書籍に掲載されています。例えば、ウィリアム・フルトンとジョー・ハリス著『表現理論：入門』、シュプリンガー社、第1版訂正、1999年、ISBN 9780387974958などです。
+<!--
+We will not talk about the proof of
+this formula in this book. Proofs can be
+found in most books about Lie theory,
+for example in William Fulton and Joe
+Harris. Representation Theory: A First
+Course. Springer, 1st corrected edition, 8
+1999. ISBN 9780387974958
+-->
+</p><p>
+
+\[
+e^X ◦ e^Y = e^{X+Y+\frac{1}{2}[X,Y]+\frac{1}{12}[X,[X,Y]]−\frac{1}{12} [Y,[X,Y]]+...} \tag{3.55}
+\]
+左辺には、リー群の2つの元（gとhと名付けましょう）の乗算があります。これらは対応する生成元（＝リー代数の元）を使って表すことができます。
+<!--
+On the left hand side, we have the multiplication of two elements of
+the Lie group, let’s name them g and h, which we can write in terms
+of the corresponding generators (=elements of the Lie algebra)
+-->
+\[
+\underbrace{g}_{\in G}◦\underbrace{h}_{\in G}= e^X ◦ e^Y = \underbrace{e^{X+Y+\frac{1}{2}[X,Y]+\frac{1}{12} [X,[X,Y]]−\frac{1}{12} [Y,[X,Y]]+...}}_{\in G} \tag{3.56}
+\]
+生成元<sup>41</sup> \(X,Y ∈ \mathfrak{g}\)を用いる。
+<!--
+with the generators <sup>41</sup> \(X,Y ∈ g\). 
+-->
+</p><p class="margin-large">
+<sup>41</sup> 
+群 G に属するリー代数は、慣例的に、対応する「フラクトゥール」書体 \(\mathfrak g\) で表される。[注記38と重複]
+<!--
+The Lie algebra which belongs to a group G is conventionally denoted by
+the corresponding "Fraktur" letter \(\mathfrak g\).
+-->
+</p><p>
+右辺には群の単一の対象があり、群の元の乗法はリー代数の元の和に変換されています。この和の新しい記号 [ , ] はリー括弧と呼ばれ、行列リー群の場合、\([X,Y] = XY − YX\) で表され、これは \(X\) と \(Y\) の交換子と呼ばれます。元 \(XY\) と \(YX\) はリー代数の一部である必要はありませんが、それらの差は常に !<sup>42</sup> です。
+<!--
+On the right-hand side we have a single object of the group and the multiplication of the group elements
+have been translated to a sum of Lie algebra elements. The new symbol in this sum [ , ] is called Lie bracket and for matrix Lie groups
+it is given by \([X,Y] = XY − YX\), which is called the commutator of \(X\) and \(Y\). The elements \(XY\) and \(YX\) need not to be part of the Lie
+algebra, but their difference always is !<sup>42</sup>
+-->
+</p><p class="margin-large">
+<sup>42</sup>
+この事実の非常に明快な証明は、ジョン・スティルウェル著『ナイーブ・ライ理論』（Springer、第1版、2008年8月、ISBN 978-0387782140）にあります。
+<!--
+A very illuminating proof of this fact
+can be found in John Stillwell. Naive Lie
+Theory. Springer, 1st edition, August
+2008. ISBN 978-0387782140
+-->
+</p><p>
+ベイカー・キャンベル・ハウスドルフの公式から、リー代数の自然積は、素朴に考えるような通常の行列乗算ではなく、リー括弧 [, ] であることが分かります。リー代数はリー括弧の下で閉じており、同様に群は対応する合成規則 ◦ の下で閉じています（例えば行列乗算）。閉包とは、2つの要素の合成が再び同じ集合 <sup>43</sup> に含まれることを意味します。
+<!--
+We learn from the Baker-Campbell-Hausdorff-Formula that the
+natural product of the Lie algebra is, not as one would naively think,
+ordinary matrix multiplication, but the Lie bracket [, ]. One says,
+the Lie algebra is closed under the Lie bracket, just as the group
+is closed under the corresponding composition rule ◦, e.g. matrix
+multiplication. Closure means that the composition of two elements
+lies again in the same set <sup>43</sup>. 
+-->
+</p><p class="margin-large">
+<sup>43</sup>
+群の元 \(g, h ∈ G\) に対しては
+\(g ◦ h ∈ G\) が成り立ちます。リー代数の元 \(X,Y ∈ \mathfrak g\) に対しては
+\([X,Y] ∈ \mathfrak g\) が成り立ち、
+一般に \(X ◦ Y \notin \mathfrak g\) が成り立ちます。
+<!--
+For group elements \(g, h ∈ G\) we have
+\(g ◦ h ∈ G\). For elements of the Lie
+algebra \(X,Y ∈ \mathfrak g\) we have \([X,Y] ∈ \mathfrak g\) and
+in general \(X ◦ Y \notin \mathfrak g\)
+-->
+</p><p>
+これらの新しい概念を説明する例を見た後、リー代数の現代的な定義を見てみましょう。この定義の主要な要素は、群の生成元がリー括弧内に置かれたときにどのように振る舞うかです。この一般的な定義を用いると、異なる群が同じリー代数を持つと言えることがわかります。上記の定義では、このようなことはほとんど意味をなさないでしょう。しかしながら、リー代数についてのこの新しい考え方により、与えられた変換に対応する最も基本的な記述を明らかにすることができます。これは、リー理論において、各リー代数に対して正確に1つの区別されたリー群が存在するという定理があるため可能です。しかし、抽象的な定義によれば、リー代数は多くのリー群に対応します。リー群の現代的な定義を導入した後で、これをより具体的に説明します。
+<!--
+After looking at an example to illustrate these new notions, we
+will have a look at the modern definition of a Lie algebra. The main
+component of this definition is how the generators of a group behave
+when put into the Lie bracket. By using this general definition we
+will see that it is possible to say that different groups have the same
+Lie algebra. With the definition above saying something like this
+would make little sense. Nevertheless, this new way of thinking
+about Lie algebras will enable us to reveal the most fundamental
+description corresponding to a given transformation. This is possible
+because there is a theorem in Lie theory that tells us that there is
+exactly one distinguished Lie group for each Lie algebra. The Lie
+algebra however, according to the abstract definition, corresponds to
+many Lie groups. We will make this more concrete after introducing
+the modern definition of a Lie group.
+-->
+</p><p>
+ここで、与えられた群のリー代数をどのように導くかの明示的な例を見てみましょう。
+<!--
+Now we want to take a look at an explicit example of how we can
+derive the Lie algebra of a given group.
+-->
+</p>
+<h3>3.4.1 \(\mathcal{SO}(3)\) の生成元とリー代数</h3>
+<!--
+<h3>3.4.1 The Generators and Lie Algebra of \(\mathcal{SO}(3)\)</h3>
+-->
+<p>
+\(\mathcal{SO}(3)\) 群の定義条件は（式3.10）です。
+<!--
+The defining conditions of the group SO(3) are (Eq. 3.10)
+-->
+\[
+\mathcal{O}^T\mathcal{O} \overset{!}{=}I　and　\det(\mathcal{O})\overset{!}{=}1 \tag{3.57}
+\]
+すべての群の元 \(\mathcal{O}\) を生成元 \(\mathcal{J}\) で表すことができます。
+<!--
+We can write every group element \(\mathcal{O}\) in terms of a generator \(\mathcal{J}\):
+-->
+\[
+\mathcal{O} = e^{θ\mathcal{J}} \tag{3.58}
+\]
+これを最初の定義条件に当てはめると、
+<!--
+Putting this into the first defining condition yields
+-->
+\[
+\mathcal{O}^T\mathcal{O} = {e^{θ\mathcal{J}}}^T e^{θ\mathcal{J}}\overset{!}{=}1 → \mathcal{J}^T + \mathcal{J}\overset{!}{=}0 \tag{3.59}
+\]
+式3.57の2番目の条件と行列指数の恒等式<sup>44</sup> \(\det(e^A) = e^{tr(A)}\)を用いると、
+<!--
+Using the second  condition in Eq. 3.57 and the identity <sup>44</sup> \(\det(e^A) = e^{tr(A)}\) for the matrix exponential, we see
+-->
+
+</p><p class="margin-large">
+<sup>44</sup>
+\(tr(A)\) は行列 \(A\) のトレースを表し、主対角線上のすべての要素の和を意味します。例えば、\(A =
+\begin{pmatrix}
+A_{11} & A_{12} \\
+A_{21} & A_{22}
+\end{pmatrix}\) の場合、\(tr(A) = A_{11} + A_{22}\) となります。
+<!--
+\(tr(A)\) denotes the trace of the matrix \(A\), which means the sum of all elements on the main diagonal. For
+example for \(A =
+\begin{pmatrix}
+A_{11} &  A_{12} \\
+A_{21} &  A_{22}
+\end{pmatrix}\) , we have 
+\(tr(A) = A_{11} + A_{22}\).
+-->
+</p><p>
+
+\[
+\begin{align}
+(\mathcal{O})\overset{!}{=}1 &\rightarrow \det(e^{θ\mathcal{J}}) = e^{θ tr(\mathcal{J})}\overset{!}{=}1 \\
+&→ tr(\mathcal{J})\overset{!}{=}0
+\end{align}
+\tag{3.60}
+\]
+
+両方の条件を満たす3つの線形独立な<sup>45</sup>行列（式3.59、式3.60）は
+<!--
+Three linearly independent <sup>45</sup> matrices fulfilling both conditions (Eq. 3.59, Eq. 3.60) are
+-->
+</p><p class="margin-large">
+<sup>45</sup>
+これについては付録 A.1 で説明されています。
+<!--
+This is explained in Appendix A.1. 
+-->
+</p><p>
+
+\[
+\mathcal{J}_1 =
+\begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & -1 \\
+0 & 1 & 0
+\end{pmatrix}
+　\mathcal{J}_2=
+\begin{pmatrix}
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+-1 & 0 & 0
+\end{pmatrix}
+　\mathcal{J}_3=
+\begin{pmatrix}
+0 & -1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+\tag{3.61}
+\]
+
+これらの行列は、群 \(\mathcal{SO}(3)\) の生成元の基底となります。
+これは、群の任意の生成元がこれらの基底生成元の線型結合として書けることを意味します: \(\mathcal{J} = a\mathcal{J}_1 + b\mathcal{J}_2 + c\mathcal{J}_3\)、ここで
+\(a, b, c\) は実定数を表す。これらの生成元は、レヴィ・チヴィタ記号 <sup>46</sup> を用いることでより簡潔に書けます。
+<!--
+These matrices form a basis for the generators of the group \(\mathcal{SO}(3)\).
+This means any generator of the group can be written as a linear
+combination of these basis generators: \(\mathcal{J} = a\mathcal{J}_1 + b\mathcal{J}_2 + c\mathcal{J}_3\), where
+\(a, b, c\) denote real constants. These generators can be written more
+ compactly by using the Levi-Civita symbol <sup>46</sup>
+-->
+</p><p class="margin-large">
+<sup>46</sup>
+レヴィ・チヴィタ記号については、付録B.5.5で説明されています。
+<!--
+The Levi-Civita symbol is explained
+in Appendix B.5.5.
+-->
+</p><p>
+
+\[
+(\mathcal{J}_i)_{jk} = -\epsilon_{ijk} \tag{3.62}
+\]
+ここで\(j, k\)は生成元\(\mathcal{J}_i\)の要素を表す。例えば、
+<!--
+where \(j, k\) denote the components of the generator \(\mathcal{J}_i\). For example,
+-->
+\[
+\begin{align}
+(\mathcal{J}_1)_{jk} = -\epsilon_{1jk} ↔
+\begin{pmatrix}
+(\mathcal{J}_1)_{11} & (\mathcal{J}_1)_{12} & (\mathcal{J}_1)_{13} \\
+(\mathcal{J}_1)_{21} & (\mathcal{J}_1)_{22} & (\mathcal{J}_1)_{23} \\
+(\mathcal{J}_1)_{31} & (\mathcal{J}_1)_{32} & (\mathcal{J}_1)_{33} 
+\end{pmatrix}
+&=-
+\begin{pmatrix}
+\epsilon_{111} & \epsilon_{112} & \epsilon_{113} \\
+\epsilon_{121} & \epsilon_{122} & \epsilon_{123} \\
+\epsilon_{131} & \epsilon_{132} & \epsilon_{133} 
+\end{pmatrix}\\
+&=
+\begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & -1 \\
+0 & 1 & 0
+\end{pmatrix}
+\tag{3.63}
+\end{align}
+\]
+
+</p><p>
+最初の基底生成器からどのような有限変換行列が得られるかを見てみましょう。生成器と有限変換の関係は指数関数によって与えられます:
+\(R_{1\,fin} = e^{θ\mathcal{J}_1}\) 。これを計算するには、\(\mathcal{J}_1\) の右下の 2 × 2 行列 <sup>47</sup> \(j_1\) に注目し、零点は一旦無視します。
+<!--
+Let’s see what finite transformation matrix we get from the first
+of these basis generators. The connection between the generators
+and the finite transformations is given by the exponential function:
+\(R_{1\,fin} = e^{θ\mathcal{J}_1}\) . To calculate this, we can focus on the lower right 2 × 2
+matrix <sup>47</sup> \(j_1\) in \(\mathcal{J}_1\) and ignore the zeroes for a moment:
+-->
+</p><p class="margin-large">
+<sup>47</sup>
+これは、行列形式の2次元レヴィ・チヴィタ記号\((j_1)_{ij} = -\epsilon_{ij}\) を正確に減じたものであり（付録 B.5.5 を参照）、これは2次元（\(\mathcal{SO}(2)\) の回転の生成元）です。
+<!--
+This is exactly minus the two-dimensional
+Levi-Civita symbol
+\((j_1)_{ij} = -\epsilon_{ij}\) in matrix form (see
+Appendix B.5.5), which is the generator
+of rotations in two dimensions (of
+\(\mathcal{SO}(2)\)).
+-->
+</p><p>
+
+\[
+\mathcal{J}_1 =
+\begin{pmatrix}
+0 & \\
+& \underbrace{\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}}_{\equiv j_1}
+\end{pmatrix}
+\tag{3.64}
+\]
+
+すぐに計算できます
+<!--
+We can immediately compute
+-->
+
+\[
+(j_1)^2 = −1 \tag{3.65}
+\]
+
+従って
+<!--
+therefore
+-->
+\[
+(j_1)^3 = \underbrace{(j_1)^2}_{=-1}j_1=-j_1,　(j_1)^4=+1,　(j_1)^5=+j_1 \tag{3.66}
+\]
+
+一般的に以下のようになります。
+<!--
+In general, we have
+-->
+
+\[
+(j_1)^{2n} = (−1)^nI　and　(j_1)^{2n+1} = (−1)^n j_1 \tag{3.67}
+\]
+
+これは指数関数を級数展開<sup>48</sup>として評価する場合に使用できます
+<!--
+which we can use if we evaluate the exponential function as series
+expansion <sup>48</sup>
+-->
+
+</p><p class="margin-large">
+<sup>48</sup>
+
+これは付録B.4.1で導出されています。
+ここで使用されているトリックは付録B.4.2でより詳細に説明されており、正弦と余弦の級数展開も付録B.4.1で導出されています。
+<!--
+This is derived in Appendix B.4.1.
+The trick used here is explained in
+more detail in Appendix B.4.2 and the
+series expansions of sine and cosine are
+derived in Appendix B.4.1, too.
+-->
+
+</p><p>
+
+\[
+\begin{align}
+\tilde{R}_{1\,fin} &= e^{θj_1} = \sum_{n=0}^\infty \frac{θ^n j_1^n}{n!} \\
+\\
+&=\sum_{n=0}^\infty \frac{θ^{2n}}{(2n)!}\underbrace{(j_1)^{2n}}_{(-1)^nI}+\sum_{n=0}^\infty \frac{θ^{2n+1}}{(2n + 1)!}\underbrace{(j_1)^{2n+1}}_{(-1)^nj_1} \\
+\\
+&=\underbrace{\left(\sum_{n=0}^\infty\frac{θ^{2n}}{(2n)!}(−1)^n\right)}_{=cos(θ)}I +\underbrace{\left(\sum_{n=0}^\infty\frac{θ^{2n+1}}{(2n + 1)!}(−1)^n\right)}_{=sin(θ)}j_1\\
+\\
+&= \cos(θ)
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
++\sin(θ)
+\begin{pmatrix}
+0 & -1 \\
+1 & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+\cos(θ) &  −\sin(θ) \\
+\sin(θ) & cos(θ)
+\end{pmatrix} \tag{3.68}
+\end{align}
+\]
+
+左上成分に \(e^0 = 1\) を用いると、完全な有限変換行列は次のようになります。
+<!--
+Using \(e^0 = 1\) for the upper-left component, the complete, finite
+transformation matrix therefore reads
+-->
+
+\[
+R_1 =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & \cos(\theta) & -\sin(\theta) \\
+0 & \sin(\theta) & \cos(\theta)
+\end{pmatrix}
+\tag{3.69}
+\]
+
+これは、本章の冒頭で引用した、3次元におけるよく知られた回転行列の一つです(式3.22)。同様の手順で、他の軸の周りの回転行列も導くことができます。
+<!--
+which we can recognize as one of the well-known rotation matrices
+in 3-dimensions that were quoted at the beginning of this chapter
+(Eq. 3.22). Following the same steps, we can derive the matrices for
+rotations around the other axes, too.
+-->
+
+</p><p>
+
+これで、群の生成元が明示的な行列形式で得られます（式3.61）。これにより、リー括弧関係を
+総当たり法で計算できます。<sup>49</sup>
+<!--
+We now have the generators of the group in explicit matrix form
+(Eq. 3.61) and this allows us to compute the Lie bracket relations
+ between the basis generators by brute force <sup>49</sup>. 
+-->
+
+</p><p class="margin-large">
+<sup>49</sup>
+
+上で説明したように、リー代数の自然積はリー括弧です。ここでは、リー括弧に入れられた基底生成元がどのように振る舞うかを計算します。他のすべての生成元は、これらの基底生成元の線形結合によって構成できます。したがって、基底生成元のリー括弧の結果がわかれば、他のすべての生成元の結果も自動的にわかります。リー括弧内での基底生成元のこの振る舞いは、次のセクションで非常に重要になります。リー代数に関する重要なことはすべて、基底生成元のリー括弧関係にエンコードされています。
+<!--
+As explained above, the natural product of the Lie algebra is the Lie
+bracket. Here we compute how the
+basis generators behave, when put into
+the Lie bracket. All other generators can
+be constructed by linear combination
+of these basis generators. Therefore, if
+we know the result of the Lie bracket
+of the basis generators, we know
+automatically the result for all other
+generators. This behavior of the basis
+generators in the Lie bracket, will
+become incredibly important in the next
+section. Everything that is important
+about a Lie algebra, is encoded in
+the Lie bracket relation of the basis
+generators.
+-->
+
+</p><p>
+
+結果は<sup>50</sup>
+<!--
+The result is <sup>50</sup>
+-->
+\[
+[\mathcal{J}_i,\mathcal{J}_j]=\epsilon_{ijk}\mathcal{J}_k \tag{3.70}
+\]
+
+ここで\(\epsilon_{ijk}\)は再びレヴィ・チヴィタ記号です。
+<!--
+where \(\epsilon_{ijk}\) is again the Levi-Civita symbol.
+-->
+
+</p><p class="margin-large">
+<sup>50</sup> 例えば、
+<!--
+<sup>50</sup> For example, we have
+-->
+\[
+\begin{align}
+[\mathcal{J}_1, \mathcal{J}_2] = \mathcal{J}_1\mathcal{J}_2 − \mathcal{J}_2\mathcal{J}_1 &=
+\begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & -1 \\
+0 & 1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+-1 & 0 & 0
+\end{pmatrix}
+-
+\begin{pmatrix}
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+-1 & 0 & 0
+\end{pmatrix}
+
+\begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & -1 \\
+0 & 1 & 0
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+0 & 0 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+-
+\begin{pmatrix}
+0 & 1 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+0 & -1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+=\underbrace{\epsilon_{12k}}_{k=3を除き=0}\mathcal{J}_k \\
+\\
+&=\epsilon_{123}\mathcal{J}_3
+\end{align}
+\]
+</p><p>
+
+物理学では、\(\mathcal{SO}(3)\) の生成元を "\(i\)" という特別な語で定義するのが慣例となっている。具体的には、\(e^{\tilde{\phi}\mathcal{J}}\) の代わりに、\(e^{i\phi\mathcal{J}}\) と書き、\(\phi = -\tilde{\phi}\) とする。生成元は
+<!--
+In physics it’s conventional to define the generators of \(\mathcal{SO}(3)\) with an extra "\(i\)". Concretely
+this means that instead of \(e^{\tilde{\phi}\mathcal{J}}\) , we write \(e^{i\phi\mathcal{J}}\) with \(\phi = -\tilde{\phi}\). Our generators
+are then
+-->
+
+\[
+\mathcal{J}_1 =
+\begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & -i \\
+0 & i & 0
+\end{pmatrix}
+
+　　\mathcal{J}_2 =
+\begin{pmatrix}
+0 & 0 & i \\
+0 & 0 & 0 \\
+-i & 0 & 0
+\end{pmatrix}
+
+　　\mathcal{J}_3 =
+\begin{pmatrix}
+0 & -i & 0 \\
+i & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+\tag{3.71}
+\]
+
+そしてリー代数<sup>51</sup>は
+<!--
+and the Lie algebra <sup>51</sup> reads
+-->
+
+</p><p class="margin-large">
+<sup>51</sup>
+基底生成子のリー括弧関係をリー代数と呼ぶことにします。
+重要なことはすべてここにコード化されているからです。
+<!--
+We will call the Lie bracket relation of
+the basis generators the Lie algebra, because
+everything important is encoded
+here.
+-->
+</p><p>
+
+\[
+[\mathcal{J}_i, \mathcal{J}_j] = i\epsilon_{ijk}\mathcal{J}_k \tag{3.72}
+\]
+</p><p>
+
+物理学では、エルミート生成子を得るために追加の「\(i\)」を導入します。これは、<sup>52</sup> \(\mathcal{J}^† = (\mathcal{J}^*)^T = \mathcal{J}\) を満たす生成子を意味します。
+<!--
+We introduce the additional "\(i\)" in physics to get Hermitian generators, which means generators that satisfy <sup>52</sup> \(\mathcal{J}^† = (\mathcal{J}^*)^T = \mathcal{J}\).
+-->
+
+</p><p class="margin-large">
+<sup>52</sup>
+例えば、\(\mathcal{J}_1^*=\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & i \\ 0 & -i & 0 \end{pmatrix}\) となり、\(\mathcal{J}_1^†= (\mathcal{J}_1^*)^T=\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & -i \\ 0 & i & 0 \end{pmatrix} = \mathcal{J}_1\) となります。
+<!--
+For example now we have \(\mathcal{J}_1^*=\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & i \\ 0 & -i & 0 \end{pmatrix}\) and therefore \(\mathcal{J}_1^†= (\mathcal{J}_1^*)^T=\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & -i \\ 0 & i & 0 \end{pmatrix} = \mathcal{J}_1\)
+-->
+</p><p>
+
+これは素晴らしい特性です。エルミート行列は実固有値を持ち、これは量子力学では重要になります。量子力学では、生成元の固有値は実験で測定すると予想される値です <sup>53</sup>。
+<!--
+This is a nice property, because Hermitian matrices have real eigenvalues and this becomes important in quantum mechanics where the eigenvalues of the generators are the values we expect to measure in experiments <sup>53</sup>. 
+-->
+
+</p><p class="margin-large">
+<sup>53</sup>
+これについてはセクション 8.3 で説明します。
+<!--
+This will be discussed in Section 8.3.
+-->
+</p><p>
+
+"\(i\)" がない場合、生成元は反エルミート
+\(\mathcal{J}^† = (\mathcal{J}^*)^T= −\mathcal{J}\) となり、対応する固有値は虚数になります。
+これにより、固有値を実験で観測できるものとして解釈することが直感的に難しくなります。
+<!--
+Without the "\(i\)", the generators are anti-Hermitian
+\(\mathcal{J}^† = (\mathcal{J}^*)^T= −\mathcal{J}\) and the corresponding eigenvalues are imaginary.
+This would make it less intuitive to interpret the eigenvalues as
+something that we can observe in experiments.
+-->
+</p><p>
+
+基底生成子は、よく知られた回転行列から始めて式3.53: \(X = \frac{dh}{dθ}\big|_{θ=0}\) を用いることで、別の方法でも導出できる。
+式3.22で引用され、式3.69で導出された最初の回転行列については、以下の式が得られる。
+<!--
+We can derive the basis generators in another way, by starting with the well known rotation matrices and use Eq. 3.53: \(X = \frac{dh}{dθ}\big|_{θ=0}\). For
+the first rotation matrix, as quoted in Eq. 3.22 and derived in Eq. 3.69, this yields
+-->
+
+\[
+\begin{align}
+\mathcal{J}_1 &= \frac{dR1}{dθ}\Bigg|_{θ=0} =\frac{d}{dθ}
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & \cos(θ) & −\sin(θ) \\
+0 & \sin(θ) & \cos(θ)
+\end{pmatrix}\Bigg|_{\theta=0} \\
+\\
+&=
+\begin{pmatrix}
+0 & 0 & 0 \\
+0 & −\sin(θ) & −\cos(θ) \\
+0 & \cos(θ) & −\sin(θ)
+\end{pmatrix}
+\Bigg|_{θ=0}=
+\begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & −1 \\
+0 & 1 & 0
+\end{pmatrix} \tag{3.73}
+\end{align}
+\]
+
+これはまさに式3.61の最初の生成元です。しかしながら、最初の方法はより一般的です。なぜなら、必ずしも有限の変換行列が与えられているわけではないからです。ローレンツ群については、まず群の定義から始め、基底生成元を導出し、その後でローレンツ変換の明示的な行列形式を計算します。既に明示的な変換行列が与えられている場合は、式3.53を用いて対応する生成元を導くことができます。
+<!--
+which is exactly the first generator in Eq. 3.61. Nevertheless, the
+first method is more general, because we will not always start with given finite transformation matrices. For the Lorentz group we will
+start with the definition of the group, derive the basis generators
+and only afterwards compute an explicit matrix form of the Lorentz
+transformations. If you already have explicit transformation matrices,
+you can always use Eq. 3.53 to derive the corresponding generators.
+-->
+
+</p><p>
+
+ローレンツ群についてより詳しく議論する前に、少し回り道をして、リー代数の現代的な定義を見てみましょう。
+この現代的な定義は、自然界の対称性を深く理解するために不可欠です。
+<!--
+Before we discuss the Lorentz group in more detail, we take a
+small detour and have a look at the modern definition of a Lie algebra.
+This modern definition is essential to get a deep understanding
+of the symmetries of nature.
+-->
+
+</p>
+
+<h3>3.4.2 リー代数の抽象的定義</h3>
+<!--
+<h3>3.4.2 The Abstract Definition of a Lie Algebra</h3>
+-->
+<p>
+ここまでは、簡略化した定義を用いてきました。リー代数は、指数関数 eX ∈ G に代入すると対応する群 G の元となるすべての元 X と、リー代数の元を結合するために用いるリー括弧 [, ] と呼ばれる演算から構成されます。
+<!--
+Up to this point we used a simplified definition: The Lie algebra consists
+of all elements X that result in an element of the corresponding
+group G, when put into the exponential function eX ∈ G, and an operation,
+called Lie bracket [, ], that we use to combine the Lie algebra
+elements.
+-->
+</p><p>
+
+この定義の最後の部分が重要であることはすでに述べました。
+群に関しては、リー代数元を結合する規則も必要です。ベーカー・キャンベル・ハウスドルフの公式を見ることで、群元の結合規則がリー代数元の結合規則とどのように関連しているかを学びました。
+重要な観察点は、リー代数元の結合規則は単なる行列の乗算ではなく、リー括弧と呼ばれるより複雑な規則であるということです。
+<!--
+We already discussed that the last part of this definition is crucial.
+As for the group, we also need a rule to combine Lie algebra
+elements. By looking at the Baker-Campbell-Hausdorff-Formula,
+we learned how the rule for the combination of group elements, is
+connected to the rule for the combination of Lie algebra elements.
+An important observation was that the rule for the combination of
+Lie algebra elements is not simply matrix multiplication, but a more
+complicated rule called Lie bracket.
+-->
+
+</p><p>
+
+この演算は既に簡略化した定義に現れていますが、ここではリー括弧がさらに中心的な意味を持つ、より抽象的な定義を導入します <sup>54</sup>
+<!--
+While this operation already appears in our simplified definition,
+we now introduce a more abstract definition where the Lie bracket is
+even more central <sup>54</sup>
+-->
+
+</p><p class="margin-large">
+<sup>54</sup>
+
+この定義は、以降のセクションで非常に役立つことが証明され、リー括弧がどのような意味で「より中心的」であるかはすぐに明らかになります。
+<!--
+This definition will prove to be
+invaluable for the following sections
+and it will become clear in a moment
+in what sense the Lie bracket is "more
+central".
+-->
+
+</p><p>
+
+リー代数とは、ベクトル空間 g に二項演算 (\([, ]: \mathfrak{g}×\mathfrak{g} → \mathfrak{g}\)) が備わったものである。この二項演算は以下の公理を満たす。
+<!--
+A Lie algebra is a vector space g equipped with a binary operation
+\([, ]: \mathfrak{g}×\mathfrak{g} → \mathfrak{g}\). The binary operation satisfies the following axioms:
+-->
+<div class="styleBullet">
+<ul><li>
+● 双線型性: \([aX + bY, Z] = a[X, Z] + b[Y, Z]\) かつ \([Z, aX + bY] =
+a[Z, X] + b[Z, Y]\) （任意の数 \(a, b\) および \(∀X,Y, Z ∈ \mathfrak{g}\) に対して）
+</li><br><li>● 反可換性: \([X,Y] = −[Y, X]　∀ X,Y ∈ \mathfrak{g}\)
+</li><br><li>● ヤコビ恒等式: \([X, [Y, Z]] + [Z, [X,Y]] + [Y, [Z, X]] = 0　∀X,Y, Z ∈ \mathfrak{g}\)
+<!--
+● Bilinearity: \([aX + bY, Z] = a[X, Z] + b[Y, Z]\) and \([Z, aX + bY] =
+a[Z, X] + b[Z,Y]\) , for arbitrary number \(a, b\) and \(∀X,Y, Z ∈ \mathfrak{g}\)
+</li><br><li>● Anticommutativity: \([X,Y] = −[Y, X]　∀ X,Y ∈ \mathfrak{g}\)
+</li><br><li>● The Jacobi Identity: \([X, [Y, Z]] + [Z, [X,Y]] + [Y, [Z, X]] = 0　∀X,Y, Z ∈ \mathfrak{g}\)
+-->
+</li></ul></div>
+</p><p>
+
+2つの行列の交換子がこれらの条件をすべて満たしていることを確認できます。もちろん、この標準的な交換子はこれらの公理を導き出すために使用されました。しかしながら、これらの公理を満たす全く異なる二項演算も存在します。例えば、古典力学の有名なポアソン括弧などです。
+<!--
+You can check that the commutator of two matrices fulfills all
+these conditions and of course this standard commutator was used to
+motivate these axioms. Nevertheless, there are quite different binary
+operations that fulfill these axioms, for example, the famous Poisson
+bracket of classical mechanics.
+-->
+
+</p><p>
+
+重要な点は、この定義がいかなるリー群にも言及していないことです。リー代数の定義はそれ自体で成り立っており、これが非常に理にかなっていることが分かります。次の節では、\(\mathcal{SU}(2)\) の生成元を見て、線形結合によって他のすべての生成元を構成するために使用できる生成元の集合である基底生成元が、\(\mathcal{SO}(3)\) の基底生成元と同じリー括弧関係を満たすことを確認します (式 3.72))。これは、\(\mathcal{SU}(2)\) と \(\mathcal{SO}(3)\) が同じリー代数を持つと解釈されます。これは非常に重要な結果であり、\(\mathcal{SU}(2)\) と \(\mathcal{SO}(3)\) について多くのことを教えてくれるでしょう。
+<!--
+The important point is that this definition makes no reference to
+any Lie group. The definition of a Lie algebra stands on its own and
+we will see that this makes a lot of sense. In the next section we will
+have a look at the generators of \(\mathcal{SU}(2)\) and find that the basis generators,
+which is the set of generators we can use to construct all other
+generators by linear combinations, fulfill the same Lie bracket relation
+as the basis generators of \(\mathcal{SO}(3)\) (Eq. 3.72). This is interpreted as
+\(\mathcal{SU}(2)\) and \(\mathcal{SO}(3)\) having the same Lie algebra. This is an incredibly
+important result and it will tell us a lot about \(\mathcal{SU}(2)\) and \(\mathcal{SO}(3)\).
+-->
+
+</p>
+<h3>3.4.3 \(\mathcal{SU}(2)\) の生成元とリー代数</h3>
+<!--
+<h3>3.4.3 The Generators and Lie Algebra of \(\mathcal{SU}(2)\)</h3>
+-->
+<p>
+
+我々は3次元での回転を記述しようとしているときに偶然\(\mathcal{SU}(2)\)に出会い、\(\mathcal{SU}(2)\)が\(\mathcal{SO}(3)\)の二重被覆<sup>55</sup>であることを発見した。
+<!--
+We stumbled upon \(\mathcal{SU}(2)\) while trying to describe rotations in three dimensions and discovered that \(\mathcal{SU}(2)\) is the double cover <sup>55</sup> of \(\mathcal{SO}(3)\).
+-->
+
+</p><p class="margin-large">
+<sup>55</sup> 
+
+これは、\(\mathcal{SU}(2)\) から \(\mathcal{SO}(3)\) への写像が、\(\mathcal{SU}(2)\) の２つの元を、\(\mathcal{SO}(3)\) の同じ元と同一視することを意味していることを思い出してください。
+<!--
+Recall that this means that the map from \(\mathcal{SU}(2)\) to \(\mathcal{SO}(3)\) identifies two
+elements of \(\mathcal{SU}(2)\) with the same
+element of \(\mathcal{SO}(3)\).
+-->
+
+</p><p>
+
+SU(2)は単位行列式<sup>56</sup>を持つユニタリ2×2行列の群であることを思い出してください。
+<!--
+Remember that SU(2) is the group of unitary 2 × 2 matrices with unit determinant <sup>56</sup>:
+-->
+
+</p><p class="margin-large">
+<sup>56</sup>
+
+「\(\mathcal{S}\)」の意味は次のとおりです。
+Special = 単位行列式。
+<!--
+This is what the "\(\mathcal{S}\)" stands for: 
+Special = unit determinant.
+-->
+
+</p><p>
+
+\[
+\begin{align}
+\mathcal{U}^†\mathcal{U} &= \mathcal{U}\mathcal{U}^† =1 \tag{3.74} \\
+\\
+\det(\mathcal{U}) &= 1 \tag{3.75}
+\end{align}
+\]
+
+まず最初に、この群のリー代数について見ていきましょう。群の定義条件を生成元\(\mathcal{J}_1, \mathcal{J}_2, . . .\)を用いて書き表すと、<sup>57</sup>となります。
+<!--
+The first thing we now want to take a look at is the Lie algebra of this group. Writing the defining conditions of the group in terms of
+ the generators \(\mathcal{J}_1, \mathcal{J}_2, . . .\) yields <sup>57</sup>
+-->
+
+</p><p class="margin-large">
+<sup>57</sup>
+
+上で述べたように、エルミート行列を得るために指数に「\(i\)」を追加します。これにより、量子力学の実験の予測として実数が得られることが保証されます。
+<!--
+As discussed above, we now work with an extra "\(i\)" in the exponent, in
+order to get Hermitian matrices, which
+guarantees that we get real numbers as
+predictions for experiments in quantum
+mechanics.
+-->
+
+</p><p>
+
+\[
+\begin{align}
+\mathcal{U}^†\mathcal{U} &= (e^{i\mathcal{J}_i})^†e^{i\mathcal{J}_i} \overset{!}{=}1 \tag{3.76}\\
+\\
+\det(\mathcal{U}) &= \det(e^{i\mathcal{J}_i} )\overset{!}{=}1 \tag{3.77}
+\end{align}
+\]
+
+最初の条件は、ベーカー・キャンベル・ハウスドルフ定理（式3.55）と\([\mathcal{J}_i, \mathcal{J}_i] = 0\)を用いて次のように表される。
+<!--
+The first condition tells us, using the Baker-Campbell-Hausdorff
+theorem (Eq. 3.55) and \([\mathcal{J}_i, \mathcal{J}_i] = 0\)
+-->
+
+\[
+\begin{align}
+&(e^{i\mathcal{J}_i})^†e^{i\mathcal{J}_i} = e^{−i\mathcal{J}_i^†} e^{i\mathcal{J}_i} \overset{!}{=}1 \\
+\\
+&→ e^{−i\mathcal{J}_i^†+i\mathcal{J}_i+\frac{1}{2}[\mathcal{J}_i^†, \mathcal{J}_i]+...} \overset{!}{=}1 \\
+\\
+&\underbrace{→}_{e^0=1}\mathcal{J}_i^† \overset{!}{=}\mathcal{J}_i  \tag{3.78}
+\end{align}
+\]
+
+条件\(\mathcal{J}_i^† = \mathcal{J}_i\)を満たす行列はエルミート行列と呼ばれ、したがって、\(\mathcal{SU}(2)\)の生成元はエルミート行列でなければならないことがわかります。
+<!--
+A matrix fulfilling the condition \(\mathcal{J}_i^† = \mathcal{J}_i\) is called Hermitian and we
+therefore learn here that the generators of \(\mathcal{SU}(2)\) must be Hermitian.
+-->
+
+</p><p>
+
+\(\det(e^A) = e^{tr(A)}\)という恒等式を用いると、2番目の条件は
+<!--
+Using the identity \(\det(e^A) = e^{tr(A)}\), we see that the second condition yields
+-->
+
+\[
+\det(e^{i\mathcal{J}_i}) = e^{itr(\mathcal{J}_i)} = 1 \underbrace{→}_{e^0=1}tr(\mathcal{J}_i)\overset{!}{=}0 \tag{3.79}
+\]
+
+</p><p>
+
+\(\mathcal{SU}(2)\) の生成元は必ずエルミート無痕跡行列であると結論付けられる。エルミート無痕跡2×2行列の基底は、以下の3つの行列 <sup>58</sup> で与えられる。
+<!--
+We conclude that the generators of \(\mathcal{SU}(2)\) must be Hermitian
+traceless matrices. A basis for Hermitian traceless 2 × 2 matrices is given by the following 3 matrices <sup>58</sup>: 
+-->
+
+</p><p class="margin-large">
+<sup>58</sup>
+複素2×2行列には4つの複素要素があり、したがって自由度は8です。2つの条件により、自由度は3に減少します。
+<!--
+A complex 2×2 matrix has 4 complex
+entries and therefore 8 degrees of
+freedom. Because of the two conditions
+the degrees of freedom are reduced to 3
+-->
+</p><p>
+
+\[
+σ_1 =
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+,　　σ_2 =
+\begin{pmatrix}
+0 & −i \\
+i  & 0
+\end{pmatrix}
+,　　σ_3 =
+\begin{pmatrix}
+1 & 0 \\
+0 & −1
+\end{pmatrix}
+\tag{3.80}
+\]
+
+これは、すべてのエルミートトレースレス 2 × 2 行列が、パウリ行列と呼ばれるこれらの行列の線形結合として表されることを意味します。
+<!--
+This means every Hermitian traceless 2 × 2 matrix can be written as a linear combination of these matrices that are called Pauli matrices.
+-->
+
+</p><p>
+
+これらの基底生成行列をリー括弧に入れると、次の式が得られます。
+<!--
+We can put these explicit matrices for the basis generators into the Lie bracket and this yields
+-->
+
+\[
+[σ_i, σ_j] = 2i\epsilon_{ijk}σ_k  \tag{3.81}
+\]
+
+ここで、\(\epsilon_{ijk}\) は再びレヴィ・チヴィタ記号です。厄介な 2 を取り除くために、\(\mathcal{SU}(2)\) の生成元を \(\mathcal{J}_i ≡ \frac{1}{2}
+σ_i\) と定義するのが慣例です。すると、リー代数は次のように表されます。
+<!--
+where \(\epsilon_{ijk}\) is again the Levi-Civita symbol. To get rid of the nasty 2 it
+is conventional to define the generators of \(\mathcal{SU}(2)\) as \(\mathcal{J}_i ≡ \frac{1}{2}
+σ_i\). The Lie algebra then reads
+-->
+
+\[
+[\mathcal{J}_i, \mathcal{J}_j] = i\epsilon_{ijk}\mathcal{J}_k  \tag{3.82}
+\]
+
+</p><p>
+
+これは、\(\mathcal{SO}(3)\) (式3.72) に対して導出したリー括弧関係と全く同じであることに注目してください。したがって、\(\mathcal{SU}(2)\) と \(\mathcal{SO}(3)\) は同じリー代数を持つと言えます。なぜなら、リー代数はリー括弧によって定義されるからです。このリー代数の抽象的な定義を用いて、\(\mathcal{SU}(2)\) によって記述される変換の異なる記述を得ます。\(\mathcal{SU}(2)\) 変換は2×2行列で記述する必要がないことがわかります。このようなことを理解するには、リー群のより抽象的な定義が必要です。この時点では、\(\mathcal{SU}(2)\) は 2 × 2 行列の集合として定義されており、\(\mathcal{SU}(2)\) を例えば 3 × 3 行列で記述することはあまり意味がありません。リー群の抽象的な定義により、同じ変換の異なる記述間の関連性を理解することができます。各リー群を幾何学的対象（多様体）と同一視し、この抽象的な対象を用いて群を定義します。これは奇妙な考えに思えるかもしれませんが、前のセクションで既に見た2つの例をもう一度見てみると、非常に納得がいくでしょう。
+<!--
+Take note that this is exactly the same Lie bracket relation we derived
+for \(\mathcal{SO}(3)\) (Eq. 3.72)! Therefore one says that \(\mathcal{SU}(2)\) and \(\mathcal{SO}(3)\)
+have the same Lie algebra, because we define Lie algebras by their Lie bracket. We will use the abstract definition of this Lie algebra, to get different descriptions for the transformations described by \(\mathcal{SU}(2)\). We will learn that an \(\mathcal{SU}(2)\) transformation doesn’t need to
+be described by 2 × 2 matrices. To make sense of things like this, we
+need a more abstract definition of a Lie group. At this point \(\mathcal{SU}(2)\) is
+defined as a set of 2 × 2 matrices, and a description of \(\mathcal{SU}(2)\) by, for
+example, 3 × 3 matrices, makes little sense. The abstract definition of a Lie group will enable us to see the connection between different descriptions
+of the same transformation. We will identify with each Lie
+group a geometrical object (a manifold) and use this abstract object to
+define a group. This may seem like a strange thought, but will make
+a lot of sense after taking a second look at two examples we already
+encountered in earlier sections.
+-->
+
+</p>
+<h3>3.4.4 リー群の抽象的定義</h3>
+<!--
+<h3>3.4.4 The Abstract Definition of a Lie Group</h3>
+-->
+<p>
+
+最初に議論したリー群の一つは単位複素数 \(\mathcal{U}(1)\) でした。これは \(z^*z = 1\) を満たす複素数として定義されます。
+z = a + ibと書くと、この条件は次のようになります。
+<!--
+One of the first Lie groups we discussed was \(\mathcal{U}(1)\), the unit complex
+numbers. These are defined as complex numbers that satisfy \(z^*z = 1\).
+If we write z = a + ib this condition reads
+-->
+
+\[
+z^*z = (a + ib)^*(a + ib) = (a − ib)(a + ib) = a^2 + b^2 = 1  \tag{3.83}
+\]
+</p><p>
+
+これはまさに単位円 <sup>59</sup> の定義条件です。
+<!--
+This is exactly the defining condition of the unit circle <sup>59</sup>. 
+-->
+
+</p><p class="margin-large">
+<sup>59</sup>
+単位円 \(\mathcal{S}^1\) は、原点から距離 1 にある2次元上のすべての点の集合です。数学的に言えば、これは \((x_1, x_2)\) が \(x_1^2+ x_2^2 = 1\) を満たすすべての点を意味します。
+<!--
+The unit circle \(\mathcal{S}^1\) is the set of all
+points in two dimensions with distance
+1 from the origin. In mathematical
+terms this means all points \((x_1, x_2)\)
+fulfilling \(x_1^2+ x_2^2 = 1\).
+-->
+</p><p>
+単位複素数の集合は複素平面上の単位円です。さらに、\(\mathcal{U}(1)\) と \(\mathcal{SO}(2)\) の元の間には一対一写像 <sup>60</sup> が存在することがわかりました。
+<!--
+The set of unit-complex numbers is the unit circle in the complex plane.  Furthermore, we found that there is a one-to-one map <sup>60</sup> between elements of \(\mathcal{U}(1)\) and \(\mathcal{SO}(2)\). 
+-->
+</p><p class="margin-large">
+<sup>60</sup>
+正確に言うと、同型性です。2つのものが同型であると言うことは、それらが「同じもの」であることを数学的に表現することです。2つのものの間に同型性が存在する場合、それらは同型であると呼ばれます。
+<!--
+To be precise: an isomorphism. To
+say two things are isomorphic is the
+mathematical way of saying that they
+are "the same thing". Two things are
+called isomorphic if there exists an
+isomorphism between them.
+-->
+
+</p><p>
+
+したがって、これらの群は、単位円という幾何学的対象と同一視するのが容易です。与えられた次元の対象によって定義される \(\mathcal{SO}(2)\) や \(\mathcal{U}(1)\) の異なる記述について議論する代わりに、この群を単位円として考えると分かりやすくなります。2次元における回転は、リー群として単位円であり、これらの変換は \(\mathcal{SO}(2)\) の元、つまり2 × 2行列、または \(\mathcal{U}(1)\) の元、つまり単位複素数で表すことができます。
+<!--
+Therefore, for these groups it is easy
+to identify them with a geometric object: the unit circle. Instead of
+talking about different descriptions for \(\mathcal{SO}(2)\) or \(\mathcal{U}(1)\), which are
+defined by objects of given dimension, it can help to think about this
+group as the unit-circle. Rotations in two-dimensions are, as a Lie
+group, the unit-circle and we can represent these transformations
+by elements of \(\mathcal{SO}(2)\), i.e. 2 × 2 matrices or elements of \(\mathcal{U}(1)\), i.e.
+unit-complex numbers.
+-->
+
+</p><p>
+
+次に議論した群は、\(\mathcal{SO}(3)\) と \(\mathcal{SU}(2)\) です。\(\mathcal{SU}(2)\) と単位四元数の間には一対一の写像が見つかったことを思い出してください。単位四元数は、条件 (式 3.28) を満たす四元数 \(q = a\mathbf{1} + b\mathbf{i} + c\mathbf{j} + d\mathbf{k}\) として定義されます。
+<!--
+The next groups we discussed were \(\mathcal{SO}(3)\) and \(\mathcal{SU}(2)\). Remember
+that we found a one-to-one map between \(\mathcal{SU}(2)\) and the unit
+quaternions. The unit quaternions are defined as those quaternions
+\(q = a\mathbf{1} + b\mathbf{i} + c\mathbf{j} + d\mathbf{k}\) that satisfy the condition (Eq. 3.28)
+-->
+
+\[
+a^2 + b^2 + c^2 + d^2 \overset{!}{=}1  \tag{3.84}
+\]
+
+これは <sup>61</sup> 三次元球面 \(\mathcal{S}^3\) を定義する条件と同じです。
+<!--
+which is the same condition that defines <sup>61</sup> the three sphere \(\mathcal{S}^3\)!
+-->
+
+</p><p class="margin-large">
+<sup>61</sup>
+
+単位円 \(\mathcal{S}^1\) は、条件 \(x_1^2+ x_2^2 = 1\) を満たす点の集合として定義されることを思い出してください。同様に、2次元球面 \(\mathcal{S}^2\) は条件 \(x_1^2+ x_2^2 + x_3^2 = 1\) によって定義され、同様に3次元球面 \(\mathcal{S}^3\) は \(x_1^2+x_2^2+x_3^2
++x_4^2 = 1\) によって定義されます。\(\mathcal{S}\) に続く数字は次元を表します。2次元では、1つの条件で1次元オブジェクト \(\mathcal{S}^1\) が得られます。同様に、4次元では、\(x_1^2+ x_2^2+ x_3^2+ x_4^2 = 1\) という条件を満たすと、3次元物体 \(\mathcal{S}^3\) が得られます。\(\mathcal{S}^3\) は4次元球の表面です。
+<!--
+Recall that the unit circle \(\mathcal{S}^1\) is defined
+as the set of points that satisfy the condition \(x_1^2+ x_2^2 = 1\). Equally, the two sphere
+\(\mathcal{S}^2\) is defined by the condition
+\(x_1^2+ x_2^2 + x_3^2 = 1\) and analogously the
+three sphere \(\mathcal{S}^3\) by \(x_1^2+x_2^2+x_3^2
++x_4^2 = 1\). The number that follows the \(\mathcal{S}\) denotes
+the dimension. In two dimensions,
+with one condition we get a one dimensional
+object: \(\mathcal{S}^1\). Equally we
+get in four dimensions, with one
+condition \(x_1^2+ x_2^2+ x_3^2+ x_4^2 = 1\) a three
+dimensional object \(\mathcal{S}^3\). \(\mathcal{S}^3\) is the surface
+of the four-dimensional ball.
+-->
+
+</p><p>
+
+したがって、四元数は\(\mathcal{SU}(2)\)と三次元球面\(\mathcal{S}^3\)との間の写像を提供します。この写像は同型（1-1かつ全射）であり、したがって\(\mathcal{SU}(2)\)を三​​次元球面\(\mathcal{S}^3\)と考えることができます。
+<!--
+
+Therefore the quaternions provide us with a map between \(\mathcal{SU}(2)\) and the
+three sphere \(\mathcal{S}^3\). This map is an isomorphism (1-1 and onto) and
+therefore we can really think of \(\mathcal{SU}(2)\) as the three sphere \(\mathcal{S}^3\).
+-->
+
+</p><p>
+
+これらの観察は、リー群の現代的な定義 <sup>62</sup> の根拠となっている。
+<!--
+These observations motivate the modern definition of a Lie group <sup>62</sup>:
+-->
+
+</p><p class="margin-large">
+<sup>62</sup>
+
+本書で取り上げる技術的な詳細は、本書の目的には重要ではありません。特に、「誘導する」や「微分可能」といった概念の正確な意味がわからなくても心配しないでください。重要なのは、リー群 = 多様体であるということです。
+<!--
+The technical details that follow aren’t
+important for what we want to do in
+this book. Especially, don’t worry if the
+exact meaning of notions like "induces"
+or "differentiable" is not clear. The
+important message to take away is: Lie
+group = manifold.
+-->
+
+</p><p>
+
+リー群は微分可能多様体でもある群です<sup>63</sup>。
+<!--
+A Lie group is a group, which is also a differentiable manifold <sup>63</sup>. 
+-->
+
+</p><p class="margin-large">
+<sup>63</sup>
+
+多様体とは点の集合であり、例えば局所的には平坦ユークリッド空間 \(R^n\) のように見える球面などです。n次元多様体は、任意の点の近傍に \(n\) 個の独立座標を与えることができる集合と考えることもできます。多様体に関するより詳しい情報については、本章末のセクション3.11の付録を参照してください。
+<!--
+ A manifold is a set of points, for example
+a sphere that looks locally like
+flat Euclidean space \(R^n\). Another way of
+thinking about a n-dimensional manifold
+is that it’s a set which can be given
+\(n\) independent coordinates in some
+neighborhood of any point. For some
+more information about manifolds, see
+the appendix in Section 3.11 at the end
+of this chapter.
+-->
+
+</p><p>
+
+さらに、群演算 ◦ は多様体からそれ自身への微分可能な写像を誘導しなければなりません。これは、群の性質が多様体の性質と両立することを保証する適合性要件です。具体的には、これは、すべての群元、例えば \(A\) が、群 \(B\) の任意の元を群 \(C = AB\) の別の元へ写像し、この写像は微分可能でなければならないことを意味します。座標を用いると、これは \(AB\) の座標が \(B\) の座標の微分可能な関数でなければならないことを意味します。
+<!--
+Furthermore, the group operation ◦ must induce a differentiable map of the manifold
+into itself. This is a compatibility requirement that ensures that the group
+property is compatible with the manifold property. Concretely this means
+that every group element, say \(A\) induces a map that takes any element of the
+group \(B\) to another element of the group \(C = AB\) and this map must be
+differentiable. Using coordinates this means that the coordinates of \(AB\) must
+be differentiable functions of the coordinates of \(B\).
+-->
+
+</p><p>
+
+これで、セクション3.4の最後のコメントが少しだけよく<sup>34</sup>理解できるようになりました。
+<!--
+We can now understand the remark at the end of Section 3.4: a bit better <sup>64</sup>. 
+-->
+
+</p><p>
+
+「...各リー代数には、正確に 1 つの区別されたリー群が存在します。」
+<!--
+"... there is precisely one distinguished Lie group for each Lie algebra."
+-->
+
+</p><p class="margin-large">
+<sup>64</sup>
+
+異なる群が同じリー代数を持つ可能性があることを既に発見したことを思い出してください。例えば、リー代数の抽象的な定義を用いると、\(\mathcal{SO}(3)\) と \(\mathcal{SU}(2)\) は同じリー代数を持つと言えます (式3.82)。
+<!--
+Recall that we already discovered that
+different groups can have the same Lie
+algebra. For example, using the abstract
+definition of a Lie algebra, we say that
+\(\mathcal{SO}(3)\) and \(\mathcal{SU}(2)\) have the same Lie algebra (Eq. 3.82).
+-->
+
+</p><p>
+
+幾何学的な観点から見ると、この群は単連結であるという性質を持つ。これは、リー群を多様体として定義する現代的な定義を用いると、この多様体上の任意の閉曲線は点<sup>65</sup>まで滑らかに縮められることを意味する。
+<!--
+From the geometric perspective, the distinguished
+group has the property of being simply connected. This means that,
+if we use the modern definition of a Lie group as a manifold, any
+closed curve on this manifold can be shrunk smoothly to a point <sup>65</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>65</sup>
+
+これについてはこれ以上議論しませんが、この章の最後に推奨されている書籍などを読んでみることをお勧めします。本書の目的としては、常に1つの明確なグループが存在することを知っていれば十分です。
+<!--
+We will not discuss this any further,
+but you are encouraged to read about
+it, for example in the books recommended
+at the end of this chapter.
+For the purpose of this book it suffices
+to know that there is always one
+distinguished group.
+-->
+
+</p><p>
+
+この重要な点を強調するために: <sup>66</sup>
+<!--
+To emphasize this important point: <sup>66</sup>
+-->
+
+</p><p class="margin-large">
+<sup>66</sup>
+
+証明は、例えばマイケル・スピヴァック著『微分幾何学入門　包括的第1巻　第3版』(Publish or Perish, 第3版、1999年) に掲載されています。ISBN 9780914098706
+<!--
+A proof can be found, for example,
+in Michael Spivak. A Comprehensive
+Introduction to Differential Geometry, Vol.
+1, 3rd Edition. Publish or Perish, 3rd
+edition, 1 1999. ISBN 9780914098706
+-->
+
+</p><p>
+
+各リー代数に対応する単連結リー群は 1 つだけ存在します。
+<!--
+There is precisely one simply-connected Lie group corresponding to each Lie algebra.
+-->
+
+</p><p>
+
+この単連結群は、同じリー代数を持つすべての群の「母群」と考えることができます。なぜなら、単連結群から同じリー代数を持つ他のすべての群への写像は存在しますが、その逆は存在しないからです。この特定のリー代数の母群と呼ぶこともできますが、数学者はそれほど大げさではなく、被覆群と呼ぶ傾向があります。同じリー代数を持つ他のすべての群は、単連結群によって覆われていると言われています。私たちはすでにこの例に遭遇しました。\(\mathcal{SU}(2)\) は \(\mathcal{SO}(3)\) の二重被覆です。これは、\(\mathcal{SU}(2)\) から \(\mathcal{SO}(3)\) への2対1の写像が存在することを意味します。
+<!--
+This simply-connected group can be thought of as the "mother"
+of all those groups having the same Lie algebra, because there are
+maps to all other groups with the same Lie algebra from the simply
+connected group, but not vice versa. We could call it the mother
+group of this particular Lie algebra, but mathematicians tend to be
+less dramatic and call it the covering group. All other groups having
+the same Lie algebra are said to be covered by the simply connected
+one. We already stumbled upon an example of this: \(\mathcal{SU}(2)\) is the
+double cover of \(\mathcal{SO}(3)\). This means there is a two-to-one map from
+\(\mathcal{SU}(2)\) to \(\mathcal{SO}(3)\).
+-->
+
+</p><p>
+
+さらに、\(\mathcal{SU}(2)\) は三次元球面であり、単連結多様体です。したがって、式 3.82 において、リー代数に属する「最も重要な」群を既に見つけました。このリー代数に属する他のすべての群は、\(\mathcal{SU}(2)\) からの写像を通して得ることができます。
+<!--
+Furthermore, \(\mathcal{SU}(2)\) is the three sphere, which is a simply connected
+manifold. Therefore, we have already found the "most important"
+group belonging to the Lie algebra in Eq. 3.82. We can get all
+other groups belonging to this Lie algebra through maps from \(\mathcal{SU}(2)\).
+-->
+
+</p><p>
+
+これで多様体 \(\mathcal{SO}(3)\) がどのようなものか理解できました。
+\(\mathcal{SU}(2)\) から \(\mathcal{SO}(3)\) への写像は、\(\mathcal{SU}(2)\) の2点、\(\mathcal{SO}(3)\) の1点と同一視されます。したがって、\(\mathcal{SO}(3)\) は \(\mathcal{S}^3\) の上半分 <sup>67</sup> と考えることができます。
+<!--
+We can now understand what manifold \(\mathcal{SO}(3)\) is. The map from
+\(\mathcal{SU}(2)\) to \(\mathcal{SO}(3)\) identifies with two points of \(\mathcal{SU}(2)\), one point of
+\(\mathcal{SO}(3)\). Therefore, we can think of \(\mathcal{SO}(3)\) as the top half <sup>67</sup> of \(\mathcal{S}^3\).
+-->
+</p>
+<center><img src="images/fig3_7.png"></center>
+<p class="margin-large">
+図3.7: 3次元球面 \(\mathcal{S}^3\) の2次元スライス（3次元面であるため、それ自体を描くことはできません）。球面の上半分は \(\mathcal{SO}(3)\) であることがわかります。\(\mathcal{SU}(2)\) から \(\mathcal{SO}(3)\) に移行するには、2つの点、例えば \(p\) と \(p + 2π\) を互いに同一視する必要があるためです。
+<!--
+Fig. 3.7: Two-dimensional slice of
+the three Sphere \(\mathcal{S}^3\) (which is a three
+dimensional surface and therefore not
+drawable itself). We can see that the top
+half of the sphere is \(\mathcal{SO}(3)\), because to
+get from \(\mathcal{SU}(2)\) to \(\mathcal{SO}(3)\) we identify
+two points, for example, p and \(p + 2π\),
+with each other.
+-->
+</p><p class="margin-large">
+<sup>67</sup>
+
+この図は少し単純化しすぎています。
+厳密に言えば、多様体としての \(\mathcal{SO}(3)\) は
+依然として球面ですが、対心点が
+同一視されています。
+<!--
+This picture is a bit oversimplified.
+Strictly speaking \(\mathcal{SO}(3)\) as a manifold is
+still a sphere, but with antipodal points
+identified.
+-->
+
+</p><p>
+
+リー群が多様体であるという観点から見ると、\(\mathcal{SU}(2)\) は \(\mathcal{SO}(3)\) よりも完全な対象であることがわかります。\(\mathcal{SO}(3)\) は完全な対象の「一部」にすぎません。
+<!--
+We can see, from the point of view that Lie groups are manifolds
+that \(\mathcal{SU}(2)\) is a more complete object than \(\mathcal{SO}(3)\). \(\mathcal{SO}(3)\) is just "part"
+of the complete object.
+-->
+
+</p><p>
+
+本書では、自然を最も基本的なレベルで記述するには、最も基本的な群を用いる必要があるという見解をとっています。
+3次元における回転の場合、この群は\(\mathcal{SU}(2)\)であり、\(\mathcal{SO}(3)\)ではありません。
+特殊相対論の対称群を考える際にも、同様のことが分かります。
+<!--
+In this book we take the view that to describe nature at the most
+fundamental level, we need to use the most fundamental groups.
+For rotations in three dimensions this group is \(\mathcal{SU}(2)\) and not \(\mathcal{SO}(3)\).
+We will discover something similar when considering the symmetry
+group of special relativity.
+-->
+
+<p><p>
+
+自然はそのような考え方に合致していることがわかります。素粒子を記述するには、四元ベクトルの変換に用いる通常の表現ではなく、ポアンカレ群の被覆群の表現を用います。最も基本的なレベルで自然を記述するには、被覆群から写像できる他の群ではなく、被覆群を用いなければなりません。
+<!--
+We will see that Nature agrees with such lines of thought! To
+describe elementary particles one uses the representations of the
+covering group of the Poincaré group, instead of just the usual representation
+one uses to transform four-vectors. To describe nature at
+the most fundamental level, we must use the covering group, instead
+of any of the other groups that one can map to from the covering
+group.
+-->
+
+</p><p>
+
+リー代数の表現を導出することによって、与えられたリー代数に属する最も基本的な群の表現<sup>68</sup>を導出することができる。
+<!--
+We are able to derive the representations <sup>68</sup> of the most fundamental group, belonging to a given Lie algebra, by deriving representa- 
+tions of the Lie algebra. 
+-->
+
+</p><p class="margin-large">
+<sup>68</sup>
+この概念は次のセクションで詳しく説明します。
+<!--
+ This notion will be made precise in the next section.
+-->
+</p><p>
+
+次に、リー代数の元（生成元）を表す行列を指数関数に代入して、群の元を表す行列を得ることができます。
+<!--
+We can then put the matrices representing
+the Lie algebra elements (the generators) into the exponential function
+to get matrices representing group elements.
+-->
+
+</p><p>
+
+ここにリー理論の強みがあります。純粋数学を用いることで、私たちは自然について根本的な何かを明らかにすることができます。特殊相対論の標準的な対称群は、この対称性に属する最も基本的な群ではないため、何かを隠しています<sup>69</sup>。
+<!--
+Herein lies the strength of Lie theory. By using pure mathematics
+we are able to reveal something fundamental about nature. The
+standard symmetry group of special relativity hides something from us, because it is not the most fundamental group belonging to this
+symmetry <sup>69</sup>. 
+-->
+</p><p class="margin-large">
+<sup>69</sup>
+量子力学をある程度ご存知の方へ：標準対称群はスピンを隠します！
+<!--
+For those who already know some
+quantum mechanics: the standard
+symmetry group hides spin from us!
+-->
+</p><p>
+
+ポアンカレ群の被覆群は基本群であるため、これを使用して自然を記述します <sup>70</sup>。
+<!--
+The covering group of the Poincaré group is the fundamental group and therefore we will use it to describe nature <sup>70</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>70</sup>
+
+以下では、ポアンカレ群の表現の一つを用いて、対応するリー代数を導出します。次に、このリー代数を用いて、このリー代数に属する、ポアンカレ群を二重に被覆する唯一の特別な群の表現を導出します。
+<!--
+ In the following, we will use one
+representation of the Poincaré group to
+derive the corresponding Lie algebra.
+Then we will use this Lie algebra to
+derive the representations of the one
+distinguished group that belongs to this
+Lie algebra, which doubly covers the
+Poincaré group.
+-->
+
+</p><p>
+
+要約すると<sup>71</sup>
+<!--
+To summarize <sup>71</sup>
+-->
+
+</p><p class="margin-large">
+<sup>71</sup>
+
+3次元球面である\(\mathcal{S}^2\)がなぜ欠落しているのか疑問に思うかもしれません。\(\mathcal{S}^2\)はリー群ではなく、これは3次元複素数が存在しないという事実と密接に関係しています。iのみを含む2次元複素数から、\(i,j,k\)を含む4次元四元数へと移行しなければならなかったことを思い出してください。
+<!--
+Maybe you wonder why \(\mathcal{S}^2\), the surface
+of the sphere in three dimensions,
+is missing. \(\mathcal{S}^2\) is not a Lie group and
+this is closely related to the fact that
+there are no three-dimensional complex
+numbers. Recall that we had to move
+from two-dimensional complex numbers
+with just i to the four-dimensional
+quaternions with \(i,j,k\).
+-->
+
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+● \(\mathcal{S}^1\hat{=}\mathcal{U}(1)\underbrace{↔}_{1対1}\mathcal{SO}(2)\)
+</li><br><li>● \(\mathcal{S}^3 \hat{=}\mathcal{SU}(2)\underbrace{→}_{2対1}\mathcal{SO}(3)\hat{=} \text{"半分" of }\mathcal{S}^3 \\
+⇒ \mathcal{SU}(2)\) は、リー代数に属する特別な群である
+\([\mathcal{J}_i, \mathcal{J}_j] = i\epsilon_{ijk} \mathcal{J}_k\) (式 3.82) である。なぜなら、 \(\mathcal{S}^3\) は単連結である。
+<!--
+● \(\mathcal{S}^1\hat{=}\mathcal{U}(1)\underbrace{↔}_{1対1}\mathcal{SO}(2)\)
+</li><br><li>● \(\mathcal{S}^3 \hat{=}\mathcal{SU}(2)\underbrace{→}_{2対1}\mathcal{SO}(3)\hat{=} \text{"half" of }\mathcal{S}^3 \\
+⇒ \mathcal{SU}(2)\) is the distinguished group belonging to the Lie algebra
+\([\mathcal{J}_i, \mathcal{J}_j] = i\epsilon_{ijk} \mathcal{J}_k\) (Eq. 3.82), because \(\mathcal{S}^3\) is simply connected.
+-->
+
+</li></ul></div>
+</p><p>
+
+次に、リー理論のもう一つの重要な分野である表現論を紹介します。表現論は、与えられたリー群から、自然を最も基本的なレベルで記述するために必要なツールを導き出すことを可能にします。
+<!--
+Next, we will introduce another important branch of Lie theory,
+called representation theory. It is representation theory that enables
+us to derive from a given Lie group the tools that we need to describe
+nature at the most fundamental level.
+-->
+
+</p>
+    </body>
+</html>
