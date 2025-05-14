@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>リー群論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>リー群論</h1>
+<h2>3.5 表現論</h2>
+<!--
+<h1>Lie Group Theory</h1>
+<h2>3.5 Representation Theory</h2>
+-->
+<p>
+群論の重要な点は、現実世界のいかなる物体にも言及することなく、変換を記述できることです。
+<!--
+The important thing about group theory is that it is able to describe
+transformations without referring to any objects in the real world.
+-->
+</p><p>
+理論的な考察においては、任意の群を抽象群とみなすことがしばしば有用です。これは、群をその多様体構造と群作用によって定義することを意味します。例えば、\(\mathcal{SU}(2)\) は三次元球面 \(\mathcal{S}^3\) であり、群の要素は多様体の点であり、積点 \(\mathcal{ab}\) を任意の二点 \(\mathcal{b, a}\) に関連付ける規則は、通常の群の公理を満たします。物理的な応用においては、群が実際に何をするか、すなわち群作用にこそ関心が寄せられます。
+<!--
+For theoretical considerations it is often useful to regard any group
+as an abstract group. This means defining the group by its manifold
+structure and the group operation. For example \(\mathcal{SU}(2)\) is the three
+sphere \(\mathcal{S}^3\), the elements of the group are points of the manifold and
+the rule associating a product point ab with any two points b and a
+satisfies the usual group axioms. In physical applications one is more
+interested in what the group actually does, i.e. the group action.
+-->
+</p><p>
+重要な考え方は、1つの群が多くの異なる種類のオブジェクトに作用できるということです <sup>72</sup>。この考え方は表現の定義の根拠となります。表現とは、群 \(\mathcal{G}\) の任意の群の要素 \(\mathcal{g}\) と、あるベクトル空間 \(\mathcal{V}\) の線型変換 <sup>74</sup> \(\mathcal{R}(\mathcal{g})\) との間の写像 <sup>73</sup> です。
+<!--
+An important idea is that one group can act on many different
+ kinds of objects <sup>72</sup>. This idea motivates the definition of a representation: A representation is a map <sup>73</sup> between any group element \(\mathcal{g}\) of a group \(\mathcal{G}\) and a linear transformation <sup>74</sup> \(\mathcal{R}(\mathcal{g})\) of some vector-space \(\mathcal{V}\)
+-->
+</p><p class="margin-large">
+<sup>72</sup>
+これはすぐにもっと理解しやすくなるでしょう。
+<!--
+This will make much more sense in a moment.
+-->
+<br><br>
+<sup>73</sup> 
+これらの特殊な性質を持つ写像を数学的に準同型写像と呼びます。同型写像の定義は準同型写像であり、これはさらに一対一対応です。
+<!--
+The mathematical term for a map with these special properties is homomorphism. The definition of an isomorphism is then a homomorphism, which is in addition one-to-one.
+-->
+<br><br>
+<sup>74</sup> 
+本書の文脈では、これは常に、各群の要素を行列に写像することを意味します。各群の要素は、あるベクトル空間の要素に対して通常の行列乗算を行う行列によって与えられます。
+<!--
+In the context of this book this will
+always mean that we map each group
+element to a matrix. Each group element
+is then given by a matrix that acts
+by usual matrix multiplication on the
+elements of some vector space.
+-->
+</p><p>
+
+\[
+\mathcal{g} \underbrace{→}_{\mathcal{R}}\mathcal{R}(\mathcal{g}) \tag{3.85}
+\]
+
+群のプロパティが保持されるような方法で:
+<!--
+in such a way that the group properties are preserved:
+-->
+<div class="styleBullet">
+<ul><li>
+• \(\mathcal{R}(\mathcal{e}) = I\) (群の単位元は何も変換しません)
+</li><br><li>• \(\mathcal{R}(\mathcal{g}^{−1}) =\mathcal{R}(\mathcal{g})^{−1}\) (すべての逆元は対応する逆変換に写像されます)
+</li><br><li>• \(\mathcal{R}(\mathcal{g}) ◦ \mathcal{R}(\mathcal{h}) = \mathcal{R}(\mathcal{gh})\) (\(\mathcal{g}\) と \(\mathcal{h}\) に対応する変換の組み合わせは、点 \(\mathcal{gh}\) に対応する変換と同じです)
+<!--
+• \(\mathcal{R}(\mathcal{e}) = I\) (The identity element of the group transforms nothing at
+all)
+</li><br><li>• \(\mathcal{R}(\mathcal{g}^{−1}) =\mathcal{R}(\mathcal{g})^{−1}\) (Every inverse element is mapped to the
+corresponding inverse transformation)
+</li><br><li>• \(\mathcal{R}(\mathcal{g}) ◦ \mathcal{R}(\mathcal{h}) = \mathcal{R}(\mathcal{gh})\) (The combination of transformations corresponding
+to \(\mathcal{g}\) and \(\mathcal{h}\) is the same as the transformation corresponding
+to the point \(\mathcal{gh}\))
+-->
+</li></ul></div>
+</p><p>
+
+表現<sup>75</sup>は、群多様体（抽象群）の各点（抽象群の要素）をベクトル空間の線型変換と同一視します。表現は写像として定義しますが、多くの場合、行列の集合を表現と呼びます。
+例えば、通常の回転行列は、ベクトル空間 <sup>76</sup> \(\mathcal{R}^3\) 上の群\(\mathcal{SO}(3)\) の表現です。回転行列は \(\mathcal{R}^3\) 上の線型変換です。しかし、ここで重要なのは、他のベクトル空間への群作用も調べることができるということです。
+<!--
+A representation <sup>75</sup> identifies with each point (abstract group element) of the group manifold (the abstract group) a linear transformation
+of a vector space. Although we define a representation as a
+map, most of the time we will call a set of matrices a representation.
+For example, the usual rotation matrices are a representation of the
+group \(\mathcal{SO}(3)\) on the vector space<sup>76</sup> \(\mathcal{R}^3\). The rotation matrices are linear transformations on \(\mathcal{R}^3\). However, the important thing here is that we can examine the group action on other vector spaces, too!
+-->
+</p><p class="margin-large">
+
+<sup>75</sup> 
+この概念は、任意の（必ずしもベクトルではない）空間への任意の（必ずしも線形ではない）変換を受け入れることで、より一般的に定式化できます。このような写像は実現と呼ばれます。物理学では、ほとんどの場合、何らかのベクトル空間（例えば量子力学におけるヒルベルト空間や特殊相対論におけるミンコフスキー空間）に存在する物体の線形変換が問題となるため、実現という一般的な概念よりも、表現という概念の方が物理学との関連性が高いと言えます。
+<!--
+This concept can be formulated more generally if one accepts arbitrary (not necessarily linear) transformations of an arbitrary (not necessarily a vector) space. Such a map is called a realization. In physics one is concerned most of the time with linear transformations of objects living in some vector space (for example Hilbert space in quantum mechanics or Minkowski space for special relativity), therefore the concept of a representation is more relevant to physics than the general concept called realization.
+-->
+
+<br><br>
+
+<sup>76</sup> 
+\(R^3\) は3次元ユークリッド空間を表し、その要素は付録A.1で例として使用している通常の3成分ベクトルです。
+<!--
+\(R^3\) denotes three dimensional Euclidean
+space, where elements are
+ordinary 3 component vectors, as we
+use them for example in Appendix A.1.
+-->
+</p><p>
+
+表現論を用いることで、与えられた群が非常に異なるベクトル空間上でどのように作用するかを体系的に調べることができ、そこから物事が本当に面白くなっていきます。
+<!--
+Using representation theory, we are able to investigate systematically
+how a given group acts on very different vector spaces and that
+is where things start to get really interesting.
+-->
+</p><p>
+
+物理学における最も重要な例の一つは \(\mathcal{SU}(2)\) です。例えば、\(\mathcal{SU}(2)\) が 1 次元の複素ベクトル空間 \(\mathbb C^1\) にどのように作用するかを調べることができます。これは後で説明するように、非常に簡単です。また、\(\mathcal{SU}(2)\) が \(\mathbb C^2\) にどのように作用するかを調べることもできます。\(\mathbb C^2\) に存在するオブジェクトは 2 次元の複素ベクトルであるため、\(\mathcal{SU}(2)\) はそれらに 2 × 2 行列として作用します。\(\mathbb C^2\) に作用する行列（＝線形変換）は、私たちが既に知っている「通常の」\(\mathcal{SU}(2)\) 行列です。さらに、\(\mathcal{SU}(2)\) が \(\mathbb C^3\) あるいはさらに高次元のベクトル空間にどのように作用するかを調べることができる。このような表現を構築するための明確な枠組みがあり、その結果、\(\mathcal{SU}(2)\) は、例えば 3 次元の複素ベクトルに対して 3 × 3 行列として作用する。\(\mathcal{SU}(2)\) 生成子が \(\mathbb C^3\) に作用する場合の基底は <sup>77</sup> で与えられる。
+<!--
+One of the most important examples in physics is \(\mathcal{SU}(2)\). For example,
+we can examine how \(\mathcal{SU}(2)\) acts on the complex vector space
+of dimension one \(\mathbb C^1\), which is especially easy, as we will see later. We
+can also investigate how \(\mathcal{SU}(2)\) acts on \(\mathbb C^2\). The objects living in \(\mathbb C^2\)
+are complex vectors of dimension two and therefore \(\mathcal{SU}(2)\) acts on
+them as 2 × 2 matrices. The matrices (=linear transformations) acting
+on \(\mathbb C^2\) are just the "usual" \(\mathcal{SU}(2)\) matrices that we already know.
+In addition, we can examine how \(\mathcal{SU}(2)\) acts on \(\mathbb C^3\) or even higher
+dimensional vector spaces. There is a well defined framework for
+constructing such representations and as a result, \(\mathcal{SU}(2)\) acts, for example,
+on complex vectors of dimension three as 3 × 3 matrices. A
+basis for the \(\mathcal{SU}(2)\) generators when they act on \(\mathbb C^3\) is given by <sup>77</sup>
+-->
+
+</p><p class="margin-large">
+<sup>77</sup>
+
+これらを導出する方法については、この章の後半で学びます。この時点では、それが可能であるということに注目してください。
+<!--
+We will learn later in this chapter how
+to derive these. At this point just take
+notice that it is possible.
+-->
+</p><p>
+
+\[
+\mathcal{J}_1 = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+0 & 1 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 0
+\end{pmatrix}
+
+,　　\mathcal{J}_2 =\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+0 & −i & 0  \\
+i & 0 & −i \\
+0 & i & 0
+\end{pmatrix}
+,　　\mathcal{J}_3 =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & −1
+\end{pmatrix}
+\tag{3.86}
+\]
+
+いつものように、これらの生成子の線形結合を指数関数に代入することで、群 \(\mathcal{SU}(2)\) の要素を表す行列を計算できます。
+<!--
+As usual, we can compute matrices that represent elements of the
+group \(\mathcal{SU}(2)\) by putting linear combinations of these generators into
+the exponential function.
+-->
+</p><p>
+
+\(\mathcal{SU}(2)\) が高次元ベクトルに対してどのように作用するかを調べてみましょう。これは非常に混乱を招く可能性があり、<sup>78</sup> この群を \(\mathcal{SU}(2)\) ではなく \(\mathcal{S}^3\) と呼ぶ方が適切でしょう。なぜなら、通常 \(\mathcal{SU}(2)\) は、(式 3.32) を満たす複素 2 × 2 (!) 行列の集合として定義されるからです。
+<!--
+One can go on and inspect how \(\mathcal{SU}(2)\) acts on higher dimensional vectors. This can be quite confusing and it would be better to call <sup>78</sup> this group \(\mathcal{S}^3\) instead of \(\mathcal{SU}(2)\), because usually \(\mathcal{SU}(2)\) is defined as the set of complex 2 × 2 (!) matrices satisfying (Eq. 3.32)
+-->
+</p><p class="margin-large">
+<sup>78</sup>
+
+本書の初期草稿では、この群は\(\mathcal{S}^3\)と名付けられていました。残念ながら、このような非標準的な名前のせいで、初心者が標準的な教科書を使ってこのテーマをより深く理解することは困難です。
+<!--
+In an early draft version of this book the group was consequently called \(\mathcal{S}^3\). Unfortunately, such a non-standard name makes it hard for beginners to dive deeper into the subject using the standard textbooks.
+-->
+</p><p>
+
+\[
+\mathcal{U}^†\mathcal{U} = 1　and　\det(\mathcal{U})=1  \tag{3.87}
+\]
+
+そして、\(\mathcal{SU}(2)\) 変換を 3 × 3 行列として書きます。したがって、\(\mathcal{SU}(2)\) やその他の群の高次元表現について話すときは、2 × 2 定義ではなく、抽象群を指していることを常に念頭に置く必要があります。
+<!--
+and now we write \(\mathcal{SU}(2)\) transformations as 3 × 3 matrices. Therefore
+one must always keep in mind that we mean the abstract group, instead
+of the 2 × 2 definition, when we talk about higher dimensional
+representation of \(\mathcal{SU}(2)\) or any other group.
+-->
+
+</p><p>
+
+通常、群はまず明示的な表現を用いて定義されます。例えば、\(\mathcal{SU}(2)\) の議論は、明示的な 2 × 2 行列を用いて始めました。このアプローチにより、前の節で行ったように、群の性質を具体的に研究することができます。この最初の研究の後、群を抽象群 <sup>79</sup> と見なす方がより有用な場合が多くあります。なぜなら、群の他の有用な表現を見つけることができるからです。
+<!--
+Typically a group is defined in the first place with the help of an
+explicit representation. For example, we began our discussion of
+\(\mathcal{SU}(2)\) with explicit 2 × 2 matrices. This approach enables us to study
+the group properties concretely, as we did in the preceding sections.
+After this initial study it’s often more helpful to regard the group
+ as an abstract group <sup>79</sup>, because it’s possible to find other, useful
+representations of the group.
+-->
+</p><p class="margin-large">
+<sup>79</sup> 
+\(\mathcal{SU}(2)\)の場合、これは\(\mathcal{S}^3\)を使用することを意味します。
+<!--
+For \(\mathcal{SU}(2)\) this means using \(\mathcal{S}^3\).
+-->
+</p><p>
+
+例に進む前に、抽象的だが有用な概念をいくつか定義する必要があります。これらの概念は、表現の階層を明確にします。なぜなら、すべての表現が同じように基本的なものではないからです。
+<!--
+Before we move on to examples we need to define some abstract,
+but useful, notions. These notions will clarify the hierarchy of representations,
+because not every possible representation is equally
+fundamental.
+-->
+
+</p><p>
+
+最初にお話ししたい概念は相似変換です。行列\(\mathcal{R}\)と可逆な<sup>80</sup>行列\(\mathcal{S}\)が与えられたとき、次のような変換が成り立ちます。
+<!--
+The first notion we want to talk about is called similarity trans formation. Given a matrix \(\mathcal{R}\) and an invertible <sup>80</sup> matrix \(\mathcal{S\) then a transformation of the form
+-->
+
+</p><p class="margin-large">
+<sup>80</sup>
+
+行列 \(\mathcal{S}\) が可逆であるとは、行列 \(\mathcal{T}\) が存在し、\(\mathcal{ST} = \mathcal{TS} = 1\) が成り立つ場合を指します。逆行列は通常、\(\mathcal{S}^{−1}\) と表記されます。
+<!--
+A matrix \(\mathcal{S}\) is called invertible, if there exists a matrix \(\mathcal{T}\), such that \(\mathcal{ST} = \mathcal{TS} = 1\). The inverse matrix is usually denoted \(\mathcal{S}^{−1}\).
+-->
+</p><p>
+\[
+\mathcal{R} → \mathcal{R}^\prime = \mathcal{S}^{−1}\mathcal{RS}  \tag{3.88}
+\]
+
+は相似変換と呼ばれます。この文脈におけるこの種の変換の有用性は、群 \(\mathcal{G}\) の表現 \(\mathcal{R}(\mathcal{G})\) があれば、\(\mathcal{S}^{−1}\mathcal{RS}\) も表現となるという事実にあります。これは表現の定義から直接導かれます。2つの群の要素 \(\mathcal{g}_1, \mathcal{g}_2\) と写像  \(\mathcal{R}: \mathcal{G} ⇒ \mathcal{GL}(\mathcal{V})\)、すなわち \(\mathcal{R}(\mathcal{g}_1)\) と \(\mathcal{R}(\mathcal{g}_2)\)  があるとします。これは、
+<!--
+is called a similarity transformation. The usefulness of this kind of
+transformation in this context lies in the fact that if we have a representation
+\(\mathcal{R}(\mathcal{G})\) of a group \(\mathcal{G}\), then \(\mathcal{S}^{−1}\mathcal{RS}\) is also a representation.
+This follows directly from the definition of a representation: Suppose
+we have two group elements \(\mathcal{g}_1, \mathcal{g}_2\) and a map \mathcal{R}: \mathcal{G} ⇒ \mathcal{GL}(\mathcal{V})\), i.e.
+R(g1) and R(g2). This is a representation if
+-->
+
+\[
+\mathcal{R}(\mathcal{g}_1)\mathcal{R}(\mathcal{g}_2) = \mathcal{R}(\mathcal{g}_1\mathcal{g}_2)  \tag{3.89}
+\]
+
+ここで、表現の相似変換を見てみましょう
+<!--
+If we now look at the similarity transformation of the representation
+-->
+\[
+S^{−1}R(g_1)\underbrace{SS^{−1}}_{=1}R(g_2)S = S^{−1}R(g_1)R(g_2)S = S^{−1}R(g_1g_2)S  \tag{3.90}
+\]
+
+これも表現であることがわかります。口語的に言えば、これは、表現があれば、その要素を文字通り任意の非特異行列 \(\mathcal{S}\) で自由に変換して、よりきれいな行列を得ることができることを意味します <sup>81</sup>。
+<!--
+we see that this is a representation, too. Speaking colloquially, this
+means that if we have a representation, we can transform its elements
+wildly with literally any non-singular matrix \(\mathcal{S}\) to get nicer matrices <sup>81</sup>.
+-->
+</p><p class="margin-large">
+<sup>81</sup>
+
+相似変換を実行する自由は、私たちのグループが作用するベクトル空間の基底を選択する自由に対応します。
+<!--
+The freedom to perform similarity 
+transformations correspond to our
+freedom to choose a basis for the vector
+space our group acts on.
+-->
+</p><p>
+
+次に導入する概念は不変部分空間と呼ばれます。
+群 \(\mathcal{G}\) の表現 \(\mathcal{R}\) がベクトル空間 \(\mathcal{V}\) 上にあるとき、<sup>82</sup> \(\mathcal{v} ∈ \mathcal{V}^\prime\) に対して、すべての \(\mathcal{g} ∈ \mathcal{G}\) に対して \(\mathcal{R}(\mathcal{g})\mathcal{v} ∈ \mathcal{V}^\prime\) が成り立つとき、\(\mathcal{V}^\prime ⊆ \mathcal{V}\) を不変部分空間と呼びます。これは、部分空間 \(\mathcal{V}^\prime\) にベクトルがあり、任意の群の要素を用いてそれに作用した場合、変換されたベクトルは常に部分空間 \(\mathcal{V}^\prime\) の一部となることを意味します。
+このような不変部分空間が見つかった場合、\(\mathcal{G}\) の \(\mathcal{V}^\prime\) 上の表現 \(\mathcal{R}^\prime\) を定義することができます。これは \(\mathcal{R}\) の部分表現と呼ばれ、次のように定義されます。
+<!--
+The next notion we want to introduce is called invariant subspace.
+When we have a representation \(\mathcal{R}\) of a group \(\mathcal{G}\) on a vector space
+\(\mathcal{V}\), we call \(\mathcal{V}^\prime ⊆ \mathcal{V}\) an invariant subspace if for <sup>82</sup> \(\mathcal{v} ∈ \mathcal{V}^\prime\) we have
+\(\mathcal{R}(\mathcal{g})\mathcal{v} ∈ \mathcal{V}^\prime\) for all \(\mathcal{g} ∈ \mathcal{G}\). This means, if we have a vector in the
+subspace \(\mathcal{V}^\prime\) and we act on it with arbitrary group elements, the 
+transformed vector will always be again part of the subspace \(\mathcal{V}^\prime\). If
+we find such an invariant subspace we can define a representation \(\mathcal{R}^\prime\)
+of \(\mathcal{G}\) on \(\mathcal{V}^\prime\), called a subrepresentation of \(\mathcal{R}\), by
+-->
+
+</p><p class="margin-large">
+<sup>82</sup> 
+
+もちろん、\(\mathcal{v} ∈ \mathcal{V}\) も同様です。ベクトル空間 \(\mathcal{V}^\prime\) はベクトル空間 \(\mathcal{V}\) の一部でなければなりません。ベクトル空間 \(\mathcal{V}\) は数学的には \(\mathcal{V}^\prime ⊆ \mathcal{V}\) と表されます。言い換えれば、\(\mathcal{V}^\prime\) のすべての要素は、同時に \(\mathcal{V}\) の要素でもあるということです。
+<!--
+Of course \(\mathcal{v} ∈ \mathcal{V}\), too. The vector space \(\mathcal{V}^\prime\) must be part of the vector space \(\mathcal{V}\), which is mathematically denoted by \(\mathcal{V}^\prime ⊆ \mathcal{V}\). In other words this means that every element of \(\mathcal{V}^\prime\) is at the same time an element of \(\mathcal{V}\).
+</p><p>
+-->
+\[
+\mathcal{R}^\prime(\mathcal{g})\mathcal{v} = \mathcal{R}(\mathcal{g})\mathcal{v} \tag{3.91}
+\]
+
+すべての \(\mathcal{v} ∈ \mathcal{V}^\prime\) に対して成り立ちます。したがって、最初に述べた表現 \(\mathcal{R}\) は基本的な表現ではなく、部分表現と呼ばれるより小さな構成要素の集合体であると考えられます。
+<!--
+for all \(\mathcal{v} ∈ \mathcal{V}^\prime\). Therefore, one is led to the thought that the representation
+\(\mathcal{R}\), we talked about in the first place, is not fundamental, but a
+composite of smaller building blocks, called subrepresentations.
+-->
+
+</p><p>
+
+このことから、非常に重要な概念である既約表現に辿り着きます。
+既約表現とは、ベクトル空間 \(\mathcal{G}\) 上の群の表現であり、零点空間 {0} と \(\mathcal{V}\) 自体以外に不変部分空間を持たない表現です <sup>83</sup>。このような表現は、より小さな表現によって構成されていないため、真に基本的な表現と考えることができます。群の既約表現は、他のすべての表現を構築するための基本単位です。
+既約表現について考える別の方法があります。既約表現は、相似変換を用いてブロック対角形式に書き換えることはできません <sup>84</sup>。一方、既約表現は、相似変換を用いてブロック対角形式に書き換えることができます。これらの概念は、素粒子を記述するのに既約表現を用いるため重要です<sup>85</sup>。変換を受ける素粒子の挙動は、対応する対称群の既約表現によって記述されることは後ほど説明します。
+<!--
+This leads us to the very important notion irreducible representation.
+An irreducible representation is a representation of a group
+\(\mathcal{G}\) on a vector space \(\mathcal{V}\) that has no invariant subspaces besides the
+zero space {0} and \(\mathcal{V}\) itself <sup>83</sup>. Such representations can be thought 
+of as truly fundamental, because they are not made up by smaller
+representations. The irreducible representations of a group are the
+building blocks from which we can build up all other representations.
+There is another way to think about irreducible representation:
+An irreducible representation cannot be rewritten, using a similarity
+transformation, in block diagonal form <sup>84</sup>. In contrast, a reducible 
+representation can be rewritten in block-diagonal form through similarity
+transformations. These notions are important because we use
+irreducible representations to describe elementary particles <sup>85</sup>. We will
+see later that the behavior of elementary particles under transforma- 
+tions is described by irreducible representations of the corresponding
+symmetry group.
+-->
+
+</p><p class="margin-large">
+<sup>83</sup> 
+
+単位元のみからなる部分空間は、常に、自明な不変部分空間です。
+<!--
+The subspace consisting solely of the
+identity element is always, trivially an
+invariant subspace.
+-->
+<br><br>
+
+<sup>84</sup> 
+ブロック対角形式の行列の例は次の通り。
+<!--
+An example for a matrix in blockdiagonal form is
+-->
+\[
+\begin{pmatrix}
+a & b & 0 \\
+c & d & 0 \\
+0 & 0 & e
+\end{pmatrix}
+\]
+<br><br>
+<sup>85</sup>
+ほかに何か？
+<!--
+What else?
+-->
+</p><p>
+
+各群には多くの表現方法があります <sup>86</sup>。自然を記述するためにどれを選択すればよいのか、どうすればわかるのでしょうか？カシミール元に基づいた考え方があります。カシミール元　\(\mathcal{C}\) はリー代数の生成元から構成され、その定義的な特徴は、群のすべての生成元 \(\mathcal{X}\) と可換であることです。
+<!--
+There are many possible representations for each group <sup>86</sup>, how do 
+we know which one to choose to describe nature? There is an idea
+that is based on the Casimir elements. A Casimir element C is built
+from generators of the Lie algebra and its defining feature is that it
+commutes with every generator X of the group
+-->
+
+</p><p class="margin-large">
+<sup>86</sup> 
+
+例えば、2次元における回転の表現には、既に2つの異なる表現方法が知られています。1つは複素数を用いるもので、もう1つは2×2行列を用いるものです。どちらも \(\mathcal{S}^1\) を群として表現したものです。
+<!--
+For example we already know two
+different representations for rotations
+in two-dimensions. One using complex
+numbers and one using 2 × 2 matrices.
+Both are representations of \(\mathcal{S}^1\) as a
+group.
+-->
+
+</p><p>
+
+\[
+[\mathcal{C}, \mathcal{X}] = 0   \tag{3.92}
+\]
+
+</p><p>
+
+これは何を意味するのでしょうか？ シュアーの補題 <sup>87</sup> と呼ばれる有名な補題は、
+既約表現 \(\mathcal{R} : \mathcal{g} → \mathcal{GL}(\mathcal{V})\) がある場合、
+すべての演算子 \(\mathcal{R}(\mathcal{X})\) と可換な任意の線形演算子 \(\mathcal{T} : \mathcal{V} → \mathcal{V}\) は、必ず恒等演算子のスカラー倍になることを示しています。したがって、カシミール元は、各表現に対して定数値を持つ線形演算子を与えます。後で見るように、これらの値は表現を自然にラベル付けする方法を提供します。<sup>88</sup> したがって、カシミール元の可能な限り最小のスカラー値を持つ表現から始めて、既約表現を調べ始めることができます。
+<!--
+What does this mean? A famous Lemma, called Schur’s Lemma <sup>87</sup>, 
+tells us that if we have an irreducible representation \(\mathcal{R} : \mathcal{g} → \mathcal{GL}(\mathcal{V})\),
+any linear operator \(\mathcal{T} : \mathcal{V} → \mathcal{V}\) that commutes with all operators
+\(\mathcal{R}(\mathcal{X})\) must be a scalar multiple of the identity operator. Therefore,
+the Casimir elements give us linear operators with constant values
+for each representation. As we will see, these values provide us with
+a way of labelling representations naturally.<sup>88</sup> We can therefore start
+to investigate the irreducible representations, by starting with the 
+representation with the lowest possible scalar value for the Casimir
+element.
+-->
+</p><p class="margin-large">
+<sup>87</sup>
+群論の基本的な結果で、群論に関するどの書籍でも調べることができます。例えば、シューアの補題は、Nadir Jeevanjee著『物理学者のためのテンソルと群論入門』（Birkhaeuser、第1版、2011年8月、ISBN 978-081764714​​8）の239ページで証明されています。
+<!--
+A basic result of group theory, which
+you can look up in any book about
+group theory. For example, Schur’s
+lemma is proven at page 239 in Nadir
+Jeevanjee. An Introduction to Tensors and
+Group Theory for Physicists. Birkhaeuser,
+1st edition, August 2011. ISBN 978-
+0817647148.
+-->
+<br><br>
+<sup>88</sup>
+例を見ればすぐにこれがより明確になります。
+<!--
+This will become much clearer as soon as we look at an example.
+-->
+</p><p>
+
+上記の表現の定義で言及したベクトル空間 \(\mathcal{V}\) について何か言えることはあるでしょうか？ベクトル空間を理解する上で重要な観察は、任意のリー群について、対応する生成元のうち1つまたは複数を相似変換を用いて対角化できることです。物理学では、これらの対角生成元を用いて、ベクトル空間を張る基底ベクトルのラベルを取得します。これらの対角生成元の固有ベクトルをベクトル空間の基底として、対応する固有値をラベルとして使用します。この考え方は、与えられた群の物理的な意味を実際に理解する上で非常に重要です。同時に対角化できる生成元が1つだけの場合、各基底ベクトルには対応する固有値という1つの数値のみがラベル付けされます。同時に対角化できる生成元が複数ある場合、各基本ベクトルのラベルとして複数の数値が与えられます。これらの数値はそれぞれ、この基本ベクトル（＝固有ベクトル）に属する、与えられた対角生成元の固有値です。特に、素粒子の「電荷ラベル」、すなわち電荷、弱電荷、色電荷はここから来ています。この考え方は、具体的な例をいくつか見ていく準備ができれば、はるかに理解しやすくなります <sup>89</sup>。
+<!--
+Is there anything we can say about the vector space V mentioned
+in the definition of a representation above? An important observation
+that helps us to make sense of the vector space, is that for any Lie
+group, one or several of the corresponding generators can be diagonalized
+using similarity transformations. In physics we use these
+diagonal generators to get labels for the basis vectors that span our
+vector space. We use the eigenvectors of these diagonal generators
+as basis for our vector space and the corresponding eigenvalues as
+labels. This idea is incredibly important to actually understand the
+physical implications of a given group. If there is just one generator
+that can be diagonalized simultaneously, each basis vector is
+labelled by just one number: the corresponding eigenvalue. If there
+are several generators that can be diagonalized simultaneously, we
+get several numbers as labels for each basic vector. Each such number
+is simply the eigenvalue of a given diagonal generator that belongs
+to this basic vector (=eigenvector). In particular this is where the
+"charge labels" for elementary particles: electric charge, weak charge,
+color charge, come from. This idea will make a lot more sense, once
+we are ready to look at some explicit examples <sup>89</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>89</sup>
+
+もう少し背景情報を述べます。
+対角生成子の集合はカルタン部分代数と呼ばれ、対応する生成子はカルタン生成子と呼ばれます。
+既に述べたように、これらの生成子は素粒子物理学において重要な役割を果たします。なぜなら、カルタン生成子の固有値は素粒子に電荷ラベルを付与するために使用されるからです。
+例えば、量子色力学を導くために、後で説明するように、群 \(\mathcal{SU}(3)\) を用いますが、2つの \(\mathcal{SU}(3)\) カルタン生成子が存在します。したがって、色力学を介して相互作用する各粒子は、2つの電荷ラベルを持ちます。
+慣習的に、2つの数値を書く代わりに、赤、青、緑という単語を用い、対応する電荷を色と呼びます。同様に、弱い相互作用の理論では、群 \(\mathcal{SU}(2)\) を用いますが、これは1つのカルタン生成子しか持ちません。したがって、各粒子は、このカルタン生成器の対応する固有値によってラベル付けされます。
+<!--
+A bit more background information:
+The set of diagonal generators is called
+Cartan subalgebra, and the corresponding
+generators Cartan generators. As
+already mentioned, these generators
+play a big role in elementary particle
+physics, because the eigenvalues of
+the Cartan generators are used to give
+charge labels to elementary particles.
+For example, to derive quantum chromodynamics,
+we use the group \(\mathcal{SU}(3)\),
+as we will see later, and there are two
+\(\mathcal{SU}(3)\) Cartan generators. Therefore,
+each particle that interacts via chromodynamics,
+carries two charge labels.
+Conventionally instead of writing two
+numbers, one uses the words red, blue,
+green, and calls the corresponding
+charge colour. Analogous, the theory of
+weak interactions uses the group \(\mathcal{SU}(2)\),
+which has only one Cartan generator.
+Therefore, each particle is labelled by
+the corresponding eigenvalue of this
+Cartan generator.
+-->
+</p><p>
+
+次の節では、\(\mathcal{SU}(2)\) のリー代数の既約表現を導出します。なぜなら、後で見るように、ローレンツ群のリー代数は、\(\mathcal{su}(2)\) <sup>90</sup> の2つのコピーと考えることができるからです。ローレンツ群はポアンカレ群の一部であるため、この順序でこれらの群について説明します。
+<!--
+In the next sections, we will derive the irreducible representations
+of the Lie algebra of \(\mathcal{SU}(2)\), because, as we will see, the Lie algebra
+of the Lorentz group can be thought of as two copies of the algebra
+\(\mathcal{su}(2)\) <sup>90</sup>. The Lorentz group is part of the Poincaré group and therefore we will talk about these groups in this order.
+-->
+
+</p><p class="margin-large">
+<sup>90</sup>
+
+技術的には、これはローレンツ群のリー代数の複素化であり、リー代数の複素化の2つのコピーとして理解できます。
+\(\mathcal{su}(2)\)
+<!--
+Technically it’s the complexification of
+the Lie algebra of the Lorentz group
+that can be understood as two copies
+of the complexification of the Lie algebra
+\(\mathcal{su}(2)\).
+-->
+</p>
+    </body>
+</html>
