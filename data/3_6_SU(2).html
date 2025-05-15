@@ -1,0 +1,1044 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>リー群論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>リー群論</h1>
+<h2>3.6 \(\mathcal{SU}(2)\)</h2>
+<!--
+<h1>Lie Group Theory</h1>
+<h2>3.6 \(\mathcal{SU}(2)\)</h2>
+-->
+<p>
+
+3.4.3節では、特定の行列（＝特定の表現）を用いて、\(\mathcal{SU}(2)\) の生成元がリー括弧<sup>91</sup>内に置かれたときにどのように振る舞うかを特定しました。この知識を用いて、さらなる表現を見つけることができます。当然のことながら、最初に用いた表現、つまり行列式が1であるユニタリ2×2行列の集合を再び導出します。しかし、こうすることで、これが単なる1つの特殊なケースに過ぎないことがわかります。この課題に取り組む前に、どのような表現が期待できるかについて少し考えてみましょう。
+<!--
+We used in Section 3.4.3 specific matrices (=a specific representation)
+to identify how the generators of \(mathcal{SU}(2)\) behave, when put into the
+Lie bracket<sup>91</sup>. We can use this knowledge to find further representations. Unsurprisingly, we will derive again the representation that
+we started with, i.e. the set of unitary 2 × 2 matrices with unit determinant.
+However, we are then able to see that this is just one special
+case. Before we tackle this task, we want to take a moment to think
+about what representations we can expect.
+-->
+
+</p><p class="margin-large">
+<sup>91</sup>
+これは、群のリー代数を抽象的な言葉で定義するために用いられるものであることを思い出してください。最終結果は式3.82でした。
+<!--
+Recall that this is what we use to
+define the Lie algebra of a group in
+abstract terms. The final result was
+Eq. 3.82.
+-->
+</p><p>
+
+
+</p>
+<h3>3.6.1 \(\mathcal{SU}(2)\) の有限次元既約表現</h3>
+<!--
+<h3>3.6.1 The Finite-dimensional Irreducible Representations
+of \(\mathcal{SU}(2)\)</h3>
+-->
+<p>
+
+前述のように、与えられた生成元の集合から構築できる特別な作用素があり、それらはリー代数の表現を理解するのに役立ちます。これらの作用素はカシミール作用素と呼ばれ、与えられたリー代数のすべての生成元と可換であるという特別な性質を持っています。リー代数 su(2) に対して、そのような作用素が 1 つあります <sup>92</sup>
+<!--
+As noted earlier, there are special operators that we can build from
+a given set of generators that are useful to understand the representations
+of the Lie algebra in question. These operators are called
+Casimir operators and have the special property that they commute
+with all generators of the given Lie algebra. For the Lie algebra su(2)
+there is one such operator <sup>92</sup>
+-->
+
+</p><p class="margin-large">
+<sup>92</sup>
+
+ここでは、2次のカシミール作用素、つまり生成元が2次の作用素に限定して扱います。
+高次のカシミール作用素も存在しますが、ここでは常に2次のカシミール作用素について言及します。
+<!--
+We restrict ourselves here to quadratic 
+Casimir operators, which means operators
+that are quadratic in the generators.
+There are also higher order Casimir
+operators, but here we always mean
+quadratic Casimir operators.
+-->
+</p><p>
+
+\[
+J^2 = J_1^2 + J_2^2 + J_3^2 \tag{3.93}
+\]
+
+これを説明するために、式3.86に示す3次元表現<sup>93</sup>を再び考えてみましょう。この表現では、カシミール演算子は
+<!--
+To illustrate this, let’s consider again the 3-dimensional representation <sup>93</sup>,as shown in Eq. 3.86. For, this representation the Casimir 
+operator is
+-->
+</p><p class="margin-large">
+<sup>93</sup>
+これまで、この表現がどこから来るのかについては議論してきませんでした。これはすぐに理解できます。ここでは、最終結果のみを用いて、カシミール演算子 \(J^2\) の使用の背後にある基本的な考え方を説明します。
+<!--
+So far, we have not discussed where
+this representation comes from. We will
+understand this in a moment. Here we
+only use the final result to explain the
+basic idea behind the use of the Casimir
+operator \(J^2\).
+-->
+</p><p>
+
+\[
+J_{3-dim}^2 =
+\begin{pmatrix}
+2 & 0 & 0 \\
+0 & 2 & 0 \\
+0 & 0 & 2
+\end{pmatrix}
+\tag{3.94}
+\]
+
+言い換えれば、カシミール演算子は単に3×3の単位行列の2倍です。対照的に、2次元表現では、\(J_i = \frac{1}{2}σ_i\)（\(σ_i\)はパウリ行列（式3.80））で与えられ、次式を得ます。
+<!--
+In other words, the Casimir operator is simply two times the 3 × 3
+identity matrix. In contrast, for the 2-dimensional representation, as
+given by \(J_i = \frac{1}{2}σ_i\), where \(σ_i\) are the Pauli matrices (Eq. 3.80), we get
+-->
+\[
+J_{2-dim}^2 =
+\begin{pmatrix}
+\frac{3}{4} & 0 \\
+0 & \frac{3}{4}
+\end{pmatrix}
+\tag{3.95}
+\]
+
+これは、生成元 \(J_1, J_2, J_3\) が何らかの表現で与えられれば、対応するカシミール作用素を明示的に計算できることを示しています。このカシミール作用素を、生成元が作用するベクトル空間の任意の元 <sup>94</sup> に作用させると、ある数値が得られます。この数値は、異なる表現にラベルを付けるために使用されます。
+<!--
+This illustrates that if the generators \(J_1, J_2, J_3\) are given in some representation,we can calculate the corresponding Casimir operator
+explicitly.If we act with this Casimir operator on any element of
+the vector space that our generators act on <sup>94</sup>, we get a number. This 
+number is what we use to label different representations.
+-->
+
+</p><p class="margin-large">
+<sup>94</sup>
+
+表現とは、抽象群またはリー代数の元を、あるベクトル空間に作用する線型作用素に写像したものであることを思い出してください。
+<!--
+Recall that a representation is a map
+of the abstract group or Lie algebra
+elements to the linear operators that act
+on some vector space.
+-->
+</p><p>
+
+異なる表現に対するこのラベルに加えて、群が作用するベクトル空間の異なる要素にラベルを付ける特別な演算子も使用します。この目的で使用する演算子は、リー代数のカルタン元として知られています。言い換えれば、カシミール元演算子が異なる表現にラベルを付けるのに対し、カルタン元は与えられた表現内のラベルを付けるということです。カルタン元とは、同時に対角化できるすべての生成元です。\(\mathcal{su}(2)\) の場合、そのような元は1つしかなく、対角生成元としてJ3を選択するのが慣例です<sup>95</sup>。3次元表現（式3.86）では、次のように表されます。
+<!--
+In addition to this label for different representations, we use additional
+special operators to label the different elements of the vector
+space that our groups acts on. The operators we use for this purpose
+are known as Cartan elements of the Lie algebra. In other words,
+while Casimir elements operators provide labels for different representations,
+the Cartan element provide labels within a given representation.
+The Cartan elements are all those generators that can be
+diagonalized simultaneously. For \(\mathcal{su}(2)\) there is only one such element
+and it is conventional to choose J3 as diagonal generator<sup>95</sup>. In 
+
+the 3-dimensional representation (Eq. 3.86) it is given by
+-->
+</p><p class="margin-large">
+<sup>95</sup>
+
+上で述べたように、\(\mathcal{su}(3)\) のような他の代数では、カルタン元が複数存在するため、各ベクトルには複数のラベルが付きます。
+<!--
+As noted above, for other algebras
+like \(\mathcal{su}(3)\), there is more than one
+Cartan element and therefore we get
+multiple labels for each vector.
+-->
+
+</p><p>
+
+\[
+J_3 =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & −1
+\end{pmatrix}
+\tag{3.96}
+\]
+
+2次元表現では次のように表される。
+<!--
+and in the 2-dimensional representation it is given by
+-->
+\[
+J_3 =
+\begin{pmatrix}
+\frac{1}{2} & 0 \\
+0 & −\frac{1}{2}
+\end{pmatrix}
+\tag{3.97}
+\]
+
+それぞれの表現について、対角生成元J_3の固有ベクトルを、表現が作用するベクトル空間の基底ベクトルとして用います。つまり、このような基底ベクトルはすべて、2つの数値<sup>96</sup>でラベル付けされます。
+<!--
+We use for each representation the eigenvectors of the diagonal generator
+\(J_3\) as basis vectors for the vector space that our representation
+acts on. This means that every such basis vector is labeled by two
+numbers<sup>96</sup> 
+-->
+
+</p><p class="margin-large">
+<sup>96</sup>
+
+ここでは、生成子が作用するベクトル空間の要素を表す抽象的な表記法を用います。この表記法は、異なる要素を区別するために用いるラベルを強調するものであり、量子力学において非常によく用いられています。これについては、8.5.3節で説明します。
+<!--
+We use here an abstract notation for
+the elements of the vector space that
+our generators act on. This notations
+emphasizes the labels that we use to
+distinguish different elements and
+is extremely popular in quantum
+mechanics, as will be discussed in
+Section 8.5.3.
+-->
+</p><p>
+
+\[
+\begin{align}
+J^2|b,m\rangle &= b|b,m\rangle \\
+J_3 |b,m\rangle &= m|b,m\rangle  
+\end{align}
+\tag{3.98}
+\]
+
+最初のラベルは、問題の表現における二次カシミール演算子 \(J^2\) の値であり、2 番目のラベルは、ベクトルにカルタン元 \(J_3\) を作用させたときに得られる値に対応します。式 3.95 と式 3.97 を見ると、この表記法における 2 次元表現の基底ベクトルは <sup>97</sup>
+\(|\frac{3}{4},\frac{1}{2}\rangle,|\frac{3}{4},−\frac{1}{2}\rangle\) であることがわかります。同様に、式 3.94 と式 3.95 を見ると、 3.96では、3次元表現の基底ベクトルは
+<sup>98</sup> \(|2,1\rangle,|2,0\rangle,|2,−1\rangle\) であることがわかります。
+<!--
+The first label is the value of the quadratic Casimir operator \(J^2\) for
+the representation in question and the second label corresponds to
+the value that we get when we act with the Cartan element \(J_3\) on the
+vector. By looking at Eq. 3.95 and Eq. 3.97, we can see that the basis
+vectors for the 2-dimensional representation in this notation are<sup>97</sup> 
+\(|\frac{3}{4},\frac{1}{2}\rangle,|\frac{3}{4},−\frac{1}{2}\rangle\). Analogously, by looking at Eq. 3.94 and Eq. 3.96, we
+can see that the basis vectors for the 3-dimensional representation
+are<sup>98</sup> \(|2,1\rangle,|2,0\rangle,|2,−1\rangle\).
+-->
+
+</p><p class="margin-large">
+<sup>97</sup>
+通常の非抽象ベクトル表記では、2次元表現の基底ベクトルとして\(\begin{pmatrix}1 \\ 0 \end{pmatrix}\)と\(\begin{pmatrix}0 \\
+1\end{pmatrix}\)を使用できることに注意してください。
+<!--
+Take note that in the usual, non-abstract vector notation, we can use
+as basis vectors for the 2-dimensional
+representation \(\begin{pmatrix}1 \\ 0 \end{pmatrix}\) and \(\begin{pmatrix}0 \\
+1\end{pmatrix}\).
+-->
+<br><br>
+<sup>98</sup>
+同様に、通常の非抽象ベクトル表記では、3次元表現の基底ベクトルとして\(\begin{pmatrix}1 \\ 0 \\ 0 \end{pmatrix},\begin{pmatrix}0 \\ 1 \\ 0 \end{pmatrix}\)および\(\begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}\)を使用できます。
+<!--
+Equally, in the usual, non-abstract
+vector notation we can use as our
+basis vectors for the 3-dimensional
+representation \(\begin{pmatrix}1 \\ 0 \\ 0 \end{pmatrix},\begin{pmatrix}0 \\ 1 \\ 0 \end{pmatrix}\) and \(\begin{pmatrix} 0 \\ 0 \\ 1 \end{pmatrix}\).
+-->
+</p><p>
+この予備的な議論を経て、ついに\(\mathcal{SU}(2)\)の表現を理解する準備が整いました。\(\mathcal{SU}(2)\)の有限次元既約表現がどのようなものになるかを知るために、3.4.3節で使用した演算子とは別に新しい演算子を定義します。<sup>99</sup>
+<!--
+After this preliminary discussion we are finally ready to understand
+the representations of \(\mathcal{SU}(2)\). To learn something about what
+finite-dimensional, irreducible representations of \(\mathcal{SU}(2)\) are possible,
+we define new operators from the ones we used in Section 3.4.3:<sup>99</sup>
+-->
+</p><p class="margin-large">
+<sup>99</sup>
+
+ここでは複素線形結合を使用していることに注意してください。元の生成元の代わりに複素線形結合を考慮するこのプロセスは複素化と呼ばれます。これは、通常、生成元の実線形結合のみを許容するためです。したがって、ここからはリー代数 \(\mathcal{su}(2)\) の複素化、つまり \(\mathcal{sl}(2,\mathbb C)\) について考えます。
+<!--
+Take note that we use a complex linear
+combination here. This process of
+considering a complex linear combination,
+instead of the original generators
+is called a complexification, because
+usually we only allow real linear combinations
+of the generators. So from here
+on, we consider the complexification
+of the Lie algebra \(\mathcal{su}(2)\), which is also
+called \(\mathcal{sl}(2,\mathbb C)\).
+-->
+</p><p>
+
+\[
+\begin{align}
+J_+ = J_1 + iJ_2 \tag{3.99} \\
+J_− = J_1 − iJ_2 \tag{3.100}
+\end{align}
+\]
+
+これらの新しい演算子は、式3.82の交換関係を用いて確認できるように、以下の交換関係に従います<sup>100</sup>
+<!--
+These new operators obey the following commutation relations, as
+you can check by using the commutator relations in Eq. 3.82<sup>100</sup>
+-->
+</p><p class="margin-large">
+<sup>100</sup>
+
+生成元のいずれかを対角化することは常に可能です。前述のように、\(J_3\) を対角元として選択することで、ベクトル空間の基底ベクトルが得られます。
+<!--
+We can always diagonalize one of
+the generators. As mentioned above,
+we choose \(J_3\) as diagonal and therefore
+yielding the basis vectors for our vector
+space.
+-->
+</p><p>
+
+\[
+\begin{align}
+[J_3, J_±] &= ±J_± \tag{3.101} \\
+[J_+, J_−] &= 2J_3  \tag{3.102}
+\end{align}
+\]
+
+これらの演算子が、固有値<sup>101</sup> \(\mathcal m\) を持つ \(J_3\) の固有ベクトル\(|b,m\rangle\) にどのように作用するかを調べると、注目すべきことがわかります。
+<!--
+If we now investigate how these operators act on an eigenvector
+\(|b,m\rangle\) of \(J_3\) with eigenvalue<sup>101</sup> \(\mathcal m\), we discover something remarkable:
+-->
+
+<sup>101</sup>
+これは付録C.4で説明されているように、\(J_3|b,m\rangle = m|b,m\rangle\)を意味します。
+<!--
+This means \(J_3|b,m\rangle = m|b,m\rangle\) as
+explained in Appendix C.4.
+-->
+\[
+\begin{align}
+J_3(J_±|b,m\rangle &= J_3(J_± |b,m\rangle) + \underbrace{J_±J_3|b,m\rangle − J_±J_3|b,m\rangle}_{=0} \\
+\\
+&= \underbrace{J_±J_3|b,m\rangle}_{=J_±m|b,m\rangle}+ \underbrace{J_3J_± |b,m\rangle − J_±J_3|b,m\rangle}_{=[J_3,J_±]|b,m\rangle} \\
+\\
+&\underbrace{=}_{Eq. 3.101}(m ± 1)J_± |b,m\rangle  \tag{3.103}
+\end{align}
+\]
+
+\(J_± |b,m\rangle\) は再び J_3 の固有ベクトルであるが、固有値は \((m ± 1)\) であると結論付けられ、したがって <sup>102</sup> \(J_± |b,m\rangle ≡ \mathcal{C}|b,m ± 1\rangle\) と書きます。
+<!--
+We conclude that \(J_± |b,m\rangle\) is again an eigenvector of J_3, but with
+eigenvalue \((m ± 1)\) and thus we write<sup>102</sup> \(J_± |b,m\rangle ≡ \mathcal{C}|b,m ± 1\rangle\):
+-->
+
+</p><p class="margin-large">
+<sup>102</sup>
+一般論として、ここでは定数Cを含めます。この定数については後ほど説明します。
+<!--
+To be general, we include here a constant C. This constant will be
+discussed in a moment.
+-->
+</p><p>
+
+\[
+J_3 |b,m ± 1\rangle = (m ± 1) |b,m ± 1\rangle  \tag{3.104}
+\]
+
+演算子 \(J_−\) と \(J_+\) は、上げ下げ演算子、下げ下げ演算子、またはラダー演算子と呼ばれます。1 つの \(J_3\) 固有ベクトルから始めて、ラダー演算子 \(J_±\) を繰り返し使用することで、より多くの J3 固有ベクトルを構築できます。このプロセスは必ず終了する必要があります。なぜなら、異なる固有値を持つ固有ベクトルは線形独立であり、有限次元表現を扱っているからです。つまり、対応するベクトル空間は有限次元であり、したがって、線形独立なベクトルは有限個しか見つけることができません。
+<!--
+The operators \(J_−\) and \(J_+\) are called raising and lowering operators
+or ladder operators. Starting from one \(J_3\) eigenvector, we can
+construct more and more J3 eigenvectors using the ladder operators
+\(J_±\) repeatedly. This process must come to an end, because eigenvectors
+with different eigenvalues are linearly independent and we are
+dealing with finite-dimensional representations. This means that the
+corresponding vector space is finite-dimensional and therefore we
+can only find a finite number of linearly independent vectors.
+-->
+</p><p>
+
+最大固有値を持つ固有ベクトルが存在すると結論付けられます。この固有値を \(j\) とします。この最大固有ベクトルは、
+<!--
+We conclude that there must be an eigenvector with a maximum
+eigenvalue that we call \(j\). For this maximum eigenvector, we must
+have
+-->
+\[
+J_+ |b, j\rangle = 0  \tag{3.105}
+\]
+
+なぜなら、式3.103によれば、他に考えられる唯一の可能性は、固有値j + 1を持つ新しい固有ベクトルを生成することであり、したがってjは最大固有値ではないからです。この最大J3固有値jと全体の表現のラベルbとの関係は、<sup>103</sup>を用いて計算できます。
+<!--
+because the only other possibility would be that, according to Eq. 3.103,
+we produce a new eigenvector with eigenvalue j + 1 and thus j
+wouldn’t be the maximum eigenvalue. We can calculate a relationship
+between this maximum J3 eigenvalue j and the label b for the
+whole representation by using<sup>103</sup> 
+-->
+</p><p class="margin-large">
+<sup>103</sup>
+これは\(J^2 = J_1^2+ J_2^2 + J_3^2 → J_1^2 + J_2^2 = J^2 − J_3^2\)から導かれます。
+<!--
+This follows from \(J^2 = J_1^2+ J_2^2 + J_3^2 → J_1^2 + J_2^2 = J^2 − J_3^2\).
+-->
+</p><p>
+
+\[
+\begin{align}
+J_−J_+ &= (J_1 − iJ_2)(J_1 + iJ_2) \\
+\\
+&= \underbrace{J_1^2 + J_2^2}_{=J^2−J_3^2}+i\underbrace{(J_1 J_2 − J_2 J_1)}_{=[J_1,J_2]=iJ_3(Eq.3.82)}= J^2 − J_3^2− J_3  \tag{3.106}
+\end{align}
+\]
+この式を使って次のように書くことができます
+<!--
+Using this expression, we can write
+-->
+\[
+0 \underbrace{=}_{Eq 3.105} J_−J_+|b,j\rangle \underbrace{=}_{\text{Eq 3.106 and Eq 3.98}} (b − j^2 − j)|b,j\rangle  \tag{3.107}
+\]
+したがって\(b − j^2 − j = 0\)と結論づけることができ、
+<!--
+Therefore, we can conclude \(b − j^2 − j = 0\) and thus
+-->
+\[
+b = j(j + 1)  \tag{3.108}
+\]
+
+最大固有値 \(j\) を持つ \(J_3\) の固有ベクトルが存在すると結論付けたのと全く同様に、最小固有値を持つ固有ベクトルが存在すると結論付けることができます。この最小固有値を \(k\) と呼び、\(J_− |b, k\rangle = 0\) でなければなりません。そうでなければ \(k\) は最小固有値にならないからです。式 3.107 の計算と同様に、次のように計算できます。
+<!--
+Completely analogous to how we concluded that there is an eigenvector
+of \(J_3\) with maximum eigenvalue \(j\), we can conclude that there
+is an eigenvector with minimal eigenvalue. We call this minimal
+eigenvalue \(k\) and we must have \(J_− |b, k\rangle = 0\), because otherwise \(k\) would not be the minimal eigenvalue. Analogous to the calculation
+in Eq. 3.107, we can calculate
+-->
+
+\[
+0 = J_+J_− |b, k\rangle = (b − k^2 + k) |b, k\rangle  \tag{3.109}
+\]
+
+したがって、\((b − k^2 + k) = 0\)となり、
+<!--
+Therefore, we have \((b − k^2 + k) = 0\) and can conclude
+-->
+\[
+b = −k(−k + 1)  \tag{3.110}
+\]
+
+式3.108と式3.110を比較すると、
+<!--
+By comparing Eq. 3.108 with Eq. 3.110, we can conclude
+-->
+\[
+k = −j  \tag{3.111}
+\]
+
+さて、このセクションの冒頭で議論したことを振り返りましょう。2次カシミール作用素
+\(J^2\) から得られるラベル \(b\) があり、これを用いて異なる表現を区別します。さらに、対角生成子
+\(J_3\) から得られるラベル  \(m\) があり、これを用いて表現が作用するベクトル空間の異なる要素にラベルを付けます。有限次元表現の場合、m には最大値があり、これを \(j\) と呼ぶことを上で示しました。与えられた \(|b,m\rangle\) に作用し、固有値 \(m ± 1\) を持つ \(J_3\) の新しい固有ベクトルを生成するラダー作用素 \(J_±\) を導入しました。実際には、これは、与えられた表現に対して最大の \(J_3\) 固有値 \(|b, j\rangle\) を持つ固有ベクトルから始めて、\(J_−\) を使って「梯子を下りていく」ことができることを意味します。\(J_−\) を繰り返し適用することで、\(J_3\) の新しい固有ベクトルが得られます。しかし、このプロセスは、有限次元表現を扱っており、固有ベクトルが無限に存在することはできないため、最も低い \(J_3\) 固有値 \(k\) を持つある固有ベクトル \(|b, k\rangle\) で終了する必要があります。最小の固有値 \(|b, k\rangle\) を持つこの固有ベクトルに \(J_−\) を作用させると、単にゼロになります。この最小の固有値は \(k = −j\) であると計算しました。
+<!--
+Now it’s time to recall our discussion from the beginning of this
+section. We have one label b coming from the quadratic Casimir operator
+\(J^2\), which we use to distinguish different representations. In
+addition, we have another label m coming from the diagonal generator
+\(J_3\), which we use to label different elements of the vector space
+our representation acts on. We have derived above that for finite dimensional
+representations, there is a maximal value for m, which
+we called \(j\). We introduced ladder operators \(J_±\) that act on a given
+\(|b,m\rangle\) and yield a new eigenvector of \(J_3\) with eigenvalue \(m ± 1\). In
+practice, this means we can start with the eigenvector with maximum
+J3 eigenvalue \(|b, j\rangle\) for a given representation and then "move
+down the ladder" using \(J_−\). The repeated application of \(J_−\) yields
+new eigenvectors of \(J_3\). However, this process must come to an end
+at some eigenvector \(|b, k\rangle\) with lowest \(J_3\) eigenvalue \(k\), because we are
+dealing with a finite dimensional representation and there can not be
+infinitely many eigenvectors. Acting with \(J_−\) on this eigenvector with
+minimal eigenvalue \(|b, k\rangle\) yields simply zero. We calculated that this
+minimal eigenvalue is \(k = −j\).
+-->
+
+</p><p>
+まとめると，\(b = j(j +1)\) (式 3.108) でラベル付けされた各 \(\mathcal{SU}(2)\) 表現に対して，\(−j ≤ m ≤ j\) の範囲で整数間隔の固有値を持つ \(J_3\) 固有ベクトルの集合が得られる．前述のように，最大 \(J_3\) 固有値のベクトル \(|b, j\rangle\) から梯子を下り始め，演算子 \(J_−\) を繰り返し適用することで最小固有値 \(|b,−j\rangle\) を持つベクトルに到達できる．適用するたびに固有値は 1 ずつ減少する．したがって，最大 \(J_3\) 固有値 \(j\) と最小値 \(−j\) の差は整数である：\(j − (−j) = 整数\).このことからすぐに結論できるのは
+<!--
+In summary, for each \(\mathcal{SU}(2)\) representation, labeled by \(b = j(j +1)\) (Eq. 3.108), we get a set of \(J_3\) eigenvectors with integer spaced
+eigenvalues in the range \(−j ≤ m ≤ j\). As mentioned above, we can
+start climbing down the ladder at the vector \(|b, j\rangle\) with maximum \(J_3\)
+eigenvalue and get to the vector with minimum eigenvalue \(|b,−j\rangle\) by
+repeated application of the operator \(J_−\). After each application the
+eigenvalue is lowered by one. Therefore, the difference between the
+maximum \(J_3\) eigenvalue \(j\) and the minimal value \(−j\) is an integer:
+\(j − (−j) = integer\). From this we can conclude immediately
+-->
+\[
+2j = integer → j = \frac{integer}{2} \tag{3.112}
+\]
+
+これは非常に重要な洞察です。なぜなら、\(\mathcal{su}(2)\) の可能な有限次元表現を理解することができるからです。\(j = 0, 1/2, 1, 3/2,...,\) の許容値を単純に代入していくだけで、すべての可能な \(\mathcal{su}(2)\) 表現が得られます。さらに、これまで学んだことを用いて、これらの表現を明示的に理解し、構築することができます。この明示的な構築については、次のセクションで説明します。特に、\(j\) の異なる許容値に対する可能な \(J_3\) 固有値 \(m\) と、これらの表現に対する二次カシミール演算子 \(J^2\) の値を調べることは有益です<sup>104</sup>
+<!--
+This is an incredibly important insight, because it allows us to understand
+the possible finite-dimensional representations of \(\mathcal{su}(2)\). Ifwe
+simply start plugging in the allowed values of \(j = 0, 1/2, 1, 3/2,...,\)
+we get all possible \(\mathcal{su}(2)\) representations. In addition, we can use
+what learned above to understand and construct these representations
+explicitly. This explicit construction will be the topic of the next
+sections. It is particular instructive to have a look at the possible \(J_3\)
+eigenvalues \(m\) for the different allowed values of \(j\) and the value of the quadratic Casimir operator \(J^2\) for these representations<sup>104</sup>
+-->
+</p><p class="margin-large">
+<sup>104</sup>
+式3.98では、\(J^2\)に属する固有値を単に\(b\)と呼びました。しかし、式3.108では、\(b\)を\(J_3\)の最大の固有値\(j: b = j(j + 1)\)で表すことを計算しました。
+<!--
+In Eq. 3.98 we called the eigenvalue 
+that belongs to \(J^2\) simply \(b\). However in
+Eq. 3.108, we calculated that we express
+\(b\) through the maximum \(J_3\) eigenvalue
+that we called \(j: b = j(j + 1)\).
+-->
+</p><p>
+
+\[
+\begin{array}{l}
+j = 0,& m= 0, & j(j + 1) = 0 \\
+j = 1/2,& m = 1/2,−1/2, & j(j + 1) = 3/4 \\
+j = 1, & m = 1, 0, 1, & j(j + 1) = 2 \\
+j = 3/2, & m = 3/2, 1/2,−1/2,−3/2,& j(j + 1) = 15/4 \\
+... \tag{3.113}
+\end{array}
+\]
+
+ここで、\(j = 0\) 表現は1次元、\(j = 1/2\) 表現は2次元、\(j = 1\) 表現は3次元、\(j = 3/2\) 表現は4次元<sup>105</sup>であることが分かります。2次元表現と3次元表現における二次カシミール演算子 \(J^2\) の値は、このセクションの冒頭で計算したものと全く同じであることに注意してください。
+<!--
+We learn here that the \(j = 0\) representation is one-dimensional, the
+\(j = 1/2\) representation is two-dimensional, the \(j = 1\) representation
+is three-dimensional and the \(j = 3/2\) representation is four dimensional<sup>105</sup>. Take note that the values for the quadratic Casimir operator \(J^2\) for the two-dimensional and the three-dimensional representation
+are exactly those that we calculated at the beginning of this
+section.
+-->
+
+</p><p class="margin-large">
+<sup>105</sup> 
+
+カルタン生成器の固有ベクトル（ここでは \(J_3\)）を、表現が作用するベクトル空間の基底ベクトルとして用います。例えば、\(J_3\)  に2つの固有値（つまり \(m\) 値）がある場合、基底ベクトルは2つあり、対応する表現は2次元になります。
+<!--
+We use the eigenvectors of the Cartan 
+generator, here \(J_3\), as basis vectors for
+the vector space that our representation
+acts on. For example, if there are two
+possible eigenvalues of J3, i.e. m values,
+we have two basis vectors and thus
+the corresponding representation is
+two-dimensional.
+-->
+</p><p>
+
+これらの様々な表現の実際の明示的な構築に進む前に、もう1つ議論する必要があることがあります。
+式3.103で計算したように、与えられた\(J_3\)固有ベクトル\(|b,m\rangle\)に\(J_+\)を作用させると、より高い固有値を持つ新しい\(J_3\)固有ベクトルが得られます。
+\(J_3 J_+ |b,m\rangle = (m + 1)J_+ |b,m\rangle\)。しかし、\(J_+ |b,m\rangle = |b,m + 1\rangle\)と単純に結論付けることはできません。代わりに、\(J_+ |b,m\rangle\)が\(|b,m + 1\rangle\)に比例することだけが分かっているので、次のように書きます。
+<!--
+There is one more thing we need to discuss, before we can move
+on to the actual explicit construction of these various representations.
+We calculated in Eq. 3.103 that if we act with \(J_+\) on a given \(J_3\) eigenvector
+\(|b,m\rangle\), we get a new \(J_3\) eigenvector with a higher eigenvalue:
+\(J_3 J_+ |b,m\rangle = (m + 1)J_+ |b,m\rangle\). However, we can not simply conclude that \(J_+ |b,m\rangle = |b,m + 1\rangle\). Instead, we only know that \(J_+ |b,m\rangle\) is
+proportional to \(|b,m + 1\rangle\) and therefore we write
+-->
+\[
+J_+ |b,m\rangle = \mathcal{C} |b,m + 1\rangle  \tag{3.114}
+\]
+
+ここで、\(\mathcal{C}\) は定数です。この定数を計算して初めて、ラダー演算子の作用を完全に理解し、実際にそれらを用いて表現を明示的に構築できるようになります。重要なのは、正規化された基底ベクトルを扱うため、\(|b,m\rangle\) と \(|b,m + 1\rangle\) が正規化されている必要があるということです。
+<!--
+
+where \8\mathcal{C}\) is some constant. We now want to calculate this constant,
+because only then we have fully understood the action of the ladder
+operators and can actually use them to construct the representations
+explicitly. The thing is that we want to work with normalized basis
+vectors and hence want that \(|b,m\rangle\) and \(|b,m + 1\rangle\) are normalized:
+-->
+\[
+\begin{align}
+|b,m\rangle^† |b,m\rangle &= 1 \\
+|b,m + 1\rangle^† |b,m + 1\rangle &= 1  \tag{3.115}
+\end{align}
+\]
+
+正規化された基底ベクトル \(|b,m\rangle\) に対して \(J_+\) あるいは \(J_−\) を作用させると、一般には正規化されません。正規化を気にしないのであれば、\(J_+ |b,m\rangle = |b,m + 1\rangle\) と書くこともできます。しかし、\(|b,m + 1\rangle\) のような基底ベクトルは常に正規化された基底ベクトルを意味するため、追加の定数 \(\mathcal{C}\) を含める必要があります。
+<!--
+If we act with \(J_+\) or equally with \(J_−\) on a normalized basis vector like
+\(|b,m\rangle\) the result will be, in general, not normalized. If we wouldn’t
+care about normalization, we could write \(J_+ |b,m\rangle = |b,m + 1\rangle\). However,
+for us a basis vector like \(|b,m + 1\rangle\) means always a normalized
+basis vector and hence we need to include the additional constant \(\mathcal{C}\).
+-->
+</p><p>
+\(J_−\)と\(J_+\)の定義<sup>106</sup>から、\(J_-^†= J_+\)および\(J_+^†= J_−\)が成立する。したがって、式3.114のノルム<sup>107</sup>を計算すると、
+<!--
+From the definition<sup>106</sup> of \(J_−\) and \(J_+\) it follows that \(J_-^†= J_+\) and \(J_+^†= J_−\). Thus if we calculate the norm<sup>107</sup> of Eq. 3.114, we get
+-->
+</p><p class="margin-large">
+<sup>106</sup>
+式3.99と式3.100:
+\(J_+ =\frac{1}{\sqrt{2}}(J_1 + iJ_2)\) および
+\(J_− =\frac{1}{\sqrt{2}}(J_1 − iJ_2)\)
+<!--
+Eq. 3.99 and Eq. 3.100:
+\(J_+ =\frac{1}{\sqrt{2}}(J_1 + iJ_2)\) and
+\(J_− =\frac{1}{\sqrt{2}}(J_1 − iJ_2)\)
+-->
+<br><br>
+<sup>107</sup> 
+なぜこれが賢明な方法なのかは、すぐに明らかになります。
+<!--
+It will become clear in a second why this is a clever thing to do
+-->
+</p><p>
+
+\[
+\begin{align}
+(J_+|b,m\rangle)^† J_+|b,m\rangle &= |\mathcal{C}|^2 \underbrace{|b,m + 1\rangle^† |b,m + 1\rangle}_{=1 (Eq. 3.115)} \\
+\\
+|b,m\rangle^† J_+^† J_+|b,m\rangle &= |\mathcal{C}|^2 \\
+\\
+|b,m\rangle^† \underbrace{J_−J_+}_{=J^2−J_3^2−J_3\;(Eq. 3.106)}|b,m\rangle &= |\mathcal{C}|^2 \\
+\\
+|b,m\rangle^† \underbrace{(J^2 − J_3^2− J_3)|b,m\rangle}_{=(b−m^2−m)|b,m\rangle\; (Eq. 3.98)}&= |\mathcal{C}|^2 \\
+\\
+|b,m\rangle^† (\underbrace{b}_{=j(j+1)\;(Eq. 3.108)}−m^2 − m)|b,m\rangle &= |\mathcal{C}|^2 \\
+\\
+\underbrace{|b,m\rangle^† |b,m\rangle}_{=1\;(Eq. 3.115)}(j(j + 1) − m^2 − m) &= |\mathcal{C}|^2 \\
+\\
+(j(j + 1) − m^2 − m) &= |\mathcal{C}|^2   \tag{3.116}
+\end{align}
+\]
+この計算の最終結果は、これまで未知であった定数 \(\mathcal{C}\) のノルムを、表現と表現内のベクトルを特徴付けるために用いるラベル \(j\) と \(m\) を用いて表す。式3.116から<sup>108</sup>を結論付けることができる。
+<!--
+The final result of this calculation expresses the norm of the previously
+unknown constant C in terms of the labels j and m that we use
+to characterize our representation and the vectors within a representation. We can conclude<sup>108</sup> from Eq. 3.116:
+-->
+</p><p class="margin-large">
+<sup>108</sup>
+定数 \(\mathcal{C}\) の可能な複素位相は無関係であり、実数かつ正として選択しました。
+<!--
+A possible complex phase of the constant \(\mathcal{C}\) is irrelevant and we chose it to be real and positive.
+-->
+</p><p>
+
+\[ 
+\sqrt{(j(j + 1) − m^2 − m)} = \mathcal{C}  \tag{3.117}
+\]
+
+したがって、与えられた表現、つまり与えられたjと与えられた基底ベクトル、つまり与えられたmに対して、式3.117を用いて、与えられた固有ベクトルに \(J_+\) を作用させた場合に何が起こるかの完全な結果を計算できます。
+<!--
+Thus, for a given representation, which means a given j and a given
+basis vector, which means given m, we can use Eq. 3.117 to calculate
+the full result of what happens if we act with J+ on a given eigenvector:
+-->
+\[
+\begin{align}
+J+|j(j + 1),m\rangle &= \mathcal{C} |j(j + 1),m + 1\rangle \\
+
+& \underbrace{=}_{Eq. 3.117} \sqrt{(j(j + 1) − m^2 − m)} |j(j + 1),m + 1\rangle  \tag{3.118}
+\end{align}
+\]
+
+既に上で述べたように、最大​​ \(J_3\) 固有値 \(|j(j + 1), j\rangle\) を持つ固有ベクトルに \(J_+\) を作用させると、必ずゼロになります。式 3.117 に \(m = j\) を代入すると、これが実際に起こることがわかります。
+<!--
+We already argued above that if we act with \(J_+\) on the eigenvector
+with maximum \(J_3\) eigenvalue \(|j(j + 1), j\rangle\), we must get zero. If we now plug in \(m = j\) in Eq. 3.117 we can see that this indeed happens:
+-->
+\[
+\begin{align}
+\sqrt{(j(j + 1) − j^2 − j)} &= \mathcal{C} \\
+\\
+\sqrt{j^2 + j − j^2 − j} &= \mathcal{C} \\
+\\
+0 &= \mathcal{C}  \tag{3.119}
+\end{align}
+\]
+
+さらに、上記と全く同じ手順で、与えられた固有ベクトルに \(J_−\) を作用させた場合に得られる定数 \(\tilde{\mathcal{C}}\) を計算することができます。結果は次のようになります。
+<!--
+In addition, following exactly the same steps as above, we can calculate
+the constant \(\tilde{\mathcal{C}}\) that we get if we act with \(J_−\) on a given eigenvector.The result is
+-->
+\[
+\begin{align}
+J_− |j(j + 1),m\rangle &= \tilde{\mathcal{C}}|j(j + 1),m + 1\rangle \\
+\\
+&=\sqrt{(j(j + 1) − m^2 + m)} |j(j + 1),m + 1\rangle \tag{3.120}
+\end{align}
+\]
+
+これで、様々な \(\mathcal{SU}(2)\) 表現に対する明示的な行列式を計算するために必要なものがすべて揃いました。実際、\(\mathcal{SU}(2)\) のすべての既約表現は、上で説明したツールを用いて構築できるこれらの表現のいずれかと等価であることを示すことができます<sup>109</sup>。先に進む前に、少し議論しておくべきことがあります。ラベル \(j(j + 1)\) は多くのスペースを占め、やや冗長です。そのため、代わりに単に \(j\) をラベルとして使用するのが慣例です。つまり、\(|j(j + 1),m\rangle\) の代わりに \(|j,m\rangle\) を使用します。
+<!--
+
+We have now everything we need to calculate explicit matrix expressions
+for the various \(\mathcal{SU}(2)\) representations. In fact, it’s possible to show that every irreducible representation of \(\mathcal{SU}(2)\) must be equivalent to one of these that we can construct by using the tools described above<sup>109</sup>. There is one small thing we need to discuss before we move on. The label \(j(j + 1)\) takes a lot of space and is somewhat redundant. It is therefore conventional to use simply \(j\) as a label instead.This means, we use \(|j,m\rangle\) instead of \(|j(j + 1),m\rangle\).
+-->
+</p><p class="margin-large">
+<sup>109</sup>
+例えば、Nadir Jeevanjee著『物理学者のためのテンソルと群論入門』（Birkhaeuser、第1版、2011年8月、ISBN 978-081764714​​8）の190ページをご覧ください。
+<!--
+See, for example, page 190 in: Nadir Jeevanjee. An Introduction to Tensors and Group Theory for Physicists. Birkhaeuser,1st edition, August 2011. ISBN 978-0817647148
+-->
+</p><p>
+それでは、表現の具体的な例を見てみましょう。もちろん、まずは最も低次元の表現から始めます。
+<!--
+Now we look at specific examples for the representations. We start,
+of course, with the lowest dimensional representation.
+-->
+</p>
+<h3>3.6.2 \(\mathcal{SU}(2)\) の1次元表現</h3>
+<!--
+<h3>3.6.2 The Representation of \(\mathcal{SU}(2)\) in one Dimension</h3>
+-->
+<p>
+\(j\) の最小値は 0 です。既に述べたように、この表現は 1 次元ベクトル空間に作用します。\(\mathcal{SU}(2)\) リー代数 \([J_l,J_m] = i\epsilon_{lmn} J_n\) の交換関係を満たす 1 × 1「行列」は数 0 のみであることから、この表現は自明であることがわかります。生成元 0 をべき乗すると、常に変換 \(\mathcal{U} = e^0 = 1\) が得られ、これは何も変化しません。
+<!--
+The lowest possible value for j is zero. As already mentioned above,
+this representation acts on a one-dimensional vector space. We can
+see that this representation is trivial, because the only 1 × 1 "matrix"
+that fulfills the commutation relations of the \(\mathcal{SU}(2)\) Lie algebra \([J_l,J_m] = i\epsilon_{lmn} J_n\), are the number 0. If we exponentiate the generator 0, we always get the transformation \(\mathcal{U} = e^0 = 1\), which changes nothing at all.
+-->
+</p>
+<h3>3.6.3 2次元における \(\mathcal{SU}(2)\) の表現</h3>
+<!--
+<h3>3.6.3 The Representation of \(\mathcal{SU}(2)\) in two Dimensions</h3>
+-->
+<p>
+次に、次の可能な値 \(j = \frac{1}{2}\) を見てみましょう。この表現は \(2\frac{1}{2}+ 1 = 2\) 次元<sup>110</sup> です。生成元 \(J_3\) の固有値は \(\frac{1}{2}\) です。
+<!--
+We now take a look at the next possible value \(j = \frac{1}{2}\)
+. This representation is \(2\frac{1}{2}+ 1 = 2\) dimensional<sup>110</sup>. The generator \(J_3\) has eigenvalues \(\frac{1}{2}\)
+-->
+<sup>110</sup>
+式3.113を参照。\(\frac{1}{2}− 1 = −\frac{1}{2}\)は式3.113からわかるように、次のように表される。
+<!--
+See Eq. 3.113. and \(\frac{1}{2}− 1 = −\frac{1}{2}\), as can be seen from Eq. 3.113 and is therefore given by
+-->
+\[
+J_3 =\frac{1}{2}
+\begin{pmatrix}
+1 & 0 \\
+0 & −1
+\end{pmatrix}
+\tag{3.121}
+\]
+
+\(J_3\) を対角生成元として選択したため<sup>111</sup>である。固有値\(+\frac{1}{2}\)と\(−\frac{1}{2}\)に対応する固有ベクトルは<sup>112</sup>である。
+<!--
+because we choose J3 to be the diagonal generator<sup>111</sup>. The eigenvectors corresponding to the eigenvalues \(+\frac{1}{2}\) and \(−\frac{1}{2}\) are<sup>112</sup>
+-->
+</p><p class="margin-large">
+<sup>111</sup>
+\(\mathcal{SU}(2)\) の場合、交換関係により、対角生成元は1つだけです。さらに、相似変換を用いて生成元を変換できるため、別の生成元を簡単に対角生成元にできることを覚えておいてください。
+<!--
+For \(\mathcal{SU}(2)\) only one generator is
+diagonal, because of the commutation
+relations. Furthermore, remember that
+we are able to transform the generators
+using similarity transformations and
+could therefore easily make another
+generator diagonal.
+-->
+<br><br>
+<sup>112</sup>
+前述のように、簡潔にするために、\(|j(j + 1),m\rangle\) ではなく \(|j,m\rangle\) を使用します。
+ここで \(j = 1/2\) です。
+<!--
+As mentioned above, we use, for
+brevity, \(|j,m\rangle\) instead of \(|j(j + 1),m\rangle\).
+Here \(j = 1/2\).
+-->
+</p><p>
+
+\[
+|1/2, 1/2\rangle =
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+　and　 |1/2,−1/2\rangle =
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+\tag{3.122}
+\]
+
+この基底における他の2つの \(\mathcal{SU}(2)\) 生成子 \(J_1\) と \(J_2\) の明示的な行列形式は、ラダー演算子を用いて書き直すことで得られる。
+<!--
+We can find the explicit matrix form of the other two \(\mathcal{SU}(2)\) generators
+\(J_1\) and \(J_2\) in this basis by rewriting them using the ladder
+operators
+-->
+\[
+\begin{align}
+J_1 &= \frac{1}{2}(J_− + J_+) \tag{3.123} \\
+\\
+J_2 &= \frac{i}{2}(J_− − J_+) \tag{3.124}
+\end{align}
+\]
+
+これは、式3.100と式3.99における \(J_±\) の定義を反転させることから直接得られます。この表現のベクトル空間の基底は \(J_3\) の固有ベクトルで与えられ、したがって、この基底において生成元 \(J_1\) と \(J_2\) を表すことを思い出してください。言い換えれば、この基底において \(J_1\) と \(J_2\) は \(J_3\) の固有ベクトルへの作用によって定義されます。次のように計算します。
+<!--
+which we get directly from inverting the definitions of \(J_±\) in Eq. 3.100
+and Eq. 3.99. Recall that a basis for the vector space of this representation
+is given by the eigenvectors of \(J_3\) and we therefore express the
+generators \(J_1\) and \(J_2\) in this basis. In other words, in this basis J1 and
+\(J_2\) are defined by their action on the eigenvectors of \(J_3\). We compute
+-->
+\[
+\begin{align}
+J_1 |1/2, 1/2\rangle &= \frac{1}{2}(J_− + J_+) |1/2, 1/2\rangle \\
+\\
+&= \frac{1}{2}(J_− |1/2, 1/2\rangle + \underbrace{J_+ |1/2, 1/2\rangle}_{=0}) \\
+\\
+&= \frac{1}{2}J_− |1/2, 1/2\rangle \\
+\\
+&\underbrace{=}_{\text{Eq. 3.120 with }\tilde{\mathcal{C}}=1}\frac{1}{2}|1/2,−1/2\rangle  \tag{3.125}
+\end{align}
+\]
+ここで、1/2 はすでに最大の \(J_3\) 固有値であり、それ以上高くすることはできないことを用いました。同様に、
+<!--
+
+where we used that 1/2 is already the maximum \(J_3\) eigenvalue and
+we cannot go higher. Similarly we get
+-->
+\[
+J_1 |1/2,−1/2\rangle =\frac{1}{2}(J_− + J_+) |1/2,−1/2\rangle =\frac{1}{2}|1/2, 1/2\rangle  \tag{3.126}
+\]
+式3.125と式3.126を用いて、\(J_1\)を行列形式で表すことができます。
+<!--
+Using Eq. 3.125 and Eq. 3.126, we can write \(J_1\) in matrix form:
+-->
+\[
+J_1 =\frac{1}{2}
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+\tag{3.127}
+\]
+この行列が、上で導出した基底ベクトル<sup>113</sup>に対して正しい作用を持つことを確認できます。同様に、
+<!--
+You can check that this matrix has the correct action on the basis
+vectors that we derived above<sup>113</sup>. In the same way, we find
+-->
+</p><p class="margin-large">
+<sup>113</sup>
+式3.125で次式を得ました:
+\(J_1 |1/2, 1/2\rangle = \frac{1}{2}|1/2,−1/2\rangle\)。\(J_1\)の明示的な行列形式を用いると次式を得ます:
+\(J_1 |1/2, 1/2\rangle = \frac{1}{2}\begin{pmatrix}0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix}=
+\frac{1}{2}\begin{pmatrix}0 \\ 1 \end{pmatrix}=\frac{1}{2}|1/2,−1/2\rangle\)。
+<!--
+We derived in Eq. 3.125: 
+\(J_1 |1/2, 1/2\rangle = \frac{1}{2}|1/2,−1/2\rangle\). Using the
+explicit matrix form of \(J_1\) we get
+\(J_1 |1/2, 1/2\rangle = \frac{1}{2}\begin{pmatrix}0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 \\ 0 \end{pmatrix}=
+\frac{1}{2}\begin{pmatrix}0 \\ 1 \end{pmatrix}=\frac{1}{2}|1/2,−1/2\rangle\).
+-->
+</p><p>
+
+\[
+J_2 =\frac{1}{2}
+\begin{pmatrix}
+0 & −i \\
+i & 0
+\end{pmatrix}
+\tag{3.128}
+\]
+
+これらは、本章の冒頭でリー代数 \(\mathcal{SU}(2)\) を調べているときに見つけた、パウリ行列 \(σ_i\) を持つ生成元 \(J_i = \frac{1}{2}σ_i\) と同じです (式 3.80)。ここで使用した表現がまさにこの2次元表現であったことがわかります。ただし、次の節で見るように、例えば3次元ではさらに多くの表現が存在します。<sup>114</sup>
+<!--
+These are the same generators \(J_i = \frac{1}{2}σ_i\), with the Pauli matrices \(σ_i\), we
+found while investigating the Lie algebra of \(\mathcal{SU}(2)\) at the beginning
+of this chapter (Eq. 3.80). We can now see that the representation we
+used there was exactly this two dimensional representation. Nevertheless,
+there are many more, for example, in three-dimensions as we will see in the next section<sup>114</sup>.
+-->
+</p><p class="margin-large">
+<sup>114</sup>
+繰り返しますが、\(\mathcal{SU}(2)\) という名前に惑わされないでください。これは元々、単位行列式を持つユニタリ 2 × 2 行列の集合として定義したものです。ここでは、対応する多様体 S3 によって定義される抽象群のことを指しており、この群の高次元表現、例えば 3 × 3 行列を持つ表現について話をします。この構造に別の名前を付けることができれば（例えば、対応する多様体の名前 \(\mathcal{S}^3\) を使うなど）、便利ですが、残念ながら \(\mathcal{SU}(2)\) が慣用名となっています。
+<!--
+Again, don’t get confused by the 
+name \(\mathcal{SU}(2)\), which we originally defined
+as the set of unitary 2 × 2 matrices
+with unit determinant. Here we mean
+the abstract group, defined by the corresponding
+manifold S3 and we are
+going to talk about higher dimensional
+representations of this group, which
+result in, for example, a representation
+with 3 × 3 matrices. It would help if
+we could give this structure a different
+name (For example, using the name of
+the corresponding manifold \(\mathcal{S}^3\)), but
+unfortunately \(\mathcal{SU}(2)\) is the conventional
+name.
+-->
+</p>
+<h3>3.6.4 3次元における \(\mathcal{SU}(2)\) の表現</h3>
+<!--
+<h3>3.6.4 The Representation of \(\mathcal{SU}(2)\) in three Dimensions</h3>
+-->
+<p>
+2次元の場合と同じ手順<sup>115</sup>に従うと、次のことがわかります。
+<!--
+Following the same procedure<sup>115</sup> as in two-dimensions, we find:
+-->
+</p><p class="margin-large">
+<sup>115</sup>
+ここでも対角生成元 \(J_3\) から始めます。式 3.113 からその固有値 \((1, 0, −1)\) がわかっているので、すぐに書き下ろすことができます。
+その後、他の 2 つの生成元 \(J_1, J_2\) は、基底ベクトル、つまり \(J_3\) の固有ベクトルにどのように作用するかを見ることで導出できます。これを計算するために、\(J_1\) と \(J_2\) を \(J_±\) を使って書き下ろせることを再び利用します。
+<!--
+Again we start with the diagonal
+generator \(J_3\), which we can write down
+immediately because we know its
+eigenvalues \((1, 0,−1)\) from Eq. 3.113.
+Afterwards, the other two generators
+\(J_1, J_2\) can be derived by looking at how
+they act on the basis vectors, i.e. the
+eigenvectors of \(J_3\). To calculate this, we
+use again that we can write \(J_1\) and \(J_2\) in
+terms of \(J_±\).
+-->
+</p><p>
+
+\[
+J_1 =\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+0 & 1 & 0 \\
+1 & 0 & 1 \\
+0 & 1 & 0
+\end{pmatrix}
+,　J_2 = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+0 & −i & 0 \\
+i & 0 & −i \\
+0 & i & 0
+\end{pmatrix}
+,　J_3 =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & −1
+\end{pmatrix}
+\tag{3.129}
+\]
+これは、\(\mathcal{SU}(2)\) の生成元の3次元表現です。
+興味があれば、これらの生成元を指数関数に代入することで、\(\mathcal{SU}(2)\) の群元の3次元表現を導くことができます。
+これ以上進んで高次元表現を導くことはしません。
+この時点で、ローレンツ群の最も重要な表現を理解するために必要なものはすべて揃っているからです。
+<!--
+This is the representation of the generators of \(\mathcal{SU}(2)\) in three dimensions.
+If you’re interested, you can derive the corresponding
+representation for the group elements of \(\mathcal{SU}(2)\) in three dimensions,
+by putting these generators into the exponential function. We will
+not go any further and derive even higher dimensional representations,
+because at this point we already have everything we need to
+understand the most important representations of the Lorentz group.
+-->
+</p>
+    </body>
+</html>
