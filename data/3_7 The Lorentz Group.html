@@ -1,0 +1,3280 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>リー群論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>リー群論</h1>
+<h2>3.7 ローレンツ群 \(\mathcal{O}(1, 3)\)</h2>
+<!--
+<h1>Lie Group Theory</h1>
+<h2>3.7 The Lorentz Group \(\mathcal{O}(1, 3)\)</h2>
+-->
+<p>
+「抽象に到達するには、常に具体的な現実から始める必要がある…常に何かから始めなければならない。その後で、現実の痕跡をすべて取り除くことができる。」
+<br><br>
+- パブロ・ピカソ<sup>116</sup>
+<!--
+"To arrive at abstraction, it is always necessary to begin with a concrete
+reality . . . You must always start with something. Afterward you can
+remove all traces of reality."
+<br><br>
+ - Pablo Picasso<sup>116</sup>
+-->
+</p><p class="margin-large">
+<sup>116</sup>
+ロバート・S・ルート＝バーンスタイン、ミシェル・M・ルート＝バーンスタイン共著『天才の閃き』マリナーブックス、第1版、2001年8月、ISBN 9780618127450より引用
+<!--
+As quoted in Robert S. Root-
+Bernstein and Michele M. Root-
+Bernstein. Sparks of Genius. Mariner
+Books, 1st edition, 8 2001. ISBN
+9780618127450
+-->
+</p><p>
+この節では、ローレンツ群のよく知られた表現の一つを導出します。次に、この馴染みのある表現を用いてローレンツ群のリー代数を導出します。これは、\(\mathcal{SU}(2)\) の導出と全く同じ方法です。そこでは、対応するリー代数を導くために、明示的な 2 × 2 行列から始めました。ローレンツ群の複素化リー代数は、リー代数 \(\mathcal{su}(2)\) の 2 つのコピーから構成されることがわかります。この事実は、ローレンツ群の更なる表現を発見するために使用できます。一方、4元ベクトルに作用する 4 × 4 行列によるローレンツ群の表現である、よく知られたベクトル表現は、表現の一つであることが証明されます。これらの新しい表現は、ベクトル表現では記述できない物理系を記述するためのツールを提供してくれます。これはリー理論の威力を示しています。リー理論を用いることで、対称性の隠れた抽象構造を特定することができ、この知識を用いることで、必要なツールを用いて自然を最も基本的なレベルで記述することが可能になります。
+<!--
+In this section we will derive one well-known representation of
+the Lorentz group. Then we will use this familiar representation to
+derive the Lie algebra of the Lorentz group. This is exactly the same
+route we followed for \(\mathcal{SU}(2)\). There we started with explicit 2 × 2 matrices
+to derive the corresponding Lie algebra. We will find that the
+complexified Lie algebra of the Lorentz group consists of two copies
+of the Lie algebra \(\mathcal{su}(2)\). This fact can be used to discover further
+representations of the Lorentz group, whereas the well-known vector
+representation, which is the representation of the Lorentz group
+by 4 × 4 matrices acting on four-vectors, will prove to be one of the
+representations. The new representations will provide us with tools
+to describe physical systems that cannot be described by the vector
+representation. This shows the power of Lie theory. Using Lie theory
+we are able to identify the hidden abstract structure of a symmetry
+and by using this knowledge, we are able to describe nature at the
+most fundamental level with the required tools.
+-->
+
+</p><p>
+まず、ローレンツ群とその部分群の特徴づけから始めます。
+ローレンツ群とは、ミンコフスキー空間<sup>117</sup>の内積を保存するすべての変換の集合です。
+<!--
+We start with a characterisation of the Lorentz group and its subgroups.
+The Lorentz group is the set of all transformations that preserve
+the inner product of Minkowski space<sup>117</sup>
+-->
+</p><p class="margin-large">
+<sup>117</sup>
+これは第2章で導出されたものです。この定義は、ユークリッド空間における回転と空間反射の定義に類似しており、ユークリッド空間の内積が保存されることを思い出してください。
+<!--
+This was derived in Chapter 2. Recall
+that this definition is analogous to
+our definition of rotations and spatial
+reflections in Euclidean space, which
+preserve the inner product of Euclidean
+space.
+-->
+</p><p>
+
+\[
+x^μx_μ = x^μη_{μν}x^ν = (x^0)^2 − (x^1)^2 − (x^2)^2 − (x^3)^2 \tag{3.130}
+\]
+
+ここで、 \(η_{μν}\) はミンコフスキー空間の計量を示します
+<!--
+where \(η_{μν}\) denotes the metric of Minkowski space
+-->
+\[
+η_{μν} =
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1  & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}
+\tag{3.131}
+\]
+
+これがローレンツ群を \(\mathcal{O}(1, 3)\) と呼ぶ理由です。群
+\(\mathcal{O}(4)\) は \((x^0)^2 +(x^1)^2 +(x^2)^2 +(x^3)^2\) を保存します。これがどのような制約を課すかを見てみましょう。ローレンツ変換の慣例的な名前は
+\(Λ\) (「ラムダ」) です。今のところ、\(Λ\) は単なる名前であり、これらの変換がどのように見えるかをここで明示的に導出します。\(x^μ → x^{\prime μ} = Λ_ν^μ x^ν\) を変換すると、積は次のようになります。
+<!--
+This is the reason why we call the Lorentz group \(\mathcal{O}(1, 3)\). The group
+\(\mathcal{O}(4)\) preserves \((x^0)^2 +(x^1)^2 +(x^2)^2 +(x^3)^2\). Let’s see what restriction
+this imposes. The conventional name for a Lorentz transformation is
+\(Λ\) ("lambda"). For the moment, \(Λ\) is just a name and we will derive
+now how these transformations look like explicitly. If we transform
+\(x^μ → x^{\prime μ} = Λ_ν^μ x^ν\), we get the product
+-->
+
+\[
+x^μη_{μν}x^ν → x^{\prime σ}η_{σρ}x^{\prime ρ} = (x^μΛ_μ^σ)η_{σρ}(Λ_ν^ρx^ν)\overset{!}{=}x^μη_{μν}x^ν \tag{3.132}
+\]
+
+そして、これは任意の\(x^μ\)に対して成り立つはずなので、
+<!--
+and because this must hold for arbitrary \(x^μ\) we conclude
+-->
+\[
+Λ_μ^ση_{σρ}Λ_ν^ρ \overset{!}{=}η_{μν} \tag{3.133}
+\]
+
+または行列形式で書かれる<sup>118</sup>
+<!--
+or written in matrix form<sup>118</sup>
+-->
+</p><p class="margin-large">
+<sup>118</sup>
+2つのベクトルの積を行列表記で書くには、左ベクトルを転置する必要があることを思い出してください。したがって、\(Λ^T\) となります。
+<!--
+Recall that in order to write the product
+of two vectors in matrix notation,
+the left vector is transposed. Therefore
+we get here \(Λ^T\).
+-->
+</p><p>
+
+\[
+Λ^TηΛ \overset{!}{=}η  \tag{3.134}
+\]
+
+<strong>これがローレンツ変換 Λ の定義方法です。</strong>
+<!--
+<strong>This is how the Lorentz transformations Λ are defined!</strong>
+-->
+</p><p>
+この定義から出発して、すべてのローレンツ変換の有用な分類を導出します。
+<!--
+Starting from this definition, we will now derive a useful classification
+for all Lorentz transformations.
+-->
+</p><p>
+式3.133の行列式を取り、\(\det(AB) = \det(A) \det(B)\) とすると、
+次の条件が得られます。
+<!--
+If we take the determinant of Eq. 3.133 and use det(AB) = det(A) det(B),
+we get the condition
+-->
+\[
+\begin{align}
+\det(Λ)\underbrace{\det(η)}_{=−1}\det(Λ) &\overset{!}{=}\underbrace{\det(η)}_{=−1}→ \det(Λ)^2 \overset{!}{=}1 \tag{3.135} \\
+\\
+&→ \det(Λ)\overset{!}{=}±1 \tag{3.136}
+\end{align}
+\]
+
+さらに、式3.133<sup>119</sup>の\(μ = ν = 0\)成分に注目すると、
+<!--
+Furthermore, if we look at the \(μ = ν = 0\) component in Eq. 3.133<sup>119</sup>,
+we get
+-->
+</p><p class="margin-large">
+<sup>119</sup>
+これがなぜ便利なのかはすぐに分かります。
+<!--
+We will see in a minute why this is useful.
+-->
+</p><p>
+
+\[
+Λ_0^σ η_{σρ}Λ_0^ρ \overset{!}{=}\underbrace{η_{00}}_{=1}→ Λ_0^σ η_{σρ}Λ_0^ρ = (Λ_0^0)^2 −\sum_i(Λ_0^i)^2 \overset{!}{=}1 \tag{3.137}
+\]
+
+そして結論として
+<!--
+and thus conclude
+-->
+\[
+Λ_0^0 \overset{!}{=}±\sqrt{1 +\sum_i(Λ_0^i)^2}  \tag{3.138}
+\]
+
+ここで、ローレンツ変換を、式3.136と式3.138の符号に応じて4つの「サブカテゴリ」に分類します。
+<!--
+We now divide the Lorentz transformations into four "sub-categories",
+depending on the signs in Eq. 3.136 and Eq. 3.138:
+-->
+\[
+\begin{align}
+L_+^↑:\det(Λ) &= +1; Λ_0^0 ≥ 1 \\
+\\
+L_−^↑:\det(Λ) &= −1; Λ_0^0 ≥ 1 \\
+\\
+L_+^↓:\det(Λ) &= +1; Λ_0^0≤ −1 \\
+\\
+L_−^↓:\det(Λ) &= −1; Λ_0^0≤ −1
+\end{align}
+\tag{3.139}
+\]
+
+この分類は有用です。なぜなら、後ほど説明するように、これらのカテゴリの1つである<sup>120</sup>、\(L_+^↑\)の変換のみが、無限小変換によって生成できるからです。私たちはリー理論の力を活用し、特に特定のグループに属するリー代数から可能な限り多くのことを学びたいと考えています。したがって、このサブカテゴリ\(L_+^↑\)に焦点を当て、対応する生成元を用いて可能な限り多くのことを学びます。他のカテゴリの変換は、この特別なカテゴリの変換と、時間反転\(Λ_T\)および空間反転\(Λ_P\)と呼ばれる2つの特別な変換の一方または両方を組み合わせたものです。ここで<sup>121</sup>
+<!--
+This classification is useful, because, as we will see in a moment, only
+the transformations in one of these categories<sup>120</sup>, \(L_+^↑\),can be generated through infinitesimal transformations. We, want to use the
+power of Lie theory and in particular learn as much as possible from
+the Lie algebra that belongs to a given group. Thus we focus on this
+sub-category \(L_+^↑\) and try to learn as much as possible using the corresponding generators. The transformations in the other categories
+are a combination of the transformations in this special category and
+one or both of two special transformations known as time-reversal
+\(Λ_T\) and space-inversion \(Λ_P\), where<sup>121</sup>
+-->
+
+</p><p class="margin-large">
+<sup>120</sup>
+この最も重要なカテゴリ \(L_+^↑\) の専門用語は、固有直交ローレンツ群です。「固有」とは、\(\det(Λ)= +1\) という性質を指し、物理的には、このカテゴリにおける変換は空間の向きを変えないことを意味します。例えば、右手座標系は右手のままで、左手座標系にはなりません。「直交」という言葉は、\(Λ_0^0≥ 1\) という性質を指し、物理的には、この性質を持つ変換は時間の方向を変えないことを意味します。
+<!--
+The technical term for this most important category \(L_+^↑\) is proper,
+orthochronous Lorentz group. "Proper"
+refers to the property \(\det(Λ)= +1\),
+which in physical terms means that
+transformations in this category do
+not change the spatial orientation. For
+example, a right-handed coordinate
+system stays right-handed and does not
+become a left-handed one. The word
+"orthochronous" refers to the property
+\(Λ_0^0≥ 1\) and means in physical terms
+that transformations with this property
+do not change the direction of time.
+-->
+<br><br>
+
+<sup>121</sup>
+少なくとも一つの表現においては、これらの演算子はこのように見えます。後ほど説明しますが、異なる表現においては、これらの演算子は全く異なるように見えます。
+ここで添え字のPは「パリティ」を表します。これは空間反転の別名です。
+物理的な用語で言えば、パリティ変換は空間軸における鏡映変換であり、時間反転変換は時間軸における鏡映変換です。
+<!--
+At least for one representation, these
+operators look like this. We will see
+later that for different representations,
+these operators look quite different.
+The subscript P here denotes "parity"
+which is another name for spaceinversion.
+In physical terms a parity
+transformation is a reflection at the
+spatial axes, whereas a time-reversal
+transformation is a reflection at the time
+axis.
+-->
+</p><p>
+
+\[
+\begin{align}
+Λ_P &=
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}
+\tag{3.140}\\
+\\
+\Lambda_T &=
+\begin{pmatrix}
+−1 & 0 & 0 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{pmatrix}
+\tag{3.141} \\
+\end{align}
+\]
+
+これは図3.8に示されています。この意味で、完全ローレンツ群は集合として理解できます。
+<!--
+This is illustrated in figure 3.8. In this sense, we can understand the
+complete Lorentz group as the set
+-->
+
+\[
+\mathcal{O}(1, 3) = \{L_+^↑,Λ_PL_+^↑,Λ_TL_+^↑,Λ_PΛ_TL_+^↑\}  \tag{3.142}
+\]
+</p>
+<center><img src="images/fig3_8.png"></center>
+<p class="margin-large">
+図3.8: ローレンツ群の4つの成分は、時間反転\(Λ_T\)と空間反転\(Λ_P\)と呼ばれる2つの離散変換を介して結びついています。
+<!--
+Fig. 3.8: The four components of the
+Lorentz group are connected through
+the two discrete transformations known
+as time-reversal \(Λ_T\) and space-inversion
+\(Λ_P\).
+-->
+</p><p>
+では、なぜ\(L_+^↑\)カテゴリの変換だけが無限小変換で構築できるのでしょうか？無限小変換で構築できる変換は、恒等変換と滑らかに結びつきます。なぜなら、無限小変換は恒等元に無限小的に近いからです。したがって、恒等元は、無限小変換を繰り返すことで構築できるすべての変換と同じカテゴリに属します。
+<!--
+So, why can only transformations in the \(L_+^↑\) category be built up
+by infinitesimal transformations? The transformations that can be
+built up by infinitesimal transformations are smoothly connected to
+the identity transformation, because the infinitesimal transformations
+are infinitesimally close to the identity element. Therefore, the identity
+element is in the same category as all the transformations that
+can be built up by repeating infinitesimal ones. We have
+-->
+\[
+\det(Id) = +1; Id_0^0= 1
+\]
+
+したがって、恒等変換と、それに伴う無限小変換によって生成できるすべての変換は、\(L_+^↑\) カテゴリに属します。
+<!--
+and therefore the identity transformation and with it all transformations
+that can be generated through infinitesimal transformations,
+belong to the \(L_+^↑\) category.
+-->
+
+</p><p>
+関連する重要な観察は、上で定義した4つのカテゴリ、\(L_+^↑、L_−^↑、L_+^↓、L_−^↓\) は互いに滑らかに接続されていないことです。例えば、\(\det(Λ) = +1\) の変換と \(\det(Λ) = −1\) の変換の間には「ギャップ」があります。その間の変換は存在しません。同様に、\(Λ_0^0 ≥ 1\) と \(Λ_0^0≤ −1\) の間にも「ギャップ」があり、その間の変換も存在しません。このギャップを越えるジャンプは、離散変換 \(Λ_P\) と \(Λ_T\) を用いることによってのみ実現できます。したがって、他のカテゴリの変換は、\(L_+^↑\) カテゴリの一部である単位元に滑らかに接続されていません。このため、これらの他のカテゴリにおける変換は、無限小変換のみでは得られません。代わりに、\(Λ_P\) と \(Λ_T\) によって提供される離散的な「ジャンプ」が常に必要になります。
+<!--
+An important related observation is that the four categories that
+we defined above: \(L_+^↑, L_−^↑, L_+^↓, L_−^↓\), are not smoothly connected to
+each other. For example, there is a "gap" between the transformations
+with \(\det(Λ) = +1\) and those with \(\det(Λ) = −1\). There are no
+transformations in between. Equally, there is a "gap" between \(Λ_0^0 ≥ 1\)
+and \(Λ_0^0≤ −1\) and also no transformations in between. The jump
+across this gap can only be achieved by making use of the discrete
+transformations \(Λ_P\) and \(Λ_T\). Therefore, the transformations in the
+other categories are not smoothly connected to the identity element,
+which is part of the \(L_+^↑\) category. For this reason, we can not get the
+transformations in these other categories, by solely using infinitesimal
+transformations. Instead, we always need the discrete "jumps"
+provided by \(Λ_P\) and \(Λ_T\).
+-->
+</p><p>
+
+<strong>要約</strong>：以下では、\(L_+^↑\) サブカテゴリにおける変換に焦点を絞ります。なぜなら、このカテゴリには、無限小変換を繰り返すことで構築できるすべての変換が含まれているからです。このような変換は、対応するリー代数を通して理解できるため、特に便利です。実際には、次のステップでは、\(L_+^↑\) カテゴリのすべての変換を生成する生成元<sup>122</sup>を調べます。他のカテゴリにおける変換は、このように導出した変換と、離散演算 \(Λ_P\) および \(Λ_T\) を組み合わせたものに過ぎません。
+<!--
+To summarize: We concentrate in the following on the transformations
+in the \(L_+^↑\) subcategory, because it contains all transformations
+that can be built up by repeating infinitesimal ones. Such transformations
+are especially nice, because we can understand them through
+the corresponding Lie algebra. In practice this means that in the next
+step, we investigate the generators<sup>122</sup> that generate all transformations in the \(L_+^↑\) category. The transformations in the other categories
+are simply a combination of the transformations that we derive this
+way, and the discrete operations \(Λ_P\) and \(Λ_T\).
+-->
+
+</p><p class="margin-large">
+<sup>122</sup>
+思い出してください: ジェネレータはリー代数の要素です。
+<!--
+Recall: Generators are the elements of the Lie algebra.
+-->
+</p>
+
+<h3>3.7.1 ローレンツ群の一つの表現</h3>
+<!--
+<h3>3.7.1 One Representation of the Lorentz Group</h3>
+-->
+<p>
+ローレンツ群の定義条件(式3.133)を用いて、許容される変換の明示的な行列表現を構築する方法を見てみましょう。まず、何を求めようとしているのか少し考えてみましょう。ローレンツ群は、4元ベクトル<sup>123</sup>に作用する場合、実4×4行列で与えられます。これらの行列は実数でなければなりません。なぜなら、実ミンコフスキー空間\(\mathcal{R}^{(1,3)}\)の要素にどのように作用するかを知りたいからです。一般的な実4×4行列には16個のパラメータがあります。ローレンツ群の定義条件は実際には10個の条件<sup>124</sup>であり、これを6個のパラメータに制限します。言い換えれば、最も一般的なローレンツ変換を記述するには、6個のパラメータが必要です。したがって、6個の線型独立な生成元を見つければ、この群のリー代数の完全な基底が見つかったことになります。これは、他のすべての生成元がこれらの基底生成元の線型結合として書けることを意味します。さらに、これらの基底生成元をリー括弧に入れたときにどのように振る舞うかを計算し、このリー代数の抽象的な定義を導くことができます。
+<!--
+Let’s see how we can use the defining condition of the Lorentz group
+(Eq. 3.133) to construct an explicit matrix representation of the allowed
+transformations. First let’s think a moment about what we are trying to find. The Lorentz group, when acting on 4-vectors<sup>123</sup>, is given by real 4 × 4 matrices. The matrices must be real, because we want to know how they act on elements of the real Minkowski space \(\mathcal{R}^{(1,3)}\). A generic, real 4 × 4 matrix has 16 parameters. The defining condition of the Lorentz group, which is in fact 10 conditions<sup>124</sup>, restricts this to 6 parameters. In other words, to describe a most general
+Lorentz transformation, 6 parameters are needed. Therefore, if we
+find 6 linearly independent generators, we have found a complete
+basis for the Lie algebra of this group. This means every other generator
+can be written as a linear combination of these basis generators.
+In addition, we are then able to compute how these basis generators
+behave when put into the Lie bracket and therefore to derive the
+abstract definition of this Lie algebra.
+-->
+</p><p class="margin-large">
+<sup>123</sup>
+特殊相対論における通常のベクトル空間は、実4次元ミンコフスキー空間 \(\mathcal{R}(1,3)\) です。まずこのベクトル空間上の表現について見ていきます。なぜなら、ローレンツ群は、4×4計量を保存する変換の集合として、そもそもそこで定義されているからです。同様に、\(\mathcal{SU}(2)\) は、そもそも複素2×2行列として定義されており、後で他の表現を導くために、これらの行列からSU(2)について可能な限り多くのことを学び取ろうとしました。
+<!--
+The usual vector space of special 
+relativity is the real, four-dimensional
+Minkowski space \(\mathcal{R}(1,3)\). We will look
+at the representation on this vector
+space first, because the Lorentz group
+is defined there in the first place, i.e. as
+the set of transformations that preserve
+the 4 × 4 metric. Equivalently \(\mathcal{SU}(2)\)
+was defined as complex 2 × 2 matrices
+in the first place and we tried to learn
+as much as possible about SU(2) from
+these matrices, in order to derive other
+representations later.
+-->
+<br><br>
+
+<sup>124</sup>
+これは、一般的な4×4行列\(Λ\)を\(Λ^TηΛ = η\)に置くことで確認できます。
+<!--
+You can see this, by putting a generic
+4 × 4 matrix \(Λ\), in \(Λ^TηΛ = η\).
+-->
+</p><p>
+
+まず、3次元ユークリッド空間の回転行列は、空間のみを包含し、時間は変化しないため、式3.133<sup>125</sup>の条件を満たすことに注意する。これは、ミンコフスキー計量の空間部分<sup>126</sup>が3×3単位行列<sup>127</sup>に比例することから導かれる。したがって、空間のみを包含する変換については、式3.133から以下の条件が成立する。
+<!--
+First note that the rotation matrices of 3-dimensional Euclidean
+space, which involve only space and leave the time unchanged, fulfil the condition in Eq. 3.133<sup>125</sup>. This follows because the spatial part<sup>126</sup> of the Minkowski metric is proportional to the 3 × 3 identity matrix<sup>127</sup>
+and therefore for transformations involving only space, we
+have from Eq. 3.133 the condition
+-->
+</p><p class="margin-large">
+<sup>125</sup>
+\(Λ_μ^σ η_{σρ}Λ_ν^ρ\overset{!}{=}η_{μν}\)
+<br><br>
+
+<sup>126</sup>
+空間部分は、成分\(μ = 1, 2, 3\)です。一般的には、これは\(η_{ij}\)と表記されます。これは、\(i, j\)のようなラテンインデックスは常に1から3までであり、\(μ\)や\(ν\)のようなギリシャインデックスは0から3までであるためです。
+<!--
+The spatial part are the components
+\(μ = 1, 2, 3\). Commonly this is denoted
+by \(η_{ij}\), because Latin indices, like \(i, j\) 
+always run from 1 to 3 and Greek
+indices, like \(μ\) and \(ν\), run from 0 to 3.
+-->
+<br><br>
+
+<sup>127</sup>
+\(η_{11} = η_{22} = η_{33} = −1\) \(i \neq j\) の場合、\(η_{ij} = 0\) を思い出してください。
+。
+<!--
+Recall \(η_{11} = η_{22} = η_{33} = −1\) and
+\(η_{ij} = 0\) for \(i \neq j\).
+-->
+</p><p>
+
+\[
+\begin{align}
+−R^T I_{3×3}R = −R^TR &\overset{!}{=}−I_{3×3} \\
+\\
+→ R^T I_{3×3}R = R^TR &\overset{!}{=} I_{3×3}
+\end{align}
+\]
+
+これはまさに \(\mathcal{O}(3)\) の定義条件である。
+(式 3.139) の条件と合わせて、
+<!--
+This is exactly the defining condition of \(\mathcal{O}(3)\). Together with the
+condition (Eq. 3.139)
+-->
+\[
+\det(Λ) \overset{!}{=}1
+\]
+
+これらは\(\mathcal{SO}(3)\)の定義条件である。対応するローレンツ変換は次のように与えられると結論する。
+<!--
+these are the defining conditions of \(\mathcal{SO}(3)\). We conclude that the
+corresponding Lorentz transformations are given by
+-->
+\[
+Λ_{rot} =
+\begin{pmatrix}
+1 & \\
+& R_{3×3}
+\end{pmatrix}
+\]
+
+回転行列 \(R_{3×3}\) は式 3.22 に示され、3.4.1 節で導出されている。したがって、対応する生成元は、3.4.1 節で 3 次元空間に対して導出した生成元と類似している。
+<!--
+with the rotation matrices \(R_{3×3}\) shown in Eq. 3.22 and derived in
+Section 3.4.1. The corresponding generators are therefore analogous
+to those we derived for three spatial dimensions in Section 3.4.1:
+-->
+\[
+J_i =
+\begin{pmatrix}
+0 & \\
+& J_i^{3dim}
+\end{pmatrix}
+\tag{3.143}
+\]
+
+例えば、式3.71を使用すると、
+<!--
+For example, using Eq. 3.71 we now have
+-->
+\[
+J_1 =
+\begin{pmatrix}
+0 & \\
+& J_1^{3dim}
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & −i \\
+0 & 0 & i & 0
+\end{pmatrix}
+\tag{3.144}
+\]
+
+</p><p>
+時間と空間に関わる変換を調べるために、リー理論では常にそうであるように、無限小変換<sup>128</sup>から始めます。
+<!--
+To investigate transformations involving time and space we will
+start, as always in Lie theory, with an infinitesimal transformation<sup>128</sup>
+-->
+</p><p class="margin-large">
+<sup>128</sup>
+クロネッカーデルタは、\(μ = ρ\) の場合には \(δ_ρ^μ = 1\)、\(μ \neq ρ\) の場合には \(δ_ρ^μ = 0\) と定義されます。
+つまり、クロネッカーデルタを行列形式で書くと、単位行列になるということです。
+<!--
+With the Kronecker delta defined by
+\(δ_ρ^μ = 1\) for \(μ = ρ\) and \(δ_ρ^μ = 0\) for \(μ \neq ρ\).
+This means writing the Kronecker
+delta in matrix form is just the identity matrix.
+-->
+</p><p>
+
+\[
+Λ_ρ^μ ≈ δ_ρ^μ +\varepsilon K_ρ^μ \tag{3.145}
+\]
+
+これを定義条件（式3.133）に代入する。
+<!--
+We put this into the defining condition (Eq. 3.133)
+-->
+\[
+\begin{align}
+&Λ_ρ^μ η_{μν}Λ_σ^ν \overset{!}{=} η_{ρσ} \\
+\\
+&→ (δ_ρ ^μ+\varepsilon K_ρ^μ )η_{μν}(δ_σ^ν+\varepsilon K_σ^ν)\overset{!}{=}η_{ρσ} \\
+\\
+&→\cancel{η_{ρσ}} +\varepsilon K_ρ^μ η_{μσ} +\varepsilon K_σ^νη_{ρν} +
+\underbrace{\varepsilon^2K_ρ^μ η_{μν}K_σ^ν}_{≈0\text{ なぜなら }\varepsilon \text{ は微小 → }\varepsilon^2≈0}=\cancel{η_{ρσ}} \\
+\\
+&→ K_ρ^μ η_{μσ} + K_σ^ν η_{ρν} =0 \tag{3.146}
+\end{align}
+\]
+
+これは行列形式で表すと<sup>129</sup>
+<!--
+which reads in matrix form<sup>129</sup>
+-->
+</p><p class="margin-large">
+<sup>129</sup>
+最初のインデックスが示すことを思い出してください。
+1 番目は行、2 番目は列です。
+ここまでは少しずさんでした
+最初と 2 番目のインデックスを使用して、次のように記述します。
+それらは互いの上にあります。実際、私たちは
+\(K_ρ^μ ≡ K_ρ^μ → (K^T)_ρ^μ = K_ρ^μ\) があります。
+行列乗算は常に機能します
+行と列を乗算します。
+したがって \(K_σ^νη_{ρν} = η_{ρν}K_σ^ν\) となります。
+\(η\) の \(ρ\) 行に
+\(σ\) - \(K\) の列。この用語は次のとおりです
+行列表記 \(ηK\)。さらに、
+\(K_ρ^μ η_{μσ} = K_ρ^μ η_{μσ} = (K^T)_ρ^μ η_{μσ}\)。このインデックス項を行列表記で書くには、\(K\)の転置を使用する必要があります。そうすることで初めて、行と列の積が得られるからです。\(K^T\)の\(ρ\)行は、\(η\)の\(σ\)列と掛け合わされます。したがって、この項は行列表記では\(K^Tη\)となります。インデックス表記では、オブジェクトを自由に移動できます。例えば、\(K_ρ^μ\)は\(K\)の要素の1つ、つまり数に過ぎないからです。
+<!--
+Recall that the first index denotes
+the row and the second the column.
+So far we have been a little sloppy
+with first and second index, by writing
+them above each other. In fact, we
+have \(K_ρ^μ ≡ K_ρ^μ → (K^T)_ρ^μ = K_ρ^μ\) .
+Matrix multiplication always works
+by multiplying rows with columns.
+Therefore \(K_σ^νη_{ρν} = η_{ρν}K_σ^ν\), where
+the \(ρ\)-row of \(η\) is multiplied with the
+\(σ\)-column of \(K\). This term then is in
+matrix notation \(ηK\). Furthermore,
+\(K_ρ^μ η_{μσ} = K_ρ^μ η_{μσ} = (K^T)_ρ^μ η_{μσ}\). In order
+to write this index term in matrix notation
+we need to use the transpose of \(K\),
+because only then we get a product of
+the form row times column. The \(ρ\)-row
+of \(K^T\) is multiplied with the \(σ\)-column
+of \(η\). Therefore, this term is \(K^Tη\) in matrix
+notation. In index notation we are
+free to move objects around, because for
+example \(K_ρ^μ\) is just one element of \(K\), i.e.
+a number.
+-->
+</p><p>
+
+\[
+K^Tη = −ηK  \tag{3.147}
+\]
+
+これで、時間と空間を含む変換の生成元の条件が整いました。これらの生成元によって生成される変換は<strong>ブースト</strong>と呼ばれます。ブーストとは、元の座標系とは異なる一定速度で移動する座標系への変換を意味します。例えば、対象の物体が静止している参照系における記述を、観測者に対して相対的に移動する参照系にブーストすることができます。第2章1節で使用した例、x軸に沿ったブーストに戻りましょう。\(y^\prime = y\) および \(z^\prime = z\) であることが分かっているので、生成元は次のようになります。
+<!--
+Now we have the condition for the generators of transformations
+involving time and space. A transformation generated by these generators
+is called a boost. A boost means a change into a coordinate
+system that moves with a different constant velocity compared with
+the original coordinate system. We can boost the description that we
+have, for example in a frame of reference where the object in question
+is at rest, into a frame of reference where it moves relative to
+the observer. Let’s go back to the example used in Chapter 2.1: A
+boost along the x-axis. Because we know that \(y^\prime = y\) and \(z^\prime = z\) the
+generator is of the form
+-->
+\[
+K_1 =
+\begin{pmatrix}
+\underbrace{
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}}_{≡k_1} & \\
+& 
+\begin{pmatrix}
+0 & 0 \\
+0 & 0
+\end{pmatrix}
+\end{pmatrix}
+\tag{3.148}
+\]
+
+2×2行列方程式を解くだけで済みます。式3.147は次のように簡約されます。
+<!--
+and we only need to solve a 2 × 2 matrix equation. Equation 3.147
+reduces to
+-->
+\[
+\begin{pmatrix}
+a & c \\
+b & d
+\end{pmatrix}
+\begin{pmatrix}
+−1 & 0 \\
+0 & 1
+\end{pmatrix}
+= −
+\begin{pmatrix}
+−1 & 0 \\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+\]
+
+これは以下<sup>130</sup>で解ける。
+<!--
+which is solved by<sup>130</sup>
+-->
+</p><p class="margin-large">
+<sup>130</sup>
+\(
+\begin{pmatrix}
+0 & i \\
+i & 0
+\end{pmatrix}
+\begin{pmatrix}
+−1 & 0 \\
+0 & 1
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & i \\
+−i & 0
+\end{pmatrix}
+\)
+そして
+<!--
+　and
+-->　
+\(
+−
+\begin{pmatrix}
+−1 & 0 \\
+0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+0 & i \\
+i & 0
+\end{pmatrix}
+= −
+\begin{pmatrix}
+0 & −i \\
+i & 0
+\end{pmatrix}
+\)
+</p><p>
+
+\[
+k_1 =
+\begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & i \\
+i & 0
+\end{pmatrix}
+\]
+
+したがって、x軸に沿ったブーストの完全なジェネレータは
+<!--
+The complete generator for boosts along the x-axis is therefore
+-->
+\[
+K_1 =
+\begin{pmatrix}
+0 & i & 0 & 0 \\
+i & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+\end{pmatrix}
+\tag{3.149}
+\]
+
+同様に、y軸とz軸に沿ったブーストの発生源も見つけることができる。
+<!--
+and equally we can find the generators for boosts along the y- and
+z-axis
+-->
+\[
+K_2 =
+\begin{pmatrix}
+0 & 0 & i & 0 \\
+0 & 0 & 0 & 0 \\
+i & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}
+　K_3 =
+\begin{pmatrix}
+0 & 0 & 0 & i \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+i & 0 & 0 & 0
+\end{pmatrix}
+\tag{3.150}
+\]
+
+</p><p>
+さて、リー理論から、生成元から有限変換に至る過程はすでにわかっています。
+<!--
+Now, we already know from Lie theory how we get from the generators
+to finite transformations
+-->
+\[
+Λ_1(\phi) = e^{i\phi K_1}
+\]
+
+簡潔にするために、生成元K1の励起部分、つまり式3.148で定義されている左上の2×2行列k1に再び焦点を当てましょう。
+指数関数はその級数展開を用いて評価でき、<sup>131</sup> \((ik_1)^2 = 1\)
+<!--
+For brevity let’s focus again on the exciting part of the generator K1,
+i.e. the upper left 2 × 2 matrix k1, which is defined in Eq. 3.148. We
+can then evaluate the exponential function using its series expansion
+and that<sup>131</sup> \((ik_1)^2 = 1\)
+-->
+</p><p class="margin-large">
+<sup>131</sup>
+簡単に確認できるように
+<!--
+As you can easily check: 
+-->
+\((ik_1)^2 =i^2 \begin{pmatrix}
+0 & i \\
+i & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 & i \\
+i & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}\)
+
+同様に、すべての偶数指数に対して \(k_1^4 = 1\) 等が成り立ち、
+もちろんすべての奇数指数に対して \((ik_1)^3 = ik_1, k_1^5 = ik_1\) 等が成り立ちます。
+<!--
+, equally \(k_1^4 = 1\) etc. for all even exponents and of
+course \((ik_1)^3 = ik_1, k_1^5 = ik_1\) etc. for all
+uneven exponents.
+-->
+</p><p>
+
+\[
+\begin{align}
+Λ_1(\phi) &= e^{i\phi k_1} = \sum_{n=0}^\infty \frac{i^n\phi^n k_1^n}{n!}
+=\sum_{n=0}^\infty \frac{\phi^{2n}}{(2n)!}\underbrace{(ik_1)^{2n}}_{=1}
++\sum_{n=0}^\infty \frac{\phi^{2n+1}}{(2n + 1)!}\underbrace{(ik_1^{2n+1})}_{
+=ik_1} \\
+\\
+&=\left( \sum_{n=0}^\infty \frac{\phi^{2n}}{(2n)!}\right)I + i\left(\sum_{n=0}^\infty \frac{\phi^{2n+1}}{(2n + 1)!}\right)k_1 = \cosh(\phi)I + i\sinh(\phi)k_1 \\
+\\
+&=
+\begin{pmatrix}
+\cosh(\phi) & 0 \\
+0 & \cosh(\phi)
+\end{pmatrix}
++
+\begin{pmatrix}
+0 & −\sinh(\phi) \\
+−\sinh(\phi) & 0
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+\cosh(\phi) & −\sinh(\phi) \\
+−\sinh(\phi) & \cosh(\phi)
+\end{pmatrix}
+\tag{3.151}
+\end{align}
+\]
+
+この計算は第3.4.1節の計算と類似していますが、ここでの和には因数(-1)nが含まれないこと、したがってこれらの和は\(\sin(\phi)\)と\(\cos(\phi)\)ではなく、双曲線正弦\(\sinh(\phi)\)と双曲線余弦\(\cosh(\phi)\)と呼ばれる異なる関数であることに注意してください。したがって、x軸に沿ったブーストの完全な4×4変換行列は
+<!--
+This computation is analogous to the computation in Section 3.4.1,
+but observe that the sums here have no factor (−1)n and therefore
+these sums are not \(\sin(\phi)\) and \(\cos(\phi)\), but different functions called
+hyperbolic sine \(\sinh(\phi)\) and hyperbolic cosine \(\cosh(\phi)\). The complete
+4 × 4 transformation matrix for a boost along the x-axis is therefore
+-->
+\[
+Λ_1 =
+\begin{pmatrix}
+\cosh(\phi) & −\sinh(\phi) & 0 & 0 \\
+−\sinh(\phi) & \cosh(\phi) & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 1
+\end{pmatrix}
+\tag{3.152}
+\]
+同様に、他の軸に沿ったブーストの変換行列を導出することができます。
+<!--
+Analogously, we can derive the transformation matrices for boosts
+along the other axes:
+-->
+\[
+\begin{align}
+Λ_2 &=
+\begin{pmatrix}
+\cosh(\phi) & 0 & −\sinh(\phi) & 0 \\
+0 & 1 & 0 & 0 \\
+−\sinh(\phi) & 0 & \cosh(\phi) & 0 \\
+0 & 0 & 0 & 1 
+\end{pmatrix} \tag{3.153} \\
+\\
+Λ_3 &=
+\begin{pmatrix}
+\cosh(\phi) & 0 & 0 & −\sinh(\phi) \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+−\sinh(\phi) & 0 & 0 & \cosh(\phi)
+\end{pmatrix} \tag{3.154}
+\end{align}
+\]
+
+これら3つの変換行列を乗算することで、任意のブーストを構成できます。
+<!--
+An arbitrary boost can be composed by multiplication of these 3
+transformation matrices.
+-->
+</p>
+<h3>3.7.2 ローレンツ群の他の成分の生成元</h3>
+<!--
+<h3>3.7.2 Generators of the Other Components of the Lorentz Group </h3>
+-->
+<p>
+ローレンツ群の他の成分<sup>132</sup>の変換の生成元がどのようになっているかを理解するには、先ほど導出した行列\(J_i, K_i\)にパリティ演算\(Λ_P\)と時間反転演算\(Λ_T\)を作用させればよい。指数表記では<sup>133</sup>
+<!--
+To understand how the generators for the transformations of the
+other components<sup>132</sup> of the Lorentz Group look like, we simply have 
+to act with the parity operation \(Λ_P\) and the time reversal operator \(Λ_T\)
+on the matrices \(J_i, K_i\) we just derived. In index notation we have<sup>133</sup>
+-->
+</p><p class="margin-large">
+<sup>132</sup>
+ローレンツ群は実際には
+\(\mathcal{O}(1, 3) = \{L_+^↑,Λ_PL_+^↑,Λ_TL_+^↑,Λ_PΛ_TL_+^↑\}\)
+であり、前のセクションで\(L_+^↑\)の生成元を導出したことを思い出してください。
+<!--
+Recall that the
+Lorentz group is in fact
+\(\mathcal{O}(1, 3) = \{L_+^↑,Λ_PL_+^↑,Λ_TL_+^↑,Λ_PΛ_TL_+^↑\}\)
+and we derived in the last section the
+generators of \(L_+^↑\).
+-->
+<br><br>
+<sup>133</sup>
+各インデックスごとに1つずつ、計2つの行列 \(Λ_P\) が必要です。これは、座標系の変化に伴う演算子の通常の変換挙動です。
+<!--
+We need two matrices \(Λ_P\), one for
+each index. This is just the ordinary
+transformation behavior of operators
+under changes of the coordinate
+system.
+-->
+</p><p>
+
+\[
+\begin{align}
+(Λ_P)_{α^\prime}^α(Λ_P)_{β^\prime}^β(J_i)^{α^\prime β^\prime}
+&\underbrace{\hat{=}}_{\text{行列表記への切り替え}}Λ_P J_i(Λ_P)^T= J_i\hat{=}
+ (J_i)^{αβ} \tag{3.155} \\
+\\
+(Λ_P)_{α^\prime}^α(Λ_P)_{β^\prime}^β(K_i)^{α^\prime β^\prime} &\underbrace{\hat{=}}_{\text{行列表記への切り替え}}
+Λ_P K_i(Λ_P)^T = −K_i\hat{=} − (K_i)^{αβ} \tag{3.156}
+\end{align}
+\]
+
+これは、前節で導出した明示的な行列を用いた総当たり計算によって確認できる。例えば、
+<!--
+as we can check by a brute force computation, using the explicit
+matrices derived in the last section. For example,
+-->
+\[
+J_1 =
+\begin{pmatrix}
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & −i \\
+0 & 0 & i & 0
+\end{pmatrix}
+→ J_1^\prime = Λ_P J_1(Λ_P)^T = J_1 \tag{3.157}
+\]
+なぜなら
+<!--
+because
+-->
+\[
+\begin{align}
+Λ_P J_1(Λ_P)^T &=
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}
+\begin{pmatrix}
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & −i \\
+0 & 0 & i & 0
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}^T \\
+\\
+&=
+\begin{pmatrix}
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & −i \\
+0 & 0 & i & 0
+\end{pmatrix}
+\tag{3.158}
+\end{align}
+\]
+
+対照的に、
+<!--
+In contrast,
+-->
+\[
+K_1 =
+\begin{pmatrix}
+0 & i & 0 & 0 \\
+i & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}
+→ K_1^\prime = Λ_PK_1(Λ_P)^T = −K_1 \tag{3.159}
+\]
+
+なぜなら
+<!--
+because
+-->
+\[
+\begin{align}
+Λ_PK_1(Λ_P)^T &=
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}
+\begin{pmatrix}
+0 & i & 0 & 0 \\
+i & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}^T \\
+\\
+&= −
+\begin{pmatrix}
+0 & i & 0 & 0 \\
+i & 0 & 0 & 0 \\
+0 & 0 & 0 & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}
+\tag{3.160}
+\end{align}
+\]
+
+結論として、パリティ変換の下では
+<!--
+In conclusion, we have under parity transformations
+-->
+\[
+J_i \underbrace{→}_{P}J_i　K_i\underbrace{→}_{P}−K_i  \tag{3.161}
+\]
+
+これは後で役に立ちます。なぜなら、異なる表現では、パリティ変換はベクトル表現ほど明白ではないからです。
+同様に、時間反転生成器を調べることもできます。
+結果は同じです。時間反転は最初の要素のみに関係し、ブースト生成器 \(K_i\) にのみ影響を与えるからです。
+<!--
+This will become useful later, because for different representations
+the parity transformations will not be as obvious as in the vector representation.
+Equally we can investigate the time-reversed generators
+and the result will be the same, because time-reversal involves only
+the first component, which only changes something for the boost
+generators \(K_i\)
+-->
+
+\[
+\begin{align}
+(Λ_T)_{α^\prime}^α(Λ_T)_{β^\prime}^β(J_i)^{α^\prime β^\prime}
+&\underbrace{\hat{=}}_{\text{行列表記への切り替え}}
+Λ_T J_i(Λ_T)^T = J_i\hat{=}(J_i)^{αβ} \tag{3.162} \\
+\\
+(Λ_T)_{α^\prime}^α(Λ_T)_{β^\prime}^β(K_i)^{α^\prime β^\prime} &\underbrace{\hat{=}}_{\text{行列表記への切り替え}}
+Λ_TK_i(Λ_T)^T = −(K_i)^{αβ} \tag{3.163}
+\end{align}
+\]
+
+または短く:
+<!--
+Or shorter:
+-->
+\[
+Ji \underbrace{→}_{T}J_i　K_i\underbrace{→}_{T}−K_i  \tag{3.164}
+\]
+
+</p>
+<h3>3.7.3 固有直順ローレンツ群のリー代数</h3>
+<!--
+<h3>3.7.3 The Lie Algebra of the Proper Orthochronous Lorentz
+Group</h3>
+-->
+<p>
+ここで、\(L_+^↑\) の生成元<sup>134</sup> の明示的な行列形式を用いて、対応するリー代数を力ずくの計算によって導くことができる<sup>135</sup>
+<!--
+Now using the explicit matrix form of the generators<sup>134</sup> for \(L_+^↑\) we can derive the corresponding 
+Lie algebra by brute force computation<sup>135</sup>
+-->
+</p><p class="margin-large">
+<sup>134</sup>
+ブーストジェネレータについては式3.149を参照
+回転ジェネレータについては式3.61を参照
+<!--
+See Eq. 3.149 for the boost generators 
+and Eq. 3.61 for the rotation generators 
+-->
+<br><br>
+
+<sup>135</sup>
+レヴィ・チヴィタ記号 \(\epsilon_{ijk}\) は付録B.5.5で定義されています。
+<!--
+The Levi-Civita symbol \(\epsilon_{ijk}\), is
+defined in Appendix B.5.5.
+-->
+</p><p>
+
+\[
+\begin{align}
+[J_i, J_j] &= i\epsilon_{ijk} J_k \tag{3.165} \\
+\\
+[J_i, K_j] &= i\epsilon_{ijk}K_k \tag{3.166} \\
+\\
+[K_i, K_j] &= −i\epsilon_{ijk} J_k  \tag{3.167}
+\end{align}
+\]
+
+ここでも\(J_i\)は回転の生成元、\(K_i\)はブーストの生成元を表す。一般的なローレンツ変換は次の形をとる。
+<!--
+where again \(J_i\) denotes the generators of rotations and \(K_i\) are the generators of boosts. A general Lorentz transformation is of the form
+-->
+
+\[
+Λ = e^{i\vec{J}\cdot\vec{θ}+i\vec{K}\cdot\vec{\Phi}} \tag{3.168}
+\]
+
+</p><p>
+
+式3.166は、2種類の生成子(\(J_i\)と\(K_i\))が互いに可換ではないことを示しています。回転生成子は交換閉路<sup>136</sup>ですが、ブースト生成子はそうではありません<sup>137</sup>。これで、交換閉路で互いに可換な、従来のものから2つの新しい演算子型を定義できます<sup>138</sup>。
+<!--
+Equation 3.166 tells us that the two types of generator (\(J_i\) and \(K_i\))
+do not commute with each other. While the rotation generators are
+closed under commutation<sup>136</sup>, the boost generators are not<sup>137</sup>. We can now define two new operator types from the old ones that are
+closed under commutation and commute with each other<sup>138</sup>
+-->
+</p><p class="margin-large">
+<sup>136</sup>
+交換閉路とは、交換子 \([J_i, J_j] = J_i J_j − J_j J_i\) が
+回転生成子であることを意味します。式 3.165 から、これが成り立つことがわかります。
+<!--
+Closed under commutation means
+that the commutator \([J_i, J_j] = J_i J_j − J_j J_i\),
+is again a rotation generator. From
+Eq. 3.165 we can see that this is the
+case.
+-->
+<br><br>
+<sup>137</sup>
+式3.167は、2つのブースト生成器 \(K_i\) と \(K_j\) の交換子が、別のブースト生成器ではなく、回転の生成器であることを示しています。
+<!--
+Eq. 3.167 tells us that the commutator
+of two boost generators \(K_i\) and \(K_j\) isn’t
+another boost generator, but a generator
+of rotations.
+-->
+<br><br>
+
+<sup>138</sup> 
+ここでも、複素線形結合を用いていることに留意してください。また、元の生成元の代わりに複素線形結合を考慮するこのプロセスは複素化と呼ばれることを思い出してください。通常、生成元には実線形結合のみを許容します。そこで、ここからはローレンツ群のリー代数の複素化について考えます。
+<!--
+Again, take note that we use a
+complex linear combination here and
+recall that this process of considering
+a complex linear combination, instead
+of the original generators is called a
+complexification. Usually we only
+allow real linear combinations of
+the generators. So from here on, we
+consider the complexification of the Lie
+algebra of the Lorentz group.
+-->
+</p><p>
+
+\[
+N_i^{±} = \frac{1}{2}(J_i ± iK_i)  \tag{3.169}
+\]
+
+交換関係を解くと、
+<!--
+Working out the commutation relations yields
+-->
+\[
+\begin{align}
+[N_i^+, N_j^+] &= i\epsilon_{ijk}N_k^+ \tag{3.170} \\
+\\
+[N_i^−, N_j^−] &= i\epsilon_{ijk}N_k^− \tag{3.171} \\
+\\
+[N_i^+, N_j^−] &= 0 \tag{3.172}
+\end{align}
+\]
+
+これらはまさにリー代数\(\mathcal{SU}(2)\)の交換関係であり、したがって\(L_+^↑\)の複素化リー代数はリー代数\(\mathcal{su}(2)\)<sup>139</sup>の2つのコピーから構成されることが発見されました。
+<!--
+These are precisely the commutation relations for the Lie algebra of
+\(\mathcal{SU}(2)\) and we have therefore discovered that the complexified Lie algebra of \(L_+^↑\) consists of two copies of the Lie algebra \(\mathcal{su}(2)\)<sup>139</sup>. 
+-->
+</p><p class="margin-large">
+<sup>139</sup>
+リー代数の表現について議論した際に、対応する複素化も用いたことを思い出してください。\(\mathcal{su}(2)\) の複素化は \(\mathcal{sl}(2,\mathbb C)\) であり、したがって技術的には、\(\mathcal{so}(1, 3)\mathbb C \simeq \mathcal{sl}(2,\mathbb C) ⊕ \mathcal{sl}(2,\mathbb C)\) となります。ここで、\(\mathcal{so}(1, 3)\mathbb C\) はローレンツ群リー代数の複素化を表します。
+<!--
+Recall that when we discussed
+the representations of the Lie algebra
+\(\mathcal{su}(2)\), we also used the corresponding
+complexification. The
+complexification of \(\mathcal{su}(2)\) is \(\mathcal{sl}(2,\mathbb C)\)
+and therefore technically we have
+\(\mathcal{so}(1, 3)\mathbb C \simeq \mathcal{sl}(2,\mathbb C) ⊕ \mathcal{sl}(2,\mathbb C)\), where
+\(\mathcal{so}(1, 3)\mathbb C\) denotes the complexification
+of the Lorentz group Lie algebra.
+-->
+</p><p>
+
+これは素晴らしいニュースです。なぜなら、\(\mathcal{su}(2)\) のリー代数のすべての既約表現の構築方法は既にわかっているからです。しかし、注意が必要です。ローレンツ群は、\(\mathcal{SO}(3)\) と同様に単連結ではありません<sup>140</sup>。リー理論によれば、単連結でない群の場合、リー代数の既約表現と対応する群の表現の間には一対一対応はありません<sup>141</sup>。その代わりに、<strong>ローレンツ群の複素化リー代数の既約表現を導出することで、対応する生成元を指数関数に代入すれば、ローレンツ群の被覆群の既約表現が見つかります</strong>。これらの表現の中にはローレンツ群の表現もありますが、それだけではありません。これは良いことです。なぜなら、特定の素粒子を記述するために、これらの追加の表現が必要だからです。
+<!--
+This is great news, because we already know how to construct
+all irreducible representations of the Lie algebra of \(\mathcal{su}(2)\). However we must be careful. The Lorentz group is, like \(\mathcal{SO}(3)\), not simplyconnected<sup>140</sup> and Lie theory tells us that, for groups that aren’t simply connected, there is no one-to-one correspondence between the irreducible representations of the Lie algebra and representations of the corresponding group<sup>141</sup>. Instead,<strong>by deriving the irreducible representations of the complexified Lie algebra of the Lorentz group, we find the irreducible representations of the covering group of the Lorentz group</strong>, if we put the corresponding generators
+into the exponential function. Some of these representations will
+be representations of the Lorentz group, but we will find more than
+that. This is good, because we need these additional representations
+to describe certain elementary particles.
+-->
+</p><p class="margin-large">
+<sup>140</sup>
+ここではこれを単なる事実として用います。
+証明しようとすると、私たちの考えは大きく異なってしまうからです。
+<!--
+We will use this simply as a fact here,
+because a proof would lead us too far
+apart.
+-->
+<br><br>
+
+<sup>141</sup>
+これはかなり混乱を招くかもしれませんが、リー代数に属する区別された群が常に1つあることを覚えておいてください。この群は単連結であるため区別されます。リー代数の既約表現を導くと、指数関数にリー代数の元（＝生成元）を置くことで、単連結（＝被覆）群の表現が得られます。単連結群にのみ、1対1の対応があります。
+<!--
+This can be quite confusing, but
+remember that there is always one
+distinguished group that belongs to a
+Lie algebra. This group is distinguished
+because it is simply connected. If we
+derive the irreducible representation
+of a Lie algebra, we get, by putting
+those Lie algebra elements (= the
+generators) in the exponential function,
+representations of the simply connected
+(= covering) group. Only for the simply
+connected group there is a one-to-one
+correspondence.
+-->
+</p><p>
+簡潔にするために、これから導く表現を、ローレンツ群のリー代数の表現やローレンツ群の二重被覆の表現ではなく、ローレンツ群の表現と呼ぶことにする。
+<!--
+For brevity, we will continue to call the representations we will derive,
+representations of the Lorentz group instead of representations of the Lie
+algebra of the Lorentz group or representations of the double cover of the
+Lorentz group.
+-->
+</p><p>
+
+リー代数 \(\mathcal{su}(2)\) の各既約表現は、su(2) カシミール作用素<sup>142</sup> のスカラー値 j でラベル付けできます。したがって、ローレンツ群の被覆群<sup>143</sup> の既約表現を、2つの整数または半整数 \(j_1\) と \(j_2\) でラベル付けできることがわかります。つまり、\((j_1, j_2)\) 表現に注目し、先に導出した 2 つの \(\mathcal{su}(2)\) コピーに対して \(j_1, j_2 = 0, \frac{1}{2},1,...\) 表現を使用します。
+<!--
+Each irreducible representation of the Lie algebra \(\mathcal{su}(2)\) can be labeled by the scalar value j of the su(2) Casimir operator<sup>142</sup>. Therefore, we now know that we can label the irreducible representations
+of the covering group<sup>143</sup> of the Lorentz group by two integer or half integer numbers: \(j_1\) and \(j_2\). This means we will look at the \((j_1, j_2)\) representations and use the \(j_1, j_2 = 0, \frac{1}{2},1,...\) representations for the two \(\mathcal{su}(2)\) copies, which we derived earlier.
+-->
+</p><p class="margin-large">
+<sup>142</sup>
+正確には、二次カシミール演算子から得られるスカラー値は \(j(j + 1)\) です。ただし、簡潔にするために、代わりに \(j\) を使用します。
+<!--
+To be precise: the scalar value that we get from the quadratic Casimir
+operator is \(j(j + 1)\). However, for
+brevity, we simply use \(j\) instead.
+-->
+<br><br>
+
+<sup>143</sup>
+真直交ローレンツ群 \(L_+^↑\) の被覆群は \(\mathcal{SL(2, C)}\) であり、これは単位行列式と複素要素を持つ 2 × 2 行列の集合として定義されます。関係
+\(\mathcal{SL(2, C)} → L_+^↑ ≡ \mathcal{SO}(1, 3)_+^↑\) は、このテキストの前半で発見した関係 \(\mathcal{SU}(2) → \mathcal{SO}(3)\) に似ています。
+<!--
+The covering group of the proper
+orthochronous Lorentz group \(L_+^↑\) is
+\(\mathcal{SL(2, C)}\), which is defined as the set of
+2 × 2 matrices with unit determinant
+and complex entries. The relationship
+\(\mathcal{SL(2, C)} → L_+^↑ ≡ \mathcal{SO}(1, 3)_+^↑\) is similar
+to the relationship \(\mathcal{SU}(2) → \mathcal{SO}(3)\) we
+discovered earlier in this text.
+-->
+</p><p>
+ローレンツ代数は、新しい記号 \(M_{μν}\) を導入することでより簡潔に記述するのが一般的です。この記号は、以下の式で定義されます。
+<!--
+It is conventional to write the Lorentz algebra in a more compact
+way by introducing a new symbol \(M_{μν}\), which is defined through the
+equations
+-->
+\[
+\begin{align}
+J_i &= \frac{1}{2}\epsilon_{ijk}M_{jk}  \tag{3.173}\\
+\\
+K_i &= M_{0i} \tag{3.174}
+\end{align}
+\]
+
+この新しい定義によれば、ローレンツ代数は次のように表される。
+<!--
+With this new definition the Lorentz algebra reads
+-->
+\[
+[M_{μν},M_{ρσ}] = i(η_{μρ}M_{νσ} − η_{μσ}M_{νρ} − η_{νρ}M_{μσ} + η_{νσ}M_{μρ}) \tag{3.175}
+\]
+次に、ローレンツ群の複素化リー代数の異なる表現、ひいてはローレンツ群の二重被覆を詳細に調べる。
+<!--
+Next, we investigate different representations of the complexified Lie
+algebra of the Lorentz group and hence of the double cover of the
+Lorentz group in detail.
+-->
+</p>
+<h3>3.7.4 \((0, 0)\) 表現</h3>
+<!--
+<h3>3.7.4 The \((0, 0)\) Representation</h3>
+-->
+<p>
+最も低次元の表現は、\(\mathcal{SU}(2)\)の場合と同様に自明である。
+\(\mathcal{su}(2)\)の両方のコピーにおいてベクトル空間は1次元だからである。
+したがって、生成元は1×1行列でなければならず、交換関係を満たす唯一の1×1「行列」は数0である。
+<!--
+The lowest dimensional representation is, as it is for \(\mathcal{SU}(2)\), trivial,
+because the vector space is one-dimensional for both copies of \(\mathcal{su}(2)\).
+Our generators must therefore be 1 × 1 matrices and the only 1 × 1
+"matrix" that fulfills the commutation relations is the number 0:
+-->
+\[
+N_i^+ = N_i^− = 0 → e^{iN_i^+} = e^{iN_i^−} = e^0 =1 \tag{3.176}
+\]
+したがって、ローレンツ群の \((0, 0)\) 表現は、ローレンツ変換によって<strong>変化しない</strong>オブジェクトに作用すると結論付けられます。この表現は<strong>スカラー表現</strong>と呼ばれます。
+<!--
+Therefore we conclude that the \((0, 0)\) representation of the Lorentz
+group acts on objects that do <strong>not</strong> change under Lorentz transformations.
+This representation is called the <strong>scalar representation</strong>.
+-->
+</p>
+<h3>3.7.5 \((\frac{1}{2}, 0)\) 表現</h3>
+<!--
+<h3>3.7.5 The \((\frac{1}{2}, 0)\) Representation</h3>
+-->
+<p>
+この表現では、\(\mathcal{SU}(2)\)リー代数\(N_i^+\)の一方のコピーに対して<sup>144</sup> 2次元表現、すなわち\(N_i^+i = \frac{σ_i}{2}\)を使用し、もう一方のコピー\(N_i^−\)に対して1次元表現、すなわち\(N_i^−= 0\)を使用する。式3.169の\(N^−\)の定義から、次のように結論づけられる。
+<!--
+In this representation we use the<sup>144</sup> 2 dimensional representation for one copy of the \(\mathcal{SU}(2)\) Lie algebra \(N_i^+\),i.e. \(N_i^+i = \frac{σ_i}{2}\) and the 1 dimensional representation for the other \(N_i^−\), i.e.\(N_i^−= 0\). From the definition of \(N^−\) in Eq. 3.169 we conclude
+-->
+</p><p class="margin-large">
+<sup>144</sup>
+ベクトル空間の次元は \(2j + 1\) で与えられることを思い出してください。したがって、ここでは \(2\frac{1}{2}+ 1 = 2\) 次元となります。
+<!--
+Recall that the dimension of our vector space is given by \(2j + 1\). Therefore we have here \(2\frac{1}{2}+ 1 = 2\) dimensions.
+-->
+</p><p>
+
+\[
+\begin{align}
+& N_i^- =  \frac{1}{2}(J_i − iK_i) =0 \tag{3.177} \\
+\\
+&→ J_i = iK_i  \tag{3.178}
+\end{align}
+\]
+
+さらに、3.6.3節で既に導出した\(\mathcal{SU}(2)\)の2次元表現を使うこともできる。
+<!--
+Furthermore, we can use that we already derived in Section 3.6.3 the
+two dimensional representation of \(\mathcal{SU}(2)\):
+-->
+\[
+N_i^+ = \frac{σ_i}{2} \tag{3.179}
+\]
+
+ここで\(σ_i\)は再びパウリ行列を表し、式3.80で定義されています。一方、
+<!--
+where \(σ_i\) denotes once more the Pauli matrices, which were defined
+in Eq. 3.80. On the other hand, we have
+-->
+\[
+N_i^+ \underbrace{=}_{Eq. 3.169}\frac{1}{2}(J_i + iK_i)\underbrace{=}_{Eq. 3.178} \frac{1}{2}(iK_i + iK_i) = iK_i \tag{3.180}
+\]
+
+式3.179と式3.180を比較すると、
+<!--
+Comparing Eq. 3.179 with Eq. 3.180 tells us that
+-->
+\[
+\begin{align}
+iK_i = \frac{σ_i}{2}&→ K_i =\frac{σ_i}{2i}=\frac{iσ_i}{2i^2} =\frac{−i}{2}σ_i \tag{3.181} \\
+\\
+\text{Eq. 3.178} &→ J_i = iK_i = \frac{−i^2}{2}σ_i =\frac{1}{2}σ_i \tag{3.182}
+\end{align}
+\]
+
+この表現におけるローレンツ回転は次のように与えられると結論づけられる。
+<!--
+We conclude that a Lorentz rotation in this representation is given by
+-->
+\[
+R_θ = e^{i\vec{θ}\cdot\vec{J}}= e^{i\vec{θ}\cdot\frac{\vec{σ}}{2}} \tag{3.183}
+\]
+
+そしてローレンツブースト
+<!--
+and a Lorentz boost by
+-->
+\[
+B_\phi = e^{i\vec{\phi}\cdot\vec{K}} = e^{\vec{\phi}\cdot\frac{\vec{σ}}{2}} \tag{3.184}
+\]
+
+指数関数を級数展開として書き出すことで、生成元の表現からローレンツ群の二重被覆の表現を簡単に得ることができます。例えば、x軸を中心とした回転は次のように与えられます。
+<!--
+By writing out the exponential function as series expansion we can
+easily get the representation of the double cover of the Lorentz group
+from the representation of the generators. For example, rotations
+about the x-axis e.g. are given by
+-->
+\[
+R_x(θ) = e^{iθJ_1} = e^{iθ\frac{1}{2}σ_1} = 1 +\frac{i}{2}θσ_1 +\frac{1}{2}\left(\frac{i}{2}θσ_1\right)^2+... \tag{3.185}
+\]
+
+そして、\(σ_1\)の明示的な行列形式（式3.80）と\(σ_1^2 = 1\)という事実を組み合わせると、<sup>145</sup>が得られます。
+<!--
+And if we use the explicit matrix form of \(σ_1\) (Eq. 3.80), together with the fact that \(σ_1^2 = 1\), we get<sup>145</sup>
+-->
+</p><p class="margin-large">
+<sup>145</sup>
+手順はセクション3.4.1で行ったものと完全に同様です
+<!--
+The steps are completely analogous
+to what we did in Section 3.4.1
+-->
+</p><p>
+
+\[
+\begin{align}
+R_x(θ) &=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
++
+\frac{i}{2}θ
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+− \frac{1}{2}
+\left(\frac{θ}{2}\right)^2
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
++ ... \\
+\\
+&=
+\begin{pmatrix}
+\cos(\frac{θ}{2}) & i\sin(\frac{θ}{2}) \\
+i\sin(\frac{θ}{2}) &  \cos(\frac{θ}{2})
+\end{pmatrix}
+\tag{3.186}
+\end{align}
+\]
+
+同様に、他の軸やブースト周りの回転に対する変換行列を計算することもできます。ここで注目すべき重要な点は、ここではローレンツ変換を表す複素2×2行列を用いていることです。これらの変換は、ミンコフスキー空間の4元ベクトルには作用しません。なぜなら、これらのベクトルは4つの成分を持つからです。この表現が作用する<strong>2成分</strong><sup>146</sup>のオブジェクトは、<strong>左カイラルスピノル</strong><sup>147</sup>と呼ばれます。
+<!--
+Analogously, we can compute the transformation matrix for rotations around other axes or boosts. One important thing to notice is that we have here complex 2 × 2 matrices, representing the Lorentz transformations. These transformations certainly do not act on the four-vectors of Minkowski space, because these have 4 components. The <strong>two-component</strong><sup>146</sup> objects this representation acts on are called <strong>left-chiral spinors</strong><sup>147</sup>:
+-->
+</p><p class="margin-large">
+<sup>146</sup>
+これら2つの成分が<strong>スピンアップ状態</strong>と<strong>スピンダウン状態</strong>に対応していることは後ほど説明します。
+<!--
+We will learn later that these two 
+components correspond to spin-up and spin-down states.
+-->
+<br><br>
+
+<sup>147</sup>
+この名前は、右カイラルスピノルの定義を理解すれば、より意味が理解できるでしょう。パリティ変換は、左カイラルスピノル変換を右カイラルスピノル変換に変換し、その逆も行うことがわかります。これらのスピノルはしばしば左手系、右手系と呼ばれますが、これらの用語はもともとヘリシティと呼ばれる概念に対応しており、カイラリティとは異なるため、混乱を招く可能性があります。パリティ演算子が何をするかを思い出してください。左手座標系を右手座標系に変換し、その逆も行います。これが名前の由来です。
+<!--
+This name will make more sense
+after the definition of right-chiral
+spinors. Then we can see that parity
+transformations transform a left-chiral
+spinor transformation into a rightchiral
+spinor transformation and vice
+versa. These spinors are often called
+left-handed and right-handed, but this
+can be confusing, because these terms
+correspond originally to a concept
+called helicity, which is not the same
+as chirality. Recall what the parity
+operator does: changing a left-handed
+coordinate system into a right-handed
+coordinate system and vice versa.
+Hence the name.
+-->
+</p><p>
+
+\[
+χ_L =
+\begin{pmatrix}
+(χ_L)_1 \\
+(χ_L)_2
+\end{pmatrix}
+\tag{3.187}
+\]
+
+</p><p>
+この文脈におけるスピノルは、2つの構成要素です。左カイラルスピノルの定義としては、ローレンツ群の \((\frac{1}{2}, 0)\) 表現に従ってローレンツ変換によって変換されるオブジェクト、というものがあります。ただし、スピノルは通常のベクトルにはない特性を持つため、これは単に同じことを別の言い方で表現したものではないことに注意してください。例えば、指数の係数 \(\frac{1}{2}\) です。この係数は、スピノルを \(2π\) 回転するとスピノルは同じではなく、マイナス符号 <sup>148</sup> が付くことを示しています。これはかなり奇妙な特性です。なぜなら、通常、オブジェクトは \(360^{\circ} = 2π\) 回転すると全く同じになると考えられるからです。
+<!--
+Spinors in this context are two component objects. A possible definition for left-chiral spinors is that they are objects that transform under Lorentz transformations according to the \((\frac{1}{2}, 0)\) representation of the Lorentz group. Take note that this is not just another way to describe the same thing, because spinors have properties that usual vectors do not have. For instance, the factor \(\frac{1}{2}\) in the exponent. This factor shows us that a spinor is after a rotation by \(2π\) not the same, but gets a minus sign<sup>148</sup>. This is a pretty crazy property, because we usually expect that objects are exactly the same after a rotation by \(360^{\circ} = 2π\).
+-->
+</p><p class="margin-large">
+<sup>148</sup>
+スピノルについては、まだまだ多くのことが言えます。例えば、J. J. Sakurai著『Modern Quantum Mechanics』（Addison Wesley、第1版、1993年、ISBN 9780201539295）の第3.2章をご覧ください。
+<!--
+There is much more one can say
+about spinors. See, for example, chapter
+3.2 in J. J. Sakurai. Modern Quantum
+Mechanics. Addison Wesley, 1st edition,
+9 1993. ISBN 9780201539295
+-->
+</p><p>
+
+前のセクションでは、最も低次元の表現は自明であることを確認しました。表現の「階層」における次の表現は、このセクションで発見したスピノル表現です。
+この意味で、次のように言えます。
+<!--
+In the last section, we saw that the lowest-dimensional representation
+is trivial. The next representation in the "hierarchy" of representations
+is the spinor representation that we discovered in this section.
+In this sense, we can say that
+-->
+</p><p>
+
+「…スピノルは、ローレンツ変換可能な最も基本的な数学的対象である。」<br>
+- A. M. Steane<sup>149</sup>
+<!--
+". . . a spinor is the most basic sort of mathematical object that can be
+Lorentz-transformed."<br>
+ - A. M. Steane<sup>149</sup>
+-->
+</p><p class="margin-large">
+<sup>149</sup>
+アンドリュー・M・スティーン. スピノール入門. ArXiv e-prints, 2013年12月
+<!--
+Andrew M. Steane. An introduction
+to spinors. ArXiv e-prints, December
+2013
+-->
+</p>
+<h3>3.7.6 \((0,\frac{1}{2})\) 表現</h2>
+<!--
+<h3>3.7.6 The \((0,\frac{1}{2})\) Representation</h2>
+-->
+<p>
+この表現は、\((\frac{1}{2}, 0)\)表現と同様に構築できますが、今回は\(N_i^+\)の1次元表現、つまり\(N_i^+ = 0\)を使用し、\(N_i^−\)の2次元表現、つまり\(N_i^− = \frac{1}{2}σ_i\)を使用します。この表現は\((\frac{1}{2}, 0)\)表現と全く同じように見えると最初は思われますが、そうではありません！今回は、式3.169のN+の定義から、
+<!--
+This representation can be constructed analogous to the \((\frac{1}{2}, 0)\) representation 
+but this time we use the 1 dimensional representation for
+\(N_i^+\), i.e. \(N_i^+ = 0\) and the two dimensional representation for \(N_i^−\), i.e.\(N_i^− = \frac{1}{2}σ_i\) . A first guess could be that this representation looks exactly like the \((\frac{1}{2}, 0)\) representation, but this is not the case! This time we get from the definition of N+ in Eq. 3.169
+-->
+\[
+\begin{align}
+&N_i^+ = \frac{1}{2}(J_i + iK_i) =0 \tag{3.188} \\
+\\
+&→ J_i = −iK_i  \tag{3.189}
+\end{align}
+\]
+
+マイナス記号に注意してください。3.6.3節で導出した\(N^+\)の\(\mathcal{su}(2)\)の2次元表現を用いると、次のようになります。
+<!--
+Take notice of the minus sign. Using the two-dimensional representation of \(\mathcal{su}(2)\) for \(N^+\), which was derived in Section 3.6.3, yields
+-->
+
+\[
+N_i^− =\frac{1}{2}σ_i =\frac{1}{2}(J_i − iK_i)\underbrace{=}_{Eq. 3.189}\frac{1}{2}(−iK_i − iK_i) = −iK_i  \tag{3.190}
+\]
+
+これを用いてブーストジェネレータの\((0,\frac{1}{2})\)表現を推定することができる。
+<!--
+Using this we can deduce the \((0,\frac{1}{2})\) representation of the boost generators
+-->
+\[
+−iK_i = \frac{1}{2}σ_i → Ki = \frac{−1}{2i}σ_i =\frac{−i}{2i^2}σ_i = \frac{i}{2}σ_i  \tag{3.191}
+\]
+
+さらに、式3.189から次の式が得られる。
+<!--
+In addition, from Eq. 3.189 we get
+-->
+\[
+J_i = −iK_i = \frac{1}{2}σ_i  \tag{3.192}
+\]
+この表現ではローレンツ回転は次のように表される。
+<!--
+We conclude that in this representation a Lorentz rotation is given by
+-->
+\[
+R_θ = e^{i\vec{θ}\cdot\vec{J}} = e^{i\vec{θ}\cdot\frac{\vec{σ}}{2}} \tag{3.193}
+\]
+
+そしてローレンツブースト
+<!--
+and a Lorentz boost by
+-->
+\[
+B_\phi = e^{i\vec{\phi}\cdot\vec{K}} = e^{−\vec{\phi}\cdot\frac{\vec{σ}}{2}} \tag{3.194}
+\]
+
+したがって、回転は \((\frac{1}{2}
+, 0)\) 表現と同じですが、ブーストは指数のマイナス符号が異なります。両方の表現は、<strong>類似しているが同じではない</strong>オブジェクトに作用すると結論付けられます。これらのオブジェクトを、<strong>右カイラルスピノル</strong>に対するローレンツ群作用の \((0, \frac{1}{2})\) 表現と呼びます。
+<!--
+Therefore, rotations are the same as in the \((\frac{1}{2}
+, 0)\) representation, but
+boosts differ by a minus sign in the exponent. We conclude both
+representations act on objects that are <strong>similar but not the same</strong>. We
+call the objects the \((0, \frac{1}{2})\) representation of the Lorentz group acts on <strong>right-chiral spinors</strong>:
+-->
+
+\[
+χ_R =
+\begin{pmatrix}
+(χ_R)^1 \\
+(χ_R)^2
+\end{pmatrix}
+\tag{3.195}
+\]
+
+左カイラル スピノルと右カイラル スピノルの総称は <strong>ワイル スピノル</strong> です。
+<!--
+The generic name for left- and right-chiral spinors is <strong>Weyl spinors</strong>.
+-->
+</p>
+<h3>3.7.7 ファン・デル・ヴェルデン記法</h3>
+<!--
+<h3>3.7.7 Van der Waerden Notation</h3>
+-->
+<p>
+
+ここで、スピノルを扱うのに非常に便利な表記法を導入します。2種類のオブジェクトは変換の仕方が異なるため、区別する必要があることが分かっています。前のセクションでは、それらは異なるものの、それほど大きくは変わらないことを学びました。すぐに、\((\frac{1}{2}, 0)\) 表現に従って変換するオブジェクト (左カイラルスピノル) と、\((0, \frac{1}{2})\) 表現に従って変換するオブジェクト (右カイラルスピノル) の間に関連があることを学びます。これらの異なるオブジェクトを1つの表記法で記述できるように、ドット付きインデックスとドットなしインデックスの概念を導入します。これは、発明者にちなんで、ファン・デル・ヴェルデン表記法と呼ばれることもあります。これにより、どのオブジェクトがどのように変換されるかを追跡できるようになります。これは、完全な形式論を構築すれば、すぐにはるかに明確になります。
+<!--
+Now we introduce a notation that makes working with spinors very convenient. We know that we have two kinds of objects that transform differently and therefore must be distinguished.In the last section we learned that they are different, but not too different. In a moment we will learn that there is a connection between the objects transforming according to the \((\frac{1}{2} , 0)\) representation (left-chiral spinors) and the objects transforming according to the \((0, \frac{1}{2} )\) representation (right-chiral spinors). To be able to describe these different
+objects using one notation we introduce the notions of dotted and
+undotted indices, sometimes called Van der Waerden notation, after
+their inventor. This will help us to keep track of which object transforms
+in what way. This will become much clearer in a minute, as
+soon as we have set up the full formalism.
+-->
+</p><p>
+左カイラルスピノル\(χ_L\)は下側の点なしの指数を持つと定義しよう。
+<!--
+Let’s define that a left-chiral spinor \(χ_L\) has a lower, undotted index
+-->
+\[
+χ_L = χ_a  \tag{3.196}
+\]
+
+右カイラルスピノル\(χ_R\)は上付き点線インデックスを持つ。
+<!--
+and a right-chiral spinor \(χ_R\) has an upper, dotted index
+-->
+\[
+χ_R = χ^{\dot{a}}  \tag{3.197}
+\]
+
+次に、「スピノル計​​量」を導入します。スピノル計​​量により、右カイラルスピノルを左カイラルスピノルに変換したり、その逆を行ったりすることが可能になりますが、後ほど説明するように、それだけでは十分ではありません。スピノル計​​量<sup>150</sup>を以下のように定義します。
+<!--
+Next, we introduce the "spinor metric". The spinor metric enables
+us to transform a right-chiral spinor into a left-chiral and vice versa,
+but not alone as we will see. We define the spinor metric<sup>150</sup> as
+-->
+
+</p><p class="margin-large">
+<sup>150</sup>
+これは付録B.5.5で定義されている2次元のレヴィ・チヴィタ記号であることに注意してください。
+<!--
+Take note that this is the Levi-Civita
+symbol in two dimensions as defined in
+Appendix B.5.5.
+-->
+</p><p>
+
+\[
+\epsilon^{ab} =
+\begin{pmatrix}
+0 & 1 \\
+−1 & 0
+\end{pmatrix}
+\tag{3.198}
+\]
+
+そして、それが望ましい特性を有することを示す。さらに、<sup>151</sup>を定義する。
+<!--
+and show that it has the desired properties. Furthermore, we define<sup>151</sup>
+-->
+</p><p class="margin-large">
+<sup>151</sup>
+奇妙な表記法 \(χ_L^{\mathcal{C}}\) について少しコメントしておくべきかもしれません。上付き文字の C は電荷共役を表します。これについては 3.7.10 節で詳しく説明します。ここで、この操作が 1 つのラベルを反転する、つまり左カイラルなスピノルが右カイラルになることがわかります。後ほど、この操作によって、例えば電荷を含むすべてのラベルが反転することがわかります。
+<!--
+Maybe a short comment on the 
+strange notation \(χ_L^{\mathcal{C}}\)
+is in order. The superscript
+C denotes charge conjugation,
+as will be explained in Section 3.7.10 in
+more detail. Here we see that this operation
+flips one label, i.e. a left-chiral
+spinor becomes right-chiral. Later we
+will see this operation flips all labels,
+including, for example, the electric
+charge.
+-->
+</p><p>
+
+\[
+χ_L^{\mathcal{C}}≡\epsilonχ_L^* \tag{3.199}
+\]
+
+ここで、*は複素共役を表します。ここで、\(χ_L^{\mathcal{C}}\) がローレンツ変換によってどのように変換されるかを調べ、それが右カイラルスピノルとして正確に変換されることを確認します。右カイラルスピノルの定義的特徴はその変換挙動であるため、\(χ_L^{\mathcal{C}}\) は右カイラルスピノルであると結論付けます。\(χ_L^{\mathcal{C}}\) がブーストによってどのように変換されるかを見てみましょう。ここでは、
+<!--
+where the * denotes complex conjugation. We will now inspect how
+\(χ_L^{\mathcal{C}}\) transforms under Lorentz transformations and see that it transforms
+precisely as a right-chiral spinor. The defining feature of a
+right-chiral spinor is its transformation behavior and therefore we
+will conclude that \(χ_L^{\mathcal{C}}\) is a right-chiral spinor. Let us have a look at how \(χ_L^{\mathcal{C}}\) transforms under boosts, where we use
+-->
+\[
+(−\epsilon)(\epsilon) =1 \tag{3.200}
+\]
+
+および
+<!--
+and
+-->
+\[
+(\epsilon)σ_i^*(−\epsilon) = −σ_i \tag{3.201}
+\]
+
+各パウリ行列\(σ_i\)について、式3.198を用いて確認できる。\(χ_L^{\mathcal{C}}\)を変換すると<sup>152</sup>となる。
+<!--
+for each Pauli matrix \(σ_i\), as you can check by using Eq. 3.198. Transforming \(χ_L^{\mathcal{C}}\) yields<sup>152</sup>
+-->
+</p><p class="margin-large">
+<sup>152</sup>
+表記法は \(\vec{\phi}\vec{σ}=\sum_i \phi_iσ_i\underbrace{=}_{\text{縮約記法}}\phi_iσ_i\) です。
+「ベクトル」\(\vec{σ}\) は、単に簡略化された慣例的な表記法なので、あまり真剣に考えないでください。
+<!--
+We use the notation \(\vec{\phi}\vec{σ}=\sum_i \phi_iσ_i\underbrace{=}_{\text{summation convention}}\phi_iσ_i\).
+The "vector" \(\vec{σ}\) shouldn’t be taken too seriously, because
+it’s just a shorth and, conventional
+notation.
+-->
+</p><p>
+
+\[
+\begin{align}
+χ_L^{\mathcal{C}}→ χ_L^{\prime \mathcal{C}} &=\epsilon(χ^\prime)_L^* \\
+\\
+&=\epsilon\left(e^{\frac{\vec{\phi}}{2}\vec{σ}}χ_L\right)^* \\
+\\
+&=\epsilon\left(e^{\frac{\vec{\phi}}{2}\vec{σ}}\underbrace{(−\epsilon)(\epsilon)}_{=1(Eq. 3.200)}χ_L\right)^* \\
+\\
+&=\underbrace{\epsilon e^{\frac{\vec{\phi}}{2}\vec{σ}}(−\epsilon)}_{
+=e^{−\frac{\vec{\phi}}{2}\vec{σ}}(Eq. 3.201)}(\epsilon)χ_L^* \\
+\\
+&= e^{-\frac{\vec{\phi}}{2}\vec{σ}}\underbrace{\epsilon χ_L^*}_{=χ_L^{\mathcal{C}}} \\
+\\
+&= e^{-\frac{\vec{\phi}}{2}\vec{σ}}χ_L^{\mathcal C} \tag{3.202}
+\end{align}
+\]
+
+これはまさに右カイラルスピノル<sup>153</sup>の変換挙動である。
+<!--
+which is exactly the transformation behavior of a right-chiral spinor<sup>153</sup>. 
+-->
+</p><p class="margin-large">
+<sup>153</sup>
+ブースト下における右カイラルスピノルの変換挙動は、式 3.194 で導出されました: \(B_θ= e^{i\vec{\phi}\vec{K}}= e^{-\vec{\phi}\frac{\vec{σ}}{2}}\)。
+これを、式 3.184 で導出されたブースト下における左カイラルスピノルの変換挙動と比較してください: \(B_θ = e^{i\vec{\phi}\vec{K}}= e^{\vec{\phi}\frac{\vec{σ}}{2}}\)
+<!--
+The transformation behavior of
+right-chiral spinors under boosts was
+derived in Eq. 3.194: \(B_θ= e^{i\vec{\phi}\vec{K}}= e^{-\vec{\phi}\frac{\vec{σ}}{2}}\).
+Compare this to how left-chiral spinors
+transform under boosts, as derived in
+Eq. 3.184: \(B_θ = e^{i\vec{\phi}\vec{K}}= e^{\vec{\phi}\frac{\vec{σ}}{2}}\)
+-->
+</p><p>
+5行目に到達するには、\(e^{\frac{\vec{\phi}}{2}\vec{σ}}\) の級数展開と式3.201を各項に使用します。同様に、回転に対する挙動が複素共役と\(\epsilon\) との乗算によって変化しないことを確認できます。\(χ_L\) と \(χ_R\) は回転に対して同じように変換されるため、当然のことですが、次のように変化します。
+<!--
+To get to the fifth line, we use the series expansion of \(e^{\frac{\vec{\phi}}{2}\vec{σ}}\) and Eq. 3.201
+on every term. You can check in the same way that the behavior under
+rotations is not changed by complex conjugation and multiplication
+with \(\epsilon\), as it should be, because \(χ_L\) and \(χ_R\) transform in the same way under rotations:
+-->
+\[
+χ_L^{\mathcal{C}}→ χ_L^{\prime \mathcal{C}}
+= \epsilon(χ^\prime)_L^* 
+= \epsilon (e^{\frac{i\vec{θ}}{2}\vec{σ}}χ)_L^* 
+= e^{\frac{i\vec{θ}}{2}\vec{σ}}\epsilon(χ_L)^*
+= e^{\frac{i\vec{θ}}{2}\vec{σ}}χ_L^{\mathcal{C}}
+\tag{3.203}
+\]
+
+さらに、\(\epsilon\) はすべての変換に対して不変であること、そして逆の変換、つまり右カイラルスピノルを左カイラルスピノルに変換する場合は、\((-\epsilon)\) を使用する必要があることを確認できます。
+<!--
+Furthermore, you can check that \(\epsilon\) is invariant under all transformations
+and that if we want to go the other way round, i.e. transform a
+right-chiral spinor into a left-chiral spinor, we have to use \((-\epsilon)\).
+-->
+</p><p>
+
+したがって、特殊相対論のテンソル表記法に倣って、我々の「計量」は指数を増減させると定義する。
+<!--
+Therefore, we define in analogy with the tensor notation of special
+relativity that our "metric" raises and lowers indices
+-->
+\[
+\epsilonχ_L\underbrace{=}_{\text{インデックス記法で書くと}}\epsilon^{ac}χ_c=χ^a  \tag{3.204}
+\]
+
+ここで、同一の添字に対する和は暗黙的に仮定されている（アインシュタインの和の慣例）。さらに、\(χ_L\)から\(χ_R\)を得るには複素共役も用いる必要があることが分かっている。
+<!--
+where summation over identical indices is implicitly assumed (Einstein
+summation convention). Furthermore, we know that if we want
+to get \(χ_R\) from \(χ_L\) we need to use complex conjugation as well
+-->
+\[
+χ_R =\epsilon χ_L^* \tag{3.205}
+\]
+
+これは、複素共役によって点なしの指数が点付き指数に変換されることを意味します。
+<!--
+This means that complex conjugation transforms an undotted index
+into a dotted index:
+-->
+\[
+χ_R =\epsilon χ_L^* = χ^{^dot{a}} \tag{3.206}
+\]
+
+したがって、複素共役によって、より低い点付きのインデックスが得られます
+\(χ_L\):
+<!--
+Therefore, we can get a lower, dotted index by complex conjugating
+\(χ_L\):
+-->
+\[
+χ_L^*= χ_a^* = χ_{\dot{a}} \tag{3.207}
+\]
+
+および、複素共役\(χ_R\)による上側の点なしの添え字
+<!--
+and an upper, undotted index, by complex conjugating \(χ_R\)
+-->
+\[
+χ_R^* = (χ^{\dot{a}})^* = χ^a  \tag{3.208}
+\]
+
+</p><p>
+\(χ_{\dot{a}}\) と \(χ_a\) がどのように変換されるかを調べることは有益です。なぜなら、これらのオブジェクトは、ローレンツ変換で変化しないスピノルから項を構成するために必要だからです。このような項は非常に重要です。なぜなら、あらゆる参照系で同じ物理法則を導くために必要だからです。これはすぐに明らかにされます。左カイラルスピノルの変換挙動から
+<!--
+It is instructive to investigate how \(χ_{\dot{a}}\) and \(χ_a\) transform, because these objects are needed to construct terms from spinors, which do not change under Lorentz transformations. Terms like this are incredibly important, because we need them to derive physical laws that
+are the same in all frames of reference. This will be made explicit in a
+moment. From the transformation behavior of a left-chiral spinor
+-->
+\[
+χ_L = χ_a → χ_a^\prime =\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{\sigma}}{2}}\right)_a^b
+χ_b  \tag{3.209}
+\]
+
+より低い点線の指数を持つスピノルがどのように変換されるかを導くことができる：
+<!--
+we can derive how a spinor with lower, dotted index transforms:
+-->
+\[
+\begin{align}
+χ_L^* = χ_a^* = χ_{\dot{a}} → χ_{\dot{a}}^\prime = (χ_a^\prime)^* &=\left(\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{\sigma}}{2}}\right)_a^b\right)^*χ_b^* \\
+\\
+&=\left(e^{−i\vec{θ}\frac{\vec{σ^*}}{2}+\vec{\phi}\frac{\vec{σ^*}}{2}}\right)_{\dot{a}}^{\dot{b}}χ_{\dot{b}} \tag{3.210}
+\end{align}
+\]
+
+同様に、右カイラルスピノルがどのように変換されるかを知っていることを使います。
+<!--
+Analogously, we use that we know how a right-chiral spinor transforms:
+-->
+\[
+χ_R → χ_R^\prime 
+= χ^{\prime \dot{a}}
+=\left(e^{i\vec{θ}\frac{\vec{σ}}{2}-\vec{\phi}\frac{\vec{σ}}{2}}\right)
+_{\dot{b}}^{\dot{a}}χ^{\dot{b}}  \tag{3.211}
+\]
+
+上側の点なしの指数を持つスピノルがどのように変換されるかを導出する：
+<!--
+to derive how a spinor with upper, undotted index transforms:
+-->
+\[
+\begin{align}
+χ_R^* = (χ^{\dot{a}})^* = χ^a → χ^{\prime a} = (χ^{\prime \dot{a}})^* &=\left(\left(e^{i\vec{θ}\frac{\vec{σ}}{2}−\vec{\phi}\frac{\vec{σ}}{2}}\right)_{\dot{b}}^{\dot{a}}\right)^*(χ^{\dot{b}})^* \\
+\\
+&=\left(e^{-i\vec{θ}\frac{\vec{σ^*}}{2}-\vec{\phi}\frac{\vec{σ^*}}{
+2}}\right)_b^aχ^b  \tag{3.212}
+\end{align}
+\]
+
+ローレンツ変換によって変化しないスピノルの積を書けるようにするには、もう1つの要素が必要です。2つのベクトルのスカラー積の定義を思い出してください：\(\vec{a} ·\vec{b} = {\vec{a}}^T\vec{b}\)。同じ考え方で、スピノル積のスピノルの1つを転置します。
+これは、指数部にパウリ行列の複素共役\(σ_i^*\)、例えば\(e^{-i\vec{θ}\frac{\vec{σ}}{2}}\)があるためにわかります。
+転置と組み合わせると、エルミート共役\(σ_i^† = (σ_i^*)^T\)となり、ここで記号\(†\)は「ダガー」と呼ばれます。あらゆるパウリ行列のエルミート共役は、再び同じパウリ行列となる。
+<!--
+To be able to write products of spinors that do not change under
+Lorentz transformations, we need one more ingredient. Recall how
+the scalar product of two vectors is defined: \(\vec{a} ·\vec{b} = {\vec{a}}^T\vec{b}\). In the same
+spirit we should transpose one of the spinors in a spinor product.
+We can see this, because at the moment we have the complex conjugate
+of the Pauli matrices \(σ_i^*\) in the exponent, for example, \(e^{-i\vec{θ}\frac{\vec{σ}}{2}}\) .
+Together with transposing this becomes the Hermitian conjugate:
+\(σ_i^† = (σ_i^*)^T\), where the symbol \(†\) is called "dagger". The Hermitian
+conjugate of every Pauli matrix, is again the same Pauli matrix
+-->
+
+\[
+σ_i^† = (σ_i^*)^T = σ_i  \tag{3.213}
+\]
+
+パウリ行列の明示的な形(式3.80)を見れば簡単に確認できます。
+<!--
+as you can easily check by looking at the explicit form of the Pauli matrices (Eq. 3.80).
+-->
+
+</p><p>
+
+式3.209と式3.212を比較し、式3.213を用いることで、下側の点なしの指数を持つ転置スピノルの変換挙動は、上側の点なしの指数を持つスピノルの変換挙動と全く逆であることが分かる。これは、\((χ^a)^Tχ_a\)という形式の項がローレンツ変換に対して不変（＝変化しない）であることを意味する。なぜなら<sup>154</sup>
+<!--
+By comparing Eq. 3.209 with Eq. 3.212 and using Eq. 3.213, we
+see that the transformation behavior of a transposed spinor with
+lower, undotted index is exactly the opposite of a spinor with upper,
+undotted index. This means a term of the form \((χ^a)^Tχ_a\) is invariant (=does not change) under Lorentz transformations, because<sup>154</sup> 
+-->
+
+</p><p class="margin-large">
+<sup>154</sup>
+付録B.5.5で説明したように、記号\(δ_b^c\)はクロネッカー記号と呼ばれ、指数表記の単位行列を表します。これは、\(b = c\)の場合には\(δ_b^c= 1\)、\(b \neq c\)の場合には\(δ_b^c= 0\)を意味します。
+<!--
+As explained in Appendix B.5.5, the 
+symbol \(δ_b^c\) is called Kronecker symbol
+and denotes the unit matrix in index
+notation. This means \(δ_b^c= 1\) for \(b = c\)
+and \(δ_b^c= 0\) for \(b \neq c\).
+-->
+
+</p><p>
+
+\[
+\begin{align}
+(χ^a)^Tχ_a → (χ^{\prime a})^Tχ_a^\prime &=\left(\left(e^{-i\vec{θ}\frac{\vec{σ^*}}{2}-\vec{\phi}\frac{\vec{σ^*}}{2}}\right)_b^aχ^b\right)^T\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_a^cχ_c\\
+\\
+&=(χ^b)^T\left(e^{-i\vec{\theta}\frac{{\vec{\sigma}^*}^T}{2}-\vec{\phi}\frac{{\vec{\sigma}^*}^T}{2}}\right)_b^a
+\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_a^cχ_c \\
+\\
+& \underbrace{=}_{Eq.3.213}(χ^b)^T
+\underbrace{\left(e^{-i\vec{\theta}\frac{\vec{\sigma}}{2}-\vec{\phi}\frac{\vec{\sigma}}{2}}\right)_b^a
+\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_a^c}_{~\delta_b^c}χ_c \\
+\\
+&=(χ_c)^Tχ_c  \tag{3.214}
+\end{align}
+\]
+
+</p><p>
+
+同様に、上付き点付き添字と下付き点付き添字を組み合わせることができます。これは、式 3.210 と式 3.211 を比較すれば確認できます。一方、\((χ^{\dot{a}})^Tχ_a\hat{=}χ_R^Tχ_L\) という形式の項は、ローレンツ変換に対して不変ではありません。なぜなら、
+<!--
+In the same way we can combine an upper, dotted index with a
+lower, dotted index as you can verify by comparing Eq. 3.210 with
+Eq. 3.211. In contrast, a term of the form \((χ^{\dot{a}})^Tχ_a\hat{=}χ_R^Tχ_L\)  isn’t invariant
+under Lorentz transformations, because
+-->
+
+\[
+χ_R^Tχ_L = (χ^{\dot{a}})^Tχ_a → (χ^{\prime\dot{a}})^Tχ_a^\prime
+ = χ^{\dot{b}}\underbrace{\left(e^{i\vec{\theta}\frac{\vec{\sigma^T}}{2}-\vec{\phi}\frac{\vec{\sigma^T}}{2}}\right)_{\dot{b}}^{\dot{a}}
+\left(e^{i\vec{\theta}\frac{\vec{\sigma}}{2}-\vec{\phi}\frac{\vec{\sigma}}{2}}\right)_a^c}_{\neq \delta_b^c}χ_c
+\tag{3.215}
+\]
+
+</p><p>
+したがって、左カイラルスピノルと右カイラルスピノルを組み合わせた項は<strong>ローレンツ不変ではない</strong>。結論として、ローレンツ不変項を得るには、常に同じ型の上付き添字と下付き添字を組み合わせる必要がある<sup>155</sup>。あるいは、別の言い方をすれば、右カイラルスピノルのエルミート共役と左カイラルスピノル \(χ_R^†χ_L = (χ_R^*)^Tχ_L \hat{=} (χ^a)^Tχ_a\)、または左カイラルスピノルのエルミート共役と右カイラルスピノル \(χ_L^†χ_R = (χ_L^*)^Tχ_R = (χ_{\dot{a}})^Tχ^{\dot{a}}\) を組み合わせることで、ローレンツ不変項を得ることができる。私たちは、自然法則を定式化するために使用できる不変の用語が必要になったときに、後でこれを使用します。
+<!--
+Therefore a term combining a left-chiral with a right-chiral spinor
+is <strong>not</strong> Lorentz invariant. We conclude, we must always combine an
+upper with a lower index of the same type<sup>155</sup> in order to get Lorentz invariant terms. Or formulated differently, we must combine the Hermitian conjugate of a right-chiral spinor with a left-chiral spinor \(χ_R^†χ_L = (χ_R^*)^Tχ_L \hat{=} (χ^a)^Tχ_a\), or the Hermitian conjugate of a left-chiral spinor with a right-chiral spinor \(χ_L^†χ_R = (χ_L^*)^Tχ_R = (χ_{\dot{a}})^Tχ^{\dot{a}}\)
+to get Lorentz invariant terms. We will use this later, when need invariant terms that we can use to formulate our laws of nature.
+-->
+</p><p class="margin-large">
+<sup>155</sup>
+この文脈では、点付き \({}^{\dot{a}} {}_{\dot{a}}\)
+または点なし \({}^a {}_a\)
+<!--
+In this context dotted \({}^{\dot{a}} {}_{\dot{a}}\)
+or undotted \({}^a {}_a\)
+-->
+</p><p>
+
+さらに、\(\epsilon^{ab}\) をスピノル計​​量と呼ぶもう一つの根拠が得られた。なぜなら、式 3.214 の不変スピノル積は次のように書けるからである。
+<!--
+In addition, we have now another justification for calling \(\epsilon^{ab}\) the
+spinor metric, because the invariant spinor product in Eq. 3.214, can
+be written as
+-->
+\[
+χ_a^Tχ^a \underbrace{=}_{Eq. 3.204}χ_a^T\epsilon^{ab}χ_b \tag{3.216}
+\]
+
+これを、式2.31でミンコフスキー計量\(η^{μν}\)を用いてミンコフスキー空間の不変積を定義した方法と比較してください。
+<!--
+Compare this to how we defined in Eq. 2.31 the invariant product of
+Minkowsi space by using the Minkowski metric \(η^{μν}\):
+-->
+\[
+x_μy^μ = x_μη^{μν}y_ν  \tag{3.217}
+\]
+
+スピノル計​​量はスピノルに対して、まさにミンコフスキー計量が4元ベクトルに対してであるのと同じです<sup>156</sup>。
+<!--
+The spinor metric is for spinors indeed what the Minkowski metric is
+for four-vectors<sup>156</sup>.
+-->
+</p><p class="margin-large">
+<sup>156</sup>
+ここで4元ベクトルに転置がない理由に戸惑わないでください。これらの方程式は2通りの読み方があります。1つはベクトル方程式として、もう1つは成分方程式としてです。4元ベクトルとその成分に同じ記号 \(x_μ\) を使用するのは慣例であり、時には混乱を招くこともあります。方程式を成分方程式として読む場合、転置は不要です。もちろん、スピノル積についても同様です。とはいえ、上で述べたように、転置を忘れてはならないため、誤りを避けるために明示的に上付き文字 \(T\) を含めていますが、ここでのスピノル方程式は、転置を必要としない成分方程式として読むこともできます。対照的に、3元ベクトルの場合は、小さな矢印を使用して明確に区別できます。\(\vec{a}\) には成分 \(a_i\) があります。
+<!--
+Don’t get confused why we have
+no transposition for the four-vectors
+here. These equations can be read in
+two ways. On the one hand as vector
+equations and on the other hand as
+component equations. It’s conventional
+and sometimes confusing to use the
+same symbol \(x_μ\) for a four-vector
+and its components. If we read the
+equation as a component equation we
+need no transposition. The same is of
+course true for our spinor products.
+Nevertheless, we have seen above that
+we mustn’t forget to transpose and in
+order to avoid errors we included the
+explicit superscript \(T\), although the
+spinor equation here can be read as
+component equation that do not need it.
+In contrast, for three component vectors
+there is a clear distinction using the
+little arrow: \(\vec{a}\) has components \(a_i\).
+-->
+</p><p>
+この表記法を設定した後、スピノルの「計量」を下付き添字で書くことができる。
+<!--
+After setting up this notation, we can now write the spinor "metric" with lowered indices
+-->
+\[
+\epsilon_{ab} =
+\begin{pmatrix}
+0 & −1 \\
+1 & 0
+\end{pmatrix}
+\tag{3.218}
+\]
+\(χ_R\) から \(χ_L\) へ変換するには、<sup>157</sup> \((-\epsilon)\) が必要だからです。さらに、2つの変換演算子を1つのオブジェクト \(Λ\) として記述できるようになりました。例えば、点線のインデックスを持つ場合、右カイラルスピノルと乗算されることがわかり、どの変換演算子を選択すべきかがわかります。
+<!--
+because we need<sup>157</sup>  \((-\epsilon)\) to get from \(χ_R\) to \(χ_L\). In addition, we can now write the two transformation operators as one object \(Λ\). For example, when it has dotted indices we know it multiplies with a right-chiral spinor and we know which transformation operator to choose:
+-->
+</p><p class="margin-large">
+<sup>157</sup>
+これは自分で確認することもできますが、以降の内容にはあまり重要ではありません。
+<!--
+You can check this yourself, but it’s
+not very important for what follows. 
+-->
+</p><p>
+
+\[
+χ_R → χ_R^\prime = χ^{\prime \dot{a}} = Λ_{\dot{b}}^{\dot{a}}
+χ^{\dot{b}}=\left(e^{i\vec{θ}\frac{\vec{σ}}{2}−
+\vec{\phi}\frac{\vec{σ}}{2}}\right)_{\dot{b}}^{\dot{a}}χ^{\dot{b}} \tag{3.219}
+\]
+
+同様に左カイラルスピノルについても
+<!--
+and analogously for left-chiral spinors
+-->
+\[
+χ_L → χ_L^\prime = χ_a^\prime = Λ_a^bχ_b =\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{φ}\frac{\vec{σ}}{2}}\right)_a^bχ_b  \tag{3.220}
+\]
+従って
+<!--
+Therefore:
+-->
+\[
+Λ_{(\frac{1}{2},0)} =\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)\hat{=}Λ_a^b \tag{3.221}
+\]
+および
+<!--
+and
+-->
+\[
+Λ_{(0,\frac{1}{2})} =\left(e^{i\vec{θ}\frac{\vec{σ}}{2}−\vec{\phi}\frac{\vec{σ}}{2}}\right)\hat{=}Λ_{\dot{b}}^{\dot{a}}  \tag{3.222}
+\]
+
+この表記法は便利です。なぜなら、これまで見てきたように、2つの異なるオブジェクト \(χ_L\) と \(χ_R\) は、結局のところそれほど違いがないからです。実際、これらを互いに変換することができ、統一された表記法が論理的な帰結となります。
+<!--
+This notation is useful, because, as we have seen, the two different
+objects \(χ_L\) and \(χ_R\) aren’t so different after all. In fact we can transform
+them into each other and a unified notation is the logical result.
+-->
+</p><p>
+さて、次の既約表現に移ります。これは既知のことであることがわかるでしょう。
+<!--
+Now we move on to the next irreducible representation, which will
+turn out to be an old acquaintance.
+-->
+<p>
+<h3>3.7.8 \((\frac{1}{2}, \frac{1}{2})\) 表現</h3>
+<!--
+<h3>3.7.8 The \((\frac{1}{2}, \frac{1}{2})\) Representation</h3>
+-->
+<p>
+この表現では、\(\mathcal{SU}(2)\) リー代数<sup>158</sup> \(N_i^+\) と \(N_i^-\) の両方のコピーに対して2次元表現を使用します。今回は、まずこの表現がどのようなオブジェクトに作用するのかを見てみましょう。\(N_i^+\) と \(N_i^-\) は可換、つまり \([N_i^+, N_j^-] = 0\) (式 3.172) であるため、コピーは互いに干渉しません。したがって、オブジェクトは両方のコピーの下で別々に変換されます。調べたいオブジェクトを \(v\) と名付けましょう。このオブジェクトには2つのインデックス \(v_a^{\dot{b}}\) があり、それぞれが \(\mathcal{su}(2)\) の別々の2次元コピーの下で変換されます。ここで、前のセクションで紹介した表記法が役立ちます。
+<!--
+For this representation we use the 2-dimensional representation for
+both copies of the \(\mathcal{SU}(2)\) Lie algebra<sup>158</sup> \(N_i^+\) and \(N_i^-\) . This time let’s have a look at what kind of object our representation is going to act
+on first. The copies will not interfere with each other, because \(N_i^+\) and \(N_i^-\) commute, i.e. \([N_i^+, N_j^-] = 0\) (Eq. 3.172). Therefore, our objects will transform separately under both copies. Let’s name the object we want to examine \(v\). This object will have 2 indices \(v_a^{\dot{b}}\), each
+transforming under a separate two-dimensional copy of \(\mathcal{su}(2)\). Here
+the notation we introduced in the last section comes in handy.
+-->
+</p><p class="margin-large">
+<sup>158</sup>
+数学的には、
+\((\frac{1}{2}, \frac{1}{2}) = (\frac{1}{2}, 0) ⊗ (0, \frac{1}{2})\) となります。
+<!--
+Mathematically we have
+\((\frac{1}{2}, \frac{1}{2}) = (\frac{1}{2}, 0) ⊗ (0, \frac{1}{2})\). 
+-->
+
+</p><p>
+オブジェクト v は4つの要素を持つことがわかります。それぞれの表現は2次元であり、両方のインデックスが2つの値 \((\frac{1}{2}\) と \(-\frac{1}{2})\) を取ることができるからです。したがって、オブジェクトは2 × 2 行列になることができますが、後で説明するように、4つの要素を持つベクトル形式を強制することも可能です。<sup>159</sup>
+<!--
+We know that our object v will have 4 components, because each
+representation is 2 dimensional and this means that both indices can
+take on two values \((\frac{1}{2}\) and \(-\frac{1}{2})\). Therefore, the objects can be 2 × 2 matrices, but it’s also possible to enforce a four component vector
+form, as we will see<sup>159</sup>.
+-->
+</p><p class="margin-large">
+<sup>159</sup>
+平面の回転について話した時も同じ状況だったことを思い出してください。回転は複素数に作用する複素数で記述できます。実数行列への写像では実数行列に作用する実数行列がありましたが、同じ作用は列ベクトルに作用する実数行列でも記述できます。
+<!--
+ Remember that when we talked
+about rotations of the plane we were in
+the same situation. The rotation could
+be described by complex numbers
+acting on complex numbers. Doing
+the map to real matrices we had real
+matrices acting on real matrices, but
+the same action could be described by a
+real matrix acting on a column vector.
+-->
+</p><p>
+
+まず、複素行列の選択について見てみましょう。一般的な2×2行列は4つの複素要素を持ち、したがって8つの自由パラメータを持ちます。前述のように、必要なのは4つだけです。すべての複素行列\(M\)は、エルミート\((H^† = H)\)行列と反エルミート\((A^† = −A)\)行列の和として表すことができます：\(M = H + A\)。エルミート行列と反エルミート行列はどちらも4つの自由パラメータを持ちます。さらに、この表現における変換は、常にエルミート2×2行列を別のエルミート2×2行列に変換し、同様に反エルミート行列を別の反エルミート行列に変換することをすぐに説明します。これは、エルミート行列と反エルミート行列が不変部分集合であることを意味します。 3.5節で説明したように、ここで一般行列を扱うということは、既約表現を持つことに相当することを意味します。これらの考察を総合すると、この既約表現はエルミート2×2行列に作用すると仮定できると結論付けられます。エルミート2×2行列の基底<sup>160</sup>は、パウリ行列と単位行列の組み合わせによって与えられます。
+<!--
+
+First, let’s look at the complex matrix choice. A general 2 × 2
+matrix has 4 complex entries and therefore 8 free parameters. As
+noted above, we only need 4. We can write every complex matrix \(M\)
+as a sum of a Hermitian \((H^† = H)\) and an anti-Hermitian \((A^† = −A)\) matrix: \(M = H + A\). Both Hermitian and anti-Hermitian matrices
+have 4 free parameters. In addition, we will see in a moment that our
+transformations in this representation always transform a Hermitian
+2 × 2 matrix into another Hermitian 2 × 2 matrix and equivalently
+an anti-Hermitian matrix into another anti-Hermitian matrix. This
+means Hermitian and anti-Hermitian matrices are invariant subsets.
+As explained in Section 3.5 this means that working with a general
+matrix here, corresponds to having a reducible representation. Putting
+these observations together, we conclude that we can assume that
+our irreducible representation acts on Hermitian 2 × 2 matrices. A
+basis<sup>160</sup> for Hermitian 2 × 2 matrices is given by the Pauli matrices together with the identity matrix.
+-->
+</p><p class="margin-large">
+<sup>160</sup>
+これは、任意のエルミート2×2行列が、次の形式の線形結合として表されることを意味します。
+\(a_01 + a_iσ_i\)
+<!--
+This means that an arbitrary Hermitian
+2 × 2 matrix can be written
+as a linear combination of the form:
+\(a_01 + a_iσ_i\)
+-->
+</p><p>
+
+\(v_a^{\dot{b}}\) を調べる代わりに、\(v_{a\dot{b}}\) を見てみましょう。そうすれば、式 3.80 で定義されている Pauli 行列を使用することができます。\(v_a^{\dot{b}}\) と \(v_{a\dot{b}}\) は、\(\epsilon^{\dot{b}\dot{c}}\) を掛け合わせることで相互に変換できるため、\(v_a^{\dot{b}}\) を扱う場合は、\(\epsilon\) を掛け合わせた Pauli 行列を使用すればよいことになります。
+\(σ^0 = I_{2×2} =\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}\) と定義すると、次のように書けます。
+<!--
+Instead of examining \(v_a^{\dot{b}}\), we will have a look at \(v_{a\dot{b}}\) , because then
+we can use the Pauli matrices as defined in Eq. 3.80. Take note that \(v_a^{\dot{b}}\) and \(v_{a\dot{b}}\) can be transformed into each other by multiplication with \(\epsilon^{\dot{b}\dot{c}}\) and therefore if you want to work with \(v_a^{\dot{b}}\), you simply have to use the Pauli matrices that have been multiplied with \(\epsilon\).
+If we define 
+\(σ^0 = I_{2×2} =\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}\), we can write
+-->
+\[
+v_{a\dot{b}} = v_νσ_{a\dot{b}}^ν= v^0
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
++ v^1
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
++ v^2
+\begin{pmatrix}
+0 & −i \\
+i & 0
+\end{pmatrix}
++ v^3
+\begin{pmatrix}
+1 & 0 \\
+0 & −1
+\end{pmatrix}
+\tag{3.223}
+\]
+
+上で説明したように、代わりに<sup>161</sup> \(v_a^{\dot{b}}= v_μσ_{a\dot{c}}^μ\epsilon^{\dot{b}\dot{c}}\) を使うこともできます。これは、基底 \((\tilde{σ}_a^{\dot{b}})^μ= σ_{a\dot{c}}^μ\epsilon^{\dot{b}\dot{c}}\) を使うことを意味します。したがって、一般エルミート行列は次のように書きます。
+<!--
+As explained above, we could use<sup>161</sup> \(v_a^{\dot{b}}= v_μσ_{a\dot{c}}^μ\epsilon^{\dot{b}\dot{c}}\) instead, which means we would use the basis \((\tilde{σ}_a^{\dot{b}})^μ= σ_{a\dot{c}}^μ\epsilon^{\dot{b}\dot{c}}\). We therefore write a
+general Hermitian matrix as
+-->
+</p><p class="margin-large">
+<sup>161</sup>
+これは単なる基底の選択であり、ここでは、パウリ行列の定義と、先ほどベクトルに対して導出した変換挙動を与える基底を選択します。
+<!--
+This is really just a basis choice and
+here we choose the basis that gives
+us with our definition of the Pauli
+matrices, the transformation behavior
+we derived earlier for vectors.
+-->
+</p><p>
+
+\[
+v_{a\dot{b}} =
+\begin{pmatrix}
+v_0 + v_3 & v_1 − iv_2 \\
+v_1 + iv_2 & v_0 − v_3
+\end{pmatrix}
+\tag{3.224}
+\]
+
+前のセクションで、異なるインデックスはそれぞれ異なる方法で変換されることを学びました。例えば、下側の点付きインデックスは、下側の点なしインデックスとは異なる方法で変換されます。
+<!--
+Remember that we have learned in the last section that different
+indices transform differently. For example, a lower dotted index
+transforms differently than a lower undotted index.
+-->
+</p><p>
+ここで、\(v_{a\dot{b}}\)がどのように変換するかを見て、前のセクションで導出した変換演算子を使用します。
+<!--
+Now we have a look at how \(v_{a\dot{b}}\) transforms and use the transformation operators that we derived in the last sections
+-->
+\[
+\begin{align}
+v → v^\prime= v_{a\dot{b}}^\prime 
+&=
+\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_a^c v_{c\dot{d}}
+\left(\left(e^{-i\vec{θ}\frac{\vec{σ^*}}{2} +\vec{\phi}\frac{\vec{σ^*}}{2}}\right)_{\dot{b}}^{\dot{d}}\right)^T \\
+\\
+&=
+\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_a^c v_{c\dot{d}}
+\left(e^{-i\vec{θ}\frac{\vec{σ^\dagger}}{2}+\vec{\phi}\frac{\vec{σ^\dagger}}{2}}\right)_{\dot{b}}^{\dot{d}} \\
+\\
+&\underbrace{=}_{\sigma_i^\dagger=\sigma_i}
+\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_a^c v_{c\dot{d}}
+\left(e^{-i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_{\dot{b}}^{\dot{d}} \tag{3.225}
+\end{align}
+\]
+
+エルミート行列は、上で述べたように、このような変換後もエルミート行列であることが分かる<sup>162</sup>
+<!--
+We can now see that a Hermitian matrix is after such a transformation still Hermitian, as promised above<sup>162</sup>
+-->
+
+</p><p class="margin-large">
+<sup>162</sup>
+全く同じ計算で、反エルミート行列は、このような変換後も反エルミート行列のままであることが示されます。これを確認するには、最後のステップで、\(v_{c\dot{d}}^† = v_{cdot{d}}\) の代わりに、\(v_{c\dot{d}}^† = -v_{c\dot{d}}\) を使用してください。
+<!--
+ Exactly the same computation
+shows that an anti-Hermitian matrix
+is still anti-Hermitian after such a
+transformation. To see this, use in
+the last step instead of \(v_{c\dot{d}}^† = v_{cdot{d}}\) that
+\(v_{c\dot{d}}^† = -v_{c\dot{d}}\).
+-->
+</p><p>
+
+\[
+\begin{align}
+\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_a^c
+v_{c\dot{d}}\left(e^{-i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_{\dot{b}}^{\dot{d}}
+&\rightarrow\left(\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_a^c
+v_{c\dot{d}}\left(e^{-i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_{\dot{b}}^{\dot{d}}\right)^\dagger \\
+\\
+& \underbrace{=}_{(ABC)^\dagger=C^\dagger B^\dagger A^\dagger}
+\left(\left(e^{-i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_{\dot{b}}^{\dot{d}}\right)^\dagger v_{c\dot{d}}^\dagger \left(\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_a^c \right)^\dagger \\
+\\
+&=\left(e^{i\vec{θ}\frac{\vec{σ^\dagger}}{2}+\vec{\phi}\frac{\vec{σ^\dagger}}{2}}\right)_{\dot{b}}^{\dot{d}} 
+v_{c\dot{d}}^\dagger
+\left(e^{-i\vec{θ}\frac{\vec{σ^\dagger}}{2}+\vec{\phi}\frac{\vec{σ^\dagger}}{2}}\right)_a^c \\
+\\
+& \underbrace{=}_{if\;v_{c\dot{d}}^\dagger=v_{c\dot{d}}}
+\left(e^{i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_a^c
+v_{c\dot{d}}
+\left(e^{-i\vec{θ}\frac{\vec{σ}}{2}+\vec{\phi}\frac{\vec{σ}}{2}}\right)_{\dot{b}}^{\dot{d}}  \tag{3.226}
+\end{align}
+\]
+
+</p><p>
+任意の変換の明示的な計算は長くて面倒なので<sup>163</sup>、代わりに具体的な例を見てみましょう。vをz軸に沿ってブーストしてみましょう<sup>164</sup>
+<!--
+The explicit computation for an arbitrary transformation is long and tedious<sup>163</sup> so instead, we will look at one specific example. Let’s boost v along the z-axis<sup>164</sup>
+-->
+</p><p class="margin-large">
+<sup>163</sup>
+例えば、マシュー・ロビンソン著『対称性と標準モデル』（Springer、第1版、2011年8月、ISBN 978-1-4419-8267-4）の128ページをご覧ください。
+<!--
+See, for example, page 128 in 
+Matthew Robinson. Symmetry and
+the Standard Model. Springer, 1st edition,
+August 2011. ISBN 978-1-4419-8267-4
+-->
+<br><br>
+
+<sup>164</sup>
+これは \(\vec{\phi} = (0, 0, \phi)^T\) を意味します。\(σ_3\) は対角なので、このようなブーストは最も簡単です。他の軸に沿ったブーストについては、指数級数を詳細に評価する必要があります。
+<!--
+This means \(\vec{\phi} = (0, 0, \phi)^T\). Such a
+boost is the easiest because \(σ_3\) is diagonal.
+For boosts along other axes the
+exponential series must be evaluated in
+detail.
+-->
+</p><p>
+
+\[
+\begin{align}
+v_{a\dot{b}}→ v_{a\dot{b}}^\prime &=
+\left(e^{\phi\frac{σ_3}{2}}\right)_a^c
+v_{c\dot{d}}
+\left(e^{\phi\frac{σ_3}{2}}\right)_{\dot{b}}^{\dot{d}} \\
+\\
+&=
+\begin{pmatrix}
+e^{\frac{\phi}{2}} & 0 \\
+0 &  e^{-\frac{\phi}{2}}
+\end{pmatrix}
+\begin{pmatrix}
+v_0 + v_3 & v_1 − iv_2 \\
+v_1 + iv_2 & v_0 − v_3
+\end{pmatrix}
+\begin{pmatrix}
+e^{\frac{\phi}{2}} & 0 \\
+0 & e^{-\frac{\phi}{2}}
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+e^\phi(v_0 + v_3) & v_1 − iv_2 \\
+v_1 + iv_2 & e^{-\phi}(v_0 − v_3)
+\end{pmatrix} \tag{3.227}
+\end{align}
+\]
+
+ここで、\(σ_3\) が対角行列<sup>165</sup>であること、および \(e^A =\begin{pmatrix} e^{A_{11}} & 0 \\ 0 & e^{A_{22}} \end{pmatrix}\) がすべての対角行列に対して成立するという事実を利用しました。ここで、式 3.227 で計算した変換済みオブジェクトを、一般的なオブジェクト \(v^\prime\) と比較します。
+<!--
+where we have used the fact that \(σ_3\) is diagonal<sup>165</sup> and that \(e^A =\begin{pmatrix} e^{A_{11}} & 0 \\ 0 & e^{A_{22}} \end{pmatrix}\)
+holds for every diagonal matrix. We now compare the transformed
+object that we calculated in Eq. 3.227 with a generic object \(v^\prime\):
+-->
+</p><p class="margin-large">
+<sup>165</sup>
+\(\sigma_3=\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}\)
+</p><p>
+
+\[
+v_{a\dot{b}}^\prime =
+\begin{pmatrix}
+v_0^\prime+v_3^\prime & v_1^\prime-iv_2^\prime \\
+v_1^\prime+iv_2^\prime & v_0^\prime-v_3^\prime
+\end{pmatrix}
+=
+\begin{pmatrix}
+e^\phi(v_0+v_3) & v_1-iv_2 \\
+v_1+iv_2 & e^{-\phi}(v_0-v_3)
+\end{pmatrix}
+\]
+
+これは、変換されたオブジェクトのコンポーネントが、変換されていないコンポーネントとどのように関連しているかを示します<sup>166</sup>
+<!--
+This tells us how the components of the transformed object are related
+to the untransformed components<sup>166</sup>
+-->
+</p><p class="margin-large">
+<sup>166</sup>
+
+この文脈では慣例となっている、双曲線正弦関数、双曲線余弦関数、および指数関数の関係
+\(e^{-\phi = (\cosh (\phi) - \sinh (\phi))\) と
+\(e^\phi = (\cosh (\phi) + \sinh (\phi))\) を使用して、式を書き直します。これらの関数に馴染みがない場合は、定義に注目してください。
+\(\cosh (\phi) ≡ \frac{1}{2}(e^\phi + e^{-\phi})\) および
+\(\sinh (\phi) ≡ \frac{1}{2}(e^\phi - e^{-\phi})\) 。または、ここにあるいくつかの式を \(e^\phi\) および
+\(e^{-\phi}\) を使って書き直すこともできます。どちらも同様に有効です。
+<!--
+We rewrite the equations using
+the connection between the hyperbolic
+sine, the hyperbolic cosine
+function and the exponential function
+\(e^{-\phi = (\cosh (\phi) - \sinh (\phi))\) and
+\(e^\phi = (\cosh (\phi) + \sinh (\phi))\), which is
+conventional in this context. If you are
+unfamiliar with these functions you
+can either take notice of their definitions:
+\(\cosh (\phi) ≡ \frac{1}{2}(e^\phi + e^{-\phi})\) and
+\(\sinh (\phi) ≡ \frac{1}{2}(e^\phi - e^{-\phi})\) or rewrite the
+few equations here in terms of \(e^\phi\) and
+\(e^{-\phi}\), which is equally good.
+-->
+</p><p>
+
+\[
+\begin{align}
+&→ v_0^\prime + v_3^\prime = e^\phi(v_0 + v_3) = (\cosh (\phi) + \sinh (\phi)) (v_0 + v_3) \\
+\\
+&→ v_0^\prime - v_3^\prime = e^{-\phi}(v_0 - v_3) = (\cosh (\phi) - \sinh (\phi)) (v_0 − v_3)
+\end{align}
+\]
+
+両方の式の加算と減算により、
+<!--
+The addition and subtraction of both equations yields
+-->
+\[
+\begin{align}
+&→ v_0^\prime = \cosh(\phi)v_0 + \sinh(\phi)v_3 \\
+\\
+&→ v_3^\prime = \sinh(\phi)v_0 + \cosh(\phi)v_3  \tag{3.228}
+\end{align}
+\]
+
+これはまさに4ベクトル形式<sup>167</sup>を用いて得られるものである。
+<!--
+This is exactly what we get using the 4-vector formalism<sup>167</sup>
+-->
+</p><p class="margin-large">
+<sup>167</sup>
+
+Z軸に沿ったブースト行列の明示的な形式については3.154を参照してください。
+<!--
+See 3.154 for the explicit form of the
+matrix for a boost along the z-axis.
+-->
+</p><p>
+
+\[
+\begin{align}
+\begin{pmatrix}
+v_0^\prime \\
+v_1^\prime \\
+v_2^\prime \\
+v_3^\prime
+\end{pmatrix}
+&=
+\begin{pmatrix}
+\cosh(\phi) & 0 & 0 & \sinh(\phi) \\
+0 & 1 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+\sinh(\phi) & 0 & 0 \cosh(\phi)
+\end{pmatrix}
+\begin{pmatrix}
+v_0 \\
+v_1 \\
+v_2 \\
+v_3
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+\cosh(\phi)v_0 + \sinh(\phi)v_3 \\
+v_1 \\
+v_2 \\
+\sinh(\phi)v_0 + \cosh(\phi)v_3
+\end{pmatrix}  \tag{3.229}
+\end{align}
+\]
+
+</p><p>
+これは任意のローレンツ変換に当てはまります。他の可能性を計算してみるとわかります。ここで示したのは、\((\frac{1}{2}, \frac{1}{2})\) 表現がベクトル表現であるということです。行列とベクトルの乗算は3つの行列の乗算よりも簡単であるため、強制ベクトル形式を用いることで変換則を簡略化できます。とはいえ、おなじみの4次元ベクトルがより基本的なスピノルとどのように関連しているかを見てきました。4次元ベクトルは階数2のスピノルであり、これはローレンツ群の \((\frac{1}{2}, \frac{1}{2})\) 表現に従って変換される2つのインデックスを持つスピノルを意味します。さらに、<strong>4次元ベクトルは、あらゆる物理システムを基礎レベルで記述するのに適切ではないことがわかります。なぜなら、4次元ベクトルは基礎的ではないからです。</strong>4次元ベクトルでは記述できない物理システムも存在します。
+<!--
+This is true for arbitrary Lorentz transformations, as you can check
+by computing the other possibilities. What we have shown here is
+that the \((\frac{1}{2}, \frac{1}{2})\) representation is the vector representation. We can
+simplify our transformation laws by using the enforced vector form,
+because multiplying a matrix with a vector is simpler than the multiplication
+of three matrices. Nevertheless, we have seen how the familiar
+4-vector is related to the more fundamental spinors. A 4-vector is
+a rank-2 spinor, which means a spinor with 2 indices that transforms
+according to the \((\frac{1}{2}, \frac{1}{2})\) representation of the Lorentz group. Furthermore, <strong>
+we can now see that 4-vectors aren’t appropriate to describe
+every physical system on a fundamental level, because they aren’t
+fundamental.</strong> There are physical systems they cannot describe.
+-->
+</p><p>
+これで、「スピノルはベクトルの平方根である」と言う人がいる理由が理解できました。これは、ベクトルが階数2のテンソルの平方根である<sup>168</sup>と同じ意味です。階数2のテンソルには2つのベクトルのインデックスがあり、ベクトルには2つのスピノルのインデックスがあります。したがって、ローレンツ変換できる最も基本的なオブジェクトは、まさにスピノルです。
+<!--
+We can now understand why some people say that "spinors are
+the square root of vectors". This is meant in the same way as vectors
+are the square root of rank-2 tensors<sup>168</sup>. A rank-2 tensor has two 
+vector indices and a vector has two spinor indices. Therefore, the 
+most basic object that can be Lorentz transformed is indeed a spinor.
+-->
+
+</p><p class="margin-large">
+<sup>168</sup>
+ランク2テンソルは単純に行列\(M_{μν}\)です。
+<!--
+ A rank-2 tensor is simply a matrix \(M_{μν}\).
+-->
+</p><p>
+ローレンツ群の研究を始めたとき、それが4つの要素<sup>169</sup>から成り立つことに気づきました。これらの要素は、パリティと時間反転演算子170によって結びついています。したがって、光速を保存するすべての変換を記述できるようにするには、それぞれの表現についてパリティ変換と時間反転変換を見つける必要があります。
+本稿では、時間反転変換の議論がパリティ変換と非常に似ているため、パリティ変換に限定します。パリティ変換のもとで、性質が必ずしも対称的であるとは限らないことについては、後の節で説明します<sup>171</sup>。
+<!--
+When we started our studies of the Lorentz group, we noted that it
+consists of four components<sup>169</sup>. These components are connected by 
+the parity and the time-reversal operator170. Therefore, to be able to describe all transformations that preserve the speed of light, we need
+to find the parity and time-reversal transformation for each representation.
+In this text we restrict ourselves to parity transformations,
+because the discussion for the time-reversal transformation is very
+similar. We will discuss in in a later section that nature isn’t always
+symmetric under parity transformations<sup>171</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>169</sup>
+Eq. 3.142: \(\mathcal{O}(1, 3) =\{L_+^↑,Λ_PL_+^↑,Λ_TL_+^↑,Λ_PΛ_TL_+^↑\}\)
+<br><br>
+
+<sup>170</sup> 
+Eq. 3.142参照
+<!--
+See Eq. 3.142
+-->
+<br><br>
+
+<sup>171</sup>
+自然は時間反転変換に対しても不変ではありませんが、この奇妙な事実について満足のいく議論をすることは本書の範囲を超えています。
+<!--
+Nature isn’t invariant under time- reversal transformations either, but a
+satisfying discussion of this curious fact
+lies beyond the scope of this book. 
+-->
+</p>
+<h3>3.7.9 スピノルとパリティ</h3>
+<!--
+<h3>3.7.9 Spinors and Parity</h3>
+-->
+<p>
+ここまでのところ、\((\frac{1}{2}, 0)\) 表現に従って変換するオブジェクトを左カイラル、\((0, \frac{1}{2})\) 表現に従って変換するオブジェクトを右カイラルと呼ぶ理由が分かりません。パリティ変換について少し説明すれば、この意味が理解できるでしょう。
+<!--
+Up to this point, there is no justification why we call the objects
+transforming according to the \((\frac{1}{2}, 0)\) representation left-chiral and
+the objects transforming according to the \((0, \frac{1}{2})\) representation rightchiral.
+After talking a bit about parity transformation, this will make
+sense.
+-->
+</p><p>
+パリティ変換下におけるローレンツ群の生成元の振る舞いは既に分かっていることを思い出してください。その結果は
+式3.161で、便宜上ここで引用します。
+<!--
+Recall that we already know the behavior of the generators of
+the Lorentz group under parity transformations. The result was
+Eq. 3.161, which we recite here for convenience
+-->
+\[
+J_i \underbrace{→}_{P}J_i　K_i \underbrace{→}_{P}−K_i  \tag{3.230}
+\]
+
+式3.169の生成元\(N^±\)の定義を見ると、
+ここでも引用されている
+<!--
+By looking at the definition of the generators \(N^±\) in Eq. 3.169, which
+we also recite here
+-->
+\[
+N_i^± = \frac{1}{2}(J_i ± iK_i)  \tag{3.231}
+\]
+
+パリティ変換の下では \(N^+ ↔ N^-\) となることがわかります。したがって、ある変換の \((0, \frac{1}{2})\) 表現は、この変換の \((\frac{1}{2}
+, 0)\) 表現になり、パリティ変換の下ではその逆も成り立ちます。これが、左手系と右手のカイラルスピノルについて話す理由です<sup>172</sup>。パリティ変換の下で右手系の座標系が左手系の座標系に変化するのと同様に、これら2つの表現は互いに変化します。
+<!--
+we can see that under parity transformations \(N^+ ↔ N^-\). Therefore,
+the \((0, \frac{1}{2})\) representation of a transformation, becomes the \((\frac{1}{2}
+, 0)\) representation of this transformation and vice versa under parity
+transformations. This is the reason for talking about left- and right
+chiral spinors<sup>172</sup>. Just as a right-handed coordinate system changes
+into a left-handed coordinate system under parity transformations,
+these two representations change into each other.
+-->
+
+</p><p class="margin-large">
+<sup>172</sup>
+慣用的な名称は左巻きスピノルと右巻きスピノルですが、これは非常に混乱を招く可能性があります。なぜなら、左巻きと右巻きという概念は、カイラリティとは異なるヘリシティという概念に直接関連しているからです。いずれにせよ、パリティ変換によって左巻きのものが右巻きのものに変わるので、この名称には意味があるはずです。
+<!--
+The conventional name is left- and 
+right-handed spinors, but this can
+be quite confusing, because the notions
+left-handed and right-handed
+are directly related to a concept called
+helicity, which is different from chirality.
+Anyway the name should make
+some sense, because something left is
+changed into something right under
+parity transformations.
+-->
+</p><p>
+回転はどちらの表現でも同じですが、ブースト変換は符号が異なるため、上記のステートメントを明示的に記述するのは簡単です。
+<!--
+Rotations are the same for both representations, but boost transformations
+differ by a sign and it is easy to make the above statement
+explicit:
+-->
+\[
+\begin{align}
+(Λ_{\vec{K}})_{(\frac{1}{2},0)} &= 
+e^{\vec{\phi}\vec{K}} \underbrace{→}_{P}
+e^{-\vec{\phi}\vec{K}} = 
+(Λ_{\vec{K}})_{(0,\frac{1}{2})}  \tag{3.232} \\
+\\
+(Λ_{\vec{K}})_{(0,\frac{1}{2})} &= 
+e^{-\vec{\phi}\vec{K}} 
+\underbrace {→}_{P}
+e^{\vec{\phi}\vec{K}} = (Λ_{\vec{K}})_{(\frac{1}{2},0)}  \tag{3.233}
+\end{align}
+\]
+
+ここで、パリティ変換に対して不変な物理系を記述したい場合、常に右カイラルスピノルと左カイラルスピノルが必要になることを学びます。最も簡単な方法は、それらを<strong>ディラックスピノル</strong>と呼ばれる単一のオブジェクトに重ねて記述することです。
+<!--
+We learn here that if we want to describe a physical system that
+is invariant under parity transformations, we will always need rightchiral
+and left-chiral spinors. The easiest thing to do is to write them
+below each other into a single object called <strong>Dirac spinor</strong>
+-->
+\[
+Ψ =
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+=
+\begin{pmatrix}
+χ_a
+ξ^{\dot{a}}
+\end{pmatrix}
+\tag{3.234}
+\]
+
+左カイラルスピノルと右カイラルスピノルの総称が<strong>ワイルスピノル</strong>であることを思い出すと、ディラックスピノル \(Ψ\) は2つのワイルスピノル \(χ_L\) と \(ξ_R\) から構成されると言えます。ここでは一般論に留まり、\(χ\) と \(ξ\) の間に先験的な関係を仮定しないことに注意してください。次の形式のディラックスピノルは、
+<!--
+Recalling that the generic name for left- and right-chiral spinors is
+<strong>Weyl spinors</strong>, we can say that a Dirac spinor \(Ψ\) consists of two Weyl
+spinors \(χ_L\) and \(ξ_R\). Note that we want to stay general here and don’t
+assume any a priori connection between \(χ\) and \(ξ\). A Dirac spinor of
+the form
+-->
+\[
+Ψ_M =
+\begin{pmatrix}
+χ_L \\
+χ_R
+\end{pmatrix}
+\tag{3.235}
+\]
+
+これは特別な場合であり、マヨラナスピノルと呼ばれます。ディラックは4元ベクトルではありません。なぜなら、全く異なる変換を行うからです<sup>173</sup>。ディラックスピノルはローレンツ群の \((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\) 表現<sup>174</sup>に従って変換されます。これは、対応する変換をブロック対角形式で1つの大きな行列に書き込むことを意味します。
+<!--
+is a special case, called Majorana spinor. A Dirac is not a four-vector,
+because it transforms completely different<sup>173</sup>. A Dirac spinor trans- 
+forms according to the \((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\) representation<sup>174</sup> of the Lorentz
+group, which means nothing more than writing the corresponding
+transformations in block-diagonal form into one big matrix:
+-->
+</p><p class="margin-large">
+<sup>173</sup>
+同様に、マヨラナ スピノルはベクトルではありません。
+<!--
+Equally, a Majorana spinor is not a vector. 
+-->
+<br><br>
+<sup>174</sup>
+これは可約表現であり、変換行列がブロック対角形式であることから明らかです。対照的に、4つのベクトルは、\((\frac{1}{2}, \frac{1}{2}) = (\frac{1}{2}, 0) ⊗ (0, \frac{1}{2})\) 表現に従って変換されます。
+<!--
+This a reducible representation,
+which is obvious because of the
+block-diagonal form of the transformation
+matrix. In contrast, fourvectors
+transform according to the
+\((\frac{1}{2}, \frac{1}{2}) = (\frac{1}{2}, 0) ⊗ (0, \frac{1}{2})\) representation.
+-->
+</p><p>
+
+\[
+Ψ → Ψ^\prime= Λ_{(\frac{1}{2},0)⊕(0,\frac{1}{2})}Ψ =
+\begin{pmatrix}
+Λ_{(\frac{1}{2},0)}  & 0 \\
+0 & Λ_{(0,\frac{1}{2})}
+\end{pmatrix}
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+\tag{3.236}
+\]
+
+例えば、ブースト変換はこの表現である
+<!--
+For example, a boost transformation is in this representation
+-->
+\[
+Ψ → Ψ^\prime =
+\begin{pmatrix}
+e^{\frac{\vec{\phi}}{2}\vec{σ}} & 0 \\
+0 & e^{\frac{-\vec{\phi}}{2}\vec{σ}}
+\end{pmatrix}
+\begin{pmatrix}
+χ_L
+ξ_R
+\end{pmatrix}
+\tag{3.237}
+\]
+
+</p><p>
+ディラックスピノルがパリティ変換の下でどのように振舞うかを調べることは有益である。なぜなら、ディラックスピノルがパリティ変換の下でどのように変換されるかが分かれば、与えられた理論がそのような変換の下で不変であるかどうかを確認できるからである。パリティ変換後もディラックスピノルが依然としてディラックスピノル（\((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\) 表現に従って変換する物体）であるとは期待できない。なぜなら、パリティ変換の下では \(N^+ ↔ N^-\) であり、したがって
+<!--
+It is instructive to investigate how Dirac spinors behave under
+parity transformations, because once we know how Dirac spinors
+transform under parity transformations, we can check if a given
+theory is invariant under such transformations. We can’t expect that
+a Dirac spinor is after a parity transformation still a Dirac spinor (an
+object transforming according to the \((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\)  representation),
+because we know that under parity transformations \(N^+ ↔ N^-\) and
+therefore
+-->
+\[
+\left(0, \frac{1}{2}\right) \underbrace{↔}_{P}
+\left(\frac{1}{2}, 0\right) \tag{3.238}
+\]
+
+ディラックスピノルが\((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\)表現に従って変換される場合、パリティ変換されたオブジェクトは\((0, \frac{1}{2}) ⊕ (\frac{1}{2}, 0)\)表現に従って変換されると結論付けます。
+<!--
+We conclude that if a Dirac spinor transforms according to the
+\((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\) representation, the parity transformed object transforms according to the \((0, \frac{1}{2}) ⊕ (\frac{1}{2}, 0)\) representation.
+-->
+\[
+Ψ^P → (Ψ^P)^\prime
+= Λ_{(0,\frac{1}{2})⊕(\frac{1}{2},0)}Ψ^P 
+=
+\begin{pmatrix}
+Λ_{(0,\frac{1}{2})} & 0 \\
+0 & Λ_{(\frac{1}{2},0)}
+\end{pmatrix}
+\begin{pmatrix}
+ξ_R \\
+χ_L
+\end{pmatrix}
+\tag{3.239}
+\]
+
+従って
+<!--
+Therefore
+-->
+\[
+Ψ =
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+→ Ψ^P =
+\begin{pmatrix}
+ξ_R \\
+χ_L
+\end{pmatrix}
+\tag{3.240}
+\]
+
+</p><p>
+パリティ変換されたディラックスピノルは、変換されていないディラックスピノルと同じオブジェクト \(ξ_R, χ_L\) を含みますが、表記が異なります。パリティ変換は \(ξ_L → ξ_R\) のようなことは行いません。\(ξ_L → ξ_R\) は別の種類の変換であり、次のセクションで説明します。
+<!--
+A parity transformed Dirac spinor contains the same objects \(ξ_R, χ_L\)
+as the untransformed Dirac spinor, only written differently. A parity
+transformation does nothing like \(ξ_L → ξ_R\), which is a different kind
+of transformation we will talk about in the next section.
+-->
+</p>
+<h3>3.7.10 スピノルと電荷共役</h3>
+<!--
+<h3>3.7.10 Spinors and Charge Conjugation</h3>
+-->
+<p>
+3.7.7節では、\(χ_L → χ_R\) と \(ξ_R → ξ_L\) という変換に遭遇しました。この変換は \(χ_L → χ_L^{\mathcal{C}} = \epsilonχ_L^* = χ_R\) によって実現され、右カイラルスピノルについては同様に \(ξ_R → ξ_R^{\mathcal{C}} =(-\epsilon))ξ_R^* = ξ_L\) となります。これで、全く異なる視点から理解できるようになりました。
+<!--
+In Section 3.7.7 we stumbled upon a transformation, which yields
+\(χ_L → χ_R\) and \(ξ_R → ξ_L\). The transformation is achieved by \(χ_L → χ_L^{\mathcal{C}} = \epsilonχ_L^* = χ_R\) and analogously for a right-chiral spinor \(ξ_R → ξ_R^{\mathcal{C}} =(-\epsilon))ξ_R^* = ξ_L\). We are now able to understand it from a quite different
+perspective.
+-->
+</p><p>
+ここまで、この変換は単に指数を上げ下げするための計算上のトリックとして使ってきました。では、ディラックスピノルはこのような変換によってどのように変換されるのでしょうか？素朴に考えると、次のようになります。
+<!--
+Up to this point, we used this transformation merely as a computational
+trick in order to raise and lower indices. Now, how does a
+Dirac spinor transform under such a transformation? Naively we get:
+-->
+\[
+Ψ =
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+→ \tilde{Ψ} =
+\begin{pmatrix}
+χ_L^{\mathcal{C}} \\
+ξ_R^{\mathcal{C}} 
+\end{pmatrix}
+=
+\begin{pmatrix}
+χ_R \\
+ξ_L
+\end{pmatrix}
+\tag{3.241}
+\]
+
+残念ながら、このオブジェクトはディラックスピノル<sup>175</sup>のようには変換されない。ディラックスピノルはブーストによって次のように変換される。
+<!--
+Unfortunately, this object does not transform like a Dirac spinor<sup>175</sup>, which transform under boosts as follows
+-->
+</p><p class="margin-large">
+<sup>175</sup>
+パリティ変換とは異なり、ここでは選択肢があり、同じ種類のオブジェクトを扱い続けることを好みます。この場合、オブジェクト \(\tilde{Ψ}\) は、パリティ変換され電荷共役化されたディラックスピノルとして見ることができます。
+<!--
+Unlike for parity transformations, 
+we have a choice here and we prefer
+to keep working with the same kind of
+object. The object \(\tilde{Ψ}\) can then be seen
+as a Dirac spinor that has been parity
+transformed and charge conjugated.
+-->
+</p><p>
+
+\[
+Ψ → Ψ^\prime =
+\begin{pmatrix}
+e^{\frac{\vec{θ}}{2}\vec{σ}} & 0 \\
+0 & e^{\frac{-\vec{θ}}{2}\vec{σ}}
+\end{pmatrix}
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+\tag{3.242}
+\]
+
+対照的に、単純な操作から得られるオブジェクト\(\tilde{Ψ}\)は次のように変換される。
+<!--
+In contrast, the object \(\tilde{Ψ}\) we get from the naive operation, transforms as
+-->
+\[
+\tilde{Ψ}→ \tilde{Ψ}^\prime =
+\begin{pmatrix}
+e^{-\frac{\vec{θ}}{2}\vec{σ}} &  0 \\
+0 & e^{\frac{\vec{θ}}{2}\vec{σ}}
+\end{pmatrix}
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+\tag{3.243}
+\]
+
+これはローレンツ群の異なる表現に従って変換されるため、異なる種類のオブジェクトです。したがって、次のように書きます。
+<!--
+This is a different kind of object, because it transforms according to a
+different representation of the Lorentz group. Therefore we write
+-->
+
+\[
+Ψ =
+\begin{pmatrix}
+χ_L
+ξ_R
+\end{pmatrix}
+→ Ψ\{\mathcal{C}} =
+\begin{pmatrix}
+ξ_R^{\mathcal{C} \\
+χ_L^{\mathcal{C}
+\end{pmatrix}
+=
+\begin{pmatrix}
+ξ_L \\
+χ_R
+\end{pmatrix}
+\tag{3.244}
+\]
+
+これは先ほど観察した変換挙動を組み込んでおり、ディラックスピノルのように変換されます。この操作は一般に<strong>電荷共役</strong>と呼ばれますが、少し誤解を招く可能性があります。この変換は左カイラルスピノルを右カイラルに変換する、つまり素粒子を記述するために使用するラベルを1つ反転させることが分かっています<sup>176</sup>。後ほど、この演算子は基本粒子を記述するために使用するラベルを1つだけでなくすべて反転させることを学びます。そのようなラベルの1つが電荷であるため、電荷共役と呼ばれますが、これを示す前に、もちろんまず電荷とは何かを理解する必要があります。とはいえ、電荷だけでなくすべてのラベルが反転することを覚えておくことは常に重要です。
+<!--
+which incorporates the transformation behavior we observed earlier
+and transforms like a Dirac spinor. This operation is commonly
+called <strong>charge conjugation</strong>, which can be a little misleading. We know
+that this transformation transforms a left-chiral spinor into a rightchiral,
+i.e. flips one label we use to describe our elementary particles<sup>176</sup>. Later we will learn that this operator flips not only one, but all labels we use to describe fundamental particles. One such label is electric charge, hence the name charge conjugation, but before we are able to show this, we need of course to understand first what electric
+charge is. Nevertheless, it’s always important to remember that all
+labels get flipped, not only electric charge.
+-->
+</p><p class="margin-large">
+<sup>176</sup>
+
+より高度な読者の方へ：ここで取り上げている各ワイルスピノルは、実際には2つの要素を持つオブジェクトであることを思い出してください。後ほど、スピンと呼ばれる物理的に測定可能な量を定義します。これは\(\frac{1}{2}σ_3\)で記述されます。行列\(\epsilon\)は、スピン演算子\(\frac{1}{2}σ_3\)の固有値\(+\frac{1}{2}\)を持つオブジェクトを、固有値\(-\frac{1}{2}\)を持つオブジェクトに反転します。これは一般的にスピン反転と解釈され、スピン\(\frac{1}{2}\)を持つオブジェクトがスピン\(-\frac{1}{2}\)を持つオブジェクトになることを意味します。
+<!--
+For the more advanced reader: Recall 
+that each Weyl spinor we are talking
+about here, is in fact a two component
+object. Later we will define a physical
+measurable quantity, called spin, that
+is described by \(\frac{1}{2}σ_3\). The matrix \(\epsilon\), flips
+an object with eigenvalue \(+\frac{1}{2}\)
+for the spin operator \(\frac{1}{2}σ_3\) into an object with
+eigenvalue \(-\frac{1}{2}\). This is commonly
+interpreted as spin flip, which means an
+object with spin \(\frac{1}{2}\), becomes an object
+with spin \(-\frac{1}{2}\).
+-->
+</p><p>
+ローレンツ群の高次元表現を導出することもできますが、この時点で、このテキストの目的に必要な有限次元の既約表現はすべて得られています。しかし、もう一つ、特に興味深い表現があります。それは無限次元表現です。これは、例えば電磁場のような場を変換するために必要となるからです。
+<!--
+We could now go on and derive higher-dimensional representations
+of the Lorentz group, but at this point we already have every
+finite-dimensional irreducible representation we need for the purpose
+of this text. Nevertheless, there is another representation, the infinitedimensional
+representation, that is especially interesting, because
+we need it to transform fields, like, for example, the electromagnetic
+field.
+-->
+</p>
+<h3>3.7.11 無限次元表現</h3>
+<!--
+<h3>3.7.11 Infinite-Dimensional Representations</h3>
+-->
+<p>
+
+前のセクションでは、ローレンツ群の有限次元表現について説明し、その分類方法を学びました。これらの有限次元表現は、1成分、2成分、または4成分の定数物体に作用します。物理学では、扱う物体は空間と時間の中で動的に変化するため、そのような物体がどのように変化するかを理解する必要があります。これまで、次のような形式の変換を扱ってきました。
+<!--
+In the last sections, we talked about finite-dimensional representations
+of the Lorentz group and learned how we can classify them.
+These finite-dimensional representations acted on constant one-,
+two- or four-component objects. In physics the objects we are dealing
+with are dynamically changing in space and time, so we need to
+understand how such objects transform. So far, we have dealt with
+transformations of the form
+-->
+\[
+\Phi_a → \Phi_a^\prime = M_{ab}(Λ)\Phi_b \tag{3.245}
+\]
+
+ここで、\(M_{ab}(Λ)\) は、ローレンツ変換 \(Λ)\) の特定の有限次元表現の行列を表します。つまり、\(M_{ab}(Λ)\) は、例えばワイルスピノルのような2成分の物体に作用する行列です。この行列との乗算の結果は、単に、問題の物体の成分が混合され、定数倍されるということです。物体 \(\Phi\) が空間と時間で変化すると、それは座標<sup>177</sup> \(\Phi = \Phi(x)\) の関数となり、これらの座標もローレンツ変換の影響を受けます。一般に、
+<!--
+where \(M_{ab}(Λ)\) denotes the matrix of the particular finite-dimensional
+representation of the Lorentz transformation \(Λ\). This means \(M_{ab}(Λ)\) is a matrix that acts, for example, on a two-component object like a
+Weyl spinor. The result of the multiplication with this matrix is simply
+that the components of the object in question get mixed and are
+multiplied with constant factors. If our object \(\Phi\) changes in space and
+time, it is a function of coordinates<sup>177</sup> \(\Phi = \Phi(x)\) and these coordinates are affected by the Lorentz transformations, too. In general we have
+-->
+</p><p class="margin-large">
+<sup>177</sup>
+ここで\(x\)はすべての時空座標\(t, x, y, z\)の略記法です。
+<!--
+Here \(x\) is a shorthand notation for all
+spacetime coordinates \(t, x, y, z\)
+-->
+</p><p>
+
+\[
+x^μ → Λ_ν^μx^ν  \tag{3.246}
+\]
+
+ここで、\(Λ_ν^μ\)は、問題となっているローレンツ変換のベクトル表現\((= (\frac{1}{2}
+, \frac{1}{2})\)表現)を表します。この場合、<sup>178</sup>
+<!--
+where \(Λ_ν^μ\) denotes the vector representation \((= (\frac{1}{2}
+, \frac{1}{2})\) representation)
+of the Lorentz transformation in question. We have in this case<sup>178</sup>
+-->
+</p><p class="margin-large">
+<sup>178</sup>
+
+ほとんどの書籍では、対称性演算子についてウィグナー規約
+\(\Phi_a(x) → M_{ab}(Λ)\Phi_b(Λ^{-1}x)\) が採用されていますが、残念ながら、現時点ではこの規約の根拠を示す方法はありません。
+<!--
+Most books use the Wigner convention
+for symmetry operators:
+\(\Phi_a(x) → M_{ab}(Λ)\Phi_b(Λ^{-1}x)\), but
+unfortunately there is at this point no
+way to motivate this convention.
+-->
+</p><p>
+
+\[
+\Phi_a(x) → M_{ab}(Λ)\Phi_b(Λx)  \tag{3.247}
+\]
+
+したがって、我々の変換は2つの部分から構成されます。1つは有限次元表現で表され、\(|Phi_a\) に作用する部分、もう1つは時空座標 \(x\) を変換する部分です。この2つ目の部分は無限次元<sup>179</sup> ベクトル空間に作用するため、無限次元表現が必要となります。ローレンツ群の無限次元表現は、微分作用素<sup>180</sup> によって与えられます。
+<!--
+Our transformation will therefore consist of two parts. One part, represented
+by a finite-dimensional representation, acting on \(|Phi_a\) and a
+second part that transforms the spacetime coordinates \(x\). This second
+part will act on an infinite-dimensional<sup>179</sup> vector space and we
+therefore need an infinite-dimensional representation. The infinitedimensional
+representation of the Lorentz group is given by differential
+operators<sup>180</sup>
+-->
+</p><p class="margin-large">
+<sup>179</sup>
+\(\Phi\) の各要素は、\(x\) の関数となります。対応する演算子は \(\Phi_a(x)\)、つまり座標の関数に作用し、この文脈では関数空間は無限次元です。関数空間が無限次元である理由は、無限個の基底関数が必要になるからです。任意の関数をこのような無限個の基底関数で展開することが、付録 D.1 で説明されているフーリエ変換の背後にある考え方です。
+<!--
+Each component of \(\Phi\) is now a
+function of \(x\). The corresponding
+operators act on \(\Phi_a(x)\), i.e. functions
+of the coordinates and the space of
+functions is in this context infinitedimensional.
+The reason that the space
+of functions is infinite-dimensional
+is that we need an infinite number of
+basis functions. The expansion of an
+arbitrary function in terms of such an
+infinite number of basis functions is the
+idea behind the Fourier transform as
+explained in Appendix D.1.
+-->
+<br><br>
+<sup>180</sup>
+記号\(∂^ν\)は偏微分\(\frac{∂}{∂ν}\)の略記法です。
+<!--
+The symbols \(∂^ν\) are a shorthand
+notation for the partial derivative \(\frac{∂}{∂ν}\).
+-->
+</p><p>
+
+\[
+M_{μν}^{inf} = i(x^μ∂^ν − x^ν∂^μ)  \tag{3.248}
+\]
+
+簡単な計算によって、\(M_{μν}^{inf}\)
+がローレンツ代数（式3.175）を満たし、座標を期待どおりに変換することを確認できます。
+<!--
+You can check by a straightforward computation that \(M_{μν}^{inf}\)
+ satisfies the Lorentz algebra (Eq. 3.175) and transforms the coordinates as
+desired.
+-->
+</p><p>
+
+座標変換は以下<sup>181</sup>で与えられる。
+<!--
+The transformation of the coordinates is now given by<sup>181</sup>
+-->
+</p><p class="margin-large">
+<sup>181</sup>
+式3.173における\(M^{μν}\)の定義を思い出してください。\(ω_{μν}\)の成分は、通常の回転角\(θ_i = \frac{1}{2}\epsilon_{ijk}ω_{jk}\)とブーストパラメータ\(\phi_i = ω_{0i_\)に直接関連付けられます。
+<!--
+Recall the definition of \(M^{μν}\) in 
+Eq. 3.173. The components of \(ω_{μν}\) can
+then be directly related to the usual
+rotation angles \(θ_i = \frac{1}{2}\epsilon_{ijk}ω_{jk}\) and the
+boost parameters \(\phi_i = ω_{0i_\).
+-->
+</p><p>
+
+\[
+\Phi^\prime(Λx) = e^{-i\frac{ω^{μν}}{2} M_{μν}^{inf}} \Phi(x)  \tag{3.249}
+\]
+
+ここで指数関数は、通常通り、その級数展開によって理解される。完全な変換は、生成元の有限次元表現 \(M_{μν}^{fin}\) によって生成される変換と、無限次元表現 \(M_{μν}^{inf}\) によって生成される変換の組み合わせとなる。
+<!--
+where the exponential function is, as usual, understood in terms
+of its series expansion. The complete transformation is then a combination
+of a transformation generated by the finite-dimensional
+representation \(M_{μν}^{fin}\) and a transformation generated by the infinitedimensional
+representation \(M_{μν}^{inf}\) of the generators:
+-->
+\[
+\Phi_a(x) → \left(e^{-i\frac{ω^{μν}}{2} M_{μν}^{fin})\right)_a^b 
+e^{-i\frac{ω^{μν}}{2} M_{μν}^{inf}} \Phi_b(x) \tag{3.250}
+\]
+
+行列M_{μν}^{fin}は有限次元かつ定数なので、2つの指数をまとめると
+<!--
+Because our matrices M_{μν}^{fin} are finite-dimensional and constant we can put the two exponents together
+-->
+\[
+\Phi_a(x) → \left(e^{-i\frac{ω^{μν}}{2} M_{μν}}\right)_a^b \Phi_b(x) \tag{3.251}
+\]
+
+ここで、\(M_{μν} = M_{μν}^{fin} + M_{μν}^{inf}\)。ローレンツ群の生成元のこの表現は<strong>場の表現</strong>と呼ばれます。
+<!--
+with \(M_{μν} = M_{μν}^{fin} + M_{μν}^{inf}\). This representation of the generators of the Lorentz group is called <strong>field representation</strong>.
+-->
+</p><p>
+ここで、別の種類の変換、つまり時空内の別の場所への変換である<strong>並進</strong>について話すことができます。並進は成分を混ぜないので、有限次元表現は必要ありません。しかし、並進の無限次元表現を見つけるのは非常に簡単です。これらはローレンツ群の一部ではありませんが、自然法則は場所に依存しないはずです。ローレンツ群（ブーストと回転）に並進を加えたものは<strong>ポアンカレ群</strong>と呼ばれ、次のセクションで説明します。とはいえ、ここでは既に並進の無限次元表現を導入しておきます。簡単のため、1次元に限定します。この場合、関数のx軸に沿った無限小並進は<sup>182</sup>で与えられます。
+<!--
+We can now talk about a different kind of transformation: <strong>translations</strong>, which means transformations to another location in spacetime.
+Translations do not mix the components and therefore, we need no
+finite-dimensional representation. However, it’s quite easy to find
+the infinite-dimensional representation for translations. These are
+not part of the Lorentz group, but the laws of nature should be location
+independent. The Lorentz group (boosts and rotations) plus
+translations is called the <strong>Poincaré group</strong>, which is the topic of the
+next section. Nevertheless, we will introduce the infinite-dimensional
+representation of translations already here. For simplicity, we restrict
+ourselves to one dimension. In this case an infinitesimal translation
+ of a function, along the x-axis is given by<sup>182</sup>
+-->
+</p><p class="margin-large">
+<sup>182</sup>
+無限小でない \(\epsilon\) の場合、ここでは無限個の項が得られます。しかし、無限小の \(\epsilon\) の場合、\(\epsilon^2 ≈ 0\) を使用し、高次の項はすべて無視します。
+<!--
+For a non-infinitesimal \(\epsilon\), we would
+get here infinitely many terms. But for
+an infinitesimal \(\epsilon\), we use \(\epsilon^2 ≈ 0\) and
+therefore neglect all higher order terms.
+-->
+</p><p>
+
+\[
+\Phi(x) → \Phi(x +\epsilon) = \Phi(x) + \underbrace{∂_x\Phi(x)}_{\text{"rate of change" along the x-axis}}\epsilon	 
+\]
+
+これはもちろんテイラー級数展開の第一項です。物理学では、生成元に-iを1つ追加するのが慣例であり、したがって次のように定義します。
+<!--
+which is, of course, the first term of the Taylor series expansion. It is
+conventional in physics to add an extra −i to the generator and we
+therefore define
+-->
+
+\[
+P_i ≡ -i∂_i  \tag{3.252}
+\]
+
+この定義によれば、任意の有限の並進は<sup>183</sup>
+<!--
+With this definition an arbitrary, finite translation is<sup>183</sup>
+-->
+</p><p class="margin-large">
+<sup>183</sup>
+\(i^2 = -1\) を使用します。
+<!--
+Using \(i^2 = -1\).
+-->
+</p><p>
+
+\[
+\Phi(x) → \Phi(x + a) = e^{-ia^iP_i}\Phi(x) = e^{-a^i∂_i}\Phi(x)
+\]
+
+ここで、\(a^i\) は各方向への移動量を表します。
+指数関数をテイラー級数<sup>184</sup> として表すと、この式は単に \(\Phi(x + a)\) のテイラー展開<sup>185</sup> として見ることができます。別の時点に変換する場合は \(P_0 = i∂_0\) を使用し、別の位置に変換する場合は \(P_i = -i∂_i\) を使用します。
+<!--
+where \(a^i\) denotes the amount we want to translate in each direction.
+If we write the exponential function as Taylor series<sup>184</sup>, this equation can simply be seen as the Taylor expansion<sup>185</sup> for \(\Phi(x + a)\). If we want to transform to another point in time we use \(P_0 = i∂_0\), for a different location we use \(P_i = -i∂_i\).
+-->
+</p><p class="margin-large">
+<sup>184</sup>
+これは付録B.4.1で導き出されます。
+<!--
+This is derived in Appendix B.4.1.
+-->
+<br><br>
+<sup>185</sup>
+これは付録 B.3 で導出されます。
+<!--
+This is derived in Appendix B.3. 
+-->
+</p><p>
+さて、自然界の完全な時空対称性群、ポアンカレ群に移りましょう。
+<!--
+Now, let’s move on to the full spacetime symmetry group of nature:
+the Poincaré group.
+-->
+</p>
+    </body>
+</html>
