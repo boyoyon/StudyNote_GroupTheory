@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>リー群論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>リー群論</h1>
+<h2>3.11 付録: 多様体</h2>
+<!--
+<h1>Lie Group Theory</h1>
+<h2>3.11 Appendix: Manifolds</h2>
+-->
+<p>
+多様体 \(M\) とは、各開近傍から \(R^n\) の開集合への連続した 1-1 写像を持つ点の集合です。簡単に言えば、多様体 \(M\) は <strong>局所的に</strong> 標準的な \(R^n\) に似ています。M の各開近傍から \(R^n\) へのこの写像は、\(M\) の各点 \(P\) に n 組の \((x_1(P), ...x_n(P))\) を関連付けます。ここで、数 \(x_1(P), ...x_n(P)\) は点 \(P\) の座標と呼ばれます。したがって、n 次元多様体は、任意の点のある近傍に n 個の独立座標を与えることができる集合であると考えることもできます。
+<!--
+A manifold \(M\) is a set of points with a continuous 1-1 map from each
+open neighborhood onto an open set of \(R^n\). In easy words this means
+that a manifold \(M\) looks <strong>locally</strong> like the standard \(R^n\). This map from
+each open neighborhood of M onto \(R^n\) associates with each point \(P\)
+of \(M\) an n-tupel \((x_1(P), ...x_n(P))\) where the numbers \(x_1(P), ...x_n(P)\) are called the coordinates of the point \(P\). Therefore another way of
+thinking about a n-dimensional manifold is that it’s a set, which can
+be given n independent coordinates ins some neighborhood of any
+point.
+-->
+</p><p>
+
+多様体の例として、球面が挙げられます。三次元球面は二次元球面 \(S^2\) と呼ばれ、\(R^3\) 内の点の集合において \(x^2 + y^2 + z^2 = r\) が成り立つものとして定義されます。ここで、\(r\) は球面の半径です。三次元球面は二次元であることに注意してください。これは、定義に3つの座標と1つの条件が含まれており、これにより自由度が1つ除去されるためです。そのため、数学的には二次元球面と呼ばれます。球面が多様体であることを確認するには、\(R^2\) への写像が必要です。この写像は通常の球座標によって与えられます。
+<!--
+An example for a manifold is the surface of a ball. The surface
+of the three-dimensional ball is called two-sphere \(S^2\) and is defined
+as the set of points in \(R^3\) for which \(x^2 + y^2 + z^2 = r\) holds, where
+\(r\) is the radius of the sphere. Take note that the surface of the threedimensional
+ball is two-dimensional, because the definition involves
+3 coordinates and one condition, which eliminates one degree of
+freedom. That is why it’s called mathematically two-sphere. To see
+that the sphere is a manifold we need a map onto \(R^2\). This map is
+given by the usual spherical coordinates.
+-->
+</p>
+<center><img src="images/fig3_9.png"></center>
+<p>
+<center>図3.9: 球面のある近傍から\(R^n\)への写像の図解</center>
+<!--
+Fig. 3.9: Illustration of the map from
+one neighborhood of the sphere on to
+\(R^n\).
+-->
+</p><p>
+球面上のほぼすべての点は、\((ϕ, θ)\) という形式の座標の組み合わせで明確に識別できます。ほぼすべてです！ 極 \(ϕ = 0\) はどこに写像されるのでしょうか？ 図に示すように、極は直線全体に写像されるため、1対1の識別は不可能です。したがって、この写像は完全な球面には適用できず、極の近傍にあるものを記述するには、別の写像が必要です。同様の問題が半円 \(θ = 0\) 上の写像でも発生します。各点は \(R^2\) 内で \(θ = 0\) と \(θ = 2π\) に写像できますが、これも1対1の写像ではありません。これは、多様体では一般に、多様体のすべての点に対して1つの座標系が存在するのではなく、ある近傍で有効な局所座標のみが存在することを示しています。これは問題ではありません。
+多様体の定義的特徴は、局所的には \(R^n\) に似ているということだからです。
+<!--
+Almost all points on the surface of the sphere can be identified
+unambiguously with a coordinate combination of the form \((ϕ, θ)\). Almost
+all! Where is the pole \(ϕ = 0\) mapped to? There is no one-to-one
+identification possible, because the pole is mapped to a whole line,
+as indicated in the image. Therefore this map does not work for the
+complete sphere and we need another map in the neighborhood of
+the pole to describe things there. A similar problem occurs for the
+map on the semicircle \(θ = 0\). Each point can be mapped in the \(R^2\)
+to \(θ = 0\) and \(θ = 2π\), which is again not a one-to-one map. This
+illustrates the fact that for manifolds there is in general not one coordinate
+system for all points of the manifold, only local coordinates,
+which are valid in some neighborhood. This is no problem because
+the defining feature of a manifold is that it looks locally like \(R^n\).
+-->
+</p><p>
+球面座標写像は開近傍\(0 < ϕ < π, 0 < θ < 2π\) においてのみ有効であり、球面全体をカバーするには2つ目の写像が必要です。例えば、異なる向きを持つ2つ目の球面座標系を用いることで、問題となる極はこの写像では異なる点に位置し、\(ϕ = 0\) には位置しなくなります。この2つ目の写像を用いることで、球面上のすべての点は \(R^2\) への写像を持ち、2次元球面は多様体として見ることができます。
+<!--
+The spherical coordinate map is only valid in the open neighborhood
+\(0 < ϕ < π, 0 < θ < 2π\) and we need a second map to cover
+the whole sphere. We can use, for example, a second spherical coordinate
+system with different orientation, such that the problematic
+poles lie at different points for this map and no longer at \(ϕ = 0\). With
+this second map every point of the sphere has a map onto \(R^2\) and the
+two-sphere can be seen to be a manifold.
+-->
+</p><p>
+多様体の簡単な例はもちろん\(R^n\)である。
+<!--
+A trivial example for a manifold is of course \(R^n\)
+-->
+</p>
+    </body>
+</html>

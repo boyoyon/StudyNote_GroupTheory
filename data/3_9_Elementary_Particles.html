@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>リー群論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>リー群論</h1>
+<h2>3.9 素粒子</h2>
+<!--
+<h1>Lie Group Theory</h1>
+<h2>3.9 Elementary Particles</h2>
+-->
+<p>
+ポアンカレ群の二重被覆の既約表現のラベル、すなわち<strong>質量</strong> \(m\) と <strong>スピン</strong> (ここでは = \(j\)) は、物理学において素粒子に<strong>ラベルを付ける</strong>方法です<sup>195</sup>。与えられたラベル \(m\) とスピン (例えば \(j = \frac{1}{2}\) を持つ素粒子は、ポアンカレ群の \(m\)、スピン \(\frac{1}{2}\) 表現に従って変換されるオブジェクトによって記述されます。
+<!--
+The labels for the irreducible representations of double cover of the
+Poincaré group, <strong>mass</strong> m and by their <strong>spin</strong> (= \(j\) here), are how elementary particles are <strong>labeled</strong> in physics<sup>195</sup>. An elementary particle with given labels m and spin, say \(j = \frac{1}{2}\), is described by an object,
+which transforms according to the \(m\), spin \(\frac{1}{2}\) representation of the
+Poincaré group.
+-->
+</p><p class="margin-large">
+<sup>195</sup>
+一部の物理学者はさらに踏み込んで、素粒子は
+ポアンカレ群の
+既約表現であると主張します。
+<!--
+Some physicists go even farther
+and say that elementary particles are
+the irreducible representations of the
+Poincaré group.
+-->
+</p><p>
+内部対称性から、電荷と呼ばれるさらなるラベルが後ほど付与されます。
+これらのラベルは素粒子を定義するために使用されます。例えば、電子は以下のラベルで定義されます。
+<!--
+
+More labels, called charges, will follow later from internal symmetries.
+These labels are used to define an elementary particle. For
+example, an electron is defined by the following labels
+-->
+<div class="styleBullet">
+<ul><li>
+• 質量: 9, 109 · 10\(^{−31}\) kg
+</li><br><li>• スピン: \(\frac{1}{2}\)
+</li><br><li>• 電荷: 1, 602 · 10\(^{−19}\) C
+</li><br><li>• 弱い電荷（弱アイソスピン）: \(−\frac{1}{2}\)
+</li><br><li>• 強い電荷（色荷）: 0.
+<!--
+• mass: 9, 109 · 10\(^{−31}\) kg,
+</li><br><li>• spin: \(\frac{1}{2}\),
+</li><br><li>• electric charge: 1, 602 · 10\(^{−19}\) C,
+</li><br><li>• weak charge, called weak isospin: \(−\frac{1}{2}\),
+</li><br><li>• strong charge, called color charge: 0.
+-->
+</li></ul></div>
+</p><p>
+これらのラベルは、実験において特定の素粒子がどのように振る舞うかを決定します。本章で導出した表現は、それらを数学的に記述する方法を定義します。素粒子は、<sup>196</sup>
+<!--
+These labels determine how a given elementary particle behaves
+in experiments. The representations we derived in this chapter define
+how we can describe them mathematically. An elementary particle
+with<sup>196</sup> 
+-->
+</p><p class="margin-large">
+<sup>196</sup>
+導出できないものについての導入部分で、3つの表現で止まる理由はないと述べられたことを思い出してください。より高次元の表現に進むこともできますが、例えばスピン \(\frac{3}{2}\) を持つ素粒子は存在しません。それでも、そのような表現は複合物体を記述するために使用できます。さらに、重力を媒介する基本粒子である重力子はスピン2を持ち、したがってそれを記述するには対応する高次元の表現を使用しなければならないと考える物理学者も多くいます。
+<!--
+Remember that in the introductory
+remarks about what we can’t derive,
+it was said there is no real reason to
+stop here after three representations.
+We could go on to higher dimensional
+representations, but there are no elementary
+particles, for example, with
+spin \(\frac{3}{2}\). Nevertheless, such representations
+can be used to describe composite
+objects. In addition, there are many
+physicists that believe the fundamental
+particle mediating gravity, called
+graviton, has spin 2 and therefore a
+corresponding higher dimensional
+representation must be used to describe
+it.
+-->
+</p><p>
+
+
+<div class="styleBullet">
+<ul><li>
+• スピン 0 は、<strong>スカラー</strong>と呼ばれるオブジェクト \(\Phi\) で記述され、(0, 0) に従って変換されます。これは<strong>スピン 0 表現</strong>またはスカラー表現と呼ばれます。
+例えば、ヒッグス粒子はスカラー場によって記述されます。
+</li><br><li>• スピン \(\frac{1}{2}\) は、<strong>スピノル</strong>と呼ばれるオブジェクト \(Ψ\) で記述され、\((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\) 表現に従って変換されます。これは<strong>スピン \(\frac{1}{2}\) 表現</strong>またはスピノル表現と呼ばれます。例えば、電子とクォークはスピノルで記述されます。
+</li><br><li>• スピン1は、<strong>ベクトル</strong>と呼ばれるオブジェクトAによって記述されます。ベクトルは、<strong>スピン1表現</strong>またはベクトル表現と呼ばれる\((\frac{1}{2}, \frac{1}{2})\)に従って変換されます。例えば、光子はベクトルによって記述されます。
+<!--
+• spin 0 is described by an object \(\Phi\), called <strong>scalar</strong>, that transforms
+according to the (0, 0), called <strong>spin 0 representation</strong> or scalar representation.
+For example, the Higgs particle is described by a scalar
+field.
+</li><br><li>• spin \(\frac{1}{2}\) is described by an object \(Ψ\), called <strong>spinor</strong>, that transforms
+according to the \((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\) representation, called <strong>spin \(\frac{1}{2}\) representation</strong>or spinor representation. For example, electrons and
+quarks are described by spinors.
+</li><br><li>• spin 1 is described by an object A, called <strong>vector</strong>, that transforms
+according to the \((\frac{1}{2}, \frac{1}{2})\), called <strong>spin 1 representation</strong> or vector
+representation. For example photons are described by vectors.
+-->
+</li></ul></div>
+</p><p>
+これは非常に重要で、深く、そして美しい洞察です。繰り返しますが、
+<!--
+This is an incredibly important, deep and beautiful insight, so
+again:
+-->
+</p><p>
+ポアンカレ群の既約表現を導くことで得られるのは、<strong>すべての素粒子を記述するために必要な数学的ツール</strong>です。ヒッグス粒子のようなスピン0の粒子を記述するには、スピン0の表現に従って変換される<strong>スカラー</strong>と呼ばれる数学的オブジェクトを使用します。電子、ニュートリノ、クォークなどの<strong>スピン \(\frac{1}{2}\) 粒子</strong>を記述するには、スピン \(\frac{1}{2}\) 表現に従って変換される<strong>スピノル</strong>と呼ばれる数学的オブジェクトを使用します。光子やその他の<strong>スピン1</strong>を持つ粒子を記述するには、スピン1の表現に従って変換される<strong>ベクトル</strong>と呼ばれるオブジェクトを使用します。
+<!--
+What we get from deriving the irreducible representations of the
+Poincaré group are the <strong>mathematical tools we need to describe all
+elementary particles.</strong> To describe spin 0 particles, like the Higgs
+Boson, we use mathematical objects, called <strong>scalars</strong>, that transform
+according to the spin 0 representation. To describe <strong>spin \(\frac{1}{2}\)
+particles</strong> like electrons, neutrinos, quarks etc. we use mathematical objects,
+called <strong>spinors</strong>, that transform according to the spin \(\frac{1}{2}\)
+representation.
+To describe photons or other particles with <strong>spin 1</strong> we use objects,
+called <strong>vectors</strong>, transforming according to the spin 1 representation.
+-->
+</p><p>
+非常に示唆に富む「スピン」という名称については、実験で何をどのように測定するかについて論じた後、8.5.5節で説明します。「スピン」という名称を正当化する前に、まず何かが回転しているかどうかをどのようにして確認できるのかを理解する必要があり、この時点では「スピン」は単なるラベルに過ぎません。
+<!--
+An explanation for the very suggestive name spin, will be given
+in Section 8.5.5, after we talked about how and what we measure in
+experiments. We first have to know how we are able to find out if
+something is spinning, before we can justify the name spin. At this
+point, spin is merely a label.
+-->
+</p>
+<h2>さらに読むためのヒント</h2>
+<!--
+<h2>Further Reading Tips</h2>
+-->
+<p>
+<div class="styleBullet">
+<ul><li>
+• <strong>ジョン・スティルウェル著『ナイーブ・リー理論』</strong><sup>197</sup> は、非常に読みやすく、数学に重点を置いたリー理論の入門書です。
+<!--
+ • <strong>John Stillwell - Naive Lie Theory</strong><sup>197</sup> is a very readable, math
+orientated introduction to Lie Theory.
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>197</sup>
+ジョン・スティルウェル著『ナイーブ・リー理論』
+シュプリンガー社、第1版、2008年8月。ISBN
+978-0387782140
+<!--
+John Stillwell. Naive Lie Theory.
+Springer, 1st edition, August 2008. ISBN
+978-0387782140
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• <strong>Nadir Jeevanjee - 物理学者のためのテンソルと群論入門</strong><sup>198</sup> は、物理学における群論の活用に重点を置いた、非常に優れた入門書です。
+<!--
+• <strong>Nadir Jeevanjee - An Introduction to Tensors and Group Theory
+ for Physicists</strong><sup>198</sup> is a very good introduction, with strong focus on
+the usage of group theory in physics.
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>198</sup>
+ナディール・ジーヴァンジー著『物理学者のためのテンソルと群論入門』
+Birkhaeuser社、第1版、2011年8月
+ISBN 978-081764714​​8
+<!--
+Nadir Jeevanjee. An Introduction to
+Tensors and Group Theory for Physicists.
+Birkhaeuser, 1st edition, August 2011.
+ISBN 978-0817647148
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• <strong>ハワード・ジョージ著『素粒子物理学におけるリー代数』</strong><sup>199</sup> は、リー群論のうち素粒子物理学に関連する部分について学ぶのに最適な本です。
+<!--
+• <strong>Howard Georgi - Lie Algebras In Particle Physics</strong><sup>199</sup> is a great
+book to learn more about the parts of Lie group theory that are
+relevant for particle physics.
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>199</sup>
+ハワード・ジョージ著『素粒子物理学におけるリー代数：アイソスピンから統一理論へ』（物理学のフロンティア）ウェストビュー・プレス、第2版、1999年10月。ISBN
+9780738202334
+<!--
+Howard Georgi. Lie Algebras In
+Particle Physics: from Isospin To Unified
+Theories (Frontiers in Physics). Westview
+Press, 2 edition, 10 1999. ISBN
+9780738202334
+-->
+</p>
+    </body>
+</html>

@@ -1,0 +1,621 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>はじめに</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>1. はじめに</h1>
+<h2>1.1 導出できないもの</h2>
+<!--
+<h1>1. Introduction</h1>
+<h2>1.1 What we Cannot Derive</h2>
+-->
+<p>
+対称性から何が導かれるかを議論する前に、理論に手作業で何を組み込む必要があるかを明確にしておきましょう。まず第一に、現在、自然界の定数を導出できる理論は存在しません。これらの定数は実験から抽出する必要があります。例としては、様々な相互作用の結合定数や素粒子の質量などが挙げられます。
+<!--
+Before we talk about what we can derive from symmetry, let’s clarify
+what we need to put into the theories by hand. First of all, there is
+presently no theory that is able to derive the constants of nature.
+These constants need to be extracted from experiments. Examples are
+the coupling constants of the various interactions and the masses of
+the elementary particles.
+-->
+</p><p>
+それに加えて、説明できないものがあります。それは<strong>数字の3</strong>です。これは数字の神秘主義のようなものではありませんが、数字の3に直接関連するあらゆる制約を説明できないのです。例えば、
+<!--
+Besides that, there is something else we cannot explain: The <strong>number
+three</strong>. This should not be some kind of number mysticism, but
+we cannot explain all sorts of restrictions that are directly connected
+with the number three. For instance,
+-->
+<div class="styleBullet">
+<ul><li>
+●標準モデルで記述される3つの基本的な力、すなわち電磁力、弱い力、強い力に対応する3つのゲージ理論<sup>1</sup>が存在します。これらの力は、対称群に対応するゲージ理論によって記述されます。\(\mathcal{U}(1), \mathcal{SU}(2)\)、\(\mathcal{SU}(3)\)。なぜ\(\mathcal{SU}(4)\)から導かれる基本的な力がないのでしょうか？誰も知りません！
+<!--
+●there are three gauge theories <sup>1</sup>, corresponding to the three fun- 
+damental forces described by the standard model: The electromagnetic,
+the weak and the strong force. These forces are described
+by gauge theories that correspond to the symmetry groups
+\(\mathcal{U}(1), \mathcal{SU}(2)\) and \(\mathcal{SU}(3)\). Why is there no fundamental force following
+from \(\mathcal{SU}(4)\) ? Nobody knows!
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>1</sup>
+この入門書にあるゲージ理論や二重被覆といった用語が理解できなくても心配しないでください。これらの用語はすべて本書の後半で詳しく説明します。ここでは完全性のためにのみ記載しています。
+<!--
+Don’t worry if you don’t understand
+some terms, like gauge theory or
+double cover, in this introduction. All
+these terms will be explained in great
+detail later in this book and they are
+included here only for completeness.
+-->
+</p><p>
+<div class="styleBullet">
+<ul><li>
+● レプトンとクォークにはそれぞれ3世代ずつあります。
+なぜ4世代目がないのでしょうか？
+高精度の実験からのみ、4世代目は存在しないことが分かっています<sup>2</sup>。
+<!--
+● There are three lepton generations and three quark generations.
+Why isn’t there a fourth? We only know from experiments with
+high accuracy that there is no fourth generation <sup>2</sup>. 
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>2</sup>
+例えば、現在の宇宙における元素の存在量は、世代数に依存します。さらに、衝突型加速器実験による強力な証拠も存在します。（例えば、Phys. Rev. Lett. 109, 241802を参照）。
+<!--
+For example, the element abundance
+in the present universe depends on the
+number of generations. In addition,
+there are strong evidence from collider
+experiments. (See e.g. Phys. Rev. Lett.
+109, 241802) .
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+● ラグランジアン \((Φ^0,Φ^1,Φ^2)\) には、\(Φ\) の最も低い3つの次数のみを含めます。ここで、\(Φ\) は物理系を記述する一般的な何かを表し、ラグランジアンは理論を導出するために用いる対象であり、自由（＝相互作用しない）場／粒子を記述する妥当な理論を得るためのものです。
+</li><br><li>● 基本粒子を記述するために、ポアンカレ群の二重被覆の最も低い3つの表現のみを使用します。これらはそれぞれスピン \(0, \frac{1}{2}\) と \(1\) に対応します。スピン \(\frac{3}{2}\) を持つ基本粒子は存在しません。
+<!--
+● We only include the three lowest orders in \(Φ\) in the Lagrangian \((Φ^0,Φ^1,Φ^2)\), where \(Φ\) denotes here something generic that describes
+our physical system and the Lagrangian is the object we
+use to derive our theory from, in order to get a sensible theory
+describing free (=non-interacting) fields/particles.
+</li><br><li>● We only use the three lowest-dimensional representations of the
+double cover of the Poincaré group, which correspond to spin \(0, \frac{1}{2}\) and \(1\), respectively, to describe fundamental particles. There is no
+fundamental particle with spin \(\frac{3}{2}\).
+-->
+</li></ul></div>
+</p><p>
+現在の理論では、これらは手作業で組み込む必要がある仮定です。実験からそれらが正しいことは分かっていますが、3つで止めなければならないというより深い原理は今のところありません。
+<!--
+
+In the present theory, these things are assumptions we have to
+put in by hand. We know that they are correct from experiments,
+but there is presently no deeper principle why we have to stop after
+three.
+-->
+</p><p>
+さらに、対称性からは導き出せないものの、妥当な理論を導き出すためには考慮に入れなければならないことが1つあります。
+<!--
+In addition, there is one thing that can’t be derived from symmetry,
+but which must be taken into account in order to get a sensible
+theory:
+-->
+</p><p>
+ラグランジアンの微分演算子 \(∂_μ\) には、可能な限り最低の非自明な次数しか含めることができません。理論によっては、これらは一次微分 \(∂_μ\) ですが、ローレンツ不変性により一次微分が禁じられている理論もあります。そのため、二次微分 \(∂_μ∂^μ\) が可能な限り最低の非自明な次数となります。そうでなければ、意味のある理論は得られません。高次の微分を持つ理論は下から無制限であり、つまり、そのような理論のエネルギーは任意の負の値を取ることができます。したがって、そのような理論の状態は常により低いエネルギー状態へと遷移し、決して安定しません。
+<!--
+We are only allowed to include the lowest-possible, non-trivial order
+in the differential operator \(∂_μ\) in the Lagrangian. For some theories
+these are first order derivatives \(∂_μ\), for other theories Lorentz invariance
+forbids first order derivatives and therefore second order
+derivatives \(∂_μ∂^μ\) are the lowest-possible, non-trivial order. Otherwise,
+we don’t get a sensible theory. Theories with higher order derivatives
+are unbounded from below, which means that the energy in such theories
+can be arbitrarily negative. Therefore states in such theories can
+always transition into lower energy states and are never stable.
+-->
+</p><p>
+最後に、本書の他の理論を導出する方法では導出できないものがもう一つあります。それは<strong>重力</strong>です。もちろん、一般相対性理論と呼ばれる美しく正しい重力理論は存在します。しかし、この理論は他の理論とは全く異なる仕組みで作用し、完全な導出は本書の範囲を超えています。量子重力は、重力を他の理論と同じ枠組みに当てはめようとする試みですが、まだ構築途中の理論であり、誰も成功裏に導出できていません。とはいえ、最終章では重力に関するいくつかのコメントを述べます。
+<!--
+Finally, there is another thing we cannot derive in the way we derive
+the other theories in this book: <strong>gravity</strong>. Of course there is a beautiful
+and correct theory of gravity, called general relativity. But this
+theory works quite differently than the other theories and a complete
+derivation lies beyond the scope of this book. Quantum gravity, as an
+attempt to fit gravity into the same scheme as the other theories, is
+still a theory under construction that no one has successfully derived.
+Nevertheless, some comments regarding gravity will be made in the
+last chapter.
+-->
+</p>
+<h2>1.2 本書の概要</h2>
+<!--
+<h2>1.2 Book Overview</h2>
+-->
+<center><img src="images/fig1_1.svg"></center>
+<p>
+本書では<strong>自然単位系</strong>を使用しています。つまり、プランク定数を\(\hbar = 1\)、光速を\(c = 1\)と設定しています。これは理論的な考察には役立ちます。不要な記述を省くことができるからです。応用分野では、標準SI単位系に戻すために定数を再度加算する必要があります。
+<!--
+This book uses <strong>natural units</strong>, which means we set the Planck
+constant to \(\hbar = 1\) and the speed of light to \(c = 1\). This is helpful
+for theoretical considerations, because it avoids a lot of unnecessary
+writing. For applications the constants need to be added again to
+return to standard SI units.
+-->
+</p><p>
+私たちの出発点は、<strong>特殊相対性理論</strong>の基本的な仮定です。
+それは、光速度はすべての慣性系（互いに等速度で移動する系）において同じ値cを持ち、物理学はすべての慣性系において同じであるということです。
+<!--
+Our starting point will be the basic assumptions of <strong>special relativity</strong>.
+These are: The velocity of light has the same value c in all inertial
+frames of reference, which are frames moving with constant velocity
+relative to each other and physics is the same in all inertial frames of
+reference.
+-->
+</p><p>
+これらの対称性制約によって許されるすべての変換の集合は、<strong>ポアンカレ群</strong>と呼ばれます。これらを利用できるようにするために、対称性を扱うための数学理論について説明します。この数学の分野は群論と呼ばれます。ここでは、ポアンカレ群 <sup>3</sup> の既約表現を導出します。これは、他のすべての表現の基本的な構成要素と考えることができます。これらの表現は、このテキストの後半で、異なるスピンを持つ粒子や場を記述するために使用します。スピンは、異なる種類の粒子/場を表す抽象的なラベルであると同時に、内部角運動量のようなものと見なすことができます。これがどのように生じるのかを詳しく説明します。
+<!--
+The set of all transformations permitted by these symmetry constraints
+is called the <strong>Poincaré group</strong>. To be able to utilize them, we
+discuss the mathematical theory that enables us to work with symmetries.
+This branch of mathematics is called group theory. We will
+derive the irreducible representations of the Poincaré group <sup>3</sup>, which 
+you can think of as basic building blocks of all other representations.
+These representations are what we use later in this text to describe
+particles and fields of different spin. On the one hand, spin is an abstract
+label for different kinds of particles/fields and on the other
+hand can be seen as something like internal angular momentum. We
+will discuss in detail how this comes about.
+-->
+</p><p class="margin-large">
+<sup>3</sup>
+技術的に正確に言うと、ポアンカレ群そのものではなく、ポアンカレ群の<strong>二重被覆</strong>の表現を導出します。「二重被覆」という用語は、群の二重被覆と群自体との間の写像が、二重被覆の<strong>2</strong>元を群の<strong>1</strong>元に写すという観察に由来しています。これは3.3.1節で詳しく説明します。
+<!--
+To be technically correct: We will
+derive the representations of the
+<strong>double-cover</strong> of the Poincaré group
+instead of the Poincaré group itself. The
+term "double-cover" comes from the
+observation that the map between the
+double-cover of a group and the group
+itself maps <stromg>two</strong> elements of the double
+cover to <strong>one</strong> element of the group. This
+is explained in Section 3.3.1 in detail.
+-->
+</p><p>
+その後、<strong>ラグランジアン形式論</strong>が導入され、物理的な文脈における対称性の扱いが非常に容易になります。中心的な対象は<strong>ラグランジアン</strong>です。異なるラグランジアンは異なる物理系を記述するため、対称性を考慮していくつかのラグランジアンを導出します。さらに、<strong>オイラー-ラグランジュ方程式</strong>を導出します。これにより、与えられたラグランジアンから運動方程式を導出することができます。ポアンカレ群の既約表現を用いることで、異なるスピンを持つ場と粒子の基本運動方程式を導出することができます。
+<!--
+Afterwards, the <strong>Lagrangian formalism</strong> is introduced, which
+makes working with symmetries in a physical context very convenient. The central object is the <strong>Lagrangian</strong>. Different Lagrangians
+describe different physical systems and we will derive several Lagrangians
+using symmetry considerations. In addition, the <strong>Euler-
+Lagrange equations</strong> are derived. These enable us to derive the equations
+of motion from a given Lagrangian. Using the irreducible representations
+of the Poincaré group, the fundamental equations of
+motion for fields and particles with different spin can be derived.
+-->
+</p><p>
+ここでの中心的な考え方は、ラグランジアンがポアンカレ群のいかなる変換に対しても不変（＝変化しない）でなければならないということです。
+これにより、運動方程式はあらゆる参照系において同じ形をとることが保証されます。これは、上で「物理学はあらゆる慣性系において同じである」と述べた通りです。
+<!--
+The central idea here is that the Lagrangian must be invariant
+(=does not change) under any transformation of the Poincaré group.
+This makes sure the equations of motion take the same form in all
+frames of reference, which we stated above as "physics is the same in
+all inertial frames".
+-->
+</p><p>
+次に、自由スピン \(\frac{1}{2}\) 場に対するラグランジアンのもう一つの対称性、すなわち \(\mathcal{U}(1)\) 変換に対する不変性を発見します。同様に、スピン 1 場に対する<strong>内部対称性</strong>も発見できます。<strong>局所</strong> \(\mathcal{U}(1)\) 対称性を強く求めると、スピン \(\frac{1}{2}\) 場とスピン 1 場の間に<strong>結合項</strong>が存在します。この結合項を含むラグランジアンが、正しい<strong>量子電磁力学のラグランジアン</strong>です。同様の手順を局所 \(\mathcal{SU}(2)\) および \(\mathcal{SU}(3)\) 変換に対して行うことで、正しい<strong>弱い相互作用と強い相互作用のラグランジアン</strong>が得られます。
+<!--
+Then, we will discover another symmetry of the Lagrangian for
+free spin \(\frac{1}{2}\) fields: Invariance under \(\mathcal{U}(1)\) transformations. Similarly
+an <strong>internal symmetry</strong> for spin 1 fields can be found. Demanding
+<strong>local</strong> \(\mathcal{U}(1)\) symmetry will lead us to <strong>coupling terms</strong> between spin \(\frac{1}{2}\) and spin 1 fields. The Lagrangian with this coupling term is the correct
+<strong>Lagrangian for quantum electrodynamics</strong>. A similar procedure
+for local \(\mathcal{SU}(2)\) and \(\mathcal{SU}(3)\) transformations will lead us to the correct
+<strong>Lagrangian for weak and strong interactions</strong>.
+-->
+</p><p>
+さらに、<strong>対称性の破れ</strong>と、対称性を破る特別な方法である<strong>ヒッグス機構</strong>についても議論します。ヒッグス機構は、質量<sup>4</sup>の粒子を記述することを可能にします。
+<!--
+In addition, we discuss <strong>symmetry breaking</strong> and a special way to
+break symmetries called the <strong>Higgs mechanism</strong>. The Higgs mechanism enables us to describe particles with mass <sup>4</sup>.
+-->
+</p><p class="margin-large">
+<sup>4</sup>
+ヒッグス機構がなければ、ラグランジアンにおける質量を記述する項は
+対称性を損なうため、禁止されます。
+<!--
+Without the Higgs mechanism, terms describing mass in the Lagrangian
+spoil the symmetry and are therefore
+forbidden.
+-->
+</p><p>
+その後、対称性と保存量の間に深い関連性があることを明らかにする<strong>ネーターの定理</strong>が導出されます。この関連性を利用し、各物理量を対応する対称性生成元と同一視します。これにより、量子力学で最も重要な方程式が導き出されます。
+<!--
+Afterwards, <strong>Noether’s theorem</strong> is derived, which reveals a deep connection between symmetries and conserved quantities. We will
+utilize this connection by identifying each physical quantity with
+the corresponding symmetry generator. This leads us to the most
+important equation of quantum mechanics
+-->
+\[
+[\hat{x}_i,\hat{p}_j]=i\delta_{ij} \tag{1.1}
+\]
+
+そして場の量子論
+<!--
+and quantum field theory
+-->
+\[
+[\hat{\Phi}(x),\hat{\pi}(y)]=i\delta(x-y) \tag{1.2}
+\]
+
+スピン0粒子の運動方程式の非相対論的<sup>5</sup>極限、すなわちクライン・ゴルドン方程式を取り上げます。この極限は有名な<stronger>シュリンガー方程式</strong>をもたらします。これは、物理量と対応する対称性の生成元との間の同一視とともに、<strong>量子力学</strong>の基礎となります。
+<!--
+We continue by taking the non-relativistic <sup>5</sup> limit of the equation
+of motion for spin 0 particles, called Klein-Gordon equation, which
+result in the famous <stronger>Schr&ouml;inger equation</strong>. This, together with the
+identifications we made between physical quantities and the generators
+of the corresponding symmetries, is the foundation of <strong>quantum
+mechanics</strong>.
+-->
+</p><p class="margin-large">
+<sup>5</sup>
+非相対論的とは、すべてのものが光の速度に比べてゆっくりと動くことを意味し、したがって、特殊相対論の特に興味深い特徴は測定できないほど小さいのです。
+<!--
+Non-relativistic means that everything
+moves slowly compared to the speed of
+light and therefore especially curious
+features of special relativity are too
+small to be measurable.
+-->
+</p><p>
+次に、様々な運動方程式6と式1.2の解から始めて、<strong>自由量子場理論</strong>について考察します。6 クライン・ゴルドン方程式、ディラック方程式、プロカ方程式、そして
+その後、マクスウェル方程式を詳しく調べることで相互作用を考慮します。
+異なるスピンの場間の結合項を持つラグランジアンについて考察します。これにより、<strong>散乱過程の確率振幅</strong>がどのように導かれるかを議論することができます。
+<!--
+Then we take a look at <strong>free quantum field theory</strong>, by starting 
+with the solutions of the different equations of motion6 and Eq. 1.2. 6 The Klein-Gordon, Dirac, Proka and
+Afterwards, we take interactions into account, by taking a closer look Maxwell equations.
+at the Lagrangians with coupling terms between fields of different
+spin. This enables us to discuss how the <strong>probability amplitude for
+scattering processes</strong> can be derived.
+-->
+</p><p>
+<strong>エーレンフェストの定理</strong>を導出することにより、量子力学と<strong>古典力学</strong>の関連性が明らかになります。さらに、<strong>マクスウェル方程式</strong>や<strong>ローレンツ力の法則</strong>を含む<strong>古典電気力学</strong>の基本方程式が導出されます。
+<!--
+By deriving the <strong>Ehrenfest theorem</strong> the connection between quantum
+and <strong>classical mechanics</strong> is revealed. Furthermore, the fundamental
+equations of <strong>classical electrodynamics</strong>, including the
+<strong>Maxwell equations</strong> and the <strong>Lorentz force law</strong>, are derived.
+-->
+</p><p>
+最後に、<strong>一般相対性理論</strong>と呼ばれる現代の<strong>重力</strong>理論の基本構造を簡単に紹介し、<strong>量子重力理論</strong>の導出における困難さについていくつか考察する。
+<!--
+Finally, the basic structure of the modern theory of <strong>gravity</strong>, called
+<strong>general relativity</strong>, is briefly introduced and some remarks regarding
+the difficulties in the derivation of a <strong>quantum theory of gravity</strong> are
+made.
+-->
+</p><p>
+本書の主要部分は、対称性を数学的に扱うために必要なツールと、一般に<strong>標準モデル</strong>として知られるものの導出についてです。標準モデルは、量子場の理論を用いて、既知のすべての素粒子の挙動を記述します。今日まで、標準モデルのすべての実験的予測は正しかったのです。したがって、本書で紹介される他のすべての理論は、標準モデルの特別なケースとして導かれると言えます。例えば、巨視的な物体の極限では古典力学、低エネルギーの素粒子の極限では量子力学が用いられます。現在知られている素粒子とその相互作用について初めて知る読者のために、次のセクションでは簡単な概要を説明します。
+<!--
+The major part of this book is about the tools we need to work
+with symmetries mathematically and about the derivation of what is
+commonly known as the <strong>standard model</strong>. The standard model uses
+quantum field theory to describe the behavior of all known elementary
+particles. Until the present day, all experimental predictions of
+the standard model have been correct. Every other theory introduced
+here can then be seen to follow from the standard model as a special
+case. For example in the limit of macroscopic objects we get classical
+mechanics or in the limit of elementary particles with low energy,
+we get quantum mechanics. For those readers who have never heard
+about the presently-known elementary particles and their interactions,
+a really quick overview is included in the next section.
+-->
+</p>
+<h2>1.3 素粒子と基本的な力</h2>
+<!--
+<h2>1.3 Elementary Particles and Fundamental Forces</h2>
+-->
+<p>
+素粒子には大きく分けて2つのカテゴリーがあります。<strong>ボソン</strong>と<strong>フェルミオン</strong>です。フェルミオンが全く同じ状態になることは2つとなく、これは<strong>パウリの排他原理</strong>として知られていますが、ボソンは無限にあります。この興味深い自然界の事実が、これらの粒子の全く異なる振る舞いを生み出しています。
+<!--
+There are two major categories for elementary particles: <strong>bosons</strong> and
+<strong>fermions</strong>. There can be never two fermions in exactly the same state,
+which is known as <strong>Pauli’s exclusion principle</strong>, but infinitely many
+bosons. This curious fact of nature leads to the completely different
+behavior of these particles:
+-->
+<div class="styleBullet">
+<ul><li>
+• フェルミオンは物質を司る
+</li><br><li>• ボソンは自然界の力を司る
+<!--
+• fermions are responsible for matter
+</li><br><li>• bosons for the forces of nature.
+-->
+</li></ul></div>
+</p><p>
+これは例えば、原子はフェルミオン<sup>7</sup>で構成されているが、電磁力はボソンによって媒介されることを意味します。電磁相互作用を担うボソンは光子と呼ばれます。この排他原理の最も劇的な帰結の一つは、安定した物質がそもそも存在しないということです。もし同じ状態に無限の数のフェルミオンが存在できるとしたら、安定した物質は存在しないでしょう<sup>8</sup>。
+<!--
+This means, for example, that atoms consist of fermions<sup>7</sup>, but the 
+electromagnetic-force is mediated by bosons. The bosons that are
+responsible for electromagnetic interactions are called photons. One
+of the most dramatic consequences of thie exclusion principle is that
+there is stable matter at all. If there could be infinitely many fermions
+in the same state, there would be no stable matter<sup>8</sup>. 
+-->
+</p><p class="margin-large">
+<sup>7</sup>
+原子は電子、陽子、中性子から構成されており、これらはすべてフェルミオンです。
+しかし、陽子と中性子は基本粒子ではなく、クォークから構成されており、クォークもフェルミオンであることに注意してください。
+<!--
+Atoms consist of electrons, protons
+and neutrons, which are all fermions.
+But take note that protons and neutrons
+are not fundamental and consist of
+quarks, which are fermions, too.
+-->
+<br>
+<sip>8</sup>
+これについては第6章で議論する。
+<!--
+We will discuss this in Chapter 6
+-->
+</p><p>
+
+現在知られている基本的な力は4つある
+<!--
+There are four presently known fundamental forces
+-->
+<div class="styleBullet">
+<ul><li>
+• 電磁力。これは質量のない<strong>光子</strong>によって媒介されます。
+</li><br><li>• 弱い力。これは質量のある \(\mathbf{W}^+,\mathbf{W}^−\) および \(\mathbf{Z}\)-<strong>ボソン</strong>によって媒介されます。
+</li><br><li>• 強い力。これは質量のない<strong>グルーオン</strong>によって媒介されます。
+</li><br><li>• 重力。これは（おそらく）<strong>グラビトン</strong>によって媒介されます。
+<!--
+• The electromagnetic force, which is mediated by massless <strong>photons</strong>.
+</li><br><li>• The weak force, which is mediated by massive \(\mathbf{W}^+,\mathbf{W}^−\) and \(\mathbf{Z}\)-<strong>bosons</strong>.
+</li><br><li>• The strong force, which is mediated by massless <strong>gluons</strong>.
+</li><br><li>• Gravity, which is (maybe) mediated by <strong>gravitons</strong>.
+-->
+</li></ul></div>
+</p><p>
+これらのボソンの中には質量がないものもあれば、質量のないものもあり、これは自然について深いことを教えてくれます。適切な枠組みを構築すれば、このことを完全に理解できるでしょう。今は、それぞれの力が対称性と密接に関連していることに注目してください。弱い力を媒介するボソンに質量があるという事実は、関連する対称性が破れていることを意味します。この<strong>自発的対称性の破れ</strong>のプロセスが、<strong>すべての</strong>素粒子の質量の原因です。これは、別の基本ボソンである<strong>ヒッグス粒子</strong>との結合によって可能になることを後で見ていきます。
+<!--
+Some of the these bosons are massless and some are not and this
+tells us something deep about nature. We will fully understand this
+after setting up the appropriate framework. For the moment, just
+take note that each force is closely related to a symmetry. The fact
+that the bosons mediating the weak force are massive means the
+related symmetry is broken. This process of <strong>spontaneous symmetry
+breaking</strong> is responsible for the masses of <strong>all</strong> elementary particles.
+We will see later that this is possible through the coupling to another
+fundamental boson, the <strong>Higgs boson</strong>.
+-->
+</p><p>
+
+素粒子は、対応する<strong>電荷</strong><sup>9</sup> を持っている場合、何らかの力を介して相互作用します。
+<!--
+Fundamental particles interact via some force if they carry the
+corresponding <strong>charge</strong><sup>9</sup>.
+-->
+</p><p class="margin-large">
+<sup>9</sup>
+すべての電荷には美しい共通の起源があり、それについては第7章で説明します。
+<!--
+All charges have a beautiful common origin that will be discussed in Chapter 7
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• 電磁力の場合、これは電荷であり、したがって、電荷を持つ粒子のみが電磁相互作用に参加します。
+</li><br><li>• 弱い力の場合、電荷は<strong>アイソスピン</strong><sup>10</sup>と呼ばれます。既知のすべてのフェルミオンはアイソスピンを持っているため、弱い力を介して相互作用します。
+<!--
+• For the electromagnetic force this is the electric charge and consequently
+only electrically charged particles take part in electromagnetic
+interactions.
+</li><br><li>• For the weak force, the charge is called <strong>isospin</strong><sup>10</sup>. All known
+fermions carry isospin and therefore interact via the weak force.
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>10</sup>
+弱い力の電荷にはしばしば「弱い」という接頭辞が付きます。つまり、弱いアイソスピンと呼ばれます。これは、強い力を介して相互作用する複合物体にはアイソスピンという別の概念があるためです。しかし、これは基本的な電荷ではなく、本書では「弱い」という接頭辞は省略されています。
+<!--
+Often the charge of the weak force 
+carries the extra prefix "weak", i.e. is
+called weak isospin, because there
+is another concept called isospin for
+composite objects that interact via the
+strong force. Nevertheless, this is not a
+fundamental charge and in this book
+the prefix "weak" is omitted.
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• 強い力の電荷は、人間の目に見える色と共通するいくつかの興味深い特徴から、<strong>色</strong>と呼ばれます。この名前に惑わされないでください。この電荷は、日常生活で目にする色とはまったく関係がありません。
+<!--
+• The charge of the strong force is called <strong>color</strong>, because of some
+curious features it shares with the humanly visible colors. Don’t
+let this name confuse you, because this charge has nothing to do
+with the colors you see in everyday life.
+-->
+</li></ul></div>
+</p><p>
+基本的なフェルミオンは2つのサブカテゴリに分けられます。
+<strong>クォーク</strong>は陽子と中性子の構成要素であり、
+<strong>レプトン</strong>はレプトンです。有名なレプトンの例としては、電子やニュートリノが挙げられます。
+クォークとレプトンは、それぞれ2つの粒子から構成される3つの<strong>世代</strong>に分類されます。
+<!--
+The fundamental fermions are divided into two subcategories:
+<strong>quarks</strong>, which are the building blocks of protons and neutrons, and
+<strong>leptons</strong>. Famous leptons are, for example, electrons and neutrinos.
+The difference is that quarks carry color charge and therefore take
+part in strong interactions, whereas leptons do not. There are three
+quark and lepton <strong>generations</strong>, which consist each of two particles:
+-->
+</p><p>
+粒子はラベルによって識別できます。電荷と質量に加えて、スピンと呼ばれる非常に重要なラベルがあります。これは一種の内部角運動量と見なすことができます。ボソンは整数スピンを持ち、フェルミオンは半整数スピンを持ちます。上記に挙げた基本フェルミオンはスピン1を持ち、ほぼすべての基本ボソンはスピン0を持ちます。スピン0を持つ基本粒子は、ヒッグス粒子だけが知られています。
+<!--
+Different particles can be identified through labels. In addition
+to the charges and the mass there is another incredibly important
+label called spin, which can be seen as some kind of internal angular
+momentum. Bosons carry integer spin, whereas fermions carry halfinteger
+spin. The fundamental fermions we listed above have spin
+\(\frac{1}{2}\) and almost all fundamental bosons have spin 1. There is only one
+known fundamental particle with spin 0: the Higgs boson.
+-->
+</p><p>
+それぞれの粒子には反粒子が存在し、それらは全く同じラベルを持ち、符号が反対です<sup>11</sup>。電子の場合、反粒子は陽電子と呼ばれますが、一般的には特別な名前はなく、「反」という接頭辞だけが付きます。例えば、アップクォークに対応する反粒子は反アップクォークと呼ばれます。光子<sup>12</sup>のような粒子は、それ自身も反粒子です。
+<!--
+
+There is an anti-particle for each particle, which carries exactly the
+same labels with opposite sign<sup>11</sup>. For the electron the anti-particle 
+is called positron, but in general there is no extra name and only a
+prefix "anti". For example, the antiparticle corresponding to an upquark
+is called anti-up-quark. Some particles, like the photon<sup>12</sup> are their own anti-particle.
+-->
+</p><p class="margin-large">
+<sup>11</sup>
+質量ラベルを除けば、おそらくそうでしょう。
+これは現在、スイスのジュネーブにある欧州原子核研究機構（CERN）のAEGIS実験、ATRAP実験、ALPHA実験などで実験的に研究されています。
+<!--
+Maybe except for the mass label.
+This is currently under experimental
+investigation, for example at the AEGIS,
+the ATRAP and the ALPHA experiment,
+located at CERN in Geneva,
+Switzerland.
+-->
+<br><br>
+
+<sup>12</sup>
+そしておそらくニュートリノも、現在多くの実験で実験的に調査されており、ニュートリノなしの二重ベータ崩壊を探索しています。
+<!--
+And maybe the neutrinos, which is
+currently under experimental investigation
+in many experiments that search
+for a neutrinoless double-beta decay.
+-->
+</p><p>
+これらの概念はすべて、本書の後半でより詳しく説明します。
+さて、この粒子動物園における様々な登場人物の相互作用を正しく記述する理論の導出に取り掛かりましょう。
+この目標に向けた最初の礎石は、アインシュタインの有名な特殊相対性理論であり、これは次章で取り上げます。
+<!--
+All these notions will be explained in more detail later in this text.
+Now it’s time to start with the derivation of the theory that describes
+correctly the interplay of the different characters in this particle zoo.
+The first cornerstone towards this goal is Einstein’s famous theory of
+special relativity, which is the topic of the next chapter.
+-->
+</p>
+<center><img src="images/fig1_2.png"></center>
+    </body>
+</html>

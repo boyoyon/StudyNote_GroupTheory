@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>リー群論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>リー群論</h1>
+<h2>3.8 ポアンカレ群</h2>
+<!--
+<h1>Lie Group Theory</h1>
+<h2>3.8 The Poincaré Group</h2>
+-->
+<p>
+ローレンツ群には回転とブーストが含まれます。光速を不変に保つ更なる変換は、空間と時間における並進です。なぜなら、時空の異なる点で光速を測定しても、その値は変化しないからです。これらの対称性をローレンツ群に加えると、ポアンカレ群<sup>186</sup>が得られます。
+<!--
+The Lorentz group includes rotations and boosts. Further transformations
+that leave the speed of light invariant are translations in space
+and time, because measuring the speed of light at a different point in
+spacetime does not change its value. If we add these symmetries to
+the Lorentz group we get the Poincaré group<sup>186</sup>
+-->
+</p><p class="margin-large">
+<sup>186</sup>
+ポアンカレ群はローレンツ群と並進の直和ではなく、半直和ですが、このテキストではこの技術的な詳細は無視します。
+<!--
+The Poincaré group is not the direct,
+but the semi-direct, sum of the Lorentz
+group and translations, but for the
+purpose of this text we can neglect this
+technical detail.
+-->
+</p><p>
+
+\[
+\begin{align}
+\text{ポアンカレ群} &= \text{ローレンツ群＋並進} \\ 
+&= \text{回転＋ブースト＋並進} \tag{3.253}
+\end{align}
+\]
+
+ポアンカレ群の生成元は、ローレンツ群の生成元 \(J_i, K_i\) と並進運動の生成元 \(P_μ\) である。
+<!--
+The generators of the Poincaré group are the generators of the
+Lorentz group \(J_i, K_i\) plus the generators of translations \(P_μ\).
+-->
+</p><p>
+
+\(J_i, K_i\)と\(P_μ\)に関して、リー代数は次のように表される。
+<!--
+In terms of \(J_i, K_i\) and \(P_μ\) the Lie algebra reads
+-->
+<sup>187</sup>
+
+</p><p class="margin-large">
+<sup>187</sup>
+あまり啓発的ではありませんが、完全性のために含めました。
+<!--
+This is not very enlightening, but
+included for completeness.
+-->
+</p><p>
+
+\[
+\begin{align}
+[J_i, J_j] &= i\epsilon_{ijk} J_k \tag{3.254} \\
+\\
+[J_i, K_j] &= i\epsilon_{ijk}K_k  \tag{3.255} \\
+\\
+[K_i, K_j] &= −i\epsilon_{ijk}J_k  \tag{3.256} \\
+\\
+[J_i, P_j] &= i\epsilon_{ijk} P_k  \tag{3.257} \\
+\\
+[J_i, P_0] &=0  \tag{3.258} \\
+\\
+[K_i, P_j] &= iδ_{ij}P_0  \tag{3.259} \\
+\\
+[K_i, P_0] &= −iP_i  \tag{3.260}
+\end{align}
+\]
+
+これは非常に厄介なことのように見えるので、慣例的に\(M_{μν}\)を使ってこれを書き表す。\(M_{μν}\)は次のように定義される。
+<!--
+Because this looks like a huge mess it is conventional to write this in
+terms of \(M_{μν}\), which was defined by
+-->
+\[
+\begin{align}
+J_i = \frac{1}{2}\epsilon_{ijk}M_{jk}  \tag{3.261} \\
+\\
+K_i = M_{0i}  \tag{3.262}
+\end{align}
+\]
+
+\(M_{μν}\) を用いると、<strong>ポアンカレ代数</strong>は次のようになる。
+<!--
+With \(M_{μν}\) the <strong>Poincaré algebra</strong> reads
+-->
+\[
+\begin{align}
+[P_μ, P_ν] &=0  \tag{3.263} \\
+\\
+[M_{μν}, P_ρ] &= i(η_{μρ}P_ν − η_{νρ}P_μ)  \tag{3.264}
+\end{align}
+\]
+
+そしてもちろんまだ
+<!--
+and of course still have
+-->
+\[
+[M_{μν},M_{ρσ}] = i(η_{μρ}M_{νσ} − η_{μσ}M_{νρ} − η_{νρ}M_{μσ} + η_{νσ}M_{μρ})  \tag{3.265}
+\]
+
+</p><p>
+この非常に複雑な群では、カシミール作用素の固定されたスカラー値を用いて表現にラベルを付けるのが非常に有用です。
+ポアンカレ群には2つのカシミール作用素があります<sup>188</sup>。最初のものは次のとおりです。
+<!--
+For this quite complicated group it is very useful to label the representations
+by using the fixed scalar values of the Casimir operators.
+The Poincaré group has two Casimir operators<sup>188</sup> . The first one is:
+-->
+</p><p class="margin-large">
+<sup>188</sup>
+カシミール演算子は、生成元から構成され、他のすべての生成元と可換な演算子として定義されることを思い出してください。
+<!--
+Recall that a Casimir operator is 
+defined as an operator, constructed
+from the generators, that commutes
+with all other generators. 
+-->
+</p><p>
+
+\[
+P_μP^μ =: m^2  \tag{3.266}
+\]
+
+このスカラー値には\(m^2\)というわかりやすい名前を付けます。これは、後でそれが粒子の質量<sup>189</sup>と一致することを学ぶからです。
+<!--
+We give the scalar value the suggestive name \(m^2\), because we will
+learn later that it coincides with the mass of particles<sup>189</sup>.
+-->
+</p><p class="margin-large">
+<sup>189</sup>
+心配しないでください。これは後でもっと理解しやすくなります。
+<!--
+Don’t worry, this will make much more sense later.
+-->
+</p><p>
+
+2番目のカシミール演算子は\(W_μW^μ\)であり、<sup>190</sup>
+<!--
+The second Casimir operator is \(W_μW^μ\), where<sup>190</sup>
+-->
+</p><p class="margin-large">
+<sup>190</sup>
+\(\epsilon^{μνρσ}\) は4次元レヴィ-チヴィタ記号であり、付録B.5.5で定義されています。
+<!--
+\(\epsilon^{μνρσ}\) is the four-dimensional Levi-
+Civita symbol, which is defined in
+Appendix B.5.5. 
+-->
+</p><p>
+
+\[
+W^μ =\frac{1}{2}\epsilon^{μνρσ}P_νM_{ρσ}  \tag{3.267}
+\]
+
+これは<strong>パウリ・ルバンスキーの4元ベクトル</strong>と呼ばれます。計算が長くなると、\(m\) に加えて、数 \(j ≡ j_1 + j_2\) をラベルとして使うことが正当化されます。このラベルは一般にスピンと呼ばれます。今のところは、これは単なる名前です。後で、スピンという名前がなぜ適切かを理解します。ローレンツ群の場合と全く同じように、\(\mathcal{SU}(2)\) 代数の2つの表現のそれぞれに対して1つの \(j_i\) が存在します。
+<!--
+which is called the <strong>Pauli-Lubanski four-vector</strong>. In a lengthy computation
+it can be justified, that in addition to m, we use the number
+\(j ≡ j_1 + j_2\) as a label. This label is commonly called spin. For the
+moment this is just a name. Later we will understand why the name
+spin is appropriate. Exactly as for the Lorentz group, we have one \(j_i\)
+for each of the two191 representations of the SU(2) algebra.
+-->
+</p><p class="margin-large">
+<sup>191</sup>
+ローレンツ群の複素化リー代数は、\(\mathcal{SU}(2)\) のリー代数の2つのコピーから構成されると考えられることを思い出してください。\(\mathcal{SU}(2)\) の表現は数値 j でラベル付けすることができ、その結果、ローレンツ群の二重被覆の表現には2つの数値 (\(j_1, j_2\)) を使用しました。
+<!--
+Recall that the complexified Lie algebra of the Lorentz group could be
+seen to consist of two copies of the Lie
+algebra of \(\mathcal{SU}(2)\). The representations
+of \(\mathcal{SU}(2)\) could be labelled by a number
+j and consequently we used for representations
+of the double cover of the
+Lorentz group two numbers (\(j_1, j_2\)).
+-->
+</p><p>
+
+例えば、\((j_1, j_2) = (0, 0)\) 表現はスピン 0 表現<sup>192</sup>と呼ばれます。\((j_1, j_2) = (\frac{1}{2}, 0)\) と \((j_1, j_2) = (0, \frac{1}{2})\) はどちらもスピン \(\frac{1}{2}\) 表現<sup>193</sup>と呼ばれ、同様に \((j_1, j_2) = (\frac{1}{2}, \frac{1}{2})\) 表現はスピン 1 表現<sup>194</sup>と呼ばれます。
+<!--
+For example, the \((j_1, j_2) = (0, 0)\) representation is called spin 0
+representation<sup>192</sup>. The \((j_1, j_2) = (\frac{1}{2}, 0)\) and \((j_1, j_2) = (0, \frac{1}{2})\) are both called spin \(\frac{1}{2}\) representations<sup>193</sup> and analogously the \((j_1, j_2) = (\frac{1}{2}, \frac{1}{2})\)  representation is called spin 1 representation<sup>194</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>192</sup>
+\(j_1 + j_2 = 0 + 0 = 0\)
+<br>
+
+<sup>193</sup>
+\(j_1 + j_2 = \frac{1}{2}+ 0 = 0 + \frac{1}{2} = \frac{1}{2}\)
+<br>
+
+<sup>194</sup>
+\( j_1 + j_2 = \frac{1}{2}+\frac{1}{2}= 1\)
+
+</p><p>
+
+ここで重要なのは、それぞれの表現が2つのスカラー値、\(m\) と \(j\) でラベル付けされているということです。\(m\) は任意の値をとることができますが、\(j\) は半整数または整数に制限されます。
+<!--
+The message to take away is that each representation is labelled by
+two scalar values: m and j. While m can take on arbitrary values, j is
+restricted to half-integer or integer values.
+-->
+</p>
+    </body>
+</html>
