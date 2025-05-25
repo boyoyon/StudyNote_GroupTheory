@@ -1,0 +1,1326 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>特殊相対性理論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+        <h1>2. 特殊相対性理論</h1>
+<p>
+有名なマイケルソン・モーリーの実験は、光速がすべての基準系において同じ値を持つことを発見しました<sup>1</sup>。
+<!--
+The famous Michelson-Morley experiment discovered that the speed
+of light has the same value in all reference frames <sup>1</sup>. 
+-->
+
+</p><p class="margin-large">
+<sup>1</sup> 
+私たちが日常生活で観察する物体の速度は、基準となる座標系によって異なります。例えば、駅に立っている観察者が電車の速度を時速50kmと計測した場合、同じ電車の横を時速15kmで走っている別の観察者は、電車の速度を時速35kmと計測します。一方、光は、あなたが光に対してどのように動いても、常に\(1.08 · 10^9\) km/hで移動します。
+<!--
+The speed of objects we observe in
+everyday life depend on the frame
+of reference. For example, when an
+observer standing at a train station
+measures that a train moves with
+50 km/h , another observer running with
+15 km/h next to the same train, measures
+that the train moves with 35 km/h . In
+contrast, light always moves with
+\(1.08 · 10^9\) km/h , no matter how you move
+relative to it.
+-->
+</p><p>
+
+アルベルト・アインシュタインは、この観察がもたらす広範な影響を認識し、この奇妙な自然現象を基に特殊相対性理論を構築しました。光速不変という理論を出発点として、アインシュタインは多くの興味深く奇妙な結果を予測し、それらはすべて真実であることが証明されました。この理論の威力を見ていきましょう。まずは特殊相対性理論とは何かを明確にしましょう。2つの基本公理は次のとおりです。
+<!--
+Albert Einstein 
+recognized the far reaching consequences of this observation and
+around this curious fact of nature he built the theory of special relativity.
+Starting from the constant speed of light, Einstein was able to
+predict many interesting and strange consequences that all proved
+to be true. We will see how powerful this idea is, but first let’s clarify
+what special relativity is all about. The two basic postulates are
+-->
+
+<div class="styleBullet">
+<ul><li>
+● <strong>相対性原理</strong>：物理学は、すべての慣性系、つまり互いに一定の速度で運動する系において同一です。
+</li><br><li>● <strong>光速度の不変性</strong>：光速度は、すべての慣性系において同じ値 \(c\) を持ちます。
+<!--
+● <strong>The principle of relativity</strong>: Physics is the same in all inertial
+frames of reference, i.e. frames moving with constant velocity
+relative to each other.
+</li><br><li>● <strong>The invariance of the speed of light</strong>: The velocity of light has the
+same value c in all inertial frames of reference.
+-->
+</li></ul></div>
+
+</p><p>
+さらに、物理法則が作用する舞台は均質かつ等方性であると仮定します。これは、実験をどこで行い（＝均質性）、どのような向きか（＝等方性）に関係なく、物理法則は一定であることを意味します。例えば、ニューヨークと東京の2人の物理学者が全く同じ実験を行った場合、同じ物理法則<sup>2</sup>が見つかるでしょう。同様に、火星の物理学者も同じ物理法則を見つけるでしょう。
+<!--
+In addition, we will assume that the stage our physical laws act on
+is homogeneous and isotropic. This means it does not matter where
+(=homogeneity) we perform an experiment and how it is oriented
+(=isotropy), the laws of physics stay the same. For example, if two
+physicists, one in New-York and the other one in Tokyo, perform exactly
+the same experiment, they would find the same <sup>2</sup> physical laws. 
+Equally a physicist on planet Mars would find the same physical
+laws.
+-->
+</p><p class="margin-large">
+<sup>2</sup> 
+定数を変えること以外にも、例えば重力加速度など
+<!--
+Besides from changing constants,
+as, for example, the gravitational
+acceleration
+-->
+</p><p>
+物理法則は、正しく定式化されていれば、実験を別の視点から見ても、明日繰り返しても変化しないはずです。さらに、第一公理は、物理実験は、一定速度で動く貨車で行う場合でも、実験室で静止している場合でも、同じ結果になるはずだと示しています。これらのことは日常の経験と一致しています。例えば、一定速度で動く車の中で目を閉じた場合、自分が本当に動いているのか、静止しているのかを見分ける方法はありません。
+<!--
+The laws of physics, formulated correctly, shouldn’t change if
+you look at the experiment from a different perspective or repeat
+it tomorrow. In addition, the first postulate tells us that a physical
+experiment should come up with the same result regardless of if
+you perform it on a wagon moving with constant speed or at rest in
+a laboratory. These things coincide with everyday experience. For
+example, if you close your eyes in a car moving with constant speed,
+there is no way to tell if you are really moving or if you’re at rest.
+-->
+</p><p>
+均質性と等方性がなければ、物理学は深刻な問題に直面するでしょう。もし実験から導き出される自然法則が、実験の特定の方向において、空間の一点にのみ成立するとしたら、そのような法則はむしろ役に立たないものとなるでしょう。
+<!--
+Without homogeneity and isotropy physics would be in deep
+trouble: If the laws of nature we deduce from experiment would hold
+only at one point in space, for a specific orientation of the experiment
+such laws would be rather useless.
+-->
+</p><p>
+唯一直感に反するのは第二公準で、これはあらゆる日常経験に反する。しかしながら、今日までのあらゆる実験は、それが正しいことを示している。
+<!--
+The only unintuitive thing is the second postulate, which is contrary
+to all everyday experience. Nevertheless, all experiments until
+the present day show that it is correct.
+-->
+</p>
+<h2>2.1 特殊相対論の不変量</h2>
+<!--
+<h2>2.1 The Invariant of Special Relativity</h2>
+-->
+<p>
+詳細に入る前に、以下のセクションで何をやるのかを簡単にまとめます。特殊相対性理論の公理を用いてミンコフスキー計量を導き出します。これは、2つの物理的事象間の「距離」を計算する方法を示しています。この文脈における物理的事象の別名は、ミンコフスキー空間内の点であり、特殊相対性理論の法則が作用する空間のことです。したがって、異なる慣性系を結ぶすべての変換は、ミンコフスキー計量を変えずに済むはずです。こうして、許容される系、つまり光速が一定である系を結ぶすべての変換を求めることができます。本書の残りの部分では、これらの変換に関する知識を用いて、これらの変換によって変化しない方程式を求めます。まずは、特殊相対性理論の公理の最も基本的な帰結の一つを導き出すための思考実験から始めましょう。
+<!--
+Before we dive into the details, here’s a short summary of what we
+want to do in the following sections. We use the postulates of special
+relativity to derive the Minkowski metric, which tells us how to compute
+the "distance" between two physical events. Another name for
+physical events in this context is points in Minkowski space, which
+is how the stage the laws of special relativity act on is called. It then
+follows that all transformations connecting different inertial frames of
+reference must leave the Minkowski metric unchanged. This is how
+we are able to find all transformations that connect allowed frames
+of reference, i.e. frames with a constant speed of light. In the rest of
+the book we will use the knowledge of these transformations, to find
+equations that are unchanged by these transformations. Let’s start
+with a thought experiment that enables us to derive one of the most
+fundamental consequences of the postulates of special relativity.
+-->
+</p><p>
+想像してみてください。観客が自分の座標系の原点に立って、真上に光パルスを送ります。光パルスは鏡で反射され、最終的に元の点に戻ります。この様子を図2.1に示します。
+<!--
+Imagine, we have a spectator, standing at the origin of his coordinate
+system and sending a light pulse straight up, where it is
+reflected by a mirror and finally reaches again the point from where
+it was sent. An illustration of this can be seen in Fig. 2.1
+-->
+</p>
+<center><img src="images/fig2_1.png"></center>
+<p>
+<center>図2.1: 思考実験の図説</center>
+<!--
+<center>Fig. 2.1: Illustration of the thought experiment</center>
+-->
+</p><p>
+重要なイベントが 3 つあります。
+<!--
+We have three important events:
+-->
+<div class="styleBullet">
+<ul><li>
+● <strong>A</strong> : 光は開始点から出発します。
+</li><br><li>● <strong>B</strong> : 光は鏡で反射されます。
+</li><br><li>● <strong>C</strong> : 光は開始点に戻ります。
+<!--
+● <strong>A</strong> : the light leaves the starting point
+</li><br><li>● <strong>B</strong> : the light is reflected at a mirror
+</li><br><li>● <strong>C</strong> : the light returns to the starting point.
+-->
+</li></ul></div>
+</p><p>
+<strong>A</strong> と <strong>C</strong> の間の時間間隔は以下になります。<sup>3</sup>
+<!--
+The time-interval between <strong>A</strong> and <strong>C</strong> is <sup>3</sup>
+-->
+</p><p class="margin-large">
+<sup>3</sup>
+一定の速度 \(v\) の場合、\(v = \frac{Δs}{Δt}\)となり、移動距離は \(Δs\), 所要時間は \(Δt\) なので、\(Δt = \frac{Δs}{v}\) となります。
+<!--
+For constant speed \(v\) we have \(v = \frac{Δs}{Δt}\),
+with the distance covered \(Δs\) and the
+time needed \(Δt\), and therefore \(Δt = \frac{Δs}{v}\)
+-->
+\[
+\Delta t=t_C-t_A=\frac{2L}{c} \tag{2.1}
+\]
+ここで、L は開始点とミラー間の距離を表します。
+<!--
+where L denotes the distance between the starting point and the mirror.
+-->
+
+</p><p>
+次に、2人目の観察者が座標系の原点である \(t_A\) に立ち、最初の観察者 <sup>4</sup> に対して左に等速 \(u\) で移動していると想像してください。
+<!--
+Next imagine a second spectator, standing at \(t_A\) at the origin of his
+coordinate system and moving with constant velocity \(u\) to the left, relative to the first spectator <sup>4</sup>. 
+-->
+</p><p class="margin-large">
+<sup>4</sup>
+ある観察者の記述を、最初の観察者に対して一定速度で移動する別の観察者の記述に変換する変換は、ブーストと呼ばれます。このような変換の形式的な記述は、後ほど導出します。
+<!--
+Transformations that allow us to transform
+the description of one observer
+into the description of a second observer,
+moving with constant speed
+relative to first observer, are called
+boosts. We derive later a formal description
+of such transformations.
+-->
+</p><p>
+簡単のため、この2番目の観察者の座標系の原点が、最初の観察者の座標原点と \(t_A\) で一致すると仮定しましょう。2番目の観察者は、少し違った見方をします。彼の参照座標系では、光が到達する点は、開始点と同じ座標ではありません（図2.2参照）。
+<!--
+For simplicity let’s assume that the 
+origin of this second spectators’ coordinate system coincides at tA
+with the coordinate origin of the first spectator. The second spectator
+sees things a little differently. In his frame of reference the point
+where the light ends up will not have the same coordinates as the
+starting point (see Fig. 2.2).
+-->
+</p>
+<center><img src="images/fig2_2.png"></center>
+<p class="margin-large">
+図2.2：移動する観察者に対する思考実験の図解。2人目の観察者は左に移動し、したがって1人目の観察者（および実験）は彼に対して右に移動します。
+<!--
+Fig. 2.2: Illustration of the thought
+experiment for a moving spectator. The
+second spectator moves to the left and
+therefore the first spectator (and the
+experiment) moves relative to him to
+the right.
+-->
+</p><p>
+これを数学的に表現すると
+<!--
+We can express this mathematically
+-->
+\[
+x_A^\prime=0\neq x_C^\prime=u\Delta t^\prime \rightarrow \Delta x^\prime=u\Delta t^\prime \tag{2.2}
+\]
+ここで、ダッシュ付きの座標は移動する観察者を表す。静止座標系の最初の観察者については、もちろん
+<!--
+where the primed coordinates denote the moving spectator. For the
+first spectator in the rest-frame we have of course
+-->
+\[
+x_A = x_C \rightarrow \Delta x = 0 \tag{2.3}
+\]
+
+\(x\)軸に沿った動きを仮定すると、
+<!--
+We assume movement along the \(x\)-axis, therefore
+-->
+\[
+y_A^\prime = y_C^\prime　and　z_A^\prime=z_C^\prime　→　Δy^\prime= 0　and　Δz^\prime= 0  \tag{2.4}
+\]
+
+そしてもちろん同様に
+<!--
+and equally of course
+-->
+\[
+y_A = y_C　and　z_A = z_C　 →　 Δy = 0　 and　 Δz = 0  \tag{2.5}
+\]
+
+次の疑問は、<strong>2人目の観察者が計測する時間間隔はどうなるか？</strong>です。光速度は一定であると仮定しているため、2人目の観察者は <strong>A</strong> と <strong>C</strong> の間で異なる時間間隔を計測します。時間間隔 \(Δt^\prime = t_C^\prime-t_A^\prime\) は、2人目の観察者が観測した光が移動する距離 \(l\) を光速 \(c\) で割った値に等しくなります。
+<!--
+The next question is: <strong>What about the time interval the second
+spectator measures?</strong> Because we postulate a constant velocity of
+light, the second spectator measures a different time interval between
+<strong>A</strong> and <strong>C</strong>! The time interval \(Δt^\prime = t_C^\prime-t_A^\prime\) is equal to the distance \(l\) the
+light travels, as the second spectator observes it, divided by the speed
+of light \(c\).
+-->
+\[
+Δt^\prime=\frac{l}{c}  \tag{2.6}
+\]
+
+古き良きピタゴラスの定理を使って移動距離lを計算することができます（図2.2参照）。
+<!--
+We can compute the distance traveled l using the good old Pythagorean
+theorem (see Fig. 2.2)
+-->
+</p><p>
+
+\[
+l = 2\sqrt{\left(\frac{1}{2}uΔt^\prime\right)^2+L^2}  \tag{2.7}
+\]
+式2.6を用いると、
+<!--
+Using Eq. 2.6, we therefore conclude
+-->
+\[
+cΔt^\prime= 2\sqrt{\left(\frac{1}{2}uΔt^\prime\right)^2+L^2}  \tag{2.8}
+\]
+
+ここで式2.2の\(Δx^\prime = uΔt^\prime\)を用いると、次のように書ける。
+<!--
+If we now use \(Δx^\prime = uΔt^\prime\) from Eq. 2.2, we can write
+-->
+\[
+\begin{align}
+cΔt^\prime &= 2\sqrt{\left(\frac{1}{2}Δx^\prime\right)^2+ L^2}  \\
+\\
+&→ (cΔt^\prime)^2 = 4\left(\left(\frac{1}{2}Δx^\prime\right)^2+ L^2\right) \\
+\\
+&→ (cΔt^\prime)^2 − (Δx^\prime)^2 = 4\left(\left(\frac{1}{2}Δx^\prime\right)^2+ L^2\right)− (Δx^\prime)^2 = 4L^2  \tag{2.9}
+\end{align}
+\]
+
+そして式2.1から \(Δt = \frac{2L}{c}\) を思い出すと、
+<!--
+and now recalling from Eq. 2.1 that \(Δt = \frac{2L}{c} , we can write
+-->
+\[
+(cΔt^\prime)^2 − (Δx^\prime)^2 = 4L^2 = (cΔt)^2 = (Δtc)^2 −\underbrace{ (Δx)^2}_{=0 \text{式2.3参照}}  \tag{2.10}
+\]
+
+最終的に以下<sup>5</sup>に到着します
+<!--
+So finally, we arrive<sup>5</sup> at
+-->
+</p><p class="margin-large">
+<sup>5</sup>
+ここで行っていることは、結果への最短経路に過ぎないことに注意してください。なぜなら、2つの座標系の原点を\(t_A\)で一致させたからです。しかしながら、物理的性質はすべての慣性系において同じであるため、より手間をかければ、任意の選択に対しても同じことを行うことができます。この自由度を利用して、計算が容易な2つの慣性系を選択しました。任意に移動する第2の慣性系では、\(Δy^\prime = 0\) と \(Δz^\prime= 0\) は成り立ちません。それでも、物理的性質はすべての慣性系において同じであるため、式は成り立ちます。
+<!--
+Take note that what we are doing here 
+is just the shortest path to the result,
+because we chose the origins of the
+two coordinate systems to coincide
+at \(t_A\). Nevertheless, the same can be
+done, with more effort, for arbitrary
+choices, because physics is the same
+in all inertial frames. We used this
+freedom to choose two inertial frames
+where the computation is easy. In
+an arbitrarily moving second inertial
+system we do not have \(Δy^\prime = 0\) and
+\(Δz\prime= 0\). Nevertheless, the equation
+holds, because physics is the same in all
+inertial frames.
+-->
+</p><p>
+
+\[
+(cΔt^\prime)^2 − (Δx^\prime)^2 − \underbrace{(Δy^\prime)^2}_{=0}−\underbrace{(Δz^\prime)^2}_{=0}= (cΔt)^2 − \underbrace{(Δx)^2}_{=0}−\underbrace{(Δy)^2}_{=0}−\underbrace{(Δz)^2}_{=0}  \tag{2.11}
+\]
+
+最初の観察者とは異なる速度で移動する3人目の観察者を考えると、同じ推論で次の式が得られます。
+<!--
+Considering a third observer, moving with a different velocity relative
+to the first observer, we can use the same reasoning to arrive at
+-->
+\[
+(cΔt^{\prime\prime})^2 −(Δx^{\prime\prime})^2 −(Δy^{\prime\prime})^2 −(Δz^{\prime\prime})^2 = (cΔt)^2 −(Δx)^2 −(Δy)^2 −(Δz)^2  \tag{2.12}
+\]
+
+<strong>したがって、私たちはすべての観察者にとって同じもの、つまり二次形式を発見しました</strong>
+<!--
+<strong>Therefore, we have found something which is the same for all
+observers: the quadratic form</strong>
+-->
+\[
+(Δs)^2 ≡ (cΔt)^2 − (Δx)^2 − (Δy)^2 − (Δz)^2  \tag{2.13}
+\]
+
+</p><p>
+
+さらに、このセクションでは、\((Δx)^2 + (Δy)^2 + (Δz)^2\)
+または\((cΔt)^2\)は観察者によって異なることを学びました。この興味深い性質がどのような意味を持つのかについては、次のセクションで説明します。
+<!--
+In addition, we learned in this section that \((Δx)^2 + (Δy)^2 + (Δz)^2\)
+or \((cΔt)^2\) aren’t the same for different observers. We will talk about
+the implications of this curious property in the next section.
+-->
+</p>
+<h2>2.2 固有時間</h2>
+<!--
+<h2>2.2 Proper Time</h2>
+-->
+<p>
+前のセクションでは、特殊相対論の不変量 \(Δs^2\) を導出しました。これは、すべての観察者にとって同じ値を持つ量です。ここで、この量の物理的な意味について考えてみましょう。
+<!--
+We derived in the last section the invariant of special relativity \(Δs^2\),
+i.e. a quantity that has the same value for all observers. Now, we
+want to think about the physical meaning of this quantity.
+-->
+</p><p>
+簡潔にするために、空間次元を1つに限定しましょう。ある観察者に対して静止している物体は、図2.3に示すような<strong>時空図</strong>を持ちます。一方、同じ観察者に対して等速度で運動している物体は、図2.4に示すような時空図を持ちます。
+<!--
+For brevity, let’s restrict ourselves to one spatial dimension. An
+object at rest, relative to some observer, has a <strong>spacetime diagram</strong>
+as drawn in Fig. 2.3. In contrast, an object moving with constant
+velocity, relative to the same observer, has a spacetime diagram as
+drawn in Fig. 2.4.
+-->
+</p>
+<center><img src="images/fig2_3.png"></center>
+<p class="margin-large">
+図2.3: 静止した物体の世界線。
+物体の位置は時間の経過とともに変化しません。
+<!--
+Fig. 2.3: World line of an object at rest.
+The position of the object stays the
+same as time goes on.
+-->
+</p>
+<center><img src="images/fig2_4.png"></center>
+<p class="margin-large">
+図2.4: 2つの事象 \(A\) と \(B\) を伴う運動物体の世界線。\(A\) と \(B\) 間の移動距離は \(Δx\) であり、事象発生から経過した時間は \(Δt\) である。
+<!--
+Fig. 2.4: World line of a moving object
+with two events \(A\) and \(B\). The distance
+travelled between \(A\) and \(B\) is \(Δx\) and
+the time that passed the events is \(Δt\).
+-->
+</p><p>
+時空における物体の位置を特定するために引く線は<strong>世界線</strong>と呼ばれます。世界線は常に観察者に依存します。
+同じ物体に対して、2人の異なる観察者が全く異なる世界線を描くこともあります。図2.4のように世界線が引かれた運動物体は、図2.5に示すように、物体と同じ一定速度で運動する2人目の観察者を探します。この2人目の観察者にとって、物体は静止しています。この2つの異なる記述を考慮するために、2人目の観察者に対してプライム付き座標を導入することに注意してください：\(x^\prime\) と \(t^\prime\)。
+<!--
+The lines we draw to specify the position of objects in spacetime
+are called <strong>world lines</strong>. World lines are always observer dependent.
+Two different observers may draw completely different world lines
+for the same object. The moving object with world line drawn in
+Fig. 2.4, looks for a second observer who moves with the same constant
+speed as the object, as drawn in Fig. 2.5. For this second observer
+the object is at rest. Take note, to account for the two different
+descriptions we introduce primed coordinates for the second observer:
+\(x^\prime\) and \(t^\prime\).
+-->
+</p>
+<center><img src="images/fig2_5.png"></center>
+<p class="margin-abstract">
+図2.5: 同じ運動物体の世界線を、その物体と同じ一定速度で運動する人物から観測した図。この観察者にとって、\(A\) と \(B\) 間の移動距離は\(Δx^\prime = 0\) である。
+<!--
+Fig. 2.5: World line of the same moving
+object, as observed from someone
+moving with the same constant speed
+as the object. The distance travelled
+between \(A\) and \(B\) is for this observer
+\(Δx^\prime = 0\).
+-->
+</p><p>
+両観察者は、時空におけるいくつかの事象 \(A\) と \(B\) の間、物体が移動する距離について意見が一致していないことがわかります。最初の観察者にとっては \(Δx \neq 0\) ですが、2番目の観察者にとっては \(Δx^\prime = 0\) です。
+両観察者にとって、\(A\) と \(B\) の間の時間間隔はゼロではありません：
+\(Δt \neq 0\) かつ \(Δt^\prime \neq= 0\)。両観察者は量の値について意見が一致しています。
+\((Δs)^2\) は、前節で導出したように、特殊相対論のこの不変量はすべての観察者にとって同じ値を持つためです。驚くべき結果として、両観察者は事象 \(A\) と \(B\) の間の経過時間について意見が一致しません。
+<!--
+We can see that both observers do not agree on the distance the
+object travels between some events \(A\) and \(B\) in spacetime. For the
+first observer we have \(Δx \neq 0\), but for the second observer \(Δx^\prime = 0\).
+For both observers the time interval between \(A\) and \(B\) is non-zero:
+\(Δt \neq 0\) and \(Δt^\prime \neq= 0\). Both observers agree on the value of the quantity
+\((Δs)^2\), because as we derived in the last section, this invariant of
+special relativity has the same value for all observers. A surprising
+consequence is that both observers do not agree on the time elapsed
+between the events \(A\) and \(B\)
+-->
+\[
+(Δs)^2 = (cΔt)^2 − (Δx)^2 (2.14)
+\]
+
+\[
+(Δs^\prime)^2 = (cΔt^\prime)^2 − \underbrace{(Δx^\prime)^2}_{=0}= (cΔt^\prime)^2  \tag{2.15}
+\]
+
+\[
+(Δs)^2 = (Δs^\prime)^2 → (Δt^\prime)^2\neq (Δt)^2　because　(Δx)^2 \neq 0  \tag{2.16}
+\]
+
+これは特殊相対性理論の最も有名な現象の一つであり、一般的に<strong>時間の遅れ</strong>と呼ばれています。時間間隔と空間距離は観察者によって異なります。時計の進み方は観察者によって異なり、そのため、2つの事象間の経過時間も観察者によって異なります。
+<!--
+This is one of the most famous phenomena of special relativity
+and commonly called <strong>time-dilation</strong>. Time-intervals and spatial distances
+are observer dependent. The clocks tick differently for different
+observers and therefore they observe a different number of ticks
+between two events.
+-->
+</p><p>
+時間の概念が相対的なものとなった今、すべての観察者が同意する新しい時間の概念が有用となるかもしれません。上の例では、物体と同じ速度で移動する2番目の観察者にとって、
+<!--
+Now that the concept of time has become relative, a new notion of
+time that all observers agree on may be useful. In the example above
+we can see that for the second observer, moving with the same speed
+as the object, we have
+-->
+\[
+(Δs)^2 = (cΔt^\prime)^2  \tag{2.17}
+\]
+
+これは、特殊相対論の不変量が、定数cを除いて、この観察者によって測定された時間間隔と等しいことを意味します。これを念頭に置いて、\((Δs)^2\)を解釈し、すべての観察者が同意する時間の概念を定義することができます。次のように定義します。
+<!--
+This means the invariant of special relativity is equivalent, up to a
+constant c, to the time interval measured by this observer. With this
+in mind, we can interpret \((Δs)^2\) and define a notion of time that all
+observers agree on. We define
+-->
+\[
+(Δs)^2 = (cΔτ)^2  \tag{2.18}
+\]
+
+ここで、\(τ\) は<strong>固有時</strong>と呼ばれます。固有時とは、観察者が、対象となる物体が静止している特殊な基準系において測定した時間のことです。
+<!--
+where \(τ\) is called the <strong>proper time</strong>. The proper time is the time measured
+by an observer in the special frame of reference where the
+object in question is at rest.
+-->
+</p><p>
+
+もちろん、現実世界の物体は一定速度で運動するとは限りません。しかし、時間間隔が十分に短い場合、極端な場合には無限小であれば、あらゆる運動は線形となり、固有時間の概念が意味を持ちます。数学的に言えば、これは無限小間隔への移行（Δ → d）を必要とします。
+<!--
+Of course objects in the real world aren’t restricted to motion
+with constant speed, but if the time interval is short enough, in the
+extremal case infinitesimal, any motion is linear and the notion of
+proper time is sensible. In mathematical terms this requires we make
+the transition to infinitesimal intervals \(Δ → d\):
+-->
+\[
+(ds)^2 = (cdτ)^2 = (cdt)^2 − (dx)^2 − (dy)^2 − (dz)^2  \tag{2.19}
+\]
+
+</p><p>
+したがって、たとえ物体が大きく動いたとしても、時計を持った観察者がその物体と共に移動し、静止した物体を観測している状況を想像することができます。この特別な観察者が測定する時間間隔が固有時であり、すべての観察者がその値に同意します。なぜなら、\((ds)^2 = (cdτ)^2\) はすべての観察者にとって同じ値を持つからです。繰り返しますが、これはすべての観察者が同じ時間間隔を測定することを意味するわけではありません。彼らは単に、問題の物体と共に移動する誰かが測定した時間間隔の値に同意しているだけなのです。
+<!--
+Therefore, even if an object moves wildly, we can still imagine
+some observer with a clock travelling with the object and therefore
+observing the object at rest. The time interval this special observer
+measures is the proper time and all observers agree on its value, because
+\((ds)^2 = (cdτ)^2\) has the same value for all observers. Again,
+this does not mean that all observers measure the same time interval!
+They just agree on the value of the time interval measured by
+someone who travels with the object in question.
+-->
+</p>
+<h2>2.3 上限速度</h2>
+<!--
+<h2>2.3 Upper Speed Limit</h2>
+-->
+<p>
+特殊相対性理論の不変量の解釈が得られたので、さらに一歩進んで、特殊相対性理論の公理の最も驚くべき帰結の一つを探求することができます。
+<!--
+Now that we have an interpretation for the invariant of special relativity,
+we can go a step further and explore one of the most stunning
+consequences of the postulates of special relativity.
+-->
+</p><p>
+\(Δs^2\) の定義におけるマイナス符号から、空間的にも時間的にも離れた2つの事象に対してはΔs2がゼロになる可能性があることがわかります。さらに、Δs2が負になる場合もありますが、その場合、固有時<sup>6</sup>は複素数値となり、これは一般に非物理的であるとして無視されます。結論として、Δs^2 = 0\ のとき、2つの事象に対して最小の固有時 \(τ = 0\) が成り立ちます。そして、次のように書けます。
+<!--
+It follows from the minus sign in the definition of Δs2that it can be
+zero for two events that are separated in space and time. It even can
+be negative, but then we would get a complex value for the proper
+time<sup>6</sup>, which is commonly discarded as unphysical. We conclude, we
+have a minimal proper time \(τ = 0\) for two events if \(Δs^2 = 0\). Then we
+can write
+-->
+</p><p class="margin-large">
+<sup>6</sup>
+\((ds)^2 = (cdτ)^2\) を思い出してください。したがって、\((ds)^2 < 0 → dτ\) の場合には複素数になります。
+<!--
+Recall \((ds)^2 = (cdτ)^2\) and therefore if 
+\((ds)^2 < 0 → dτ\) is complex. 
+-->
+</p><p>
+
+\[
+\begin{align}
+Δs_{min}^2 &= 0 = (cΔt)^2 − (Δx)^2 − (Δy)^2 − (Δz)^2 \\
+\\
+&→ (cΔt)^2 = (Δx)^2 + (Δy)^2 + (Δz)^2 \\
+\\
+&→ c^2 =\frac{(Δx)^2 + (Δy)^2 + (Δz)^2}{(Δt)^2}  \tag{2.20}
+\end{align}
+\]
+
+右辺には速度の2乗\(v^2\)、つまり距離を時間で割った値があります。これを無限小極限で書き直すと、
+<!--
+On the right-hand side we have a squared velocity \(v^2\), i.e. distance
+divided by time. We can rewrite this in the infinitesimal limit
+-->
+\[
+→ c^2 =\frac{(dx)^2 + (dy)^2 + (dz)^2}{(dt)^2}  \tag{2.21}
+\]
+
+関数 \(x(t), y(t), z(t)\) は2つの事象間の経路を表します。したがって、右辺には事象間の速度が表されます。
+<!--
+The functions \(x(t), y(t), z(t)\) describe the path between the two
+events. Therefore, we have on the right-hand side the velocity between
+the events.
+-->
+</p><p>
+
+固有時間の最低値は、誰かが速度を上げて移動することによって測定されると結論付けました
+<!--
+We conclude the lowest value for the proper time is measured by
+someone travelling with speed
+-->
+\[
+→ c^2 = v^2  \tag{2.22}
+\]
+これは、\(c\) よりも速い速度で動くものは何もないことを意味します！<strong>物理学では、あらゆるものに速度の上限があります</strong>。時空における2つの事象は、\(c\) よりも速い速度で繋がることはできません。
+<!--
+This means nothing can move with a velocity larger than c! <strong>We
+have an upper speed limit for everything in physics</strong>. Two events
+in spacetime can’t be connected by anything faster than c.
+-->
+</p><p>
+この観察から<strong>局所性原理</strong>が導き出されます。これは、物理学におけるあらゆる事象は、そのすぐ近くの環境からのみ影響を受けるということを意味します。あらゆる相互作用は局所的であり、遠隔作用は起こり得ません。なぜなら、物理学におけるあらゆる事象は、ある点から別の点へ移動するのに時間を必要とするからです。
+<!--
+From this observation follows the <strong>principle of locality</strong>, which
+means that everything in physics can only be influenced by its immediate
+surroundings. Every interaction must be local and there can be
+no action at a distance, because everything in physics needs time to
+travel from some point to another.
+-->
+</p>
+<h2>2.4 ミンコフスキー記法</h2>
+<!--
+<h2>2.4 The Minkowski Notation</h2>
+-->
+<p class="margin-large">
+今後、空間も時間も、それ自体では消え去り、
+単なる影と化す運命にあり、両者のある種の結合のみが
+独立した実在性を維持するであろう。<br>
+- ヘルマン・ミンコフスキー<sup>7</sup>
+<!--
+Henceforth space by itself, and time by itself, are doomed to fade away
+into mere shadows, and only a kind of union of the two will preserve
+an independent reality.<br>
+- Hermann Minkowski<sup>7</sup>
+-->
+</p><p class="margin-large">
+<sup>7</sup>
+第80回ドイツ自然科学者・医師会議での演説（1908年9月21日）
+<!--
+In a speech at the 80th Assembly
+of German Natural Scientists and
+Physicians (21 September 1908)
+-->
+</p><p>
+特殊相対論の不変量を書き直すことができる
+<!--
+We can rewrite the invariant of special relativity 
+-->
+\[
+ds^2 = (cdt)^2 − (dx)^2 − (dy)^2 − (dz)^2  \tag{2.23}
+\]
+
+一見するとかなり複雑に見える新しい表記法を使うことで、
+非常に役立つことが証明されます。
+<!--
+by using a new notation, which looks quite complicated at first sight,
+but will prove to be invaluable:
+-->
+\[
+ds^2 = η^{μν}dx_μdx_ν = η^{00}(dx_0)^2 + η^{11}(dx_1)^2 + η^{22}(dx_2)^2 + η^{33}(dx_3)^2
+\]
+
+\[
+= (dx_0)^2 − (dx_1)^2 − (dx_2)^2 − (dx_3)^2 = (cdt)^2 − (dx)^2 − (dy)^2 − (dz)^2  \tag{2.24}
+\]
+
+ここでは、現代物理学のあらゆる場面で使用されているため、習得しておく必要のあるいくつかの新しい表記法と慣例を使用します。
+<!--
+Here we use several new notations and conventions one needs to
+become familiar with, because they are used everywhere in modern
+physics:
+-->
+<div class="styleBullet">
+<ul><li>
+• アインシュタインの加法規則：添字が2回出現する場合、暗黙的に和が取られます：\(\sum_{i=1}^3 a_ib_i = a_ib_i = a_1b_1 + a_2b_2 + a_3b_3\)、ただし
+\(\sum_{i=1}^3 a_ib_j = a_1b_j + a_2b_j + a_3b_j \neq a_ib_j\)
+</li><br><li>• ギリシャ添字<sup>8</sup>（\(μ, ν\)や\(σ\)など）は、常に0から3まで加算されます：
+\(x_μy_μ = \sum_{μ=0}^3 x_μy_μ\)。
+<!--
+• Einsteins summation convention: If an index occurs twice, a sum
+is implicitly assumed : \(\sum_{i=1}^3 a_ib_i = a_ib_i = a_1b_1 + a_2b_2 + a_3b_3\), but
+\(\sum_{i=1}^3 a_ib_j = a_1b_j + a_2b_j + a_3b_j \neq a_ib_j\)
+</li><br><li>• Greek indices<sup>8</sup>, like \(μ, ν\) or \(σ\), are always summed from 0 to 3: 
+\(x_μy_μ = \sum_{μ=0}^3 x_μy_μ.
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>8</sup>
+対照的に、\(i, j, k\) のようなローマ字の添え字は常に合計されます: \(x_ix_i ≡ \sum_i^3 x_ix_i\)
+1 から 3 まで。本書の後半では、\(A, B, C\) のような大文字のローマ字を使用し、合計は 1 から 8 までになります。
+<!--
+In contrast, Roman indices like \(i, j, k\)
+are always summed: \(x_ix_i ≡ \sum_i^3 x_ix_i\)
+from 1 to 3. Much later in the book
+we will use capital Roman letters like
+\(A, B, C\) that are summed from 1 to 8.
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• 変数 \(x_0 ≡ ct, x_1 ≡ x, x_2 ≡ y\) と \(x_3 ≡ z\) の名前を変更し、時間と空間が同等に扱われることを明確にし、上記で導入した規則を適用できるようにします。
+
+</li><br><li>• ミンコフスキー計量 \(η^{00} = 1, η^{11 }= −1, η^{22} = −1,
+η^{33} = −1\) および \(ημν = 0\)（\(μ \neq ν\) の場合）を導入します（これを等価的に記述するには <sup>9</sup> \(η = diag(1,−1,−1,−1)\) とします）。
+<!--
+• Renaming of the variables \(x_0 ≡ ct, x_1 ≡ x, x_2 ≡ y\) and \(x_3 ≡ z\), to
+make it obvious that time and space are now treated equally and
+to be able to use the rules introduced above
+
+</li><br><li>• Introduction of the Minkowski metric \(η^{00} = 1, η^{11 }= −1, η^{22} = −1,
+η^{33} = −1\) and \(ημν = 0\) for \(μ \neq ν\) ( an equal way of writing this is<sup>9</sup> \(η = diag(1,−1,−1,−1)\))
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>9</sup>
+\[
+η =
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}
+\]
+</p><p>
+
+さらに、<strong>4ベクトル</strong>の概念を導入するのが一般的です。
+<!--
+In addition, it’s conventional to introduce the notion of a <strong>four- vector</strong>
+-->
+\[
+dx_μ =
+\begin{pmatrix}
+dx_0 \\
+dx_1 \\
+dx_2 \\
+dx_3
+\end{pmatrix}
+\tag{2.25}
+\]
+
+なぜなら、上記の式は4元ベクトルとミンコフスキー計量を使って同様に表すことができるからです。
+<!--
+because the equation above can be written equally using four-vectors
+and the Minkowski metric in matrix form
+-->
+\[
+\begin{align}
+(ds)^2 &= dx_μη^{μν}dx_ν =\left(dx_0　dx_1　dx_2　dx_3\right)
+\begin{pmatrix}
+1  & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}
+\begin{pmatrix}
+dx_0 \\
+dx_1 \\
+dx_2 \\
+dx_3
+\end{pmatrix} \\
+\\
+&= dx_0^2− dx_1^2− dx_2^2− dx_3^2 \tag{2.26}
+\end{align}
+\]
+
+これは実に巧妙な書き方です。dsの物理的な解釈は、時空における2つの事象間の「距離」です。ここでは空間的な距離だけでなく、時間的な隔たりも考慮する必要があることに注意してください。3次元ユークリッド空間<sup>10</sup>を考えると、2点間の2乗（最短）距離は<sup>11</sup>で与えられます。
+<!--
+This is really just a clever way of writing things. A physical interpretation
+of ds is that it is the "distance" between two events in
+spacetime. Take note that we don’t mean here only the spatial distance,
+but also have to consider a separation in time. If we consider
+3-dimensional Euclidean<sup>10</sup> space the squared (shortest) distance between two points is given by<sup>11</sup>
+-->
+</p><p class="margin-large">
+<sup>10</sup>
+3次元ユークリッド空間は、古典物理学の空間に過ぎません。古典物理学では、時間は空間とは異なる扱いを受け、幾何学的考察には含まれていませんでした。時間を第4の座標とする時空の概念は、特殊相対性理論によって導入され、後述するように、時間と空間座標の混合を可能にしました。
+<!--
+3-dimensional Euclidean space is just 
+the space of classical physics, where
+time was treated differently from space
+and therefore it was not included into
+the geometric considerations. The
+notion of spacetime, with time as a
+fourth coordinate was introduced with
+special relativity, which enables mixing
+of time and space coordinates as we
+will see.
+-->
+<br><br>
+
+<sup>11</sup>
+クロネッカーデルタ\(δ_{ij}\)は、インデックス表記の単位行列であり、付録B.5.5で定義されています。
+<!--
+The Kronecker delta \(δ_{ij}\), which is the
+identity matrix in index notation, is
+defined in Appendix B.5.5.
+-->
+</p><p>
+
+\[
+\begin{align}
+(ds)^2  &= dx_iδ_{ij}dx_j =\left(dx_1　dx_2　dx_3\right)
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+dx_1 \\
+dx_2 \\
+dx_3
+\end{pmatrix} \\
+\\
+&= (ds)^2 = (dx_1)^2 + (dx_2)^2 + (dx_3)^2  \tag{2.27}
+\end{align}
+\]
+
+</p><p>
+無限に離れた2点間の距離を示す数学的なツールは、<strong>計量</strong>と呼ばれます。退屈なユークリッド空間では、計量は単なる単位行列 \(δ\) です。一般相対論の曲がった時空では、はるかに複雑な計量が出現する可能性があります。特殊相対論の時空の形状は、比較的単純なミンコフスキー計量 \(η\) で表されます。計量は長さを計算するツールであるため、<strong>4元ベクトルの長さ</strong>を定義するためにも必要です。4元ベクトルの長さは、ベクトルとそれ自身のスカラー積で与えられます<sup>12</sup>
+<!--
+The mathematical tool that tells us the distance between two infinitesimal
+separated points is called <straong>metric</strong>. In boring Euclidean
+space the metric is just the identity matrix \(δ\). In the curved spacetime
+of general relativity much more complicated metrics can occur.
+The geometry of the spacetime of special relativity is encoded in the
+relatively simple Minkowski metric \(η\). Because the metric is the tool
+to compute length, we need it to define the <strong>length of a four-vector</strong>,
+which is given by the scalar product of the vector with itself<sup>12</sup>
+-->
+</p><p class="margin-large">
+<sup>12</sup>
+ユークリッド空間でも同じことが言えます。
+\(length^2(v) = \vec{v} ·\vec{v} = v_1^2+ v_2^2+ v_3^2\)
+なぜなら、ここでの計量は単純に
+\(δ =\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\) となるからです。
+<!--
+The same is true in Euclidean space: 
+\(length^2(v) = \vec{v} ·\vec{v} = v_1^2+ v_2^2+ v_3^2\),
+because the metric is here simply
+\(δ =\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\).
+-->
+</p><p>
+
+\[
+x^2 = x · x ≡ x_μx_νη^{μν}
+\]
+
+同様に、任意の2つの4元ベクトルの<strong>スカラー積</strong>は次のように定義されます。
+<!--
+Analogously, the <strong>scalar product</strong> of two arbitrary four-vectors is
+defined by
+-->
+\[
+x · y ≡ x_μy_νη^{μν}  \tag{2.28}
+\]
+
+</p><p>
+計算をより効率的にするための表記法がもう1つあります。上付き添字が<sup>13</sup>である4元ベクトルを定義します。
+<!--
+There is another, notational convention to make computations
+more streamlined. We define a four-vector with upper index as<sup>13</sup>
+-->
+</p><p class="margin-large">
+<sup>13</sup>
+低いインデックスを持つ4ベクトルは
+共変ベクトルと呼ばれ、高いインデックスを持つ4ベクトルは
+反変ベクトルと呼ばれます。
+<!--
+Four-vectors with a lower index are
+often called covariant and four-vectors
+with an upper index contravariant.
+-->
+</p><p>
+
+\[
+x^μ ≡ η^{μν}x_ν  \tag{2.29}
+\]
+
+または同様に
+<!--
+or equally
+-->
+\[
+y^ν ≡ η^{μν}y_μ\underbrace{=}_{\text{ミンコフスキー計量は対称的 } η^{μν}=η^{νμ}}η^{νμ}y_μ  \tag{2.30}
+\]
+
+したがって、2つの4元ベクトルのスカラー積は<sup>14</sup>と書ける。
+<!--
+Therefore, we can write the scalar product of two four-vectors as<sup>14</sup>
+-->
+</p><p class="margin-large">
+<sup>14</sup>
+インデックスの名前は関係ありません。詳細については、付録B.5.1をご覧ください。
+<!--
+The name of the index makes no
+difference. For more information about
+this have a look at Appendix B.5.1.
+-->
+</p><p>
+
+\[
+x · y ≡ x_μy_νη^{μν} = x_μy^μ = x^νy_ν  \tag{2.31}
+\]
+
+どの指数を上指数に変換するかは問題ではありません。これは、ミンコフスキー計量を常に記述することを避けるための方法に過ぎません。
+アインシュタインの和の規則が和の符号を記述することを避けるために導入されたのと同じです。
+<!--
+It doesn’t matter which index we transform to an upper index. This
+is just a way of avoiding writing the Minkowski metric all the time,
+just as Einstein’s summation convention is introduced to avoid writing
+the summation sign.
+-->
+</p>
+<h2>2.5 ローレンツ変換</h2>
+<!--
+<h2>2.5 Lorentz Transformations</h2>
+-->
+<p>
+次に、特殊相対論の公理に違反することなく、与えられた座標系における記述をどのように変換できるかを考えます。上で学んだように、2つの公理から、\(ds^2 = η^{μν}dx_μdx_ν\) はすべての慣性系において同じです。
+<!--
+Next, we try to figure out in what ways we can transform our description
+in a given frame of reference without violating the postulates
+of special-relativity. We learned above that it follows directly
+from the two postulates that \(ds^2 = η^{μν}dx_μdx_ν\) is the same in all inertial frames of reference:
+-->
+\[
+ds^{\prime 2} = dx_μ^\prime dx_ν^\prime η^{μν} = ds^2 = dx_μdx_νη^{μν}  \tag{2.32}
+\]
+
+したがって、許容される変換は、この二次形式、あるいはミンコフスキー時空のスカラー積を不変にする変換である。
+ある座標系における記述を、Λを持つ別の座標系における記述に変換する一般的な変換を表すと、変換された座標 \(dx_μ^\prime\) は次のように書ける。
+<!--
+Therefore, allowed transformations are those which leave this quadratic
+form or equally the scalar product of Minkowski spacetime invariant.
+Denoting a generic transformation that transforms the description in
+one frame of reference into the description in another frame with Λ,
+the transformed coordinates \(dx_μ^\prime\) can be written as:
+-->
+\[
+dx_μ → dx_μ\prime = Λ_μ^σ dx_σ  \tag{2.33}
+\]
+
+すると不変性条件は次のように書ける。
+<!--
+Then we can write the invariance condition as
+-->
+\[
+\begin{align}
+(ds)^2 &= (ds^\prime)^2 \\
+\\
+→ dx · dx &\overset{!}{=}dx^\prime · dx^\prime \\
+\\
+→ dx_μdx_νη^{μν} &\overset{!}{=} dx_μ^\prime dx_ν^\primeη^{μν}  \underbrace{=}_{Eq. 2.33}Λ_ μ^σ dx_σΛ_ ν^γ dx_γη^{μν} \\
+\\
+\underbrace{→}_{\text{ダミーインデックスをリネーム}}dx_μdx_νη^{μν} &\overset{!}{=}Λ_σ^μ dx_μΛ_γ^ν dx_νη^{σγ} \\
+\\
+\underbrace{→}_{\text{この式は任意の} dx_μ \text{で成り立つので}}
+η^{μν}&\overset{!}{=}Λ_σ^μ η^{σγ}Λ_γ^ν  \tag{2.34}
+\end{align}
+\]
+
+あるいは行列表記で書くと<sup>15</sup>
+<!--
+Or written in matrix notation<sup>15</sup>
+-->
+</p><p class="margin-large">
+<sup>15</sup>
+転置について疑問がある場合は、付録C.1をご覧ください。
+<!--
+If you wonder about the transpose 
+here have a look at Appendix C.1.
+-->
+</p><p>
+
+\[
+η = Λ^TηΛ  \tag{2.35}
+\]
+
+<strong>これは、許容される座標系間の変換 Λ が満たさなければならない条件です。</strong>
+<!--
+<strong>This is the condition that transformations Λ between allowed
+frames of reference must fulfil.</strong>
+-->
+</p><p>
+この時点で奇妙に思えても心配しないでください。なぜなら、このような条件はごく自然なものであることがすぐにわかるからです。次の章では、例えば、通常のユークリッド空間における回転は、ユークリッド空間のスカラー積を不変にする変換 O として定義されることを学びます<sup>16</sup>
+<!--
+If this seems strange at this point don’t worry, because we will see
+that such a condition is a quite natural thing. In the next chapter we
+will learn that, for example, rotations in ordinary Euclidean space are
+defined as those transformations O that leave the scalar product of
+Euclidean space invariant<sup>16</sup>
+-->
+</p><p class="margin-large">
+<sup>16</sup>
+· はベクトルのスカラー積に用いられ、通常の行列乗算では \(\vec{a} ·\vec{b} =\vec{a}^T\vec{b}\) に相当します。
+ここでベクトルは1 × 3 行列です。\((Oa)^T = a^TO^T\) という事実は、付録 C.1、特に式 C.3 で説明されています。
+<!--
+The · is used for the scalar product of 
+vectors, which corresponds to \(\vec{a} ·\vec{b} =\vec{a}^T\vec{b}\) for ordinary matrix multiplication,
+where a vector is an 1 × 3 matrix. The
+fact \((Oa)^T = a^TO^T\) is explained in
+Appendix C.1, specifically Eq. C.3.
+-->
+</p><p>
+
+\[
+\vec{a} \vec{b}\overset{!}{=}\vec{a}^\prime ·\vec{b}^\prime
+\underbrace{=}_{(Oa)^T=a^TO^T\text{に注意}}\vec{a}^TO^TO\vec{b}  \tag{2.36}
+\]
+
+したがって<sup>17</sup> \(O^T1O \overset{!}{=}1\) となり、単位行列 1 であるユークリッド空間の計量は、式 2.35 のミンコフスキー計量と同じ役割を果たすことがわかります。これは回転の定義の一部です。回転の定義的特徴は、ベクトルの長さが変化しないことであり、これは数学的にはスカラー積の不変性に対応します<sup>18</sup>。さらに、回転は座標系の向きを変えないことも考慮する必要があります<sup>19</sup>。これは数学的には \(\det O \overset{!}{=}1\) を意味します。なぜなら、ベクトルの長さを不変にする他の変換、つまり空間反転<sup>20</sup> があるからです。
+<!--
+Therefore<sup>17</sup> \(O^T1O \overset{!}{=}1\) and we can see that the metric of Euclidean space, which is just the unit matrix 1, plays the same role as the Minkowski metric in Eq. 2.35. This is one part of the definition for
+rotations, because the defining feature of rotations is that they leave
+the length of a vector unchanged, which corresponds mathematically
+to the invariance of the scalar product<sup>18</sup>. Additionally we must include that rotations do not change the orientation<sup>19</sup> of our coordinate system, which means mathematically \(\det O \overset{!}{=}1\), because there are other transformations which leave the length of any vector invariant: spatial inversions<sup>20</sup>
+-->
+</p><p class="margin-large">
+<sup>17</sup>
+この条件はしばしば<strong>直交性</strong>と呼ばれ、記号\(O\)が用いられます。\(O^TO = 1\)を満たす行列は、その列が互いに直交しているため、直交行列と呼ばれます。言い換えれば、行列の各列はベクトルと考えることができ、行列の直交性条件とは、各ベクトルが他のすべての列ベクトルと直交していることを意味します。
+<!--
+This condition is often called <strong>orthogonality</strong>,
+hence the symbol \(O\). A matrix
+satisfying \(O^TO = 1\) is called orthogonal,
+because its columns are orthogonal
+to each other. In other words: Each
+column of a matrix can be thought of
+as a vector and the orthogonality condition
+for matrices means that each such
+vector is orthogonal to all other column
+vectors.
+-->
+<br><br>
+
+<sup>18</sup>
+ベクトルの長さは、ベクトルとそれ自身とのスカラー積で与えられることを思い出してください。
+<!--
+Recall that the length of a vector is
+given by the scalar product of a vector
+with itself.
+-->
+<br><br>
+
+<sup>19</sup>
+これについては付録A.5で説明されています。
+<!--
+This is explained in Appendix A.5.
+-->
+<br><br>
+
+<sup>20</sup>
+空間反転は、単に写像
+\(\vec{x} → -\vec{x}\) です。数学的には、このような変換は、条件 \(\det O \overset{!}{=}-1\) および \(O^TO = 1\) によって特徴付けられます。
+したがって、回転についてのみ議論したい場合は、追加の条件
+\(\det O \overset{!}{=}1\) が存在します。空間反転は、パリティ変換とも呼ばれます。
+<!--
+A spatial inversion is simply a map
+\(\vec{x} → -\vec{x}\). Mathematically such transformations
+are characterized by the
+conditions \(\det O \overset{!}{=}-1\) and \(O^TO = 1\).
+Therefore, if we only want to talk about
+rotations we have the extra condition
+\(\det O \overset{!}{=}1\). Another name for spatial
+inversions are parity transformations.
+-->
+</p><p>
+<strong>ローレンツ変換</strong>とは、ミンコフスキー時空のスカラー積を不変にする変換と定義します。物理的な用語で言えば、ローレンツ変換は特殊相対論の公理を遵守する座標系間の変化を記述することを意味します。つまり、当然ながら、ローレンツ変換によって変化しない項を得たい場合には、必ず上付き添字と下付き添字を組み合わせる必要があります:
+\(x_μy^μ = x_μy_νη^{μν}\)。次章では、このような条件を扱うための非常に洗練された手法をいくつか学んだ後、許容される変換の明示的な行列を構築します。
+<!--
+We define the <strong>Lorentz transformations</strong> as those transformations
+that leave the scalar product of Minkowski spacetime invariant. In
+physical terms this means that Lorentz transformations describe
+changes between frames of references that respect the postulates
+of special relativity. In turn this does mean, of course, that everytime
+we want to get a term that does not change under Lorentz
+transformations, we must combine an upper with a lower index:
+\(x_μy^μ = x_μy_νη^{μν}\). We will construct explicit matrices for the allowed
+transformations in the next chapter, after we have learned some very
+elegant techniques for dealing with conditions like this.
+-->
+</p>
+<h2>2.6 不変性、対称性、共変性</h2>
+<!--
+<h2>2.6 Invariance, Symmetry and Covariance</h2>
+-->
+<p>
+先に進む前に、いくつか非常に重要な概念についてお話ししなければなりません。
+まず、変換によって変化しないものを<strong>不変</strong>と呼びます。例えば、異なる量 \(A, B, C, ....\) に依存する \(F = F(A, B, C, ...)\) のような任意のものを考えてみましょう。
+\(A, B, C, ... → A^\prime, B^\prime, C^\prime, ...\) を変換すると、
+<!--
+Before we move on, we have to talk about some very important notions.
+Firstly, we call something <strong>invariant</strong>, if it does not change under
+transformations. For instance, let’s consider something arbitrary like
+\(F = F(A, B, C, ...)\) that depends on different quantities \(A, B, C, ....\) If
+we transform \(A, B, C, ... → A^\prime, B^\prime, C^\prime, ...\) and we have
+-->
+\[
+F(A^\prime, B^\prime, C^\prime, ...) = F(A, B, C, ...)  \tag{2.37}
+\]
+
+\(F\) はこの変換に対して不変と呼ばれます。これは「対称性」という言葉を使って別の表現で表現できます。<strong>対称性</strong>とは、変換または変換のクラスに対する不変性として定義されます。例えば、ある物理系を任意に回転させても常に <strong>全く</strong>同じ状態を保つ場合、その系は回転に対して対称です。別の例として、温度が一定の部屋が挙げられます。温度という量は測定位置に依存しません。言い換えれば、温度という量は並進に対して不変です。並進とは、すべての点を特定の方向に特定の距離だけ移動させることを意味します。したがって、この部屋では並進対称性が保たれます。
+<!--
+\(F\) is called invariant under this transformation. We can express this
+differently using the word symmetry. <strong>Symmetry</strong> is defined as invariance
+under a transformation or class of transformations. For
+example, some physical system is symmetric under rotations if we
+can rotate it arbitrarily and it always stays <strong>exactly</strong> the same. Another
+example would be a room with constant temperature. The quantity
+temperature does not depend on the position of measurement. In
+other words, the quantity temperature is invariant under translations.
+A translation means that we move every point a given distance in a
+specified direction. Therefore, we have translational symmetry within
+this room.
+-->
+</p><p>
+共変性は不変性と似た意味を持ちますが、混同しないように注意してください。方程式は、その中のオブジェクトを変換しても同じ<strong>形</strong>になる場合、共変性と呼ばれます。例えば、次の方程式があるとします。
+<!--
+Covariance means something similar, but may not be confused
+with invariance. An equation is called covariant, if it takes the same
+<strong>form</strong> when the objects in it are transformed. For instance, if we have an equation
+-->
+\[
+E_1 = aA^2 + bBA + cC^4
+\]
+
+そして変換後の式は次のようになる。
+<!--
+and after the transformation this equation reads
+-->
+\[
+E_1^\prime = aA^{\prime 2} + bB-\prime A^\prime+ cC^{\prime 4}
+\]
+
+この方程式は形が変わらないため、共変方程式と呼ばれます。
+別の方程式
+<!--
+the equation is called covariant, because the form stayed the same.
+Another equation
+-->
+\[
+E_2 = x^2 + 4axy + z
+\]
+
+変形後はこんな感じ
+<!--
+that after a transformation looks like
+-->
+\[
+E_2^\prime = y^{\prime 3} + 4az^\prime y^\prime+ y^{\prime 2}+ 8z^\prime x^\prime
+\]
+
+は共変ではありません。なぜなら、形が完全に変化したからです。
+すべての物理法則はローレンツ変換の下で共変でなければなりません。なぜなら、そのような法則だけがすべての座標系において有効だからです。物理法則を非共変な方法で定式化することは非常に悪い考えです。なぜなら、そのような法則は1つの座標系でしか成立しないからです。
+物理法則は東京とニューヨークでは異なって見えるでしょう。
+優先される座標系はないので、私たちは法則がすべての座標系で成立することを望んでいます。物理法則を共変的な方法で定式化する方法については、後で学びます。
+<!--
+is not covariant, because it changed its form completely.
+All physical laws must be covariant under Lorentz transformations,
+because only such laws are valid in all reference frames. Formulating
+the laws of physics in a non-covariant way would be a very bad
+idea, because such laws would only hold in one frame of reference.
+The laws of physics would look differently in Tokyo and New York.
+There is no preferred frame of reference and we therefore want our
+laws to hold in all reference frames. We will learn later how we can
+formulate the laws of physics in a covariant manner.
+-->
+</p>
+<h2>さらに読むためのヒント</h2>
+<!--
+<h2>Further Reading Tips</h2>
+-->
+<p>
+<div class="styleBullet">
+<ul><li>
+• <strong>E. Taylor と J. Wheeler 著『Spacetime Physics: Introduction to
+Special Relativity(時空物理学：特殊相対論入門)』</strong><sup>21</sup> は、入門書として非常に良い本です。
+<!--
+• <strong>E. Taylor and J. Wheeler - Spacetime Physics: Introduction to
+Special Relativity</strong><sup>21</sup> is a very good book to start with. 
+-->
+<br><br>
+
+<sup>21</sup>
+Edwin F. Taylor and John Archibald
+Wheeler. Spacetime Physics. W.H.
+Freeman, 2nd edition, 3 1992. ISBN
+9780716723271
+
+</li><br><li>
+• <strong>D. Fleisch - 『A Student’s Guide to Vectors and Tensors(ベクトルとテンソルの学生向けガイド)』</strong><sup>22</sup> では、特殊相対論で用いられるテンソル形式について、例えば共変成分と反変成分の違いなどについて、非常に独創的な説明がなされています。
+<!--
+• <strong>D. Fleisch - A Student’s Guide to Vectors and Tensors</strong><sup>22</sup> has very creative explanations for the tensor formalism used in special
+relativity, for example, for the differences between covariant and
+contravariant components.
+-->
+<br><br>
+
+<sup>22</sup>
+Daniel Fleisch. A Student’s Guide
+to Vectors and Tensors. Cambridge
+University Press, 1st edition, 11 2011.
+ISBN 9780521171908
+
+</li><br><li>
+• <strong>N. Jeevanjee 著『An Introduction to Tensors and Group Theory for
+Physicists(物理学者のためのテンソルと群論入門)』</strong><sup>23</sup> は、特殊相対論に必要な数学を学ぶ上で優れた参考文献です。
+<!--
+• <strong>N. Jeevanjee - An Introduction to Tensors and Group Theory for
+Physicists</strong><sup>23</sup> is another good source for the mathematics needed in special relativity.
+-->
+<br><br>
+
+<sup>23</sup>
+Nadir Jeevanjee. An Introduction to
+Tensors and Group Theory for Physicists.
+Birkhaeuser, 1st edition, August 2011.
+ISBN 978-0817647148
+
+
+</li><br><li>
+• <strong>A. Zee - 『Einstein Gravity in a nutshell(アインシュタインの重力を一言で表すと)』</strong><sup>24</sup> は一般相対性理論に関する本ですが、特殊相対性理論についても多くの優れた説明があります。
+<!--
+• <strong>A. Zee - Einstein Gravity in a nutshell</strong><sup>24</sup> is a book about general relativity, but has many great explanations regarding special
+relativity, too.
+-->
+<br><br>
+
+<sup>24</sup>
+Anthony Zee. Einstein Gravity in a
+Nutshell. Princeton University Press, 1st
+edition, 5 2013. ISBN 9780691145587
+
+
+
+</li></ul></div>
+</p>
+    </body>
+</html>
