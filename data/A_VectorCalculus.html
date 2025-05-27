@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>付録A</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>付録A　ベクトル計算</h1>
+<!--
+<h1>A Vector calculus</h1>
+-->
+<p>
+物理学では、物体の位置を3つの数値で記述することがしばしば有用です。
+<!--
+It is often useful in physics to describe the position of some object
+using three numbers 
+-->
+\(
+\begin{pmatrix}
+x \\
+y \\
+z
+\end{pmatrix}
+\)
+これはベクトル \(\vec{v}\) と呼ばれ、文字の上に小さな矢印で示されます。3つの数字は、ベクトルの3つの座標軸に沿った成分です。最初の数字はベクトルが \(x\) 方向にどれだけ伸びているか、2番目の数字は \(y\) 方向にどれだけ伸びているか、3番目の数字は \(z\) 方向にどれだけ伸びているかを示します。例えば、
+<!--
+. This is what we call a vector \(\vec{v}\) and denote
+by a little arrow above the letter. The three numbers are the
+components of the vector along the three coordinate axes. The first
+number tells us how far the vector in question goes in the x-direction,
+the second how far in the y-direction and the third how far in the
+z-direction. For example, 
+-->
+\(
+\vec{w} =
+\begin{pmatrix}
+0 \\
+4 \\
+0
+\end{pmatrix}
+\)
+は, \(y\) 方向のみを指すベクトルです。
+<!--
+is a vector that points exclusively
+in the y-direction.
+-->
+</p><p>
+ベクトルは加算することができます。
+<!--
+Vectors can be added
+-->
+\[
+\vec{v} =
+\begin{pmatrix}
+v_x \\
+v_y \\
+v_z
+\end{pmatrix}
+　\vec{w} =
+\begin{pmatrix}
+w_x \\
+w_y \\
+w_z
+\end{pmatrix}
+　→　\vec{v}+\vec{w} =
+\begin{pmatrix}
+v_x + w_x \\
+v_y + w_y \\
+v_z + w_y
+\end{pmatrix} \tag{A.1}
+\]
+
+掛けることもできます。
+<!--
+and multiplied
+-->
+\[
+\vec{v}\cdot\vec{w} =
+\begin{pmatrix}
+v_x \\
+v_y \\
+v_z
+\end{pmatrix}
+·
+\begin{pmatrix}
+w_x \\
+w_y \\
+w_z
+\end{pmatrix}
+= v_xw_x + v_yw_y + v_zw_z  \tag{A.2}
+\]
+
+この乗算の結果はベクトルではなく、数値（＝スカラー）です。そのため、スカラー積と呼ばれます。ベクトルとそれ自身との<strong>スカラー積</strong>は、ベクトルの長さに直接関係しています。
+<!--
+The result of this multiplication is not a vector, but a number (= a
+scalar), hence the name: scalar product. The <strong>scalar product</strong> of a vector
+with itself is directly related to its length:
+-->
+\[
+長さ(\vec{v}) = \sqrt{\vec{v} ·\vec{v}}  \tag{A.3}
+\]
+
+3つの量を2つの括弧で囲んで単純に上下に書くだけでは、ベクトルとして扱えないことに注意してください。例えば、部屋の温度 \(T\)、気圧 \(P\)、湿度 \(H\) を2つの括弧で囲むとします。
+<!--
+Take note that we can’t simply write three quantities below each
+other between two brackets and expect it to be a vector. For example,
+let’s say we put the temperature \(T\), the pressure \(P\) and the humidity
+\(H\) of a room between two brackets:
+-->
+\[
+\begin{pmatrix}
+T \\
+P \\
+H
+\end{pmatrix}
+\tag{A.4}
+\]
+
+そうすることを妨げるものは何もありませんが、結果は無意味であり、明らかにベクトルではありません。なぜなら、これらの量の間には線形な接続がなく、これらの量を混合することができないからです。対照的に、3つの位置座標は、例えばベクトルを異なる視点から見ると、互いに変換されます<sup>1</sup>。したがって、2つの大きな括弧で囲んで座標を上下に書くのは便利です。別の例として、ある物体の運動量が挙げられます。この場合も、物体を異なる視点から見ると成分が混合するため、位置ベクトルのように書くのは便利です。
+<!--
+Nothing prevents us from doing so, but the result would be rather
+pointless and definitely not a vector, because there is no linear connection
+between these quantities that could lead to the mixing of
+these quantities. In contrast, the three position coordinates transform
+into each other, for example if we look at the vector from a different
+perspective<sup>1</sup>. Therefore writing the coordinates below each other
+between two big brackets is useful. Another example would be the
+momentum of some object. Again, the components mix if we look at
+the object from a different perspective and therefore writing it like
+the position vector is useful.
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+これについては、すぐに明らかにされます。
+<!--
+This will be made explicit in a moment. 
+-->
+</p><p>
+ここでは、ベクトルとは位置ベクトル \(\vec{v}\) と全く同じように変換される量だとしましょう。つまり、ある変換の下で \(\vec{v} → \vec{v}^\prime = M\vec{v}\) となる場合、\(\vec{w} → \vec{w}^\prime = M\vec{w}\) のように変換される量はベクトルです。例としては、物体の運動量や加速度などが挙げられます。
+<!--
+For the moment let’s say a vector is a quantity that transforms
+exactly like the position vector \(\vec{v}\). This means, if under some transformation
+we have \(\vec{v} → \vec{v}^\prime = M\vec{v}\) any quantity that transforms like
+\(\vec{w} → \vec{w}^\prime = M\vec{w}\) is a vector. Examples are the momentum or acceleration of some object.
+-->
+</p><p>
+物理学では、この考え方によく遭遇します。二つの括弧で囲まれた量を上下に書く場合、それらは必ずしもベクトルではありませんが、何らかの線形演算によって互いに変換することができます。これは、行列との乗算で表現されることが多いです。
+<!--
+We will encounter this idea quite often in physics. If we write
+quantities below each other between two brackets, they aren’t necessarily
+vectors, but the quantities can transform into each other
+through some linear operation. This is often expressed by multiplication
+with a matrix.
+-->
+<p>
+<h3>A.1 基底ベクトル</h3>
+<!--
+<h3>A.1 Basis Vectors</h3>
+-->
+<p>
+座標軸に沿った成分の概念は、基底ベクトルを導入することでより一般化できます。基底ベクトルは長さ1の線形独立な<sup>2</sup>ベクトルです。3次元では3つの基底ベクトルが必要であり、あらゆるベクトルをこれらの基底ベクトルで表すことができます。明らかな選択肢は次のようになります。
+<!--
+We can make the idea of components along the coordinate axes more
+general by introducing basis vectors. Basis vectors are linearly inde
+pendent<sup>2</sup> vectors of length one. In three dimensions we need three
+basis vectors and we can write every vector in terms of these basis
+vectors. An obvious choice is:
+-->
+</p><p class="margin-large">
+<sup>2</sup>
+ベクトルの集合 {\(\vec{a},\vec{b},\vec{c}\)} は、式 \(c_1\vec{a} + c_2\vec{b} + c_3\vec{c} = 0\) が \(c_1 = c_2 = c_3 = 0\) の場合にのみ成り立つ場合、線形独立であると呼ばれます。これは、どのベクトルも他のベクトルの線形結合として表すことができないことを意味します。なぜなら、0 以外の数に対して \(c_1\vec{a} + c_2\vec{b} + c_3\vec{c} = 0\) が成り立つ場合、\(c_1\vec{a} + c_2\vec{b} = −c_3\vec{c}\) と書くことができるからです。
+<!--
+A set of vectors {\(\vec{a},\vec{b},\vec{c}\)} is called 
+linearly independent if the equation
+\(c_1\vec{a} + c_2\vec{b} + c_3\vec{c} = 0\) is only true for
+\(c_1 = c_2 = c_3 = 0\). This means that
+no vector can be written as a linear
+combination of the other vectors,
+because if we have \(c_1\vec{a} + c_2\vec{b} + c_3\vec{c} = 0\)
+for numbers different than zero, we can
+write \(c_1\vec{a} + c_2\vec{b} = −c_3\vec{c}\).
+-->
+</p><p>
+
+\[
+\vec{e}_1 =
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix}
+,　 \vec{e}_2 =
+\begin{pmatrix}
+0 \\
+1 \\
+0
+\end{pmatrix}
+,　\vec{e}_3 =
+\begin{pmatrix}
+0 \\
+0 \\
+1
+\end{pmatrix}
+\tag{A.5}
+\]
+
+任意の3次元ベクトル\(\vec{v}\)は、これらの基底ベクトルを用いて表現できる。
+<!--
+and an arbitrary three-dimensional vector \(\vec{v}\) can be expressed in
+terms of these basis vectors
+-->
+\[
+\vec{v} =
+\begin{pmatrix}
+v_1 \\
+v_2 \\
+v_3
+\end{pmatrix}
+= v_1\vec{e}_1 +v_2\vec{e}_2 +v_3\vec{e}_3 = v_1
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix}
++v_2
+\begin{pmatrix}
+0 \\
+1 \\
+0
+\end{pmatrix}
++v_3
+\begin{pmatrix}
+0 \\
+0 \\
+1
+\end{pmatrix}
+\tag{A.6}
+\]
+
+</p>
+<center><img src="images/figA_0.png"></center>
+<p>
+
+数 \(v_1, v_2, v_3\) は \(\vec{v}\) の成分と呼ばれます。これらの成分は基底ベクトルに依存することに注意してください。
+<!--
+The numbers \(v_1, v_2, v_3\) are called the components of \(\vec{v}\). Take note that
+these components depend on the basis vectors.
+-->
+</p><p>
+
+上で導入したベクトル \(\vec{w}\) <sup>3</sup>は、\(\vec{w} = 0\vec{e}_1 + 4\vec{e}_2 + 0\vec{e}_3\) と書くことができます。基底ベクトルとして同様に適切な選択肢は、
+<!--
+The vector \(\vec{w}\) we introduced above<sup>3</sup> can therefore be written as
+\(\vec{w} = 0\vec{e}_1 + 4\vec{e}_2 + 0\vec{e}_3\). An equally good choice for the basis vectors would be
+-->
+</p><p class="margin-large">
+<sup>3</sup>
+\(\vec{w} =
+\begin{pmatrix}
+0 \\
+4 \\
+0
+\end{pmatrix}
+\)
+</p><p>
+
+\[
+\tilde{\vec{e}}_1 =\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+1 \\
+0
+\end{pmatrix}
+,　\tilde{\vec{e}}_2 =\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+−1 \\
+0
+\end{pmatrix}
+,　\tilde{\vec{e}}_3 =
+\begin{pmatrix}
+0 \\
+0 \\
+1
+\end{pmatrix}
+\tag{A.7}
+\]
+
+この基底ではベクトル \(\vec{w}\) は全く異なって見えます:
+<!--
+In this basis the vector \(\vec{w}\) "looks" quite different:
+-->
+\[
+\vec{w} = 2\,\sqrt{2}\tilde{\vec{e}}_1 -2\,\sqrt{2}\tilde{\vec{e}}_2 + 0\,\tilde{\vec{e}}_3
+= 2\,\sqrt{2}\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+1 \\
+0
+\end{pmatrix}
+-2\sqrt{2}\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+−1 \\
+0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+4 \\
+0
+\end{pmatrix}
+\tag{A.8}
+\]
+
+したがって、\(\vec{w}\) をこの新しい基底に関する成分で次のように書くことができます。
+<!--
+Therefore we can write \(\vec{w}\) in terms of components with respect to this
+new basis as
+-->
+\[
+\tilde{\vec{w}} =
+\begin{pmatrix}
+2\sqrt{2} \\
+−2\sqrt{2} \\
+0
+\end{pmatrix}
+\]
+
+これは別のベクトルではなく、単に記述が異なるだけです。正確に言うと、
+\(\tilde{\vec{w}}\) は、最初に使用した座標系を基準に回転した座標系におけるベクトル \(\vec{w}\) の記述です。
+<!--
+This is not a different vector just a different description! To be precise,
+\(\tilde{\vec{w}}\) is the description of the vector \(\vec{w}\) in a coordinate system that is rotated relative to the coordinate system we used in the first place.
+-->
+</p>
+
+<h2>A.2 座標系の変更</h2>
+<!--
+<h2>A.2 Change of Coordinate Systems</h2>
+-->
+<p>
+異なる座標系間の接続は、行列を用いることで明確にすることができます。2つの異なる座標系は、異なる視点から実験を観察する2人の異なる観察者がいることを意味する場合もあれば、単に一方の観察者が異なる基底ベクトルの集合を使用することを決定したことを意味する場合もあります。これらの記述はどのように関連しているのでしょうか？複雑さを避けるために、2つの座標系の原点が一致し、両方の座標系が同じ \(z\) 軸を持つと仮定しましょう。したがって、\(x\) 座標と \(y\) 座標のみが異なります。さらに、実験において重要なものの位置はベクトル \(\vec{v}\) で記述されると仮定しましょう。
+
+</p>
+<center><img src="images/figA_02.png"></center>
+<p>
+
+
+最初の観察者にベクトルが \(\vec{v} =
+\begin{pmatrix}
+v_x \\
+v_y \\
+v_z
+\end{pmatrix}
+\)
+と見える場合、同じベクトルが2番目の観察者の座標系でどのように見えるかを, 図A.1に示すように、通常の三角関数
+\(\sin(\phi),\cos(\phi)\) と \(\tan(\phi) = \frac{\sin(\phi)}
+{\cos(\phi)}\) を使用して計算することができます \(\vec{v} =
+\begin{pmatrix}
+v_{x^\prime} \\
+v_{y^\prime} \\
+v_{z^\prime}
+\end{pmatrix}
+\)
+
+<!--
+The connection between different coordinate systems can be made
+precise through the use of matrices. Two different coordinate systems
+can mean that we have two different observers that look at our experiment
+from different perspectives or this can simply mean that one
+observer decides to use a different set of basis vectors. How are those
+descriptions related? To avoid complications, let’s assume that the
+origin of the two coordinate systems coincide and both coordinate
+systems have the same z-axes. Therefore only the \(x\) and \(y\) coordinates
+are different. Let’s assume further that the position of something
+important in the experiment is described by the vector \(\vec{v|\).
+If the first observer sees the vector \(\vec{v} =
+\begin{pmatrix}
+v_x \\
+v_y \\
+v_z
+\end{pmatrix}
+\)
+, we can compute how the same vector looks like in the coordinate system of the second observer \(\vec{v} =
+\begin{pmatrix}
+v_{x^\prime} \\ 
+v_{y^\prime} \\
+v_{z^\prime}
+\end{pmatrix}
+\)
+by using the usual trigonometric functions
+\(\sin(\phi),\cos(\phi)\) and \(\tan(\phi) = \frac{\sin(\phi)}
+{\cos(\phi)}\) , as illustrated in Fig. A.1.
+-->
+</p>
+<center><img src="images/figA_1.png"></center>
+<p class="margin-large">
+図A.1: 2つの異なる座標系におけるベクトルの成分の図解。詳細は本文を参照。
+<!--
+Fig. A.1: Illustration of the components
+of a vector in two different coordinate
+systems. Details can be found in the
+text.
+-->
+</p><p>
+
+\(v_x\)と\({v_x}^\prime\)の関係は次のように計算できます。
+<!--
+The relationship between \(v_x\) and \({v_x}^\prime\) can be computed using
+-->
+\[
+\cos(\phi) =\frac{v_{x^\prime}}{v_x + a}→ v_{x^\prime} = (v_x + a) \cos(\phi)
+\]
+
+および
+<!--
+and
+-->
+\[
+\tan(\phi) = \frac{a}{v_y} → a = v_y \tan(\phi).
+\]
+
+これにより
+<!--
+This yields
+-->
+\[
+\begin{align}
+v_{x^\prime} &=(v_x + v_y \tan(\phi))\cos(\phi) 
+=\left(v_x + v_y\frac{\sin(\phi)}{\cos(\phi)}\right)\cos(\phi) \\
+\\
+&= v_x \cos(\phi) + v_y \sin(\phi)
+\end{align}
+\]
+
+同様に、
+<!--
+Analogously we can use
+-->
+\[
+\cos(\phi) =\frac{v_y}{v_{y^\prime} + b}→ v_{y^\prime} = v_y\frac{1}{\cos(\phi)}
+- b
+\]
+
+および
+<!--
+and
+-->
+\[
+\tan(\phi) = \frac{b}{v_{x^\prime}}→ b = v_{x^\prime} \tan(\phi)
+\]
+
+これは\(\sin^2(\phi) + \cos^2(\phi) = 1\)を使って得られる。
+<!--
+which yields using \(\sin^2(\phi) + \cos^2(\phi) = 1\)
+-->
+\[
+\begin{align}
+v_{y^\prime} &= v_y\frac{1}{\cos(\phi)}−v_{x^\prime} \tan(\phi) 
+= v_y\frac{1}{\cos(\phi)}-(v_x \cos(\phi)+v_y \sin(\phi)) \frac{\sin(\phi)}{\cos(\phi)} \\
+\\
+&= v_y\frac{\sin^2(\phi) + \cos^2(\phi)}{\cos(\phi)}
+- v_x \sin(\phi) - v_y \frac{\sin^2(\phi)}{\cos(\phi)}
+= v_y \cos(\phi) − v_x \sin(\phi)
+\end{align}
+\]
+
+したがって\(v_{y^\prime} = −v_x \sin(\phi) + v_y \cos(\phi)\)。
+<!--
+Therefore \(v_{y^\prime} = −v_x \sin(\phi) + v_y \cos(\phi)\).
+-->
+</p><p>
+
+これを回転行列を使って書くことができます。
+<!--
+We can write this using a rotation matrix:
+-->
+\[
+\begin{align}
+\begin{pmatrix}
+v_{x^\prime} \\
+v_{y^\prime} \\
+v_{z^\prime}
+\end{pmatrix}
+&= R_z(\phi)\vec{v} =
+\begin{pmatrix}
+\cos(\phi)  & \sin(\phi) & 0 \\
+−\sin(\phi) & \cos(\phi) & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\begin{pmatrix}
+v_x \\
+v_y \\
+v_z
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+\cos(\phi)v_x + \sin(\phi)v_y \\
+−\sin(\phi)v_x + \cos(\phi)v_y \\
+v_z
+\end{pmatrix}
+\tag{A.9}
+\end{align}
+\]
+回転ベクトルを計算するには、行列の各行に回転前のベクトルを掛け合わせます。既に述べたように、\(z\) 軸に沿った成分 \(v_3\) は両方の観察者で同じです。行列 \(R_z(\phi)\) は、\(z\) 軸を中心とした角度 \(\phi\) の回転を表します。
+<!--
+We multiply each row of the matrix with the unrotated vector to
+compute the rotated vector. As already noted above, the component
+along the \(z\)-axis \(v_3\) is the same for both observers. The matrix \(R_z(\phi)\)
+describes a rotation by the angle \(\phi\) about the \(z\)-axis.
+-->
+</p>
+<h2>A.3 行列の乗算</h2>
+<!--
+<h2>A.3 Matrix Multiplication</h2>
+-->
+</p><p>
+このような計算は、行列を用いることで大幅に簡素化されます。行列の乗算の規則は常に行×列です。上で紹介したスカラー積は、ベクトルを1列3行の行列（3×1行列）と解釈すれば、この特別なケースとして考えることができます。2つのベクトルのスカラー積は、
+<!--
+Computations like this are tremendously simplified through the use
+of matrices. The rule for Matrix multiplication is always row times
+column. We can see the scalar product introduced above as a special
+case of this, if we interpret a vector as a matrix with one column and
+three rows (a 3 × 1 matrix). The scalar product of two vectors is then
+-->
+\[
+\vec{v} ·\vec{w} = \vec{v}^T\vec{w} =(v_x\;v_y\;v_z)
+\begin{pmatrix}
+w_x \\
+w_y \\
+w_z
+\end{pmatrix}
+= v_xw_x + v_yw_y + v_zw_z  \tag{A.10}
+\]
+ここで、\(T\) は転置を表します。つまり、すべての列が行になり、すべての行が列になります。したがって、\(\vec{v}^T\) は1行3列の行列です。このように書くと、スカラー積は再び行×列の行列積になります。
+<!--
+where the \(T\) denotes transposing, which means that every columns
+becomes a row and every row a column. Therefore, \(\vec{v}^T\) is a matrix
+with 1 row and 3 columns. Written in this way the scalar product is
+once more a matrix product with row times columns.
+-->
+</p><p>
+同様に、2つの行列の積は、左の行列の各行と右の行列の各列を乗算することで得られます。これは図A.2で説明されています。2つの行列の乗算の具体的な例は、
+<!--
+Analogously, we get the matrix product of two matrices from the
+multiplication of each row of the matrix to the left with a column
+of the matrix to the right. This is explained in Fig. A.2. An explicit
+example for the multiplication of two matrices is
+-->
+\[
+M =
+\begin{pmatrix}
+2 & 3 \\
+1 & 0 \\
+\end{pmatrix}
+　N =
+\begin{pmatrix}
+0 & 1 \\
+4 & 8
+\end{pmatrix}
+\]
+\[
+MN =
+\begin{pmatrix}
+2 & 3 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 & 1 \\
+4 & 8 \\
+\end{pmatrix}
+=
+\begin{pmatrix}
+2 · 0 + 3 ·4 & 2· 1 + 3 · 8 \\
+1 · 0 + 0 ·4 & 1· 1 + 0 · 8
+\end{pmatrix}
+=
+\begin{pmatrix}
+12 & 26 \\
+0 & 1
+\end{pmatrix}
+\tag{A.11}
+\]
+
+覚えておくべきルールは<strong>行×列</strong>です。2つの行列の乗算は可換ではないことに注意してください。つまり、一般に\(MN \neq NM\)となります。
+<!--
+The rule to keep in mind is <strong>row times column</strong>. Take note that the
+multiplication of two matrices is not commutative, which means in
+general \(MN \neq NM\).
+-->
+</p>
+<center><img src="images/figA_2.png"></center>
+<p class="margin-large">
+図A.2: 行列の乗算の概略図。
+覚えておくべき重要な点は、<strong>行 × 列</strong>です。
+最初のインデックスは行番号、2番目のインデックスは列番号を表します。この例では、積行列の赤い要素は
+\(c_{1,2} = a_{1,1}b_{1,2} + a_{1,2}b_{2,2}\) であり、青い要素は
+\(c_{3,3} = a_{3,1}b_{1,3} + a_{3,2}b_{2,3}\) です。一般に
+\(c_{i,j} = a_{i,k}b_{k,j} = a_{i,1}b_{1,j} + a_{i,2}b_{2,j} + ....\)
+図はOlivier Perrin (Bilou) によるもので、
+Wikimedia Commons から CC BY-SA 3.0 ライセンスに基づいて公開されています: http:
+//creativecommons.org/licenses/
+by-sa/3.0/deed.en 。URL: http:
+//commons.wikimedia.org/wiki/ ファイル:
+Matrix_multiplication_diagram_2.svg
+、アクセス日: 2015年1月28日
+<!--
+Fig. A.2: Schematic matrix multiplication.
+The important thing to
+keep in mind is <strong>row times column</strong>.
+The first index denotes the
+row number, the second the column
+number. In the example, the
+red element of the product matrix is
+\(c_{1,2} = a_{1,1}b_{1,2} + a_{1,2}b_{2,2}\) and the blue element
+is \(c_{3,3} = a_{3,1}b_{1,3} + a_{3,2}b_{2,3}\). In general
+\(c_{i,j} = a_{i,k}b_{k,j} = a_{i,1}b_{1,j} + a_{i,2}b_{2,j} + ....\)
+Figure by Olivier Perrin (Bilou
+Wikimedia Commons) released under
+a CC BY-SA 3.0 licence: http:
+//creativecommons.org/licenses/
+by-sa/3.0/deed.en . URL: http:
+//commons.wikimedia.org/wiki/File:
+Matrix_multiplication_diagram_2.svg
+, Accessed: 28.1.2015
+-->
+</p>
+<h2>A.4 スカラー</h2>
+<!--
+<h2>A.4 Scalars</h2>
+-->
+<p>
+注目すべき重要な点は、2つのベクトルのスカラー積はすべての観察者にとって同じ値を持つということです。これはスカラーの定義と見ることができます。スカラーはすべての観察者にとって同じです。これは、ベクトルの各要素が数値であるため、すべての数値がスカラーであるという意味ではなく、上で見たように、観察者によって数値が異なります。対照的に、2つのベクトルのスカラー積はすべての観察者にとって同じでなければなりません。これは、ベクトルとそれ自身のスカラー積がベクトルの長さに直接関係しているという事実から導かれます。実験を見る視点や場所を変えても、長さは変わらないかもしれません。ベクトルの長さは回転不変量と呼ばれます。なぜなら、系をどのように回転させても同じ長さだからです。
+<!--
+An important thing to notice is that the scalar product of two vectors
+has the same value for all observers. This can be seen as the definition
+of a scalar: A scalar is the same for all observers. This does not
+simply mean that every number is a scalar, because each component
+of a vector is a number, but as we have seen above a different number
+for different observers. In contrast the scalar product of two vectors
+must be the same for all observers. This follows from the fact that the
+scalar product of a vector with itself is directly related to the length
+of the vector. Changing the perspective or the location we choose to
+look at our experiment may not change the length of anything. The
+length of a vector is called an invariant for rotations, because it stays
+the same no matter how we rotate our system.
+-->
+<p>
+<h2>A.5 右手座標系と左手座標系 </h2>
+<!--
+<h2>A.5 Right-handed and Left-handed Coordinate Systems </h2>
+-->
+<p>
+上で二人の観測者について述べたとき、私たちは暗黙のうちに、彼らが座標系の定義に関して同意していると仮定しました。実際には、二つの選択肢があり、それらはやはり行列の乗算によって関連づけられていますが、回転によって関連づけられているわけではありません。一方の観測者は右手座標系と呼ばれるものを選択し、もう一方の観測者は左手座標系と呼ばれるものを選択するかもしれません。
+<!--
+When we talked above about two observers, we implicitly assumed
+they agree in terms of the definition of their coordinate system. In
+fact, there are two possible choices, which are again related by matrix
+multiplication, but not by rotations. One observer may choose what
+we call a right-handed coordinate system and another observer what
+we call a left-handed coordinate system.
+-->
+</p>
+<center><img src="images/figA_3.png"></center>
+<p class="margin-large">
+図A.3: 右手座標系と左手座標系。図はPrimalshellによる。
+(Wikimedia Commons)
+CC-BY-SA-3.0ライセンスに基づき公開されています:
+http://creativecommons.org/
+licenses/by-sa/3.0/deed.en。URL:
+http://commons.wikimedia.org/
+wiki/File:3D_Cartesian_Coodinate_
+Handedness.jpg、アクセス日: 2014年12月1日
+<!--
+Fig. A.3: Right-handed and left-handed 
+coordinate system. Figure by Primalshell
+(Wikimedia Commons)
+released under a CC-BY-SA-3.0 licence:
+http://creativecommons.org/
+licenses/by-sa/3.0/deed.en. URL:
+http://commons.wikimedia.org/
+wiki/File:3D_Cartesian_Coodinate_
+Handedness.jpg , Accessed: 1.12.2014
+-->
+</p><p>
+左手座標系を右手座標系に回転させる方法はありません。代わりに、これらの座標系は鏡映によって関連付けられます。つまり、右手座標系と左手座標系の記述は、次の形式の変換によって関連付けられます。
+<!--
+There is no way to rotate a left-handed into a right-handed coordinate
+system. Instead, such coordinate systems are related through a
+reflection in a mirror. This means the descriptions in a right-handed
+and a left-handed coordinate system are related by a transformation
+of the form
+-->
+\[
+\begin{pmatrix}
+v_1 \\
+v_2 \\
+v_3
+\end{pmatrix}
+
+→
+
+\begin{pmatrix}
+−v_1 \\
+−v_2 \\
+−v_3
+\end{pmatrix}
+\tag{A.12}
+\]
+これはすべての空間座標の符号を反転することを意味します。この種の変換は、慣例的に<strong>パリティ変換</strong>と呼ばれます。
+パリティ変換は次のように記述できます。
+<!--
+which means we flip the sign of all spatial coordinates. The conventional
+name for this kind of transformation is <strong>parity transformation</strong>.
+We can describe a parity transformation by
+-->
+\[
+\vec{v} →\vec{v}^\prime= P\vec{v} =
+\begin{pmatrix}
+−1 & 0 & 0 \\
+0 & −1 & 0 \\
+0 & 0 & −1
+\end{pmatrix}
+\begin{pmatrix}
+v_1 \\
+v_2 \\
+v_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+−v_1 \\
+−v_2 \\
+−v_3
+\end{pmatrix}
+\tag{A.13}
+\]
+
+</p>
+    </body>
+</html>

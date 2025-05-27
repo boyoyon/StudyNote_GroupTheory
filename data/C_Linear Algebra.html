@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>Appendix C</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>C 線形代数</h1>
+<!--
+<h1>C Linear Algebra</h1>
+-->
+<p>
+多くの計算は、線形代数のツールボックスにある行列やトリックを使うことで簡略化できます。そこで、いくつかの基本的な変換を見てみましょう。
+<!--
+Many computations can be simplified by using matrices and tricks
+from the linear algebra toolbox. Therefore, let’s look at some basic
+transformations.
+-->
+</p>
+<h2>C.1 基本的な変換</h2>
+<!--
+<h2>C.1 Basic Transformations</h2>
+-->
+<p>
+行列の複素共役は次のように定義されます。
+<!--
+The complex conjugate of a matrix is defined as
+-->
+\[
+M_{ij}^*=
+\begin{pmatrix}
+M_{11}^* &  M_{12}^* \\
+M_{21}^* &  M_{22}^*
+\end{pmatrix}
+\tag{C.1}
+\]
+
+つまり、各要素の複素共役を単純に取ることになります<sup>1</sup>。
+<!--
+which means we simply take the complex conjugate of each element<sup>1</sup>.
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+複素数 \(z = a + ib\) の複素共役は、\(a\) が実部、\(b\) が虚部である場合、単に \(z^* = a − ib\) となることを思い出してください。
+<!--
+Recall that the complex conjugate of a
+complex number \(z = a + ib\), where \(a\) is
+the real part and \(b\) the imaginary part,
+is simply \(z^* = a − ib\).
+-->
+</p><p>
+<strong>行列の転置</strong>は、行列形式では\(M_{ij}^T = M_{ji}\)で定義されます。
+<!--
+The <strong>transpose of a matrix</strong> is defined by \(M_{ij}^T = M_{ji}\), in matrix form
+-->
+\[
+M_{ij} =
+\begin{pmatrix}
+M_{11} & M_{12} \\
+M_{21} & M_{22}
+\end{pmatrix}
+→ M_{ij}^T=
+\begin{pmatrix}
+M_{11} &  M_{21} \\
+M_{12} &  M_{22}
+\end{pmatrix}
+\tag{C.2}
+\]
+
+これは、行列の列と行を入れ替えることを意味します。この定義と2つの行列の積の定義から得られる重要な帰結は、\((MN)^T \neq M^TN^T\) となることです。代わりに、\((MN)^T = N^TM^T\) となり、転置によって積における2つの行列の位置が入れ替わります。これは指数表記で直接確認できます。
+<!--
+which means we swap columns and rows of the matrix. An important
+consequence of this definition and the definition of the product
+of two matrices is that we have \((MN)^T \neq M^TN^T\). Instead
+\((MN)^T = N^TM^T\), which means by transposing we switch the position
+of two matrices in a product. We can see this directly in index
+notation
+-->
+\[
+MN ≡ (MN)_{ij} = M_{ik}N_{kj}
+\]
+
+\[
+(MN)^T ≡ ((MN)_{ij})^T = (MN)_{ji} = (M_{ik}N_{kj})^T
+\]
+
+\[
+(M_{ik}N_{kj})^T = M_{ik}^TN_{kj}^T = M_{ki}N_{jk} = N_{jk}M_{ki} ≡ N^TM^T \tag{C.3}
+\]
+
+最後のステップでは、行列表記では常に左行列の行と右行列の列を掛け合わせるという一般的な規則を使用します。これを行列表記で書くには、2つの項の位置を\(N_{jk}M_{ki}\)に変更します。これは左行列の行と右行列の列を掛け合わせたものであり、行列表記では\(N^TM^T\)と書くことができます。
+<!--
+where in the last step we use the general rule that in matrix notation
+we always multiply rows of the left matrix with columns of the right
+matrix. To write this in matrix notation, we change the position of the
+two terms to \(N_{jk}M_{ki}\), which is rows of the left matrix times columns
+of the right matrix, as it should be and we can write in matrix notation
+\(N^TM^T\).
+-->
+</p><p>
+
+インデックス表記では、対象となるオブジェクトの位置をいつでも自由に変更できることに注意してください。たとえば、\(M_{ki}\) と \(N_{jk}\) は、行列の個々の要素、つまり通常の数にすぎないためです。
+<!--
+Take note that in index notation we can always change the position
+of the objects in question freely, because for example \(M_{ki}\) and \(N_{jk}\) are
+just individual elements of the matrices, i.e. ordinary numbers.
+-->
+</p>
+<h2>C.2 行列指数関数</h2>
+<!--
+<h2>C.2 Matrix Exponential Function</h2>
+-->
+<p>
+
+指数関数が級数としてどのように見えるかは既に導出済みなので、指数関数に<strong>行列を代入</strong>すると何を意味するのかを定義できます。
+<!--
+We already derived how the exponential function looks as a series,
+and therefore we can define what we mean when we put a <strong>matrix
+into the exponential function</strong>:
+-->
+</p><p>
+
+\(e^M\) は任意の行列 \(M\) を用いて、級数で定義されます。
+<!--
+\(e^M\), with an arbitrary matrix \(M\), is defined by the series
+-->
+\[
+e^M =\sum_{n=0}^\infty \frac{M^n}{n!} \tag{C.4}
+\]
+
+一般に\(e^Me^N \neq e^{M+N}\)であることに注意することが重要です。\(e^Me^N = e^{M+N}\)という恒等式は、\(MN = NM\)の場合にのみ正しくなります。
+<!--
+It is important to take note that in general \(e^Me^N \neq e^{M+N}\). The identity \(e^Me^N = e^{M+N}\) is only correct if \(MN = NM\).
+-->
+</p>
+<h2>C.3 行列式</h2>
+<!--
+<h2>C.3 Determinants</h2>
+-->
+<p>
+
+行列の行列式は直感に反しますが、非常に便利な概念です。例えば、ある行列の行列式がゼロでない場合、その行列は可逆であることが自動的にわかります<sup>2</sup>。残念ながら、これを証明することは本書の範囲を超えているため、興味のある読者は線形代数の標準的な教科書を参照してください。
+<!--
+The determinant of a matrix is a rather unintuitive, but immensely
+useful notion. For example, if the determinant of some matrix is
+non-zero, we automatically know that the matrix is invertible<sup>2</sup>. Unfortunately proving this lies beyond the scope of this text and the
+interested reader is referred to the standard texts about linear algebra.
+-->
+
+</p><p class="margin-large">
+<sup>2</sup>
+
+行列 \(M\) が可逆であるとは、\(M^{−1}\) で表される逆行列が見つかり、\(M^{−1}M = 1\) となる場合を指します。
+<!--
+A matrix \(M\) is invertible, if we can find 
+an inverse matrix, denoted by \(M^{−1}\),
+with \(M^{−1}M = 1\).
+-->
+</p><p>
+
+3×3行列の行列式はレヴィ・チヴィタ記号を使って定義できます。
+<!--
+The determinant of a 3 × 3 matrix can be defined using the Levi-
+Civita symbol
+-->
+
+\[
+\det(A) = \sum_{i=1}^3\sum_{j=1}^3\sum_{k=1}^3 \epsilon_{ijk}A_{1i}A_{2j}A_{3k}  \tag{C.5}
+\]
+
+\(n\) 次元の場合も同様です。
+<!--
+and analogously for n-dimensions
+-->
+\[
+\det(A) = \sum_{i_1=1}^n \sum_{i_2=1}^n . . . \sum_{i_n=1}^n \epsilon_{i_1i_2...i_n} A_{1i_1}A_{2i_2} . . . A_{ni_n}  \tag{C.6}
+\]
+
+2 次元での明示的な例を見ると分かりやすいでしょう。
+<!--
+It is instructive to look at an explicit example in two dimensions:
+-->
+\[
+\det(A) = det
+\begin{pmatrix}
+3 & 1 \\
+5 & 2
+\end{pmatrix}
+= (3 · 2) − (5 · 1) = 1
+\]
+
+一般的な3次元行列の場合、
+<!--
+For a general three dimensional matrix, we have
+-->
+\[
+\det
+\begin{pmatrix}
+a_1 & a_2 & a_3 \\
+b_1 & b_2 & b_3 \\
+c_1 & c_2 & c_3
+\end{pmatrix}
+= a_1(b_2c_3−b_3c_2)−a_2(b_1c_3−b_3c_1)+a_3(b_1c_2−b_2c_1) 
+\tag{C.7}
+\]
+</p>
+<h2>C.4 固有値と固有ベクトル</h2>
+<!--
+<h2>C.4 Eigenvalues and Eigenvectors</h2>
+-->
+<p>
+
+線形代数の物理学のあらゆる分野で用いられる2つの非常に重要な概念は、固有値と固有ベクトルです。固有ベクトル \(\vec{v}\) と固有値 \(λ\) は、各行列 \(M\) に対して次の式で定義されます。
+<!--
+Two very important notions from linear algebra that are used all over
+physics are eigenvalues and eigenvectors. The eigenvectors \(\vec{v}\) and
+eigenvalues \(λ\) are defined for each matrix \(M\) by the equation
+-->
+\[
+M\vec{v} = λ\vec{v}  \tag{C.8}
+\]
+
+</p><p>
+
+重要なのは、方程式の両辺に同じベクトル \(\vec{v}\) があることです。この方程式は、定数 \(λ\) を除いて、ベクトル \(\vec{v}\) を行列 \(M\) に掛けても変化しないことを意味します。各固有ベクトルには対応する固有値があります。行列の固有ベクトルと固有値を求めるための非常に洗練された計算手法があり、詳細は線形代数の書籍に記載されています。
+<!--
+The important thing is that we have on both sides of the equation
+the same vector \(\vec{v}\). In words this equation means that the vector \(\vec{v}\) remains, up to a constant \(λ\), unchanged if multiplied with the matrix \(M\). To each eigenvector we have a corresponding eigenvalue. There are quite sophisticated computational schemes for finding the eigenvectors and eigenvalues of a matrix and the details can be found in
+any book about linear algebra.
+-->
+</p><p>
+
+これらの概念の重要性を理解するために、回転について考えてみましょう。回転は行列で記述でき、回転行列の固有ベクトルが回転軸を定義します。
+<!--
+To get a feeling for the importance of these notions think about
+rotations. We can describe rotations by matrices and the eigenvector
+of a rotation matrix defines the rotational axis.
+-->
+</p>
+<h2>C.5 対角化</h2>
+<!--
+<h2>C.5 Diagonalization</h2>
+-->
+<p>
+
+固有ベクトルと固有値を用いると、行列を対角形式に変換することができ、これは計算や物理的な解釈に非常に役立ちます。任意の対角化可能な行列 \(M\) は、以下の形式<sup>3</sup> に書き直すことができることが示されています。
+<!--
+Eigenvectors and eigenvalues can be used to bring matrices into diagonal
+form, which can be quite useful for computations and physical
+interpretations. It can be shown that any diagonalizable matrix \(M\)
+can be rewritten in the form<sup>3</sup>
+-->
+</p><p class="margin-large">
+<sup>3</sup>
+
+一般に、\(M^\prime = N^{−1}MN\) という形式の変換は基底変換と呼ばれます。\(M^\prime\) は、別の座標系における行列 \(M\) です。したがって、この節の結果として、\(M\) が特に単純な、つまり対角行列である基底が見つかります。
+<!--
+In general, a transformation of the
+form \(M^\prime = N^{−1}MN\) refers to a basis
+change. \(M^\prime\) is the matrix \(M\) in another
+coordinate system. Therefore, the result
+of this section is that we can find a basis
+where \(M\) is particularly simple, i.e.
+diagonal.
+-->
+</p><p>
+
+\[
+M = N^{−1}DN  \tag{C.9}
+\]
+
+ここで、行列 \(N\) は固有ベクトルを列として構成され、 \(D\) は対角行列であり、その対角線上には \(M\) の固有値があります。
+<!--
+where the matrix \(N\) consists of the eigenvectors as its column and \(D\)
+is diagonal with the eigenvalues of M on its diagonal:
+-->
+\[
+\begin{pmatrix}
+M_{11} &  M_{12} \\
+M_{21} &  M_{22}
+\end{pmatrix}
+= N^{−1}
+\begin{pmatrix}
+λ_1 & 0 \\
+0 & λ_2
+\end{pmatrix}
+N =
+(\vec{v}_1, \vec{v}_2)^{−1}
+\begin{pmatrix}
+λ_1 & 0 \\
+0 & λ_2
+\end{pmatrix}
+(\vec{v}_1,\vec{v}_2)
+\tag{C.10}
+\]
+
+</p>
+    </body>
+</html>

@@ -1,0 +1,958 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>Appendix B</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>B 微積分</h1>
+<h2>B.1 積の法則</h2>
+<!--
+<h1>B Calculus</h1>
+<h2>B.1 Product Rule</h2>
+-->
+<p>
+積の法則
+<!--
+The product rule
+-->
+\[
+\frac{d\left(f(x)g(x)\right)}{dx}=\left(\frac{d\,f(x)}{dx}\right)g(x) + f(x)\left(\frac{d\,g(x)}{dx}\right)≡ f^\prime g + f g^\prime  \tag{B.1}
+\]
+微分の定義から直接導かれます。
+<!--
+follows directly from the definition of derivatives
+-->
+\[
+\begin{align}
+\frac{d}{dx}[f(x)g(x)] &= \lim\limits_{h→0}\frac{f(x+ h)g(x+ h)−f(x)g(x)}{h} \\
+\\
+&= \lim\limits_{h→0} \frac{[f(x+h)g(x+h) − f(x+h)g(x)] + [f(x+ h)g(x) − f(x)g(x)]}{h} \\
+\\
+&= \lim\limits_{h→0}f(x+ h)\frac{g(x+h)−g(x)}{h}+g(x)\frac{f(x+h)−f(x)}{h} \\
+\\
+&= f(x)g^\prime (x) + g(x) f^\prime (x)
+\end{align}
+\]
+</p>
+<h2>B.2 部分積分</h2>
+<!--
+<h2>B.2 Integration by Parts</h2>
+-->
+<p>
+（おそらく作り話と思われる）ある逸話があります。ピーター・ラックス氏が国家科学賞を受賞した際、他の受賞者（おそらく数学者ではない）が、彼になぜこの賞を受賞したのか尋ねました。ラックス氏はこう答えました。「部分積分をしたのです。」<br>
+- ウィリー・ウォン<sup>1</sup>
+<!--
+A (likely apocryphal) story goes: when Peter Lax was awarded the
+National Medal of Science, the other recipients (presumably nonmathematicians)
+asked him what he did to deserve the Medal. Lax
+responded: " I integrated by parts."<br>
+- Willie Wong<sup>1</sup>
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+www.math.stackexchange.com で紹介されました
+<!--
+Told on www.math.stackexchange.com
+-->
+</p><p>
+積分の重要な法則は積の法則から直接導かれます。積の法則<sup>2</sup>を積分すると
+<!--
+An important rule for integrals follows directly from the product
+rule. Integrating the product rule<sup>2</sup>
+-->
+</p><p class="margin-large">
+<sup>2</sup>
+式B.1を参照し、最初の項には微積分学の基本定理\(\int_a^b dx h^\prime (x) = h(b) − h(a)\)を使います。
+<!--
+See Eq. B.1 and we then use for the
+first term the fundamental theorem of
+calculus \(\int_a^b dx h^\prime (x) = h(b) − h(a)\).
+-->
+</p><p>
+
+\[
+\underbrace{\int_a^b dx \frac{d\left(f(x)g(x)\right)}{dx}}_{=f(x)g(x)|_a^b}
+=\int_a^b dx \left(\frac{d f(x)}{dx}\right)g(x)+\int_a^b dx f(x)\left(\frac{dg(x)}{dx}\right) \tag{B.2}
+\]
+そして、この項を並べ替えると
+<!--
+and rearranging the terms yields
+-->
+\[
+\int_a^b dx\left(\frac{d f(x)}{dx}\right)g(x) = f (x)g(x)\Big|_a^b-\int_a^b dx f(x)\left(\frac{dg(x)}{dx}\right)  \tag{B.3}
+\]
+
+この規則は物理学において場を扱うときに特に有用です。なぜなら、空間全体にわたって積分すると、つまり\(a = −∞,b = ∞\)、境界項は\(f(x)g(x)\big|_{a=-\infty}^{b=\infty} = 0\)と消えるからです。なぜなら、すべての場は無限遠 <sup>3</sup> で消える必要があるからです。
+<!--
+This rule is particularly useful in physics when working with fields,
+because if we integrate over all space, i.e. \(a = −∞,b = ∞\), the boundary
+term vanishes \(f(x)g(x)\big|_{a=-\infty}^{b=\infty} = 0\), because all fields must vanish at infinity <sup>3</sup>.
+-->
+</p><p class="margin-large">
+<sup>3</sup>
+これは当然のことです。そうでなければ、
+場全体のエネルギーは無限大となり、
+そのような場の構成は非物理的になります。
+<!--
+This follows, because otherwise the 
+total field energy would be infinity
+and such field configurations are nonphysical.
+-->
+</p>
+<h2>B.3 テイラー級数</h2>
+<!--
+<h2>B.3 The Taylor Series</h2>
+-->
+<p>
+テイラー級数は、任意の無限微分可能関数を冪(べき)級数で表すことができる公式です。
+<!--
+The Taylor series is a formula that enables us to write any infinitely
+differentiable function in terms of a power series
+-->
+\[
+f(x) = f(a) + (x− a) f^\prime (a) +\frac{1}{2}(x − a)^2 f^{\prime\prime}(a) + . . .  \tag{B.4}
+\]
+
+<div class="styleBullet">
+<ul><li>
+• 一方では、ある関数を級数で表す方法を知りたい場合に使えます。例えば、\(e^{ix} = \cos(x) + i \sin(x)\) であることを示すのに使えます。
+</li><br><li>• 他方では、テイラー級数を使って、ある点の周りの関数の近似値を得ることができます。これは、何らかの理由で高次の項を無視でき、無限個の項を考慮する必要がない場合に便利です。例えば、点 \(y\) の近傍点、例えば \(y + Δy\) における関数 \(f(x)\) を評価したい場合、次のように書きます。<sup>4</sup>
+<!--
+• On the one hand we can use it if we want to know how we can
+write some function in terms of a series. This can be used for
+example to show that \(e^{ix} = \cos(x) + i \sin(x)\).
+</li><br><li>• On the other hand we can use the Taylor series to get approximations
+for a function about a point. This is useful when we can
+neglect for some reasons higher order terms and don’t need to
+consider infinitely many terms. If we want to evaluate a function
+\(f(x)\) in some neighbouring point of a point \(y\), say \(y + Δy\), we can
+write<sup>4</sup>
+-->
+</li></ul></div>
+</p><p class="margin-large">
+
+<sup>4</sup>
+ここで変数の名前に惑わされないでください。上の式では、\(a\) での計算によって \(x\) における関数を評価したいのです。ここでは、\(y\) の情報を用いて、\(y + Δy\) における \(f\) について知りたいのです。関係を明確にするために、\(x = y + Δy\) かつ \(a = y\) とします。
+<!--
+Don’t let yourself get confused by 
+the names of our variables here. In the
+formula above we want to evaluate the
+function at \(x\) by doing computations
+at \(a\). Here we want to know something
+about \(f\) at \(y + Δy\), by using information
+at \(y\). To make the connection precise:
+\(x = y + Δy\) and \(a = y\).
+-->
+</p><p>
+
+\[
+f(y + Δy) = f (y) + (y + Δy − y) f\prime (y) + . . . = f(y) + Δy f^\prime (y) + . . . . \tag{B.5}
+\]
+
+これは、関数を \(y\) で評価することによって、関数の \(y + Δy\) における近似値を得ることを意味します。極端な場合、無限小近傍 \(Δy →\epsilon\) では、関数の変化はテイラー級数の1つの項（線形項）で表すことができます。
+<!--
+This means we get an approximation for the function value at
+\(y + Δy\), by evaluating the function at y. In the extreme case of an
+infinitesimal neighbourhood \(Δy →\epsilon\), the change of the function
+can be written by one (the linear) term of the Taylor series.
+-->
+\[
+Δf = f (y +\epsilon) − f (y) = f (y) +\epsilon f^\prime(y) + . . . − f (y) = 
+\epsilon f^\prime (y) + \underbrace{...}_{≈0\; for\;\epsilon^2≈0} \tag{B.6}
+\]
+
+</p><p>
+この式は最も有用な数学的ツールの一つであり、微積分学の基本定理と部分積分法を用いて導くことができます。基本定理は、
+<!--
+This formula is one of the most useful mathematical tools and
+we can derive it using the fundamental theorem of calculus and
+integration by parts. The fundamental theorem tells us
+-->
+\[
+\int_a^x dt f^\prime(t) = f(x) − f (a) → f (x) = f (a) +\int_a^x dt f^\prime(t)  \tag{B.7}
+\]
+
+2番目の項は部分積分で書き直すことができます。なぜなら、\(f^\prime(t) = 1 f^\prime(t)\)の前には当然1が暗黙的に存在し、これを式B.3の2番目の関数として使うことができるからです: \(g^\prime(t) = 1\)。部分積分の規則によれば、積分 \(\int_a^b v^\prime u=vu|_a^b+\int vu^\prime\) は、一方の項を積分し、もう一方の項を微分することで書き直すことができます。
+ここで、\(g^\prime(t) = 1\) を積分し、\(f^\prime(t)\) を微分します。つまり、式\(g^\prime = v^\prime\)、\(f^\prime = u\) です。これは次式を得ます。
+<!--
+We can rewrite the second term by integrating by parts, because
+we have of course an implicit 1 in front of \(f^\prime(t) = 1 f^\prime(t)\), which
+we can use as a second function in Eq. B.3: \(g^\prime(t) = 1\). The rule for
+integration by parts tells us that we can rewrite an integral \(\int_a^b v^\prime u=vu|_a^b+\int vu^\prime\) by integrating one term and differentiating the other.
+Here we integrate \(g^\prime(t) = 1\) and differentiate \(f^\prime(t)\), i.e. in the formula
+\(g^\prime = v^\prime\) and \(f^\prime = u\). This yields
+-->
+\[
+f (x) = f (a) +\int_a^x dt f\prime(t) = f(a) + g(t) f^\prime(t)\Big|_a^x-\int_a^x dt g(t) f^{\prime\prime}(t)  \tag{B.8}
+\]
+
+ここで、\(g(t)\) が何であるかを知る必要があります。現時点でわかっている情報は \(g^\prime(t) = 1\) だけですが、この導関数を持つ関数は無数に存在します。任意の定数 \(c\) に対して、関数 \(g = t + c\) は \(g^\prime(t) = 1\) を満たします。この公式は \(g = t − x\) のときに特に有用になります<sup>5</sup>。つまり、定数 \(c\) として、積分の上限境界 \(−x\) をマイナスしたものを使用します。すると、上の式の第2項は
+<!--
+Now we need to know what \(g(t)\) is. At this point the only information
+we have is \(g^\prime(t) = 1\), but there are infinitely many functions
+with this derivative: For any constant \(c\) the function \(g = t + c\) satisfies
+\(g^\prime(t) = 1\). Our formula becomes particularly useful<sup>5</sup> for \(g = t − x\), i.e. we use minus the upper integration boundary \(−x\) as our constant \(c\). Then we have for the second term in the equation above
+-->
+</p><p class="margin-large">
+<sup>5</sup>
+
+この式は任意の \(c\) に対して成り立ちます。もちろん、別の定数を選ぶこともできますが、その場合、私たちの式は得られません。\(f(x)\) の有用な式が得られるように定数 \(c\) を選びます。そうしないと、\(f(x)\) が左辺と右辺に現れてしまいます。
+<!--
+The equation holds for arbitrary \(c\)
+and of course you’re free to choose
+something different, but you won’t get
+our formula. We choose the constant c
+such that we get a useful formula for
+\(f(x)\). Otherwise \(f(x)\) would appear on
+the left- and right-hand side.
+-->
+</p><p>
+
+\[
+g(t) f^\prime(t)\Big|_a^x= (t−x) f^\prime(t)\Big|_a^x=
+\underbrace{(x − x)}_{=0}f^\prime(x)−(a−x) f^\prime(a) = (x−a) f^\prime(a)
+  \tag{B.9}
+\]
+
+そして式は次のようになります
+<!--
+and the formula now reads
+-->
+\[
+f(x) = f(a) + (x − a) f^\prime(a) +\int_a^x dt (x − t) f^{\prime\prime}(t)  \tag{B.10}
+\]
+
+次に、<sup>6</sup> \(v^\prime = (x − t)\) と \(u = f^{\prime\prime}(t)\) を用いて、部分積分を使って最後の項をもう一度評価します。
+<!--
+We can then evaluate the last term once more using integration by
+parts, now with<sup>6</sup> \(v^\prime = (x − t)\) and \(u = f^{\prime\prime}(t)\):
+-->
+</p><p class="margin-large">
+<sup>6</sup>
+\(v^\prime = (x − t)\) を積分するとマイナス符号が付くことに注意してください: \(→ v = −\frac{1}{2}(x −
+t)^2 + d\)。これは、ここでの変数が \(t\) であり、定数 \(d\) をゼロに選択したためです。
+<!--
+Take note that integrating \(v^\prime = (x − t)\)
+yields a minus sign: \(→ v = −\frac{1}{2}(x −
+t)^2 + d\), because our variable here is \(t\)
+and with some constant d we choose to
+be zero.
+-->
+</p><p>
+
+\[
+→\int_a^x dt \underbrace{(x − t)}_{=v^\prime}\underbrace{f^{\prime\prime}(t)}_{=u}
+=\underbrace{−\frac{1}{2}(x − t)^2}_{=v}
+\underbrace{f^{\prime\prime}(t)}_{=u}
+\Big|_a^x−\int_a^x dt\underbrace{\left(−\frac{1}{2}(x − t)^2\right)}_{=v}\underbrace{f^{\prime\prime\prime}(t)}_{=u^\prime}
+\]
+
+ここで境界項は再び単純です。
+<!--
+where the boundary term is again simple
+-->
+\[
+−\frac{1}{2}(x − t)^2 f^{\prime\prime}(t)\Big|_a^x
+= −\frac{1}{2}\underbrace{(x − x)^2}_{=0}f^{\prime\prime}(x)
++\frac{1}{2}(x − a)^2 f^{\prime\prime}(a)
+\]
+
+この式は次のようになります。
+<!=-
+This gives us the formula
+-->
+\[
+f(x) = f(a) + (x − a) f^\prime(a) +\frac{1}{2}(x − a)^2 f^{\prime\prime}(a) +
+\int_a^x dt \frac{1}{2}(x − t)^2 f^{\prime\prime\prime}(t)  \tag{B.11}
+\]
+
+最後の項を部分積分することもできますが、パターンはもうお分かりでしょう。テイラー級数は、和を表す数学記号Σを使って、より簡潔に表すことができます。
+<!--
+We could go on and integrate the last term by parts, but the pattern
+should be visible by now. The Taylor series can be written in a more
+compact form using the mathematical sign for a sum Σ:
+-->
+\[
+\begin{align}
+f(x) &=\sum_{n=0}^\infty \frac{f^{(n)}(a)(x − a)^n}{n!} \\
+\\
+&=\frac{f^{(0)}(a)(x − a)^0}{0!}+\frac{f^(1)(a)(x − a)^1}{1!}+\frac{f^{(2)}(a)(x − a)^2}{2!} \\
+\\
+&　+\frac{f^{(3)}(a)(x − a)^3}{3!}+ . . .   \tag{B.12}
+\end{align}
+\]
+
+ここで、\(f^{(n)}\) は \(f\) の \(n\) 階微分を表します。例えば、\(f^{(2)} = f^{\prime\prime}\)、\(n!\) は \(n\) の階乗を表します。つまり、\(n! = 1 · 2 · 3 . . . n\) です。例えば、\(n = 5\) の場合、\(5! = 5 · 4 · 3 · 2 · 1 = 120, 2! = 2 · 1 = 2\) となり、定義により \(0! = 1\) となります。級数については次のセクションで説明します。
+<!--
+where \(f^{(n)}\) denotes the \(n\)-th derivative of \(f\) , e.g. \(f^{(2)} = f^{\prime\prime}\) and \(n!\) is the factorial of \(n\), i.e. \(n! = 1 · 2 · 3 . . . n\). For example for \(n = 5\) we have \(5! = 5 · 4 · 3 · 2 · 1 = 120, 2! = 2 · 1 = 2\) and by definition \(0! = 1\). Series are the topic of the next section.
+-->
+</p>
+<h2>B.4 級数</h2>
+<!--
+<h2>B.4 Series</h2>
+-->
+<p>
+前のセクションでは、無限和を含む非常に重要な式に出会いました。このセクションでは、和の操作に関する基本的なコツと、いくつかの非常に重要な級数を紹介します。
+<!--
+In the last section we stumbled upon a very important formula that
+includes an infinite sum. In this section some basic tricks for sum
+manipulation and some very important series will be introduced.
+-->
+</p>
+<h3>B.4.1 重要な級数</h3>
+<!--
+<h3>B.4.1 Important Series</h3>
+-->
+<p>
+前のセクションでは、すべての無限微分可能関数は級数として書けることを学びました。まずはおそらく最も重要な関数、指数関数 \(e^x\) から始めましょう。指数関数のテイラー級数はすぐに書けます。
+<!--
+In the last section we learned that we can write every infinitely differentiable
+function as a series. Let’s start with maybe the most important
+function: The exponential function \(e^x\). The Taylor series for the
+exponential function can be written right away
+-->
+\[
+e^x = \sum_{n=0}^\infty \frac{x^n}{n!} \tag{B.13}
+\]
+
+指数関数の定義的特徴、すなわち導関数が指数関数自身であるということ: \((e^x)^\prime = ex\) を用いて、\(a = 0\) に関するテイラー級数を評価し、\(e^0 = 1\) を用いる。これにより、指数関数のテイラー級数 (式 B.12) が得られる。
+<!--
+by using the defining feature of the exponential function that the
+derivative is the exponential function itself: \((e^x)^\prime = ex\), evaluating the
+Taylor series about \(a = 0\) and using \(e^0 = 1\). This yields the Taylor
+series (Eq. B.12) for the exponential function:
+-->
+\[
+e^x = \sum_{n=0}^\infty \frac{e^0(x − 0)^n}{n!}
+=\sum_{n=0}^\infty \frac{x^n}{n!} \tag{B.14}
+\]
+この級数は\(e^x\)の定義として見ることができます。
+<!--
+This series can be seen as a definition of \(e^x\).
+-->
+</p><p>
+
+他に2つの重要な無限微分可能関数は、\(\sin(x)\)
+と\(\cos(x)\)です。これらの関数のテイラー級数は、\((\sin(x))^\prime = \cos(x), (\cos(x))^\prime = −\sin(x), \cos(0) = 1\)、\(\sin(0) = 0\)を用いて計算できます。
+<!--
+Two other important, infinitely differentiable functions are \(\sin(x)\)
+and \(\cos(x)\). We can compute the Taylor series for these functions,
+by using \((^sin(x))^\prime = \cos(x), (\cos(x))^\prime = −\sin(x), \cos(0) = 1\) and \(\sin(0) = 0\).
+-->
+\[
+\sin(x) = \sum_{n=0}^\infty \frac{\sin^{(n)}(0)(x − 0)^n}{n!}
+\]
+
+\(\sin(0) = 0\) により、n が偶数である項はすべて消え、これを和を分割すれば使える。
+<!--
+Because of \(\sin(0) = 0\) every term with even n vanishes, which we can
+use if we split the sum. Observe that
+-->
+\[
+\sum_{n=0}^\infty n = \sum_{n=}^\infty (2n + 1) +\sum_{n=0}^\infty (2n)
+\]
+
+\[
+1 + 2 + 3 + 4 + 5 + 6 . . . = 1 + 3 + 5 + . . . + 2 + 4 + 6 + . . .  \tag{B.15}
+\]
+
+\(\sin(x)\)の和を分割すると、
+<!--
+Splitting the sum for \(\sin(x)\) yields
+-->
+\[
+\begin{align}
+\sin(x) &= \sum_{n=0}^\infty \frac{\sin^{(2n+1)}(0)(x − 0)^{2n+1}}{(2n + 1)!}
++\underbrace{\sum_{n=0}^\infty \frac{\sin^{(2n)}(0)(x − 0)^{2n}}{(2n)!}}_{=0} \\
+\\
+&=\sum_{n=0}^\infty \frac{\sin^{(2n+1)}(0)(x − 0)^{2n+1}}{(2n + 1)!}  \tag{B.16}
+\end{align}
+\]
+
+\(\sin(x)\) のすべての偶数階微分、つまり \(\sin^{(2n)}\) は、\(\sin(x)\) となります（ただし、その前にマイナス記号が付く場合もあります）。したがって、\(\sin(0) = 0\) により、第2項は消えます。\(\sin(x)\) のすべての奇数階微分は、\(\cos(x)\) となります（ただし、その前にマイナス記号が付く場合もあります）。
+<!--
+Every even derivative of \(\sin(x)\), i.e. \(\sin^{(2n)}\) is again \(\sin(x)\) (with possibly
+a minus sign in front of it) and therefore the second term vanishes
+because of \(\sin(0) = 0\). Every uneven derivative of \(\sin(x)\) is
+\(\cos(x)\), with possibly a minus sign in front of it. We have
+-->
+\[
+\begin{align}
+\sin(x)^{(1)} &= \cos(x) \\
+\\
+\sin(x)^{(2)} &= \cos^\prime(x) = −\sin(x) \\
+\\
+\sin(x)^{(3)} &= −\sin^\prime(x) = −\cos(x) \\
+\\
+\sin(x)^{(4)} &= −\cos^\prime(x) = \sin(x) \\
+\\
+\sin(x)^{(5)} &= ^sin^\prime(x) = \cos(x)  \tag{B.17}
+\end{align}
+\]
+
+したがって、パターンは\(\sin^{(2n+1)}(x) = (−1)^n cos(x)\)となり、式<sup>7</sup>にnの整数値を代入すれば確認できます。したがって、式B.16は次のように書き直すことができます。
+<!--
+The pattern is therefore \(\sin^{(2n+1)}(x) = (−1)^n cos(x)\), as you can
+check by putting some integer values for n into the formula<sup>7</sup>. We can therefore rewrite Eq. B.16 as
+-->
+</p><p class="margin-large">
+<sup>7</sup>
+\(\sin^{(1)}(x) = sin^{(2·0+1)}(x) =
+(−1)^0 \cos(x) = \cos(x), sin^{(3)}(x) =
+\sin^{(2·1+1)}(x) = (−1)^1 \cos(x) = −\cos(x)\)
+</p><p>
+
+\[
+\begin{align}
+\sin(x) &= \sum_{n=0}^\infty \frac{\sin^{(2n+1)}(0)(x − 0)^{2n+1}}{(2n + 1)!} \\
+\\
+&=\sum_{n=0}^\infty \frac{(−1)^n \cos(0)(x − 0)^{2n+1}}{(2n + 1)!} \\
+\\
+&\underbrace{=}_{\cos(0)=1} \sum_{n=0}^\infty \frac{(−1)^n(x)^{2n+1}}{(2n + 1)!}  \tag{B.18}
+\end{align}
+\]
+
+これは \(\sin(x)\) のテイラー級数であり、これも \(\sin(x)\) の定義として見ることができます。同様に、
+<!--
+This is the Taylor series for \(\sin(x)\), which again can be seen as a definition
+of \(\sin(x)\). Analogous we can derive
+-->
+\[
+\cos(x) = \sum_{n=0}^\infty \frac{(−1)^n(x)^{2n}}{(2n)!} \tag{B.19}
+\]
+
+今回は不等号導関数が \(\sin(0) = 0\) に比例するからです。
+<!--
+because this time uneven derivatives are proportional to \(\sin(0) = 0\).
+-->
+</p>
+<h3>B.4.2 和の分割</h3>
+<!--
+<h3>B.4.2 Splitting Sums</h3>
+-->
+<p>
+前のセクションでは、多くの計算で非常に役立つトリックを使用しました。
+そこでは、
+<!--
+In the last section we used a trick that is quite useful in many computations.
+There we used the example
+-->
+\[
+\sum_{n=0}^\infty n =\sum_{n=0}^\infty (2n + 1) +\sum_{n=0}^\infty (2n)
+\]
+
+\[
+1 + 2 + 3 + 4 + 5 + 6 . . . = 1 + 3 + 5 + . . . + 2 + 4 + 6 + . . .   \tag{B.20}
+\]
+
+任意の和を偶数と奇数に分割する方法を説明します。\(2n\) は常に偶数ですが、\(2n + 1\) は常に奇数です。前のセクションでこれが便利であることはすでに説明しましたが、別の例を見てみましょう。複素引数 \(ix\) を持つ指数級数を分割するとどうなるでしょうか？
+<!--
+to motivate how we can split any sum in terms of even and uneven
+integers. \(2n\) is always an even integer, whereas \(2n + 1\) is always an
+uneven integer. We already saw in the last section that this can be
+useful, but let’s look at another example. What happens if we split
+the exponential series with complex argument \(ix\)?
+-->
+\[
+\begin{align}
+e^{ix} &= \sum_{n=0}^\infty \frac{(ix)^n}{n!} \\
+\\
+&= \sum_{n=0}^\infty \frac{(ix)^{2n}}{(2n)!}+\sum_{n=0}^\infty \frac{(ix)^{2n+1}}{(2n + 1)!}  \tag{B.21}
+\end{align}
+\]
+
+これは\((ix)^{2n} = i^{2n}x^{2n}\)および\(i^{2n} = (i^2)^n =(−1)^n\)を用いて書き直すことができる。さらに\(i^{2n+1} = i · i^{2n} = i(−1)^n\)も成り立つ。すると、
+<!--
+This can be rewritten using that \((ix)^{2n} = i^{2n}x^{2n}\) and \(i^{2n} = (i^2)^n =(−1)^n\). In addition we have of course \(i^{2n+1} = i · i^{2n} = i(−1)^n\). Then we have
+-->
+\[
+\begin{align}
+e^{ix} &= \sum_{n=0}^\infty \frac{(ix)^n}{n!} \\
+\\
+&=\sum_{n=0}^\infty \frac{(−1)^n(x)^{2n}}{(2n)!}+ i\sum_{n=0}^\infty \frac{(−1)^n(x)^{2n+1}}{(2n + 1)!} \\
+\\
+&=\underbrace{\sum_{n=0}^\infty \frac{(−1)^n(x)^{2n}}{(2n)!}}_{=\cos(x)\,see\, Eq. B.19}+i
+\underbrace{\sum_{n=0}^\infty\frac{(−1)^n(x)^{2n+1}}{(2n + 1)!}}_{=\sin(x)\, see\, Eq. B.18}  \\
+\\
+&= \cos(x) + i \sin(x)  \tag{B.22}
+\end{align}
+\]
+これは<strong>オイラーの公式</strong>としてよく知られています。
+<!--
+This is famously known as <strong>Euler’s formula</strong>.
+-->
+</p>
+<h3>B.4.3 アインシュタインの和の規則</h3>
+<!--
+<h3>B.4.3 Einstein’s Sum Convention</h3>
+-->
+<p>
+物理学では和は非常に一般的ですが、大きな和記号 \(\Sigma\) を常に書くのは非常に面倒です。そのため、ある賢い人が「アインシュタイン和規約」と呼ばれる慣習を導入しました。この慣習によれば、ある項で添え字が2回現れるたびに、例えば上記の和の \(n\) のように、暗黙の和が理解されます。これはつまり、
+<!--
+Sums are very common in physics and writing the big sum sign Σ
+all the time can be quite cumbersome. For this reason a clever man
+introduced a convention, called Einstein sum convention. According
+to this convention every time an index appears twice in some term,
+like n in the sums above, an implicit sum is understood. This means
+-->
+\[
+a_nb_n ≡\sum_n a_nb_n   \tag{B.23}
+\]
+他の例としては
+<!--
+Other examples are
+-->
+\[
+\begin{align}
+a_nb_nc_m &≡\sum_n a_nb_nc_m  \tag{B.24} \\
+\\
+a_mb_nc_m &≡\sum_m a_mb_nc_m  \tag{B.25}
+\end{align}
+\]
+しかし
+<!--
+but
+-->
+\[
+a_nb_m \neq \sum_n a_nb_m  \tag{B.26}
+\]
+
+一般に \(m \neq n\) となるためです。パートナーを持たないインデックスは<strong>フリーインデックス</strong>と呼ばれ、パートナーを持つインデックスは<strong>ダミーインデックス</strong>と呼ばれます。その理由は次のセクションで説明します。
+<!--
+because in general \(m \neq n\). An index without a partner is called a <strong>free
+index</strong>, an index with a partner a <strong>dummy index</strong>, for reasons that will
+be explained in the next section.
+-->
+</p><p>
+
+例えば、\(a_nb_nc_m ≡ \sum_n a_nb_nc_m\) という和において、インデックス \(n\) はダミーインデックスですが、\(m\) はフリーインデックスです。同様に、\(a_mb_nc_m ≡ \sum_m a_mb_nc_m\) においても、インデックス \(m\) はダミーインデックスで、\(n\) はフリーインデックスです。
+<!--
+For example in the sum \(a_nb_nc_m ≡ \sum_n a_nb_nc_m\), the index \(n\) is a
+dummy index, but \(m\) is a free index. Equivalently, in \(a_mb_nc_m ≡ \sum_m a_mb_nc_m\),
+the index \(m\) is a dummy index and \(n\) is free.
+-->
+</p>
+<h2>B.5 インデックス表記</h2>
+<h3>B.5.1 ダミーインデックス</h3>
+<!--
+<h2>B.5 Index Notation</h2>
+<h3>B.5.1 Dummy Indices</h3>
+-->
+<p>
+パートナーを持つ指数の名前は
+全く影響を及ぼさないことに注意することが重要です。\(n → k\) という名前を変更しても、\(n\) が縮約されている限り、全く何も変わりません<sup>8</sup>。
+<!--
+It is important to take note that the name of indices with a partner
+plays absolutely no role. Renaming \(n → k\), changes absolutely nothing<sup>8</sup>,
+as long as \(n\) is contracted 
+-->
+</p><p class="margin-large">
+<sup>8</sup>
+もちろん、インデックスを別の種類のインデックスに変更することはできません。例えば、\(i → j\) は変更できますが、\(i → μ\) は変更できません。\(μ\) のようなギリシャ文字インデックスは常に 0 から 3 まで加算され、\(i\) のようなローマ字インデックスは常に 1 から 3 まで加算されるからです。
+<!--
+Of course we can’t change an index
+into another type of index. For example,
+we can change \(i → j\) but not
+\(i → μ\), because Greek indices like \(μ\) are
+always summed from 0 to 3 and Roman
+indices, like \(i\) from 1 to 3.
+-->
+</p><p>
+
+\[
+a_nb_nc_m = a_kb_kc_m ≡\sum_n a_nb_nc_m ≡\sum_k a_kb_kc_m   \tag{B.27}
+\]
+
+一方、自由インデックスは自由に名前を変更できません。例えば、\(m → q\) は、方程式の反対側に同じ自由インデックスを持つ項が存在する必要があるため、大きな違いを生む可能性があります。つまり、\(a_nb_nc_m\) のような項を単独で見る場合、同じ自由インデックス \(m\) を持つ他の項も名前を変更する必要がある可能性があることを常に考慮する必要があります。例を見てみましょう。
+<!--
+On the other hand free indices can not be renamed freely. For example,
+\(m → q\) can make quite a difference because there must be some
+term on the other side of the equation with the same free index. This
+means when we look at a term like \(a_nb_nc_m\) isolated, we must always
+take into account that there might be other terms with the same free
+index \(m\) that must be renamed, too. Let’s look at an example
+-->
+\[
+F_i = \epsilon_{ijk}a_jb_k  \tag{B.28}
+\]
+
+ここで新たに登場する点は、あるオブジェクト（ここでは \(\epsilon_{ijk}\)）が複数のインデックスを持つことができるということですが、これは後で説明するので、あまり気にしないでください。したがって、\(\epsilon_{ijk}a_jb_k\) を見ると、\(j\) と \(k\) の名前は好きなように変更できます。なぜなら、これらのインデックスは短縮形になっているからです。例えば、\(j → u, k → z\) は、\(\epsilon_{iuz}a_ub_z\) となり、実際には同じです。一方、\(i\) はダミーインデックスではないので、\(i → m: \epsilon_{muz}a_ub_z\) と名前を変更することはできません。そうすると、式は次のようになってしまいます。
+<!--
+A new thing that appears here is that some object, here \(\epsilon_{ijk}\), is allowed
+to carry more than one index, but don’t let that bother you,
+because we will come back to this in a moment. Therefore, if we look
+at \(\epsilon_{ijk}a_jb_k\) we can change the names of \(j\) and \(k\) as we like, because
+these indices are contracted. For example \(j → u, k → z\), which yields
+\(\epsilon_{iuz}a_ub_z\) is really the same. On the other hand \(i\) is not a dummy index
+and we can’t rename it \(i → m: \epsilon_{muz_a_ub_z\) , because then our equation
+would read
+-->
+\[
+F_i = \epsilon_{muz}a_ub_z  \tag{B.29}
+\]
+
+この時点では、これは衒学的すぎるように思えるかもしれません。なぜなら、意味のある結果を得るためには、\(F_i\) でも \(i\) の名前を変更する必要があることは明らかだからです。しかし、多くの場合、私たちは独立した項を見ることになるので、何も変更せずに何ができるかを知ることは重要です。
+<!--
+This may seem pedantic at this point, because it is clear that we need
+to rename \(i\) at \(F_i\), too in order to get something sensible, but more
+often than not will we look at isolated terms and it is important to
+know what we are allowed to do without changing anything.
+-->
+</p>
+<h2>B.5.2 複数のインデックスを持つオブジェクト</h2>
+<!--
+<h2>B.5.2 Objects with more than One Index</h2>
+-->
+<p>
+さて、複数のインデックスを持つオブジェクトについて話しましょう。2つのインデックスを持つオブジェクトは、単なる行列です。最初のインデックスはどの行から値を取得するかを示し、2番目のインデックスはどの列から値を取得するかを示します。
+例えば
+<!--
+Now, let’s talk about objects with more than one index. Objects with
+two indices are simply matrices. The first index tells us which row
+and the second index which column we should pick our value from.
+For example
+-->
+\[
+M_{ij} ≡
+\begin{pmatrix}
+M_{11} & M_{12} \\
+M_{21} & M_{22}
+\end{pmatrix}
+\tag{B.30}
+\]
+
+これは例えば、\(M_{12}\) が 1 行目の 2 列目にあるオブジェクトであることを意味します。
+</p><p>
+これを利用して、インデックスを使った行列の乗算を記述できます。2 つの行列の積は
+<!--
+This means for example that M12 is the object in the first row in the
+second column.
+</p><p>
+We can use this to write matrix multiplication using indices. The
+product of two matrices is
+-->
+\[
+MN ≡ (MN)_{ij} = M_{ik}N_{kj}  \tag{B.31}
+\]
+
+</p><p>
+左側には、積行列 \((MN)\) の \(i\) 行 \(j\) 列の要素があります。これは、\(M\) の \(i\) 行目と \(N\) の \(j\) 列目を乗じて得られます。添え字 \(k\) は 2 回出現するため、暗黙の和が仮定されます。3 つ以上の添え字 (テンソル) を持つオブジェクトに名前を付けることができます。本書では 2 つで十分であり、次のセクションの 1 つで取り上げる例外についてのみ説明します。
+<!--
+On the left hand side we have the element in row \(i\) in column \(j\) of
+the product matrix \((MN)\), which we get from multiplying the \(i\)-th
+row of \(M\) with the \(j\)-th column of \(N\). The index k appears twice and
+therefore an implicit sum is assumed. One can give names to objects
+with three or more indices (tensors). For the purpose of this book
+two are enough and we will discuss only one exception, which is the
+topic of one of the next sections.
+-->
+</p>
+<h3>B.5.3 対称インデックスと反対称インデックス</h3>
+<!--
+<h3>B.5.3 Symmetric and Antisymmetric Indices</h3>
+-->
+<p>
+行列が対称であるとは、\(M_{ij} = M_{ji}\) のことです。これは、2次元の例では \(M_{12} = M_{21}\) となり、対称行列の例は次のようになります。
+<!--
+A matrix is said to be symmetric if \(M_{ij} = M_{ji}\). This means in our two
+dimensional example \(M_{12} = M_{21}\) and an example for a symmetric
+matrix is
+-->
+\[
+\begin{pmatrix}
+9 & 3 \\
+3 & 17
+\end{pmatrix}
+\tag{B.32}
+\]
+
+行列が<strong>(完)全反対称</strong>であるとは、すべての \(i, j\) に対して \(M_{ij} = −M_{ji}\) が成り立つ場合を指します。例を以下に示します。
+<!--
+A matrix is called <strong>totally antisymmetric</strong> if \(M_{ij} = −M_{ji}\) for all \(i, j\)
+holds. An example would be.
+-->
+\[
+\begin{pmatrix}
+0 & 3 \\
+−3 & 0
+\end{pmatrix}
+\tag{B.33}
+\]
+
+ここで対角要素はゼロでなければならないことに注意してください。なぜなら、
+\(M_{11} = −M_{11}\) であり、これは \(M_{11} = 0\) の場合にのみ満たされ、
+\(M_{22}\) の場合も同様です。
+<!--
+Take note that the diagonal elements must vanish here, because
+\(M_{11} = −M_{11}\), which is only satisfied for \(M_{11} = 0\) and analogously for
+\(M_{22}\).
+-->
+</p>
+<h3>B.5.4 反対称×対称の和</h3>
+<!--
+<h3>B.5.4 Antisymmetric × Symmetric Sums</h3>
+-->
+<p>
+重要な観察点は、インデックスが対称なものと、同じインデックスが反対称なものを掛け合わせた合計は常に、結果がゼロになることです。
+<!--
+An important observation is that every time we have a sum over
+something symmetric in its indices multiplied with something antisymmetric
+in the same indices, the result is zero:
+-->
+\[
+\sum_{ij} a_{ij}b_{ij} = 0  \tag{B.34}
+\]
+
+\(a_{ij} = −a_{ji}\)かつ\(b_{ij} = b_{ji}\)がすべての\(i, j\)に対して成立する場合、これは次のように書けます。
+<!--
+if \(a_{ij} = −a_{ji}\) and \(b_{ij} = b_{ji}\) holds for all \(i, j\). We can see this by writing
+-->
+\[
+\sum_{ij} a_{ij}b_{ij} = \frac{1}{2}\left(\sum_{ij}a_{ij}b_{ij} +\sum_{ij} a_{ij}b_{ij}\right)
+\tag{B.35}
+\]
+
+前述のように、第2項で使用するダミーインデックス \(i → j\) と \(j → i\) の名前は自由に変更できます。
+<!--
+As explained earlier we are free to rename our dummy indices \(i → j\)
+and \(j → i\), which we use in the second term
+-->
+\[
+→ \sum_{ij} a_{ij}b_{ij} = \frac{1}{2}\left(\sum_{ij}a_{ij}b_{ij} +\sum_{ij}a_{ji}b_{ji}\right)
+\tag{B.36}
+\]
+
+次に、\(b_{ij}\) の対称性と \(a_{ij}\) の反対称性を利用して、第2項の添字を入れ替えると、<sup>9</sup>が得られます。
+<!--
+Then we use the symmetry of \(b_{ij}\) and antisymmetry of \(a_{ij}\), to switch
+the indices in the second term, which yields<sup>9</sup>
+-->
+</p><p class="margin-large">
+<sup>9</sup>
+もしこれが安っぽいトリックのように思えるなら、
+実際にそれが正しいかどうかを確認するために、いくつかの明示的な例を計算してみてください。
+<!--
+If this looks like a cheap trick to you,
+you should compute some explicit
+examples to see that this is really true.
+-->
+</p><p>
+
+\[
+\begin{align}
+→ \sum_{ij}a_{ij}b_{ij} &= \frac{1}{2}\left(\sum_{ij}a_{ij}b_{ij} +\sum_{ij}\underbrace{a_{ji}}_{=−a_{ij}}\underbrace{b_{ji}}_{=b_{ij}}\right) \\
+\\
+&=\frac{1}{2}\left(\sum_{ij}a_{ij}b_{ij} - \sum_{ij}a_{ij}b_{ij}\right)= 0  \tag{B.37}
+\end{align}
+\]
+
+</p>
+<h3>B.5.5 2つの重要な記号</h3>
+<!--
+<h3>B.5.5 Two Important Symbols</h3>
+-->
+<p>
+
+最も重要な行列の一つは、もちろん<strong>単位行列</strong>です。2次元では、
+<!--
+One of the most important matrices is of course the <strong>unit matrix</strong>. In
+two dimensions we have
+-->
+\[
+1 =
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+\tag{B.38}
+\]
+
+指数表記では単位行列はクロネッカー記号と呼ばれ、\(δ_{ij}\) と表記され、任意の次元に対して次のように定義される。
+<!--
+In index notation the unit matrix is called the Kronecker symbol,
+denoted δij, which is then defined for arbitrary dimensions by
+-->
+\[
+δ_{ij} =
+\begin{cases}
+1 & if\; i = j \\
+0 & if\; i \neq j 
+\end{cases}
+\tag{B.39}
+\]
+
+クロネッカー記号は、\(δ_{ij} = δ_{ji}\) であるため対称です。
+<!--
+The Kronecker symbol is symmetric because \(δ_{ij} = δ_{ji}\).
+-->
+</p><p>
+同様に重要なのは<strong>レヴィ・チヴィタ記号</strong> \(\epsilon_{ijk}\) です。これは2次元で次のように定義されます。
+<!--
+Equally important is the <strong>Levi-Civita symbol</strong> \(\epsilon_{ijk}\), which is defined
+in two dimensions as follows:
+-->
+\[
+\epsilon_{ij} = 
+\begin{cases}
+1 & if\;(i, j) = \{(1, 2)\} \\
+0 & if\;i = j \\
+−1 & if\;(i, j) = \{(2, 1)\}
+\end{cases}
+\tag{B.40}
+\]
+
+行列形式では次のように書ける。
+<!--
+In matrix form, we can write it as
+-->
+\[
+\epsilon_{ij}=
+\begin{pmatrix}
+0 & 1 \\
+−1 & 0
+\end{pmatrix}
+\tag{B.41}
+\]
+
+3次元では、レヴィ・チヴィタ記号は
+<!--
+In three dimensions the Levi-Civita symbol is
+-->
+\[
+\epsilon_{ijk}=
+\begin{cases}
+1 & if\;(i, j, k) = \{(1, 2, 3), (2, 3, 1), (3, 1, 2)\} \\
+0 & if\;i = j\; または\; j = k\; または\; k = i \\
+−1 & if\;(i, j, k) = {(1, 3, 2), (3, 2, 1), (2, 1, 3)}
+\end{cases}
+\tag{B.42}
+\]
+
+そして4次元で
+<!--
+and in four dimensions
+-->
+\[
+\epsilon_{ijkl}=
+\begin{cases}
+1 & if\;(i, j, k, l)\text{ は }\{(1, 2, 3, 4)\text{ の偶置換である}\} \\
+−1 & if\;(i, j, k, l)\text{ は }\{(1, 2, 3, 4)\text{ の奇置換である}\} \\
+0 & 上記以外
+\end{cases}
+\tag{B.43}
+\]
+
+たとえば、\((1, 2, 4, 3)\) は\((1, 2, 3, 4)\)の奇置換（1つ置換しているため）であり、\((2, 1, 4, 3)\) は\((1, 2, 3, 4)\)の偶置換（2つ置換しているため）です。
+。
+<!--
+For example \((1, 2, 4, 3)\) is an uneven (because we make one change)
+and \((2, 1, 4, 3)\) is an even permutation (because we make two changes)
+of \((1, 2, 3, 4)\).
+-->
+</p><p>
+
+レヴィ・チヴィタ記号は<strong>完全反対称</strong>です。なぜなら、2つの添字を変更すると、定義により常にマイナス記号が付くからです。
+\(\epsilon_{ijk} = −\epsilon_{jik},\epsilon_{ijk} = −\epsilon_{ikj}\) など。または2次元では
+\(\epsilon_{ij} = −\epsilon_{ji}\) となります。
+<!--
+The Levi-Civita symbol is <strong>totally anti-symmetric</strong> because if we
+change two indices, we always get, by definition, a minus sign:
+\(\epsilon_{ijk} = −\epsilon_{jik},\epsilon_{ijk} = −\epsilon_{ikj}\) etc. or in two dimensions
+\(\epsilon_{ij} = −\epsilon_{ji}\).
+-->
+</p>
+    </body>
+</html>
