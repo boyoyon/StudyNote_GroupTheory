@@ -97,7 +97,26 @@
     </style>
     </head>
     <body>
-        <h1>リー群論</h1>
+<h1><center>パートII 対称性ツール</center></h1>
+<p>
+<center>「数は大きさを測り、群は対称性を測る。」</center>
+<br>
+</p><p style="text-align: right;">
+<strong>Mark A. Armstrong</strong><br>
+『グループと対称性』より<br>
+<!--
+<h1><center>Part II Symmetry Tools</center></h1>
+<p>
+<center>"Numbers measure size, groups measure symmetry."</center>
+<br>
+</p><p style="text-align: right;">
+<strong>Mark A. Armstrong</strong><br>
+in Groups and Symmetry.<br>
+-->
+Springer, 2nd edition, 2 1997.<br>
+ISBN 9780387966755<br>
+</p>
+<h1>リー群論</h1>
 <h2>章の概要</h2>
 <p>
 この章の最終目標は、時空の基本対称群であると仮定するポアンカレ群の二重被覆の基本表現を導出することです。これらの基本表現は、すべての素粒子を記述するために必要なツールであり、それぞれが異なる種類の素粒子を表します。これらの表現は、自然界にどのような種類の素粒子が存在するかを教えてくれます。
@@ -199,22 +218,41 @@ Let us get started with two easy examples to get a feel for what
 we want to do:
 -->
 <div class="styleBullet">
-<ul>
-<li>1. 正方形は数学的には点の集合（例えば、4つの頂点はこの集合の一部）であり、正方形の対称性とは、この点の集合をそれ自身に写す変換です。
+<ul><li>
+1. 正方形は数学的には点の集合（例えば、4つの頂点はこの集合の一部）であり、正方形の対称性とは、この点の集合をそれ自身に写す変換です。
 
 正方形の対称性の例としては、原点を中心として \(90^{\circ}, 180^{\circ}, 270^{\circ}\) または \(0^{\circ}\) 回転することが挙げられます。これらの回転は、正方形をそれ自身に写します。つまり、集合内のすべての点を、その集合に再び含まれる点に写すということです。そして、集合はこのような変換に対して不変であると言えます。<br>
-<br>
 
-すべての回転が正方形の対称性となるわけではないことに注意してください。これは、正方形の頂点に注目すると明らかになります。この集合を時計回りに、例えば \(5^{\circ}\)◦ 回転させる変換を行うと、これらの点は正方形を定義する元の集合の外側の点に写像されます。例えば、図 3.2 に示すように、角の点 \(A\) は点 \(A^\prime\) に写像されますが、これはそもそも正方形を定義した集合内には存在しません。したがって、\(5^{\circ}\) 回転は正方形の対称性ではありません。もちろん、回転後の物体は依然として正方形ですが、別の正方形（＝別の点の集合）になります。しかし、\(90^{\circ}\) 回転は正方形の対称性です。なぜなら、点 \(A\) は元の集合内にある点 \(B\) に写像されるからです。これは図 3.3 に示されています。<br>
+<center><img src="images/fig3_1.png"></center>
+<p>
+<center>図3.1: 正方形の図</center>
 <br>
+<!--
+<center>Fig. 3.1: Illustration of a square</center>
+-->
+
+すべての回転が正方形の対称性となるわけではないことに注意してください。これは、正方形の頂点に注目すると明らかになります。この集合を時計回りに、例えば \(5^{\circ}\)◦ 回転させる変換を行うと、これらの点は正方形を定義する元の集合の外側の点に写像されます。例えば、図 3.2 に示すように、角の点 \(A\) は点 \(A^\prime\) に写像されますが、これはそもそも正方形を定義した集合内には存在しません。したがって、\(5^{\circ}\) 回転は正方形の対称性ではありません。もちろん、回転後の物体は依然として正方形ですが、別の正方形（＝別の点の集合）になります。<br>
+<br>
+<center><img src="images/fig3_2.png"></center>
+<center>図3.2: 5度回転した正方形の図</center>
+<br>
+<!--
+<center>Fig. 3.2: Illustration of a square, rotated by 5◦</center>
+-->
+しかし、\(90^{\circ}\) 回転は正方形の対称性です。なぜなら、点 \(A\) は元の集合内にある点 \(B\) に写像されるからです。これは図 3.3 に示されています。<br>
+<br>
+<center><img src="images/fig3_3.png"></center>
+<p>
+<center>図3.3: 90度回転した正方形の図</center>
+<br>
+<!--
+<center>Fig. 3.3: Illustration of the square rotated by 90◦</center>
+-->
 
 もう 1 つ、役立つ視点があります。少しの間目を閉じて、誰かが目の前で正方形を変形させているところを想像してみてください。目を開けた後、その人が何か変わったかどうか全くわからない場合、その変換は対称変換です。<br>
 <br>
 正方形を不変にする変換の集合は群と呼ばれます。変換パラメータ（ここでは回転角度）は任意の値をとることができず、その群は離散群と呼ばれます。
-</li><br><li>2. もう1つの例は、単位円を不変にする変換の集合です。繰り返しますが、単位円は点の集合として定義され、対称変換はこの集合を自身に写す写像です。<br>
-<br>
-単位円は、原点の周りのいくつかの回転に対して, ではなく, すべての回転に対して不変です。言い換えれば、変換パラメータ（回転角度）は任意の値をとることができ、その群は連続群と呼ばれます。
-</li></ul></div>
+
 <!--
 <li>1. A square is mathematically a set of points (for example, the four
 corner points are part of this set) and a symmetry of the square is
@@ -252,7 +290,22 @@ The set of transformations that leave the square invariant is called
 a group. The transformation parameter, here the rotation angle,
 can’t take on arbitrary values and the group is called a discrete
 group.
-</li><br><li>2. Another example is the set of transformations that leave the unit
+-->
+</li></ul></div>
+</p>
+
+</p>
+
+
+<p>
+<div class="styleBullet">
+<ul><li>
+2. もう1つの例は、単位円を不変にする変換の集合です。繰り返しますが、単位円は点の集合として定義され、対称変換はこの集合を自身に写す写像です。<br>
+<br>
+単位円は、原点の周りのいくつかの回転に対して, ではなく, すべての回転に対して不変です。言い換えれば、変換パラメータ（回転角度）は任意の値をとることができ、その群は連続群と呼ばれます。
+</li></ul></div>
+<!--
+2. Another example is the set of transformations that leave the unit
 circle invariant. Again, the unit circle is defined as a set of points
 and a symmetry transformation is a map that maps this set into
 itself.<br>
@@ -263,27 +316,7 @@ rotation angle) can take on arbitrary values, and the group is said
 to be a continuous group.
 </li></ul></div>
 -->
-</p>
-<center><img src="images/fig3_1.png"></center>
-<p>
-<center>図3.1: 正方形の図</center>
-<!--
-<center>Fig. 3.1: Illustration of a square</center>
--->
-</p>
-<center><img src="images/fig3_2.png"></center>
-<p>
-<center>図3.2: 5度回転した正方形の図</center>
-<!--
-<center>Fig. 3.2: Illustration of a square, rotated by 5◦</center>
--->
-</p>
-<center><img src="images/fig3_3.png"></center>
-<p>
-<center>図3.3: 90度回転した正方形の図</center>
-<!--
-<center>Fig. 3.3: Illustration of the square rotated by 90◦</center>
--->
+
 </p>
 <center><img src="images/fig3_4.png"></center>
 <p class="margin-large">

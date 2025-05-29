@@ -1,0 +1,2478 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>Framework</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>4 フレームワーク(枠組み)</h1>
+<!--
+<h1>4 The Framework</h1>
+-->
+<p>
+この章の基本的な考え方は、何かを最小化することで、正しい自然方程式を得るというものです。この何かとは何でしょうか？
+一つ確かなことは、対象はローレンツ変換によって変化してはならないということです。そうでなければ、異なる座標系に対して異なる自然法則が導かれるからです。数学的に言えば、これは、私たちが探している対象はスカラー、つまりローレンツ群の(0, 0)表現に従って変換する対象でなければならないことを意味します。可能な限り単純な選択という制約と合わせて、これで正しい自然方程式を導くのに十分でしょう。自然は単純なものを好むのです。
+<!--
+The basic idea of this chapter is that we get the correct equations
+of nature, by minimizing something. What could this something be?
+One thing is for sure: the object shouldn’t change under Lorentz
+transformations, because otherwise we get different laws of nature
+for different frames of reference. In mathematical terms this means
+the object we are searching for must be a scalar, which is an object
+transforming according to the (0, 0) representation of the Lorentz
+group. Together with the restriction to the simplest possible choice
+this will be enough to derive the correct equations of nature. Nature
+likes it simple.
+-->
+</p><p>
+
+この考え方に基づいて、<strong>ラグランジュ形式</strong>と呼ばれる枠組みを紹介します。理論の中心となる対象を最小化することで、対象の物理系を記述する運動方程式が得られます。この最小化手順の結果は、<strong>オイラー・ラグランジュ方程式</strong>と呼ばれます。
+<!--
+Starting with this idea, we will introduce a framework called the
+<strong>Lagrangian formalism</strong>. By minimizing the central object of the theory
+we get the equations of motion that describe the physical system
+in question. The result of this minimization procedure is called the
+<strong>Euler-Lagrange equations</strong>.
+-->
+</p><p>
+
+ラグランジアン形式論は、現代物理学における最も重要な定理の一つである<strong>ネーターの定理</strong>を導くことを可能にします。この定理は、対称性と保存量<sup>1</sup>の間に深いつながりがあることを明らかにしています。次章ではこのつながりを用いて、実験で測定する量が理論によってどのように記述できるかを理解します。
+<!--
+The Lagrangian formalism enables us to derive one of the mostimportant
+theorems of modern physics: <strong>Noether’s Theorem</strong>. This
+theorem reveals the deep connection between symmetries and conserved
+quantities<sup>1</sup>. We will use this connection in the next chapter to
+understand how the quantities that we measure in experiments can
+be described by the theory.
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+保存量とは、時間的に変化しない量のことです。よく知られている例としては、ある系のエネルギーや運動量などが挙げられます。数学的には、これは \(∂_tQ = 0 → Q =一定\) を意味します。
+<!--
+A conserved quantity is a quantity
+that does not change in time. Famous
+examples are the energy or the momentum
+of a given system. In mathematical
+terms this means \(∂_tQ = 0 → Q =const\).
+-->
+</p>
+<h2>4.1 ラグランジアン形式</h2>
+<!--
+<h2>4.1 Lagrangian Formalism</h2>
+-->
+<p>
+ラグランジアン形式論は、基礎物理学のほとんどの分野で用いられる非常に強力な枠組み<sup>2</sup>です。この形式論は比較的単純です。なぜなら、基本対象である<strong>ラグランジアン</strong>はスカラー<sup>3</sup>だからです。この形式論は、対称性を考慮したい場合に非常に有用です。ラグランジアン上の積分である<strong>作用</strong>が、ある対称性変換に対して不変であることを要求すると、問題のシステムのダイナミクスがこの対称性を尊重することが保証されます。
+<!--
+The Lagrangian formalism is an incredibly powerful framework<sup>2</sup> that
+is used in most parts of fundamental physics. It is relatively simple,
+because the fundamental object, the <strong>Lagrangian</strong>, is a scalar<sup>3</sup>. The
+formalism is extremely useful if we want to use symmetry considerations.
+If we demand the <strong>action</strong>, the integral over the Lagrangian, to
+be invariant under some symmetry transformation, we ensure that
+the dynamics of the system in question respect this symmetry.
+-->
+</p><p class="margin-large">
+<sup>2</sup>
+もちろん、他にも枠組みは存在します。例えば、ハミルトニアン形式論は、ハミルトニアンを中心対象としています。ハミルトニアンの問題は、それが表すエネルギーが共変エネルギー・インパルス・ベクトルの単なる一要素に過ぎないため、ローレンツ不変ではないことです。
+<!--
+There are of course other frameworks,
+e.g. the Hamiltonian formalism, which
+has the Hamiltonian as its central
+object. The problem with the Hamiltonian
+is that it is not Lorentz invariant,
+because the energy, it represents, is
+just one component of the covariant
+energy-impulse vector.
+-->
+<br><br>
+
+<sup>3</sup>
+スカラーとは、ローレンツ群の(0, 0)表現に従って変換されるオブジェクトです。つまり、ローレンツ変換によって全く変化しないということです。
+<!--
+A scalar is an object transforming
+according to the (0, 0) representation
+of the Lorentz group. This means that
+it does not change at all under Lorentz
+transformations.
+-->
+</p><p>
+<h3>4.1.1 フェルマーの原理</h3>
+<!--
+<h3>4.1.1 Fermat’s Principle</h3>
+-->
+<p>
+「自然界で何らかの作用が起こるとき、その変化によって生じる作用の量は、可能な限り最小限である。」<br>
+</p><p style="text-align: right;">
+- ピエール・ド・モーペルテューイ<br>
+「運動の法則の研究」（1746年）<br>
+<!--
+"Whenever any action occurs in nature, the quantity of action employed
+by this change is the least possible."<br>
+- Pierre de Maupertius<sup>4</sup>
+
+</p><p class="margin-large">
+<sup>4</sup>
+"Recherche des loix du mouvement"  (1746)
+-->
+</p><p>
+
+
+ラグランジアン形式の基本的な考え方は、フェルマーの原理から生まれました。フェルマーの原理は、光は常に空間内の2点間の経路 \(q(t)\) を選び、その経路を通る時間を最小化するというものです。これを数学的に表現するために、与えられた経路 \(q(t)\) の<strong>作用</strong>を次のように定義します。
+<!--
+The basic idea of the Lagrangian formalism emerged from Fermat’s
+principle, which states that light always chooses the path \(q(t)\)
+between two points in space that minimizes the time it takes to travel
+between the points. To put this into mathematical terms, we define
+the <strong>action</strong> of a given path \(q(t)\) as
+-->
+
+\[
+S_{light}[\mathbf{q}(t)] =\int dt
+\]
+
+そして、私たちの課題は、作用<sup>5</sup>を最小化する特定の経路 \(q(t)\) を見つけることです。与えられた<strong>関数</strong>\(f(x)\)の最小値<sup>6</sup>を求めるには、導関数をゼロに設定します: \(f^\prime (x)\overset{!}{=}0\)。この方程式の解は、関数の極値です。ここでは、関数 \(\mathbf{q}(t)\) の関数 \(S\) である<strong>関数</strong> \(S[\mathbf{q}(t)]\) の最小値を求めます。関数の最小値を求めるには、<strong>変分計算</strong>と呼ばれる新しい数学的概念が必要です。
+<!--
+and our task is then to find the specific path \(q(t)\) that minimizes the
+action<sup>5</sup>. To find the minimum<sup>6</sup> of a given <strong>function</strong> \(f(x)\), we take the derivative and set it to zero: \(f^\prime (x)\overset{!}{=}0\). The solutions of this equation
+are the extrema of the functions. Here we want to find the minimum
+of a <strong>functional</strong> \(S[\mathbf{q}(t)]\), which is a function \(S\) of a function \(\mathbf{q}(t)\). To
+find the minimum of a functional, we need a new mathematical idea,
+called <strong>variational calculus</strong>.
+-->
+</p><p class="margin-large">
+<sup>5</sup>
+ここでの作用は、単に特定の経路における時間、つまり全時間にわたる積分です。しかし、一般には、この作用はもう少し複雑になります。
+これについては後ほど説明します。
+<!--
+The action is here simply the integral 
+over the time for a specific path, i.e.
+the total time. However, in general the
+action will be a bit more complicated,
+as we will see in a moment.
+-->
+<br><br>
+
+<sup>6</sup>
+一般的に、私たちは極値、つまり最小値と最大値を見つけたいと考えています。
+次のセクションで概説する考え方は、両方を見つけることを可能にします。それでも、
+ここでは引き続き最小値についてお話しします。
+<!--
+In general, we want to find extrema,
+which means minimums and maximums.
+The idea outlined in the next
+section is capable of finding both. Nevertheless,
+we will continue to talk about
+minimums.
+-->
+</p>
+<center><img src="images/fig4_1.png"></center>
+<p>
+
+<center>図4.1: 始点と終点が固定されたパスの変分</center>
+<!--
+Fig. 4.1: Variations of a path with fixed
+starting- and end-point.
+-->
+</p>
+<h3>4.1.2 変分法 - 基本的な考え方</h3>
+<!--
+<h3>4.1.2 Variational Calculus - the Basic Idea</h3>
+-->
+<p>
+
+関数の極小値を求めることができる新しい理論を開発したいのであれば、一歩下がって数学的な極小値を特徴付けるものは何かを考える必要があります。変分法の答えは、極小値はその近傍によって特徴付けられるということです。例えば、普通の関数\(f(x) = 3x^2 + x\)の極小値 \(x_{min}\) を求めてみましょう。まず、特定の\(x = a\)に注目し、その近傍を詳しく見ていきます。数学的には、これは\(a + \epsilon\)を意味します。ここで、\(\epsilon\)は無限小（正または負）の変化を表します。このaの周りの変化を関数\(f(x)\)に代入します。
+<!--
+If we want to develop a new theory capable of finding the minima of
+functionals, we need to take a step back and think about what characterises
+a mathematical minimum. The answer of variational calculus
+is that a minimum is characterised by its immediate neighbourhood.
+For example, let’s find the minimum xmin of an ordinary function
+\(f(x) = 3x^2 + x\). We start by looking at one specific \(x = a\) and take
+a close look at its neighborhood. Mathematically this means \(a +\epsilon\),
+where \(\epsilon\) denotes an infinitesimal (positive or negative) variation. We
+put this variation around a into our function \(f(x)\):
+-->
+\[
+f(a +\epsilon) = 3(a +\epsilon)^2 + (a +\epsilon) = 3(a^2 + 2a\epsilon + \epsilon^2) + a +\epsilon
+\]
+
+<strong>ここで重要な点は、\(a\) が最小値となる場合、\(\epsilon\) の一次変動は必ず消滅する</strong>ということです。そうでない場合、\(\epsilon\) を負の \(\epsilon < 0\) とすると、\(f(a +\epsilon)\) は \(f (a)\) より小さくなります。したがって、\(\epsilon\) に関するすべての線形項を集め、それらが消滅することを要求します。
+<!--
+<strong>Now the crucial observation is that if \(a\) is a minimum, first order
+variations in \(\epsilon\) must vanish</strong>. Otherwise we can choose \(\epsilon\) to be negative \(\epsilon < 0\) and then \(f(a +\epsilon)\) is smaller than \(f (a)\). Therefore, we collect all terms linear in \(\epsilon\) and demand that they vanish:
+-->
+\[
+3 · 2a\epsilon+\epsilon \overset{!}{=}0 → 6a + 1 \overset{!}{=}0
+\]
+
+この方程式は次のように解けます。
+<!--
+This equation is solved by
+-->
+\[
+x_{min} = a = \frac{−1}{6}
+\]
+
+もちろん、これは導関数 \(f(x) = 3x^2 + x → f^\prime(x) = 6x + 1\) をゼロにした場合に得られる結果と全く同じです。通常の関数に関して言えば、これは同じことを行う別の方法にすぎません。しかし、変分計算はさらに関数の極値を求めることができます。これが一般的な作用関数でどのように機能するかは、後ほど説明します。
+<!--
+This is, of course, exactly the same result that we get if we take the
+derivative \(f(x) = 3x^2 + x → f^\prime(x) = 6x + 1\) and demand this to be
+zero. In terms of ordinary functions this is just another way of doing
+the same thing. However, variational calculus is additionally able to
+find the extrema of functionals. We will see in a moment how this
+works for a general action functional.
+-->
+</p><p>
+
+ラグランジアン形式の考え方は、光に対するフェルマー原理のような原理が質量を持つ物体にも存在するというものです。残念ながら、質量を持つ物体はフェルマー原理に単純に従いません。しかし、より一般的な仮説を試みることはできます。
+<!--
+The idea of the Lagrangian formalism is that a principle like the
+Fermat principle for light exists for massive objects, too. Unfortunately,
+massive objects do not simply obey Fermat’s principle. Yet, we
+can try a more general ansatz
+-->
+\[
+S[q(t)] = \int \mathcal{L} dt
+\]
+
+ここで、\(\mathcal{L}\) は一般にラグランジアンと呼ばれる非定数関数です。
+この関数は光に対しては定数ですが、一般的なラグランジアンは、対象となる物体の位置 \(q(t)\) の関数です。
+さらに、ラグランジアンは物体の速度に依存する場合があります:
+\(\mathcal{L} = \mathcal{L}(q(t), \frac{∂}{∂t} q(t))\)。これについては次のセクション<sup>7</sup>で詳しく説明します。このような関数に対する変分計算の考え方の用法を詳しく見る前に、2つの小さな点について説明しておく必要があります。
+<!--
+where \(\mathcal{L}\) is, in general, a non-constant function called the Lagrangian.
+This function happens to be constant for light, but a general Lagrangian
+is a function of the position \(q(t)\) of the object in question.
+In addition, the Lagrangian can depend on the velocity of the object:
+\(\mathcal{L} = \mathcal{L}(q(t), \frac{∂}{∂t} q(t))\). This will be discussed in more detail in the next section<sup>7</sup>. Before we take a closer look at the usage of the variational 
+calculus idea for a functional like this, we need to talk about two
+small things.
+-->
+
+</p><p class="margin-large">
+<sup>7</sup>
+私たちの課題は、与えられたラグランジアンと初期条件に対して、可能な限り最小の作用を持つ経路 \(q(t)\) を見つけることです。
+それを行う前に、問題の物理系を記述する正しいラグランジアンを見つける必要があります。ここで、前章で説明した対称性が役に立ちます。ラグランジアンがローレンツ群のすべての変換に対して不変であることを条件にすれば、正しいラグランジアンにたどり着くことができます。
+<!--
+Our task will be to find the path \(q(t)\)
+with lowest possible action for a given
+Lagrangian and given initial conditions.
+Before we are able to do that, we
+need to find the correct Lagrangian,
+describing the physical system in
+question. Here is where the symmetries
+we talked about in the last chapters
+come in handy. Demanding that the
+Lagrangian is invariant under all
+transformations of the Lorentz group,
+will lead us to the correct Lagrangians.
+-->
+</p>
+<h2>4.2 制限事項</h2>
+<!--
+<h2>4.2 Restrictions</h2>
+-->
+<p>
+第1章1節で既に述べたように、現在の理論には制約があり、これまでのところ第一原理から動機づけることはできません。私たちが知っているのは、理にかなった理論を得るためには、第一原理を尊重しなければならないということだけです。
+<!--
+As already noted in Chapter 1.1 there are restrictions to our present
+theories, that, so far, we can’t motivate from first principles. We only
+know that we must respect them to get a sensible theory.
+-->
+</p><p>
+重要な制約の一つは、ラグランジアンでは最低の、非自明な微分しか使えないということです。ここで自明とは、システムのダイナミクス、つまり運動方程式に影響を与えないことを意味します。理論によっては1次微分、2次微分になるものもあります。ある理論の最低次数は、ラグランジアンがローレンツ不変<sup>8</sup>であるという条件によって決まります。そうでなければ、異なる参照系に対して異なる運動方程式が得られるからです。理論によっては、1次微分では不変項が得られないため、2次微分が最低次となります。
+<!--
+One important restriction is that we are only allowed to use the
+lowest, non-trivial derivatives in the Lagrangian. Trivial in this context
+means with no influence of the dynamics of the system, i.e. on
+the equations of motion. For some theories this will be first order
+and for others second order derivatives. The lowest order of a given
+theory is determined by the condition that the Lagrangian must be
+Lorentz invariant<sup>8</sup>, because otherwise we would get different equations of motions for different frames of reference. For some theories
+we can’t get an invariant term with first order derivatives and therefore
+second order derivatives are the lowest possible order.
+-->
+</p><p class="margin-large">
+<sup>8</sup>
+実際、作用はローレンツ不変でなければなりませんが、ラグランジアンがローレンツ不変であれば、作用も必ずローレンツ不変になります。
+<!--
+In fact, the action must be Lorentz
+invariant, but if the Lagrangian is
+Lorentz invariant, the action certainly
+is, too.
+-->
+</p><p>
+
+高階微分を含む理論をどのように扱うべきか、私たちは全く分かっていません。そして、そのような理論には深刻な体系的な問題が存在します<sup>9</sup>。さらに、ラグランジアンにおける高階微分は、運動方程式における高階微分につながり、したがってより多くの初期条件が必要になります。
+<!--
+We simply do not know how to work with theories including
+higher order derivatives and there are deep systematic problems
+with such theories<sup>9</sup>. In addition, higher order derivatives in the Lagrangian lead to higher order derivatives in the equations of motion
+and therefore more initial conditions would be required.
+-->
+</p><p class="margin-large">
+<sup>9</sup>
+これらの問題はオストログラツキー不安定性として知られています。高階微分を持つ理論では、エネルギーは任意の負の値を取る可能性があり、これは、そのような理論におけるあらゆる状態が必ずより低いエネルギー状態へと崩壊することを意味します。このような理論には安定な状態は存在しません。
+<!--
+These problems are known as Ostrogradski instabilities. The energy
+in theories with higher order derivatives
+can be arbitrarily negative, which
+would mean that every state in such
+theory would always decay into lower
+energy states. There are no stable states
+in such theories.
+-->
+</p><p>
+
+一次微分への制約は、局所<sup>10</sup>理論を求める要求の結果であると主張されることもありますが、これは単に<strong>無限</strong>個の微分を排除するだけです。非局所相互作用は、以下の形<sup>11</sup>をとります。
+<!--
+It is sometimes claimed that the constraint to first order derivatives
+is a consequence of our demand to get a loca<sup>l10</sup> theory, but this only
+rules out an <strong>infinite</strong> number of derivatives. A non-local interaction is
+of the form<sup>11</sup>
+-->
+</p><p class="margin-large">
+<sup>10</sup>
+局所性は、第2.4節で示されているように、特殊相対論の基礎公理の結果である。
+<!--
+Locality is a consequence of the basis
+postulates of special relativity, as shown
+in Section 2.4.
+-->
+<br><br>
+
+<sup>11</sup>
+ここでは、粒子の軌道を探索する粒子理論のラグランジアンと、場の配置 \(Φ(x)\) を探索する場の理論のラグランジアンについて論じます。これが次のセクションのトピックです。
+<!--
+We will discuss Lagrangians for
+particle theories, where we search for
+particle paths and Lagrangians for
+field theories, where we search for field
+configurations \(Φ(x)\). This is the topic of
+the next section.
+-->
+</p><p>
+
+\[
+Φ(x − h)Φ(x)  \tag{4.1}
+\]
+
+つまり、2つの場が時空上の任意の距離 \(h\) を持つ2つの異なる点で相互作用する。テイラー展開を用いると、次のように書ける。
+<!--
+that is, two fields interacting with each other at two different points
+in spacetime with arbitrary distance \(h\). Using the Taylor expansion
+we can write
+-->
+\[
+Φ(x − h) =\sum_{k=0}^∞\left(\left(\frac{∂}{∂x}\right)^kΦ(x)\Big|_{x=h}\right)\frac{(h)^k}{k!}  \tag{4.2}
+\]
+
+これは、無限個の導関数を許容すると、非局所相互作用理論が得られることを示しています。
+<!--
+which shows that allowing an infinite number of derivatives would
+result in a non-local interaction theory.
+-->
+</p><p>
+もう一つの制約は、自由（＝相互作用しない）場／粒子を記述する理論を得るためには、\(Φ(x)\) の2次の項で止まらなければならないということである。つまり、<sup>12</sup> の項のみを含めるということである。
+<!--
+Another restriction is that in order to get a theory describing free
+(=non-interacting) fields/particles we must stop at second order in
+the field \(Φ(x)\). This means we only include the terms<sup>12</sup>
+-->
+</p><p class="margin-large">
+<sup>12</sup>
+
+別の観点から見ると、これは再び、可能な限り最低の、自明でない項のみを含めることを意味します。\(Φ^0\) と \(Φ^1\) を含む項は、ラグランジアンにおいて \(Φ\) に比例する項にはなりません。これは後で説明します。したがって、ここでも可能な限り最低の、自明でない次数、つまり \(Φ\) のみを使用します。
+<!--
+From another perspective, this means 
+again that we only include the lowest
+possible, non-trivial terms. Terms
+with \(Φ^0\) and \(Φ^1\) do not lead to terms
+proportional to \(Φ\) in the Lagrangian,
+as we will see later and therefore we
+use once more only the lowest possible,
+non-trivial order, now in \(Φ\).
+-->
+</p><p>
+
+\[
+Φ^0,Φ^1,Φ^2
+\]
+例えば、\(Φ^2∂_μΦ\) という形式の項は \(Φ\) の 3 次項であるため、自由理論のラグランジアンには含まれません。
+<!--
+into our considerations. For example, a term of the form \(Φ^2∂_μΦ\) is of
+third order in \(Φ\) and therefore not included in the Lagrangian for our
+free theory.
+-->
+</p>
+<h2>4.3 粒子理論と場の理論</h2>
+<!--
+<h2>4.3 Particle Theories vs. Field Theories</h2>
+-->
+<p>
+
+現在、自然を記述する枠組みは2つあります。一つは、物理系を時間に依存する粒子の位置、すなわち\(\vec{q} = \vec{q}(t)\)で記述する<strong>粒子理論</strong>です。自然を直交座標で記述する必要がないため、\(x\)ではなく\(q\)という記号を使用します<sup>13</sup>。このような理論では、ラグランジアンは位置\(\vec{q}\)、速度\(∂_t\vec{q}\)、および時間\(t\)に依存します。
+<!--
+Currently we have two frameworks to describe nature. On the one
+hand, we have <strong>particle theories</strong> that describe physical systems in
+terms of positions of particles depending on time, i.e. \(\vec{q} = \vec{q}(t)\). We
+use the symbol \(q\) instead of \(x\), because there is no need to describe
+nature in terms of Cartesian coordinates<sup>13</sup>. For such theories the
+Lagrangian depends on the position \(\vec{q}\), the velocity \(∂_t\vec{q}\) and the time \(t\):
+-->
+</p><p class="margin-large">
+<sup>13</sup>
+
+もう一つの可能​​性としては、例えば球座標が挙げられます。
+<!--
+Another possibility are, for example, 
+spherical coordinates. 
+-->
+</p><p>
+
+\[
+\mathcal{L} = \mathcal{L}(\vec{q}, ∂_t\vec{q}, t)  \tag{4.3}
+\]
+
+</p><p>
+
+有名な例としてはラグランジアン \(\mathcal{L} = \frac{1}{2}m\dot{\vec{q}}^2\) があり、これから古典力学におけるニュートンの運動方程式を導くことができます。これについては後ほど詳しく説明します。
+<!--
+A famous example is the Lagrangian \(\mathcal{L} = \frac{1}{2}m\dot{\vec{q}}^2\), from which we can derive Newton’s equation of motion for classical mechanics. This
+will be discussed later in great detail.
+-->
+</p><p>
+一方、個々の粒子の位置\(\vec{q}(t)\)ではなく、場<sup>14</sup>を用いて自然を記述する<strong>場の理論</strong>があります。このような理論では、空間と時間が場\(Φ(\vec{x}, t)\)が作用する舞台となります。
+これらの制約を用いると、<sup>15</sup>が得られます。
+<!--
+On the other hand, we have <strong>field theories</strong> that do not use the
+location \(\vec{q}(t)\) of individual particles to describe nature, but fields<sup>14</sup>. In
+such theories space and time form the stage the fields \(Φ(\vec{x}, t)\) act on.
+Using the restrictions we get<sup>15</sup> 
+-->
+</p><p class="margin-large">
+<sup>14</sup>
+
+量子場の理論の特に美しい特徴は、粒子がどのように出現するかです。第6章では、場が粒子を生成したり破壊したりできることを見ていきます。
+<!--
+An especially beautiful feature of
+quantum field theory is how particles
+emerge. In Chapter 6 we will see that
+fields are able to create and destroy
+particles.
+-->
+<br><br>
+
+<sup>15</sup>
+ここで異なる記号 \(\mathscr{L}\) が使用されているのは意図的です。なぜなら、場の理論ではほとんどの場合、ラグランジアン密度 \(\mathscr{L}\) を扱うからです。ラグランジアン密度は、\(\mathcal{L} = \int d^3x\mathscr{L}\) によってラグランジアンと関連しています。
+<!--
+The usage of a different symbol \(\mathscr{L}\)
+here is intentional, because in field
+theories we will work most of the time
+with the Lagrangian density \(\mathscr{L}\). The
+Lagrangian density is related to the
+Lagrangian via \(\mathcal{L} = \int d^3x\mathscr{L}\).
+-->
+</p><p>
+
+\[
+\mathscr{L} = \mathscr{L}(Φ(\vec{x}, t), ∂_μΦ(\vec{x}, t),\vec{x}, t)  \tag{4.4}
+\]
+</p><p>
+
+有名な例としてはラグランジアン \(\mathscr{L} = \frac{1}{2}(∂_μΦ∂^μΦ-m^2Φ^2)\) があり、これからクライン・ゴルドン方程式を導出します。
+<!--
+A famous example is the Lagrangian \(\mathscr{L} = \frac{1}{2}(∂_μΦ∂^μΦ-m^2Φ^2)\), from which we will derive the Klein-Gordon equation.
+-->
+</p><p>
+場の理論の大きな利点は、空間と時間を同等に扱うことです。粒子理論では、空間座標\(\vec{q}(t)\)を用いて、粒子を時間の関数として記述します。特に注目すべきは、ラグランジアンには\(∂_{\vec{q}}t\)のような項が存在しないということです。もし存在するとしたら、どのように解釈すべきでしょうか？粒子の位置について話すとき、私たちが何を意味しているかは明らかですが、時間について同様の文を解釈する明確な方法はありません。
+<!--
+The big advantage of field theories is that they treat space and
+time on an equal footing. In a particle theory we use the space coordinates
+\(\vec{q}(t)\) to describe our particle as a function of time. Notably,
+there is no term like \(∂_{\vec{q}}t\) in the Lagrangian and if it would be there,
+how should we interpret it? It is clear what we mean when we talk
+about the location of a particle, but there is no obvious way to make
+sense of a similar sentence for time.
+-->
+</p><p>
+ここまで議論してきたので、この章の冒頭で提案した元の最小化問題に戻ることができます。私たちは、ある関数の最小値を見つけたいのです。
+<!--
+Having discussed all this, we are able to return to the original
+minimizing problem, proposed at the beginning of this chapter. We
+want to find the minimum of some functional
+-->
+\[
+S[q(t)] =\int\mathcal{L}dt
+\]
+
+これにより正しい運動方程式が得られます。
+<!--
+which will give us the correct equations of motion.
+-->
+</p><p>
+
+これらの方程式の解は、粒子にとっては汎関数を最小化する正しい経路です。場の理論にとっては、解は正しい場の配置です。
+<!--
+The solutions of these equations are for particles the correct paths
+that minimize the functional. For a field theory the solutions are the
+correct field configurations.
+-->
+</p><p>
+
+今のところ、オブジェクト \(\mathcal{L}\) については心配する必要はありません。なぜなら、次の章で、対象となるシステムに対して正しいラグランジアン \(\mathcal{L}\) をどのように導くかを詳しく説明するからです。ここでは、一般的な \(\mathcal{L}\) を扱い、上で紹介した変分法を用いて、汎関数 \(S[q(t)]\) の最小値を導きます。この最小化手順により、システムの運動方程式が得られます。
+<!--
+For the moment, do not worry about the object \(\mathcal{L}\), because we
+will describe in the following chapters in great detail how we can
+derive the correct Lagrangian \(\mathcal{L}\) for the systems in question. Here, we
+work with a general \(\mathcal{L}\) and use the machinery of variational calculus,
+introduced above, to derive the minimum of the functional \(S[q(t)]\).
+This minimization procedure will give us the equations of motion for
+the system.
+-->
+</p>
+<h2>4.4 オイラー・ラグランジュ方程式</h2>
+<!--
+<h2>4.4 Euler-Lagrange Equation</h2>
+-->
+<p>
+まず粒子理論から始めます。これは、粒子が2つの固定点の間をどのように移動するかを解明することを意味します。私たちが解かなければならない数学的問題は、<strong>作用</strong>が
+<!--
+We start with particle theory and this means, we want to find out
+how a particle moves between two fixed points. The mathematical
+problem we have to solve is to find the <strong>function</strong> q(t) for which the
+<strong>action</strong>
+-->
+\[
+S =\int_{t_1}^{t_2}\mathcal{L}\left(q(t),\frac{dq(t)}{dt}, t\right)dt
+\]
+
+は<strong>極値</strong>（最大値または最小値）です。
+<!--
+is an <strong>extremum</strong> (maximum or minimum). We use the notation
+-->
+\[
+\dot{q}(t) ≡ \frac{dq(t)}{dt}
+\]
+
+上の例と同様に、\(q(t) = a(t)\)を固定し、この粒子の軌道を少し変化させます。
+<!--
+Analogous to the example above, we fix \(q(t) = a(t)\) and vary this
+particle path a little bit
+-->
+\[
+a(t) + \epsilon(t)
+\]
+
+ここで\(\epsilon\)は再び無限小です。粒子を考えると、経路を変えることができるだけでなく、同様に速度\(\dot{a}(t) +\dot{\epsilon}(t)\)も\(\dot{\epsilon}(t) = \frac{d\epsilon(t)}{dt}\)で変化させることができます。
+<!--
+where \(\epsilon\) is again infinitesimal. Considering a particle, we are not only
+able to vary the path, but in the same way we can vary the velocity
+\(\dot{a}(t) +\dot{\epsilon}(t)\) with \(\dot{\epsilon}(t) = \frac{d\epsilon(t)}{dt}\).
+-->
+</p><p>
+
+境界では、変換されたパスは変換されていないパスと等しくなければなりません。
+<!--
+At the boundary, the transformed path must be equivalent to the
+untransformed path:
+-->
+\[
+0 = \epsilon(t_1) =\epsilon(t_2)  \tag{4.5}
+\]
+
+なぜなら、私たちは作用積分を極値化する<strong>2つの固定点の間</strong>の経路を探しているからです。
+<!--
+because we are searching for the path <strong>between two fixed points</strong> that
+extremizes the action integral.
+-->
+</p><p>
+この固定機能の変化により、機能的な
+<!--
+This variation of the fixed function results in the functional
+-->
+\[
+S =\int_{t_1}^{t_2} dt \mathcal{L}(q +\epsilon, \dot{q}+\dot{\epsilon}, t)
+\]
+
+関数の最小値を探した上記の例と同様に、ここでは変分\(\epsilon\)の線形項が消えることを要求します。一般的な\(\mathcal{L}\)を扱うため、これをテイラー級数<sup>16</sup>として展開し、1次の項が消えることを要求します。
+<!--
+Analogous to the example above, where we searched for the minimum
+of a function, we will demand here that the terms linear in the
+variation \(\epsilon\) vanish. Because we work with a general \(\mathcal{L}\), we expand it
+as Taylor series<sup>16</sup> and demand that the first order terms vanish
+-->
+<sup>16</sup>
+
+ここでは、付録 B.3 で導出した多変数関数の一般化式を使用しています。
+\(\mathcal{L}(q +\epsilon,\dot{q}+\dot{\epsilon}, t) = \mathcal{L}(q) + (q +\epsilon-q) \frac{∂L}{∂q}+(\dot{q} +\dot{\epsilon}-\dot{q}) \frac{∂L}{∂\dot{q}} + . . .
+= \mathcal{L}(q) +\epsilon \frac{∂L}{∂q}+ \dot{\epsilon}\frac{∂L}{∂\dot{q}} + . . \).
+<!--
+We are using a generalization of the 
+formula, derived in Appendix B.3 for
+functions with more than one variable:
+\(\mathcal{L}(q +\epsilon,\dot{q}+\dot{\epsilon}, t) = \mathcal{L}(q) + (q +\epsilon-q) \frac{∂L}{∂q}+(\dot{q} +\dot{\epsilon}-\dot{q}) \frac{∂L}{∂\dot{q}} + . . .
+= \mathcal{L}(q) +\epsilon \frac{∂L}{∂q}+ \dot{\epsilon}\frac{∂L}{∂\dot{q}} + . . \).
+-->
+\[
+\int_{t_1}^{t_2} dt \left[\epsilon(t)\frac{∂\mathcal{L}}{∂q}+\left(\frac{d}{dt}\epsilon(t)\right)\frac{∂\mathcal{L}}{∂\dot{q}}\right]\overset{!}{=}0  \tag{4.6}
+\]
+
+さらに進むには、\epsilon(t)\) を括弧で囲む方法を見つける必要があります。\(\epsilon(t)\) は任意の変分であり、括弧で囲むと、合計がゼロになる場合は括弧内のすべてが消える必要があることが分かっているため、これは必要です。ここまでで、\(\epsilon(t)\) と乗算される項が1つと、\(\frac{d}{dt}\epsilon(t)\) と乗算される項が2つあります。\(\epsilon(t)\) を括弧で囲むには、導関数を取り除く必要があります。これを実現するには、最後の項を<sup>17</sup>の部分で積分し、次の式を得ます。
+<!--
+To proceed further, we need to find a way to bracket \epsilon(t)\) out. This is
+necessary, because \(\epsilon(t)\) is an arbitrary variation and when we bracket
+it out, we know that everything inside the brackets has to vanish if
+the total result is zero. So far we have one term that gets multiplied
+with \(\epsilon(t)\) and a second term that gets multiplied with \(\frac{d}{dt}\epsilon(t)\). To
+bracket \(\epsilon(t)\) out, we need get rid of the derivative. To achieve this, we
+integrate the last term by parts<sup>17</sup>, which yields 
+-->
+</p><p class="margin-large">
+<sup>17</sup>
+
+部分積分は積の法則の直接的な帰結であり、付録B.2で導出されます。
+<!--
+Integration by parts is a direct conse- 
+quence of the product rule and derived
+in Appendix B.2.
+-->
+</p><p>
+
+\[
+\int_{t_1}^{t_2} dt\;\left(\frac{d}{dt}\epsilon(t)\right)\frac{∂\mathcal{L}(q, \dot{q}, t)}{∂\dot{q}}
+\]
+
+\[
+=\epsilon(t)\frac{∂\mathcal{L}(q, \dot{q}, t)}{∂\dot{q}}\Bigg|_{t_1}^{t_2}
+-\int_{t_1}^{t_2}dt\;\epsilon(t)\frac{d}{dt}\left(\frac{∂\mathcal{L}(q,\dot{q}, t)}{∂\dot{q}}\right)
+\]
+
+式4.5を用いると、
+<!--
+Using Eq. 4.5 we have
+-->
+\[
+\epsilon(t)\frac{∂\mathcal{L}(q, \dot{q}, t)}{∂\dot{q}}\Bigg|_{t_1}^{t_2}= 0 
+\]
+
+したがって、式4.6は次のように書き直すことができる。
+<!--
+So, we can rewrite Eq. 4.6 as
+-->
+\[
+\int_{t_1}^{t_2} dt\;\epsilon(t)\left[\frac{∂\mathcal{L}(q, \dot{q}, t)}{∂q}
+-\frac{d}{dt}\left(\frac{∂\mathcal{L}(q, \dot{q}, t)}{∂\dot{q}}\right)\right]\overset{!}{=}0
+\]
+
+そして、任意の変化\(\epsilon(t)\)に対してこれがゼロになるのは、角括弧[ ]内の式が常にゼロになる場合のみであることがわかります。これは<sup>18</sup>となります。
+<!--
+and we can see that this only vanishes for arbitrary variations \(\epsilon(t)\)
+if the expression in the square bracket [ ] is identically zero. This
+yields<sup>18</sup>
+-->
+</p><p class="margin-large">
+<sup>18</sup>
+
+おそらく、導関数の2つの異なる記号について疑問に思われるでしょう。\(\frac{d}{dt}\) は \(t\) に関する全微分と呼ばれ、\(\frac{∂}{∂t}\) は偏微分と呼ばれます。全微分は、関数 f における変化の総量を表します。これは、偏微分とも呼ばれる変化率の和に、量自体の変化を乗じたものです。例えば、3次元空間における関数 \(f(x(t), y(t), z(t))\) の全変化は、\(\frac{df}{dt} =
+\frac{∂f}{∂x}\frac{∂x}{∂t} + \frac{∂f}{∂y}\frac{∂y}{∂t} + \frac{∂f}{∂z}\frac{∂z}{∂t} + \frac{∂f}{∂t}\frac{∂t}{∂t}\) で表されます。変化率は変化した距離を乗じたものです。対照的に、偏微分はこの全変化の一部にすぎません。tに明示的に依存しない関数の場合、偏微分はゼロになります。例えば、\(f(x(t), y(t)) = x^2y + y^3\) の場合、\(\frac{∂f}{∂t} = 0\) となりますが、\(\frac{∂f}{∂x} = 2xy \neq 0\) であり、\(\frac{∂f}{∂y} = x^2 + 3y^2 \neq 0\) となります。したがって、\(\frac{df}{dt} = 2xy\frac{∂x}{∂t} + (x^2 + 3y^2) \frac{∂y}{∂t}\) となります。対照的に、別の関数 \(g(x(t), y(t), t) =x^2t + y\) に対しては、\(\frac{∂g}{∂t} = x^2\) となります。
+<!--
+Maybe you wonder about the two
+different symbols for derivatives. \(\frac{d}{dt}\) is
+called the total derivative with respect
+to \(t\), whereas \(\frac{∂}{∂t}\) is called the partial
+derivative. The total derivative gives
+us the total change, which is for a
+function f given by sum of the change
+rates, also known as partial derivatives,
+times the change of the quantity itself.
+For example, the total change of a
+function \(f(x(t), y(t), z(t))\) in three
+dimensional space is given by \(\frac{df}{dt} =
+\frac{∂f}{∂x}\frac{∂x}{∂t} + \frac{∂f}{∂y}\frac{∂y}{∂t} + \frac{∂f}{∂z}\frac{∂z}{∂t} + \frac{∂f}{∂t}\frac{∂t}{∂t}\) . The change
+rate times the distance it is changed.
+In contrast the partial derivative is just
+one part of this total change. For a
+function that does not explicitly depend
+on t the partial derivative is zero. For
+example, for \(f(x(t), y(t)) = x^2y + y^3\),
+we have \(\frac{∂f}{∂t} = 0\), but \(\frac{∂f}{∂x} = 2xy \neq 0\)
+and \(\frac{∂f}{∂y} = x^2 + 3y^2 \neq 0\). Therefore,
+\(\frac{df}{dt} = 2xy\frac{∂x}{∂t} + (x^2 + 3y^2) \frac{∂y}{∂t}\) . In contrast
+for another function \(g(x(t), y(t), t) =x^2t + y\) we have \(\frac{∂g}{∂t} = x^2\).
+-->
+</p><p>
+\[
+\frac{∂\mathcal{L}(q, \dot{q}, t)}{∂q}−\frac{d}{dt}\left(\frac{∂\mathcal{L}(q, \dot{q}, t)}{∂\dot{q}}\right)= 0  \tag{4.7}
+\]
+
+これは有名な<strong>オイラー・ラグランジュ方程式</strong>です。
+<!--
+which is the famous <strong>Euler-Lagrange equation</strong>.
+-->
+</p><p>
+
+場の理論についても同様の手順を踏むことができます。まず、この場合、時間と空間を同等に扱うことに注意してください。したがって、ラグランジアン密度 \(\mathscr{L}\) を導入します。
+<!--
+For a field theory we can follow a similar route. First notice that in
+this case we treat time and space equally. Therefore, we introduce the
+Lagrangian density \(\mathscr{L}\):
+-->
+\[
+\mathcal{L} = \int d^3\;x\mathscr{L}(Φ^i, ∂_μΦ^i)  \tag{4.8}
+\]
+
+そしてこのラグランジアン密度を使って作用を記述することができます。
+<!--
+and we can write the action in terms of this Lagrangian density
+-->
+\[
+S =\int dt \mathcal{L} = \int d^4x\mathscr{L}(Φ^i, ∂_μΦ^i)  \tag{4.9}
+\]
+
+上記と同じ手順に従うと、場の理論の運動方程式<sup>19</sup>が得られます。
+<!--
+Following the same steps as above, we get the equations<sup>19</sup> of motion
+for a field theory:
+-->
+</p><p class="margin-large">
+<sup>19</sup>
+複数形なのは、各場の成分に対して1つの方程式が得られるからです。つまり、\(Φ_1,Φ_2, ...\) です。
+<!--
+Plural because we get one equation
+for each field component, i.e.
+\(Φ_1,Φ_2, ...\).
+-->
+</p><p>
+
+\[
+\frac{∂\mathscr{L}}{∂Φ^i}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ^i)}\right)= 0  \tag{4.10}
+\]
+</p><p>
+
+次の節では、ラグランジアン形式を用いて、現代物理学における最も重要な定理の一つを導出します。この定理は、対称性と保存量との深い関係を理解するために必要です。保存量は自然を記述するのに適切な量<sup>20</sup>であり、この定理から、理論的な文脈で保存量をどのように扱うべきかを学びます。
+<!--
+In the next section we will derive, using the Lagrangian formalism,
+one of the most important theorems of modern physics. We need
+this theorem to see the deep connection between symmetries and
+conserved quantities. The conserved quantities are the appropriate
+quantities<sup>20</sup> to describe nature and from this theorem we learn how 
+we can work with them in a theoretical context.
+-->
+</p><p class="margin-large">
+<sup>20</sup>
+これらは、極めて複雑な世界における錨のようなものだと捉えることができます。すべてが変化しても、保存量は変わりません。
+<!--
+We can see them as anchors in an
+otherwise extremely complicated
+world. While everything changes, the
+conserved quantities stay the same.
+-->
+</p>
+
+<h2>4.5 ネーターの定理</h2>
+<!--
+<h2>4.5 Noether’s Theorem</h2>
+-->
+<p>
+
+ネーターの定理は、ラグランジアンの対称性はそれぞれ、ある保存量に直接関係していることを示しています。あるいは、少し異なる表現で言えば、物理学者が自然を記述するために一般的に用いる概念（保存量）は、対称性と直接結びついています。これは、科学史上最も美しい洞察の一つです。
+<!--
+Noether’s theorem shows that each symmetry of the Lagrangian is
+directly related to one conserved quantity. Or formulated slightly
+different: The notions physicists commonly use to describe nature
+(the conserved quantities) are directly connected to symmetries. This
+is one of the most beautiful insights in the history of science.
+-->
+</p>
+<h3>4.5.1 粒子理論におけるネーターの定理</h3>
+<!--
+<h3>4.5.1 Noether’s Theorem for Particle Theories</h3>
+-->
+<p>
+
+素粒子理論における保存量について何が言えるか見てみましょう。ここでは連続対称性に限定します。そうすることで、無限小変化を見ることができるからです。これまでの章で見てきたように、有限変化は無限小変化の繰り返しによって構築できます。ラグランジアンの無限小変換<sup>21</sup> \(q → q^\prime = q + δq\) に対する不変性は、数学的に次のように表すことができます。
+<!--
+Let’s have a look at what we can say about conserved quantities in
+particle theories. We will restrict to continuous symmetries, because
+then we can look at infinitesimal changes. As we have seen in earlier
+chapters, we can build up finite changes by repetition of infinitesimal
+changes. The invariance of the Lagrangian under an infinitesimal
+transformation<sup>21</sup> \(q → q^\prime = q + δq\) can be expressed mathematically
+-->
+</p><p class="margin-large">
+<sup>21</sup>
+微小変化を表す記号 \(δ\) は、偏微分を表す記号 \(∂\) と混同しないように注意が必要です。
+<!--
+The symbol for a small variation \(δ\) 
+may not be confused with the symbol
+for partial derivatives \(∂\).
+-->
+</p><p>
+
+\[
+\begin{align}
+&δ\mathcal{L} = \mathcal{L}\left(q,\frac{dq}{dt}, t\right)
+−\mathcal{L}\left(q + δq,\frac{d(q + δq)}{dt}, t\right) \\
+\\
+&= \mathcal{L}\left(q,\frac{dq}{dt}, t\right)
+−\mathcal{L}\left(q + δq,\frac{dq}{dt}+\frac{dδq}{dt}, t\right)\overset{!}{=}0  \tag{4.11}
+\end{align}
+\]
+</p><p>
+
+ラグランジアンが不変であることを要求するのは、あまりにも制限的になりかねません。
+力学が一定に保たれるために本当に不変である必要があるのは、ラグランジアンではなく作用です。もちろん、ラグランジアンが不変であれば、作用も自動的に不変になります。
+<!--
+Demanding that the Lagrangian is invariant can be too restrictive.
+What really needs to be invariant for the dynamics to stay the same
+is the action and not the Lagrangian. Of course, if the Lagrangian is
+invariant, the action is automatically invariant:
+-->
+\[
+δS =\int dt\mathcal{L}\left(q,\frac{dq}{dt}, t\right)
+−\int dt\mathcal{L}\left(q + δq,\frac{dq}{dt}+\frac{dδq}{dt}, t\right)
+=\int dtδ\mathcal{L} \underbrace{=}_{if\; δ\mathcal{L}=0} 0  \tag{4.12}
+\]
+
+作用が同じまま、ラグランジアンがどう変化するのでしょうか？関数Gの全時間微分をラグランジアンに加えることで、
+<!--
+How can the Lagrangian change, while the action stays the same? It
+turns out we can always add the total time derivative of a function G
+to the Lagrangian
+-->
+\[
+\mathcal{L} → \mathcal{L}+\frac{dG}{dt}
+\]
+行動を変えることなく、なぜなら<sup>22</sup>
+<!--
+without changing the action, because<sup>22</sup>
+-->
+</p><p class="margin-large">
+<sup>22</sup>
+\(δG = \frac{∂G}{∂q}δq\) を用いると、\(G = G(q)\) であり、\(q\) を変化させます。したがって、G の変化は、変化率 \(\frac{∂G}{∂q}\) に \(q\) の変化を乗じた値で表されます。
+<!--
+Using \(δG = \frac{∂G}{∂q}δq\), because \(G = G(q)\)
+and we vary \(q\). Therefore the variation
+of G is given by the rate of change \(\frac{∂G}{∂q}\)
+times the variation of \(q\).
+-->
+</p><p>
+
+\[
+δS → δS^\prime= δS +\int_{t_1}^{t_2} dt\frac{d}{dt}δG 
+= δS +\underbrace{\frac{∂G}{∂q}δq\Bigg|_{t_1}^{t_2}}_{=0\; \because\; δq(t_1)=δq(t_2)=0}
+\]
+
+最後のステップでは、変分 \(δq\) が初期時刻と最終時刻 \((t_1, t_2)\) でゼロになることを仮定します。結論として、ラグランジアン \(δ\mathcal{L}\) の変分がゼロになることを要求する必要はなく、むしろ、より制限の少ない条件が成り立ちます。
+<!--
+In the last step, we use that the variation \(δq\) vanishes at the initial and
+final times \((t_1, t_2)\). We conclude, there is no need for us to demand
+that the variation of the Lagrangian \(δ\mathcal{L}\) vanishes, rather we have the
+less restrictive condition
+-->
+\[
+δ\mathcal{L}\overset{!}{=}\frac{dG}{dt}  \tag{4.13}
+\]
+</p><p>
+
+これは、ラグランジアンがこのように変化しても作用は変わらないことを意味します。したがって、ラグランジアンが変化しても、その変化が何らかの関数の全微分\(\frac{dG}{dt}\)として表せる限り、運動方程式は変わりません。式4.11を、右辺の0の代わりに\(\frac{dG}{dt}\)を使って書き直すと、次のようになります。
+<!--
+This means the Lagrangian can change in this way without changing
+the action. Therefore the equation of motion stay the same even
+though the Lagrangian changes, as long as the change can be written
+as total derivative of some function: \(\frac{dG}{dt}\) . Rewriting Eq. 4.11, now with
+\(\frac{dG}{dt}\) instead of 0 on the right hand side yields
+-->
+\[
+δ\mathcal{L} = \mathcal{L}\left(q,\frac{dq}{dt}, t\right)
+−\mathcal{L}\left(q +δq,\frac{dq}{dt}+\frac{dδq}{dt}, t\right)
+\overset{!}{=}\frac{dG}{dt}  \tag{4.14}
+\]
+
+第2項をテイラー級数として展開し、\(δq\)が無限小であるため、\(δq\)の1次の項のみを残し、\(\frac{dq}{dt} = \dot{q}\)という表記を用いる。
+<!--
+We expand the second term as Taylor series and keep only terms that
+are first order in \(δq\), because \(δq\) is infinitesimal, and use the notation \(\frac{dq}{dt} = \dot{q}\):
+-->
+\[
+\begin{align}
+&→ δ\mathcal{L} = \mathcal{L}−\mathcal{L}
+− \frac{∂\mathcal{L}}{∂q}δq − \frac{∂\mathcal{L}}{∂\dot{q}}δ\dot{q}
+\overset{!}{=}\frac{dG}{dt} \\
+\\
+&→ δ\mathcal{L} = −\frac{∂\mathcal{L}}{∂q}δq
+−\frac{∂\mathcal{L}}{∂\dot{q}}δ\dot{q}
+\overset{!}{=}\frac{dG}{dt}  \tag{4.15}
+\end{align}
+\]
+
+式4.15をオイラー・ラグランジュ方程式<syp>23</sup>を用いて書き直すと、次の式が得られる。
+<!--
+We can rewrite Eq. 4.15 by using the Euler-Lagrange equation<syp>23</sup>. This yields
+-->
+</p><p class="margin-large">
+<sup>23</sup>
+Eq. 4.7: \(\frac{∂\mathcal{L}}{∂q} = \frac{d}{dt}\left(\frac{∂\mathcal{L}}{∂\dot{q}}\right)\)
+</p><p>
+
+\[
+→ δ\mathcal{L} = −\frac{d}{dt}\left(\frac{∂\mathcal{L}}{∂\dot{q}}\right)
+δq − \frac{∂\mathcal{L}}{∂\dot{q}}δ\dot{q} =\frac{dG}{dt}
+\]
+
+これは積の法則<sup>24</sup>を使って書き直すことができる。
+<!--
+This can be rewritten, using the product rule<sup>24</sup>
+-->
+</p><p class="margin-large">
+<sup>24</sup>
+積のルールが不明な場合は、付録B.1をご覧ください。
+<!--
+If you’re unsure about the product
+rule, have a look at Appendix B.1.
+-->
+</p><p>
+
+\[
+→ δ\mathcal{L} = −\frac{d}{dt}\left(\frac{∂\mathcal{L}}{∂\dot{q}}δq\right)=\frac{dG}{dt}
+\]
+
+\[
+→ \frac{d}{dt}\underbrace{\left(\frac{∂\mathcal{L}}{∂\dot{q}}δq + G\right)}_{≡J}= 0  \tag{4.16}
+\]
+
+したがって、時間的に保存される量 J が見つかりました。
+<!--
+Therefore, we have found a quantity J that is conserved in time:
+-->
+\[
+J =\frac{∂\mathcal{L}}{∂\dot{q}}δq + G  \tag{4.17}
+\]
+
+なぜなら私たちは
+<!--
+because we have
+-->
+\[
+\frac{d}{dt}J = 0 → J = const
+\]
+</p><p>
+
+これを説明するために、10.2節で後述する結果を一つ用います。
+ニュートンの第二法則（定質量自由粒子の場合）<sup>25</sup>
+<!--
+To illustrate this, we will use one later result from Section 10.2:
+Newton’s second law for a free particle with constant mass<sup>25</sup> 
+-->
+</p><p class="margin-large">
+<sup>25</sup>
+
+q が物体の位置を表す場合、
+\(\frac{dq}{dt} = \dot{q}\) は物体の速度、
+\(\frac{d}{dt}\frac{dq}{dt} = \frac{d^2q}{dt^2} = \ddot{q}\) は加速度です。
+<!--
+If q denotes the position of some object,
+\(\frac{dq}{dt} = \dot{q}\) is the velocity of the object
+and \(\frac{d}{dt}\frac{dq}{dt} = \frac{d^2q}{dt^2} = \ddot{q}\) the acceleration.
+-->
+</p><p>
+
+\[
+m \ddot{\vec{q}} = 0  \tag{4.18}
+\]
+
+この有名な運動方程式を再現するラグランジアンは<sup>26</sup>
+<!--
+The Lagrangian that reproduces this famous equation of motion is<sup>26</sup>
+-->
+</p><p class="margin-large">
+<sup>26</sup>
+
+ここでは複数の空間次元を扱うため、\(q\) と \(a\) の代わりにベクトル \(\vec{q}\) と \(\vec{a}\) を使用します。
+<!--
+We work now with more than one
+spatial dimension, which means instead
+of \(q\) and \(a\), we use vectors \(\vec{q}\) and \(\vec{a}\).
+-->
+</p><p>
+
+\[
+\mathcal{L}  =\frac{1}{2}m\dot{\vec{q}}^2  \tag{4.19}
+\]
+これをオイラー・ラグランジュ方程式に代入すれば確認できます。(式4.7)
+<!--
+as you can check, by putting it into the Euler-Lagrange equation
+(Eq. 4.7).
+-->
+</p><p>
+
+このラグランジアンの異なる対称性について、対応する保存量を計算してみましょう。このラグランジアンは、空間変換 \(\vec{q} → \vec{q}^\prime = \vec{q} +\vec{a}\) に対して不変です (\(δ\mathcal{L} = 0\))。ここで、\(\vec{a}\) は定数ベクトルを表します。なぜなら、\(\mathcal{L} = \frac{1}{2}m\dot{\vec{q}}^2\) は \(\vec{q}\) に依存しないからです。対応する保存量は <sup>27</sup> となります。
+<!--
+Let us compute for different symmetries of this Lagrangian the
+corresponding conserved quantities. Our Lagrangian is invariant
+(\(δ\mathcal{L} = 0\)) under spatial translations \(\vec{q} → \vec{q}^\prime = \vec{q} +\vec{a}\), where \(\vec{a}\) denotes
+some constant vector, because \(\mathcal{L} = \frac{1}{2}m\dot{\vec{q}}^2\) does not depend on \(\vec{q}\). The corresponding conserved quantity reads<sup>27</sup>
+-->
+
+</p><p class="margin-large">
+<sup>27</sup>
+ここでG = 0であり、これは確かに式4.13の条件を満たしています。
+<!--
+Here G = 0, which certainly fulfils the
+condition in Eq. 4.13.
+-->
+</p><p>
+
+\[
+J_{trans} =\frac{∂\mathcal{L}}{∂\dot{\vec{q}}}\vec{a} = m\dot{\vec{q}}\vec{a} =\vec{p}\vec{a}  \tag{4.20}
+\]
+
+ここで、\(\vec{p} = m\dot{\vec{q}}\) は、古典力学で通常<strong>運動量</strong>と呼ばれるものです。
+\(\frac{d}{dt} J = 0\) という式は任意の \(\vec{a}\) に対して成立し、したがって
+<strong>ラグランジアンが空間並進に対して不変であるため、運動量は保存されます</strong>。
+<!--
+where \(\vec{p} = m\dot{\vec{q}}\) is what we usually call <strong>momentum</strong> in classical mechanics.
+The equation \(\frac{d}{dt} J = 0\) holds for arbitrary \(\vec{a}\) and therefore
+<strong>momentum is conserved, because the Lagrangian is invariant under
+spatial translations</strong>.
+-->
+</p><p>
+
+ここで回転について見ていきたいと思いますが、そのためには1次元以上の回転が必要です。1次元の回転だけでは意味がありません。
+ここでは通常のベクトル表記ではなく、インデックス表記を使用すると便利です。
+こうすることで、すべての式を\(q → q_i\)で書き直すだけで、1次元以上の変化を組み込むことができるからです。
+では、無限小回転<sup>28</sup> \(q_i → q_i^\prime = q_i +\epsilon_{ijk}\) を見てみましょう。
+<!--
+We now want to look at rotations and therefore need more than
+one dimension, because a rotation in one dimension makes no sense.
+It is useful to use an index notation instead of the usual vector notation
+here, because then we can simply rewrite all equations with
+\(q → q_i\) to be able to incorporate changes in more than one dimension.
+Let’s have a look at an infinitesimal rotation<sup>28</sup> \(q_i → q_i^\prime = q_i +\epsilon_{ijk}q_ja_k\)
+-->
+</p><p class="margin-large">
+<sup>28</sup>
+ここでは、回転の生成元をレヴィ・チヴィタ記号を用いて書きます。これは式3.62の下のテキストで説明されています。
+<!--
+Here we write the generator of
+rotations by using the Levi-Civita
+symbol. This was explained in the text
+below Eq. 3.62.
+-->
+</p><p>
+したがって、\(δq_i =\epsilon_{ijk}q_ja_k\) となる。我々のラグランジアンはこのような変換に対して不変である。なぜなら、\(\mathcal{L} = \frac{1}{2}m\dot{\vec{q}}^2\) は \(q\) に依存せず、対応する保存量は <sup>29</sup> であるからである。
+<!--
+and therefore \(δq_i =\epsilon_{ijk}q_ja_k\). Our Lagrangian is invariant under such
+transformations, because again, \(\mathcal{L} = \frac{1}{2}m\dot{\vec{q}}^2\) does not depend on \(q\), and the corresponding conserved quantity is<sup>29</sup>
+-->
+</p><p class="margin-large">
+<sup>29</sup>
+これは式4.16で導出されたもので、ここでも\(G = 0\)を使います。
+<!--
+This was derived in Eq. 4.16, again we
+work here with \(G = 0\).
+-->
+</p><p>
+
+\[
+\begin{align}
+J_{rot} &=\frac{∂\mathcal{L}(q_i, \dot{q}_i, t)}{∂\dot{q}_i}δq_i =
+\frac{∂\mathcal{L}(q_i, \dot{q}_i, t)}{∂\dot{q}_i}\epsilon_{ijk}q_ja_k \\
+\\
+&= m\dot{q}_i\epsilon_{ijk}q_ja_k = p_i\epsilon_{ijk}q_ja_k \\
+\\
+&→ J_{rot} = (\vec{p} ×\vec{q}) ·\vec{a} ≡\vec{L} ·\vec{a}  \tag{4.21}
+\end{align}
+\]
+
+最後のステップでは、項をベクトル表記で書き直します。ここで、×は外積と呼ばれ、\vec{L}は古典力学で通常<strong>角運動量</strong>と呼ばれるものです。<strong>したがって、回転に対する不変性は、角運動量の保存則</strong>につながります。
+<!--
+In the last step we rewrite our term in vector notation, where × is
+called the cross product and \vec{L} is what we usually call <strong>angular momentum</strong>
+in classical mechanics. <strong>Therefore, invariance under rotations
+leads us to conservation of angular momentum</strong>.
+-->
+</p><p>
+次に、時間変換に対する不変性について見てみましょう<sup>30</sup>。
+無限小の時間変位 \(t → t^\prime = t + \epsilon\) は、次のような効果をもたらします。
+<!--
+Next let’s have a look at invariance under time translations<sup>30</sup>. An
+infinitesimal time displacement \(t → t^\prime = t + \epsilon\)  has the effect
+-->
+</p><p class="margin-large">
+<sup>30</sup> 
+
+つまり、物理学は、実験を昨日、今日、あるいは50年後に行うかどうかに関わらず、同じ初期条件が与えられれば、物理法則は同じままである、ということを意味します。
+<!--
+This means that physics doesn’t care 
+about if we perform an experiment
+yesterday, today or in 50 years, given
+the same initial conditions, the physical
+laws stay the same.
+-->
+</p><p>
+
+\[
+\begin{align}
+δ\mathcal{L} &= \mathcal{L}\left(q(t),\frac{dq(t)}{dt}, t\right)
+−\mathcal{L}\left(q(t+\epsilon),\frac{dq(t +\epsilon)}{dt}, t +\epsilon\right) \\
+\\ 
+&=−\frac{∂\mathcal{L}}{∂q}\frac{∂q}{∂t}\epsilon
+− \frac{∂\mathcal{L}}{∂\dot{q}}\frac{∂\dot{q}}{∂t}\epsilon
+−\frac{∂\mathcal{L}}{∂t}\epsilon
+\underbrace{=}_{\text{
+これはまさに全微分}}−\frac{d\mathcal{L}}{dt}\epsilon
+\tag{4.22}
+\end{align}
+\]
+
+これは一般に\(δ\mathcal{L} \neq 0\)であることを示していますが、式4.13の条件は\(G = −\mathcal{L}\)によっていずれにせよ満たされます。
+<!--
+which tells us that in general \(δ\mathcal{L} \neq 0\), but the condition in Eq. 4.13 is
+fulfilled anyway with \(G = −\mathcal{L}\).
+-->
+</p><p>
+これを式4.16に代入すると次のようになる。
+<!--
+We can put this into Eq. 4.16, which yields
+-->
+\[
+\frac{d}{dt}\underbrace{\left(\frac{∂\mathcal{L}}{∂\dot{q}}\dot{q} − \mathcal{L}\right)}_{≡H}= 0   \tag{4.23}
+\]
+
+保存量\(\mathcal{H}\)は<strong>ハミルトニアン</strong>と呼ばれ、系の全エネルギーを表します。この例のラグランジアンでは、
+<!--
+The conserved quantity \(\mathcal{H}\) is called the <strong>Hamiltonian</strong> and represents
+the total energy of the system. For our example Lagrangian, we have
+-->
+\[
+\begin{align}
+\mathcal{H} &=\frac{∂\mathcal{L}}{∂\dot{q}}\dot{q} − \mathcal{L} =
+\underbrace{\left(\frac{∂}{∂\dot{q}}\frac{1}{2}m\dot{q}^2\right)}_{=m\dot{q}}\dot{q}−\frac{1}{2}m\dot{q}^2 \\
+\\
+&= m\dot{q}^2 − \frac{1}{2}m\dot{q}^2 =\frac{1}{2}m\dot{q}^2  \tag{4.24}
+\end{align}
+\]
+
+これはまさに私たちの系の運動エネルギーです。運動エネルギーは、ポテンシャル/外力なしで計算したため、全エネルギーです。外部ポテンシャル中の粒子に対するニュートンの第二法則を導くラグランジアンは、\(m\ddot{q} = \frac{dV}{dq}\) です。
+<!--
+which is exactly the kinetic energy of our system. The kinetic energy
+is the total energy, because we worked without a potential/external
+force. The Lagrangian that leads to Newton’s second law for a particle
+in an external potential: \(m\ddot{q} = \frac{dV}{dq}\) is
+-->
+\[
+\mathcal{L} =\frac{1}{2}m\dot{q}^2 − V(q)
+\]
+
+ハミルトニアンは
+<!--
+The Hamiltonian is then
+-->
+\[
+\mathcal{H} =\frac{1}{2}m\dot{q}^2 + V
+\]
+
+正しい総エネルギーは、運動エネルギー+位置エネルギーです。
+<!--
+which is the correct total energy=kinetic energy+potential energy.
+-->
+</p><p>
+<strong>ブースト不変性</strong>から導かれる保存量は
+やや奇妙であり、対応する計算は付録のセクション4.6に記載されています。結果として得られる保存量は
+<!--
+The conserved quantity that follows from <strong>boost invariance</strong> is
+rather strange and the corresponding computation can be found in
+the appendix Section 4.6. The resulting conserved quantity is
+-->
+\[
+\tilde{J}_{boost} = \underbrace{pt − \frac{1}{2}mvt}_{≡\tilde{p}t}
+−mq =\tilde{p}t − mq  \tag{4.25}
+\]
+
+この量は開始時刻に依存し、開始時刻を適切に選択することでゼロにすることができます。この量は保存されるため、この保存則によれば、ゼロは常にゼロのままです。
+<!--
+We can see that this quantity depends on the starting time and by
+choosing the starting time appropriately we can make it zero. Because this quantity is conserved, this conservation law tells us that zero stays zero for all times.
+-->
+</p><p>
+粒子理論を要約すると、次のような関係があります。
+<!--
+To summarize for particle theories we have the following connections:
+-->
+<div class="styleBullet">
+<ul><li>
+• 空間における並進不変性 ⇒ 運動量保存則
+</li><br><li>• ブースト不変性<sup>31</sup> ⇒ \(\tilde{p}t − mq\) の保存則
+<!--
+• translational invariance in space ⇒ conservation of momentum,
+</li><br><li>• boost invariance<sup>31</sup> ⇒ conservation of \(\tilde{p}t − mq\), 
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>31</sup>
+ブーストの別名は、運動量空間における並進です。これは、\(q → q + vt\) という変換によって、運動量が \(m\dot{q} → m(\dot{q} + v)\) に変化するためです。
+<!--
+Another name for a boost is translation
+in momentum space, because the
+transformation \(q → q + vt\), changes the
+momentum to \(m\dot{q} → m(\dot{q} + v)\).
+-->
+</p><p>
+<div class="styleBullet">
+<ul><li>
+• 回転不変性 ⇒ 角運動量保存則
+</li><br><li>• 時間における並進不変性 ⇒ エネルギー保存則。
+<!--
+• rotational invariance ⇒ conservation of angular momentum,
+</li><br><li>• translational invariance in time ⇒ conservation of energy.
+-->
+</li></ul></div>
+</p><p>
+ネーターの定理は、これらの概念<sup>32</sup>が自然に関するあらゆる物理理論において何らかの形で用いられる理由を示しています。物理法則に通常用いられる時空対称性が保たれている限り、運動量、エネルギー、角運動量は保存量として存在します。
+<!--
+Noether’s theorem shows us why these notions<sup>32</sup> are used in every
+physical theory of nature in one or another form. As long as we 
+have the usual spacetime symmetries of our physical laws, we have
+momentum, energy and angular momentum as conserved quantities.
+-->
+</p><p class="margin-large">
+<sup>32</sup>
+ブースト不変性から生じる保存量を除いて。
+<!--
+Except for the conserved quantity
+following from boost invariance.
+-->
+</p><p>
+上記の議論を場の理論についても繰り返すと有益です。
+場の理論には2種類の対称性があります。一方では、ラグランジアンが時空変換に対して不変となる場合があり、これは回転のような変換を意味します。他方では、場自体の変換に対して不変となる場合があり、これは<strong>内部対称性</strong>と呼ばれます。
+<!--
+It is instructive to repeat the above discussion for field theories.
+In field theories we have two kinds of symmetries. On the one hand,
+our Lagrangian can be invariant under spacetime transformations,
+which means a transformation like a rotation. On the other hand, we
+can have invariance under transformations of the field itself, which
+are called <strong>internal symmetries</strong>.
+-->
+</p>
+<h3>4.5.2 場の理論におけるネーターの定理 - 時空対称性</h3>
+<!--
+<h3>4.5.2 Noether’s Theorem for Field Theories - Spacetime Symmetries</h3>
+-->
+<p>
+場については、時空変換によって起こり得る異なる種類の変化を区別する必要があります。観測者 \(S^\prime\) は場 \(Ψ^\prime(x^\prime)\) を見ますが、観測者 \(S\) は場 \(Ψ(x)\) を見ます。これは同じ場ですが、単に別の視点から見たものであり、2 人の観測者は同じ数値的な場の成分を見ていません。この 2 つの異なる記述は、ローレンツ群の適切な変換によって関連付けられています。セクション 3.7.11 で場の表現を導入しました。これをここで使用します。(無限次元) 微分演算子表現は \(x → x^\prime\) を変化させます。つまり、この表現を用いることで、時空の異なる点や回転したフレームにおける場の成分を計算できるということです。ローレンツ群の有限次元表現は \(Ψ → Ψ^\prime\) に変化し、つまり場の成分を混合します<sup>33</sup>。
+<!--
+For fields one has to distinguish between different kinds of changes
+that can happen under spacetime transformations. Observer \(S^\prime\) sees
+the field \(Ψ^\prime(x^\prime)\) whereas observer \(S\) sees the field \(Ψ(x)\). This is the same field, just from another perspective and the two observers do
+not see the same numerical field components. The two different
+descriptions are related by the appropriate transformations of the
+Lorentz group. We introduced in Section 3.7.11 the field representation,
+which we will be using now. The (infinite-dimensional) differential
+operator representation changes \(x → x^\prime\). This means by using
+this representation we can compute the field components at a different
+point in spacetime or in a rotated frame. The finite-dimensional
+representation of the Lorentz group changes \(Ψ → Ψ^\prime\), i.e. mixes the
+field components<sup>33</sup>.
+-->
+</p><p class="margin-large">
+<sup>33</sup>
+例えば、ワイルスピノルは2つの成分を持ち、ベクトル場は4つの成分を持つことを思い出してください。ベクトル場 \(A_μ =
+\begin{pmatrix}
+A_0 \\
+A_1 \\
+A_2 \\
+A_3
+\end{pmatrix}
+\)
+を別の視点、つまり回転座標系で表すと、\(A_μ^\prime =
+\begin{pmatrix}
+A_0^\prime \\
+A_1^\prime \\
+A_2^\prime \\
+A_3^\prime
+\end{pmatrix}
+=
+\begin{pmatrix}
+A_0 \\
+−A_2 \\
+A_1 \\
+A_3
+\end{pmatrix}
+\) のようになります。 \(A_μ^\prime\) と
+\(A_μ\) は、互いに \(z\) 軸を中心に 90\(^\circ\) 回転した座標系で同じ場を表します。
+<!--
+Remember for example, that a Weyl 
+spinor has two- and a vector field
+has four-components. If we look at
+the vector field \(A_μ =
+\begin{pmatrix}
+A_0 \\
+A_1 \\
+A_2 \\
+A_3
+\end{pmatrix}
+\)
+from a
+different perspective, i.e. describe it in
+a rotated coordinate system it can look
+like \(A_μ^\prime =
+\begin{pmatrix}
+A_0^\prime \\
+A_1^\prime \\
+A_2^\prime \\
+A_3^\prime
+\end{pmatrix}
+=
+\begin{pmatrix}
+A_0 \\
+−A_2 \\
+A_1 \\
+A_3
+\end{pmatrix}
+\). \(A_μ^\prime\) and
+\(A_μ\) describe the same field in coordinate
+systems that are rotated by 90\(^\circ\) around
+the \(z\)-axis relative to each other.
+-->
+</p><p>
+
+時空に依存する場の完全な変換は、両方の部分から構成される必要があります。\(x → x^\prime\) の変化から始めて、これらの部分を個別に見ていきます。回転の場合、それに続く保存量は実際には保存されません。これは、変換の2番目の部分、つまり場の成分の混合を無視したためです。\(x → x^\prime\) と \(Ψ → Ψ^\prime\) から続く2つの保存量の和のみが保存されます。
+<!--
+A complete transformation, for a field that depends on spacetime,
+needs to consist of both parts. We will look at these parts separately,
+starting with the change \(x → x^\prime\). For rotations the conserved quantity
+that follows is not really conserved, because we neglected the second
+part of the transformation, i.e. the mixing of the field components.
+Only the sum of the two conserved quantities that follow from \(x →x^\prime\) and \(Ψ → Ψ^\prime\) is conserved.
+-->
+</p><p>
+これをより具体的にするために、一般的なラグランジアン密度\(\mathscr{L}((Φ(x_μ), ∂_μΦ(x_μ), x_μ)\)を考えてみましょう。対称性とは、
+<!--
+To make this more concrete consider a general Lagrangian density
+\(\mathscr{L}((Φ(x_μ), ∂_μΦ(x_μ), x_μ)\). Symmetry means we have
+-->
+\[
+\mathscr{L}((Φ(x_μ), ∂_μΦ(x_μ), x_μ) = \mathscr{L}((Φ^\prime(x_μ^\prime), ∂_μΦ^\prime(x_μ^\prime), x_μ^\prime)  \tag{4.26}
+\]
+
+一般に、関数の関数全体の変化は、独立関数が変化し、それらが評価される点も変化した場合、<sup>34</sup>で与えられる。
+<!--
+In general, the total change of a function-of-a-function, when the
+independent functions are changed and the point at which they are
+evaluated is also changed, is given by<sup>34</sup>
+-->
+</p><p class="margin-large">
+<sup>34</sup>
+
+初めて聞く方のために説明します。これはしばしば全微分と呼ばれます。全変化は、微分とも呼ばれる変化率の合計に、量自体の変化を掛けて求められます。例えば、3次元空間における関数 \(f(x, y, z)\) の全変化は、\(\frac{∂f}{∂x}δx + \frac{∂f}{∂y}δy + \frac{∂f}{∂z}δz\) で与えられます。
+変化率と変化距離の積です。微小な変化を考慮するため、これはテイラー展開の最初の項と見なすことができ、高次の項は無視できます。
+<!--
+If this is new to you: This is often 
+called the total derivative. The total
+change is given by the sum of the
+change rates, also known as derivatives,
+times the change of the quantity itself.
+For example, the total change of a
+function \(f(x, y, z)\) in three dimensional
+space is given by \(\frac{∂f}{∂x}δx +\frac{∂f}{∂y}δy + \frac{∂f}{∂z}δz\).
+The change rate times the distance it
+is changed. We consider infinitesimal
+changes and therefore this can be
+seen as the first terms in the Taylor
+expansion, where we can neglect higher
+order terms.
+-->
+</p><p>
+
+\[
+df(g(x), h(x), ...) =\frac{∂f}{∂g}δg +\frac{∂f}{∂h}δh + ... +\frac{∂f}{∂x}δx  \tag{4.27}
+\]
+
+これをラグランジアンに適用すると、
+<!--
+Applying this to the Lagrangian yields
+-->
+\[
+δ\mathscr{L} =\frac{∂\mathscr{L}}{∂Φ}δΦ +\frac{∂\mathscr{L}}{∂(∂_μΦ)}δ(∂μΦ) +
+\frac{∂\mathscr{L}}{∂x_μ}δxμ \tag{4.28} 
+\]
+
+これをオイラー・ラグランジュ方程式<sup>35</sup>を使って書き直すと、
+<!--
+which we can rewrite using the Euler-Lagrange equations<sup>35</sup>
+-->
+</p><p class="margin-large">
+<sup>35</sup>
+式4.10を参照してください: \(\frac{∂\mathscr{L}}{∂Φ} = ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}\right)\)
+<!--
+See Eq. 4.10: \(\frac{∂\mathscr{L}}{∂Φ} = ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}\right)\)
+-->
+</p><p>
+
+\[
+\begin{align}
+δ\mathscr{L} &= ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}\right)δΦ +\frac{∂\mathscr{L}}{∂(∂_μΦ)}
+\underbrace{δ(∂_μΦ)}_{=∂_μδΦ}+\frac{∂\mathscr{L}}{∂x_μ}δx_μ \\
+\\
+&\underbrace{=}_{\text{積の公式}}∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}δΦ\right)
++\frac{∂\mathscr{L}}{∂x_μ}δx_μ  \tag{4.29}
+\end{align}
+\]
+
+変分\(δΦ\)は2つの部分から構成される。
+<!--
+The variation \(δΦ\) has now two parts
+-->
+\[
+δΦ =\epsilon_{μν}S^{μν}Φ(x) −\frac{ ∂Φ(x)}{∂x_μ}δx_μ  \tag{4.30}
+\]
+
+変換パラメータ\(\epsilon_{μν}\)、対応する有限次元表現における変換演算子\(S^{μν}\)、および従来のマイナス符号を用いて表されます。\(S_{μν}\)は、回転の生成元とは\(J_i = \frac{1}{2}\epsilon_{ijk}S_{jk}\)、ブーストの生成元とは\(K_i = S_{0i}\)によって関連しており、これは式3.173のMμνの定義に類似しています。この量Sμνの定義により、回転とブーストの生成元を同時に扱うことができます。
+<!--
+with the transformation parameters \(\epsilon_{μν}\), the transformation operator
+\(S^{μν}\) in the corresponding finite-dimensional representation and a
+conventional minus sign. \(S_{μν}\) is related to the generators of rotations
+by \(J_i = \frac{1}{2}\epsilon_{ijk}S_{jk}\) and to the generators of boosts by \(K_i = S_{0i}\), analogous
+to the definition of Mμν in Eq. 3.173. This definition of the quantity
+Sμν enables us to work with the generators of rotations and boosts at
+the same time.
+-->
+</p><p>
+最初の部分は回転とブーストにおいてのみ重要です。なぜなら、並進では場の成分が混ざらないからです。ブーストの場合、保存量は粒子の場合と同様にあまり意味をなさないため、実際にはこの項は回転対称性においてのみ意味を持つことになります。
+<!--
+The first part is only important for rotations and boosts, because
+translations do not mix the field components. For boosts the conserved
+quantity will not be very enlightening, just as in the particle
+case, so in fact this term will become only relevant for rotational
+symmetry.
+-->
+</p><p>
+最も単純な場の変換、つまり時空における並進から始めましょう。
+<!--
+Let’s start with the simplest field transformation: a translation in
+spacetime
+-->
+\[
+x_μ → x_μ^\prime = x_μ + δx_μ = x_μ + a_μ  \tag{4.31}
+\]
+
+並進運動については\(\epsilon_{μν} = 0\)となる。なぜなら、並進運動では場の成分は混ざらないからである。したがって、式4.30は次のように書ける。
+<!--
+For translations we have \(\epsilon_{μν} = 0\), because field components do not
+mix under translations and therefore Eq. 4.30 reads
+-->
+\[
+δΦ = − \frac{∂Φ}{∂x_μ}δx_μ
+\]
+
+したがって、不変性 \((δ\mathscr{L} = 0)\) の結果を調べたい場合、式4.29から次式が得られます。
+<!--
+Thus if we want to investigate the consequences of invariance \((δ\mathscr{L} = 0)\),
+we get from Eq. 4.29
+-->
+\[
+\begin{align}
+&−∂ν\left(\frac{∂\mathscr{L}}{∂(∂_νΦ)}\frac{∂Φ}{∂x_μ}δx_μ\right)
++\frac{∂\mathscr{L}}{∂x_μ}δx_μ =0  \tag{4.32} \\
+\\
+&→−∂_ν\left(\frac{∂\mathscr{L}}{∂(∂_νΦ)}\frac{∂Φ}{∂x_μ}− δ_μ^ν\mathscr{L}\right)δx^μ = 0  \tag{4.33}
+\end{align}
+\]
+</p><p>
+式4.31から\(δx_μ = a_μ\)が得られ、これを式4.33に代入すると、次の式が得られる。
+<!--
+From Eq. 4.31 we have \(δx_μ = a_μ\), which we now put into Eq. 4.33.
+This yields
+-->
+\[
+−∂_ν\left(\frac{∂\mathscr{L}}{∂(∂_νΦ)}\frac{∂(Φ)}{∂x_μ}− δ_μ^ν\mathscr{L}\right)a^μ = 0  \tag{4.34}
+\]
+
+そしてこれがエネルギー運動量テンソルを定義する動機となる。
+<!--
+and this motivates us to define the energy-momentum tensor
+-->
+\[
+T_μ^ν :=\frac{∂\mathscr{L}}{∂(∂_νΦ)}\frac{∂(Φ)}{∂x_μ}− δ_μ^ν\mathscr{L}  \tag{4.35}
+\]
+
+式4.34は、\(T_μ^ν\)の各成分\(μ\)が連続性を満たすことを示しています。\(a^μ\)は任意です<sup>36</sup>
+<!--
+Equation 4.34 tells us that each component \(μ\) of \(T_μ^ν\)  fulfils a continuity
+equation, because \(a^μ\) is arbitrary<sup>36</sup>
+-->
+
+</p><p class="margin-large">
+<sup>36</sup>
+
+ここではプラス記号 \(∂_νT_μ^ν = ∂_0T_μ^0 + ∂_iT_μ^i\) が使用されていますが、実際には \(A_μB^μ = A_μη^{μν}B_ν = A_0B_0 − A_iB_i\) となっています。
+負符号のない下限インデックスを持つ 4 次元ベクトルを \(A_μ = (A_0, A_1, A_2, A_3)^T\) と定義し、上限インデックスを持つ 4 次元ベクトルを \(B^μ ≡ η^{μν}B_ν = (B_0,−B_1,−B_2,−B_3)^T\) と定義しました。
+ここでのマイナス符号は、ミンコフスキー計量 \(η^{μν} = diag(1,−1,−1,−1)\) のマイナス符号の結果です。
+式 4.37 にプラス符号が付いている理由は、\(∂_μ\) が次のように定義されているためです。
+\(∂_μ ≡ \frac{∂}{∂x^μ} = \left( \frac{∂}{∂x^0} ,−\frac{∂}{∂x^1} ,−\frac{∂}{∂x^2} ,−\frac{∂}{∂x^3} \right)^T\)
+ここでのマイナス符号は、\(T_μ^ν\) の上限インデックスに現れるマイナス符号と打ち消され、全体としてプラス符号になります。
+<!--
+Take note that we have here a plus
+sign \(∂_νT_μ^ν = ∂_0T_μ^0 + ∂_iT_μ^i\), although we
+have \(A_μB^μ = A_μη^{μν}B_ν = A_0B_0 − A_iB_i\).
+We defined a four-vector with a
+lower index without minus signs
+\(A_μ = (A_0, A_1, A_2, A_3)^T\) and a
+four-vector with an upper index as
+\(B^μ ≡ η^{μν}B_ν = (B_0,−B_1,−B_2,−B_3)^T\).
+The minus signs here are a result of
+the minus signs in the Minkowski
+metric \(η^{μν} = diag(1,−1,−1,−1)\).
+The reason for the plus sign in
+Eq. 4.37 is that \(∂_μ\) is defined as
+\(∂_μ ≡ \frac{∂}{∂x^μ} = \left( \frac{∂}{∂x^0} ,−\frac{∂}{∂x^1} ,−\frac{∂}{∂x^2} ,−\frac{∂}{∂x^3} \right)^T\).
+The minus signs here cancel with the
+minus signs that appear through the
+upper index of \(T_μ^ν\)
+ and we get an overall
+plus sign.
+-->
+</p><p>
+
+\[
+∂_νT_μ^ν =0 \tag{4.36}
+\]
+
+\[
+→ ∂_νT_μ^ν = ∂_0T_μ^0 + ∂_iT_μ^i = 0  \tag{4.37}
+\]
+
+これは、保存量が存在することを直接的に示しています。例えば、\(μ = 0\) の場合には<sup>37</sup>
+<!--
+This tells us directly that we have conserved quantities, because, for
+ example, for \(μ = 0\) we get<sup>37</sup>
+-->
+
+</p><p class="margin-large">
+<sup>37</sup>
+\(∂_0 = ∂_t\) と \(∂^iT_i^0 = ∇\vec{T}\)
+そして有名な発散定理
+\(\int_V d^3x∇A =\int_{δV} d^2xA\) を用いると、ある体積 \(V\) 上の積分を、対応する面 \(δV\) 上の積分として書き直すことができます。ガウスの定理と呼ばれる発散定理の非常にわかりやすい証明は、http://www.feynmanlectures.caltech.edu/II_03.html に掲載されています。これは、無料でオンラインで入手可能な
+Richard P. Feynman、Robert B. Leighton、Matthew Sands による論文の第3章です。ファインマン物理学講義：第2巻。
+アディソン・ウェスレー社、第1版、1977年2月。
+ISBN 9780201021172
+<!--
+Using \(∂_0 = ∂_t\) and \(∂^iT_i^0 = ∇\vec{T}\) 
+and the famous divergence theorem
+\(\int_V d^3x∇A =\int_{δV} d^2xA\), which enables
+us to rewrite the integral over some
+volume \(V\), as an integral over the corresponding
+surface \(δV\). A very illuminating
+proof of the divergence theorem,
+there called Gauss’ theorem, can be
+found at http://www.feynmanlectures.
+caltech.edu/II_03.html which is
+Chapter 3 of the freely online available
+Richard P. Feynman, Robert B.
+Leighton, and Matthew Sands. The
+Feynman Lectures on Physics: Volume 2.
+Addison-Wesley, 1st edition, 2 1977.
+ISBN 9780201021172
+-->
+</p><p>
+
+\[
+∂_0T_0^0 + ∂_iT_0^i = 0 → ∂_0T_0^0 = −∂_iT_0^i
+\]
+
+\[
+∂_tT_0^0 = −∇\vec{T} \underbrace{→}_{\text{ある無限体積Vにわたって積分すると}}
+\int_V d^3x∂_tT_0^0 = −\int_V d^3x∇\vec{T}
+\]
+
+\[
+→ ∂_t\int_V d^3xT_0^0 = −\int_V d^3x∇\vec{T} \overbrace{=}^{\text{発散定理; δVは体積Vの表面積を表す}}
+−\int_{δV} d^2x\vec{T} \underbrace{=}_{\text{場は無限遠で消滅するので}}0 \tag{4.38}
+\]
+
+\[
+→ ∂_t \int_V d^3xT_0^0 = 0   \tag{4.39}
+\]
+
+最後のステップでは、無限の体積 \(V\)、例えば無限の半径 \(r\) を持つ球面 \(δV\) について積分する必要がある場合、\(r = ∞\) における場を評価する必要があることを用います。
+場は無限遠で消滅しなければなりません。そうでなければ、場の全エネルギーは無限大となり、無限エネルギーを持つ場の構成は非物理的になります<sup>38</sup>。
+<!--
+In the last step we use that if we have an infinite volume \(V\), like
+a sphere with infinite radius \(r\), and we have to integrate over the
+surface of this volume \(δV\), we need to evaluate our fields at \(r = ∞\).
+Fields must vanish at infinity, because otherwise the total field energy
+would be infinite and field configurations with infinite energy are
+non-physical<sup>38</sup>.
+-->
+</p><p class="margin-large">
+<sup>38</sup>
+
+厳密に言えば、これはスピン0とスピン1/2の場に対してのみ成り立つことに注意してください。
+スピン1の場の場合、有限エネルギーを保証するためには場の強度テンソルFμνのみがゼロでなければなりませんが、「基本場」\(A_μ\)（\(F_{μν} := ∂_μA_ν − ∂_νA_μ\)）は「無限大において」非ゼロになることができます。（場の強度テンソルは式6.23で定義されます）。
+この観察は、非アーベルゲージ理論における非自明な真空描像につながります。残念ながら、適切な議論は本書の範囲をはるかに超えています。
+<!--
+Take note that strictly speaking this is 
+only true for spin 0 and spin 1/2 fields.
+For spin 1 fields, only the field-strength
+tensor Fμν must vanish to guarantee
+finite energy, while the "basic fields" \(A_μ\)
+(with \(F_{μν} := ∂_μA_ν − ∂_νA_μ\)) can be nonzero
+"at infinity". (The field strength
+tensor will be defined in Eq. 6.23).
+This observation leads to the nontrivial
+vacuum picture in non-abelian
+gauge theories. Unfortunately, a proper
+discussion lies far beyond the scope of
+this book.
+-->
+</p><p>
+結論として、時空における並進不変性は、各成分μについて1つずつ、4つの保存量<sup>39</sup>を導きます。式4.39は、これらが
+<!--
+We conclude: the invariance under translations in spacetime leads
+us to 4 conserved quantities<sup>39</sup>, one for each component μ . Equation
+4.39 tells us these are
+-->
+</p><p class="margin-large">
+<sup>39</sup>
+\(∂_0T_μ^0a^μ = ∂_0T_0^0 a^0 − ∂_0T_i^0 a^i =
+0\) であるため、任意の \(a^μ\) では各成分について別々の連続方程式が得られます。
+<!--
+Because \(∂_0T_μ^0a^μ = ∂_0T_0^0 a^0 − ∂_0T_i^0 a^i =
+0\), with arbitrary \(a^μ\) we get a separate
+continuity equation for each component.
+-->
+</p><p>
+
+\[
+\begin{align}
+E &= \int d^3xT_0^0  \tag{4.40} \\
+\\
+P_i &= \int d^3xT_i^0  \tag{4.41}
+\end{align}
+\]
+
+ここで、常に \(i = 1, 2, 3\) です。これらの量は系の<strong>全エネルギー</strong>
+\(E\) と呼ばれ、<strong>時間変換不変性</strong> \(x_0 → x_0 + a_0\) と<strong>場の配置 Pi の全運動量</strong> と呼ばれ、空間変換不変性</strong> \(x_i → x_i + a_i\) があるため保存されます。
+<!--
+where as always \(i = 1, 2, 3\). These quantities are called the <strong>total energy</strong>
+\(E\) of the system, which is conserved because we have <strong>invariance
+under time-translations</strong> \(x_0 → x_0 + a_0\9 and the <strong>total momentum
+of the field configuration Pi, which is conserved because we have
+invariance under spatial-translations</strong> \(x_i → x_i + a_i\).
+-->
+</p>
+<h3>4.5.3 ローテーションとブースト</h3>
+<!--
+<h3>4.5.3 Rotations and Boosts</h3>
+-->
+<p>
+次に、回転とブーストに対する不変性について見ていきます。まず式4.30の2番目の部分から始め、その後、1番目の部分の含意について見ていきます。1番目の部分から1つの量、2番目の部分から1つの量が得られ、これらは<strong>一緒に</strong>保存されます。スカラー場には混ざり合う可能性のある成分がないため、スカラー場の場合、1番目の部分はゼロです。言い換えれば、スカラーの場合、3.7.4節で導出したローレンツ群の生成元の1次元表現 \(S_{μν} = 0\) を使用します。したがって、この節で導出するのは、スカラー場の完全な保存量です。
+<!--
+Next, we take a look at invariance under rotations and boosts. We
+will start with the second part of Eq. 4.30 and then look afterwards
+at the implications of the first part. We will get a quantity from the
+first part and a quantity from the second part, which are <strong>together</strong>
+conserved. A scalar field has no components that could mix, hence
+for a scalar field the first part is zero. In other words, for scalars we
+use the 1-dimensional representation of the generators of the Lorentz
+group \(S_{μν} = 0\), which was derived in Section 3.7.4. Therefore what
+we derive in this section is the complete conserved quantity for a
+scalar field.
+-->
+</p><p>
+変換の2番目の部分は次のように与えられる。
+<!--
+The second part of the transformation is given by
+-->
+\[
+x_μ → x_μ^\prime = x_μ + δx_μ = x_μ + M_μ^σx_σ \tag{4.42}
+\]
+
+ここで、\(M_μ^σ\) は回転とブーストの生成元であり、その無限次元表現である。つまり、これらは式 3.248 で定義されている微分作用素によって表される。
+<!--
+where \(M_μ^σ\) are the generators of rotations and boost in their infinitedimensional
+representation. This means they are represented by
+differential operators, as defined in Eq. 3.248.
+-->
+</p><p>
+
+式4.42から、座標の変化は\(δx_μ = M_μ^σx_σ\)で与えられることがわかります。これを式4.33に代入すると、
+<!--
+From Eq. 4.42, we see that the change of the coordinates is given
+by \(δx_μ = M_μ^σx_σ\). Putting this into Eq. 4.33 yields
+-->
+\[
+∂_ν\left(\frac{∂\mathscr{L}}{∂(∂_νΦ)}\frac{∂(Φ)}{∂x_μ}− δ_μ^ν\mathscr{L}\right)M^{μσ}x_σ =0  \tag{4.43}
+\]
+
+\[
+\underbrace{→}_{Eq. 4.35}∂_νT_μ^νM^{μσ}x_σ = 0
+\]
+
+これを少し書き直して、従来の形式に置き換えることもできます。
+<!--
+We can write this a little differently to bring it into the conventional
+form
+-->
+\[
+\begin{align}
+&=\frac{1}{2}(∂^νT_ν^μ M_{μσ}x^σ + ∂^νT_ν^μ\underbrace{ M_{μσ}}_{=−M_{σμ}}
+x^σ) =\frac{1}{2}(∂^νT_ν^μ M_{μσ}x^σ − ∂^νT_ν^μ M_{σμ}x^σ) \\
+\\
+&\underbrace{=}_{\text{ダミーインデックスをリネーム}}\frac{1}{2}(∂^νT_ν^μ M_{μσ}x^σ − ∂^νT_ν^σ M_{μσ}x^μ) =\frac{1}{2}(∂^νT_ν^μ x^σ − ∂^νT_ν^σ x^μ)M_{μσ} \\
+\\
+&=\frac{1}{2} ∂_ν(T^{μν}x^σ − T^{σν}x^μ)M_{μσ} = 0 \\
+\\
+&→ with (J^ν)^{σμ} ≡ T^{μν}x^σ − T^{σν}x^μ → ∂_ν(J^ν)^{σμ} = 0  \tag{4.44}
+\end{align}
+\]
+
+最後のステップで導入した量 \(J^ν\) は<strong>ネーターカレント</strong>と呼ばれます。式 3.173 の定義から導かれる \(M_{μσ} = −M_{σμ}\) の反対称性により、\(M_{μμ} = 0\) となることに注意してください。
+したがって、ゼロでない \(M_{μσ}\) ごとに 1 つずつ、6 つの異なる連続方程式 \(∂_ν(J^ν) = 0\) が見つかりました。式 4.39 と同じ議論から、時間的に保存される量は次の式であると結論付けられます。
+<!--
+The quantity \(J^ν\) we introduced in the last step is called <strong>Noether
+current</strong>. Note that, because of the anti-symmetry of \(M_{μσ} = −M_{σμ}\),
+which follows from the definition in Eq. 3.173, we have \(M_{μμ} = 0\).
+Therefore, we found 6 different continuity equations \(∂_ν(J^ν) = 0\), one
+for each non-vanishing \(M_{μσ}\). With the same arguments from Eq. 4.39
+we conclude that the quantities conserved in time are
+-->
+\[
+\mathcal{Q}^{μσ} =\int d^3x(T^{μ0}x^σ − T^{σ0}x^μ)   \tag{4.45}
+\]
+
+回転不変性<sup>40</sup>については、保存量は
+<!--
+For rotational invariance<sup>40</sup>, we therefore have the conserved quantities
+-->
+</p><p class="margin-large">
+<sup>40</sup>
+
+式3.173の回転生成子\(J_i\)と\(M_{μν}\)の関係を思い出してください：\(J_i = \frac{1}{2}\epsilon_{ijk}M_{jk}\)、つまりここでは空間成分\(i = j = \{1, 2, 3\}\)に制限し、\(μ = ν = \{0, 1, 2, 3\}\)の代わりに\(i, j\)と書きます。
+<!--
+Recall the connection between the
+generator of rotations \(J_i\) and \(M_{μν}\)
+from Eq. 3.173: \(J_i = \frac{1}{2}\epsilon_{ijk}M_{jk}\), which
+means we now restrict to the spatial
+components \(i = j = \{1, 2, 3\}\) here and
+write \(i, j\) instead of \(μ = ν = \{0, 1, 2, 3\}\).
+-->
+</p><p>
+
+\[
+L_{orbit}^i =\frac{1}{2}\epsilon^{ijk}\mathcal{Q}^{jk} =\frac{1}{2}\epsilon^{ijk} \int d^3x(T^{j0}x^k − T^{k0}x^j)   \tag{4.46}
+\]
+
+これを我々は場の<strong>軌道角運動量</strong>と呼んでいます<sup>41</sup>。
+<!--
+which we call the <strong>orbital angular momentum</strong> of our field<sup>41</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>41</sup>
+
+「軌道」という接頭辞の意味はすぐに分かります。なぜなら、これは実際には完全な角運動量の一部に過ぎないからです。欠けている部分については、後ほど見ていきます。
+<!--
+The prefix "orbital" will make sense
+in a moment, because actually this is
+just one part of the complete angular
+momentum. We will have a look at the
+missing part in a moment.
+-->
+</p><p>
+
+同様に、ブーストに対する保存量は<sup>42</sup>である。
+<!--
+Equivalently, we have the conserved quantity for boosts<sup>42</sup>
+-->
+
+</p><p class="margin-large">
+<sup>42</sup>
+
+ブーストジェネレータ\(K_i\)と\(M_{μν}: K_i = M_{0i}\)の関係を思い出してください。
+<!--
+Recall the connection between the
+boost generators \(K_i\) and \(M_{μν}: K_i = M_{0i}\).
+-->
+</p><p>
+
+\[
+\mathcal{Q}^{0i} =\int d^3x(T^{00}x^i − T^{i0}x^0)   \tag{4.47}
+\]
+
+これについては付録のセクション4.7でもう少し詳しく説明します。
+<!--
+which is discussed a bit more in the appendix Section 4.7.
+-->
+</p>
+<h3>4.5.4 スピン</h3>
+<!--
+<h3>4.5.4 Spin</h3>
+-->
+<p>
+次に、式4.30の最初の部分の含意について見ていきます。これは、回転から得られる保存量の導出で見落としていた部分です。ここで、
+<!--
+Next, we want to take a look at the implications of the first part of
+Eq. 4.30, which is what we missed in our previous derivation of the
+conserved quantity that follows from rotations. We now consider
+-->
+\[
+δΦ =\epsilon_{μν}S^{μν}Φ(x)   \tag{4.48}
+\]
+
+ここで、\(S^{μν}\) は、問題<sup>43</sup>における変換の適切な有限次元表現である。これにより、式4.29において、
+<!--
+where \(S^{μν}\) is the appropriate finite-dimensional representation of the
+transformation in question<sup>43</sup>. This gives us in Eq. 4.29 the extra term
+-->
+</p><p class="margin-large">
+<sup>43</sup>
+有限次元表現は、場の成分の混合を担います。例えば、回転生成子の2次元表現\(J_i = \frac{1}{2}σ_i\)は、ワイルスピノルの成分を混合します。
+<!--
+The finite-dimensional representations are responsible for the mixing of
+the field components. For example, the
+two dimensional representation of the
+rotation generators: \(J_i = \frac{1}{2}σ_i\), mix the
+components of Weyl spinors.
+-->
+</p><p>
+
+\[
+∂_ρ\left(\frac{∂\mathscr{L}}{∂(∂_ρΦ)}\epsilon_{μν}S^{μν}Φ(x)\right)  \tag{4.49}
+\]
+
+これにより、式4.46に新たな項が加わります。完全な保存量は、
+<!--
+which leads to an additional term in Eq. 4.46. The complete conserved
+quantity then reads
+-->
+\[
+L^i =\frac{1}{2}\epsilon^{ijk}Q^{jk} 
+=\frac{1}{2}\epsilon^{ijk} \int d^3x\left(\frac{∂\mathscr{L}}{∂(∂_0Φ)}S^{jk}Φ(x) + (T^{j0}x^k − T^{k0}x^j)\right)   \tag{4.50}
+\]
+
+そして我々はこう書く
+<!--
+and therefore we write
+-->
+\[
+L^i = L_{spin}^i + L_{orbit}^i  \tag{4.51}
+\]
+
+</p><p>
+最初の部分は新しいものですが、これまで検討してきた通常の軌道角運動量と類似している必要があります。なぜなら、この2つの項は加算され、同じ不変性を考慮する際に現れるからです。標準的な見方では、この保存量の最初の部分は、ある種の内部角運動量<sup>44</sup>であると考えられています。
+<!--
+The first part is something new, but needs to be similar to the
+usual orbital angular momentum we previously considered, because
+the two terms are added and appear when considering the same
+invariance. The standard point of view is that the first part of this
+conserved quantity is some-kind of internal angular momentum<sup>44</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>44</sup>
+後ほど、場が粒子を生成したり破壊したりする様子を見ていきます。スピン \(\frac{1}{2}\) 場はスピン \(\frac{1}{2}\) 粒子を生成します。これは素粒子の不変の性質です。そのため、「内部」という言葉が使われています。軌道角運動量は、2つ以上の粒子が互いの周りをどのように回転するかを表す量です。
+<!--
+We will see later that fields create 
+and destroy particles. A spin \(\frac{1}{2}\)
+field 
+creates spin \(\frac{1}{2}\)
+particles, which is an unchangeable
+property of an elementary
+particle. Hence the usage of the word
+"internal". Orbital angular momentum
+is a quantity that describes how two
+or more particles revolve around each
+other.
+-->
+</p><p>
+ポアンカレ群の表現にも「スピン」というラベルを付けたことを思い出してください。ここでこの概念が再び登場します。次章の8.5.5節では、この新しい種類の角運動量「スピン」をどのように測定できるかを詳しく説明します。そして、それがポアンカレ群の表現に用いるラベルと実際に一致することを後で確認します。
+<!--
+Recall that we label the representations of the Poincaré group by
+something we call spin, too. Now this notion appears again. We will
+learn in the next chapter and in great detail in Section 8.5.5, how we
+are able to measure this new kind of angular momentum, called spin
+and see later that it indeed coincides with the label we use for the
+representations of the Poincaré group.
+-->
+</p>
+<h3>4.5.5 場の理論におけるネーターの定理 - 内部対称性</h3>
+<!--
+<h3>4.5.5 Noether’s Theorem for Field Theories - Internal Symmetries</h3>
+-->
+<p>
+ここで内部対称性について見てみましょう<sup>45</sup>。ラグランジアン (\(δ\mathscr{L} = 0\)) の、場 <strong>自体</strong> の微小変換に対する不変性は、
+<!--
+We now take a look at internal symmetries<sup>45</sup>. The invariance of a
+Lagrangian (\(δ\mathscr{L} = 0\)) under some infinitesimal transformation of the
+field <strong>itself</strong>
+-->
+</p><p class="margin-large">
+<sup>45</sup>
+内部対称性は、相互作用する場の理論にとって極めて重要です。さらに、最も簡単な内部対称性の一つから導かれる一つの保存量が、量子場の理論の出発点となるでしょう。
+<!--
+Internal symmetries will be incredibly 
+important for interacting field theories.
+In addition, one conserved quantity,
+following from one of the easiest
+internal symmetries will provide us
+with the starting point for quantum
+field theory.
+-->
+</p><p>
+
+\[
+Φ_i → Φ_i^\prime = Φ_i + δΦ_i   \tag{4.52}
+\]
+
+数学的に書くことができる
+<!--
+can be written mathematically
+-->
+\[
+\begin{align}
+δ\mathscr{L} &= \mathscr{L}(Φ^i, ∂_μΦ^i) −\mathscr{L}(Φ^i + δΦ^i, ∂_μ(Φ^i + δΦ^i)) \\
+\\
+&= −\frac{∂\mathscr{L}(Φ^i, ∂_μΦ^i)}{∂Φ^i}δΦ^i
+− \frac{∂\mathscr{L}(Φ^i, ∂_μΦ^i)}{∂(∂_μΦ^i)}∂_μδΦ^i \overset{!}{=}0  \tag{4.53}
+\end{align}
+\]
+
+ここで、テイラー展開を用いて2行目に到達し、\(δΦ_i\)の1次の項のみを保持しました。これは、変換が無限小であるためです。場のオイラー・ラグランジュ方程式(式4.10)から、
+<!--
+where we used the Taylor expansion to get to the second line and
+only keep terms of first order in \(δΦ_i\), because the transformation is
+infinitesimal. From the Euler-Lagrange equation (Eq. 4.10) for fields
+we know
+-->
+\[
+\frac{∂\mathscr{L}}{∂Φ^i} = ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ^i)}\right)
+\]
+
+これを式4.53に代入すると、
+<!--
+Putting this into Eq. 4.53, we get
+-->
+\[
+δ\mathscr{L} = −∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ^i)}\right)δΦ^i 
+−\frac{∂\mathscr{L}}{∂(∂_μΦ^i)}∂_μδΦ^i = 0
+\]
+
+これは積の法則を用いると次の式と同じである。
+<!--
+which is, using the product rule, the same as
+-->
+\[
+∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ^i)}δΦ^i\right)= 0  \tag{4.54}
+\]
+
+</p><p>
+
+これは、ラグランジアンが変換不変であるならば、\(Φ_i → Φ^{\prime i} = Φ_i + δΦ^i\)、ネーターカレントと呼ばれる量が得られることを意味する。
+<!--
+This means, if the Lagrangian is invariant under the transformation
+\(Φ_i → Φ^{\prime i} = Φ_i + δΦ^i\), we get again a quantity, called Noether current
+-->
+\[
+J^μ ≡\frac{∂\mathscr{L}}{∂(∂_μΦ^i)}δΦ^i  \tag{4.55}
+\]
+
+これは連続方程式を満たす
+<!--
+which fulfils the continuity equation
+-->
+\[
+\text{Eq. 4.54} → ∂_μ J^μ = 0  \tag{4.56}
+\]
+
+さらに、式4.39と同じ手順で、時間的に保存される量を導くことができる。
+<!--
+Furthermore, following the same steps as in Eq. 4.39, we are able to
+derive a quantity that is conserved in time
+-->
+
+\[
+∂_t \int d^3xJ^0 = 0  \tag{4.57}
+\]
+</p><p>
+非常に重要な例を一つ見てみましょう。それは、場自体の変位に対する不変性<sup>46</sup>で、これは式4.52において\(δΦ = −i\epsilon\)を意味します。
+<!--
+Let’s have a look at one very important example: invariance under
+displacements of the field itself<sup>46</sup>, which means \(δΦ = −i\epsilon\) in Eq. 4.52: 
+-->
+</p><p class="margin-large">
+<sup>46</sup>
+この時点では、体が複素数か実数かについては何も仮定していないことに注意してください。定数 \(\epsilon\) は任意の値であり、もし実数値だけ体を動かしたいのであれば、完全に虚数であっても構いません。この時点で i が含まれているのは、生成元をエルミートにするため（この時点では全く明らかではありませんが）、そして、後ほど示すように、固有値が実数になるためです。この時点では混乱しないでください。この余分な i は、単に慣例と見なすことができます。\(\epsilon^\prime := i\epsilon\) と定義することで、定数に取り込むことができるからです。
+<!--
+Take note that at this point we made
+no assumptions about the field being
+complex or real. The constant \(\epsilon\) is arbitrary and could be entirely imaginary
+if we want to move our field by a real
+value. The i is included at this point to
+make the generator Hermitian (which is
+by no means obvious at this point) and
+therefore the eigenvalues real, as will be
+shown later. Don’t get confused at this
+point. You could simply see this extra i
+as a convention, because we could just
+as well absorb it into the constant by
+defining \(\epsilon^\prime := i\epsilon\).
+-->
+</p><p>
+
+\[
+Φ → Φ^\prime= Φ − i\epsilon  \tag{4.58}
+\]
+
+または複数のフィールドコンポーネントの場合
+<!--
+or for more than one field component
+-->
+\[
+Φ_i → Φ_i^\prime = Φ_i − i\epsilon_i  \tag{4.59}
+\]
+
+この変換の生成元は\(−i\frac{∂}{∂Φ}\)である。なぜなら、
+<!--
+The generator of this transformation is \(−i\frac{∂}{∂Φ}\), because
+-->
+\[
+Φ^\prime = e^{−i\epsilon \frac{∂}{∂Φ}}Φ =
+\left(1 − i\epsilon\frac{∂}{∂Φ}+ . . .\right)Φ ≈ Φ − i\epsilon  \tag{4.60}
+\]
+
+対応する保存量は<strong>共役</strong>運動量Πと呼ばれます。式4.54と式4.57から<sup>47</sup>が得られます。
+<!--
+The corresponding conserved quantity is called <strong>conjugate</strong> momentum Π. With Eq. 4.54 and Eq. 4.57 we get<sup>47</sup>
+-->
+</p><p class="margin-large">
+<sup>47</sup>
+式4.55の\(δΦ\)は定数\(\epsilon\)となり、この量は任意の\(\epsilon\)に対して保存されるため、\(\epsilon\)なしで保存量を定義します。
+<!--
+The \(δΦ\) in Eq. 4.55 becomes a constant
+\(\epsilon\) and because the quantity is conserved
+for arbitrary \(\epsilon\) we define our conserved
+quantity without it.
+-->
+</p><p>
+
+\[
+∂_tΠ = 0 → ∂_tΠ = ∂_t \int d^3xJ^0 = ∂_t \int d^3xπ = 0
+\]
+
+\[
+with\; J^0 = π = \frac{∂\mathscr{L}}{∂(∂_0Φ)}  \tag{4.61}
+\]
+
+ここでπという量は<strong>共役運動量密度</strong><sup>48</sup>と呼ばれます。
+これは、空間並進不変性から生じる場の物理的な運動量密度とは異なることに注意してください。\(Φ(x) → Φ(x^\prime) = Φ(x +\epsilon)\) は次のように表されます。
+<!--
+The quantity π here is called the <strong>conjugate momentum density</strong><sup>48</sup>.
+Take note that this is different from the physical momentum density
+of the field, which arises from the invariance under spatial translations
+\(Φ(x) → Φ(x^\prime) = Φ(x +\epsilon)\) and is given by
+-->
+</p><p class="margin-large">
+<sup>48</sup>
+このやや抽象的な量は、第6章で説明するように、量子場の理論において最も重要な概念の1つです。
+<!--
+This rather abstract quantity is one of 
+the most important notions in quantum
+field theory, as we will see in Chapter 6.
+-->
+</p><p>
+
+\[
+p^i = T^{0i} =\frac{∂\mathscr{L}}{∂(∂_0Φ)}\frac{∂Φ}{∂x_i}
+\]
+これは式4.41で導出したものです。後の章では、さらに多くの内部対称性について見ていきます。これらは、相互作用を記述する理論を構築する際に非常に役立つことが証明されます。では、場の理論における対称性と保存量について学んだことをまとめましょう。
+<!--
+which we derived in Eq. 4.41. In later chapters we will look at many
+more internal symmetries, which will prove to be invaluable when
+we develop a theory that describes interactions. Now let’s summarize
+what we learned about symmetries and conserved quantities in field
+theories:
+-->
+<div class="styleBullet">
+<ul><li>
+• 空間における並進不変性 ⇒ 物理的運動量保存則
+\(P^i =\int d^3xT^{0i} = \int d^3x\frac{∂\mathscr{L}}{∂(∂_0Φ)}\frac{∂Φ}{∂x_i}\),
+
+</li><br><li>• ブースト不変性<sup>49</sup> ⇒ エネルギー中心の速度は一定
+<!--
+• translational invariance in space ⇒ conservation of physical momentum
+\(P^i =\int d^3xT^{0i} = \int d^3x\frac{∂\mathscr{L}}{∂(∂_0Φ)}\frac{∂Φ}{∂x_i}\),
+
+</li><br><li>• boost invariance<sup>49</sup> ⇒ constant velocity of the center of energy,
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<sup>49</sup>
+ブーストの別名は、運動量空間における変換です。
+<!--
+Another name for a boost is a translation in momentum space.
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• 回転不変性 ⇒ 全角運動量の保存則
+\(L^i = \frac{1}{2}\epsilon^{ijk} \int d^3x\left(\frac{∂\mathscr{L}}
+{∂(∂_0Φ)} S^{jk}Φ(x) + (T^{k0}x^j − T^{j0}x^k)\right)=
+L_{spin}^i + L_{orbit}^i\) はスピン角運動量と軌道角運動量から成ります。
+</li><br><li>• 時間における並進不変性 ⇒ エネルギー保存則
+\(
+E = \int d^3xT^{00} = \int d^3x \left(\frac{∂\mathscr{L}}{∂(∂_0Φ)}\frac{∂Φ}{∂x_0}−\mathscr{L}\right)
+\)
+</li><br><li>• 場自体の変位不変性 ⇒ 共役運動量の保存 \(Π =\int d^3x\frac{∂\mathscr{L}}{∂(∂_0Φ)} =\int d^3xπ\).
+<!--
+• rotational invariance ⇒ conservation of the total angular momentum
+\(L^i = \frac{1}{2}\epsilon^{ijk} \int d^3x\left(\frac{∂\mathscr{L}}
+{∂(∂_0Φ)} S^{jk}Φ(x) + (T^{k0}x^j − T^{j0}x^k)\right)=
+L_{spin}^i + L_{orbit}^i\) consisting of spin and orbital angular momentum,
+</li><br><li>• translational invariance in time ⇒ conservation of energy
+\(
+E = \int d^3xT^{00} = \int d^3x \left(\frac{∂\mathscr{L}}{∂(∂_0Φ)}\frac{∂Φ}{∂x_0}−\mathscr{L}\right)
+\)
+</li><br><li>• displacement invariance of the field itself ⇒ conservation of the
+conjugate momentum \(Π =\int d^3x\frac{∂\mathscr{L}}{∂(∂_0Φ)} =\int d^3xπ\).
+-->
+</li></ul></div>
+</p>
+<h2>さらに読むためのヒント</h2>
+<!--
+<h2>Further Reading Tips</h2>
+-->
+<div class="styleBullet">
+<ul><li>
+• <strong>コーネリウス・ランチョス著『変分原理の力学』</strong><sup>50</sup>
+は、古典力学におけるラグランジュ形式論の活用法について解説した優れた書籍です。
+</li></ul></div>
+</p><p class="margin-large">
+<sup>50</sup>
+コーネリウス・ランチョス著『変分原理の力学』Dover Publications、第4版、1986年3月。ISBN
+9780486650678
+</p><p>
+<div class="styleBullet">
+<ul><li>
+• <strong>デイビッド・モーリン著『古典力学入門』</strong><sup>51</sup>
+は、ラグランジュ形式論が古典力学でどのように用いられているかを丁寧に解説した、非常に学生に優しい書籍です。
+<!--
+• <strong>Cornelius Lanczos - The Variational Principles of Mechanics</strong><sup>50</sup>
+is a brilliant book about the usage of the Lagrangian formalism in
+classical mechanics.
+</li></ul></div>
+</p><p class="margin-large">
+<sup>50</sup>
+Cornelius Lanczos. The Variational 
+Principles of Mechanics. Dover Publications,
+4th edition, 3 1986. ISBN
+9780486650678
+</p><p>
+<div class="styleBullet">
+<ul><li>
+• <strong>David Morin - Introduction to Classical Mechanics</strong><sup>51</sup> is an ex- 
+tremely student friendly book that carefully explains how the
+Lagrangian framework is used in classical mechanics.
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<sup>51</sup>
+デイヴィッド・モーリン著『古典力学入門：問題と解答付き』ケンブリッジ大学出版局、第1版、2008年2月。ISBN 9780521876223
+<!--
+David Morin. Introduction to Classical
+Mechanics: With Problems and Solutions.
+Cambridge University Press, 1 edition,
+2 2008. ISBN 9780521876223
+-->
+</p><p>
+<div class="styleBullet">
+<ul><li>
+• <strong>ハーバート・ゴールドスタイン著『古典力学』</strong><sup>52</sup> は、ラグランジアン形式論に関する多くの優れた解説が掲載された、古典力学の標準的な書籍です。
+<!--
+• <strong>Herbert Goldstein - Classical Mechanics</strong><sup>52</sup> is the standard book
+about classical mechanics with many great explanations regarding
+the Lagrangian formalism.
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<sup>52</sup>
+<sup>52</sup>
+ハーバート・ゴールドスタイン、チャールズ・P・プール・ジュニア、ジョン・L・サフコ著『古典力学』
+アディソン・ウェスレー社、第3版、2001年6月
+ISBN 9780201657029
+<!--
+Herbert Goldstein, Charles P. Poole
+Jr., and John L. Safko. Classical Mechanics.
+Addison-Wesley, 3rd edition, 6 2001.
+ISBN 9780201657029
+-->
+</p>
+<h2>4.6 付録：ブースト不変性による保存量と粒子理論における不変性</h2>
+<!--
+<h2>4.6 Appendix: Conserved Quantity from Boost
+Invariance for Particle Theories</h2>
+-->
+<p>
+この付録では、ブースト不変性から、例として挙げたラグランジアン \(\mathcal{L} = \frac{1}{2}m\dot{\vec{q}}^2\) に従う保存量を求めます。ブースト変換は \(q → q^\prime = q + δq = q + vt\) であり、\(v\) は一定速度を表します。このラグランジアンはブーストに対して不変ではありませんが、上で述べたように、これは全く問題ではありません。
+運動方程式が変換に対して不変であるためには、ラグランジアンは任意の関数の全微分まで変化することが許されます。この条件は、ブースト変換 \(q → q^\prime = q + vt \underbrace{⇒}_{v=一定!}\dot{q}^\prime = \dot{q} + v\) では明らかに満たされており、したがって、ラグランジアン
+<!--
+In this appendix we want to find the conserved quantity that follows
+for our example Lagrangian \(\mathcal{L} = \frac{1}{2}m\dot{\vec{q}}^2\) from boost invariance. A
+boost transformation is \(q → q^\prime = q + δq = q + vt\), where \(v\) denotes a
+constant velocity. Our Lagrangian is not invariant under boosts, but
+this is no problem at all, as we have seen above:
+For our equations of motion to be unchanged under transformations
+the Lagrangian is allowed to change up to the total derivative of an
+arbitrary function. This condition is clearly fulfilled for our boost
+transformation \(q → q^\prime = q + vt \underbrace{⇒}_{v=const!}\dot{q}^\prime = \dot{q} + v\) and therefore our
+Lagrangian
+-->
+\[
+\mathcal{L} = \frac{1}{2}m\dot{q}^2
+\]
+
+は、以下によって変更されます
+<!--
+is changed by
+-->
+\[
+\begin{align}
+δ\mathcal{L} &= \mathcal{L}(q, \dot{q}, t) −\mathcal{L}(q^\prime, \dot{q}^\prime, t) =
+\frac{1}{2}m\dot{q}^2 − \frac{1}{2}mz{\dot{q}^\prime}^2 \\
+\\
+&=\frac{1}{2}m\dot{q}^2 − \frac{1}{2}m(\dot{q} + v)^2 = −m\dot{q}v − \frac{1}{2}mv^2 
+\end{align}
+\]
+
+これは関数の全微分であす<sup>53</sup>。
+<!--
+which is the total derivative of the function<sup>53</sup>
+-->
+</p><p class="margin-large">
+<sup>53</sup>
+\(\frac{dG}{dt} = \frac{d}{dt} (−mqv − \frac{1}{2}mv^2t) = −m\dot{q}v −\frac{1}{2}mv^2\)、\(v\)と\(m\)は定数だからです。
+<!--
+\(\frac{dG}{dt} = \frac{d}{dt} (−mqv − \frac{1}{2}mv^2t) = −m\dot{q}v −\frac{1}{2}mv^2\), because \(v\) and \(m\) are constant.
+-->
+</p><p>
+
+\[
+−G ≡ −mqv − \frac{1}{2}mv^2t
+\]
+
+運動方程式は変化せず、保存量<sup>54</sup>を見つけることができると結論付けます。
+<!--
+We conclude that our equations of motion stay unchanged and we
+can find a conserved quantity<sup>54</sup>.
+-->
+</p><p class="margin-large">
+<sup>54</sup>
+これを確認する別の方法は、運動方程式を直接見ることです：
+\(m\ddot{q} = 0\)。変換は
+\(q → q^\prime = q + vt\) となり、\(v =const\)
+したがって、\(\dot{q} → \dot{q}^\prime = \dot{q} + v\) かつ
+\(\ddot{q} → \ddot{q}^\prime = \ddot{q}\) となります。
+<!--
+Another way to see this is by looking
+directly at the equation of motion:
+\(m\ddot{q} = 0\). We have the transformation
+\(q → q^\prime = q + vt\), with \(v =const\)
+and therefore \(\dot{q} → \dot{q}^\prime = \dot{q} + v\) and
+\(\ddot{q} → \ddot{q}^\prime = \ddot{q}\).
+-->
+</p><p>
+ブーストの場合、保存量は（式4.16）
+<!--
+For boosts, the conserved quantity is (Eq. 4.16)
+-->
+\[
+J_{boost} =\underbrace{\frac{∂\mathcal{L}}{∂\dot{q}}}_{≡p}
+\underbrace{δq}_{=vt}−G = pvt − mvq − \frac{1}{2}mv^2t
+\]
+
+ここで、式4.16では右辺に零点があるので、各項からvを1つずつ消去することができます。これにより、
+<!--
+where we can cancel one v from every term, because in Eq. 4.16 we
+have a zero on the right hand side. This gives us
+-->
+\[
+\tilde{J}_{boost} = \underbrace{pt − \frac{1}{2}mvt}_{≡\tilde{p}t}
+−mq =\tilde{p}t − mq  \tag{4.62}
+\]
+
+</p><p>
+これはかなり奇妙な保存量です。なぜなら、その値は開始時刻に依存するからです。適切なゼロ時刻を選ぶことで、この量はゼロになります。これは保存されるので、常にゼロのままです。
+<!--
+This is a rather strange conserved quantity because its value depends
+on the starting time. We can choose a suitable zero time, which
+makes this quantity zero. Because it is conserved, this zero stays zero
+for all times.
+-->
+</p>
+<h2>4.7 付録: 場の理論におけるブースト不変性から得られる保存量</h2>
+<!--
+<h2>4.7 Appendix: Conserved Quantity from Boost Invariance for Field Theories</h2>
+-->
+<p>
+場の理論におけるブースト不変性については、保存量として次の式があります。
+<!--
+
+For invariance under boosts in a field theory we have the conserved
+quantities
+-->
+\[
+\mathcal{Q}^{0i} =\int d^3x\left(T^{00}x^i − T^{i0}x^0\right)   \tag{4.63}
+\]
+これは式4.47で\(K_i = M_{0i}\)を使って導出したものです。
+<!--
+which we derived in Eq. 4.47, using \(K_i = M_{0i}\).
+-->
+</p><p>
+この量をどのように解釈すればよいでしょうか？ \(\mathcal{Q}^{0i}\) は保存されます。つまり、
+<!--
+How can we interpret this quantity? \(Q^{0i}\) is conserved, which
+means
+-->
+\[
+0 =\frac{∂\mathcal{Q}^{0i}}{∂t}=\underbrace{\int d^3x \frac{∂T^{i0}}{∂t}x^0}_{=x^0\frac{∂}{∂t}\int d^3xT^{i0}}
++\int d^3xT^{i0}\underbrace{\frac{∂x_0}{∂t}}_{=1\; \because\; x_0=t}
+−\frac{∂}{∂t}\int d^3x \frac{∂T^{00}}{∂t}x^i
+\]
+
+\[
+= t\frac{∂P^i}{∂t}+ P^i −\frac{∂}{∂t}\int d^3xT^{00}x^i
+\]
+
+式4.20から、\(P^i\)は保存される\(\frac{∂P^i}{∂t} = 0 → P^i = 一定\)であることが分かります。
+そして結論として、
+<!--
+From Eq. 4.20 we know that \(P^i\) is conserved \(\frac{∂P^i}{∂t} = 0 → P^i = const\).
+and we can conclude
+-->
+\[
+\frac{∂}{∂t} \int d^3xT^{00}x^i = P^i = 一定  \tag{4.64}
+\]
+
+したがって、この保存則は<sup>55</sup>エネルギーの中心が等速度で移動することを示しています。あるいは別の見方をすれば、運動量は全エネルギーと質量中心のエネルギーの速度の積に等しいと言えます。
+<!--
+Therefore this conservation law tells us<sup>55</sup> that the center of energy
+travels with constant velocity. Or from a different perspective: The
+momentum equals the total energy times the velocity of the centre-ofmass
+energy.
+-->
+</p><p class="margin-large">
+<sup>55</sup>
+この用語の意味についてはあまり心配しないでください。これは、これまで導出した他の保存量のように、実際には有用な保存量ではないからです。
+<!--
+Don’t worry about the meaning of 
+this term too much, because this isn’t
+really a useful conserved quantity like
+the others we derived so far.
+-->
+</p><p>
+しかしながら、式4.47で導かれた保存量は依然として奇妙です。開始時刻を適切に選ぶことで、この量はゼロにすることができます。これは保存されるので、あらゆる場合においてゼロのままです。
+<!--
+Nevertheless, the conserved quantity derived in Eq. 4.47 remains
+strange. By a suitable choice of the starting time the quantity can be
+chosen to be zero. Because it is conserved, this zero stays zero in all
+instances.
+-->
+</p>
+    </body>
+</html>
