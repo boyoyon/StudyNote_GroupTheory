@@ -1,0 +1,2521 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>場の量子論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>9 場の量子論</h1>
+<h2>要約</h2>
+<!--
+<h1>9 Quantum Field Theory</h1>
+<h2>Summary</h2>
+-->
+<p>
+この章では、場の量子論の枠組みを紹介します。
+第5章で導出した方程式から始めます。
+<!--
+In this chapter the framework of quantum field theory is introduced.
+Starting with the equation derived in Chapter 5
+-->
+\[
+[Φ(x), π(y)] = iδ(x − y)
+\]
+
+場自体が演算子であることがわかります。スピン0、\(\frac{1}{2}\)、1の運動方程式の解は、それらの<strong>フーリエ展開</strong><sup>1</sup>によって表されます。上記の交換関係を用いると、フーリエ係数が演算子であることがわかります。その後、これらの<strong>演算子</strong>と、もちろんそれらと共に場が、どのように<strong>粒子を生成し消滅させる</strong>かを見ていきます。対応する場のラグランジアンを用いることで、エネルギーを表すハミルトン演算子を導くことができます。
+<!--
+
+we are able to see that the fields themselves are operators. The solutions
+of the equations of motion for spin 0, \(\frac{1}{2}\)
+and 1 are written in
+terms of their <strong>Fourier expansions</strong><sup>1</sup>. Using the commutation relation, cited above, we discover that the Fourier coefficients are now operators. Afterwards, we will see how these <strong>operators</strong>, and with
+them of course the fields, <strong>create and annihilate particles</strong>. Using the
+Lagrangian for the corresponding fields, we are able to derive the
+Hamiltonian operator representing energy.
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+フーリエ変換の考え方は
+付録D.1で説明されています。
+<!--
+The idea behind the Fourier transform
+is explained in Appendix D.1.
+-->
+</p><p>
+
+その後、場の量子論の核心である<strong>相互作用理論</strong>の展開を始めます。相互作用理論では、ハミルトニアンは自由場のハミルトニアンと<strong>相互作用ハミルトニアン</strong>の線形結合で与えられることがわかります。この知見は<strong>相互作用描像</strong>において用いられ、そこでは場の時間発展は自由ハミルトニアンによって、状態の時間発展は相互作用ハミルトニアンによって支配されます。この描像を用いることで、散乱過程の確率振幅を導くことができます。これらはディラック記法で表されます。
+<!--
+
+Afterwards, we start developing <strong>interaction theory</strong>, which is what
+quantum field theory is all about. We will see that in interaction theory,
+the Hamiltonian is given by a linear combination of the Hamiltonian
+for the free field plus an <strong>interaction Hamiltonian</strong>. This insight
+can then be used in the <strong>interaction picture</strong>, where the time evolution
+of the fields is governed by the free Hamiltonian and the time
+evolution of the states by the interaction Hamiltonian. Using this picture,
+we are able to derive the probability amplitudes for scattering
+processes. These are denoted in the Dirac notation
+-->
+
+\[
+\langle f|\hat{S}|i\rangle
+\]
+
+ここで、\(\hat{S}\) は散乱過程を記述する演算子、\(|i\rangle\) は初期状態、\(\langle f|\) は終状態です。演算子 \(\hat{S}\) は相互作用ハミルトニアン \(H_I\) を用いて次のように表すことができます。
+<!--
+
+where \(\hat{S}\) denotes the operator describing the scattering process, \(|i\rangle\) is the initial state and \(\langle f|\) is the final state. We will discover that the
+operator \(\hat{S}\) can be written in terms of the interaction Hamiltonian \(H_I\) :
+-->
+
+\[
+\hat{S}(t, t_i) = e^{−i\int_{t_i}^t dt^\prime H_I}
+\]
+</p><p>
+
+これは解くことができないので、指数関数を
+その級数展開で評価します。ほとんどの実験では、最初の数項だけで正確な記述が得られます。
+<!--
+
+This can’t be solved and therefore we evaluate the exponential
+in terms of its series expansions. For most experiments the first few
+terms suffice to get an accurate description.
+-->
+
+</p><p>
+この級数展開の各項は、物理的には異なる種類の散乱過程を記述するものとして解釈できます。相互作用ハミルトニアンは、上述のように粒子を生成および消滅させる場の線形結合を含みます。最初の非自明な次数では、8つの項が得られ、最初の項は\(e^−e^+ → γ\)という形の散乱過程を記述することがわかります。これは、電子と陽電子からなる初期状態\(|e^−e^+\rangle\)から始まり、スピン\(\frac{1}{2}\)場の場演算子によって電子と陽電子が消滅し、その後、光子場によって光子\(\langle γ|\)が生成されることを意味します。他の項は、この初期状態\(|e^−e^+\rangle\)に作用するとゼロになります。
+<!--
+
+Each term in this series expansion can be interpreted physically
+as describing a different kind of scattering process. The interaction
+Hamiltonian contains linear combinations of the fields, which create
+and annihilate particles as mentioned above. For the first non-trivial
+order, we get 8 terms and we will see that the first term describes a
+scattering process of the form \(e^−e^+ → γ\). This means we start with an
+initial state \(|e^−e^+\rangle\) consisting of an electron and a positron, which are
+annihilated by the field operators of the spin \(\frac{1}{2}\)
+fields and afterwards
+a photon \(\langle γ|\) is created by the photon field. The other terms result in
+zero when operating on this initial state \(|e^−e^+\rangle\).
+-->
+</p><p>
+
+級数展開の次の次数は非常に多くの項から成りますが、ここではそのうちの1つだけを見てみましょう。ここでも、初期状態 \(|e^−e^+\rangle\) から始め、<strong>1</strong>の項が \(e^−e^+ → γ → e^−e^+\) という過程を記述していることがわかります。この過程において、最初と最後の電子と陽電子は、一般に全く異なる運動量を持ちます。
+<!--
+
+The next order in the series expansion consists of many, many
+terms and we will take a look at just one of them. Again, we start
+with an initial state \(|e^−e^+\rangle\) and we will see that <strong>one</strong> term describes
+the process \(e^−e^+ → γ → e^−e^+\), where the initial and final electron
+and positron have, in general, completely different momenta.
+-->
+</p><p>
+全く同じように、すべての項はすべての相互作用ハミルトニアンに対して解釈できます。こうした計算を簡略化する図解として、有名なファインマン図があります。この図における各線と頂点は、上記のような因子を表します。
+<!--
+
+In exactly the same way, all terms can be interpreted for all interaction
+Hamiltonians. A pictorial way to simplify these kinds of computations
+are the famous Feynman diagrams. Each line and vertex in
+such a diagram represents a factor of the kind mentioned above.
+-->
+<p>
+
+<h2>9.1 場の理論の同定</h2>
+<!--
+<h2>9.1 Field Theory Identifications</h2>
+-->
+<p>
+
+この節では、対称性制約から導出したラグランジアンが場の理論の枠組みでどのように用いられるかを理解したい。自然を記述する場の理論を導出する第一歩は、我々が見出したラグランジアンと、第5章の結果、具体的には便宜上ここで引用する式5.5とを組み合わせることである。
+<!--
+
+In this section, we want to understand how the Lagrangians that we
+derived from symmetry constraints can be used in a field theoretical
+framework. The first step in deriving a field theory describing
+nature is combining the Lagrangians we found with the result from
+Chapter 5, specifically Eq. 5.5, which we recite here for convenience:
+-->
+
+\[
+[Φ(x), π(y)] = iδ(x − y)  \tag{9.1}
+\]
+
+ここで共役運動量密度\(π(y)\)は次のように与えられる。
+<!--
+where the conjugate momentum density \(π(y)\) is given by
+-->
+\[
+π(y) =\frac{∂\mathscr{L}}{∂(∂_0Φ(y))} \tag{9.2}
+\]
+</p>
+<h2>9.2 フリースピン 0 フィールド理論</h2>
+<!--
+
+<h2>9.2 Free Spin 0 Field Theory</h2>
+-->
+<p>
+"Every act of creation is first of all an act of destruction."<br>
+(あらゆる創造行為は、まず第一に破壊行為である)
+</p><p style="text-align: right;">
+- Pablo Picasso<sup>2</sup>
+
+</p><p class="margin-large">
+<sup>2</sup>
+As quoted in Rollo May. The Courage
+to Create. W. W. Norton and Company,
+reprint edition, 3 1994. ISBN
+9780393311068 
+</p><p>
+ここでも、最も単純なケース、すなわち自由スピン0の場から始めましょう。
+このような場はスカラーで記述されます。スカラーとは、ローレンツ変換<sup>3</sup>によって全く変化しないオブジェクトです。対応するラグランジアンは、既に6.2章で導出しました。
+<!--
+
+Again, let’s start with the simplest possible case: free spin 0 fields.
+We describe such fields with scalars, which are objects that do not
+change at all under Lorentz transformations<sup>3</sup>. We already derived in 
+Chapter 6.2 the corresponding Lagrangian
+-->
+</p><p class="margin-large">
+<sup>3</sup>
+これはセクション3.7.4で導出されたものである。
+<!--
+This was derived in Section 3.7.4
+-->
+</p><p>
+
+\[
+\mathscr{L} =\frac{1}{2}(∂_μΦ∂^μΦ − m^2Φ^2)  \tag{9.3}
+\]
+
+そして、クライン・ゴルドン方程式と呼ばれる運動方程式
+<!--
+and the equation of motion, called Klein-Gordon equation
+-->
+
+\[
+(∂_μ∂^μ + m^2)Φ = 0  \tag{9.4}
+\]
+
+式9.3のラグランジアンを用いて共役運動量を計算することができる。
+<!--
+Using the Lagrangian in Eq. 9.3, we can calculate the conjugate momentum
+-->
+
+\[
+π(x) =\frac{∂\mathscr{L}}{∂(∂_0Φ(x))}
+=\frac{∂}{∂(∂_0Φ(x))}\frac{1}{2}
+(∂_μΦ(x)∂^μΦ(x)−m^2Φ^2(x)) = ∂_0Φ(x)
+\]
+
+クライン・ゴルドン方程式の最も一般的な解は、フーリエ展開<sup>4</sup>によって表される。
+<!--
+The most general solution of the Klein-Gordon equation can be written
+in terms of its Fourier-expansion<sup>4</sup>
+-->
+</p><p class="margin-large">
+<sup>4</sup>
+積分測度の詳細な計算と、このような解法の記述の正当性については、この章末のセクション9.6の付録を参照してください。
+<!--
+See the appendix in Section 9.6 at
+the end of this chapter for a detailed
+computation of the integral measure
+and a justification for writing the
+solution like this.
+-->
+</p><p>
+
+\[
+Φ(x) = \int dk^3\frac{1}{(2π)^32ω_k}
+\left(a(k)e^{−i(kx)} + b(k)e^{i(kx)}\right) \tag{9.5}
+\]
+
+ここで\((ω_k)^2 ≡\vec{k}^2 + m^2\)である。<strong>実</strong>スカラー場の場合、これを次のように書き直すことができる。
+<!--
+with \((ω_k)^2 ≡\vec{k}^2 + m^2\). For <strong>real</strong> scalar fields we can rewrite this as
+-->
+
+\[
+Φ(x) = \int dk^3\frac{1}{(2π)^32ω_k}
+\left(a(k)e^{−i(kx)} + a^†(k)e^{i(kx)}\right)  \tag{9.6}
+\]
+
+\(c + c^† = \underbrace{Re(c) + i · Im(c)}_{c}
++\underbrace{Re(c) − i · Im(c)}_{c^†}= 2Re(c) であるため
+<!--
+
+because \(c + c^† = \underbrace{Re(c) + i · Im(c)}_{c}
++\underbrace{Re(c) − i · Im(c)}_{c^†}= 2Re(c)
+\)
+-->
+</p><p>
+
+ここで、式9.1、すなわち、消滅しない交換子 \([Φ(x), π(y)] \neq 0\) の意味について見てみましょう。これは、\(Φ(x)\)
+と \(π(y)\) は通常の関数ではなく、<strong>演算子</strong>でなければならないことを意味します。なぜなら、通常の関数は交換可能だからです: \((3 + x)(7xy) = (7xy)(3 + x)\)。
+式9.6を見ると、フーリエ係数 a(k)
+と a(k)† は演算子であると結論付けられます。なぜなら、\(e^{±i(kx)}\) は単なる複素数であり、複素数は交換可能だからです。
+<!--
+
+Now we are having a look at the implications of Eq. 9.1, i.e. the
+non vanishing commutator \([Φ(x), π(y)] \neq 0\). This means that \(Φ(x)\)
+and \(π(y)\) cannot be ordinary functions, but must be <strong>operators</strong>, because
+ordinary functions commute: \((3 + x)(7xy) = (7xy)(3 + x)\).
+By looking at Eq. 9.6, we conclude that the Fourier-coefficients a(k)
+and a(k)† are operators, because \(e^{±i(kx)}\) is just a complex number and
+complex numbers commute.
+-->
+
+</p><p>
+式9.1を用いて<sup>5</sup>を計算することができる。
+<!--
+Using Eq. 9.1 we can compute<sup>5</sup>
+-->
+</p><p class="margin-large">
+<sup>5</sup>
+例えば、以下の第4.1章を参照。
+<!--
+See for example chapter 4.1 in
+Lewis H. Ryder. Quantum Field Theory.
+Cambridge University Press, 2nd
+edition, 6 1996. ISBN 9780521478144
+-->
+</p><p>
+
+\[
+[a(k), a^†(k^\prime)] = (2π)^3δ^3(\vec{k} −\vec{k^\prime})  \tag{9.7}
+\]
+
+および
+<!--
+and
+-->
+\[
+[a(k), a(k^\prime)] =0  \tag{9.8}
+\]
+
+\[
+[a^†(k), a^†(k^\prime)] = 0  \tag{9.9}
+\]
+</p><p>
+場自体が演算子であることがわかったので、次に論理的に問うべきことは「<strong>何に作用するのか？</strong>」です。粒子理論では、力学変数は粒子を記述するもの（波動関数、抽象的なディラックベクトルなど）に作用する演算子であると見なします。場の理論では、これまで粒子を記述するものは何もありません。この時点では、場の理論において粒子がどのように現れるのかは全く明らかではありません。それでも、場の係数\(a(k)\)と\(a^†(k)\)が抽象的なものにどのように作用するかを見てみましょう。そうすることで、場が抽象的なものにどのように作用するかが分かります。ここで何が起こっているのかを直感的に理解するために、まず私たちがよく知っているもの、つまりエネルギーについて見てみましょう。
+<!--
+
+Now that we know that our field itself is an operator, the logical
+next thing to ask is: <strong>What does it operate on?</strong> In a particle theory,
+we identify the dynamical variables as operators acting on something
+describing a particle (the wavefunction, an abstract Dirac vector, etc.).
+In a field theory we have up to now nothing to describe a particle.
+At this point, it is completely unclear how particles appear in a field
+theory. Nevertheless, let’s have a look at how our field coefficents
+\(a(k)\) and \(a^†(k)\) act on something abstract and by doing this, we learn
+how the fields act on something abstract. To get some intuition about
+what is going on here, let’s first have a look at something we are
+familiar with: energy.
+-->
+</p><p>
+スカラー場のエネルギーEは<sup>6</sup>で与えられる。
+<!--
+The energy E of a scalar field is given by<sup>6</sup>
+-->
+</p><p class="margin-large">
+<sup>6</sup>
+これを式4.40で時間並進不変性から導き出しました。
+<!--
+We derived this in Eq. 4.40 from 
+time-translation invariance.
+-->
+</p><p>
+
+\[
+\begin{align}
+E &= \int d^3xT^{00} \\
+\\
+&=\int d^3x\left(\frac{∂\mathscr{L}}{∂(∂_0Φ)}
+\underbrace{\frac{∂Φ}{∂x_0}}_{=∂_0Φ}−\mathscr{L}\right) \\
+\\
+&=\int d^3x \left((∂_0Φ)^2 −\frac{1}{2}(∂_μΦ∂^μΦ − m^2Φ^2)\right) \\
+\\
+&\underbrace{=}_{∂_μ∂^μ=∂_0∂_0−∂_i∂_i}
+\frac{1}{2} \int d^3x
+\left((∂_0Φ)^2 + (∂_iΦ)^2 + m^2Φ^2\right)  \tag{9.10}
+\end{align}
+\]
+
+式9.6を式9.10に代入し、交換関係（式9.7-9.9）を用いると、
+<!--
+By substituting Eq. 9.6 into Eq. 9.10 and using the commutation
+relations (Eq. 9.7-9.9), we can write
+-->
+
+\[
+\begin{align}
+E &=\frac{1}{2} \int dk^3 \frac{1}{(2π)^3}ω_k
+\left(a^†(k)a(k) + a(k)a^†(k)\right) \\
+\\
+&\underbrace{=}_{Eq. 9.7}
+\int dk^3 \frac{1}{(2π)^3}ω_k
+\left(a^†(k)a(k) +\frac{1}{2}(2π)^3δ^3(0)\right)  \tag{9.11}
+\end{align}
+\]
+</p><p>
+この時点で、理論が破綻することがわかります。積分の第二項は無限大です。この時点で止まって、この種の理論は機能しないと言うこともできます。しかし、勇敢な物理学者たちは、この無限大の項を無視してさらに深く掘り下げ、自然を非常に正確に記述する理論を発見しました。これには説明がつかず、ここから先は第二項を無視するのが標準的な方法です。ここでの核心は、この項があらゆる系のエネルギーに現れ、私たちが測定できるのはエネルギー差だけであるということです。したがって、この定数の無限大の項は、私たちの測定にはどこにも現れません。
+<!--
+
+At this point we can see that our theory explodes. The second
+term in the integral is infinite. We could stop at this point and say
+that this kind of theory does not work. Nevertheless, some brave
+physicists dug deeper, ignoring this infinite term and discovered a
+theory describing nature very accurately. There is no explanation for
+this and the standard way of continuing from here on is to ignore the
+second term. The crux here is that this term appears in the energy
+of every system and we are only able to measure energy differences.
+Therefore, this constant infinite term appears in none of our measurements.
+-->
+</p><p>
+
+慣例的に、エネルギーを演算子として表すとハミルトニアン
+\(\hat{H}\) と呼ばれる。\(\hat{H}\) の交換子<sup>7</sup> とフーリエ係数 \(a(k)\) および \(a^†(k)\) を計算すると、
+<!--
+
+Conventionally, the energy written as an operator is called Hamiltonian
+\(\hat{H}\). We can compute the commutator<sup>7</sup> of \(\hat{H}\) and the Fourier coefficents \(a(k)\) and \(a^†(k)\). We get 
+-->
+</p><p class="margin-large">
+<sup>7</sup>
+これがなぜ便利なのかはすぐに明らかになります。
+<!--
+It will become clear in a moment why this is useful.
+-->
+</p><p>
+
+\[
+\begin{align}
+[\hat{H} , a^†(k^\prime)] &= \int dk^3 \frac{1}{(2π)^3}ω_k[a^†(k)a(k), a^†(k^\prime)] \\
+\\
+&\underbrace{=}_{[a^†(k),a^†(k^\prime)]=0}
+\int dk^3 \frac{1}{(2π)^3}ω_ka^†(k)[a(k), a^†(k^\prime)] \\
+\\
+&= \int dk^3ω_ka^†(k)δ^3(k − k^\prime) \\
+\\
+&\underbrace{=}_{See\; Appendix\; D.2}ω_{k^\prime} a^†(k^\prime)  \tag{9.12}
+\end{align}
+\]
+
+そして同様に
+<!--
+and equally
+-->
+
+\[
+[\hat{H}, a(k^\prime)] = −ω_{k^\prime} a(k^\prime)  \tag{9.13}
+\]
+</p><p>
+
+量子形式論は、物理系を記述する何かに作用素を作用させることで機能します<sup>8</sup>。ここで、エネルギー作用素、つまりハミルトニアン \(\hat{H}\) を、物理系を記述する抽象的な何かに作用させると、系のエネルギーが得られます。\(|?\rangle\)
+<!--
+The quantum formalism works by operating with operators on
+something that describes the physical system<sup>8</sup>. Here, if we act with 
+the energy operator, i.e. the Hamiltonian \(\hat{H}\), on something abstract
+\(|?\rangle\) describing our physical system, we get the energy of the system:
+-->
+</p><p class="margin-large">
+<sup>8</sup>
+これについてはセクション 8.3 で説明しました。
+<!--
+This was explained in Section 8.3.
+-->
+</p><p>
+
+\[
+\hat{H}|?\rangle = E|?\rangle  \tag{9.14}
+\]
+</p><p>
+
+さて、最初の質問に戻ります。<strong>場<sup>9</sup> はシステムにどのように作用するのでしょうか？</strong> 最初のフーリエ係数（演算子）がシステムのエネルギー \(E\) に与える影響を見てみましょう<sup>10</sup>:
+<!--
+Now we return to our starting question: <strong>How does a field<sup>9</sup> act on our system?</strong> Let’s have a look at the effect of the first Fourier coefficient, now an operator, on the energy \(E\) of the system<sup>10</sup>:
+-->
+</p><p class="margin-large">
+<sup>9</sup>
+覚えておいてください: フィールド = 演算子!
+<!--
+Remember: Field=Operator!
+-->
+<br><br>
+
+<sup>10</sup>
+ここで、非常に巧妙なことをやってみましょう。これは、量子力学における調和振動子の問題を解決する際に、ディラックが初めて発見したものです。
+<!--
+We will do something very clever
+here, which was first discovered by
+Dirac while solving the problem of
+the harmonic oscillator in quantum
+mechanics.
+-->
+</p><p>
+
+\[
+\begin{align}
+\hat{H}\left(a(k^\prime) |?\rangle\right) &=
+\left(a(k^\prime)\hat{H}+\underbrace{\hat{H}a(k^\prime) − a(k^\prime)\hat{H}}_{[\hat{H} ,a(k^\prime)]}\right)|?\rangle \\
+\\
+&= a(k^\prime)\underbrace{\hat{H}|?\rangle}_{=E|?\rangle}
++[\hat{H} , a(k^\prime)] |?\rangle \\
+\\
+&=\left(a(k^\prime)E + [\hat{H}, a(k^\prime)]\right)|?\rangle \\
+\\
+&\underbrace{=}_{Eq. 9.13}
+\left(a(k^\prime)E − ω_{k^\prime} a(k^\prime)\right)|?\rangle \\
+\\
+&=\left(E − ω_{k^\prime})\left(a(k^\prime) |?\rangle\right)\right)  \tag{9.15}
+\end{align}
+\]
+
+2番目のフーリエ係数も同様である
+<!--
+and equally for the second Fourier coefficent
+-->
+
+\[
+\hat{H}a^†(k^\prime) |?\rangle = (E + ω_{k^\prime})a^†(k^\prime) |?\rangle \tag{9.16}
+\]
+
+これをどう解釈すればいいでしょうか？\(a(k^\prime) |?\rangle\)は、エネルギー\(E − ω_k\)を持つ新しいシステムとして解釈できます。これをより具体的にするために、
+定義します。
+<!--
+How can we interpret this? We see that \(a(k^\prime) |?\rangle\) can be interpreted
+as a new system with energy \(E − ω_k\). To make this more concrete we
+define
+-->
+
+\[
+|?_2\rangle ≡ a(k^\prime) |?\rangle
+\]
+
+および
+<!--
+with
+-->
+
+\[
+\hat{H}|?_2\rangle \underbrace{=}_{Using\; Eq. 9.15}
+(E − ω_{k^\prime}) |?_2\rangle
+\]
+</p><p>
+これは、場の働きをどのように解釈すべきかを示唆しています。定義により、\(H |0\rangle = 0|0\rangle\) となる完全に空の系 \(|0\rangle\) を想像してください。
+ここで、\(a^†(k^\prime)\) を \(|0\rangle\) に作用させると、空の系はエネルギー \(ω_{k^\prime}\) を持つ系に変換されることがわかります。
+<!--
+
+This suggests how we should interpret what the field does. Imagine
+a completely empty system \(|0\rangle\), with, by definition \(H |0\rangle = 0|0\rangle\).
+If we now act with \(a^†(k^\prime)\) on \(|0\rangle\), we know that this transforms our
+empty system into a system having energy \(ω_{k^\prime}\)
+-->
+\[
+\hat{H}a^†(k^\prime) |0\rangle \underbrace{=}_{Using\; Eq. 9.16}
+ω_{k^\prime}a^†(k^\prime) |0\rangle  \tag{9.17}
+\]
+
+\(a^†(k^\prime)\) は、完全に空の系にエネルギー \(ω_{k^\prime}\) を持つ何かを生成します。<strong>これは運動量 \(k^\prime !\) を持つ粒子</strong>と呼ばれます。この系に \(a^†(k^\prime)\) をもう一度作用させると、同じ運動量を持つ2つ目の粒子が生成されます。さらに \(a^†(k^{\prime\prime})\) を作用させると、運動量 \(k^{\prime\prime}\) を持つ粒子が生成され、これが繰り返されます。したがって、\(a^†(k^\prime)\) を <strong>生成演算子</strong>と呼びます。 \(a^†(k^\prime)\)と同様に、\(a(k^\prime): a(k^\prime)\)はエネルギー\(ω_{k^\prime}\)の粒子を消滅させると解釈でき、したがって<strong>消滅</strong>または<strong>消滅演算子</strong>と呼ばれます。これをより具体的にするために、粒子の状態を表す新しい表記法を導入します。
+<!--
+
+We see that \(a^†(k^\prime)\) creates something in the completely empty system
+with energy \(ω_{k^\prime}\), <strong>which is what we call a particle with momentum
+\(k^\prime !\)</strong> If we act a second time on this system with \(a^†(k^\prime)\) we create a
+second particle with the same momentum. If we act on it with \(a^†(k^{\prime\prime})\) 
+we create a particle with momentum \(k^{\prime\prime}\) and so on. Therefore, we
+call \(a^†(k^\prime)\) a <strong>creation operator</strong>. Similarly to \(a^†(k^\prime)\), we can interpret
+\(a(k^\prime): a(k^\prime)\) destroys or annihilates a particle of energy \(ω_{k^\prime}\) and is
+therefore called <strong>annihilation</strong> or <strong>destruction operator</strong>. To make this
+more concrete we introduce a new notation for particle states
+-->
+\[
+\begin{align}
+a^†(k) |0\rangle &≡ |1_k\rangle  \tag{9.18} \\
+\\
+a^†(k) |1_k\rangle &≡ |2_k\rangle  \tag{9.19} \\
+\\
+a^†(k^\prime) |2_k\rangle &≡ |2_k, 1_{k^\prime\rangle  \tag{9.20}
+\end{align}
+\]
+
+エネルギーをもう一度見てみましょう:
+<!--
+Take a look at the energy again:
+-->
+
+\[
+E =\int dk^3 \frac{1}{(2π)^3}ω_ka^†(k)a(k)
+\]
+
+この演算子が\(|2k_1, k_2\rangle\)のような状態に作用するとどうなるでしょうか？結果は次のようになるはずです。
+<!--
+What happens if this operator acts on a state like \(|2k_1, k_2\rangle\) ? The result should be
+-->
+
+\[
+E = 2ω_{k_1} + ω_{k_2}
+\]
+
+これは、エネルギー\(ω_{k_1}\)を持つ2つの粒子と、エネルギー\(ω_{k_2}\)を持つ1つの粒子のエネルギーです。したがって、演算子
+<!--
+which is the energy of two particles with energy \(ω_{k_1}\) and one particle
+with energy \(ω_{k_2}\) . Therefore, the operator
+-->
+
+\[
+N(k) ≡ a^†(k)a(k)  \tag{9.21}
+\]
+
+ここで、\(N(k)\) と表記される数演算子は、状態から運動量 k を持つ粒子の数を抽出します。
+<!--
+appearing here is a number operator, denoted \(N(k)\) that extracts the
+number of particles with momentum k from a state:
+-->
+
+\[
+N(k) |n_k, n?k^\prime, . . .\rangle = n_k |n_k, n_k^\prime, . . .\rangle  \tag{9.22}
+\]
+</p><p>
+エネルギー演算子は次のように書ける。
+<!--
+The energy operator can then be written as
+-->
+\[
+E = \int dk^3 \frac{1}{(2π)^3}ω_kN(k)
+\]
+
+さらに、運動量スペクトルが連続ではなく離散的である物理系が存在することに注意する必要がある<sup>11</sup>。そのような系では、すべての積分は和に変わり、例えばエネルギーは
+次のようになる。
+<!--
+
+Furthermore, take note that there are physical systems, where the
+momentum spectrum is not continuous, but discrete<sup>11</sup>. For such 
+systems all integrals change to sums, for example, the energy is then
+of the form
+-->
+
+</p><p class="margin-large">
+<sup>11</sup>
+箱の中の粒子の例を思い出してください。場の量子論では、対象の系が体積Vに制限されていると仮定することがよく用いられます。これにより、離散的な運動量スペクトルが得られます。計算の最後に、極限\(\lim_{V→∞}\)が取られます。
+<!--
+
+Remember the particle in a box
+example. It is an often used trick in
+quantum field theory to assume the
+system in question is restricted to a
+volume V. This results in a discrete
+momentum spectrum. At the end of the
+computation the limit \(\lim_{V→∞}\) is taken.
+-->
+</p><p>
+
+\[
+E =\sum_k ω_kN(k)
+\]
+
+そして交換関係は次のように変化する。
+<!--
+and the commutation relation changes to
+-->
+
+\[
+[a(k), a^†(k^\prime)] = δ_{k,k^\prime}  \tag{9.23}
+\]
+</p><p>
+
+場の量子論は、量子力学と同様に、確率的な予測を行う理論であることに留意してください。したがって、状態は正規化される必要があります\(\langle k, k^\prime, ..|k, k^\prime, ..\rangle \overset{!}{=}1\)。なぜなら、100% = 1を超える確率は意味をなさないからです。ケットに\(a(k)\)のような演算子を作用させた場合、新しいケットは必ずしも単位ノルム<sup>12</sup>を持つとは限りません。したがって、次のように書きます。
+<!--
+
+Take note that quantum field theory is, like quantum mechanics, a
+theory making probabilistic predictions. Therefore, our states need to
+be normalized \(\langle k, k^\prime, ..|k, k^\prime, ..\rangle \overset{!}{=}1\), because a probability of more than
+100% = 1 doesn’t make sense. If we act with an operator like \(a(k)\) on
+a ket, the new ket does not necessarily have unit norm<sup>12</sup>. Therefore, we write
+-->
+</p><p class="margin-large">
+<sup>12</sup>
+全く同じ考え方が3.6.1節でも議論され、そこでは有限次元の\(\mathcal{su}(2)\)表現を導出しました。そこでは、「ラダー演算子」\(J_±\)も導入し、与えられたベクトルにこれらの演算子を作用させたときに現れる定数を導出しました。
+<!--
+
+Exactly the same line of though
+was discussed in Section 3.6.1, where
+we derived the finite-dimensional
+\(\mathcal{su}(2)\) representations. There, we also
+introduced "ladder operators" \(J_±\) and
+derived the constants that we emerge
+when we act with these operators on a
+given vector.
+-->
+</p><p>
+
+\[
+a^†(k) |n_k\rangle = C |n_k + 1\rangle   \tag{9.24}
+\]
+
+ここで、\(n_k\)は運動量\(k\)を持つ粒子の数、\(C\)は任意の数である。このことから<sup>13</sup>が得られる。
+<!--
+where \(n_k\) denotes the number of particles with momentum \(k\) and \(C\) is some number. From this we get<sup>13</sup>
+-->
+</p><p class="margin-large">
+<sup>13</sup>
+\(|n_k\rangle^† = \langle n_k|\) であり、
+もちろん \((a^†)^† = a\) であることを思い出しましょう。
+<!--
+Recall that \(|n_k\rangle^† = \langle n_k|\) and we have
+of course \((a^†)^† = a\).
+-->
+</p><p>
+
+\[
+(a^†(k) |n_k\rangle)^† = (C |n_k + 1\rangle)^†
+\]
+
+\[
+→ \langle n_k| a(k) = \langle n_k + 1| C^†  \tag{9.25}
+\]
+
+したがって、次のように書くことができる。
+<!--
+We can therefore write
+-->
+
+\[
+\underbrace{\langle n_k| a(k)}_{9.25}
+\underbrace{a^†(k) |n_k\rangle}_{9.24}
+=\langle n_k + 1| \underbrace{C^†C}_{\text{a number and no operator}}
+|n_k + 1\rangle = C^†C
+\underbrace{\langle n_k + 1|nk + 1\rangle}_{=1}  \tag{9.26}
+\]
+
+または離散交換関係（式9.23）を使用する
+<!--
+or using the discrete commutation relation (Eq. 9.23)
+-->
+\[
+\begin{align}
+\langle n_k| a(k)a^†(k) |n_k\rangle &= \langle n_k| \left(
+\underbrace{a^†(k)a(k)}_{=N(k)\; Eq. 9.21}
++\underbrace{δ_{k,k}}_{=1}\right) |n_k\rangle \\
+\\
+&\overbrace{=}^{Eq. 9.22} 	
+\langle n_k| \underbrace{(n_k + 1)}_{\text{a number and no operator}}
+|n_k\rangle = (n_k + 1) \underbrace{\langle n_k|n_k\rangle}_{=1}  \tag{9.27}
+\end{align}
+\]
+
+式9.26と式9.27を組み合わせると、
+<!--
+Putting Eq. 9.26 and Eq. 9.27 together yields
+-->
+\[
+C^†C = n_k + 1 → C = \sqrt{n_k +1}  \tag{9.28}
+\]
+
+そしてそれゆえ
+<!--
+and we therefore have
+-->
+\[
+a^†(k) |n_k \rangle = \sqrt{n_k + 1} |n_k + 1 \rangle  \tag{9.29}
+\]
+
+同じ手順で次のように導くことができる。
+<!--
+Following the same steps we can derive
+-->
+\[
+a(k) |n_k \rangle = \sqrt{n_k} |n_k − 1 \rangle  \tag{9.30}
+\]
+
+この時点で 2 つの疑問が浮かぶかもしれません。
+<!--
+Two questions may pop up at this point.
+-->
+<div class="styleBullet">
+<ul><li>
+1. 完全に空の系で粒子を消滅させたい場合、どうなるでしょうか？
+</li><br><li>2. エネルギーや電荷の保存則はどうなりますか？保存則に違反することなく、無から何かを作り出すにはどうすればよいでしょうか？
+<!--
+1. What happens if we want to annihilate a particle in a completely
+empty system?
+</li><br><li>2. What about energy or charge conservation? How can we create
+something from nothing without violating conservation laws?
+-->
+</li></ul></div>
+</p><p>
+もちろん、保存則は決して破られることはありませんが、それがどのように起こるのかは、理論をさらに発展させた場合にのみ明らかになるでしょう。この時点でリチャード・ファインマンが
+同じ問題を抱えていたことを考えれば、理解が深まるかもしれません<sup>14</sup>
+<!--
+
+The conservation laws are, of course, never violated, but how this
+comes about will only become clear when we develop the theory
+further. Maybe it helps to see that at this point Richard Feynman had
+the same problem<sup>14</sup>
+-->
+</p><p class="margin-large">
+<sup>14</sup>
+ファインマンのノーベル賞受賞講演（1965年12月11日）
+<!--
+Feynman’s Nobel Lecture (December 
+11, 1965)
+-->
+</p><p>
+誰かが生成消滅演算子について教えてくれたとき、この演算子は電子を生成すると聞き、私は「どうやって電子を生成するの？電荷保存則に反するじゃない」と言い、とても実用的な計算体系を学ぶことを妨げていたのを覚えています。
+<!--
+I remember that when someone had started to teach me about creation
+and annihilation operators, that this operator creates an electron, I said,
+"how do you create an electron? It disagrees with the conservation
+of charge", and in that way, I blocked my mind from learning a very
+practical scheme of calculation.
+-->
+</p><p>
+第二に、そもそも存在しないものを破壊することは決してできない。完全に空の状態 \(|0\rangle\) に破壊演算子 \(a(k)\) を作用させると、式9.30を用いて次式が得られる。
+<!--
+Secondly, we are never able to destroy something which is not
+there in the first place. If we act with the destruction operator \(a(k)\) on
+a completely empty state \(|0\rangle\) we get, using Eq. 9.30
+-->
+\[
+a(k) |0_k\rangle = \sqrt{0} |0_k − 1_k\rangle  =0  \tag{9.31}
+\]
+
+または同様に
+<!--
+or equally
+-->
+\[
+a(k^\prime) |1_k\rangle =\sqrt{0} |1_k, 0_{k^\prime} − 1_{k^\prime} \rangle = 0  \tag{9.32}
+\]
+
+消滅演算子 \(a(k^\prime)\) を、この運動量 \(k^\prime\) を持つ粒子を含まない \(|k\rangle\) のようなケットに作用させると、理論はゼロを生成することがわかります。生成演算子と消滅演算子は、すべての可能な運動量にわたる積分（または和）を含む、場のフーリエ展開に現れます。したがって、これらの場が \(|k\rangle\) のようなケットに作用する場合、ゼロ以外の値をもたらす消滅演算子は1つだけです。これは、場の量子論を用いて相互作用を記述しようとするときに非常に重要になります。
+<!--
+
+We can see that if we act with an annihilation operator \(a(k^\prime)\) on a
+ket, like \(|k\rangle\) that does not include a particle with this momentum \(k^\prime\),
+the theory produces a zero. The creation and annihilation operators
+appear in the Fourier expansion of the fields, which includes an
+integral (or sum) over all possible momenta. Therefore, if these fields
+act on a ket like \(|k\rangle\), only one annihilation operator will result in
+something non-zero. This will be of great importance when we try to
+describe interactions using quantum field theory.
+-->
+
+</p><p>
+相互作用の話に移る前に、自由スピン場とスピン1場について簡単に見てみましょう。
+<!--
+Before we move on to interactions, we take a brief look at free spin
+\(\frac{1}{2}\) and spin 1 fields.
+-->
+</p>
+<h2>9.3 自由スピン \(\frac{1}{2}\) 場の理論</h2>
+<!--
+<h2>9.3 Free Spin \(\frac{1}{2}\) Field Theory</h2>
+-->
+<p>
+自由スピン\(\frac{1}{2}\)場の運動方程式はディラック方程式<sup>15</sup>である。
+<!--
+The equation of motion for free spin \(\frac{1}{2}\) fields is the Dirac equation<sup>15</sup>
+-->
+</p><p class="margin-large">
+<sup>15</sup>
+ディラック方程式は6.3節で導出しました。
+<!--
+We derived the Dirac equation in 
+Section 6.3.
+-->
+</p><p>
+
+\[
+(iγ_μ∂^μ − m)Ψ = 0
+\]
+
+ディラック方程式の一般解は、<sup>16</sup> の形式で表すことができます。
+<!--
+The general solution of the Dirac equation can be written in the
+form<sup>16</sup>
+-->
+</p><p class="margin-large">
+<sup>16</sup>
+ディラック方程式は
+第8.9節で解きます。一般解は
+前節で論じたクライン・ゴルドン方程式の解と同様に書き表されます。
+<!--
+The Dirac equation is solved in 
+Section 8.9. The general solution is then
+written analogous to the solution of the
+Klein-Gordon equation, discussed in
+the last section.
+-->
+</p><p>
+
+\[
+\begin{align}
+Ψ &=\sum_r \sqrt{\frac{m}{(2π)^3}}
+\int \frac{d^3p}{\sqrt{w_p}}
+\left(c_r(p)u_r(p)e^{−ipx} + d_r(p)v_r(p)e^{+ipx}\right) \\
+\\
+&= Ψ^+ + Ψ^−  \tag{9.33}
+\end{align}
+\]
+
+しかし今回は実数場に限定しません。なぜなら、6.3節でローレンツ不変なラグランジアンには複素スピン \(\frac{1}{2}\) 場が必要であることを見てきたからです。さらに、標準的な慣例に従い、解を次のように書きます。
+<!--
+
+but this time we do not restrict to real fields, because we saw in Section
+6.3 that a Lorentz invariant Lagrangian needs complex spin \(\frac{1}{2}\)
+fields. In addition, we follow the standard convention and write the
+solutions as
+-->
+\[
+Ψ =\sum_r\sqrt{\frac{m}{(2π)^3}}
+\int \frac{d^3p}{\sqrt{w_p}}
+\left(c_r(p)u_r(p)e^{−ipx} + d_r^†(p)v_r(p)e^{+ipx}\right)  \tag{9.34}
+\]
+
+このようにすると、\(d_r^†(p)\) は反粒子を生成するように見えるからです。もし解の中でそれを \(d_r(p)\) と名付けると混乱を招く可能性があります。
+粒子の場合、\(c_r^†(p)\) は反粒子を生成し、\(c_r(p)\) は反粒子を消滅させるからです。
+フーリエ係数を \(d_r(p)\) ではなく \(d_r^†(p)\) と名付けると、反粒子についても同様の解釈になります。つまり、\(d_r^†(p)\) は反粒子を生成し、\(d_r(p)\) は反粒子を消滅させるのです。
+<!--
+because in this way, \(d_r^†(p)\) can be seen to create an anti-particle. If
+we would name it \(d_r(p)\) in the solution, this could lead to confusion,
+because for particles \(c_r^†(p)\) creates and \(c_r(p)\) annihilates. Naming
+the Fourier coefficient \(d_r^†(p)\) instead of \(d_r(p)\), leads to an analogous
+interpretation for anti-particles: \(d_r^†(p)\) creates and \(d_r(p)\) annihilates.
+-->
+</p><p>
+同様に、随伴ディラック方程式についても
+<!--
+Analogously, we have for the adjoint Dirac equation
+-->
+\[
+(i∂^μ\overline{Ψ}γ_μ + m\overline{Ψ} ) = 0
+\]
+
+これも6.3節で導出されたが、その解は
+<!--
+which was also derived in Section 6.3, the solution
+-->
+\[
+\begin{align}
+\overline{Ψ} &=\sum_r \sqrt{\frac{m}{(2π)^3}}
+\int \frac{d^3p}{\sqrt{w_p}}
+\left(c_r^†(p)\overline{u}_r(p)e^{+ipx} + d_r(p)\overline{v}_r(p)e^{−ipx}\right) \\
+\\
+&≡\overline{Ψ}^+ + \overline{Ψ}^−  \tag{9.35}
+\end{align}
+\]
+
+これらの解において、\(u_1, u_2, v_1, v_3\) は任意のフレームにおける「基底スピノル」を表す<sup>17</sup>
+<!--
+In these solutions \(u_1, u_2, v_1, v_3\) denote the "basis spinors" in an arbitrary frame<sup>17</sup>
+-->
+</p><p class="margin-large">
+<sup>17</sup>
+これらのスピノルは、8.10節で静止系（π = 0）で導出しました。任意の系における基底スピノルは、ブースト変換によって静止系における基底スピノルから計算できます。
+<!--
+We derived these spinors in the rest
+frame (pi = 0) in Section 8.10. The basis
+spinors in an arbitrary frame can be
+computed from the basis spinors in the
+rest frame by a boost transformation.
+-->
+</p><p>
+
+\[
+u_1 =\sqrt{\frac{E + m}{2m}}
+\begin{pmatrix}
+1 \\
+0 \\
+\frac{p_3}{E+m} \\
+\frac{p_1+ip_2}{E+m}
+\end{pmatrix}
+　u_2 =\sqrt{\frac{E + m}{2m}}
+\begin{pmatrix}
+0 \\
+1 \\
+\frac{p_1−ip_2}{E+m} \\
+\frac{−p_3}{E+m}
+\end{pmatrix}
+\tag{9.36}
+\]
+
+\[
+v_1 =\sqrt{\frac{E + m}{2m}}
+\begin{pmatrix}
+\frac{p_1−ip_2}{E+m} \\
+\frac{−p_3}{E+m} \\
+0 \\
+1
+\end{pmatrix}
+　v_2 =\sqrt{\frac{E + m}{2m}}
+\begin{pmatrix}
+\frac{p_3}{E+m} \\
+\frac{p_1+ip_2}{E+m} \\
+1 \\
+0
+\end{pmatrix}
+\tag{9.37}
+\]
+</p><p>
+自由スピン場（\frac{1}{2}\）の理論の残りの部分は、スカラー理論と同様に展開できますが、小さな違いが1つあります<sup>18</sup>。次の式を使ってどうなるか試してみましょう。
+<!--
+The rest of the theory for free spin \(\frac{1}{2}\)
+fields can be developed similarly
+to the scalar theory, but there is one small difference<sup>18</sup>. Let’s try what we get when we use the formula
+-->
+</p><p class="margin-large">
+<sup>18</sup>
+信じられないほど巨大な結果をもたらします！
+実際、もしスピン \(\frac{1}{2}\) 理論がスカラー理論と全く同じように機能するなら、この宇宙の何ものも安定しないでしょう。
+<!--
+
+With incredible huge consequences!
+In fact, nothing in this universe would
+be stable if the spin \(\frac{1}{2}\)
+theory would
+work exactly like the scalar theory.
+-->
+</p><p>
+
+\[
+[Ψ(x), π(y)] = iδ(x − y) \tag{9.38}
+\]
+
+スピン \(\frac{1}{2}\) 場についても同様です。運動方程式の一般解、すなわちディラック方程式には、2つの異なる係数があります。\(c^†\) は粒子を生成し、\(d^†\) は反粒子を生成します。ここで、交換関係<sup>19</sup>を用いてスピン \(\frac{1}{2}\) 場のハミルトニアンを計算すると、次のような式が得られます。
+<!--
+
+for spin \(\frac{1}{2}\) fields, too. In the general solution for the equation of motion,
+i.e. the Dirac equation, we have two different coefficients: \(c^†\)
+creates particles, whereas \(d^†\) creates anti-particles. When we now
+compute the Hamiltonian for a spin \(\frac{1}{2}\)
+field, using the commutation
+relation<sup>19</sup>, we get something of the form
+-->
+</p><p class="margin-large">
+<sup>19</sup>
+\([Ψ(x), π(y)] = Ψ(x)π(y) − π(y)Ψ(x) = iδ(x − y)\)
+</p><p>
+
+\[
+H ∼ \int c^†c − d^†d 
+\]
+
+これは、反粒子のエネルギーが負であることを示しています。これは深刻な問題です。なぜなら、あらゆる状態は永遠に低いエネルギー状態へと崩壊する可能性があり、この宇宙の何ものも安定しなくなるからです。ハミルトニアンは、スカラーの場合とは異なり、下から有界ではありません。
+<!--
+
+This shows that the energy of anti-particles is then negative. This is a
+serious problem because every state could forever decay to lower energy
+states and nothing in this universe would be stable. The Hamiltonian
+is not bounded from below, in contrast to the scalar case.
+-->
+</p><p>
+
+しかし、代わりに反交換関係を用いると
+<!--
+However, when we use instead the anticommutation relation
+-->
+\[
+{Ψ(x), π(y)} = Ψ(x)π(y) + π(y)Ψ(x) = −iδ(x − y)
+\]
+
+反粒子生成演算子と消滅演算子を含む項は正となり、問題は解決されます。
+<!--
+
+the term involving the anti-particle creation and annihilation operators
+comes out positive and the problem is therefore solved.
+-->
+</p><p>
+
+これには非常に興味深い結果が生まれます。例えば、次のようになります。<sup>20</sup>
+<!--
+This has very interesting consequences. For example, we then
+have<sup>20</sup>
+-->
+</p><p class="margin-large">
+<sup>20</sup>
+スカラーの場合の式9.9と同様ですが、交換子[, ] → {, }の代わりに反交換子を使用します。
+<!--
+
+Analogous to Eq. 9.9 for scalars, but 
+now with the anticommutator instead
+of the commutator [, ] → {, }.
+-->
+</p><p>
+
+\[
+\{c^†(p), c^†(p^\prime)\} = 0
+\]
+
+そこから結論できるのは
+<!--
+from which we can conclude
+-->
+
+\[
+\{c^†(p), c^†(p)\} = c^†(p)c^†(p) + c^†(p)c^†(p) = 2c^†(p)c^†(p) = 0
+\]
+
+\[
+⇒ c^†(p)c^†(p) =0   \tag{9.39}
+\]
+
+<strong>2つの等しい生成演算子<sup>21</sup>の作用は常にゼロになります！</strong>これは、2つの等しいスピン \(\frac{1}{2}\) 粒子を生成できないことを意味し、これはパウリの排他原理としてよく知られています。
+<!--
+
+<strong>The action of two equal creation operators<sup>21</sup> always results in a zero!</strong> This means we cannot create two equal spin \(\frac{1}{2}\) particles and this
+is famously called Pauli-exclusion principle.
+-->
+</p><p class="margin-large">
+<sup>21</sup>
+スピン0の場の場合、対応する式はそれほど驚くべきものではありません。なぜなら、そこでは交換子が使われているからです：\([c^†(p), c^†(p)] =
+c^†(p)c^†(p) − c^†(p)c^†(p) = 0\).
+<!--
+
+For spin 0 fields the correspond- 
+ing equation isn’t very surprising,
+because there we use the
+commutator: \([c^†(p), c^†(p)] =
+c^†(p)c^†(p) − c^†(p)c^†(p) = 0\).
+-->
+</p><p>
+フーリエ係数の他の反交換関係は、場の反交換子と共役運動量から次のように導かれる。
+<!--
+
+The other anti-commutation relations for the Fourier coefficients
+can be derived from the anti-commutator of the field and the conjugate
+momentum to be:
+-->
+\[
+\{c_r(p), c_s^†(p^\prime)\} = δ_{rs}δ(p− p^\prime)　\{d_r(p), d_s^†(p^\prime)\} = δ_{rs}δ(p− p^\prime)   \tag{9.40}
+\]
+
+そして、他のすべての可能な組み合わせはゼロになります。したがって、これらの係数は、前のセクションでスピン0の場について導出したものと同じ特性を持つことがわかります。これらは生成と破壊を行いますが、同じ演算子をある状態に2回作用させると、ゼロになるという違いがあります。自由スピン \(\frac{1}{2}\) 場のハミルトニアンは、自由スピン0の場のハミルトニアンと同様に導出できます。
+<!--
+
+and all other possible combinations equal zero. Therefore, these coefficients
+can be seen to have the same properties as those we derived
+in the last section for the spin 0 field. They create and destroy, with
+the difference that acting twice with the same operator on a state results
+in a zero. The Hamiltonian for a free spin \(\frac{1}{2}\) field can be derived
+analogous to the Hamiltonian for a free spin 0 field
+-->
+
+\[
+H_{free}^{\frac{1}{2}} = \int d^3x(−i\overline{Ψ}γ_i∂^iΨ − m\overline{Ψ}Ψ)  \tag{9.41}
+\]
+
+またはフーリエ係数で表すと
+<!--
+or expressed in terms of the Fourier coefficients
+-->
+\[
+\mathscr{H}_{free}^{\frac{1}{2}} =\sum_r \int d^3p w_p
+\left(c_r^†(p)c_r(p) + d_r^†(p)d_r(p) + const\right)  \tag{9.42}
+\]
+
+ここでも定数項は無限項につながるので、これを無視することにします。
+<!--
+where again the constant term leads to an infinite term and we
+choose to ignore this.
+-->
+</p>
+
+<h2>9.4 フリースピン 1 場の理論</h2>
+<!--
+<h2>9.4 Free Spin 1 Field Theory</h2>
+-->
+<p>
+自由スピン1場の運動方程式の解、Proca方程式<sup>22</sup>
+<!--
+The solution for the equation of motion for free spin 1 fields, the
+Proca equation<sup>22</sup>
+-->
+</p><p class="margin-large">
+<sup>22</sup>
+Proca方程式は
+6.4節で導出しました。
+<!--
+We derived the Proca equation in
+Section 6.4.
+-->
+</p><p>
+
+\[
+m^2A^ρ =\frac{1}{2}∂_σ(∂^σA^ρ − ∂^ρA^σ)  \tag{9.43}
+\]
+
+は、スピン0の場の解と類似しており、次の形式となる。
+<!--
+is, analogous to the spin 0 field solution, of the form
+-->
+\[
+\begin{align}
+A_μ &= \int \frac{d^3k}{\sqrt{(2π)^32ω_k}}
+\left(\epsilon_{r,μ}(k)a_r(k)e^{−ikx} +\epsilon_{r,μ}(k)a_r^†(k)e^{ikx}\right) \\
+\\
+&≡ A_μ^+ + A_μ^-   \tag{9.44}
+\end{align}
+\]
+
+ここで、\(\epsilon_{r,μ}(k)\) は<strong>基底ベクトル</strong>であり、<strong>分極ベクトル</strong>と呼ばれます。スピン1の場の場合も、反交換子の代わりに交換子を使用することができます。したがって、係数 \(a_r, a_r^†\) はスピン0の場の係数と同じ特性を持つことが分かります。
+<!--
+where \(\epsilon_{r,μ}(k)\) are <strong>basis vectors</strong>, called <strong>polarization vectors</strong>. For spin
+1 fields we are again able to use the commutator instead of the anticommutator.
+We are therefore able to derive that the coefficients \(a_r, a_r^†\)
+have the same properties as the coefficients for spin 0 fields.
+-->
+</p>
+<h2>9.5 相互作用場理論</h2>
+<!--
+<h2>9.5 Interacting Field Theory</h2>
+-->
+<p>
+次のステップは、異なるスピンの場の間の相互作用を見ることです。対応するラグランジアンは、以前の章でローレンツ対称性とゲージ対称性から導出されました。例えば、質量を持つスピン \(\frac{1}{2}\) 場と質量のないスピン 1 場との間の相互作用については、次のラグランジアンが成り立ちます (式 7.17)
+<!--
+The next step is to look at interactions between fields of different
+spin. The corresponding Lagrangians were derived in earlier chapters
+from Lorentz and gauge symmetry. For example, for the interaction
+between a massive spin \(\frac{1}{2}\) field and one massless spin 1 field, we have
+the Lagrangian (Eq. 7.17)
+-->
+\[
+\mathscr{L}_{Dirac+Extra-Term} = −m\overline{Ψ}Ψ + i\overline{Ψ}γ_μ∂^μΨ + gA_μ\overline{Ψ}γ^μΨ  \tag{9.45}
+\]
+
+そこから対応するハミルトニアン<sup>23</sup>を導く。
+<!--
+from which we derive the corresponding Hamiltonian<sup>23</sup>
+-->
+
+</p><p class="margin-large">
+<sup>23</sup>
+このハミルトニアンをすぐに使います！
+<!--
+We will use this Hamiltonian in a
+moment!
+-->
+</p><p>
+
+\[
+\begin{align}
+H &= \int d^3xT^{00} \\
+\\
+&= \int d^3x \left(\underbrace{\frac{∂\mathscr{L}}{∂(∂_0Ψ)}}_{=i\overline{Ψ}γ_0}∂_0Ψ −\mathscr{L}\right) \\
+\\
+&=\int d^3x \left(i\overline{Ψ}γ_0∂_0Ψ + m\overline{Ψ}Ψ − i\overline{Ψ}\underbrace{γ_μ∂^μ}_{=γ_0∂_0−γ_i∂_i}
+Ψ− gA_μ\overline{Ψ}γ^μΨ\right) \\
+\\
+&=\underbrace{\int d^3x(m\overline{Ψ}Ψ + i\overline{Ψ}γ_i∂_iΨ)}_{=H_{free}^{\frac{1}{2}}}
+−\underbrace{\int d^3x \left(gA_μ\overline{Ψ}γ^μΨ\right)}_{≡−H_I} \\
+\\
+&= H_{free}^{\frac{1}{2}} + H_I   \tag{9.46}
+\end{align}
+\]
+</p>
+<h3>9.5.1 散乱振幅</h3>
+<!--
+<h3>9.5.1 Scatter Amplitudes</h3>
+-->
+<p>
+
+場の量子論における主要な目標の一つは、定義された<sup>24</sup>運動量 \(p_1, p_2, .., p_n\) を持つ一定数 \(n\) の粒子が、（異なる可能性もある）運動量 \(q_1, q_2, .., q_{n^\prime}\) を持つ一定数 \(n^\prime\) の（異なる可能性もある）粒子に変化する確率を計算することです。これはディラックの記法を用いて次のように表すことができます。
+<!--
+One of the main goals in quantum field theory is to compute the
+probability for a fixed number \(n\) of particles with defined<sup>24</sup> momenta \(p_1, p_2, .., p_n\) to transform into a (possibly different) 
+number of (possibly
+different) particles \(n^\prime\) with momenta \(q_1, q_2, .., q_{n^\prime}\). We can write
+this using Dirac’s notation
+-->
+</p><p class="margin-large">
+<sup>24</sup>
+これは物理学者が衝突型加速器実験で準備するものなのです。
+<!--
+This is what physicists prepare in 
+collider experiments. 
+-->
+</p><p>
+
+\[
+\langle q_1, q_2, .., q_{n^\prime} | \hat{S} |p_1, p_2, .., p_{n^\prime} \rangle \tag{9.47}
+\]
+
+ここで、\(\hat{S}\) は散乱を記述する演算子です。この演算子が具体的にどのように見えるかは、次のセクションで導出します。別の表現で表すと、初期時刻 \(t_i\) に空間 xi のいくつかの点にいくつかの粒子が存在し、相互作用後、つまり最終時刻 \(t_f\) には、（おそらく異なる）粒子がおそらく異なる位置 \(x_f\) に存在します。
+<!--
+where \(\hat{S}\) is the operator describing the scattering. We will derive
+how this operator looks concretely in the next section. Formulated
+differently, we have some particles at initial time \(t_i\) at some points in
+space xi and after the interaction, i.e. at the final time \(t_f\) , (possibly
+different) particles at a possibly different location \(x_f\).
+-->
+</p><p>
+したがって、私たちが最初に答えなければならない質問は、「場の量子理論における状態の時間発展について何が言えるか」ということです。
+<!--
+Therefore, the first question we have to answer is: What can we
+say about the time evolution of states in quantum field theory?
+-->
+</p>
+<h3>9.5.2 状態の時間発展</h3>
+<!--
+<h3>9.5.2 Time Evolution of States</h3>
+-->
+<p>
+
+この問いに答えるために、エネルギー演算子は、一方では時間変換の生成子との同一視によって、他方ではハミルトニアンによって与えられることを観察する。例えば、自由スピン0理論の場合、(式9.10)を導出した。
+<!--
+To answer this question we observe that the energy operator is given
+on the one hand by the identification with the generator of timetranslations
+\(i∂_0\) and on the other hand by the Hamiltonian. For example,
+for the free spin 0 theory we derived (Eq. 9.10)
+-->
+
+\[
+H_{free}^0 =\frac{1}{2} \int d^3x
+\left((∂_0Φ)^2 + (∂_iΦ)^2 + mΦ^2 \right) \tag{9.48}
+\]
+
+一方、自由スピン\(\frac{1}{2}\)理論では、（式9.41）
+<!--
+while for the free spin \(\frac{1}{2}\) theory we have (Eq. 9.41)
+-->
+\[
+H_{free}^{\frac{1}{2}} = \int d^3x(m\overline{Ψ}Ψ + i\overline{Ψ}γ_i∂^iΨ)  \tag{9.49}
+\]
+
+どちらの同一視も場の理論におけるエネルギーを表す演算子であり、したがって次のように書く。
+<!--
+
+Both identifications are operators in a field theory, representing energy,
+and we therefore write
+-->
+
+\[
+i∂_0 |?(t)\rangle = H |?(t)\rangle  \tag{9.50}
+\]
+
+これは場の量子論における状態の時間発展を支配する方程式です。この方程式を用いて、ある時点の状態から別の時点の状態へと変換する時間発展演算子 \(\mathcal{U}\) を定義できます。
+簡潔にするために開始時刻を \(t = 0\) とすると、sup>25</sup> となります。
+<!--
+which is the equation governing the time evolution of a state in quantum
+field theory. We can use this equation to define a time-evolution
+operator \(\mathcal{U}\) that transforms the state from one point in time to another.
+If we choose, for brevity, the start time \(t = 0\) we have,sup>25</sup>
+-->
+</p><p class="margin-large">
+<sup>25</sup>
+一般に\(|?(t)\rangle = \mathcal{U}(t − t^\prime) |?(t^\prime)\rangle\)です。
+<!--
+In general \(|?(t)\rangle = \mathcal{U}(t − t^\prime) |?(t^\prime)\rangle\).
+-->
+</p><p>
+
+\[
+|?(t)\rangle = \mathcal{U}(t) |?(0)\rangle  \tag{9.51}
+\]
+
+この仮定を式9.50に代入すると次のようになる。
+<!--
+Putting this ansatz into Eq. 9.50 yields
+-->
+\[
+i∂_0\mathcal{U}(t) |?(0)\rangle = \mathcal{HU}(t) |?(0)\rangle  \tag{9.52}
+\]
+
+この式は任意の\(|?(0)\rangle\)に対して成立するため、
+<!--
+This equation holds for arbitrary \(|?(0)\rangle\) and therefore
+-->
+\[
+i∂_0\mathcal{U}(t) = \mathcal{HU}(t)  \tag{9.53}
+\]
+
+この方程式の一般解は
+<!--
+The general solution of this equation is
+-->
+\[
+\mathcal{U}(t) = e^{−i\int_0^t dx_0H}  \tag{9.54}
+\]
+
+確認できたので
+<!--
+as we can check
+-->
+\[
+\begin{align}
+i∂_0\mathcal{U}(t) = \mathcal{HU}(t) &→ i∂_0e^{−i\int_0^t dx_0H} = He^{−i\int_0^t dx_0H} \\
+\\
+&→ i(−iH)e^{−i\int_0^t dx_0H} = He^{−i \int_0^t dx_0H} \\
+\\
+&→ He^{−i\int_0^t dx_0H} = He^{−i\int_0^t dx_0H}  \tag{9.55}
+\end{align}
+\]
+</p><p>
+
+実験では、ケット\(|?(t)\rangle\)を測定することはなく、常にブラとケットの組み合わせを測定します。一般に、次のような形の対象があります。
+<!--
+In experiments we never measure a ket \(|?(t)\rangle\), but always the combinations
+of a bra with a ket. In general, we have objects of the form
+-->
+\[
+\langle f(t)|\hat{\mathcal{O}} |i(t)\rangle  \tag{9.56}
+\]
+
+ある演算子 \(\hat{\mathcal{O}}\)、初期状態 \(|i(t)\rangle\)、終了状態 \(\langle f(t)|\) を用いて、状態は演算子 U によって記述されるように時間とともに変化し、演算子は時間に依存しません。このやや恣意的な選択はシュレーディンガー描像と呼ばれ、以下では様々な選択肢、つまり様々な「描像」について説明します。
+<!--
+
+with some operator \(\hat{\mathcal{O}}\), initial state \(|i(t)\rangle\) and final state \(\langle f(t)|\). Here
+the states evolve in time, as described by the operator U, and the
+operators are time independent. This somewhat arbitrary choice is
+called Schr&ouml;dinger picture and in the following we will talk about
+different possible choices, i.e. different "pictures".
+-->
+</p><p>
+
+式9.56を時間発展演算子で書き直すと、<sup>26</sup>
+<!--
+Writing Eq. 9.56 in terms of the time-evolution operator leads us
+to<sup>26</sup>
+-->
+</p><p class="margin-large">
+<sup>26</sup>
+\(\langle f | = | f\rangle^†\) を覚えておいてください。
+<!--
+Remember \(\langle f | = | f\rangle^†\)
+-->
+</p><p>
+
+\[
+\langle f(0)|\mathcal{U}^†(t)\hat{\mathcal{O}}\mathcal{U}(t) |i(0)\rangle  \tag{9.57}
+\]
+
+重要な考え方は、視点を変えて、演算子 \(\hat{\mathcal{O}}\) は \(\mathcal{U}^†(t)\hat{\mathcal{O}}\mathcal{U}(t)\) という規則に従って時間とともに発展し、ブラとケットは時間に依存しないと言えるというものです。この新しい視点は、<strong>ハイゼンベルク描像</strong>と呼ばれます。
+<!--
+An important idea is that we can switch our perspective and say the
+operator \(\hat{\mathcal{O}}\) evolves in time, according to the rule \(\mathcal{U}^†(t)\hat{\mathcal{O}}\mathcal{U}(t)\) and
+the bra and ket are time-independent. This new perspective is called
+<strong>Heisenberg picture</strong>.
+-->
+</p><p>
+
+相互作用理論で役立つ、似たような非常に便利なトリックがあります。ハミルトニアンは常に自由ハミルトニアンと相互作用ハミルトニアンの和です（式9.46）。
+<!--
+
+There is a similar, very useful trick that is helpful in interaction
+theory. The Hamiltonian is always the sum of the free Hamiltonian
+and the interaction Hamiltonian (Eq. 9.46)
+-->
+\[
+H = H_{free} + H_I  \tag{9.58}
+\]
+
+ポイントは、上で紹介した2つの視点を組み合わせることです。状態はHIに従って進化し、演算子<sup>27</sup>はHfreeに従って進化します。これは非常に便利です。なぜなら、自由場について既に導出した結果をすべて再利用できるからです。このタイプの視点は<strong>相互作用図</strong>と呼ばれます。相互作用図において状態を定義します。
+<!--
+The trick is to use a mixture of the two perspectives introduced
+above. We let the states evolve according to HI and the operators<sup>27</sup> according to Hfree. This is incredibly useful, 
+because then we can
+reuse all results we already derived for free fields. This type of perspective
+is called <strong>interaction picture</strong>. We define a state in the interaction picture
+-->
+</p><p class="margin-large">
+<sup>27</sup>
+場の量子論では、場が演算子であることを思い出してください。
+<!--
+Recall that in quantum field theory 
+the fields are our operators. 
+-->
+</p><p>
+
+\[
+|i(t)\rangle_I ≡ \mathcal{U}_{free}^†|i(t)\rangle_S   \tag{9.59}
+\]
+
+ここで、\(\mathcal{U}_{free} = e^{−i\int_0^t dx_0H_{free}}\) であり、添え字 \(S\) は <strong>シュレーディンガー像</strong> を表します。これは、状態が完全ハミルトニアンに従って発展し、演算子が時間に依存しない標準的な視点の名前です。
+<!--
+
+where \(\mathcal{U}_{free} = e^{−i\int_0^t dx_0H_{free}}\) and the index \(S\) stands for <strong>Schr&ouml;dinger
+picture</strong>, which is the name for the standard perspective where the
+states evolve according to the full Hamiltonian and the operators are
+time-independent.
+-->
+</p><p>
+式9.59を式9.50に代入すると、相互作用図における時間発展方程式が得られます。<sup>28,/sup>
+<!--
+Putting now Eq. 9.59 into Eq. 9.50 we get<sup>28,/sup> the time-evolution  equation in the interaction picture:
+-->
+</p><p class="margin-large">
+<sup>28</sup>
+シュレーディンガー描像に対して、この式は成り立ちます。したがって、\(|i(t)\rangle_I ≡ U_{free}^†|i(t)\rangle_S\) を
+\(|i(t)\rangle_S\) について解く必要があります。この式に
+\(\mathcal{U}_{free}\) を掛け、\(\mathcal{U}_{free}\mathcal{U}_{free}^† = 1\) を用います。これにより、\(|i(t)\rangle_S = \mathcal{U}_{free} |i(t)\rangle_I\) が得られ、これを式9.50に代入できます。
+<!--
+
+The equation holds in this form for 
+the Schr&ouml;dinger picture. Therefore, we
+have to solve \(|i(t)\rangle_I ≡ U_{free}^†|i(t)\rangle_S\) for
+\(|i(t)\rangle_S\). We multiply the equation with
+\(\mathcal{U}_{free}\) and use \(\mathcal{U}_{free}\mathcal{U}_{free}^† = 1\). This yields
+\(|i(t)\rangle_S = \mathcal{U}_{free} |i(t)\rangle_I\), which we can then
+put into Eq. 9.50.
+-->
+
+</p><p>
+
+\[
+i∂_0 |i(t)\rangle_S = H |i(t)\rangle_S
+\]
+
+\[
+→ i∂_0\mathcal{U}_{free} |i(t)\rangle_I = \mathcal{HU}_{free} |i(t)\rangle_I
+\]
+
+\[
+→ i∂_0e^{−i\int_0^t dx_0H_{free}} |i(t)\rangle_I = (H_{free} + H_I )e^{−i\int_0^t dx_0H_{free}} |i(t)\rangle_I 
+\]
+
+\[
+\underbrace{→}_{product\; rule}
+\cancel{H_{free}e^{−i\int_0^t dx_0H_{free}} |i(t)\rangle_I}
++ ie^{−i\int_0^t dx_0H_{free}}∂_0 |i(t)\rangle_I 
+= (\cancel{H_{free}} + H_I )e^{−i\int_0^t dx_0H_{free}} |i(t)\rangle_I
+\]
+
+\[
+→ ie^{−i\int_0^t dx_0H_{free}}∂_0 |i(t)\rangle_I = H_Ie^{−i\int_0^t dx_0H_{free}} |i(t)\rangle_I
+\]
+
+\[
+→ i∂_0 |i(t)\rangle_I = \underbrace{e^{i\int_0^t dx_0H_{free}}H_Ie^{−i\int_0^t  dx_0H_{free}}}_{=H_I^{int}= \text{the interaction Hamiltonian in the interaction picture.}}|i(t)\rangle_I
+\]
+
+\[
+→ i∂_0 |i(t)\rangle_I = H_I-{int}I|i(t)\rangle_I   \tag{9.60}
+\]
+
+状態の時間発展は、相互作用ハミルトニアン \(H_I-{int}\) によって支配されていると結論づけられます。この小さな方程式は、その後のすべてにおいて非常に重要になります。
+<!--
+
+We conclude that the time-evolution of the states is now indeed
+governed by the interaction Hamiltonian \(H_I-{int}\) . This little equation
+will be incredibly important for everything that follows.
+-->
+</p><p>
+
+さて、最初の質問に戻ります。散乱過程をどのように計算するか
+<!--
+
+Now we are able to return to the starting question: How can we
+compute scattering processes
+-->
+
+\[
+\langle f(t_f)| \hat{S}(t_f , t_i) |i(t_i)\rangle　? \tag{9.61}
+\]
+
+演算子 \(\hat{S}(t_f , t_i)\) は、時刻 \(t_i\) における初期状態 \(|i(t_i)\rangle\) を、時刻 \((t_f)\) における終状態 \(|Ψ(t_f)\rangle\) に変換します。一般に、終状態は特定の粒子状態ではなく、多くの可能な結果の線形結合です。そうでなければ、素粒子物理学は退屈なものになるでしょう。相互作用は常に特定の結果をもたらします。ここではより一般的な考え方を採用し、任意の線形結合を許容します。演算子 \(\hat{S}\) を指定すると、これが実際に当てはまることがわかります。
+<!--
+
+The operator \(\hat{S}(t_f , t_i)\) transforms the initial state \(|i(t_i)\rangle\) at time \(t_i\) into
+the final state \(|Ψ(t_f)\rangle\) at time \((t_f)\). In general, the final state is not
+one specific particle state, but a linear combination of many possible
+outcomes. If this would be not the case particle physics would be
+boring. An interaction would always result in one specific outcome.
+We are more general here and allow arbitrary linear combinations.
+After we specify the operator \(\hat{S}\) we will see that this is actually the case.
+-->
+
+</p><p>
+
+具体的には、\(\hat{S}\) は初期状態を最終状態の線形結合に変換することを意味します。混乱を避けるため、以下では最終時刻を \(t_f\) ではなく単に \(t\) と呼びます。すると、<sup>29</sup> となります。
+<!--
+
+Concretely this means that \(\hat{S}\) transforms an initial state into a
+linear combination of final states. To avoid confusion we will call the
+final time in the following simply \(t\) instead of \(t_f\) . Then we have<sup>29</sup>
+-->
+
+</p><p class="margin-large">
+<sup>29</sup>
+これは、状態 \(|Ψ(t)\rangle\) を粒子状態 \(|f(t)\rangle\) で級数展開したものと見ることができます。
+<!--
+
+This can be seen as a series expansion
+of the state \(|Ψ(t)\rangle\) in terms of our
+particle states \(|f(t)\rangle\).
+-->
+</p><p>
+
+\[
+\hat{S}(t, t_i) |i(t_i)\rangle = |Ψ(t)\rangle =\sum_f
+\underbrace{S_{fi}}_{complex\; numbers}| f(t)\rangle  \tag{9.62}
+\]
+
+左辺の特定の \(\langle f^\prime (t)|\) との乗算により、和の1項を除くすべての項が終了します。
+<!--
+
+The multiplication with one specific \(\langle f^\prime (t)|\) from the left-hand side
+terminates all but one term of the sum:
+-->
+
+\[
+\langle f^\prime(t)|\sum_f S_{fi} | f(t)\rangle 
+=\sum_f S_{fi} \underbrace{\langle f^\prime(t)| f(t)\rangle}_
+{=δ_{ff^\prime}\text{ because basis states are orthogonal}}
+=\sum_f S_{fi}δ_{ff^\prime} = S_{f^\prime i} \tag{9.63}
+\]
+
+したがって、このプロセスが発生する確率は \(|S_{f^\prime i}|^2\) です。
+<!--
+Therefore, the probability for this process to happen is \(|S_{f^\prime i}|^2\).
+-->
+</p><p>
+ここで、散布演算子\(\hat{S}\)を指定します。そのために、上で導出した時間発展方程式をもう一度見てみましょう<sup>30</sup>
+<!--
+Now we specify the scatter operator \(\hat{S}\). For this purpose we take a
+look again at the time-evolution equation that we derived above<sup>30</sup> 
+-->
+
+</p><p class="margin-large">
+<sup>30</sup>
+式9.60では、表記の煩雑さを避けるために、上付き文字「int」を省略しています。これは、相互作用図で作業していることを示します。
+<!--
+Eq. 9.60 and in order to avoid notational
+clutter we suppress the superscript
+"int", which denotes that we are
+working in the interaction picture here.
+-->
+</p><p>
+
+\[
+i∂_t |Ψ(t)\rangle_I = H_I |Ψ(t)\rangle_I   \tag{9.64}
+\]
+
+これを初期状態と演算子\(\hat{S}\)を用いて式9.62で書き直すことができる。
+<!--
+We can rewrite this in terms of our initial state and the operator \(\hat{S}\) using Eq. 9.62
+-->
+\[
+→ i∂_t\hat{S}(t, t_i) |i(t_i)\rangle_I = H_I\hat{S} |i(t_i)\rangle_I
+\]
+
+\[
+\underbrace{→}_{product\; rule}
+i(∂_t\hat{S}(t, t_i)) |i(t_i)\rangle_I + i\hat{S}(t, t_i) 
+\underbrace{∂_t |i(t_i)\rangle_I}_{=0\; because\; |i(ti)\rangle_I\\text{ does not depend on t}}= H_I\hat{S} |i(t_i)\rangle_I
+\]
+
+この式が任意の初期状態に対して成り立つことを用いると、次のように書けます。
+<!--
+Now using that this equation holds for arbitrary initial states we can
+write
+-->
+
+\[
+i∂_t\hat{S} (t, t_i) = H_I\hat{S}  \tag{9.65}
+\]
+
+一般解<sup>31</sup>
+<!--
+with the general solution<sup>31</sup>
+-->
+</p><p class="margin-large">
+<sup>31</sup>
+ここでは、時間順序と呼ばれる非常に重要な点を省略しました。これについては、次のセクションで説明します。
+<!--
+We omitted something very important
+here, called time ordering, which we
+will discuss in the next section. 
+-->
+</p><p>
+
+\[
+\hat{S}(t, t_i) = e^{−i\int_{t_i}^t dt^\prime H_I}  \tag{9.66}
+\]
+</p><p>
+
+一見すると、問題は簡単です。\(H_I\) が分かっているので、「積分を解くだけ」です。これにより演算子 \(\hat{S}(t, t_i)\) が得られ、これを初期状態に作用させることで、様々な過程の確率振幅が得られます。残念ながら、積分は解けないため、近似法を使用する必要があります。問題を数学的に簡略化するために、初期時刻を \(t_i = −∞\)、最終時刻を \(t = ∞\) とします。これにより、確率振幅が時間に依存することを回避できます。例えば、粒子を散乱させた場合、想定される「衝突」から \(10^{−24}\) 秒後に特定の過程が発生する確率は、「衝突」から \(2 · 10^{−24}\) 秒後に発生する確率とは異なります。なぜなら、相互作用はまだ発生しているからです。時間値を非常に大きく取ることで、このような複雑さを回避できます。
+私たちが測定するのは通常、すべてのインタラクションが起こった後の結果です。
+<!--
+
+At a first glance the problem is easy now. We know \(H_I\) and "just
+have to solve the integral". This gives the operator \(\hat{S}(t, t_i)\) and by
+acting with it on our initial states we get the probability amplitudes
+for different processes. Unfortunately, the integral cannot be solved
+and we therefore have to use an approximation method. To simplify
+the problem mathematically, the initial time is taken to be \(t_i = −∞\)
+and the final time \(t = ∞\). By doing this we avoid our probability
+amplitudes depending on time. For example, if we scatter particles,
+the probability that a certain process has happened \(10^{−24}\) seconds
+after the assumed "collision" is different than \(2 · 10^{−24}\) seconds after
+the "collision", because the interaction is still happening! By taking
+the time values to be very large we avoid these kind of complications.
+What we measure is usually always a result after all the interactions
+have happened.
+-->
+</p>
+<h3>9.5.3 ダイソン級数</h3>
+<!--
+<h3>9.5.3 Dyson Series</h3>
+-->
+<p>
+指数積分には解析解が存在しないため、テイラー級数展開する<sup>32</sup>
+<!--
+Because there is no analytic solution for the exponentiated integral,
+we expand it in a Taylor series<sup>32</sup>
+-->
+</p><p class="margin-large">
+<sup>32</sup>
+これは付録B.4.1で導出されています:
+\(e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + ...\)
+<!--
+This is derived in Appendix B.4.1: 
+\(e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \frac{x^4}{4!} + ...\)
+-->
+</p><p>
+
+\[
+\begin{align}
+\hat{S}(∞,−∞) &= e^{−i\int_{−∞}^∞ dt^\prime H_I(t^\prime)} \\
+\\
+&= 1 − i\int_{−∞}^∞ dt_1H_I(t_1) \\
+\\
+&　−\frac{1}{2!}\left(\int_{−∞}^∞ dt_1H_I(t_1)\right)
+\left(\int_{−∞}^∞ dt_2H_I(t_2)\right)
++ ...  \tag{9.67}
+\end{align}
+\]
+
+これは<strong>ダイソン級数</strong>と呼ばれます。3番目の項をよく見てみましょう。\(H_I (t_1)\)と\(H_I (t_2)\)は単なる数値ではなく、右側のケットに作用する演算子です。したがって、前の時刻の演算子が後の時刻の演算子よりも先にケットに作用するようにする必要があります。演算子は時間順にケットに作用する必要があります。\(H_I (t = 5 s)\)の状態に作用し、その後に\(H_I (t = 2 s)\)を作用させるのは意味がありません。上記の級数では、\(t_1 < t_2\)の場合、
+<!--
+
+This is called the <strong>Dyson series</strong>. We need to take a careful look at
+the third term. \(H_I (t_1)\) and \(H_I (t_2)\) are not just numeric values, but
+operators acting on a ket to their right. Therefore, we need to make
+sure that the earlier time operator acts on the ket before the later time
+operator. The operators need to operate on the ket in a time ordered
+manner. It makes no sense if we act on a state with \(H_I (t = 5 s)\) and
+after that with \(H_I (t = 2 s)\). In the series above, we need for \(t_1 < t_2\)
+-->
+\[
+\left( \int_{−∞}^∞ dt_2H_I(t_2)\right)
+\left( \int_{−∞}^∞ dt_1H_I(t_1) \right)
+\]
+
+そして\(t_2 < t_1\)の場合
+<!--
+and for \(t_2 < t_1\)
+-->
+\[
+\left( \int_{−∞}^∞ dt_1H_I(t_1)\right)
+\left( \int_{−∞}^∞ dt_2H_I(t_2) \right)
+\]
+
+この目的のために、抽象的な時間順序付け演算子 \(T\) が導入され、これは次のように定義される。
+<!--
+For this purpose an abstract time-ordering operator \(T\) is introduced,
+which is defined by
+-->
+\[
+T\{A(x)B(y)\} :=
+\begin{cases}
+A(t_1)B(t_2) & if & t_1 > t_2 \\
+\\
+B(t_2)A(t_1) & if & t_1 < t_2
+\end{cases}
+\tag{9.68}
+\]
+
+したがって、級数展開の各項に名前を付けて、
+<!--
+Therefore we write, giving a name to each term of the series expansion,
+-->
+\[
+\begin{align}
+\hat{S}(∞,−∞) &= \underbrace{1}_{S^{(0)}}
+\underbrace{−i\int_{−∞}^∞ dt_1H_I (t_1)}_{S^{(1)}} \\
+\\
+&　\underbrace{−\frac{1}{2!}T\left\{
+\left(\int_{−∞}^∞ dt_1H_I (t_1)\right)
+\left(\int_{−∞}^∞ dt_2H_I (t_2)\right)\right\}
+}_{S^{(2)}}
++... \tag{9.69}
+\end{align}
+\]
+
+または合計として書かれる
+<!--
+or written as a sum
+-->
+\[
+\begin{align}
+\hat{S}(∞,−∞) &=\sum_{n=0}^∞\frac{(−i)^n}{n!}\int_{−∞}^∞ ...\int_{−∞}^∞
+T\left\{\left(
+\int_{−∞}^∞ dt_1H_I (t_1)\right)
+\left(\int_{−∞}^∞ dt_2H_I (t_2)\right)...
+\left(\int_{−∞}^∞ dt_nH_I (t_n)\right)\right\} \\
+\\
+&=\sum_{n=0}^∞ S^{(n)}  \tag{9.70}
+\end{align}
+\]
+
+これは、\(H_I\) には数値係数 <sup>33</sup>、すなわち対応する相互作用の結合定数、つまり \(H_I ∝ g\) が含まれるため有用である。この結合定数は、例えば電磁相互作用の場合、1 より小さい。したがって、展開式の 2 番目の項 \(S^{(2)} ∝
+(H_I)^2 ∝ g^2\) は、1 番目の項 \(S^{(1)} ∝ g\) よりも寄与が小さい。展開式の高次の項の寄与はさらに小さく、\(g > g^2 > g^3 > ...\) となる。問題のシステムを記述するには、級数展開の最初の数項を評価するだけで十分な場合が多い。高次の項は、測定不可能な補正をもたらす場合が多い。
+<!--
+This is useful because \(H_I\) has a numerical factor<sup>33</sup> in it, the coupling constant of the corresponding interaction, i.e. \(H_I ∝ g\) . This
+coupling constant is, for example, for electromagnetic interactions,
+smaller than one. Therefore, the second term in the expansion \(S^{(2)} ∝
+(H_I)^2 ∝ g^2\) contributes less than the first term \(S^{(1)} ∝ g\). The higher order
+terms in the expansion contribute even less: \(g > g^2 > g^3 > ...\). To
+describe the system in question it often suffices to evaluate the first
+few terms of the series expansion. Higher order terms often deliver
+corrections that lie outside the possibility of measurement.
+-->
+</p><p class="margin-large">
+<sup>33</sup>
+式9.46を参照。
+<!--
+See Eq. 9.46.
+-->
+</p><p>
+残念ながら、この点から先に進むには、何ページにも及ぶ複雑な代数計算が必要になります。最初のステップはウィックの定理で、これにより時間順序を交換子を用いて表現できるようになります。さらに、これらの交換子を計算する必要があり、その結果は有名なファインマン伝播関数となります。それでもなお、私たちはさらに先へ進みたいので<sup>34</sup>、証明はせずにこれらの結果を用いることにします。興味のある読者は、場の量子論に関する標準的なテキスト<sup>35</sup>を参照してください。
+<!--
+
+Unfortunately, going further from this point needs many pages of
+heavy algebra. The first step is Wick’s-Theorem which enables one
+to express the time ordering in terms of commutators. Furthermore,
+these commutators need to be computed, which results in the famous
+Feynman propagators. Nevertheless, we want to go further<sup>34</sup>, so we 
+are going to use these results without proofs. The interested reader is 
+referred to the standard texts on quantum field theory<sup>35</sup>. 
+-->
+</p><p class="margin-large">
+<sup>34</sup>
+だって、楽しいことが
+始まるんですから！
+<!--
+Because now, the fun is about to
+begin!
+-->
+<br><br>
+
+<sup>35</sup>
+この章の最後のセクションに、おすすめの本をいくつか紹介します。
+<!--
+Some recommended books will be
+listed in the last section of this chapter.
+-->
+</p>
+<h3>9.5.4 級数の評価</h3>
+<!--
+<h3>9.5.4 Evaluating the Series</h3>
+-->
+<p>
+さて、本章の冒頭で紹介した例に戻りましょう。質量を持つスピン \(\frac{1}{2}\) 場と質量を持たないスピン 0 場との間の相互作用です。対応する相互作用ハミルトニアンは
+(式 9.46)
+<!--
+
+We will now return to the example introduced at the beginning of
+this chapter: The interaction between a massive spin \(\frac{1}{2}\)
+field and a
+massless spin 0 field. The corresponding interaction Hamiltonian is
+(Eq. 9.46)
+-->
+\[
+H_I = −\int d^3xgA_μ\overline{Ψ}γ^μΨ
+\]
+
+上で説明したように、式9.70の級数のそれぞれの項を個別に見ていきます。
+<!--
+As explained above, we will look at each term of the series in Eq. 9.70
+individually.
+-->
+</p><p>
+
+この級数の最初の項は、単に恒等演算子なので自明である。
+<!--
+The first term of the series is trivial as it is simply the identity
+operator
+-->
+\[
+S^{(0)} = I  \tag{9.71}
+\]
+
+2 項目はさらに面白いです:
+<!--
+The second term is more exciting:
+-->
+\[
+S^{(1)} = −i \int_{−∞}^∞ dtH_I 
+= ig \int_{−∞}^∞ d^4xA_μ\overline{Ψ}γ^μΨ  \tag{9.72}
+\]
+
+これを9.33式と9.44式を思い出しながら書き直すと、
+<!--
+which we rewrite, recalling Eq. 9.33 and Eq. 9.44, as
+-->
+\[
+S^{(1)} = ig \int_{−∞}^∞ d^4x(A_μ^+ + A_μ^-)(\overline{Ψ}^+ +\overline{Ψ}^−)γ^μ(Ψ^+ + Ψ^−)  \tag{9.73}
+\]
+
+この2番目の項は実際には8つの項から成っていることがわかります。これらの項の1つ、\(S_1^{(1)}\) が、例えば、準備された運動量を持つ1個の電子と1個の陽電子からなる状態にどのように作用するかを見てみましょう。
+\(|e^+(p_1), e^−(p_2)\rangle\)
+<!--
+We can see this second term is actually 8 terms. Let us have a look at
+how one of these terms, we call it \(S_1^{(1)}\) , acts on a state consisting of,
+for example, one electron and one positron with prepared momenta
+\(|e^+(p_1), e^−(p_2)\rangle\)
+-->
+\[
+ig \int_{−∞}^∞ d^4xA_μ^+\overline{Ψ}^+γ^μΨ^+ |e^+(p_1), e^−
+(p_2)\rangle
+\]
+
+\(Ψ^+\) は、すべての<sup>37</sup>個の可能な運動量に対する粒子の破壊<sup>36</sup>演算子と定数、および\(e^{−ipx_1}\)の形式の項で構成されています。
+<!--
+Ψ+ consists of destruction<sup>36</sup> operators for particles for all<sup>37</sup> possible momenta, multiplied with constants and a term of the form \(e^{−ipx_1}\) :
+-->
+</p><p class="margin-large">
+<sup>36</sup>
+† の付いた演算子は生成演算子で、付かない演算子は破壊演算子であることを覚えておいてください。\(Ψ^+\) は式9.33で定義されています。
+<!--
+Remember the operators with the † 
+are those who create and the operators
+without are those who destroy. \(Ψ^+\) is
+defined in Eq. 9.33.
+-->
+<br><br>
+
+<sup>37</sup>
+あらゆる可能な運動量を統合します！
+<!--
+We integrate over all possible momenta!
+-->
+</p><p>
+
+\[
+Ψ^+ ∝ \int d^3p c_r(p)e^{−ipx}
+\]
+
+各運動量について、これはケットを破壊します。つまり、ゼロになります。なぜなら、\(c_r(p) = c_r(p_2)\) を除いて、存在しないものを破壊しようとしているからです。したがって、\(Ψ^+\) を操作すると、
+<!--
+For each momentum this destroys the ket, which means we get a
+zero, because we are trying to destroy something which is not there,
+except for \(c_r(p) = c_r(p_2)\). Therefore, operating with \(Ψ^+\) results in
+-->
+\[
+Ψ^+ |e^+(p_1), e^−(p_2)\rangle ∝ e^{−ip_2x} |e^+, 0\rangle
+\]
+
+同様に、ケットに\(\overline{Ψ}^+\)を作用させると、
+<!--
+In the same way, operating with \(\overline{Ψ}^+\) on the ket results in
+-->
+\[
+\overline{Ψ}^+e^{−ip_2x} |e^+(p_1), 0\rangle ∝ e^{−ip_2x}e^{−ip_1x} |0, 0\rangle
+\]
+
+したがって、純粋な真空状態が残り、それに多くの定数が乗じられます。ケットに作用する最後の項は \(A_μ^+\) であり、これはあらゆる運動量の光子を生成します。
+<!--
+Therefore, we are left with the pure vacuum state, multiplied with
+lots of constants. The last term operating on the ket is \(A_μ^+\) , which
+creates photons of all momenta.
+-->
+</p>
+<center><img src="images/fig9_1.png"></center>
+<p>
+<center>図9.1: 過程のファインマングラフ
+\(e^+e^− → γ\)</center>
+<!--
+Fig. 9.1: Feynman graph for the process
+\(e^+e^− → γ\)
+-->
+</p><p>
+
+定性的に言えば、この1項の寄与を求めると、運動量\(k^\prime\)を持つ光子\(\langleγ|\)の生成確率振幅は
+<!--
+Qualitatively we have, when we want the contribution of this one
+term to the probability amplitude for the creation of a photon \(\langleγ|\)
+with momentum \(k^\prime\)
+-->
+\[
+\langle f|S_1^{(1)}|i\rangle = \langle γ_{k^\prime} | S_1^{(1)}|e^+(p_1), e^−(p_2)\rangle  \tag{9.74}
+\]
+
+\[
+=\int_{−∞}^∞ d^4x \langle γ_{k^\prime} |\sum_k 定数(k) |γ_k\rangle e^{−ix(p_1+p_2−k)}
+\]
+
+\[
+=\int_{−∞}^∞ d^4x \sum_k 定数(k)
+\underbrace{\langle γ_{k^\prime} | |γ_k\rangle}_{=δ_{kk^\prime}}
+e^{−ix(p_1+p_2−k)}
+\]
+
+\[
+=\int_{−∞}^∞ d^4x 定数(k^\prime)e^{−ix(p_1+p_2−k^\prime)}
+\]
+
+\(x\) 上の積分はデルタ関数 \(δ(p_1 + p_2 − k)\) となり、これは4元運動量保存則<sup>38</sup>を表します。実験では、ある特定の運動量で系を測定または準備することはできず、ある範囲でしか測定や準備を行うことができません。したがって、計算の最後に、関連する運動量範囲で積分を行う必要があります。
+<!--
+The integration over \(x\) results in a delta function \(δ(p_1 + p_2 − k)\) that
+represents 4-momentum conservation<sup>38</sup>. In experiments we are never able to measure or prepare a system in one defined momentum, but
+only in a range. Therefore, at the end of our computation, we have to
+integrate over the relevant momentum range.
+-->
+
+</p><p class="margin-large">
+<sup>38</sup>
+\(e^−\) の 4 元運動量（= エネルギー \(p_0 = E\)
+と通常の運動量 pi）と e+ の 4 元運動量の合計は、光子の 4 元運動量 \(γ: p_1 + p_2 − k \overset{!}{=}0\) と等しくなければなりません。そうでない場合は、付録 D.2 で説明されているように、\(δ(p_1 + p_2 − k) = 0\) となります。
+<!--
+The 4-momentum (=energy \(p_0 = E\)
+and ordinary momentum pi) of \(e^−\)
+plus the 4-momentum of e+ must
+be equal to the 4-momentum of the
+photon \(γ: p_1 + p_2 − k \overset{!}{=}0\). Otherwise
+\(δ(p_1 + p_2 − k) = 0\) as explained in
+Appendix D.2.
+-->
+</p><p>
+\(\hat{S}^{(1)}\) に寄与する他の7つの項は、例えば最初は存在しない光子を破壊するため、ゼロになることに注意してください。もし電子と陽電子以外の粒子、例えば光子と陽電子 \(|γ, e^+\rangle\) から始めていたら、最初の項はゼロになり、他の項はゼロ以外の値になります。
+<!--
+Take note that the seven other terms contributing to \(\hat{S}^{(1)}\) result
+in a zero, because they destroy for example, a photon, which is not
+there in the beginning. If we had started with particles other than an
+electron and a positron, for example, a photon and a positron \(|γ, e^+\rangle\),
+the first term results in a zero and some other term is non-zero.
+-->
+</p><p>
+次に、\(\hat{S}\) の 3 番目の項を定性的に簡単に見てみます。
+<!--
+Next we take a very quick, qualitative look at the third term of \(\hat{S}\):
+-->
+\[
+\begin{align}
+S^{(2)} &= −\frac{1}{2!}T\left\{
+\left(\int_{−∞}^∞ d^4x_1\mathscr{H}_I (x_1)\right)
+\left(\int_{−∞}^∞ d^4x_2\mathscr{H}_I (x_2)\right)\right\} \\
+\\
+&= −\frac{1}{2!}T\left\{
+\left(\int_{−∞}^∞ d^4x_1gA_μ(x_1)\overline{Ψ}(x_1)γ^μΨ(x_1)\right)
+\left(\int_{−∞}^∞ d^4x_2gA_μ(x_2)\overline{Ψ}(x_2)γ^μΨ(x_2)\right)
+\right\}
+\tag{9.75}
+\end{align}
+\]
+
+ここで、時間順序はウィックの定理を用いて、交換子を含む正規順序（\(N{}\)と表記）の項の和に書き直すことができる。正規順序とは、すべての生成演算子を左側に、すべての消滅演算子を右側に配置することを意味する。例えば、\(N\{aa^†a^†a\} =
+a^†a^†aa\)。この和の項の一つは、例えば次のようになる。
+<!--
+where the time-ordering can be rewritten using Wick’s Theorem into
+a sum of normal-ordered, denoted \(N{}\), terms with commutators in
+it. Normal ordering means, putting all creation operators to the left,
+and all annihilation operators to the right. For instance, \(N\{aa^†a^†a\} =
+a^†a^†aa\). One of the terms of this sum, for example, is
+-->
+\[
+−\frac{1}{2!}g^2 \int \int d^4x_1d^4x_2N \left\{
+\overline{Ψ}(x_1)γ^μΨ(x_1)[A_μ(x_1), A_μ(x_2)]\overline{Ψ}(x_2)γ^μΨ(x_2)\right\}
+\]
+
+ここで、交換子の計算は \(A_μ\) の明示的な解を用いて行うことができ、その結果は光子伝播関数<sup>39</sup>
+\([A_μ(x_1), A_μ(x_2)] ≡ iD_μ(x_1 − x_2)\) と呼ばれます。
+<!--
+where the computation of the commutator can be done using the
+explicit solution for \(A_μ\) and the result is called Photon propagator<sup>39</sup>
+\([A_μ(x_1), A_μ(x_2)] ≡ iD_μ(x_1 − x_2)\).
+-->
+</p><p class="margin-large">
+<sup>39</sup>
+伝播関数は、場の量子論において導出が最も複雑なものの1つです。例えば、スカラー伝播関数を考えると、出発点は\(iΔ ≡ \langle 0| T{Φ(x)Φ^†(y)} |0\rangle\)です。これは、真空からyで粒子を生成し、それを\(x\)で消滅させます。
+これは交換子として書き直すことができ、\(iΔ =\langle 0| [Φ^{+†}(y),Φ^−(x)] |0\rangle\)
+そして、数ページにわたる数式処理の後、\(iΔ =\frac{−i}{2π^3}\int \frac{d^3k}{ω_k}e^{−ik(x−y)}\)という形式が得られます。この最終的な式こそが、計算で使用できるものです。これは単なるスケッチで、多くの点が完全に正確というわけではありません。それでも、何が起こっているのか、大まかなイメージはつかめるはずです。
+<!--
+
+The propagators are one of the most
+complicated things to derive in quantum
+field theory. For instance, considering
+the scalar propagator, the starting
+point is \(iΔ ≡ \langle 0| T{Φ(x)Φ^†(y)} |0\rangle\),
+which creates a particle from the vacuum
+at y and destroys it again at \(x\).
+This can be rewritten as the commutator
+\(iΔ =\langle 0| [Φ^{+†}(y),Φ^−(x)] |0\rangle\)
+and after many pages of math
+we get an expression of the form
+\(iΔ =\frac{−i}{2π^3}\int \frac{d^3k}{ω_k}e^{−ik(x−y)}\). This final
+expression is what we can use in computations.
+This is just a sketch and
+many things here are not completely
+correct. Nevertheless it should give you
+a rough idea of what is going on.
+-->
+</p><p>
+この項から、また非常に多くの項が得られます。なぜなら、\(Ψ,\overline{Ψ}\) などは実際には2つの項の和であり、ここではそのうちの1つだけを見ていきます。したがって、これらの非常に多くの項のうちの1つ<sup>40</sup>について、電子と陽電子から始めると、定性的に次のような式が得られます。
+<!--
+
+From this term we get again many, many terms, because every
+\(Ψ,\overline{Ψ}\) etc. is actually a sum of two terms, and we will take a look at
+just one of them. Therefore, qualitatively we have for one<sup>40</sup> of these many many terms, if we start again with an electron and a positron, something of the form
+-->
+</p><p class="margin-large">
+<sup>40</sup>
+再び、電子と陽電子の衝突がゼロにならないという項を取ります。
+<!--
+
+We pick again the term not resulting
+in a zero for the collision of an electron
+with a positron.
+-->
+</p><p>
+
+\[
+−\frac{1}{2!}g^2 \int \int d^4x_1d^4x_2\overline{Ψ}^−
+(x_1)Ψ^−(x_1)D_μ(x_1 − x_2)\overline{Ψ}^+(x_2)Ψ^+(x_2) |e^+, e^−\rangle  \tag{9.76}
+\]
+これは物理的に理解できます。
+<!--
+This can be understood physically:
+-->
+<div class="styleBullet">
+<ul><li>
+• 開始時の2つの粒子は、\(x_2\)で\(\overline{Ψ}^+(x_2)Ψ^+(x_2)\)によって破壊されます。
+</li><br><li>• 次に、伝播関数は\(x_2\)に「仮想」光子を生成し、それを\(x_1\)に伝播させてそこで破壊します。
+</li><br><li>• 最後に、\(\overline{Ψ}^−(x_1)Ψ^−(x_1)\)によって、\(x_1\)に再び電子と陽電子が生成されます。
+<!--
+• The two particles we start with are destroyed at \(x_2\) by \(\overline{Ψ}^+(x_2)Ψ^+(x_2)\).
+</li><br><li>• Then the propagator creates a "virtual" photon at \(x_2\) and propagates
+it to \(x_1\) where it is destroyed.
+</li><br><li>• Finally \(\overline{Ψ}^−(x_1)Ψ^−(x_1)\) again create at \(x_1\) an electron and a positron.
+-->
+</li></ul></div>
+</p><p>
+したがって、この項を用いて、反応 \(e^+e^− → e^+e^−\) の確率振幅を計算することができます。もちろん、入射粒子と出射粒子の個々の運動量は完全に異なる可能性がありますが、それらの和は異なります41。同様に、他のすべての項は、質量のある<sup>42</sup>スピン \(\frac{1}{2}\) と質量のない<sup>43</sup>スピン1場との間の何らかの反応として解釈できます。
+<!--
+We can therefore compute with this term the probability amplitude
+for a reaction \(e^+e^− → e^+e^−\), where of course the individual
+momenta of the incoming and outgoing particles can be completely
+different, but not their sum41. In the same way, all the other terms
+can be interpreted as some reaction between massive<sup>42</sup> spin \(\frac{1}{2}\) and massless<sup>43</sup> spin 1 fields.
+-->
+</p><p class="margin-large">
+<sup>41</sup>
+これは事実であるに違いありません。なぜなら、運動量保存則が成り立つからです。
+<!--
+This must be the case, because we 
+have conservation of momentum. 
+-->
+<br><br>
+
+<sup>42</sup>
+ここでは電子と陽電子について見てきました。他にはクォークや、他の2つのレプトン（μ）とτが考えられます。
+<!--
+Here we looked at electrons and
+positrons. Other possibilities are the
+quarks or the other two leptons \(μ\) and
+\(τ\).
+-->
+<br><br>
+
+<sup>43</sup>
+ここで光子
+<!--
+Here photons
+-->
+</p>
+<center><img src="images/fig9_2.png"></center><p>
+<center>図9.2: 過程のファインマングラフ
+\(e^+e^− → γ → e^+e^−\)</center>
+<!--
+Fig. 9.2: Feynman graph for the process
+\(e^+e^− → γ → e^+e^−\)
+-->
+</p><p>
+このような計算から得られる確率振幅は、実験で直接確認することができます。なぜなら、確率振幅は、実験で測定できる量、すなわち断面積に直接結びついているからです。
+この章で概説した手法は、場の量子論の多くの重要な結果を導くために用いることができます。導出した他の相互作用項は、相互作用ハミルトニアンに代入することができ、対応する確率振幅も同様に得られます。
+ここで議論した方法は、結合定数が1より小さい場合にのみ有効であることに注意してください。結合定数が1より大きい場合、式9.70の和における高次の項は低次の項よりも大きくなります。したがって、近似値を得るために級数の最初の項だけを使用することは決して正当化されません。
+<!--
+
+The probability amplitudes we get from computations like this
+can then be directly checked in experiments, because the probability
+amplitude is directly connected to a quantity that can be measured in
+experiments: the cross section.
+The techniques outlined in this chapter can be used to derive
+many important results of quantum field theory. The other interaction
+terms we derived can be put into the interaction Hamiltonian
+and the corresponding probability amplitudes follow analogously.
+Take not that the method we discussed here, only works if the coupling
+constant is smaller than 1. If the coupling constant is bigger
+than 1, higher order terms in the sum in Eq. 9.70 are bigger than
+lower order terms and therefore it is by no means justified to use just
+the first terms of the series, to get an approximation.
+-->
+</p>
+<h2>さらに読むためのヒント</h2>
+<!--
+<h2>Further Reading Tips</h2>
+-->
+<p>
+• <strong>Robert D. Klauber - Student Friendly Quantum Field Theory</strong><sup>44</sup>
+(『学生に優しい場の量子論』)は、私の個人的な意見ですが、場の量子論の入門書として最高のものです。すべての章が教育的に優れています。著者は、場の量子論を学ぶ人がどのような問題に直面するかについて、多くの時間をかけて考察しているからです。
+<!--
+is, in my humble opinion, the best introduction to quantum field
+theory. All chapters are pedagogically brilliant, because the author
+spent a lot of time thinking about what problems someone
+learning quantum field theory faces.
+-->
+</p><p class="margin-large">
+<sup>44</sup>
+Robert D. Klauber. Student Friendly 
+Quantum Field Theory. Sandtrove
+Press, 2nd edition, 12 2013. ISBN
+9780984513956
+</p><p>
+
+• <strong>Francis Halzen, Alan D. Martin - Quarks and Leptons: An In
+troductory Course in Modern Particle Physics</strong><sup>45</sup>
+(『クォークとレプトン：現代素粒子物理学入門』)は、場の量子論の計算手法の応用に焦点を当てた優れた本です。
+<!--
+ is a great book which focusses on the applications of the computational schemes
+of quantum field theory.
+-->
+</p><p class="margin-large">
+<sup>45</sup>
+Francis Halzen and Alan D. Martin. 
+Quarks and Leptons: An Introductory
+Course in Modern Particle Physics. Wiley,
+1st edition, 1 1984. ISBN 9780471887416
+</p><p>
+
+• <strong>Anthony Zee - Quantum Field Theory in a Nutshell</strong><sup>46</sup>
+(『場の量子論を一言で表す』) には、優れた独自の説明がいくつかありますが、初心者には理解するには短すぎる章もあります。他の本で場の量子論を学んだ後には、ぜひお勧めします。
+<!--
+ has some brilliant and unique explanations, but some chapters are simply
+too short to understand as a beginner. Highly recommended after
+learning some quantum field theory from another book.
+-->
+</p><p class="margin-large">
+<sup>46</sup>
+Anthony Zee. Quantum Field Theory in
+a Nutshell. Princeton University Press,
+1st edition, 3 2003. ISBN 9780691010199
+</p><p>
+
+• <strong>Franz Mandl, Graham Shaw - Quantum Field Theory</strong><sup>47</sup> 
+(『場の量子論』)は、弱い相互作用理論と強い相互作用理論に関する非常に良い出発点である。
+<!--
+is a very 
+good starting point regarding weak and strong interaction theory
+-->
+</p><p class="margin-large">
+<sup>47</sup>
+Franz Mandl and Graham Shaw.
+Quantum Field Theory. Wiley, 2nd
+edition, 5 2010. ISBN 9780471496847
+</p><p>
+
+•<strong>Michele Maggiore - A Modern Introduction to Quantum Field
+Theory</strong><sup>48</sup>
+(『場の量子論の現代的入門書』)は、群論的概念に重点を置いた優れた入門書です。
+<!--
+ is a great introduction with a strong focus on group 
+theoretical concepts.
+-->
+
+</p><p class="margin-large">
+<sup>48</sup>
+Michele Maggiore. A Modern Introduction
+to Quantum Field Theory. Oxford
+University Press, 1st edition, 2 2005.
+ISBN 9780198520740
+</p><p>
+
+• <strong>Matthew Schwartz - Quantum Field Theory and the Standard
+Model</strong><sup>49</sup> 
+(『場の量子論と標準模型』)は、多くの高度なトピックについて啓発的な説明を提供しています。
+<!--
+offers illuminating explanations on many advanced topics.
+-->
+
+</p><p class="margin-large">
+<sup>49</sup>
+Matthew D. Schwartz. Quantum
+Field Theory and the Standard Model.
+Cambridge University Press, 1 edition,
+12 2013. ISBN 9781107034730
+</p>
+<h2>9.6 付録: クライン・ゴルドン方程式の最も一般的な解</h2>
+<!--
+<h2>9.6 Appendix: Most General Solution of the
+Klein-Gordon Equation</h2>
+-->
+<p>
+クライン・ゴルドン方程式の<strong>一つの</strong>解を見つけるのはそれほど難しくありません。確かに平面波は
+<!--
+It is not too hard to find <strong>one</strong> solution of the Klein-Gordon equation. Certainly plane waves
+-->
+\[
+Φ(x) = ae^{i(px−Et)} = ae^{−i(p_μx^μ)}
+\]
+特殊相対論のエネルギー・運動量関係により、この仕事はうまくいく。
+(式8.2)
+<!--
+do the job, because of the energy-momentum relation of special relativity
+(Eq. 8.2)
+-->
+\[
+E^2 = \vec{p}^2 + m^2 → p_μ p^μ = m^2
+\]
+
+確認できたところによると：
+<!--
+as we can check:
+-->
+\[
+\begin{align}
+(∂_μ∂^μ + m^2)Φ &= (∂_μ∂^μ + m^2)e^{−i(p_μx^μ) \\
+\\
+&= (−p_μ p^μ + m^2)e^{−i(p_μx^μ) \\
+\\
+&= (−m^2 + m^2)e^{−i(p_μx^μ) \\
+\\
+&= 0  \tag{9.77}
+\end{align}
+\]
+
+場を2回微分するので、指数の符号は関係ありません。同様に
+<!--
+Because we differentiate the field twice the sign in the exponent does
+not matter. Equally
+-->
+\[
+Φ^†(x) = a^†e^{−i(px−Et) = a^†e^{i(p_μx^μ)}
+\]
+
+は解である。さらに解は線形結合として構築できる。
+一般解は、すべての可能な解の重ね合わせによって与えられ、
+これはフーリエ展開<sup>50</sup>として見ることができる。
+<!--
+is a solution. Further solutions can be built as linear combinations.
+A general solution is given by superposition of all possible solutions,
+which can be seen as Fourier expansion<sup>50</sup>
+-->
+</p><p class="margin-large">
+<sup>50</sup>
+これが \(2π\) の因数の由来です。別の見方をすると、解が正規直交集合を形成することが求められます。\(\int dke^{ikx}e^{−ikx^\prime} =
+\int dke^{ik(x−x^\prime)} = 2πδ(x − x^\prime)\)。したがって、\(2π\) の因数は正規化定数です。
+<!--
+That’s were the factors of \(2π\) come
+from. Another way of seeing this is
+demanding the solutions to form an
+orthonormal set: \(\int dke^{ikx}e^{−ikx^\prime} =
+\int dke^{ik(x−x^\prime)} = 2πδ(x − x^\prime)\). Therefore,
+the factors of \(2π\) are normalisation
+constants.
+-->
+</p><p>
+
+\[
+Φ(x) =\int \frac{dp^4}{(2π)^4} \left(a(p)e^{−i(p_μx^μ) + a^†(p)e^{i(p_μx^μ)}\right)
+\]
+
+\(a = a(p)\) と書いたのは、\(p\) の値ごとに異なる乗算係数を持つことができ、合計の各項がそれぞれ独立した解となるためです。
+<!--
+Take note that we wrote \(a = a(p)\) because we can have a different
+multiplication factor for each value of \(p\) and each term in the summation
+is a solution on its own.
+-->
+</p><p>
+
+この文脈では、エネルギーと運動量の代わりに、波数\(k_i ≡ \frac{p_i}{\hbar}\)と周波数\(k_0 = w ≡ \frac{E}{\hbar}\)を用いるのが慣例です。\(\hbar = 1\)を用いるので、標準的な教科書的な表現にするには変数名を変更するだけで済みます。さらに、\(k_x ≡ k_μx^μ\)と略記するのが慣例です。したがって、次のように書きます。
+<!--
+In this context it is conventional to work with the wave number
+\(k_i ≡ \frac{p_i}{\hbar}\) and the frequency \(k_0 = w ≡ \frac{E}{\hbar}\) instead of the energy and
+momentum. Because we work with \(\hbar = 1\) we simply have to rename
+our variables to get the standard textbook expressions. Furthermore
+it’s conventional to abbreviate \(k_x ≡ k_μx^μ\). We therefore write
+-->
+\[
+Φ(x) =\int \frac{dk^4}{(2π)^4}
+\left(a(k)e^{−i(kx)} + a^†(k)e^{i(kx)}\right)
+\]
+</p><p>
+
+クライン・ゴルドン方程式のすべての解が自然を記述するのに適しているわけではないことに注意してください。なぜなら、<strong>「質量殻」条件</strong>があるからです。
+<!--
+Take note that not all solutions of the Klein-Gordon equation are
+suited to describe nature, because we have the <strong>"mass-shell" condition</strong>
+-->
+\[
+p_μ p^μ = k_μk^μ = m^2 → k_0^2− k_i^2
+\overset{!}{=} m^2 → k^2 \overset{!}{=}
+m^2   \tag{9.78}
+\]
+
+質量殻条件を満たす解のみが、相対論的エネルギー運動量関係式（式8.2）と一致する。この条件を式に組み込むことで、デルタ分布を持つ非物理的（オフシェル）解をすべて除外することができる<sup>51</sup>
+<!--
+Only solutions satisfying the mass-shell condition are in agreement
+with the relativistic energy-momentum relation (Eq. 8.2). We can
+build this condition into our equation, excluding all non-physical
+(off-shell) solutions with a delta distribution<sup>51</sup>
+-->
+</p><p class="margin-large">
+<sup>51</sup>
+これについては付録 D.2 で説明されています。
+<!--
+This is explained in Appendix D.2. 
+-->
+</p><p>
+
+\[
+Φ(x)_{physical} =\int \frac{dk^4}{(2π)^4} 2πδ(k^2 − m^2)
+\left(a(k)e^{−i(kx)} + a^†(k)e^{i(kx)}\right)
+\]
+
+それに加えて、正のエネルギー解のみが物理的に存在します。なぜなら、前述のように、そうでなければエネルギーは下から無限大となり、何も安定しないからです。この制約を、解に組み込むには、ヘビサイド関数\(θ(k_0)\)を用います。\(k_0 < 0\)の場合には0、\(k_0 ≥ 0\)の場合には1となります。積分は次のようになります。
+<!--
+Besides that, only positive energy solutions are physical, because as
+explained earlier, otherwise the energy would be unbounded from
+below and nothing would be stable. We can built this constraint on
+our solutions into the equation by using a Heaviside function \(θ(k_0)\),
+being zero for \(k_0 < 0\) and 1 for \(k_0 ≥ 0\). Our integral then reads
+-->
+\[
+Φ(x)_{physical} =\int \frac{1}{(2π)^3} 
+\underbrace{dk^4δ(k^2 − m^2)θ(k_0)}_{measure}
+\left(a(k)e^{−i(kx)} + a^†(k)e^{i(kx)}\right)
+\]
+
+ここで、この尺度は次のように書き直すことができる。
+<!--
+where we can rewrite the measure as follows
+-->
+\[
+\begin{align}
+dk^4δ(k^2 − m^2)θ(k_0) &= dk^4δ(k_0^2
+\underbrace{−\vec{k}^2 − m^2}_{≡−ω_k^2(definition)}
+)θ(k_0) \\
+\\
+&= dk^4δ(k_0^2− ω_k^2)θ(k_0) \\
+\\
+&= dk^4δ\left((k_0 − ω_k)(k_0 + ω_k)\right)θ(k_0) \\
+\\
+&\underbrace{=}_{using\; δ\left(f(x)\right)=\sum_i\frac{δ(x−a_i)}{\left|\frac{df}{dx}(a_i)\right|} \text{where ai denotes the roots, i.e. }f(a_i)=0,\text{ of the function }f(x)}
+dk^4\frac{1}{2k_0}\left(δ(k_0 − ω_k) + δ(k_0 + ω_k)\right)
+θ(k_0) \\
+\\
+&\underbrace{=}_{\text{because the argument of }δ(k_0+ω_k)\text{ never becomes zero with }k_0≥0}
+dk^4\frac{1}{2k_0}δ(k_0 − ω_k) \\
+\\
+&= dk^3dk_0\frac{1}{2k_0}δ(k_0 − ω_k) \\
+\\
+&\underbrace{=}_{\text{Integrating over }k_0}
+dk^3\frac{1}{2ω_k}  \tag{9.79}
+\end{align}
+\]
+</p><p>
+最終的に、クライン・ゴルドン方程式の一般解と物理的解は次のようになります。
+<!--
+So finally the general and physical solution of the Klein-Gordon
+equation reads
+-->
+\[
+Φ(x) =\int dk^3 \frac{1}{(2π)^32ω_k}
+\left(a(k)e^{−i(kx)} + a^†(k)e^{i(kx)}\right)
+\tag{9.80}
+\]
+
+</p>
+    </body>
+</html>

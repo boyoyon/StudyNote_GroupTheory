@@ -146,7 +146,7 @@ I, an element g close to the identity is denoted
 \[
 g(\epsilon) = I + \epsilon X  \tag{3.47}
 \]
-ここで、\(\epsilon\) は数学では常にそうであるように、非常に小さな数であり、\(X\) は生成元と呼ばれるオブジェクトです。これについては後ほど説明します。
+ここで、\(\epsilon\) は数学では常にそうであるように、非常に小さな数であり、\(X\) は生成子と呼ばれるオブジェクトです。これについては後ほど説明します。
 このような小さな変換は、あるオブジェクトに作用してもほとんど変化しません。可能な限り小さなケースでは、このような変換は無限小変換と呼ばれます。しかし、このような無限小変換を何度も繰り返すと、有限の変換になります。
 回転について考えてみましょう。ある方向への小さな回転を何度も行うことは、同じ方向への大きな回転を1回行うことに相当します。数学的には、小さな変換を何度も繰り返すという考え方は次のように書くことができます。
 <!--
@@ -204,13 +204,13 @@ books about analysis.
 \[
 h(θ) = \lim_{N→∞}\left(I +\frac{θ}{N}X\right)^N = e^{θX} \tag{3.51}
 \]
-ある意味で、オブジェクト \(X\) は有限変換 \(h\) を生成するため、生成元と呼ばれます。
+ある意味で、オブジェクト \(X\) は有限変換 \(h\) を生成するため、生成子と呼ばれます。
 <!--
 In some sense the object X generates the finite transformation \(h\),
 which is why it’s called the generator.
 -->
 </p><p>
-与えられた変換の生成元 \(X\) を計算したい場合、上記の式を微分することで得られます。
+与えられた変換の生成子 \(X\) を計算したい場合、上記の式を微分することで得られます。
 <!--
 If we want to calculate the generator X of a given transformation,
 we can differentiate the above formula
@@ -225,7 +225,7 @@ Thus, if we evaluate this formula at \(θ = 0\), we get
 \[
 X =\frac{dh(θ)}{dθ}\Bigg|_{θ=0} \tag{3.53}
 \]
-このような考え方の背後にある考え方は、無限小元（上記で \(X\) と表記）の重要な部分、つまり生成元を見ることで、群について多くのことを学ぶことができるというものです。これは後ほどより明確に説明しますが、まずは別の観点から見てみましょう。生成元がどのような意味で有限変換を生成するのかが、より明確になります。
+このような考え方の背後にある考え方は、無限小元（上記で \(X\) と表記）の重要な部分、つまり生成子を見ることで、群について多くのことを学ぶことができるというものです。これは後ほどより明確に説明しますが、まずは別の観点から見てみましょう。生成子がどのような意味で有限変換を生成するのかが、より明確になります。
 <!--
 The idea behind such lines of thought is that one can learn a lot
 about a group by looking at the important part of the infinitesimal
@@ -340,7 +340,7 @@ Course. Springer, 1st corrected edition, 8
 \[
 e^X ◦ e^Y = e^{X+Y+\frac{1}{2}[X,Y]+\frac{1}{12}[X,[X,Y]]−\frac{1}{12} [Y,[X,Y]]+...} \tag{3.55}
 \]
-左辺には、リー群の2つの元（gとhと名付けましょう）の乗算があります。これらは対応する生成元（＝リー代数の元）を使って表すことができます。
+左辺には、リー群の2つの元（gとhと名付けましょう）の乗算があります。これらは対応する生成子（＝リー代数の元）を使って表すことができます。
 <!--
 On the left hand side, we have the multiplication of two elements of
 the Lie group, let’s name them g and h, which we can write in terms
@@ -349,7 +349,7 @@ of the corresponding generators (=elements of the Lie algebra)
 \[
 \underbrace{g}_{\in G}◦\underbrace{h}_{\in G}= e^X ◦ e^Y = \underbrace{e^{X+Y+\frac{1}{2}[X,Y]+\frac{1}{12} [X,[X,Y]]−\frac{1}{12} [Y,[X,Y]]+...}}_{\in G} \tag{3.56}
 \]
-生成元<sup>41</sup> \(X,Y ∈ \mathfrak{g}\)を用いる。
+生成子<sup>41</sup> \(X,Y ∈ \mathfrak{g}\)を用いる。
 <!--
 with the generators <sup>41</sup> \(X,Y ∈ g\). 
 -->
@@ -401,7 +401,7 @@ algebra \(X,Y ∈ \mathfrak g\) we have \([X,Y] ∈ \mathfrak g\) and
 in general \(X ◦ Y \notin \mathfrak g\)
 -->
 </p><p>
-これらの新しい概念を説明する例を見た後、リー代数の現代的な定義を見てみましょう。この定義の主要な要素は、群の生成元がリー括弧内に置かれたときにどのように振る舞うかです。この一般的な定義を用いると、異なる群が同じリー代数を持つと言えることがわかります。上記の定義では、このようなことはほとんど意味をなさないでしょう。しかしながら、リー代数についてのこの新しい考え方により、与えられた変換に対応する最も基本的な記述を明らかにすることができます。これは、リー理論において、各リー代数に対して正確に1つの区別されたリー群が存在するという定理があるため可能です。しかし、抽象的な定義によれば、リー代数は多くのリー群に対応します。リー群の現代的な定義を導入した後で、これをより具体的に説明します。
+これらの新しい概念を説明する例を見た後、リー代数の現代的な定義を見てみましょう。この定義の主要な要素は、群の生成子がリー括弧内に置かれたときにどのように振る舞うかです。この一般的な定義を用いると、異なる群が同じリー代数を持つと言えることがわかります。上記の定義では、このようなことはほとんど意味をなさないでしょう。しかしながら、リー代数についてのこの新しい考え方により、与えられた変換に対応する最も基本的な記述を明らかにすることができます。これは、リー理論において、各リー代数に対して正確に1つの区別されたリー群が存在するという定理があるため可能です。しかし、抽象的な定義によれば、リー代数は多くのリー群に対応します。リー群の現代的な定義を導入した後で、これをより具体的に説明します。
 <!--
 After looking at an example to illustrate these new notions, we
 will have a look at the modern definition of a Lie algebra. The main
@@ -425,7 +425,7 @@ Now we want to take a look at an explicit example of how we can
 derive the Lie algebra of a given group.
 -->
 </p>
-<h3>3.4.1 \(\mathcal{SO}(3)\) の生成元とリー代数</h3>
+<h3>3.4.1 \(\mathcal{SO}(3)\) の生成子とリー代数</h3>
 <!--
 <h3>3.4.1 The Generators and Lie Algebra of \(\mathcal{SO}(3)\)</h3>
 -->
@@ -437,7 +437,7 @@ The defining conditions of the group SO(3) are (Eq. 3.10)
 \[
 \mathcal{O}^T\mathcal{O} \overset{!}{=}I　and　\det(\mathcal{O})\overset{!}{=}1 \tag{3.57}
 \]
-すべての群の元 \(\mathcal{O}\) を生成元 \(\mathcal{J}\) で表すことができます。
+すべての群の元 \(\mathcal{O}\) を生成子 \(\mathcal{J}\) で表すことができます。
 <!--
 We can write every group element \(\mathcal{O}\) in terms of a generator \(\mathcal{J}\):
 -->
@@ -516,9 +516,9 @@ This is explained in Appendix A.1.
 \tag{3.61}
 \]
 
-これらの行列は、群 \(\mathcal{SO}(3)\) の生成元の基底となります。
-これは、群の任意の生成元がこれらの基底生成元の線型結合として書けることを意味します: \(\mathcal{J} = a\mathcal{J}_1 + b\mathcal{J}_2 + c\mathcal{J}_3\)、ここで
-\(a, b, c\) は実定数を表す。これらの生成元は、レヴィ・チヴィタ記号 <sup>46</sup> を用いることでより簡潔に書けます。
+これらの行列は、群 \(\mathcal{SO}(3)\) の生成子の基底となります。
+これは、群の任意の生成子がこれらの基底生成子の線型結合として書けることを意味します: \(\mathcal{J} = a\mathcal{J}_1 + b\mathcal{J}_2 + c\mathcal{J}_3\)、ここで
+\(a, b, c\) は実定数を表す。これらの生成子は、レヴィ・チヴィタ記号 <sup>46</sup> を用いることでより簡潔に書けます。
 <!--
 These matrices form a basis for the generators of the group \(\mathcal{SO}(3)\).
 This means any generator of the group can be written as a linear
@@ -538,7 +538,7 @@ in Appendix B.5.5.
 \[
 (\mathcal{J}_i)_{jk} = -\epsilon_{ijk} \tag{3.62}
 \]
-ここで\(j, k\)は生成元\(\mathcal{J}_i\)の要素を表す。例えば、
+ここで\(j, k\)は生成子\(\mathcal{J}_i\)の要素を表す。例えば、
 <!--
 where \(j, k\) denote the components of the generator \(\mathcal{J}_i\). For example,
 -->
@@ -567,7 +567,7 @@ where \(j, k\) denote the components of the generator \(\mathcal{J}_i\). For exa
 \]
 
 </p><p>
-最初の基底生成器からどのような有限変換行列が得られるかを見てみましょう。生成器と有限変換の関係は指数関数によって与えられます:
+最初の基底生成子からどのような有限変換行列が得られるかを見てみましょう。生成子と有限変換の関係は指数関数によって与えられます:
 \(R_{1\,fin} = e^{θ\mathcal{J}_1}\) 。これを計算するには、\(\mathcal{J}_1\) の右下の 2 × 2 行列 <sup>47</sup> \(j_1\) に注目し、零点は一旦無視します。
 <!--
 Let’s see what finite transformation matrix we get from the first
@@ -578,7 +578,7 @@ matrix <sup>47</sup> \(j_1\) in \(\mathcal{J}_1\) and ignore the zeroes for a mo
 -->
 </p><p class="margin-large">
 <sup>47</sup>
-これは、行列形式の2次元レヴィ・チヴィタ記号\((j_1)_{ij} = -\epsilon_{ij}\) を正確に減じたものであり（付録 B.5.5 を参照）、これは2次元（\(\mathcal{SO}(2)\) の回転の生成元）です。
+これは、行列形式の2次元レヴィ・チヴィタ記号\((j_1)_{ij} = -\epsilon_{ij}\) を正確に減じたものであり（付録 B.5.5 を参照）、これは2次元（\(\mathcal{SO}(2)\) の回転の生成子）です。
 <!--
 This is exactly minus the two-dimensional
 Levi-Civita symbol
@@ -697,7 +697,7 @@ rotations around the other axes, too.
 
 </p><p>
 
-これで、群の生成元が明示的な行列形式で得られます（式3.61）。これにより、リー括弧関係を
+これで、群の生成子が明示的な行列形式で得られます（式3.61）。これにより、リー括弧関係を
 総当たり法で計算できます。<sup>49</sup>
 <!--
 We now have the generators of the group in explicit matrix form
@@ -708,7 +708,7 @@ We now have the generators of the group in explicit matrix form
 </p><p class="margin-large">
 <sup>49</sup>
 
-上で説明したように、リー代数の自然積はリー括弧です。ここでは、リー括弧に入れられた基底生成元がどのように振る舞うかを計算します。他のすべての生成元は、これらの基底生成元の線形結合によって構成できます。したがって、基底生成元のリー括弧の結果がわかれば、他のすべての生成元の結果も自動的にわかります。リー括弧内での基底生成元のこの振る舞いは、次のセクションで非常に重要になります。リー代数に関する重要なことはすべて、基底生成元のリー括弧関係にエンコードされています。
+上で説明したように、リー代数の自然積はリー括弧です。ここでは、リー括弧に入れられた基底生成子がどのように振る舞うかを計算します。他のすべての生成子は、これらの基底生成子の線形結合によって構成できます。したがって、基底生成子のリー括弧の結果がわかれば、他のすべての生成子の結果も自動的にわかります。リー括弧内での基底生成子のこの振る舞いは、次のセクションで非常に重要になります。リー代数に関する重要なことはすべて、基底生成子のリー括弧関係にエンコードされています。
 <!--
 As explained above, the natural product of the Lie algebra is the Lie
 bracket. Here we compute how the
@@ -800,7 +800,7 @@ where \(\epsilon_{ijk}\) is again the Levi-Civita symbol.
 \]
 </p><p>
 
-物理学では、\(\mathcal{SO}(3)\) の生成元を "\(i\)" という特別な語で定義するのが慣例となっている。具体的には、\(e^{\tilde{\phi}\mathcal{J}}\) の代わりに、\(e^{i\phi\mathcal{J}}\) と書き、\(\phi = -\tilde{\phi}\) とする。生成元は
+物理学では、\(\mathcal{SO}(3)\) の生成子を "\(i\)" という特別な語で定義するのが慣例となっている。具体的には、\(e^{\tilde{\phi}\mathcal{J}}\) の代わりに、\(e^{i\phi\mathcal{J}}\) と書き、\(\phi = -\tilde{\phi}\) とする。生成子は
 <!--
 In physics it’s conventional to define the generators of \(\mathcal{SO}(3)\) with an extra "\(i\)". Concretely
 this means that instead of \(e^{\tilde{\phi}\mathcal{J}}\) , we write \(e^{i\phi\mathcal{J}}\) with \(\phi = -\tilde{\phi}\). Our generators
@@ -866,7 +866,7 @@ For example now we have \(\mathcal{J}_1^*=\begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & i
 -->
 </p><p>
 
-これは素晴らしい特性です。エルミート行列は実固有値を持ち、これは量子力学では重要になります。量子力学では、生成元の固有値は実験で測定すると予想される値です <sup>53</sup>。
+これは素晴らしい特性です。エルミート行列は実固有値を持ち、これは量子力学では重要になります。量子力学では、生成子の固有値は実験で測定すると予想される値です <sup>53</sup>。
 <!--
 This is a nice property, because Hermitian matrices have real eigenvalues and this becomes important in quantum mechanics where the eigenvalues of the generators are the values we expect to measure in experiments <sup>53</sup>. 
 -->
@@ -879,7 +879,7 @@ This will be discussed in Section 8.3.
 -->
 </p><p>
 
-"\(i\)" がない場合、生成元は反エルミート
+"\(i\)" がない場合、生成子は反エルミート
 \(\mathcal{J}^† = (\mathcal{J}^*)^T= −\mathcal{J}\) となり、対応する固有値は虚数になります。
 これにより、固有値を実験で観測できるものとして解釈することが直感的に難しくなります。
 <!--
@@ -921,7 +921,7 @@ the first rotation matrix, as quoted in Eq. 3.22 and derived in Eq. 3.69, this y
 \end{align}
 \]
 
-これはまさに式3.61の最初の生成元です。しかしながら、最初の方法はより一般的です。なぜなら、必ずしも有限の変換行列が与えられているわけではないからです。ローレンツ群については、まず群の定義から始め、基底生成元を導出し、その後でローレンツ変換の明示的な行列形式を計算します。既に明示的な変換行列が与えられている場合は、式3.53を用いて対応する生成元を導くことができます。
+これはまさに式3.61の最初の生成子です。しかしながら、最初の方法はより一般的です。なぜなら、必ずしも有限の変換行列が与えられているわけではないからです。ローレンツ群については、まず群の定義から始め、基底生成子を導出し、その後でローレンツ変換の明示的な行列形式を計算します。既に明示的な変換行列が与えられている場合は、式3.53を用いて対応する生成子を導くことができます。
 <!--
 which is exactly the first generator in Eq. 3.61. Nevertheless, the
 first method is more general, because we will not always start with given finite transformation matrices. For the Lorentz group we will
@@ -1027,7 +1027,7 @@ bracket of classical mechanics.
 
 </p><p>
 
-重要な点は、この定義がいかなるリー群にも言及していないことです。リー代数の定義はそれ自体で成り立っており、これが非常に理にかなっていることが分かります。次の節では、\(\mathcal{SU}(2)\) の生成元を見て、線形結合によって他のすべての生成元を構成するために使用できる生成元の集合である基底生成元が、\(\mathcal{SO}(3)\) の基底生成元と同じリー括弧関係を満たすことを確認します (式 3.72))。これは、\(\mathcal{SU}(2)\) と \(\mathcal{SO}(3)\) が同じリー代数を持つと解釈されます。これは非常に重要な結果であり、\(\mathcal{SU}(2)\) と \(\mathcal{SO}(3)\) について多くのことを教えてくれるでしょう。
+重要な点は、この定義がいかなるリー群にも言及していないことです。リー代数の定義はそれ自体で成り立っており、これが非常に理にかなっていることが分かります。次の節では、\(\mathcal{SU}(2)\) の生成子を見て、線形結合によって他のすべての生成子を構成するために使用できる生成子の集合である基底生成子が、\(\mathcal{SO}(3)\) の基底生成子と同じリー括弧関係を満たすことを確認します (式 3.72))。これは、\(\mathcal{SU}(2)\) と \(\mathcal{SO}(3)\) が同じリー代数を持つと解釈されます。これは非常に重要な結果であり、\(\mathcal{SU}(2)\) と \(\mathcal{SO}(3)\) について多くのことを教えてくれるでしょう。
 <!--
 The important point is that this definition makes no reference to
 any Lie group. The definition of a Lie algebra stands on its own and
@@ -1041,7 +1041,7 @@ important result and it will tell us a lot about \(\mathcal{SU}(2)\) and \(\math
 -->
 
 </p>
-<h3>3.4.3 \(\mathcal{SU}(2)\) の生成元とリー代数</h3>
+<h3>3.4.3 \(\mathcal{SU}(2)\) の生成子とリー代数</h3>
 <!--
 <h3>3.4.3 The Generators and Lie Algebra of \(\mathcal{SU}(2)\)</h3>
 -->
@@ -1089,7 +1089,7 @@ Special = unit determinant.
 \end{align}
 \]
 
-まず最初に、この群のリー代数について見ていきましょう。群の定義条件を生成元\(\mathcal{J}_1, \mathcal{J}_2, . . .\)を用いて書き表すと、<sup>57</sup>となります。
+まず最初に、この群のリー代数について見ていきましょう。群の定義条件を生成子\(\mathcal{J}_1, \mathcal{J}_2, . . .\)を用いて書き表すと、<sup>57</sup>となります。
 <!--
 The first thing we now want to take a look at is the Lie algebra of this group. Writing the defining conditions of the group in terms of
  the generators \(\mathcal{J}_1, \mathcal{J}_2, . . .\) yields <sup>57</sup>
@@ -1133,7 +1133,7 @@ theorem (Eq. 3.55) and \([\mathcal{J}_i, \mathcal{J}_i] = 0\)
 \end{align}
 \]
 
-条件\(\mathcal{J}_i^† = \mathcal{J}_i\)を満たす行列はエルミート行列と呼ばれ、したがって、\(\mathcal{SU}(2)\)の生成元はエルミート行列でなければならないことがわかります。
+条件\(\mathcal{J}_i^† = \mathcal{J}_i\)を満たす行列はエルミート行列と呼ばれ、したがって、\(\mathcal{SU}(2)\)の生成子はエルミート行列でなければならないことがわかります。
 <!--
 A matrix fulfilling the condition \(\mathcal{J}_i^† = \mathcal{J}_i\) is called Hermitian and we
 therefore learn here that the generators of \(\mathcal{SU}(2)\) must be Hermitian.
@@ -1152,7 +1152,7 @@ Using the identity \(\det(e^A) = e^{tr(A)}\), we see that the second condition y
 
 </p><p>
 
-\(\mathcal{SU}(2)\) の生成元は必ずエルミート無痕跡行列であると結論付けられる。エルミート無痕跡2×2行列の基底は、以下の3つの行列 <sup>58</sup> で与えられる。
+\(\mathcal{SU}(2)\) の生成子は必ずエルミート無痕跡行列であると結論付けられる。エルミート無痕跡2×2行列の基底は、以下の3つの行列 <sup>58</sup> で与えられる。
 <!--
 We conclude that the generators of \(\mathcal{SU}(2)\) must be Hermitian
 traceless matrices. A basis for Hermitian traceless 2 × 2 matrices is given by the following 3 matrices <sup>58</sup>: 
@@ -1204,7 +1204,7 @@ We can put these explicit matrices for the basis generators into the Lie bracket
 [σ_i, σ_j] = 2i\epsilon_{ijk}σ_k  \tag{3.81}
 \]
 
-ここで、\(\epsilon_{ijk}\) は再びレヴィ・チヴィタ記号です。厄介な 2 を取り除くために、\(\mathcal{SU}(2)\) の生成元を \(\mathcal{J}_i ≡ \frac{1}{2}
+ここで、\(\epsilon_{ijk}\) は再びレヴィ・チヴィタ記号です。厄介な 2 を取り除くために、\(\mathcal{SU}(2)\) の生成子を \(\mathcal{J}_i ≡ \frac{1}{2}
 σ_i\) と定義するのが慣例です。すると、リー代数は次のように表されます。
 <!--
 where \(\epsilon_{ijk}\) is again the Levi-Civita symbol. To get rid of the nasty 2 it
@@ -1598,7 +1598,7 @@ tions of the Lie algebra.
 -->
 </p><p>
 
-次に、リー代数の元（生成元）を表す行列を指数関数に代入して、群の元を表す行列を得ることができます。
+次に、リー代数の元（生成子）を表す行列を指数関数に代入して、群の元を表す行列を得ることができます。
 <!--
 We can then put the matrices representing
 the Lie algebra elements (the generators) into the exponential function

@@ -1,0 +1,518 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>自然の測定</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1><center>第3部 自然の方程式</center></h1>
+<!--
+<h1><center>Part III The Equations of Nature</center></h1>
+-->
+<p>
+「美を自分の方程式に組み込むという観点から努力すれば、…人は確実に進歩の道を歩んでいることになる。」
+<!--
+"If one is working from the point of view of getting beauty into one’s
+equation, ...one is on a sure line of progress."
+-->
+<br>
+<br>
+</p><p style="text-align: right;">
+<strong>Paul A. M. Dirac</strong><br>
+in The evolution of the<br>
+physicist’s picture of nature.<br>
+(『物理学者の自然観の進化』より)<br>
+Scientific American, vol. 208<br>
+Issue 5, pp. 45-53.<br>
+Publication Date: 05/1963<br>
+</p>
+<h1>5 自然の測定</h1>
+<!--
+<h1>5 Measuring Nature</h1>
+-->
+<p>
+対称性と保存量との関係を発見したので、この関係を活用できます。より専門的な言葉で言えば、ネーターの定理は、対称変換の生成子と保存量との関係を確立します。
+本章では、この関係を活用します。
+<!--
+Now that we have discovered the connection between symmetries
+and conserved quantities, we can utilize this connection. In more
+technical terms, Noether’s Theorem establishes a connection between
+the generator of a symmetry transformation and a conserved quantity.
+In this chapter we will utilize this connection.
+-->
+</p><p>
+保存量は、物理学者が物理系を記述する際に一般的に用いるものです。なぜなら、系がどれほど複雑に変化しても、保存量は変わらないからです。例えば、実験で何が起こっているかを記述するために、物理学者は運動量、エネルギー、角運動量を用います。ネーターの定理は、非常に重要な考え方を示唆しています。
+<!--
+Conserved quantities are what physicists commonly use to describe
+physical systems, because no matter how complicated the
+system changes, the conserved quantities stay the same. For example,
+to describe what is happening in an experiment physicists use
+the momentum, energy and angular momentum. Noether’s theorem
+hints us towards an incredibly important idea:
+-->
+</p><p>
+自然を記述するために用いる量は、対応する生成子と同一視されます。
+
+\[
+\text{物理量} ⇒ \text{対応する対称性の生成子}  \tag{5.1}
+\]
+
+<!--
+We identify the quantities that we use to describe nature with the
+corresponding generators:
+
+\[
+\text{physical quantity} ⇒ \text{generator of the corresponding symmetry}  \tag{5.1}
+\]
+-->
+これから見ていくように、この同一視は自然と量子論へと私たちを導きます。粒子理論を考えながら、これを具体的に考えてみましょう。
+<!--
+As we will see, this identification naturally guide us towards quantum
+theory. Let’s make this concrete by considering a particle theory.
+-->
+</p>
+<h2>5.1 量子力学の演算子</h2>
+<!--
+<h2>5.1 The Operators of Quantum Mechanics</h2>
+-->
+<p>
+空間並進生成子の作用下におけるラグランジアン不変性は、運動量保存則を導く。
+したがって、我々は次のように同一視する。
+
+\[
+\text{運動量 }\hat{p}_i → \text{空間並進生成子} − i∂_i
+\]
+<!--
+The invariance of the Lagrangian under the action of the generator
+of spatial-translations leads us to the conservation of momentum.
+Therefore, we make the identification
+
+\[
+\text{momentum }\hat{p}_i → \text{generator of spatial-translations} − i∂_i
+\]
+-->
+演算子を表すには、ハット \(\hat{O}\) を使用するのが一般的です。
+<!--
+It is conventional to use a hat: \(\hat{O}\) to denote an operator.
+-->
+</p><p>
+同様に、時間並進の生成子の作用に対する不変性はエネルギー保存則を導きます。したがって
+
+\[
+\text{エネルギー }\hat{E} → \text{時間並進の生成子 } i∂_o 
+\]
+<!--
+Analogously, the invariance under the action of the generator
+of time-translations leads us to the conservation of energy. Consequently
+
+\[
+\text{energy }\hat{E} → \text{generator of time-translations } i∂_o 
+\]
+-->
+</p><p>
+「位置の保存」に対応する対称性は存在しないため、位置は生成子と同一視されない。
+単に<sup>1</sup>
+<!--
+There is no symmetry corresponding to the "conservation of location"
+and therefore the location is not identified with a generator. We
+simply have<sup>1</sup>
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+あるいは、ブーストに対する不変性に対応する保存量を見ることでこれを確認することもできます。4.6節では、非相対論的ラグランジアンから始めたため、非相対論的ガリレイブーストに対応する保存量を導出したことに注意してください。しかしながら、相対論的ラグランジアンに対しても同じことを行えば、保存量 \(t\vec{p} −\vec{x}E\) が得られます。
+相対論的エネルギーは、\(E =\sqrt{m^2 + p^2}\) で与えられます。非相対論的極限 \(c → ∞\) では、\(E ≈ m\) となり、ガリレイブーストについて導出した式をローレンツブーストの保存量から復元できます。粒子理論における保存量は
+\(M_i = (tp_i − x_iE)\) です。ブーストの生成子は（式3.248で\(K_i = M_{0i}\) を参照）
+\(K_i = i(x_0∂_i − x_i∂_0)\) です。この2つの式を比較すると（もちろん\(x_0 = t\)）、\(M_i = (tp_i − x_iE) ↔ K_i = i(t∂_i − x_i∂_0)\) となります。
+先ほど行った同定を用いると、これで同定は簡単です。
+位置 \(\hat{x}_i → x_i\)。
+<!--
+Alternatively, we can see this by
+looking at the conserved quantity
+corresponding to invariance under
+boosts. Take note that we derived in
+Section 4.6 the conserved quantity
+corresponding to a non-relativistic
+Galilei boost, because we started with
+a non-relativistic Lagrangian. Nevertheless,
+we can do the same for the
+relativistic Lagrangian and end up
+with the conserved quantity \(t\vec{p} −\vec{x}E\).
+The relativistic energy is given by
+\(E =\sqrt{m^2 + p^2}\). In the non-relativistic
+limit \(c → ∞\) we get \(E ≈ m\) and therefore
+recover the formula we derived for a
+Galilei boost from the Lorentz boost
+conserved quantity. The conserved
+quantity for a particle theory is then
+\(M_i = (tp_i − x_iE)\) . The generator of
+boosts is (see Eq. 3.248 with \(K_i = M_{0i}\))
+\(K_i = i(x_0∂_i − x_i∂_0)\). Comparing the two
+equations, with of course \(x_0 = t\), yields
+\(M_i = (tp_i − x_iE) ↔ K_i = i(t∂_i − x_i∂_0)\)
+The identification is now, with the
+identifications we made earlier, straightforward.
+Location \(\hat{x}_i → x_i\).
+-->
+</p><p>
+
+\[
+位置\; \hat{x}_i → x_i
+\]
+<!--
+\[
+location\; \hat{x}_i → x_i
+\]
+-->
+</p><p>
+自然を記述するために理論で用いたい物理量は、（微分）作用素によって与えられます。次に論理的に問われるべきことは、これらの作用素は何に作用するのか、そして実験で測定できるものとはどのような関係があるのか​​、ということです。この点については後の章で詳しく説明します。この時点では、物理量、つまり作用素は何かに作用する必要があると述べれば十分でしょう。ここでは、作用素が作用する抽象的な対象について考えてみましょう。これを \(Ψ\) (プサイ)と名付けましょう。この何かが何なのかについては、後ほど考察します。
+<!--
+The physical quantities we want to use in our theory to describe
+nature are now given by (differential) operators. The logical next
+thing to ask is: What do they act on and where is the connection to
+things we can measure in experiments? We will discuss this in a later
+chapter in detail. At this point it is sufficient to note that our physical
+quantities, now operators, need to act on something. Here we want to
+move on with an abstract thing that the operators act on. Let’s name
+it \(Ψ\). We will explore later what this something is.
+-->
+</p><p>
+この時点で、量子力学の最も重要な<sup>2</sup>
+方程式の一つを導くことができます。上で説明したように、演算子は抽象的な何か \(Ψ\) に作用すると仮定します。すると、
+<!--
+At this point, we are able to derive one of the most important<sup>2</sup>
+equations of quantum mechanics. As explained above, we assume
+that our operators act on something abstract \(Ψ\). Then we have
+-->
+</p><p class="margin-large">
+<sup>2</sup>
+量子力学について何も知らないと、なぜこの短い方程式がそれほど重要なのか不思議に思うかもしれません。しかし、ハイゼンベルクの不確定性原理については聞いたことがあるかもしれません。第8.3節では、量子力学の形式主義を詳しく見ていきます。すると、この方程式が、粒子の運動量と位置を任意の精度で測定することはできないことを示していることがわかります。物理量は測定演算子として解釈され、この方程式は、位置の測定の後に運動量の測定を行うことは、運動量の測定の後に位置の測定を行うことと同じではないことを示しています。
+<!--
+If you don’t know anything about
+quantum mechanics, it may seem
+strange to you why this little equation
+is so important, but maybe you have
+heard of the Heisenberg uncertainty
+principle. In Section 8.3 we will take a
+closer look at the formalism of quantum
+mechanics. Then we will be able to see
+that this equation tells us that we aren’t
+able to measure the momentum and
+the location of a particle with arbitrary
+precision. Our physical quantities are
+interpreted as measurement operators
+and this equation tells us that a
+measurement of location followed by a
+measurement of momentum is not the
+same as a measurement of momentum
+followed by a measurement of location.
+-->
+</p><p>
+
+\[
+\begin{align}
+[\hat{p}_i, \hat{x}_j]Ψ &= (\hat{p}_i\hat{x}_j −\hat{x}_j\hat{p}_i)Ψ = (−i∂_i\hat{x}_j +\hat{x}_ji∂_i)Ψ \\
+\\
+&\underbrace{=}_{product\; rule}−(i∂_i\hat{x}_j)Ψ −\cancel{\hat{x}_j(i∂_iΨ)} +\cancel{\hat{x}_ji∂_iΨ}\underbrace{=}_{\because\; ∂_i\hat{x}_j=\frac{∂x_j}{∂x_i}}
+−iδ_{ij}Ψ   \tag{5.2}
+\end{align}
+\]
+
+この式は任意の \(Ψ\) に対して成り立ちます。なぜなら、\(Ψ\) について何も仮定していないからです。したがって、この式は\(Ψ\)<sup>3</sup>なしで書くことができます。
+<!--
+This equation holds for arbitrary \(Ψ\), because we made no assumptions
+about it and therefore we can write the equation without \(Ψ\)<sup>3</sup>:
+-->
+
+</p><p class="margin-large">
+<sup>3</sup>
+もしこれが初めてお考えなら、<strong>あらゆる</strong>ベクトル方程式を、数値のみを含む方程式に書き直すことができるということに注目してください。例えば、ニュートンの第二法則：\(\vec{F} = m\ddot{\vec{x}}\) は、\(\vec{F}\vec{C} = m\ddot{\vec{x}}\vec{C}\) と書き直すことができ、これは任意のベクトル \(\vec{C}\) に対して確かに成り立ちます。しかし、この方程式が任意の \(\vec{C}\) に対して成り立つ場合、常にそれを書き直すことはあまり意味がありません。
+<!--
+If this is a new idea to you, take note
+that we could rewrite <strong>every</strong> vector
+equation as an equation that involves
+only numbers. For example Newton’s
+second law: \(\vec{F} = m\ddot{\vec{x}}\), could be written
+as \(\vec{F}\vec{C} = m\ddot{\vec{x}}\vec{C}\), which is certainly true
+for any vector \(\vec{C}\). Nevertheless, if the
+equation is true for any \(\vec{C}\), writing it all
+the time makes little sense.
+-->
+</p><p>
+
+\[
+[ \hat{p}_i, \hat{x}_j] = −iδ_{ij}   \tag{5.3}
+\]
+</p>
+<h3>5.1.1 スピンと角運動量</h3>
+<!--
+<h3>5.1.1 Spin and Angular Momentum</h3>
+-->
+<p>
+前章（第4.5.4節）では、回転不変性から生じる保存量が2つの部分から成り立つことを見ました。2つ目の部分は軌道角運動量と同一視されており、それゆえ、生成子の<strong>無限</strong>次元表現と同一視します。
+
+\[
+\text{軌道角運動量 }\hat{L}_i → \text{回転生成子(無限次元表現) }
+i\frac{1}{2}\epsilon_{ijk}(x^j∂^k −x^k∂^j)
+\]
+<!--
+In the last chapter (Section 4.5.4) we saw that the conserved quantity
+that resulted from rotational invariance has two parts. The second
+part was identified with the orbital angular momentum and
+we therefore make the identification with the <strong>infinite</strong> dimensional
+representation of the generator 
+
+\[
+\text{orb. angular mom. }\hat{L}_i → \text{gen. of rot. (inf. dim. rep.) }
+i\frac{1}{2}\epsilon_{ijk}(x^j∂^k −x^k∂^j)
+\]
+-->
+同様に、スピンと呼ばれる最初の部分を、対応する生成子<sup>4</sup>の<strong>有限</strong>次元表現と同一視します。
+<!--
+Analogously we identify the first part, called spin, with the corresponding
+<strong>finite</strong> dimensional representation of the generators<sup>4</sup>
+-->
+</p><p class="margin-large">
+<sup>4</sup>
+これは、場の成分の混合に対する不変性から生じた保存量の一部であることを思い出してください。したがって、有限次元表現となります。
+
+\[
+\text{spin }\hat{S}_i → \text{回転生成子(有限次元表現) }S_i 
+\]
+
+<!--
+Recall that this was the part of the
+conserved quantity that resulted from
+the invariance under mixing of the
+field components. Hence the finitedimensional
+representation.
+
+\[
+\text{spin }\hat{S}_i → \text{generators of rotations (fin. dim. rep.) }S_i 
+\]
+-->
+
+式 4.30 の下のテキストで説明されているように、\(S_{μν}\) と回転の生成子\(S_i\)の関係は \(S_i = \frac{1}{2}\epsilon_{ijk}S_{jk}\) です。
+<!--
+As explained in the text below Eq. 4.30 the relation between \(S_{μν}\) and
+the generator of rotations \(S_i\) is \(S_i = \frac{1}{2}\epsilon_{ijk}S_{jk}\).
+-->
+</p><p>
+例えば、スピン \(\frac{1}{2}\) 場を考える場合、3.7.5 節で導出した 2 次元表現を使用する必要があります。
+<!--
+For example, when we consider a spin \(\frac{1}{2}\)
+field, we have to use the
+two-dimensional representation which we derived in Section 3.7.5:
+-->
+\[
+\hat{S}_i = i\frac{σ_i}{2}  \tag{5.4}
+\]
+
+ここで、\(σ_i\) はパウリ行列を表します。この非常に興味深く、かつ非常に奇妙なタイプの角運動量については、この章で導出した演算子の扱い方を学んだ後、8.5.5節で再び取り上げます。スピン角運動量と軌道角運動量の和のみが保存されることを覚えておくことが重要です。
+<!--
+where once more \(σ_i\) denotes the Pauli matrices. We will return to
+this very interesting and very strange type of angular momentum in
+Section 8.5.5, after we learned how to work with the operators that
+we derive in this chapter. It is important to keep in mind that only
+the sum of spin and orbital angular momentum is conserved.
+-->
+</p>
+<h2>5.2 場の量子論の演算子</h2>
+<!--
+<h2>5.2 The Operators of Quantum Field Theory</h2>
+-->
+<p>
+場の理論における中心的な対象は、もちろん、場です。場は、<strong>空間と時間における位置の関数</strong><sup>5</sup> \(Φ = Φ(x)\) です。後ほど、時空上の点における相互作用を記述したいので、動的変数の密度 \(π = π(x)\) を扱います。密度を全空間にわたって積分して得られる全量 \(Π =\int dx^3π(x) \neq Π(x)\) は扱いません。
+<!--
+The central objects in a field theory are, of course, fields. A field is
+a <strong>function of the location in space and time</strong><sup>5</sup> \(Φ = Φ(x)\). Later we
+want to describe interactions at points in spacetime and therefore 
+work with the densities of our dynamical variables \(π = π(x)\) and not
+the total quantities that we get by integrating the densities over all
+space \(Π =\int dx^3π(x) \neq Π(x)\).
+-->
+</p><p class="margin-large">
+<sup>5</sup>
+ここで、\(x = x_0, x_1, x_2, x_3\) には時間
+\(x_0 = t\) が含まれます。
+<!--
+Here \(x = x_0, x_1, x_2, x_3\) includes time
+\(x_0 = t\).
+-->
+</p><p>
+
+前章では、場自体の変位\(Φ → Φ − i\epsilon\)に対する不変性について、共役運動量Πと呼ばれる新しい保存量を発見しました。前節で行った同定と同様に、共役運動量密度を対応する生成子(式4.60)と同一視します。
+
+\[
+\text{共役運動量密度 }π(x) → \text{場自体の変位の生成子} : −i \frac{∂}{∂Φ(x)}
+\]
+<!--
+We discovered in the last chapter for invariance under displacements
+of the field itself \(Φ → Φ − i\epsilon\) a new conserved quantity, called
+conjugate momentum Π. Analogous to the identifications we made
+in the last section, we identify the conjugate momentum density with
+the corresponding generator (Eq. 4.60)
+
+\[
+\text{conj. mom. density }π(x) → \text{gen. of displ. of the field itself} : −i \frac{∂}{∂Φ(x)}
+\]
+-->
+粒子理論の場合と同様に、運動量、角運動量、エネルギーを対応する生成子と同一視することもできます。しかし、場の量子論では少し異なる動作をするため、ここで行った同一視は十分であることが後でわかります。
+<!--
+We could now go on, like we did for a particle theory, and identify
+momentum, angular momentum and energy with the corresponding
+generators. However, we will see later that quantum field theory
+works a little differently and the identification we make here will
+prove to be sufficient.
+-->
+</p><p>
+
+前のセクションで議論したのと同じ理由で、演算子が作用する何かが必要です。そこで、ここでも抽象的な\(Ψ\)を扱います。これについては後の章で詳しく説明します。こうすることで、非常に重要な方程式、つまり場の量子論を導くことができます<sup>6</sup>
+<!--
+For the same reasons discussed in the last section, we need something
+our operators act on. Thus again, we work again with an abstract
+\(Ψ\), that we will specify in a later chapter. We are then again
+able to derive an incredibly important equation, this time of quantum
+field theory<sup>6</sup> 
+-->
+
+</p><p class="margin-large">
+<sup>6</sup>
+
+最後のステップでは、デルタ分布の\(\frac{∂x_i}{∂x_j}= δ_{ij}\)と同様の式を用います。\(\frac{∂f(x_i)}{∂f(x_j)} = δ(x_i − x_j)\)は、厳密に示せます。詳細については、付録D.2を参照してください。
+<!--
+For the last step we use the analogue
+to \(\frac{∂x_i}{∂x_j}= δ_{ij}\) for the delta distribution
+\(\frac{∂f(x_i)}{∂f(x_j)} = δ(x_i − x_j)\), which can be shown
+in a rigorous way. For some more information
+have a look at Appendix D.2.
+-->
+</p><p>
+
+\[
+\begin{align}
+[Φ(x), π(y)]Ψ &=\left[Φ(x),−i\frac{∂}{∂Φ(y)}\right]Ψ
+\\
+\\
+&\underbrace{=}_{product\; rule}\cancel{−iΦ(x)\frac{∂Ψ}{∂Φ(y)}}+
+\cancel{iΦ(x)\left(\frac{∂Ψ}{∂Φ(y)}\right)}
++ i\left(\frac{∂Φ(x)}{∂Φ(y)}\right)Ψ = iδ(x − y)Ψ \tag{5.5}
+\end{align}
+\]
+
+再び、この式は任意の\(Ψ\)に対して成り立ち、したがって次のように書くことができる。
+<!--
+Again, the equations hold for arbitrary \(Ψ\) and we can therefore write
+-->
+\[
+[Φ(x), π(y)] = iδ(x − y)  \tag{5.6}
+\]
+
+同様に、複数のフィールド成分についても、
+<!--
+Analogously we have for more than one field component
+-->
+\[
+[Φ_i(x), π_j(y)] = iδ(x − y)δ_{ij}  \tag{5.7}
+\]
+
+後で見るように、場の量子論のほぼすべては
+この小さな方程式から導かれます
+<!--
+As we will see later, almost everything in quantum field theory
+follows from this little equatio
+-->
+</p>
+    </body>
+</html>

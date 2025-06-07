@@ -1,0 +1,3934 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>量子力学</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1><center>第4部 応用</center></h1>
+<!--
+<h1><center>Part IV Applications</center></h1>
+-->
+<center>「真に美しいものは、何の役にも立たないもの以外にはない。役に立つものはすべて醜い。」</center>
+<!--
+<center>"There is nothing truly beautiful but that which can never be of any use</center>
+<center>whatsoever; everything useful is ugly."</center>
+-->
+<p style="text-align: right;">
+<strong>Theophile Gautier</strong><br>
+in Mademoiselle de Maupin.<br>
+Wildside Press, 11 2007 .<br>
+ISBN 9781434495556<br>
+</p>
+<h1>8 量子力学</h1>
+<h2>要約</h2>
+<!--
+<h1>8 Quantum Mechanics</h1>
+<h2>Summary</h2>
+-->
+<p>
+この章では量子力学について論じます。ここで扱う内容のすべては、第5章で議論した同一視に基づいています。最初の結果として、<strong>相対論的なエネルギーと運動量の関係</strong>を導出します。
+<!--
+In this chapter we will talk about quantum mechanics. The foundation
+for everything here are the identifications we discussed in Chapter
+5. As a first result, we derive the <strong>relativistic energy-momentum
+relation</strong>.
+-->
+</p><p>
+量子形式論の仕組みについて議論した後、クライン・ゴルドン方程式の非相対論的極限を取ります。これは、最も単純な粒子であるスカラーの運動方程式だからです。
+これは有名な<strong>シュレーディンガー方程式</strong>をもたらします。この方程式の解は確率振幅として解釈され、この<strong>波動力学</strong>アプローチを用いて2つの簡単な例を解析します。
+<!--
+After a discussion of how the quantum formalism works, we take
+the non-relativistic limit of the Klein-Gordon equation, because this
+is the equation of motion for the simplest type of particles: scalars.
+This results in the famous <strong>Schr&ouml;dinger equation</strong>. The solution of this
+equation is interpreted as a probability amplitude and two simple
+examples are analysed using this <strong>wave-mechanic</strong> approach.
+-->
+</p><p>
+その後、量子力学の一般的な構造を理解するのに役立つ<strong>ディラック記法</strong>が導入されます。この記法では、系の初期状態は<strong>ケット</strong>と呼ばれる抽象状態ベクトル \(|i\rangle\) で表されます。この初期状態を特定の終状態において測定する際の確率振幅は、これを \(\langle f|\) と表記される <strong>ブラ</strong> と乗算することで正式に計算できます。ブラとケットの組み合わせは複素数となり、これは過程 \(i → f\) の確率振幅 \(A\) として解釈されます。この過程の確率は \(|A|^2\) です。次に、<strong>射影演算子</strong>について説明します。これらを<strong>完全性関係</strong>と共に用いて、任意の状態を任意の演算子の固有状態基底に展開する方法を見ていきます。これまで用いてきた波動力学は、状態を位置基底に展開する特別なケースと見なすことができます。ディラック表記では、シュレーディンガー方程式を用いて状態の時間発展を計算します。この関係を明確にするために、ディラック表記を用いて、既に波動力学を用いて解いた例を再解析します。
+<!--
+
+Afterwards, the <strong>Dirac notation</strong> is introduced, which is useful to
+understand the general structure of quantum mechanics. In this notation,
+the initial state of a system is denoted by an abstract state
+vector \(|i\rangle\), called <strong>ket</strong>. The probability amplitude for measuring this
+initial state in a specific final state can then be computed formally
+by multiplying it with a <strong>bra</strong>, denoted \(\langle f|\). The combination of a bra
+with a ket results in a complex number that is interpreted as probability
+amplitude \(A\) for the process \(i → f\) . The probability for this
+process is \(|A|^2\). Then we talk about <strong>projection operators</strong>. We will
+see how they can be used, together with the <strong>completeness relation</strong>,
+to expand an arbitrary state in the eigenstate basis of an arbitrary
+operator. The previously used wave-mechanics can then be seen as
+a special case, where we expand the states in the location basis. In
+the Dirac notation the Schrödinger equation is used to compute the
+time-evolution of states. To make the connection explicit, we use the
+Dirac notation to reanalyze an example which we already solved
+using wave-mechanics.
+-->
+</p>
+<h2>8.1 粒子理論の同定</h2>
+<!--
+<h2>8.1 Particle Theory Identifications</h2>
+-->
+<p>
+これまでに導出した方程式<sup>1</sup>は、粒子理論と場の理論で用いることができる。本章では、これらの方程式が粒子理論でどのように用いられるかを考察する。ここで扱う力学変数は、問題となる粒子の位置、角運動量、エネルギー、運動量である。第5章で説明したように、これらを対応する対称性の生成子と同一視する<sup>2</sup>。
+<!--
+The equations we derived so far<sup>1</sup> can be used in particle- and field-
+theories. In this chapter we want to investigate how they can be used
+in a particle-theory. Our dynamic variables are then the location, the
+angular momentum, the energy and the momentum of the particle
+in question. As explained in Chapter 5, we identify these with the
+generators of the corresponding symmetry<sup>2</sup>:
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+クライン・ゴードン方程式、ディラック方程式、プロカ方程式、マクスウェル方程式
+<!--
+The Klein-Gordon, Dirac, Proka and  Maxwell equations 
+-->
+<br><br>
+
+<sup>2</sup>
+式3.248、式3.252および第5章を参照
+<!--
+See Eq. 3.248, Eq. 3.252 and Chapter 5 
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• 運動量 \(\hat{p}_i = −i∂_i\)、
+</li><br><li>• 位置 \(\hat{x}_i = x_i\)、
+</li><br><li>• エネルギー \(\hat{E} = i∂_0\)、
+</li><br><li>• 角運動量 \(\hat{L}_i = i\frac{1}{2}\epsilon_{ijk}(x^j∂^k − x^k∂^j)\)。
+<!--
+• momentum \(\hat{p}_i = −i∂_i\),
+</li><br><li>• location \(\hat{x}_i = x_i\),
+</li><br><li>• energy \(\hat{E} = i∂_0\),
+</li><br><li>• angular momentum \(\hat{L}_i = i\frac{1}{2}\epsilon_{ijk}(x^j∂^k − x^k∂^j)\).
+-->
+</li></ul></div>
+</p><p>
+これらの演算子が量子力学でどのように使用されるかを議論する前に、
+それらを使って現代物理学で最も重要な方程式の1つを導出します。
+<!--
+
+Before we discuss how these operators are used in quantum mechanics,
+we use them to derive one of the most important equations
+of modern physics.
+-->
+</p>
+<h2>8.2 相対論的エネルギー-運動量関係</h2>
+<!--
+<h2>8.2 Relativistic Energy-Momentum Relation</h2>
+-->
+<p>
+6.2節では、自由スピン0の粒子の運動方程式、すなわちクライン・ゴルドン方程式を導出した。
+<!--
+In Section 6.2 we derived the equation of motion for a free spin 0
+particle, the Klein-Gordon equation:
+-->
+\[
+(∂_μ∂^μ + m^2)Φ = 0
+\]
+
+上で繰り返した同定によれば、この式は以下となる<sup>3</sup>。
+<!--
+With the identifications reiterated above this equation reads<sup>3</sup>
+-->
+
+</p><p class="margin-large">
+<sup>3</sup>
+以下を使う。
+<!--
+Using 
+-->
+\(p_μ =
+\begin{pmatrix}
+p_0 \\
+p_1 \\
+p_2 \\
+p_3
+\end{pmatrix}
+=
+\begin{pmatrix}
+p_0 \\
+\vec{p}
+\end{pmatrix}
+=
+\begin{pmatrix}
+E \\
+\vec{p}
+\end{pmatrix}
+\)
+</p><p>
+
+\[
+\begin{align}
+(∂_μ∂^μ + m^2)Φ &= (∂_0∂_0 − ∂_i∂_i + m^2)Φ \\
+\\
+&=\left(\left(\frac{1}{i}E\right)\left(\frac{1}{i}E\right)−
+\left(−\frac{1}{i}p_i\right)\left(−\frac{1}{i}p_i\right)+ m^2\right)Φ \\
+\\
+&= (−E^2 +\vec{p}^2 + m^2)Φ = 0  \tag{8.1}
+\end{align}
+\]
+
+従って
+<!--
+Therefore
+-->
+\[
+→ E^2 = \vec{p}^2 + m^2　あるいは四元ベクトルを使って　p_μ p^μ = m^2   \tag{8.2}
+\]
+
+これは特殊相対論における有名な<strong>エネルギーと運動量の関係</strong>です。
+静止粒子（\(\vec{p} = 0\)）の場合、これはアインシュタインの有名な方程式を与えます。
+<!--
+which is the famous <strong>energy-momentum relation</strong> of special-relativity.
+For a particle at rest (\(\vec{p} = 0\)) this gives us Einstein’s famous equation
+-->
+
+\[
+E^2 = m^2 ↔ E = mc^2
+\]
+
+ここで、わかりやすくするために \(c^2\) を復元しました。これで、ポアンカレ群の第一カシミール作用素のスカラー値 \(p_μ p^μ\) に \(m^2\) (式 3.266) という示唆に富む名前を与えた理由が理解できます。pμ pμ の組み合わせは、まさに問題の粒子の質量の2乗であり、実験では、例えば粒子のエネルギーと運動量を測定することによって測定できます: \(m =\sqrt{E^2 −\vec{p}^2}\)。同じ理由で、第6.2節で導出したラグランジアン内の定数が \(m^2\) とも呼ばれる理由も理解できます。
+<!--
+
+where we restored \(c^2\) for clarity. We can now understand why we
+gave the scalar value of the first Casimir operator of the Poincaré
+group \(p_μ p^μ\) the suggestive name \(m^2\) (Eq. 3.266). The combination
+pμ pμ is indeed the squared mass of the particle in question, which
+can be measured in experiments, for example, by measuring the
+energy and momentum of the particle: \(m =\sqrt{E^2 −\vec{p}^2}\). For the same
+reason, we understand now why the constant in the Lagrangian we
+derived in Section 6.2 is also called \(m^2\).
+-->
+</p>
+<h2>8.3 量子形式論</h2>
+<!--
+<h2>8.3 The Quantum Formalism</h2>
+-->
+<p>
+
+物理量は演算子によって与えられたので、次にそれらが作用する対象が必要です。まず、各演算子には固有関数の集合があり、これは行列の固有ベクトルと完全に類似していることに注目してください。行列は有限次元なので、有限次元の固有ベクトルが得られます。ここで、演算子は無限次元ベクトル空間に作用するため、固有関数が得られます。例えば、運動量演算子の固有関数を得るために解かなければならない方程式は、
+<!--
+
+Now that our physical quantities are given by operators, we need
+something they can act on. First take note that we have for each
+operator a set of eigenfunctions, which is completely analogous to
+the eigenvectors of matrices. Matrices are finite-dimensional and
+therefore we get finite dimensional eigenvectors. Here our operators
+act on an infinite-dimensional vector space and we therefore have
+eigenfunctions. For example, the equation we must solve to get the
+eigenfunctions of the momentum operator is
+-->
+\[
+\underbrace{− i∂_i}_{演算子}Ψ = \underbrace{p_i}_{固有値}\overbrace{Ψ}^{固有関数}  \tag{8.3}
+\]
+
+ある数値\(p_i\)で解は
+<!--
+with some number \(p_i\). A solution is
+-->
+\[
+Ψ =\underbrace{C}_{=定数}e^{ip_ix_i}　because
+\]
+
+\[
+→−i∂_iCe^{ip_ix_i} = p_iCe^{ip_ix_i}  \tag{8.4}
+\]
+
+ただし、これは任意の \(p_i\) に対する解であることに注意してください。したがって、運動量演算子の固有関数は無限個見つかりました。\(\hat{p}_i = −i∂_i\)。同様に、エネルギー固有関数も探索できます。
+<!--
+but take note that this a solution for arbitrary \(p_i\). Therefore we have
+found an infinite number of eigenfunctions for the momentum operator
+\(\hat{p}_i = −i∂_i\). Equivalently, we can search for energy eigenfunctions
+-->
+\[
+i∂_0Φ = EΦ  \tag{8.5}
+\]
+
+あるいは角運動量固有関数<sup>4</sup>。行列の固有ベクトルと同様に、これらの固有関数は対応する抽象ベクトル空間<sup>5</sup>の基底となる。これは、任意の関数\(Ψ\)を固有関数で展開できることを意味する。例えば、\(Ψ\)を運動量固有関数<sup>6</sup>で展開することができる（1次元で簡潔にするため）。
+<!--
+or angular momentum eigenfunctions<sup>4</sup>. Analogous to eigenvectors 
+for matrices, these eigenfunctions are bases for the corresponding abstract
+vector space<sup>5</sup>. This means we can expand an arbitrary function
+\(Ψ\) in terms of eigenfunctions. For example, we can expand \(Ψ\) in terms
+of momentum eigenfunctions<sup>6</sup> (for brevity in one dimension)
+-->
+</p><p class="margin-large">
+<sup>4</sup>
+角運動量固有関数の議論は、演算子が他のものよりも複雑なため、少し複雑です。\([\hat{L}_i, \hat{L}_j] \neq 0\) であるため、3つの成分すべてに対応する固有関数の集合を同時に見つけることはできません。これについては後ほど説明します。長々とした議論の最終的な結論は、角運動量演算子の3番目の成分 \(\hat{L}_3\) （およびすべての成分 \([\hat{L}_2,\hat{L}_j] = 0\) と交換する2乗角運動量演算子 \(\hat{L}_2\) ）の対応する固有関数が、有名な球面調和関数であるということです。これらは直交基底を形成します。
+<!--
+
+The discussion for angular momentum
+eigenfunctions is a bit more complicated,
+because the operator is more
+complicated than the others. We can’t
+find a set of eigenfunctions for all three
+components at the same time, because
+\([\hat{L}_i, \hat{L}_j] \neq 0\). This will be discussed in
+a moment. The final result of a lengthy
+discussion is that the corresponding
+eigenfunctions of the third component
+of the angular momentum operator \(\hat{L}_3\)
+(and of the squared angular momentum
+operator \(\hat{L}_2\), which commutes with all
+components \([\hat{L}_2,\hat{L}_j] = 0\)) are the famous
+spherical harmonics. These form an
+orthonormal basis.
+-->
+<br><br>
+
+<sup>5</sup>
+行列の場合、固有ベクトルは対応するベクトル空間の基底となることを思い出してください。
+<!--
+Recall that for matrices the eigenvectors
+are a basis for the corresponding
+vector space.
+-->
+<br><br>
+
+<sup>6</sup>
+これはまさに
+関数 \(Ψ\) のフーリエ変換であり、
+付録 D.1 で導入されていることに注意してください。
+係数 \(\frac{1}{\sqrt{2π}}\)
+は慣例的なものです。
+<!--
+Take note that this is exactly the
+Fourier transform of a function \(Ψ\),
+which is introduced in Appendix D.1
+and the factor \(\frac{1}{\sqrt{2π}}\)
+is a matter of convention.
+-->
+</p><p>
+
+\[
+Ψ =\frac{1}{\sqrt{2π}} \int_{−∞}^∞ dpΨ_pe^{−ipx}  \tag{8.6}
+\]
+
+ここで、 \(Ψ_p\) は、 \(v_1, v_2, v_3\) に類似したこの展開の係数です。
+\(\vec{v} = v_1\vec{e}_1 + v_2\vec{e}_2 + v3\vec{e}_3\) 。
+<!--
+where \(Ψ_p\) are the coefficients in this expansion analogous to \(v_1, v_2, v_3\)
+in \(\vec{v} = v_1\vec{e}_1 + v_2\vec{e}_2 + v3\vec{e}_3\).
+-->
+</p><p>
+
+いくつかのシステムでは、連続基底ではなく離散基底を持つような境界条件が存在します。その場合、例えば離散的なエネルギー固有関数の集合 \(Φ_{E_n}\) を用いて任意の状態を展開することができます。
+<!--
+For some systems we have boundary conditions such that we
+have a discrete instead of a continuous basis. Then we can expand
+an arbitrary state, for example, in terms of discrete set of energy
+eigenfunctions \(Φ_{E_n}\) :
+-->
+\[
+Ψ =\sum_n c_nΦ_{E_n}  \tag{8.7}
+\]
+
+重要な観察は、一般に、ある演算子の固有関数の集合は、別の演算子の固有関数の集合とは一致しないということです。\([A, B] = AB − BA = 0\) と交換する演算子についてのみ、両方の演算子の同時固有関数の集合が見つかります。ここではこれを証明しませんが、共通の固有関数の集合と交換子の性質の関係を見るために、2つの交換演算子 \([A, B] = 0 → AB = BA\) があると仮定しましょう。\(A\) に属する固有関数の集合 \(Ψ_i\) については、\(AΨ_i = a_iΨ_i\) が成り立ちます。ここで、\(a_i\) は対応する固有値を表します。ここで、<sup>7</sup> を計算できます。
+<!--
+An important observation is that, in general, a set of eigenfunctions
+for one operator is not a set of eigenfunctions for another operator.
+Only for operators that commute \([A, B] = AB − BA = 0\), we can find
+a simultaneous set of eigenfunctions for both operators. We don’t
+prove this here, but to see the connection between a common set of
+eigenfunctions and the commutator property, let’s assume we have
+two commutating operators \([A, B] = 0 → AB = BA\). For the set of
+eigenfunctions \(Ψ_i\) that belong to \(A\), we have \(AΨ_i = a_iΨ_i\), where \(a_i\)
+denotes the corresponding eigenvalues. Now, we can calculate<sup>7</sup>
+-->
+</p><p class="margin-large">
+<sup>7</sup>
+ここでの括弧（）は説明のみを目的として使用されています。
+<!--
+The brackets () are used here solely 
+for illustrative purposes.
+-->
+</p><p>
+
+\[
+A(BΨ_i)\underbrace{=}_{AB=BA}BAΨ_i\underbrace{=}_{AΨ_i=a_iΨ_i}Ba_iΨ_i\overbrace{
+=}_{a_i\text{ はただの数字}}a_i(BΨ_i)  \tag{8.8}
+\]
+
+これは、\((BΨ_i)\) がすべての \(Ψ_i\) に対して \(A\) の固有関数でもあり、\(a_i\) と全く同じ固有値を持つことを示しています。したがって、\((BΨ_i)\) と Ψi の唯一の差は定数、つまり \(BΨ_i = b_iΨ_i\) となります。\(AB = BA\) が成り立つ場合、\(A\) の固有関数 \(Ψ_i\) は \(B\) の固有関数でもあると結論付けます。
+<!--
+This shows that \((BΨ_i)\) is also an eigenfunction of \(A\) for all \(Ψ_i\), with
+exactly the same eigenvalues \(a_i\). Therefore the only difference between
+\((BΨ_i)\) and Ψi can be a constant: \(BΨ_i = b_iΨ_i\). We conclude that
+the \(A\) eigenfunctions \(Ψ_i\) are also eigenfunctions of \(B\) if \(AB = BA\)
+holds.
+-->
+</p><p>
+
+一般に、私たちの演算子は<sup>8</sup> \(Ψ\) と呼ばれるものに作用します。これは、対象となる物理系の<strong>状態</strong>を表します。この \(Ψ\) は、対応する運動方程式を解くことで得られます。
+<!--
+In general our operators act on something we call<sup>8</sup> \(Ψ\), which denotes the <strong>state</strong> of the physical system in question. We get this \(Ψ\), by solving the corresponding equation of motion.
+-->
+</p><p class="margin-large">
+<sup>8</sup>
+
+\(Ψ\) の使用は量子力学では慣例的であり、ここでもそれを使用します。
+これまではスピノルについてのみ使用していましたが、スピン 0 粒子を記述するためにも使用します。
+<!--
+The usage of \(Ψ\) is conventional in 
+quantum mechanics and we use it here,
+although we used it so far exclusively
+for spinors, to describe spin 0 particles,
+too.
+-->
+</p><p>
+
+通常、このような解は、何らかの基底で展開すると複数の項を持つ。例えば、2つのエネルギー固有状態<sup>9</sup> \(Ψ = c_1Φ_{E_1} + c_2Φ_{E_2}\) で表せる状態を考える。この状態にエネルギー演算子を作用させると、次式が得られる。
+<!--
+Usually, such a solution will have more than one term if we expand
+it in some basis. For example, consider a state that can be written in
+terms of two energy eigenstates<sup>9</sup> \(Ψ = c_1Φ_{E_1} + c_2Φ_{E_2}\)
+Acting with the energy operator on this state yields
+-->
+</p><p class="margin-large">
+<sup>9</sup>
+
+これは、展開\(Ψ = \sum_n c_nΦ_{E_n}\)の他のすべての係数がゼロであることを意味します。
+<!--
+This means all other coefficients in the expansion \(Ψ = \sum_n c_nΦ_{E_n}\) are zero. 
+-->
+</p><p>
+
+\[
+\hat{E}Ψ = \hat{E}(c_1Φ_{E_1} + c_2Φ_{E_2}) = c_1E_1Φ_{E_1} + c_2E_2Φ_{E_2}
+\neq E(c_1Φ_{E_1} + c_2Φ_{E_2} )  \tag{8.9}
+\]
+
+したがって、異なるエネルギーを持つ状態の<strong>重ね合わせ</strong>は、一般にエネルギー演算子の固有状態ではありません。なぜなら、固有状態とは、ある数Eに対して定義により\(\hat{E}Ψ = EΨ\)となるからです。しかし、\(Ψ\)で記述される系のエネルギーとは何でしょうか？状態が2つのエネルギー固有状態の重ね合わせであるということはどういう意味でしょうか？これらすべてを物理的な観点からどのように解釈できるでしょうか？
+<!--
+A <strong>superposition</strong> of states with different energy is therefore, in general,
+no eigenstate of the energy operator, because for an eigenstate
+we have by definition \(\hat{E}Ψ = EΨ\) for some number E. But what is
+then the energy of the system described by \(Ψ\)? What does it mean
+that a state is a superposition of two energy eigenstates? How can we
+interpret all this in physical terms?
+-->
+</p><p>
+解釈への最初のヒントは、ラグランジアンの \(\mathcal{U}(1)\) 対称性です。これは、運動方程式 \(Ψ\) の解が物理的に直接関連しないことを示しています<sup>10</sup>。次に、これまでに導出した運動方程式の解はどれも、<sup>11</sup> \(vec{x}\) と \(t\) の関数、すなわち \(Ψ = Ψ(\vec{x}, t)\) であることが分かります。
+<!--
+A first hint towards an interpretation is the \(\mathcal{U}(1)\) symmetry of
+our Lagrangians, which shows us that the solution of an equation
+of motion \(Ψ\) cannot be directly physically relevant<sup>10</sup>. Secondly, we
+observe that a solution to any equation of motion we derived so far is
+a function of<sup>11</sup> \(vec{x}\) and \(t\), i.e. \(Ψ = Ψ(\vec{x}, t)\).
+-->
+</p><p class="margin-large">
+<sup>10</sup>
+もし\(Ψ\)が何らかの方法で粒子を直接記述すると仮定すると、同様に許容される\(\mathcal{U}(1)\)変換解\(Ψ^\prime = e^{iα}Ψ\)は何を記述するでしょうか？
+<!--
+If we assume that \(Ψ\) describes our 
+particle directly in some way, what
+would the \(\mathcal{U}(1)\) transformed solution
+\(Ψ^\prime = e^{iα}Ψ\), which is equally allowed,
+describe?
+-->
+<br><br>
+
+<sup>11</sup>
+これについては次のセクションで詳しく説明します。
+<!--
+This will be made explicit in the next
+sections.
+-->
+</p><p>
+
+標準的な解釈は、<strong>波動関数</strong>\(Ψ(\vec{x}, t)\) の絶対値の2乗\(|Ψ(\vec{x}, t)|^2\) がその位置の<strong>確率密度</strong>を与えるというものです。\(\mathcal{U}(1)\) 対称性は、この量 \(|Ψ|^2 = Ψ^†Ψ → (Ψ^\prime)^†(Ψ)^\prime = Ψ^†e^{−iα}e^{iα}Ψ = Ψ^†Ψ\) には影響を与えないことに注目してください。言い換えれば、\(Ψ(x, t)\) は、位置の測定が区間 \([x, x + dx]\) 内の値を与える確率振幅です。したがって、空間全体で積分すると、
+<!--
+The standard interpretation is that the absolute value squared
+\(|Ψ(\vec{x}, t)|^2\) of the <strong>wave function</strong> \(Ψ(\vec{x}, t)\) gives the <strong>probability density</strong> of its location. Observe that the \(\mathcal{U}(1)\) symmetry has no influence on
+this quantity \(|Ψ|^2 = Ψ^†Ψ → (Ψ^\prime)^†(Ψ)^\prime = Ψ^†e^{−iα}e^{iα}Ψ = Ψ^†Ψ\). In other words: \(Ψ(x, t)\) is the probability amplitude that a measurement
+of the location gives a value in the interval \([x, x + dx]\). Consequently
+we have, if we integrate over all space
+-->
+\[
+\int dxΨ^*(x, t)Ψ(x, t) \overset{!}{=} 1  \tag{8.10}
+\]
+
+これは正規化処方と呼ばれます。なぜなら、粒子が宇宙のどこにあっても見つかる確率は100% = 1でなければならないからです。
+<!--
+which is called the normalization prescription, because the probability
+for finding the particle anywhere in space must be 100% = 1.
+-->
+</p><p>
+
+他の物理量について予測を行う場合、波動関数を対応する基底で展開する必要があります。例えば、エネルギー固有関数で展開することができます：\(Ψ = c_1Φ_{E_1| + c_2Φ_{E_2} + ...\)。すると、量子力学の標準的な解釈は、\(Ψ\)で記述される系において、与えられたエネルギー値\(E_1\)を測定する確率は、\(Ψ\)と\(Φ_{E_1}\)の重なりの絶対値の2乗で与えられるというものです。
+<!--
+If we want to make predictions about any other physical quantity,
+we must expand the wave-function in terms of the corresponding
+basis. For example, we can expand it in terms of energy eigenfunctions:
+\(Ψ = c_1Φ_{E_1| + c_2Φ_{E_2} + ...\). Then, the standard interpretation of
+quantum mechanics is: the probability for measuring a given energy
+value \(E_1\) for the system described by \(Ψ\) is given by the absolute value
+squared of the overlap between \(Ψ\) and \(Φ_{E_1}\)
+-->
+\[
+P(E_1) =\left| \int dxΦ_{E_1}^* (x, t)Ψ(x, t)\right|^2
+\]
+
+上記の例では、
+<!--
+In the example above this means
+-->
+\[
+\begin{align}
+P(E_1) &=\left| \int dxΦ_{E_1}^*(x, t)Ψ(x, t)\right|^2=\left| \int dxΦ_{E_1}^*(x, t)
+\left(c_1Φ_{E_1} + c_2Φ_{E_2}\right)\right|^2 \\
+\\
+&=\Bigg| c_1 \underbrace{\int dxΦ_{E_1}^*(x, t)Φ_{E_1}}_{上で説明したように =1} + c_2 \underbrace{\int dxΦ_{E_1}^*(x, t)Φ_{E_2}}_{固有状態は直交しているので =0} \Bigg|^2 \\
+\\
+&= |c_1|^2  \tag{8.11}
+\end{align}
+\]
+
+同様に、他の \(Ψ(\vec{x}, t)\) を運動量固有関数で展開すると、
+<!--
+Analogously, when we expand some other \(Ψ(\vec{x}, t)\) in terms of momentum
+eigenfunctions
+-->
+\[
+Ψ(\vec{x}, t) =\frac{1}{\sqrt{2π}} \int_{−∞}^∞ dp\tilde{Ψ} (\vec{p}, t)e^{−i\vec{p}\vec{x}}
+\]
+
+区間 \([p, p + dp]\) 内の運動量を持つ系を見つけるための確率振幅として \(\tilde{Ψ}(\vec{p}, t)\) が与えられます。
+<!--
+we have \(\tilde{Ψ}(\vec{p}, t)\) as the probability amplitude for finding the system
+with momentum in the interval \([p, p + dp]\).
+-->
+</p><p>
+
+この解釈は、例えば統計的期待値を用いて、系についての確率的予測を行うために用いることができます。これは次のセクションで取り上げます。その後、非相対論的量子力学の運動方程式を導出し、2つの例を見てみましょう。
+<!--
+This interpretation can be used to make probabilistic predictions
+about the system, for example using the statistical expectation value,
+which is the topic of the next section. Afterwards we will derive the
+equation of motion for non-relativistic quantum mechanics and look
+at two examples.
+-->
+</p>
+<h3>8.3.1 期待値</h3>
+<!--
+<h3>8.3.1 Expectation Value</h3>
+-->
+<p>
+統計学では、期待値は加重平均に類似して定義されます。例えば、サイコロを10回投げて\(2, 4, 1, 3, 3, 6, 3, 1, 4, 5,\) が出た場合、平均値は
+<!--
+In statistics the expectation value is defined in analogy to the weighted
+average. For example, if tossing a dice ten times results in \(2, 4, 1, 3, 3,
+6, 3, 1, 4, 5,\) the average value is
+-->
+\[
+\langle x\rangle = (2 + 4 + 1 + 3 + 3 + 6 + 3 + 1 + 4 + 5) · \frac{1}{10}= 3.2
+\]
+
+これを計算する別の方法は、同等の結果を集め、それらを経験的確率で重み付けすることです。
+<!--
+An alternative way of computing this is to collect equal results and
+weighing them by their empirical probability:
+-->
+\[
+\langle x\rangle = \frac{2}{10}·1 +\frac{1}{10}·2 +\frac{3}{10}·3 +
+\frac{2}{10}·4 +\frac{1}{10}·5 +\frac{1}{10}·6 = 3.2
+\]
+
+これを一般的に書くと
+<!--
+We can write this in general as
+-->
+\[
+\langle x\rangle =\sum_i ρ_ix_i  \tag{8.12}
+\]
+
+ここで\(ρ_i\)は確率を表す。同様に、連続分布の場合、
+<!--
+where \(ρ_i\) denotes the probability. Equally for a continuous distribution
+we have
+-->
+\[
+\langle x\rangle = \int dxρ(x)x  \tag{8.13}
+\]
+
+量子力学では、物理量\(\hat{\mathcal{O}}\)の<strong>期待値</strong>は同様に定義される。
+<!--
+In quantum mechanics the <strong>expectation value</strong> for a physical quantity \(\hat{\mathcal{O}}\) is defined analogously
+-->
+\[
+\langle \hat{\mathcal{O}}\rangle = \int d^3xΨ^*\hat{\mathcal{O}}Ψ  \tag{8.14}
+\]
+
+一般に、Ψを\(\hat{\mathcal{O}}\)の固有関数、例えば運動量固有関数で展開する必要があります。そして、これらの状態に演算子\(\hat{\mathcal{O}}\)を作用させると、対応する固有値が得られ、重み付き和が得られます。
+<!--
+In general, we must expand Ψ in terms of eigenfunctions of \(\hat{\mathcal{O}}\), for example momentum eigenfunctions. Then, acting with the operator
+\(\hat{\mathcal{O}}\) on these states yields the corresponding eigenvalues and we get a weighted sum.
+-->
+</p><p>
+
+例えば、ある粒子の位置の期待値は
+<!--
+For example, the expectation value for the location of some particle
+is
+-->
+\[
+\langle \hat{x}\rangle = \int d^3xΨ^*\hat{x}Ψ =
+\int d^3xΨ^*xΨ = \int d^3xx \underbrace{Ψ^*Ψ}_{\text{その位置の確率密度}} \tag{8.15}
+\]
+
+次の節では、クライン・ゴルドン方程式の非相対論的極限を考察し、この方法で非相対論的量子力学の運動方程式を導出します<sup>12</sup>。
+<!--
+In the next section, we consider the non-relativistic limit of the
+Klein-Gordon equation and will derive this way the equation of motion of non-relativistic quantum mechanics<sup>12</sup>.
+-->
+</p><p class="margin-large">
+<sup>12</sup>
+これまでに導出した他の方程式の非相対論的極限を考えることも可能です。例えば、ディラック方程式は非相対論的極限ではパウリ方程式になります。しかし、これらの追加の方程式は本書の目的にとってそれほど重要ではありません。
+<!--
+It is also possible to consider the non- 
+relativistic limit of the other equations
+that we have derived so far. For example,
+the Dirac equation becomes in the
+non-relativistic limit the Pauli equation.
+However, these additional equations
+are less important for the goals of this
+book.
+-->
+</p>
+<h2>8.4 シュレーディンガー方程式</h2>
+<!--
+<h2>8.4 The Schrödinger Equation</h2>
+-->
+<p>
+クライン・ゴルドン方程式は平面波によって解かれる
+<!--
+The Klein-Gordon equation is solved by plane waves
+-->
+\[
+Φ = e^{±ip_μx^μ} ≡ e^{±ip·x} 
+\]
+
+ここで \(p_μ = (E,\vec{p})^T\) は粒子の保存される四元運動量である。
+<!--
+where \(p_μ = (E,\vec{p})^T\) is the conserved four-momentum of the particle.
+We check
+-->
+\[
+\begin{align}
+0 &= (∂_μ∂^μ + m^2)Φ \\
+\\
+&= (∂_μ∂^μ + m^2)e^{±ip_μx^μ} \\
+\\
+&= (i^2p_μ p^μ + m^2)e^{±ip_μx^μ} = 0 \\
+\\
+&= (−m^2 + m^2)e^{±ip_μx^μ} = 0  \tag{8.16}
+\end{align}
+\]
+
+マイナス記号を使った解法を少し変えて書きます
+<!--
+We now write the solution with a minus sign a little differently
+-->
+\[
+Φ = e^{−ip_μx^μ} = Φ = e^{i(−Et+\vec{p}·\vec{x})}
+\]
+
+そして、時間依存性は\(e^{−iEt}\)、すなわち\(Φ ∝ e^{−iEt}\)で与えられることがわかる。式8.2から、エネルギーは
+<!--
+and then we see that the time dependence is given by \(e^{−iEt}\), i.e.
+\(Φ ∝ e^{−iEt}\). From Eq. 8.2 we know the energy is
+-->
+\[
+E =\sqrt{\vec{p}^2 + m^2} =\sqrt{m^2\left(\frac{\vec{p}^2}{m^2} + 1\right)} 
+= m\sqrt{\frac{\vec{p}^2}{m^2} + 1}
+\]
+
+非相対論的極限 \(|\vec{p}| \ll m\)、つまり光速よりもはるかに遅く移動する物体（つまり運動量が質量よりもはるかに小さい物体）の場合、テイラー級数を用いてエネルギーを次のように近似することができます。
+<!--
+In the non-relativistic limit \(|\vec{p}| \ll m\), i.e. for an object that moves
+much slower than the speed of light, which implies that its momentum
+is much smaller than its mass, we can approximate the energy
+using the Taylor-series as
+-->
+\[
+\begin{align}
+E &= m\sqrt{\frac{\vec{p}^2}{m^2} + 1} \\
+\\
+&= m(1 +\frac{1}{2}\frac{\vec{p}^2}{m^2}+ . . .) \\
+\\
+&≈ \underbrace{m}_{静止質量}+\underbrace{\frac{\vec{p}^2}{2m}}_{運動エネルギー}  \tag{8.17}
+\end{align}
+\]
+
+したがって、次のように書くことができる。
+<!--
+We can therefore write
+-->
+\[
+Φ = e^{i(−Et+\vec{p}·\vec{x})} ≈ e^{−imt} \underbrace{e^{i\vec{p}·\vec{x}−i(\vec{p}^2/2m)t}}_{≡φ(\vec{x},t)}= e^{−imt}φ(\vec{x}, t)  \tag{8.18}
+\]
+</p><p>
+
+\(|\vec{p}| \ll m\) から、静止質量は運動エネルギーよりもはるかに大きいことが分かります。したがって、\(φ(\vec{x}, t)\) における残りの時間依存性は、\(e^{−imt}\) よりも遅く振動します。この仮定をクライン・ゴルドン方程式に代入すると、次のようになります。
+<!--
+From \(|\vec{p}| \ll m\) it follows that the rest-mass is much bigger than
+the kinetic energy and therefore the remaining time dependence in
+\(φ(\vec{x}, t)\) oscillates more slowly than \(e^{−imt}\). If we put our ansatz into the
+Klein-Gordon equation we get
+-->
+
+\[
+(∂_μ∂^μ + m^2)e^{−imt}φ(\vec{x}, t) = (∂_t∂^t − ∂_i∂^i + m^2)e^{−imt}φ(\vec{x}, t) = 0
+\]
+
+次に、\(∂_te^{−imt}(. . .) = e^{−imt}(−im + ∂_t)(. . .)\) という積の法則を2回使います。すると、
+<!--
+Then we use \(∂_te^{−imt}(. . .) = e^{−imt}(−im + ∂_t)(. . .)\), which is just the
+product rule, twice. This yields
+-->
+
+\[
+e^{−imt}((−im + ∂_t)^2 − ∂_i∂^i + m^2)φ(\vec{x}, t) = 0
+\]
+
+これは決してゼロにならないので、\(e^{−imt}\)で割ることができます。
+したがって
+<!--
+which we can divide by \(e^{−imt}\), because this never becomes zero.
+Therefore
+-->
+\[
+→ ((−im + ∂_t)^2−∇^2 + m^2)φ(\vec{x}, t) = 0
+\]
+
+\[
+→ (−m^2 − 2im∂_t + (∂_t)^2−∇^2 + m^2)φ(\vec{x}, t) = 0
+\]
+
+第三項と比較して
+<!--
+Comparing now the third term
+-->
+\[
+\begin{align}
+(∂_t)^2φ(\vec{x}, t) &= (∂_t)^2 exp\left[i\vec{p}·\vec{x} − i(\vec{p}^2/2m)t\right] \\
+\\
+&= (\vec{p}^2/2m)^2 exp\left[i\vec{p}·\vec{x} − i(\vec{p}^2/2m)t\right]∝
+\frac{p^4}{m^2}  \tag{8.19}
+\end{align}
+\]
+
+第二項と(比較して)
+<!--
+with the second term
+-->
+\[
+\begin{align}
+im∂_tφ(\vec{x}, t) &= im∂_t exp\left[i\vec{p} ·\vec{x} − i(\vec{p}^2/2m)t\right] \\
+\\
+&= m(\vec{p}^2/2m) exp\left[i\vec{p} ·\vec{x} − i(\vec{p}^2/2m)t\right]∝ p^2  \tag{8.20}
+\end{align}
+\]
+
+は、\(|\vec{p}| \ll m\) により、この極限における第3項を無視できることを示しています。したがって、
+<!--
+shows us that, because of \(|\vec{p}| \ll m\), we can neglect the third term in
+this limit. Therefore
+-->
+\[
+(−2im∂_t −∇^2)φ(\vec{x}, t) = 0
+\]
+
+\[
+\underbrace{→}_{(-2m)で割る}(i∂_t +\frac{1}{2m}∇^2)φ(\vec{x}, t) = 0 
+\]
+
+\[
+→ \left(i∂_t +\frac{∇^2}{2m}\right))φ(\vec{x}, t) = 0  \tag{8.21}
+\]
+
+これは有名な<strong>シュレーディンガー方程式</strong>です。この章の冒頭で述べたように、この式を次のように表します。
+<!--
+which is the famous <strong>Schrödinger equation</strong>. When we now make
+the identifications we recited at the beginning of this chapter, the
+equation reads
+-->
+\[
+\begin{align}
+&→ (E −\underbrace{\frac{\vec{p}^2}{2m}}_{=運動エネルギー})φ(\vec{x}, t) = 0 \\
+\\
+&→ E =\frac{\vec{p}^2}{2m}  \tag{8.22}
+\end{align}
+\]
+
+これは通常の<strong>非相対論的なエネルギーと運動量の関係</strong>です。
+この観点から見ると、外部ポテンシャルをどのように組み込むことができるかは容易に理解できます。なぜなら、外部ポテンシャルの動きは、エネルギー方程式にポテンシャルエネルギーを表す項を追加するだけだからです。
+<!--
+which is the usual <strong>non-relativistic energy-momentum relation</strong>.
+From this point-of-view, it is easy to see how we can include an external
+potential, because movement in an external potential simply adds
+a term describing the potential energy to the energy equation:
+-->
+
+\[
+→ E =\frac{\vec{p}^2}{2m}+ V
+\]
+
+有名な例としては、調和振動子のポテンシャル \(V = −kx^2\) が挙げられます。
+シュレーディンガー方程式は、ハミルトニアン演算子 \(\hat{H}\) を用いて書き直すのが一般的です。ハミルトニアン演算子は、例えば運動エネルギーの演算子 \(\frac{∇^2}{2m}\) やポテンシャルエネルギーの演算子 \(\hat{V}\) など、寄与するすべてのエネルギー演算子をまとめたものです。すると、
+<!--
+A famous example is the potential of a harmonic oscillator \(V = −kx^2\).
+It is conventional to rewrite the Schrödinger equation, using the
+Hamiltonian operator \(\hat{H}\) , which collects all contributing energy operators,
+for example, the operator for the kinetic energy \(\frac{∇^2}{2m}\) and the
+operator for the potential energy \(\hat{V}\) . Then we have
+-->
+\[
+i∂_tφ(\vec{x}, t) =\underbrace{\left(\frac{∇^2}{2m}+\hat{V}\right)}_{≡\hat{H}}
+φ(\vec{x}, t) → i∂_tφ(\vec{x}, t) =\hat{H}φ(\vec{x}, t)  \tag{8.23}
+\]
+
+これはシュレーディンガー方程式を書く標準的な方法です。
+<!--
+This is the standard way to write the Schrödinger equation.
+-->
+</p>
+<h3>8.4.1 外場を伴うシュレーディンガー方程式</h3>
+<!--
+<h3>8.4.1 Schrödinger Equation with an External Field</h3>
+-->
+<p>
+
+前節と同じ手順で、<strong>相互作用する</strong>クライン・ゴルドン方程式の非相対論的極限(式7.42)を導くこともできる。これは、質量を持つスピン0の場\(\phi\)と質量のないスピン1の場\(A_μ\)（光子場）の間の相互作用を記述する方程式である。結果として得られる方程式は以下の通りである。
+<!--
+We can also follow the same procedure as in the last section and
+derive the non-relativistic limit of the <strong>interacting</strong> Klein-Gordon equation
+(Eq. 7.42), i.e. the equation that describes the interaction between
+a massive spin 0 field \(\phi\) and a massless spin 1 field \(A_μ\) (the photon
+field). The resulting equation is
+-->
+\[
+\left(i∂_t −\frac{1}{2m}\left(∇−iq\vec{A}\right)^2− qA_0\right)φ(\vec{x}, t) = 0  \tag{8.24}
+\]
+</p>
+<h2>8.5 波動方程式から粒子運動へ</h2>
+<!--
+<h2>8.5 From Wave Equations to Particle Motion</h2>
+-->
+<p>
+さて、量子力学の標準的な解釈が実際にどのように機能するかを示す2つの例を見てみましょう。
+<!--
+Now, let’s look at two examples of how the standard interpretation of
+quantum mechanics works in practice.
+-->
+</p>
+<h3>8.5.1 例: 自由粒子</h3>
+<!--
+<h3>8.5.1 Example: Free Particle</h3>
+-->
+<p>
+自由（外部ポテンシャルなし）シュレーディンガー方程式の解（式8.21）は次のように与えられる。
+<!--
+A solution for the free (without external potential) Schrödinger equation
+(Eq. 8.21) is given by
+-->
+\[
+Ψ = e^{−i(Et−\vec{p}\vec{x})}  \tag{8.25}
+\]
+
+なぜなら
+<!--
+because
+-->
+\[
+i∂_te^{−i(Et−\vec{p}\vec{x})}\overset{!}{=}−\frac{∇^2}{2m}e^{−i(Et−\vec{p}\vec{x})}
+\]
+
+\[
+→ Ee^{−i(Et−\vec{p}\vec{x})} \overset{!}{=}\frac{\vec{p}^2}{2m}
+e^{−i(Et−\vec{p}\vec{x})}  \tag{8.26}
+\]
+
+ここで、\(E\)は自由粒子の全エネルギーを表す数値であり、式8.22で\(E = \frac{\vec{p}^2}{2m}\)として導出されている。より一般的な解は線形結合である。
+<!--
+where \(E\) is just the numerical value for the total energy of the free
+particle, which was derived in Eq. 8.22 as \(E = \frac{\vec{p}^2}{2m}\). A more general
+solution is a linear combination
+-->
+\[
+Ψ = Ae^{−i(Et−\vec{p}\vec{x})} + Be^{−i(E^\prime t−\vec{p^\prime}\vec{x^\prime})} + . . . .
+\]
+
+</p>
+<center><img src="images/fig8_1.png"></center>
+<p>
+<center>図8.1: ガウス包絡線を持つ自由波束</center>
+<!--
+Fig. 8.1: Free wave-packet with Gaussian
+envelope. Figure by Inductiveload
+(Wikimedia Commons) released under
+a public domain licence. URL: http:
+//commons.wikimedia.org/wiki/File:
+Travelling_Particle_Wavepacket.svg ,
+Accessed: 4.5.2014
+-->
+</p><p>
+波動関数を確率振幅として解釈するため、正規化する必要があります。なぜなら、粒子を発見する確率は100% = 1でなければならないからです。しかし、空間全体に広がる波動関数では、これは不可能です。個々の自由粒子を記述するには、波束と呼ばれる適合線形結合を使用する必要があります。
+<!--
+
+We interpret the wave-function as a probability amplitude and
+therefore it must be normalized, because the total probability for
+finding the particle must be 100% = 1. This is not possible for the
+wave-function above which spreads out over all of space. To describe
+an individual free particle we have to use a suited linear combination,
+called a wave-packet:
+-->
+\[
+Ψ_{WP}(\vec{x}, t) = \int dp^3A(\vec{p})e^{i(\vec{p}\vec{x}−Et)}  \tag{8.27}
+\]
+
+ここで、複素数 \(A(\vec{p})\) は、波束を正規化できるように選択する必要があります。一つの可能​​性は、\(A(\vec{p})\) がガウス分布であるガウス波束です。
+<!--
+
+where the complex numbers \(A(\vec{p})\) have to be chosen in a way that
+makes the wave packet normalizable. One possibility is a Gaussian
+wave-packet, where \(A(\vec{p})\) is a Gauss distribution.
+-->
+\[
+Ψ_{GWP}(\vec{x}, t) = \int dp^3A(\vec{p})e^{i(\vec{p}\vec{x}−Et)} =
+\int dp^3ψ_0e^{i(\vec{p}−\vec{\tilde{p}})^2/4σ^2}e^{i(\vec{p}\vec{x}−Et)}
+\]
+
+このようなガウス波束の例を図8.1に示します。
+多くの計算では、複雑な波束を扱わずに、代わりに単純な波動関数を扱うための巧妙なトリックを使うことができます。
+<!--
+
+An example of such a Gaussian wave-packet is plotted in Fig. 8.1.
+For many computations clever tricks can be used in order to avoid
+working with complicated wave packets, allowing us to work with
+simple wave functions instead.
+-->
+
+</p>
+<h3>8.5.2 例: 箱の中の粒子</h3>
+<!--
+<h3>8.5.2 Example: Particle in a Box</h3>
+-->
+<p>
+
+ここで、量子力学の標準的な例の一つを見てみましょう。それは、無限に高いポテンシャル壁を持つ1次元の箱の中に閉じ込められた粒子です。箱の内側ではポテンシャルはゼロですが、外側では無限大です（図8.2参照）。
+<!--
+
+Now we look at one of the standard examples of quantum mechanics:
+a particle confined in a box, here 1-dimensional, with infinitely
+high potential walls. Inside the box the potential is zero, outside it’s
+infinite (see Fig. 8.2).
+-->
+</p>
+<center><img src="images/fig8_2.png"></center>
+<p>
+<center>図8.2: 無限ポテンシャル井戸</center>
+<!--
+Fig. 8.2: Infinite potential well. Figure
+by Benjamin D. Esham (Wikimedia
+Commons) released under a
+public domain licence. URL: http:
+//commons.wikimedia.org/wiki/File:
+Infinite_potential_well.svg , Accessed:
+4.5.2014
+-->
+</p><p>
+
+ポテンシャルは区分的に定義される
+<!--
+The potential is defined piece-wise
+-->
+\[
+V(x) =
+\begin{cases}
+0, & 0 < x < L \\
+∞, & otherwise
+\end{cases}
+\tag{8.28}
+\]
+
+したがって、1次元シュレーディンガー方程式を区分的に解く必要があります。
+<!--
+and therefore, we have to solve the one-dimensional Schrödinger
+equation piece-wise.
+-->
+\[
+i∂_tΨ(x, t) = −\frac{∂_x^2}{2m}Ψ(x, t) + V(x)Ψ(x, t)
+\]
+
+<div class="styleBullet">
+<ul><li>
+• 箱の内側では、解は自由粒子解に等しくなります。
+\(0 < x < L\) に対して \(V(x) = 0\) となるためです。
+</li><br><li>• 箱の外側では、\(V(x) = ∞\) となるため、唯一可能な物理的解は \(Ψ(x, t) = 0\) となります。
+<!--
+• Inside the box, the solution is equal to the free particle solution,
+because \(V(x) = 0\) for \(0 < x < L\).
+</li><br><li>• Outside, because here \(V(x) = ∞\), the only possible, physical
+solution is \(Ψ(x, t) = 0\).
+-->
+
+</li></ul></div>
+</p><p>
+一般自由粒子解は次のように書き直すことができる<sup>13</sup>
+<!--
+We can rewrite the general free particle solution as<sup>13</sup>
+-->
+</p><p class="margin-large">
+<sup>13</sup>
+\(\sin(x) = \frac{1}{2i}\left(e^{ix} − e^{−ix}\right)\) および
+\(\cos(x) = \frac{1}{2}\left(e^{ix} + e^{−ix}\right)\) を用いると、
+付録 B.4.1 で導出された \(\cos(x), \sin(x)\) および \(e^{ix}\) の級数展開から直接導かれる。
+<!--
+Using \(\sin(x) = \frac{1}{2i}\left(e^{ix} − e^{−ix}\right)\) and
+\(\cos(x) = \frac{1}{2}\left(e^{ix} + e^{−ix}\right)\), which follows
+directly from the series expansion of
+\(\cos(x), \sin(x)\) and \(e^{ix}\) as derived in
+Appendix B.4.1.
+-->
+</p><p>
+
+\[
+Ψ(x, t) = Ae^{−i(Et−px)} + Be^{−i(Et+px)}
+\]
+
+\[
+=\left(C \sin(px) + D\cos(px)\right)e^{−iEt}
+\]
+
+これを非相対論的なエネルギー運動量関係（式8.22）を使って書き直すと、
+<!--
+which we can rewrite again using the non-relativistic energy-momentum
+relation (Eq. 8.22)
+-->
+\[
+E =\frac{p^2}{2m}　→　p =\sqrt{2mE}
+\]
+
+\[
+Ψ(x, t) =\left(C \sin(\sqrt{2mE}x) + D\cos(\sqrt{2mE}x)\right)e^{−iEt}  \tag{8.29}
+\]
+</p><p>
+
+次に、波動関数は連続関数でなければならないことを用います。
+波動関数にジャンプがある場合、ジャンプにおける微分が無限大となるため、粒子の運動量\(\hat{p}_xΨ = −i∂_xΨ\)は無限大となります。したがって、境界条件は\(Ψ(0) = Ψ(L) \overset{!}{=} 0\)となります。\(\cos(0) = 1\)であるため、\(D \overset{!}{=}0\)となります。
+さらに、これらの条件は
+<!--
+Next we use that the wave-function must be a continuous function.
+If there are any jumps in the wave-function, the momentum of
+the particle \(\hat{p}_xΨ = −i∂_xΨ\) is infinite, because the derivative at the
+jump would be infinite. Therefore, we have the boundary conditions
+\(Ψ(0) = Ψ(L) \overset{!}{=} 0\). Because \(\cos(0) = 1\), we see that we have \(D \overset{!}{=}0\).
+Furthermore, we see that these conditions impose
+-->
+
+\[
+\sqrt{2mE_n} \overset{!}{=} \frac{nπ}{L}  \tag{8.30}
+\]
+
+任意の整数\(n\)で表す。これは<sup>14</sup>の場合、
+<!--
+with arbitrary integer \(n\). This follows because for<sup>14</sup>
+-->
+</p><p class="margin-large">
+<sup>14</sup>
+波動関数に添え字 \(n\) を付けていることに注意してください。\(n\) ごとに異なる解が得られるからです。
+<!--
+Take note that we put an index \(n\) on
+our wave-function, because we have a
+different solution for each \(n\).
+-->
+</p><p>
+
+\[
+Φ_n(x, t) = C \sin\left(\frac{nπ}{L}x\right)e^{−iE_nt}  \tag{8.31}
+\]
+
+両方の境界条件が満たされている
+<!--
+both boundary conditions are satisfied
+-->
+\[
+→ Φ_n(L, t) = C \sin\left(\frac{nπ}{L}L\right)e^{−iE_nt} = C \sin(nπ)e^{−iE_nt} = 0
+\]
+
+\[
+→ Φ_n(0, t) = C \sin\left(\frac{nπ}{L}0\right)e^{−iE_nt} = C \sin(0)e^{−iE_nt} = 0
+\]
+
+正規化定数 \(C\) は \(C =\sqrt{\frac{2}{L}}\) と求められます。
+
+箱の内側のどこかに粒子が存在する確率は 100% = 1 でなければならず、外側の確率は \(Ψ = 0\) なので 0 です。したがって、
+<!--
+The normalization constant \(C\), can be found to be \(C =\sqrt{\frac{2}{L}}\)
+, because
+the probability for finding the particle anywhere inside the box must
+be 100% = 1 and the probability outside is zero, because there we
+have \(Ψ = 0\). Therefore
+-->
+\[
+P = \int_0^L dxΦ_n^*(x, t)Φ_n(x, t) \overset{!}{=}1
+\]
+
+\[
+P = \int_0^L dxC^2 \sin\left(\frac{nπ}{L}x\right)e^{+iE_nt} \sin\left(
+\frac{nπ}{L}x\right)e^{−iE_nt}
+\]
+
+\[
+= C^2 \int_0^L dx \sin^2\left(\frac{nπ}{L}x\right) 
+= C^2 \left[\frac{x}{2}− \frac{sin(\frac{2nπ}{L}x)}{4\frac{nπ}{L}}\right]_0^L
+\]
+
+\[
+= C^2\left(\frac{L}{2}− \frac{\sin(\frac{2nπ}{L}L)}{4\frac{nπ}{L}}\right)
+= C^2\frac{L}{2} \overset{!}{=}1
+\]
+
+\[
+→ C^2 \overset{!}{=}\frac{2}{L}
+\]
+
+エネルギー\(E\)について式8.30を解くことができる。
+<!--
+We can now solve Eq. 8.30 for the energy \(E\)
+-->
+\[
+E_n \overset{!}{=} \frac{n^2π^2}{L^22m}  \tag{8.32}
+\]
+
+ここで、<strong?可能なエネルギーは量子化されている</strong>ことがわかります。つまり、離散的な値の集合のみが許容され、任意の連続値は許容されないということです<sup>15</sup>。これが量子力学の名の由来です。
+<!--
+We see here that the <strong?possible energies are quantized</strong>, which means
+that only a discrete set of values is allowed and not arbitrary continuous
+values<sup>15</sup>. Hence the name quantum mechanics. 
+-->
+</p><p class="margin-large">
+<sup>15</sup>
+\(n\) は必ず整数であることを思い出してください。
+取り得るエネルギー値は、この整数の2乗の\(\frac{π^2}{L^22m}\)倍です。
+<!--
+Recall that n is necessarily an integer.
+The possible energy values are \(\frac{π^2}{L^22m}\)
+times this integer squared.
+-->
+</p><p>
+
+各 \(n\) と次の形式の線形結合に対して解があることに注目してください。
+<!--
+Take note that we have a solution for each n and linear combinations of the form
+-->
+\[
+Φ(x, t) = AΦ_1(x, t) + BΦ_2(x, t) + ...
+\]
+
+も解である。これらの解は確率的解釈<sup>16</sup>のため、再度正規化する必要がある。
+<!--
+are solutions, too. These solutions have to be normalised again be-
+cause of the probabilistic interpretation<sup>16</sup>.
+-->
+</p><p class="margin-large">
+<sup>16</sup>
+1 = 100%を超える確率は意味をなさない。
+<!--
+A probability of more than 1 = 100% 
+doesn’t make sense.
+-->
+</p><p>
+
+次に<sup>17</sup>、エネルギー\(E = E_2 = \frac{2^2π^2}{L^22m}\)を持つ粒子を測定する確率はどれくらいか、という問いを立てることができる。粒子が次式で表される正規化された状態にあるとする。
+<!--
+Next we can ask<sup>17</sup>, what is the probability for measuring the particle having Energy \(E = E_2 = \frac{2^2π^2}{L^22m}\). Say our particle is in the normalized state given by
+-->
+
+</p><p class="margin-large">
+<sup>17</sup>
+場所 \(x\) で粒子が見つかる確率はどれくらいか？
+<!--
+Instead of what’s the probability to
+find a particle at place x. 
+-->
+</p><p>
+
+\[
+Ψ(x, t) =\sqrt{\frac{3}{5}}Φ_2(x, t) +\sqrt{\frac{2}{5}}Φ_3(x, t)
+\]
+
+量子力学の従来の解釈における答えは、\(Ψ\) と \(Φ_2\) の重なりの絶対値の2乗である。
+<!--
+The answer in the conventional interpretation of quantum mechanics
+is: it is the absolute value squared of the overlap between \(Ψ\) and \(Φ_2\)
+-->
+\[
+P\left(E =\frac{2^2π^2}{L^22m}\right)
+=\left| \int dxΦ_2^*(x, t)Ψ(x, t) \right|^2
+\]
+
+ここで重なりは\(Φ_2\)と\(Ψ\)のスカラー積<sup>18</sup>として見ることができます。
+<!--
+where the overlap can be seen as a scalar product<sup>18</sup> of \(Φ_2\) and \(Ψ\):
+-->
+<sup>18</sup>
+
+実際、これは状態ベクトル \(Ψ, Φ_n\) が存在するヒルベルト空間のスカラー積です。
+<!--
+In fact, this is the scalar product of 
+the Hilbert space in which our state
+vectors \(Ψ, Φ_n\) live.
+-->
+\[
+(Φ_2,Ψ) = \int dxΦ_2^*Ψ = \underbrace{c}_{複素数}
+\]
+
+計算は簡単です。なぜなら、私たちが見つけた解は直交しているからです。
+<!--
+The computation is easy, because the solutions we found are orthogonal,
+i.e.
+-->
+\[
+\int dxΦ_n^*(x, t)Φ_{n^\prime}(x, t) = δ_{nn^\prime}
+\]
+
+例えば<sup>19</sup>、
+<!--
+For example<sup>19</sup>,
+-->
+</p><p class="margin-large">
+<sup>19</sup>
+これはWolframalpha.comなどのように部分積分などを使って簡単に確認できます。
+
+<!--
+You can check this easily using 
+integration by parts or something like
+Wolframalpha.com
+-->
+</p><p>
+
+\[
+\begin{align}
+\int_0^L dxΦ_2^*Φ_3(x, t) &= \int_0^L dxC \sin\left(\frac{2π}{L}x\right)e^{+iEt}C \sin\left(\frac{3π}{L}x\right)e^{−iEt} \\
+\\
+&= C^2 \int_0^L dx \sin\left(\frac{2π}{L}x\right) \sin\left(
+\frac{3π}{L}x\right) = 0
+\end{align}
+\]
+
+したがって、エネルギーを求める確率は\(E = \frac{2^2π^2}{L^22m}\)となる。
+<!--
+Therefore, we get the probability for finding the energy \(E = \frac{2^2π^2}{L^22m}\)
+-->
+\[
+\begin{align}
+P\left(E =\frac{2^2π^2}{L^22m}\right) &=
+\left| \int dxΦ_2^*(x, t)Ψ(x, t)\right|^2 \\
+\\
+&=\left| \int dxΦ_2^*(x, t)
+\left(\sqrt{\frac{3}{5}}Φ_2(x, t) +\sqrt{\frac{2}{5}}Φ_3(x, t)\right)\right|^2 \\
+\\
+&=\left| \int dx\left(\sqrt{\frac{3}{5}}
+\underbrace{Φ_2^*(x, t)Φ_2(x, t)}_{積分すると =1}
++\sqrt{\frac{2}{5}}\underbrace{Φ_2^*(x, t)Φ_3(x, t)}_{積分すると =0}
+\right)\right|^2 \\
+\\
+&=\left(\sqrt{\frac{3}{5}}\right)^2
+\tag{8.33}
+\end{align}
+\]
+</p><p>
+
+式8.31で見つけた関数を、エネルギー演算子 i∂t の固有状態、またはハミルトニアン<sup>20</sup> \(\hat{H} ≡ −\frac{∂_x^2}{2m}\) の固有状態と呼ぶことができることに注意してください。
+<!--
+Take note that we are able to call the functions we just found in
+Eq. 8.31, eigenstates of the energy operator i∂t or equivalently of the
+Hamiltonian<sup>20</sup> \(\hat{H} ≡ −\frac{∂_x^2}{2m}\), because
+-->
+</p><p class="margin-large">
+<sup>20</sup>
+
+これは、シュレーディンガー方程式
+\(i∂_tΦ = −\frac{∂_x^2}{2m}Φ ≡\hat{H}Φ\) から直接導かれます。
+<!--
+This follows directly from
+the Schrödinger equation
+\(i∂_tΦ = −\frac{∂_x^2}{2m}Φ ≡\hat{H}Φ\).
+-->
+</p><p>
+
+\[
+\hat{H}Φ_n = E_nΦ_n  \tag{8.34}
+\]
+
+固有状態にエネルギー演算子を作用させると、同じ状態に定数を乗じた値が得られ、これを状態のエネルギーと呼びます。一方、任意の状態は、エネルギー演算子、つまりハミルトニアン演算子 \(\hat{H}\) を作用させると変化します。例えば、線形結合を見てみましょう。
+<!--
+If we act with the energy operator on an eigenstate, we get the same
+state multiplied with a constant, which we call energy of the state. In
+contrast, an arbitrary state is changed when the energy operator or
+the Hamiltonian operator \(\hat{H}\) act on it. For example, if we take a look
+at the linear combination
+-->
+\[
+Ψ =\sqrt{\frac{3}{5}}Φ_2 +\sqrt{\frac{2}{5}}Φ_3
+\]
+
+以下であることがわかります。
+<!--
+we see that
+-->
+\[
+\hat{H}Ψ = \hat{H}\left(\sqrt{\frac{3}{5}}Φ_2 +\sqrt{\frac{2}{5}}Φ_3\right)
+\underbrace{=}_{Eq. 8.34}\sqrt{\frac{3}{5}}E_2Φ_1 +\sqrt{\frac{2}{5}}E_3Φ_3
+\]
+
+これは\(E_2 \neq E_3\)なので、\(Ψ\)の倍数として書くことはできません。したがって、\(Ψ\)はエネルギー演算子の固有状態ではありません。しかしながら、
+すべての波動関数は固有状態\(Φ_n\)で表すことができます。
+なぜなら、それらは完全な基底関数を形成するからです。
+<!--
+which cannot be written as multiple of \(Ψ\) because \(E_2 \neq E_3\). Therefore,
+\(Ψ\) is not an eigenstate of the energy operator. Nevertheless,
+every wave function can be expressed in terms of the eigenstates \(Φ_n\),
+because they form a complete basis set.
+-->
+</p><p>
+
+次に、ディラックが考案した便利な表記法を紹介します。これは量子力学の構造を理解するのに非常に役立ちます。
+<!--
+Next we want to introduce a useful notation invented by Dirac,
+which extremely helpful to understand the structure of quantum
+mechanics.
+-->
+</p>
+<h3>8.5.3 ディラック記法</h3>
+<!--
+<h3>8.5.3 Dirac Notation</h3>
+-->
+<p>
+ディラック記法では、物理系の状態は抽象的に次のように表される。
+<!--
+In the Dirac notation the state of a physical system is denoted abstractly
+by
+-->
+\[
+|Ψ\rangle  \tag{8.35}
+\]
+
+これは<strong>ケット</strong><sup>21</sup>と呼ばれます。例えば、箱の中にある粒子をエネルギー固有状態に置くと、
+<!--
+which is called a <strong>ket</strong><sup>21</sup>. For example, if we prepare a particle in a box in an energy eigenstate we have 
+-->
+</p><p class="margin-large">
+<sup>21</sup>
+しゃれはすぐにわかるでしょう。
+<!--
+The pun will become clear in a second.
+-->
+</p><p>
+
+\[
+\hat{H}|Φ_n\rangle = E_n |Φ_n\rangle
+\]
+
+各ケットに対して、\(\langle Ψ|\)で表される<strong>ブラ</strong>を定義することができ、これは次のように与えられる。
+<!--
+To each ket we can define a <strong>bra</strong>, denoted by \(\langle Ψ|\) which is given by
+-->
+\[
+\langle Ψ| = |Ψ\rangle^†  \tag{8.36}
+\]
+
+ここで、\(†\) 記号（ダガーと呼ばれる）はエルミート共役、つまり転置と複素共役を表します。ブラはケットに作用するオブジェクトです。内積は次のように定義できます。
+<!--
+where the \(†\) symbol (called dagger) denotes the Hermitian conjugate,
+i.e. transposing plus complex conjugation. A bra is an object that acts
+on a ket. We can define an inner product as follows:
+-->
+\[
+(|Φ\rangle , |Ψ\rangle) ≡ \langle Φ|Ψ\rangle
+\]
+
+ケットを左辺の<strong>ブラ</strong>と掛け合わせると、結果は複素数になる。
+<!--
+If a ket is multiplied with a <strong>bra</strong> from the left-hand side, the result is a complex number
+-->
+\[
+\langle Φ|Ψ\rangle = c  \tag{8.37}
+\]
+
+この複素数は、状態\(|Ψ\rangle\)にある物理系が状態\(|Φ\rangle\)で測定される確率振幅です。したがって、この確率は\(|\langle Φ|Ψ\rangle |^2\)で与えられます。例えば、区間\([x, x + dx]\)内で状態\(|Ψ\rangle\)にある粒子が見つかる確率振幅は、次のように与えられます。
+<!--
+This complex number is the probability amplitude for a physical system
+in the state \(|Ψ\rangle\) to be measured in the state \(|Φ\rangle\). Consequently,
+the probability is given by \(|\langle Φ|Ψ\rangle |^2\). For example, the probability
+amplitude for finding a particle in the state \(|Ψ\rangle\) in the interval
+\([x, x + dx]\) is given by
+-->
+\[
+\langle x|Ψ\rangle ≡ Ψ(x)
+\]
+
+これは前章で使用した波動関数です。さらに、次のように問うことができます。区間 \([p, p + dp]\) に運動量を持つ同じ粒子が見つかる確率振幅はいくらでしょうか？答えはディラック表記で
+次のように表されます。
+<!--
+This is the wave function we used in the last chapters. Furthermore,
+we could ask: What’s the probability amplitude for finding the same
+particle with momentum in the interval \([p, p + dp]\)? The answer in
+the Dirac notation is
+-->
+\[
+\langle p|Ψ\rangle ≡ Ψ(p)
+\]
+</p><p>
+
+確率的解釈<sup>22</sup>を用いているために、状態は正規化条件を満たす必要があることを思い出してください。例えば、
+<!--
+Recall that our states must fulfil a normalization condition, be-
+ cause we are using a probabilistic interpretation<sup>22</sup>. For example, we
+have
+-->
+</p><p class="margin-large">
+<sup>22</sup>
+
+粒子がどこにあっても見つかる確率は100% = 1でなければなりません。あるいは、粒子がどんな運動量であっても見つかる確率は100% = 1でなければなりません。言い換えれば、すべての起こりうる結果の確率の合計は1でなければなりません。
+<!--
+The probability for finding the particle anywhere must be 100% = 1 or
+equally the probability for finding the
+particle with any momentum must be
+100% = 1. In other words: the sum of
+probabilities for all possible outcomes
+must add up to 1.
+-->
+</p><p>
+
+\[
+\int dx|Ψ(x, t)|^2 = \int dxΨ^*(x, t)Ψ(x, t) \overset{!}{=} 1 \tag{8.38}
+\]
+
+そして同様に
+<!--
+and equally
+-->
+
+\[
+\int dp|Φ(p, t)|^2 = \int dpΦ^*(p, t)Φ(p, t) \overset{!}{=} 1  \tag{8.39}
+\]
+
+または新しい表記法で書くと
+<!--
+or written in our new notation
+-->
+\[
+\int dx|\langle x|Ψ\rangle |^2 =
+\int dx(\langle x|Ψ\rangle)^†\langle x|Ψ\rangle =
+\int dx \;angle Ψ|x\rangle \langle x|Ψ\rangle \overset{!}{=}1  \tag{8.40}
+\]
+
+および
+<!--
+and
+-->
+\[
+\int dp|\langle p|Φ\rangle |^2 =
+\int dp(\langle p|Φ\rangle)^†\langle p|Φ\rangle =
+\int dp \langle Φ|p\rangle \langle p|Φ\rangle \overset{!}{=} 1  \tag{8.41}
+\]
+
+ここで、新しい種類の演算子 \(|p\rangle \langle p|\) と \(|x\rangle \langle x|\) が登場します。これらは<strong>射影演算子</strong><sup>23</sup>と呼ばれます。これらは、ケットを別のケットに変換することから演算子と呼ばれます。例えば、
+<!--
+We can see here a new kind of operator: \(|p\rangle \langle p|\) and \(|x\rangle \langle x|\), which are called <strong>projection operators</strong><sup>23</sup>. They are operators because they transform a ket into another ket. For example,
+-->
+</p><p class="margin-large">
+<sup>23</sup>
+先ほど紹介した左カイラルスピノルと右カイラルスピノルの射影演算子と全く同じように、これらの射影演算子は定義条件\(P^2 = P\)を満たします。
+<!--
+Exactly like the projection operators 
+for left-chiral and right-chiral spinors
+we introduced earlier, these projection
+operators fulfil the defining condition
+\(P^2 = P\).
+-->
+</p><p>
+
+\[
+|x \rangle \underbrace{\langle x|Ψ\rangle}_{\text{=Ψ(x)と呼ぶ複素関数}}= |x\rangle Ψ(x)
+\]
+
+これもケットです。なぜなら、複素関数とケットの積もまたケットだからです。一般に、演算子とは、ケットに作用して別のケットを生成する任意のオブジェクトのことです。式8.40を見ると、別の演算子を導入する動機が生まれます。
+<!--
+which is again a ket, because the product of a complex function with
+a ket is again a ket. In general, an operator is any object that acts on
+a ket to generate another ket. Looking at Eq. 8.40 motivates us to
+introduce another operator
+-->
+\[
+\int dx \langle Ψ|x\rangle \langle x|Ψ\rangle = \langle Ψ|
+\underbrace{\left(\int dx |x\rangle \langle x|\right)}_{≡\hat{I}}
+|Ψ\rangle = \langle Ψ|\hat{I} |Ψ\rangle \overset{!}{=}1  \tag{8.42}
+\]
+
+このことから、
+<!--
+From this we can conclude
+-->
+\[
+\hat{I} |Ψ\rangle \overset{!}{=}|Ψ\rangle  \tag{8.43}
+\]
+
+任意のケット \(|Ψ\rangle\) に対して、\(\langle Ψ|Ψ\rangle = 1\) となる。これは、状態 \(|Ψ\rangle\) に準備された系が状態 \(|Ψ\rangle\) にある確率が、もちろん 100% = 1 であるからである。例えば、ある粒子をある点 x0 にあるように準備した場合、それが点 \(x_0\) にある確率は 1 である。したがって、\(\langle x_0|x_0\rangle = 1\) となる。このため、\(\hat{I}\) は単位演算子と呼ばれ、数の掛け算における数字 1 と同じ役割を果たす。結果は
+<!--
+for an arbitrary ket \(|Ψ\rangle\), because \(\langle Ψ|Ψ\rangle = 1\). This follows, because
+the probability for a system prepared in state the \(|Ψ\rangle\) to be found
+in the state \(|Ψ\rangle\), must be, of course, 100% = 1. For example, if we
+prepare a particle to be at some point x0, the probability for finding
+it at point \(x_0\) is 1. Therefore, \(\langle x_0|x_0\rangle = 1\). Because of this, \(\hat{I}\) is called
+the unit operator and plays the same role as the number 1 in the
+multiplication of numbers. The result
+-->
+\[
+\int dx |x\rangle \langle x| = \hat{I}  \tag{8.44}
+\]
+
+または離散的な基準で
+<!--
+or for a discrete basis
+-->
+\[
+\sum_i |i\rangle \langle i| = \hat{I}  \tag{8.45}
+\]
+
+は、完全性関係</strong>と呼ばれます。一般に、ケット\(|a\rangle\)の基底\(|i\rangle\)における成分は、
+<!--
+are called ,strong>completeness relations</strong>. In general, we say the component
+of a ket \(|a\rangle\) in the basis \(|i\rangle\) is
+-->
+\[
+|i\rangle^† |a\rangle ≡ \langle i|a\rangle ≡ a_i
+\]
+
+これは複素数です。完全性関係、つまり
+\(\sum_i |i\rangle \langle i| =\hat{I}\) を用いると、次のように書けます。
+<!--
+which is a complex number. Using the completeness relation, i.e.
+\(\sum_i |i\rangle \langle i| =\hat{I}\), we can write
+-->
+\[
+|a\rangle =\sum_i |i\rangle \langle i|a\rangle =\sum_i |i\rangle a_i 
+\]
+
+これは、ケット\(|a\rangle\)の基底\(|i\rangle\)による級数展開<sup>24</sup>と見ることができる。したがって、複素数\(a_i\)は展開係数と見ることができる。同様に、連続完備基底の場合、
+<!--
+This can be seen as the series expansion<sup>24</sup> of the ket \(|a\rangle\) in terms of the basis \(|i\rangle\). Consequently, the complex numbers \(a_i\) can be seen as the expansion coefficients. Equally for a continuous complete basis,
+we have
+-->
+</p><p class="margin-large">
+<sup>24</sup>
+これは、付録 A.1 で説明されているように、与えられた基底を用いてベクトルを次のように表すことができるのと同様です。
+\(\vec{v} = v_1\vec{e}_1 + v_2\vec{e}_2 + v_3\vec{e}_3\)。
+<!--
+Analogous to how we can write
+a vector in terms of a given basis:
+\(\vec{v} = v_1\vec{e}_1 + v_2\vec{e}_2 + v_3\vec{e}_3\), as explained in
+Appendix A.1.
+-->
+</p><p>
+
+\[
+|Ψ\rangle = \int dx |x\rangle \underbrace{\langle x|Ψ\rangle}_{≡Ψ(x)\; 複素数}=\int dx |x\rangle Ψ(x)
+\]
+</p><p>
+
+8.3.1節で導入した期待値はディラック表記で次のように表される。
+<!--
+The expectation value we introduced in Section 8.3.1 is in the Dirac
+notation given by
+-->
+\[
+\langle\hat{\mathcal{O}}\rangle = \langle Ψ|\hat{\mathcal{O}} |Ψ\rangle
+\]
+
+さて、箱の中の粒子の例に戻り、ディラック記法を使って解いてみましょう。
+<!--
+Now let’s return to the example of the particle in a box, and solve it
+using the Dirac notation.
+-->
+</p>
+<h3>8.5.4 例: 再び箱の中の粒子</h3>
+<!--
+<h3>8.5.4 Example: Particle in a Box, Again</h3>
+-->
+<p>
+私たちが問うたのは、「エネルギー \(E = E_2 = \frac{n^2π^2}{2mL^2}\) を持つ粒子が見つかる確率はどれくらいか？」というものでした。この問いは、ディラック記法を用いて非常に自然な方法で答えることができます。確率は次のように与えられます。
+<!--
+The question we asked was: What is the probability for finding the
+particle having energy \(E = E_2 = \frac{n^2π^2}{2mL^2}\) ? This question can be answered
+in the Dirac notation in a very natural way. The probability is
+given by
+-->
+\[
+\begin{align}
+P(E_2) &=| \langle E =\frac{n^2π^2}{2mL^2}\midΨ\rangle |^2
+=|\langle E =\frac{n^2π^2}{2mL^2} | \underbrace{\left(\int dx |x\rangle \langle x|\right)}_{=\hat{I}} | Ψ\rangle |^2
+\\
+\\
+&=| \int dx \langle E =\frac{n^2π^2}{2mL^2}|x\rangle \langle x|Ψ\rangle |^2
+=| \int dxΦ_2^*(x)Ψ(x)|^2 
+\end{align}
+\]
+
+これはまさに、第8.5.2節で標準的な波動力学を用いて導出した結果です。量子力学についてさらに学び、両方の表記法を用いて自分でいくつかの問題を解くと、これらすべてがはるかに明確になります。
+<!--
+which is exactly the result we derived using the standard wave mechanics
+in Section 8.5.2. All of this becomes much clearer as soon as
+you learn more about quantum mechanics and solve some problems
+on your own, using both notations.
+-->
+</p>
+<h3>8.5.5 スピン</h3>
+<!--
+<h3>8.5.5 Spin</h3>
+-->
+<p>
+さて、5.1.1節で導出した、新しい種類の角運動量であるスピンの作用素に戻りましょう。ここまでで、2つの未解決の問題がありました。1つは、ローレンツ群の表現のラベルとしてスピンを用いてきたことです。例えば、スピン \(\frac{1}{2}\) を持つ素粒子を記述したい場合、スピン \(\frac{1}{2}\) 表現に従って変換するオブジェクトを使用する必要があります。もう1つは、回転対称性から、スピンと呼ぶものを導出しました<sup>25</sup>。量子論の枠組みでは、5.1.1節で導出した作用素を与えられた状態に作用させると、結果は粒子のスピンとなります。スカラー表現の場合、この演算子は\(\hat{S} = 0\)で与えられ、もちろん状態\(Ψ\)では常に0になります。
+<!--
+Now it’s time to return to the operator we derived in Section 5.1.1
+for a new kind of angular momentum, we called spin. So far we have
+two loose ends. On the one hand, we have used spin as a label for
+the representations of the Lorentz group. For example, if we want
+to describe an elementary particle with spin \(\frac{1}{2}\)
+, we have to use an
+object transforming according to the spin \(\frac{1}{2}\)
+representation. On the
+other hand, we derived from rotational symmetry something that we
+called spin, too<sup>25</sup>. In the quantum framework, when we act with the
+operator that we derived in Section 5.1.1 on a given state, the result
+is the spin of the particle. For the scalar representation, this operator
+is given by \(\hat{S} = 0\), which of course always yields 0 when with it on a
+state \(Ψ\).
+-->
+</p><p class="margin-large">
+<sup>25</sup>
+回転不変性から導かれる保存量は2つの部分から成ります。1つは時空座標の回転不変性から導かれ、軌道角運動量と呼ばれます。もう1つは、場の成分の混合不変性から導かれます。4.5.4節を参照してください。
+<!--
+The conserved quantity that follows 
+from invariance under rotations has
+two parts. One part follows from
+the invariance under rotations of the
+spacetime coordinates and is called
+orbital angular momentum. The second
+parts follows from the invariance under
+the mixing of the field components. See
+Section 4.5.4.
+-->
+</p>
+<center><img src="images/fig8_3.png"></center>
+<p>
+
+図8.3：シュテルン・ゲルラッハの実験の図解。元の実験は銀原子を用いて行われた。銀原子のスピン挙動は最外殻原子軌道の1つの電子によって支配されている。実験結果は電子の場合と同じである。粒子ビームは不均一磁場の影響を受ける。古典的な角運動量の場合、磁場を通過する粒子の偏向は連続分布となるはずである。測定されたのは2種類の偏向、すなわちビームが2つの部分に分割される様子です。1つはスピン \(\frac{1}{2}\) に対応し、もう1つは \(-\frac{1}{2}\) に対応します。
+<!--
+Fig. 8.3: Illustration of the Stern-
+Gerlach experiment. The original experiment
+was performed with silver atoms,
+whose spin behavior is dominated
+by the one electron in the outermost
+atomic orbital. The experimental result
+is the same as with electrons. A
+beam of particles is affected by an inhomogeneous
+magnetic field. For a
+classical type of angular momentum
+the deflection of the particles through
+the magnetic field should be a continuous
+distribution. Measured are
+just two deflection types, i.e. the beam
+splits in two parts, one corresponding
+to spin \(\frac{1}{2}
+and one to \(−\frac{1}{2}\)
+. Figure by
+Theresa Knott (Wikimedia Commons)
+distributed under a CC BY-SA 3.0 license:
+http://creativecommons.org/
+licenses/by-sa/3.0/deed.en. URL:
+http://commons.wikimedia.org/wiki/
+File:Stern-Gerlach_experiment.PNG ,
+Accessed: 24.5.2014.
+-->
+</p><p>
+
+\((\frac{1}{2}, 0)\) 表現には、3.7.5節で導出した回転生成子の2次元表現を使用する必要があります。
+<!--
+For the \((\frac{1}{2}, 0)\) representation we have to use the two-dimensional
+representation of the rotation generator, which was derived in Section
+3.7.5
+-->
+\[
+\hat{S}_i = \frac{σ_i}{2}  \tag{8.46}
+\]
+
+ここで、\(σ_i\) はパウリ行列を表します。\(Ψ\) で表される粒子のスピンを知りたい場合は、\(Ψ\) にスピン演算子を作用させる必要があります。例えば、\(\hat{S}_3\) の場合、これは対応する粒子の 3 方向、またはより一般的には \(z\) 方向のスピンを与えます。同様に、\(\hat{S}_2\) の場合、\(y\) 方向、\(\hat{S}_1\) の場合も \(x\) 方向のスピンを与えます。
+<!--
+and where \(σ_i\) denotes the Pauli matrices. If we want to know the spin
+of a particle described by \(Ψ\), we have to act with the spin-operator on
+\(Ψ\). For example, for \(\hat{S}_3\) this will give us the spin of the corresponding
+particle in the 3-, or more familiar called \(z\)-direction. Analogously for
+\(hat{S}_2\) in the \(y\)- and \(\hat{S}_1\) in the \(x\)-direction.
+-->
+</p><p>
+
+演算子\(\hat{S}_3\)の明示的な形式は
+<!--
+The explicit form of the operator \(\hat{S}_3\) is
+-->
+\[
+\hat{S}_3 =\frac{σ_3}{2}=
+\begin{pmatrix}
+\frac{1}{2} & 0 \\
+0 & −\frac{1}{2}
+\end{pmatrix}
+\tag{8.47}
+\]
+
+対応する固有状態は
+<!--
+The corresponding eigenstates are
+-->
+\[
+v_{\frac{1}{2}}=
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+　v_{-\frac{1}{2}}=
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+\tag{8.48}
+\]
+
+それぞれ固有値が \(\frac{1}{2}\) と \(−\frac{1}{2}\) である。
+これは、スピノル<sup>26</sup> によって記述される粒子がスピン \(\frac{1}{2}\) を持つことを意味する。
+このスピンは任意の測定軸に整列することも、反整列することもできる。そのため、この表現をスピン \(\frac{1}{2}\) 表現<sup>27</sup> と呼ぶ。量子論の枠組みでは、これはスピン測定の結果は \(\frac{1}{2}\) と \(−\frac{1}{2}\) のみであると解釈される。第 4.5.4 節では、スピンは軌道角運動量に似た概念であることを学びました。なぜなら、どちらの概念も回転不変性から生じるからです。ここでは、この種の角運動量を測定すると、非常に驚​​くべき結果が得られることがわかります。この奇妙な自然界の事実を証明した最も有名な実験はシュテルン・ゲルラッハの実験です（図8.3参照）。
+<!--
+with eigenvalues \(\frac{1}{2}\) and \(−\frac{1}{2}\), respectively.
+This means a particle described by a spinor<sup>26</sup> has spin \(\frac{1}{2}\)
+, which can be aligned or anti-aligned to some arbitrary measurement axis. This
+is why we call this representation spin \(\frac{1}{2}\) representation<sup>27</sup>. In the quantum framework this is interpreted by saying that a measurement of spin can only result in \(\frac{1}{2}\) and \(−\frac{1}{2}\). In Section 4.5.4 we learned that
+spin is something similar to orbital angular momentum, because
+both notions arise from rotational invariance. Here we can see that
+this kind of angular momentum gives quite surprising results, when
+measured. The most famous experiment proving this curious fact of
+nature is the Stern-Gerlach experiment (see Fig. 8.3).
+-->
+</p><p class="margin-large">
+<sup>26</sup>
+
+スピノルは、\((\frac{1}{2}, 0)\)、\((0, \frac{1}{2})\)、または\((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\)表現に従って変換されるオブジェクトであることを思い出してください。
+<!--
+
+Recall that a spinor is an object
+transforming according to the \((\frac{1}{2}, 0)\), the
+\((0, \frac{1}{2})\) or \((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\) representation.
+-->
+<br><br>
+
+<sup>27</sup>
+スピン1やその他の高次の表現についても同様のことが言えます。
+<!--
+Analogous statements can be made
+for the spin 1 or other higher representations.
+-->
+</p><p>
+あらゆる方向のスピン測定においても同様です。\(x\)、\(y\)、または\(z\)方向のスピン測定では、\(\frac{1}{2}\)と\(−\frac{1}{2}\)のみが得られます。
+<!--
+
+The same is true for a measurement of spin in any direction. A
+measurement of the spin in the \(x\)-,\(y\)- or \(z\)-direction can only result in
+\(\frac{1}{2}\) and \(−\frac{1}{2}\).
+-->
+</p><p>
+
+量子形式論におけるスピン測定の具体的な例を一つ見てみましょう。前述のように、スピン演算子（式5.4）の明示的な形は、例えば\(z\)軸に沿った測定の場合、次のようになります。
+<!--
+
+Let’s look at one concrete example of how a spin-measurement
+works in the quantum formalism. As mentioned above, the explicit
+form of the spin operator (Eq. 5.4), say for a measurement along the
+\(z\)-axis, is
+-->
+\[
+\hat{S}_z =\frac{1}{2}σ_3 =
+\begin{pmatrix}
+\frac{1}{2} & 0 \\
+0 & −\frac{1}{2}
+\end{pmatrix}
+\tag{8.49}
+\]
+
+固有状態は \(|\frac{1}{2}\rangle_z \hat{=}
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}\) と \(|−\frac{1}{2}\rangle_z \hat{=}
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}\) です。ここで、添え字
+\(z\) は、\(\hat{S}_z\) の固有状態を扱っていることを示します。一般的なスピノルはスピン固有状態ではなく、重ね合わせ \(|X\rangle\ =
+a |\frac{1}{2}\rangle_z + b |−\frac{1}{2}\rangle_z\) です。係数は、与えられた粒子をどのように準備するかによって異なります。 \(z\)軸に沿ったスピン測定を行い、スピン\(−\frac{1}{2}\)を持つ粒子をすべて除外すると、係数\(b\)は0、係数aは1になります。測定とフィルタリングを行わない場合、係数は\(a = b = \frac{1}{\sqrt{2}}\)となり、これは各可能性の確率<sup>28</sup> \(\frac{1}{2}\)を意味します。\(z\)軸に沿った測定を行った後、例えば\(x\)軸に沿った測定を行うと、状況は面白くなります。\(z\)軸に沿ったすべての\(−\frac{1}{2}\)成分を除外したとしても、\(x\)軸に沿ってスピン\(−\frac{1}{2}\)を持つ粒子が存在します。
+<!--
+
+The eigenstates are \(|\frac{1}{2}\rangle_z \hat{=}
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}\) and \(|−\frac{1}{2}\rangle_z \hat{=}
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}\), where the subscript
+\(z\) denotes that we are dealing with eigenstates of \(\hat{S}_z\). A general
+spinor is not a spin-eigenstate, but a superposition \(|X\rangle\ =
+a |\frac{1}{2}\rangle_z + b |−\frac{1}{2}\rangle_z\). The coefficients depend on how we prepare a given
+particle. If we did a measurement of the spin along the \(z\)-axis and
+filtered out all particles with spin \(−\frac{1}{2}\)
+, the coefficient \(b\) would be zero
+and a would be 1. Without any measurement and filtering the coefficients
+are \(a = b = \frac{1}{\sqrt{2}}\) , which means probability<sup>28</sup> \(\frac{1}{2}\)
+for each possibility. Things get interesting if we make a measurement along
+the \(z\)-axis and afterwards a measurement, for example, along the \(x\)-axis.
+Even if we did filter out all \(−\frac{1}{2}\)
+components along the \(z\)-axis,
+there will be particles with spin \(−\frac{1}{2}\)
+along the \(x\)-axis.
+-->
+</p><p class="margin-large">
+<sup>28</sup>
+
+係数は確率振幅に直接関係しており、確率を求めるにはこれを二乗する必要があります。これは後ほど説明します。
+<!--
+
+The coefficients are directly related
+to the probability amplitude which
+we need to square in order to get the
+probability. This will be shown in a
+moment.
+-->
+</p><p>
+
+スピン演算子 \(\hat{S}_z\) を状態に対して作用させるということは、\(z\) 軸に沿ったスピンを測定することを意味します。一般的な状態 \(|X\rangle\) では、\(+\frac{1}{2}\)
+と \(−\frac{1}{2}\)
+の両方の結果が考えられ、その確率は因子 a と b に直接関係しています。\(−\frac{1}{2}\) を測定する確率を知りたい場合、量子形式論によれば、対応する確率振幅は
+<!--
+
+Acting with the spin operator \(\hat{S}_z\) on a state means measuring spin
+along the \(z\)-axis. For a general state \(|X\rangle\) both outcomes \(+\frac{1}{2}\)
+and \(−\frac{1}{2}\)
+are possible and the probability is directly related to the factors a and
+b. If we want to know the probability for measuring \(−\frac{1}{2}\), the quantum
+formalism tells us that the corresponding probability amplitude
+is
+-->
+\[
+
+{}_z\langle −\frac{1}{2}|X\rangle = a
+\underbrace{{}_z\langle −\frac{1}{2}| \frac{1}{2}\rangle_z}_{=0}
++b\underbrace{{}_z\langle \frac{1}{2}| −\frac{1}{2}\rangle_z}_{=1}= b  \tag{8.50}
+\]
+
+したがって、\(z\)軸に沿ったスピン\(−\frac{1}{2}\)を測定する確率は
+\(P_{z=−\frac{1}{2}}= |b|^2\)です。別の軸、例えばx軸に沿ったスピンを測定したい場合は、2つの状態を\(\hat{S}_x\)の固有状態を用いて展開する必要があります。これは明示的な行列形式で表されます(式5.4)。
+<!--
+
+Therefore, the probability for measuring spin \(−\frac{1}{2}\)
+along the \(z\)-axis is
+\(P_{z=−\frac{1}{2}}= |b|^2\). If we want to measure the spin along another axis, say
+the x-axis, we need to expand our two states in terms of the eigenstates
+of \(\hat{S}_x\), which reads in explicit matrix form (Eq. 5.4)
+-->
+\[
+S_x =
+\begin{pmatrix}
+0 & \frac{1}{2} \\
+\frac{1}{2} & 0
+\end{pmatrix}
+\tag{8.51}
+\]
+
+対応する正規化固有状態は \(|\frac{1}{2}\rangle_x \hat{=}\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+1
+\end{pmatrix}\) および
+\(|−\frac{1}{2}\rangle_x \hat{=}\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+−1
+\end{pmatrix}\) です。 \(x\)軸に沿ったスピン\(−\frac{1}{2}\)の測定確率を知りたい場合は、\(|\frac{1}{2}\rangle_z\)と\(|−\frac{1}{2}\rangle_z\)を\(|\frac{1}{2}\rangle_x\)と\(|−\frac{1}{2}\rangle_x\)で書き直す必要があります。
+<!--
+
+and the corresponding normalized eigenstates are \(|\frac{1}{2}\rangle_x \hat{=}\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+1
+\end{pmatrix}\) and
+\(|−\frac{1}{2}\rangle_x \hat{=}\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+−1
+\end{pmatrix}\). If we want to know the probability for measuring
+spin \(−\frac{1}{2}\) along the \(x\)-axis, we need to rewrite \(|\frac{1}{2}\rangle_z\) and \(|−\frac{1}{2}\rangle_z\) in terms
+of \(|\frac{1}{2}\rangle_x\) and \(|−\frac{1}{2}\rangle_x\):
+-->
+
+\[
+\underbrace{|\frac{1}{2}\rangle_z}_{
+\begin{pmatrix}
+1 \\
+0 
+\end{pmatrix}
+} = \frac{1}{\sqrt{2}}\Bigg(
+\underbrace{
+| \frac{1}{2}\rangle_x}_{\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+1
+\end{pmatrix}
+}+
+\underbrace{|−\frac{1}{2}\rangle_x}_{\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+−1
+\end{pmatrix}
+}\Bigg)
+\tag{8.52}
+\]
+
+\[
+\underbrace{|−\frac{1}{2}\rangle_z}_{
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+}=\frac{1}{\sqrt{2}}\Bigg(
+\underbrace{
+| \frac{1}{2}\rangle_x}_{
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+1
+\end{pmatrix}
+}−
+\underbrace{|−\frac{1}{2}\rangle_x}_{
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+−1
+\end{pmatrix}
+}\Big)
+\tag{8.53}
+\]
+
+そしてそれゆえ
+<!--
+And therefore
+-->
+
+\[
+|X\rangle = a | \frac{1}{2}\rangle_z +b |−\frac{1}{2}\rangle_z
+= a \frac{1}{\sqrt{2}}\Bigg(
+| \frac{1}{2}\rangle_x
++|−\frac{1}{2}\rangle_x \Bigg)
++b \frac{1}{\sqrt{2}} \Bigg(
+| \frac{1}{2}\rangle_x
+−|−\frac{1}{2}\rangle_x \Bigg)
+\tag{8.54}
+\]
+
+\(x\) 軸に沿ったスピンの \(−\frac{1}{2}\) を測定する確率振幅は、
+<!--
+The probability amplitude for measuring \(−\frac{1}{2}\)
+for the spin along the \(x\)-axis is then
+-->
+
+\[
+\begin{align}
+{}_x\langle −\frac{1}{2}|X\rangle &= {}_x\langle −\frac{1}{2} | \Bigg(
+a \frac{1}{\sqrt{2}} \Big(
+| \frac{1}{2}\rangle_x + |−\frac{1}{2}\rangle_x \Big)
++ b \frac{1}{\sqrt{2}} \Big(
+| \frac{1}{2}\rangle_x − |−\frac{1}{2}\rangle_x \Big) \Bigg) \\
+\\
+&= \frac{a}{\sqrt{2}} − \frac{b}{\sqrt{2}}
+\tag{8.55}
+\end{align}
+\]
+
+
+そして確率は \(P_{x=−\frac{1}{2}}= |\frac{a}{\sqrt{2}}−\frac{b}{\sqrt{2}}|^2\) です。
+</p><p>
+さて、この計算の冒頭で概説した例に戻りましょう。\(z\)軸に沿ったスピン \(−\frac{1}{2}\) を持つすべての粒子を除外すると、状態 \(|X\rangle\) は次のようになります。
+<!--
+
+and the probability is \(P_{x=−\frac{1}{2}}= |\frac{a}{\sqrt{2}}−\frac{b}{\sqrt{2}}|^2\).
+</p><p>
+Now, let’s come back to the example outlined at the beginning of
+this computation. If we filter out all particles with spin \(−\frac{1}{2}\)
+along the \(z\)-axis the state \(|X\rangle\) is
+-->
+
+\[
+|X\rangle_{\text{z軸フィルタリング後}} = | \frac{1}{2}\rangle_z  \tag{8.56}
+\]
+
+これは \(a = 1\) かつ \(b = 0\) を意味し、\(x\) 軸に沿ったスピン \(−\frac{1}{2}\) を測定する確率がゼロではない \(P_{x=−\frac{1}{2}}= |\frac{1}{\sqrt{2}}−\frac{0}{\sqrt{2}}|^2 =\frac{1}{2}\) となります。ここで、\(x\) 軸に沿ったスピン \(−\frac{1}{2}\) を持つ粒子をすべて除外し、z 軸に沿ったスピン測定を繰り返すと、非常に注目すべきことに気づきます。\(x\) 軸に沿ったスピン \(−\frac{1}{2}\) を持つ粒子を除外した後、次の状態が得られます。
+<!--
+
+This means \(a = 1\) and \(b = 0\) and we get a non-zero probability for
+measuring spin \(−\frac{1}{2}\)
+along the \(x\)-axis \(P_{x=−\frac{1}{2}}= |\frac{1}{\sqrt{2}}−\frac{0}{\sqrt{2}}|^2 =\frac{1}{2}\). Ifwe
+now filter out all particles with spin \(−\frac{1}{2}\) 
+along the \(x\)-axis and repeat
+our measurement of spin along the z-axis we notice something quite
+remarkable. After filtering the particles with spin \(−\frac{1}{2}\)
+along the \(x\)-axis
+we have the state
+-->
+
+\[
+|X\rangle_{\text{x軸フィルタリング後}} = | \frac{1}{2}\rangle_x  \tag{8.57}
+\]
+
+\(z\)軸に沿ったスピン\(−\frac{1}{2}\)の測定確率を知りたい場合は、\(| \frac{1}{2}\rangle_x\)を\(| \frac{1}{2}\rangle_z\)と\(|−\frac{1}{2}\rangle_z\)を使って表す必要があります。
+<!--
+
+If we want to know the probability for measuring spin \(−\frac{1}{2}\)
+along the
+\(z\)-axis, we need to write \(| \frac{1}{2}\rangle_x\) in terms of \(| \frac{1}{2}\rangle_z\) and \(|−\frac{1}{2}\rangle_z\):
+-->
+
+\[
+|X\rangle_{\text{x軸フィルタリング後}} = 
+\underbrace{| \frac{1}{2}\rangle_x}_{\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+1
+\end{pmatrix}
+}=\frac{1}{\sqrt{2}} \Bigg(
+\underbrace{| \frac{1}{2}\rangle_z}_{
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+}+ 
+\underbrace{|−\frac{1}{2}\rangle_z}_{
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+} \Bigg)
+\tag{8.58}
+\]
+
+そして確率\(P_{z=−\frac{1}{2}}
+= |_z\langle −\frac{1}{2} | X\rangle |^2 = \frac{1}{2}\)を得ます。
+<!--
+
+and we get the probability \(P_{z=−\frac{1}{2}}
+= |_z\langle −\frac{1}{2} | X\rangle |^2 = \frac{1}{2}\).
+-->
+</p><p>
+<strong>要約すると</strong>次のようになります。
+<!--
+<strong>To summarize</strong>, this means:
+-->
+<div class="styleBullet">
+<ul><li>
+• まず、\(z\)軸に沿ったスピン測定を行い、\(−\frac{1}{2}\)を持つすべての粒子をフィルタリングします。これにより、次の状態が残ります。
+
+\[
+|X\rangle_{\text{z軸フィルタリング後}} = | \frac{1}{2}\rangle_z \tag{8.59}
+\]
+
+</li><br><li>• ここで、\(z\)軸に沿ったスピンを再度測定すると、非常に意外ではない結果が得られます。\(−\frac{1}{2}\)のスピンを測定する確率は0%で、\(+\frac{1}{2}\)のスピンを測定する確率は100%です。
+
+\[
+{}_z\langle \frac{1}{2} |X\rangle_{\text{z軸フィルタリング後}}= 1 \tag{8.60}
+\]
+
+\[
+{}_z\langle −\frac{1}{2} |X\rangle_{\text{z軸フィルタリング後}} = 0 \tag{8.61}
+\]
+
+</li><br><li>• 次に、\(z\)フィルタリングされた粒子流について、\(x\)軸に沿ったスピンを測定すると、\(+\frac{1}{2}\)の測定値に対して\(\frac{1}{2}= 50%\)の確率が得られます。同様に、\(−\frac{1}{2}\)の測定値に対しても\(\frac{1}{2}= 50%\)の確率が得られます。次に、\(x\)軸に沿ったスピン \(−\frac{1}{2}\) を持つすべての成分をフィルタリングすると、状態 \(|X\rangle_{\text{x軸フィルタリング後}} = | \frac{1}{2}\rangle_x\) になります。
+</li><br><li>• ここで、\(z\)軸に沿ったスピンを再度測定すると、驚くべき結果が得られます。\(−\frac{1}{2}\) が測定される確率は
+\(\frac{1}{2}= 50%\) です。\(x\)軸に沿った測定によって状態は変化しました。そのため、最初のステップでこれらの成分をフィルタリングしたにもかかわらず、\(z\)軸に沿ったスピン \(−\frac{1}{2}\) を持つ成分が再び得られています。
+<!--
+
+• We start with a spin measurement along the \(z\)-axis and filter out
+all particles with \(−\frac{1}{2}\). This leaves us with a state
+
+\[
+|X\rangle_{\text{after z-axis filtering}} = | \frac{1}{2}\rangle_z  \tag{8.59}
+\]
+
+</li><br><li>• If we now measure again the spin along the \(z\)-axis we get a very
+unsurprising result: The probability for measuring spin \(−\frac{1}{2}\) is zero
+and for spin \(+\frac{1}{2}\) the probability is 100%.
+
+\[
+{}_z\langle \frac{1}{2} |X\rangle_{\text{after z-axis filtering}}= 1  \tag{8.60}
+\]
+
+\[
+{}_z\langle −\frac{1}{2} |X\rangle_{\text{after z-axis filtering}} = 0  \tag{8.61}
+\]
+
+</li><br><li>• If we then measure the spin along the \(x\)-axis, for our \(z\)-filtered particle
+stream, we get a probability of \(\frac{1}{2}= 50%\) for a measurement
+of \(+\frac{1}{2}\). Equivalently, we have a probability of \(\frac{1}{2}= 50%\) for a measurement
+of \(−\frac{1}{2}\). If we then filter out all components with spin \(−\frac{1}{2}\) along the \(x\)-axis we are in the state \(|X\rangle_{\text{after x-axis filtering}} = | \frac{1}{2}\rangle_x\).
+</li><br><li>• Now measuring the spin along the \(z\)-axis again, gives us the
+surprising result that the probability for measuring spin \(−\frac{1}{2}\) is
+\(\frac{1}{2}= 50%\). The measurement along the \(x\)-axis did change the state
+and therefore we are again getting components with spin \(−\frac{1}{2}\) along the \(z\)-axis, even though we did filter these out in the first step!
+-->
+</li></ul></div>
+</p><p>
+これらの問題について、実際の測定装置を交えた素晴らしい議論が、ファインマン講義第3巻<sup>29</sup>(蛇足：日本語訳は第5巻) に掲載されています。
+<!--
+A brilliant discussion of these matters, involving real measuring
+devices, can be found in the Feynman Lectures<sup>29</sup> Vol. 3. 
+-->
+</p><p class="margin-large">
+<sup>29</sup>
+Richard P. Feynman, Robert B.
+Leighton, and Matthew Sands. The
+Feynman Lectures on Physics, Volume 3.
+Addison Wesley, 1st edition, 1 1971.
+ISBN 9780201021189
+</p>
+<h2>8.6 ハイゼンベルクの不確定性原理</h2>
+<!--
+<h2>8.6 Heisenberg’s Uncertainty Principle</h2>
+-->
+<p>
+さて、量子力学の最も興味深い特徴の一つについてお話ししましょう。前のセクションで、\(x\)方向のスピン測定は、\(z\)方向のスピンに関するこれまでの知識をすべて無意味にすることを学びました。このようなことは、量子力学の多くの観測量で起こります。この振る舞いは、<sup>30</sup> \(\hat{S}_x\hat{S}_z \neq \hat{S}_z\hat{S}_x\) という事実に遡ることができます。これは、\(z\)軸に沿ったスピン測定の後に\(x\)軸に沿ったスピン測定を行うのと、\(x\)軸に沿ったスピン測定の後に\(z\)軸に沿ったスピン測定を行うのとでは異なることを意味します。 \(z\)軸に沿ったスピンを測定すると、系は\(\hat{S}_z\)の固有状態になり、
+x軸に沿ったスピンを測定すると、\(\hat{S}_x\)の固有状態になります。
+\(\hat{S}_z\)と\(\hat{S}_x\)の固有状態はすべて異なるため、これは驚くべきことではありません。
+<!--
+
+Now it’s time to talk about one of the most curious features of quantum
+mechanics. We learned in the last section that a measurement of
+spin in the \(x\)-direction makes everything we knew previously about
+spin along the \(z\)-direction useless. This kind of thing happens for
+many observables in quantum mechanics. We can trace this behavior
+back to the fact that<sup>30</sup> \(\hat{S}_x\hat{S}_z \neq \hat{S}_z\hat{S}_x\). This means that a measurement 
+of spin along the \(z\)-axis followed by a measurement of spin along
+the \(x\)-axis is different from a measurement of spin along the \(x\)-axis
+followed by a measurement of spin along the \(z\)-axis. After measuring
+the spin along the \(z\)-axis the system is in an eigenstate of \(\hat{S}_z\) and
+after a measurement of spin along the x-axis, in an eigenstate of \(\hat{S}_x\).
+The eigenstates for \(\hat{S}_z\) and \(\hat{S}_x\) are all different and therefore this is no
+surprise.
+-->
+</p><p class="margin-large">
+<sup>30</sup>
+スピン演算子は、回転生成子の対応する有限次元表現と同一視されることを思い出してください。これらは交換関係 \([J_i, J_j] = J_i J_j − J_j J_i = i\epsilon_{ijk} J_k \neq 0 → J_i J_j \neq J_j J_i\) を満たします。例えば、スピン \(\frac{1}{2}\) 粒子を記述する場合、2次元表現 \(J_i = \frac{σ_i}{2}\) を使用する必要があります。
+<!--
+
+Recall that we identify the spin 
+operators with the corresponding
+finite-dimensional representations for
+the rotation generators. These fulfil
+the commutator relation \([J_i, J_j] =
+J_i J_j − J_j J_i = i\epsilon_{ijk} J_k \neq 0 → J_i J_j \neq J_j J_i\). For
+example, if we describe spin \(\frac{1}{2}\)
+particles,
+we must use the two-dimensional
+representation \(J_i = \frac{σ_i}{2}\).
+-->
+</p><p>
+これを別の視点から見てみましょう。<strong>系の \(z\) 軸と \(x\) 軸に沿ったスピンを同時に知ることはできません！</strong> \(z\) 軸に沿ったスピンを測定するたびに、\(x\) 軸に沿ったスピンは不確定になり、その逆も同様です。\(z\) 軸/\(x\) 軸に沿ったスピンと \(y\) 軸に沿ったスピンについても同様です。
+スピンは本当に奇妙なものかもしれませんが、位置と運動量の測定でも同じ挙動が見られます。便宜上ここで引用した式 5.3 をもう一度見てみましょう。
+<!--
+
+We can look at this from a different perspective: <strong>We aren’t able
+to know the spin of a system along the \(z\)-axis and the \(x\)-axis at the
+same time!</strong> Each time we measure spin along the \(z\)-axis the spin
+along the \(x\)-axis becomes undetermined and vice-versa. The same
+is true for spin along the \(z\)-axis/\(x\)-axis and spin along the \(y\)-axis.
+Spin may be something really strange, but we can observe the same
+behavior for measurements of position and momentum. Take a look
+again at Eq. 5.3, which we recite here for convenience:
+-->
+
+\[
+[\hat{p}_i, \hat{x}_j] = \hat{p}_i \hat{x}_j − \hat{x}_j \hat{p}_i = iδ_{ij}  \tag{8.62}
+\]
+
+上記の考え方に従うと、\(x\)方向の運動量の測定は、\(x\)軸上の位置の測定結果に変化をもたらすことがわかります。言い換えれば、これは、同じ方向の位置と運動量を同時に任意の精度で知ることはできないことを意味します。交換子は、同じ軸に沿った測定に対してのみ非ゼロとなることに注意してください<sup>31</sup>。y方向の運動量の測定は、\(x\)軸上の位置の測定結果に影響を与えません。
+<!--
+Following the line of thought as above tells us that a measurement of
+momentum in the \(x\)-direction changes what we can expect for a measurement
+of position on the \(x\)-axis. In other words this means that
+we can’t know position and momentum in the same direction at the
+same time with arbitrary precision. Take note that the commutator is
+only non-zero for measurements along the same axis<sup>31</sup>. A measure
+ment of momentum in the y-direction has no influence on what we
+can expect for the position on the \(x\)-axis.
+-->
+</p><p class="margin-large">
+<sup>31</sup>
+クロネッカーデルタ \(δ_{ij}\) は、付録 B.5.5 で定義されているように、\(i \neq j\) の場合には 0、\(i = j\) の場合には 1 になります。
+<!--
+The Kronecker delta \(δ_{ij}\) is zero for 
+\(i \neq j\) and one for \(i = j\) as defined in
+Appendix B.5.5.
+-->
+</p><p>
+運動量を測定するたびに、位置は不確定になり、逆もまた同様です。これは<strong>ハイゼンベルクの不確定性原理</strong>として知られています。
+同様の観察は、異なる軸に沿った角運動量についても行えます。これは、対応する演算子の交換子もゼロではないためです。一般に、任意の2つの物理量が互いに交換可能かどうかを確認できます。交換可能でない場合、それらを任意の精度で同時に測定することはできないことがわかります。
+<!--
+
+Everytime we measure momentum the position becomes uncertain
+and vice versa. This is known as <strong>Heisenberg’s uncertainty principle</strong>.
+Analogous observations can be made for angular momentum along
+different axes, because the commutator for the corresponding operator
+is non-zero, too. In general, we can check for any two physical
+quantities if they commute with each other. If they don’t, we know
+that they can’t be measured at the same time with arbitrary precision.
+-->
+</p><p>
+おそらくこれは驚くべきことではないかもしれません。量子力学は、対応する対称性の生成子を測定演算子として用います。例えば、運動量の測定は並進生成子<sup>32</sup>の作用と等価になります。並進生成子は系を少し動かし、その結果、位置が変わります。さらに驚くべきことは、自然が実際にこのように機能していることです。長年にわたり、ハイゼンベルクの不確定性原理に関する多くの実験的検証が行われ、すべてが正しいことが証明されました。
+<!--
+
+Maybe this shouldn’t surprise us. Quantum mechanics uses the
+generators of the corresponding symmetries as measurement operators. For instance, this has the consequence that a measurement of
+momentum is equivalent to the action of the translation generator<sup>32</sup>.
+The translation generator moves our system a little bit and therefore
+the location is changed. What is more surprising is that nature
+actually works this way. Over the years there have been many experimental
+tests of the Heisenberg’s uncertainty principle and all proved
+it to be correct.
+-->
+</p><p class="margin-large">
+<sup>32</sup>
+並進不変性は運動量保存則につながることを思い出してください。
+<!--
+
+Recall that invariance under translations
+leads us to conservation of momentum.
+-->
+</p>
+<h2>8.7 解釈に関するコメント</h2>
+<!--
+<h2>8.7 Comments on Interpretations</h2>
+-->
+<p>
+この章で解説する解釈と表記法は標準的なものです。しかしながら、同様に強力な他の形式論も存在します。例えば、ファインマン経路積分形式論<sup>33</sup>は、結果の点では、この章で解説した波動力学と完全に同等です。しかし、この形式論における計算は完全に異なります。粒子が点aから点bに到達する確率を計算したい場合、粒子がaとbの間を移動できる可能性のあるすべての経路を合計する必要があります。ばかげているように聞こえるかもしれませんが、このアプローチは同じ結果につながり、それは形式的にも証明できます。フリーマン・ダイソンはかつて次のような話をしました<sup>34</sup>
+<!--
+
+The interpretation and notations described in this chapter are the
+standard ones. Nevertheless, there are other formalisms equally
+powerful. For example, the Feynman path integral formalism<sup>33</sup> is, 
+in terms of results, completely equivalent to the wave mechanics,
+we described in this chapter. Yet computations in this formalism
+are completely different. If we want to compute the probability for
+a particle to get from point a to point b, we have to sum over all
+possible paths that a particle can go between a and b. As absurd as it
+sounds, this approach leads to the same result, which can be proved
+formally as well. Freeman Dyson once told the story<sup>34</sup>
+-->
+</p><p class="margin-large">
+<sup>33</sup>
+詳しくは、例えばリチャード・P・ファインマンとアルバート・R・ヒブス著『量子力学と経路積分：改訂版』ドーバー出版、改訂第7版、2010年、ISBN 9780486477220をご覧ください。
+<!--
+To learn more about this see for
+example, Richard P. Feynman and
+Albert R. Hibbs. Quantum Mechanics and
+Path Integrals: Emended Edition. Dover
+Publications, emended editon edition, 7
+2010. ISBN 9780486477220
+-->
+<br><br>
+
+<sup>34</sup>
+Harry Woolf, editor. Some Strangeness
+in the Proportion. Addison-Wesley, 1st
+edition, 2 1981. ISBN 9780201099249
+</p><p class="margin-large">
+
+ディック・ファインマンは、量子力学の「履歴の総和」版について教えてくれました。「電子は好きなように振る舞う」と彼は言いました。「好きなように、どんな方向にもどんな速度でも、時間的に前にも後ろにも進む。そして、その振幅を足し合わせると波動関数が得られる」。私は彼に「あなたは頭がおかしい」と言いました。しかし、彼は頭がおかしいわけではありませんでした。
+<!--
+Dick Feynman told me about his "sum over histories" version of quantum
+mechanics. "The electron does anything it likes," he said. "It just
+goes in any direction at any speed, forward or backward in time, however
+it likes, and then you add up the amplitudes and it gives you the
+wavefunction." I said to him, "You’re crazy." But he isn’t.
+-->
+</p><p>
+量子力学の基本方程式に対する、主流からさらに離れた解釈として、ボーミアン力学があります。
+出発点は、シュレーディンガー方程式に仮定\(Re^{St}\)を代入することです。虚数部と実数部を分離すると、2つの方程式が得られます。そのうちの1つは、古典力学のハミルトン・ヤコビ方程式に追加項を加えたものと完全に類似しています。この追加項は、奇妙な量子効果の原因となる余分なポテンシャルとして解釈できます。以降の計算は古典力学と完全に類似しています。勾配を用いて余分なポテンシャルから新しい力を計算し、それをニュートンの古典方程式\(F = ma\)に代入します。したがって、ボーミアン力学では、依然として古典的な粒子の軌道が存在します。このアプローチによる結果は、私の知る限り、標準的な非相対論的量子力学によって計算される結果と同等です。しかしながら、このアプローチは、余分なポテンシャルが非局所的な変化を受けるため、不評になってきました。
+<!--
+
+Another interpretation for the basic equations of quantum mechanics,
+further away from the mainstream, is Bohmian Mechanics.
+The starting point is to put the ansatz: \(Re^{St}\) into the Schrödinger
+equation. Separating the imaginary and real part results in two
+equations, one of which can be seen as completely analogous to the
+Hamilton-Jacobi equation of classical mechanics plus an additional
+term. This additional term can be interpreted as an extra potential,
+which is responsible for the strange quantum effects. Further computations
+are completely analogous to classical mechanics. A new
+force is computed from the extra potential using the gradient, which
+is then put into Newton’s classical equation: \(F = ma\). Therefore, in
+Bohmian mechanics one still has classical particle trajectories. The
+results from this approach are, as far as I know, equal to those computed
+by standard non-relativistic quantum mechanics. Nevertheless,
+this approach has fallen into disfavour because the extra potential
+undergoes non-local changes.
+-->
+</p>
+<h2>さらに読むためのヒント</h2>
+<!--
+<h2>Further Reading Tips</h2>
+-->
+<p>
+•<strong> Richard P. Feynman - The Feynman Lectures on Physics, Vol. 3</strong>(蛇足：日本語版では第5巻)<sup>35</sup>
+は量子力学を学び始めるのに最適な本です。量子力学のほとんどの概念が、他のどの本よりもわかりやすく説明されています。
+<!--
+is a great book to start learning about quantum mechanics. Most
+concepts of quantum mechanics are explained here more lucidly
+than anywhere else.
+-->
+</p><p class="margin-large">
+<sup>35</sup>
+Richard P. Feynman, Robert B. 
+Leighton, and Matthew Sands. The
+Feynman Lectures on Physics, Volume 3.
+Addison Wesley, 1st edition, 1 1971.
+ISBN 9780201021189
+</p><p>
+
+• <strong>David J. Griffiths - Introduction to Quantum Mechanics</strong><sup>36</sup>
+(『量子力学入門』) は、非常に読みやすく啓発的な本です。
+<!--
+is a
+very readable and enlightening book.
+-->
+</p><p class="margin-large">
+<sup>36</sup>
+David J. Griffiths. Introduction to 
+Quantum Mechanics. Pearson Prentice
+Hall, 2nd edition, 4 2004. ISBN
+9780131118928
+</p><p>
+
+•<strong> J. J. Sakurai - Modern Quantum Mechanics</strong><sup>37</sup>
+(『現代量子力学』)は素晴らしい本で、量子力学の概念について独自の視点をしばしば提供しています。
+<!--
+ is a brilliant book,
+which often offers a unique perspective on the concepts of quantum
+mechanics.
+-->
+
+</p><p class="margin-large">
+<sup>37</sup>
+J. J. Sakurai. Modern Quantum Mechanics.
+Addison Wesley, 1st edition, 9 1993.
+ISBN 9780201539295
+</p><p>
+
+•<strong> Paul A. M. Dirac - Lectures on Quantum Mechanics</strong><sup>38</sup>
+(『量子力学講義』)は、量子力学の父の一人による古い本です。アイデアを発見した本人から直接聞くのは常に良いことなので、強くお勧めします。
+<!--
+ is an old
+book by one of the fathers of quantum mechanics. Highly recommended,
+because reading about ideas by the person who discovered
+them is always a good idea.
+-->
+</p><p class="margin-large">
+<sup>38</sup>
+Paul A. M. Dirac and Physics. Lectures
+on Quantum Mechanics. Dover
+Publications, 1st edition, 3 2001. ISBN
+9780486417134
+</p><p>
+
+• ディラックスピノルの構成要素の解釈に関する詳細な議論は付録8.8に記載されています。
+<!--
+• You can find a detailed discussion of the interpretation of the
+components of a Dirac spinor in Appendix 8.8.
+-->
+</p>
+<h2>8.8 付録: ディラックスピノル成分の解釈</h2>
+<!--
+<h2>8.8 Appendix: Interpretation of the Dirac Spinor Components</h2>
+-->
+<p>
+この付録および対応する付録において、\(u\) と \(v\) はディラックスピノル内の2成分オブジェクト、\(u\) と \(v\) は4成分オブジェクトを表します。例えば、\(u_1\) と \(u_2\) は2つの異なる4成分オブジェクトを表します。一般的な4成分オブジェクト \(u\) の場合、2つの2成分オブジェクトを \(u_1\) と \(u_2\) で表します。つまり、\(u =
+\begin{pmatrix}
+u_1 \\
+u_2
+\end{pmatrix}\) です。
+<!--
+
+In this and the corresponding appendices, \(u\) and \(v\) denote two-component
+objects inside a Dirac spinor and \(u\) and \(v\) four-component objects. For example
+\(u_1\) and \(u_2\) describe two different four-component objects. For a general
+four-component object \(u\), we denote the two two-component objects by \(u_1\)
+and \(u_2\), i.e. \(u =
+\begin{pmatrix}
+u_1 \\
+u_2
+\end{pmatrix}\).
+-->
+</p><p>
+
+ここまで、ディラックスピノル内の2つのワイルスピノルについては、比較的漠然とした説明しかしてきませんでした。これらは何を意味するのでしょうか？どのように解釈できるのでしょうか？さらに、ディラックスピノル内の各ワイルスピノルは2つの要素から構成されています。これらをどのように解釈すればよいのでしょうか？さて、ついにこれらの疑問に答えることができるようになりました。
+<!--
+
+Up to this point we have been relatively vague about the two Weyl
+spinors inside a Dirac spinor. What do they stand for? How can they
+be interpreted? In addition, each such Weyl spinor inside a Dirac
+spinor consists of two components. How to interpret these? Now, we
+are finally in the position to give answers to these questions.
+-->
+</p><p>
+要するに：
+<!--
+In short:
+-->
+<div class="styleBullet">
+<ul><li>
+• ディラックスピノル \(ψ =
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}\) 内の2つのワイルスピノル \(χ_L, ξ_R\) は「異なる粒子」を表します。しかしながら、これらを異なるカイラリティを持つ同じ粒子（例えば電子）と呼ぶのが慣例です。
+<ul>
+<li>– \(χ_L\) は左カイラルな電子を表します。</li>
+<li>– \(ξ_R\) は右カイラルな電子を表します。</li>
+</ul>
+
+しかし重要な点は、これらは実際には異なる粒子／場であるということです<sup>39</sup>。
+なぜなら、それらはパリティ変換や電荷共役によって関連付けられていないからです。これが異なる記号を使用する理由です。もちろん、これらの間には何らかの関連性があり、そのため、これらを1つのオブジェクトで表記します。これについては後ほど詳しく説明します。
+<!--
+
+• The two Weyl spinors \(χ_L, ξ_R\) inside a Dirac spinor \(ψ =
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}\) describe "different particles". Nevertheless, it’s conventional to
+call them the same particle, for example an electron, with different
+chirality:
+<ul>
+<li>– \(χ_L\) describes a left-chiral electron,</li>
+<li>– \(ξ_R\) describes a right-chiral electron,</li>
+</ul>
+
+but the crucial point is that these are really distinct particles/fields<sup>39</sup>, 
+because they aren’t related by a parity transformation or charge
+conjugation. This is why we use different symbols. There is, of
+course, some sort of connection between them, which is why we
+write them in one object. This will be discussed in detail in a moment.
+-->
+
+</li></ul></div>
+</p><p class="margin-large">
+<sup>39</sup>
+これらは異なる量子数でラベル付けされているため、実験では異なる挙動を示します。
+<!--
+
+They are labelled by different quantum
+numbers and therefore behave
+differently in experiments!
+-->
+</p><p>
+<div class="styleBullet">
+<ul><li>
+• 各ワイルスピノルの2つの成分は、対応する粒子の異なるスピン構成<sup>40</sup>を表します。
+
+<ul>
+<li>– \(
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix} \) に比例するワイルスピノルは、<strong>スピンアップ</strong>を持つ粒子を表します。</li>
+<li>– \(
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+\) に比例するワイルスピノルは、<strong>スピンダウン</strong>を持つ粒子を表します。</li>
+<li>– その他のワイルスピノルは、単にスピンアップとスピンダウンの混合です。</li>
+</ul>
+<br>
+これがどのように起こるのかを詳しく見てみましょう。
+<!--
+
+• The two components of each Weyl spinor describe different spin
+configurations<sup>40</sup> of the corresponding particle. 
+
+<ul>
+<li>– A Weyl spinor proportional to \(
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix} \) describes a particle with
+<strong>spin up</strong> </li>
+<li>– A Weyl spinor proportional to \(
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix} 
+\) describes a particle with <strong>spin down</strong></li>
+<li>– Any other Weyl spinor is simply a mixture of spin up and spin
+down.</li>
+</ul>
+<br>
+Let’s see how this comes about in detail:
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<sup>40</sup>
+これについてはセクション8.5.5で説明しました。
+スピンは角運動量と同様に測定できますが、スピン \(\frac{1}{2}\) 粒子の場合、どの軸を選択しても、測定結果は \(+\frac{1}{2}\) または \(-\frac{1}{2}\) のいずれかになります。これらの2つの測定結果は、一般に<strong>スピンアップ</strong>と<strong>スピンダウン</strong>と呼ばれます。
+<!--
+This was discussed in Section 8.5.5.
+Recall that spin can be measured
+like angular momentum, but for a
+spin \(\frac{1}{2}\)
+particle the result of such a
+measurement can only be \(+\frac{1}{2}\)
+or \(−\frac{1}{2}\), no matter what axis we choose. These
+two measurement results are commonly
+called <strong>spin up</strong> and <strong>spin down</strong>.
+-->
+</p><p>
+弱い相互作用とパリティの破れから得られる重要なことは、左カイラル粒子と右カイラル粒子は実際には異なる粒子であるということです。左カイラル粒子は弱い電荷（アイソスピン）を持ち、したがって弱い力によって相互作用します。右カイラル粒子はそうではありません。これは7.7.1節で説明されています。
+<!--
+
+The important thing we learn from weak interactions and parity
+violation is that left-chiral and right-chiral particles are really different
+particles. Left-chiral particles carry weak charge (isospin) and
+therefore interact via the weak force. Right chiral particles do not,
+which was explained in Section 7.7.1.
+-->
+</p><p>
+自然界のあらゆる粒子には対応する反粒子が存在し、一般的には電荷共役によって反粒子の記述が得られます。電荷共役は、アイソスピンを含むすべての粒子のラベルを反転させます。では、例えば電子に関連する粒子について考えてみましょう。
+<!--
+
+We have for every particle in nature a corresponding antiparticle
+and in general, we get the antiparticle description through charge
+conjugation. Charge conjugation flips all particle labels, which includes
+isospin. Let’s see what particles we can expect that are related
+to, say electrons. We have
+-->
+<div class="styleBullet">
+<ul><li>
+• 左カイラル電子 \(χ_L\) は、アイソスピン \(−\frac{1}{2}\) と電荷 \(−e\) を持ち、二重項を構成します。
+</li><br><li>• 右カイラル反左カイラル電子 \((χ_L)^c = χ_R\) は、アイソスピン \(\frac{1}{2}\) と電荷 \(+e\) を持ち、これも二重項を構成します。この性質は、電荷共役によって単純に消滅するわけではありません。現時点では混乱を招くかもしれませんが、これまでは弱い力と粒子の結合についてのみ説明してきました。弱い力は右カイラル反粒子にも結合することがわかります。 </li><br><li>• アイソスピン 0 で電荷 \(−e\) を持つ右カイラル電子 \(ξ_R\)
+</li><br><li>• アイソスピン 0 で電荷 \(+e\) を持つ左カイラル反右カイラル電子 \((ξ_R)^c = ξ_L\)
+<!--
+
+• A left-chiral electron \(χ_L\), with isospin \(−\frac{1}{2}\)
+and electric charge \(−e\),
+which is part of a doublet.
+</li><br><li>• A right-chiral anti-left-chiral-electron \((χ_L)^c = χ_R\) with isospin \(\frac{1}{2}\),
+electric charge \(+e\), which is part of a doublet, too. This property
+does not simply vanish through charge conjugation. This may be
+confusing at the moment, but so far we have only talked about the
+coupling of the weak force to particles. It turns out that the weak
+force couples to right-chiral antiparticles as well.
+</li><br><li>• A right-chiral electron \(ξ_R\) with isospin 0 and electric charge \(−e\)
+</li><br><li>• A left-chiral anti-right-chiral-electron \((ξ_R)^c = ξ_L\) with isospin 0 and
+electric charge \(+e\)
+-->
+</li></ul></div>
+</p><p>
+したがって、電子について話すとき、実際には<strong>4</strong>つの異なる「もの」を考慮する必要があります。これらはすべて実際には異なる粒子であり、それぞれに異なる名前を付ける必要があります。通常、電子に関連する粒子は電子と陽電子の2つだけですが、これがどのように起こるのかはすぐに説明します。
+<!--
+
+Therefore, when talking about electrons, we have in fact <strong>four</strong> different
+"things" we need to consider. These are all really different particles
+and we need to give them different names! Usually one talks
+about just two particles related to an electron: The electron and the
+positron and we will see how this comes about in a moment.
+-->
+</p><p>
+以下の議論は、問題の粒子の静止系に限定します。他の系でも議論は同様ですが、より複雑になります。
+<!--
+
+We restrict the following discussion to the rest frame of the particles
+in question. In other frames the discussion works analogous but is more
+cumbersome.
+-->
+</p><p>
+ディラックスピノルとその電荷共役の内部にある物体は、これらの4つの粒子と直接関係しています。<strong>物理的電子</strong>と<strong>物理的陽電子</strong>は、一般的にディラック方程式の解として認識されています。ディラック方程式は運動方程式、すなわち、対象となる粒子のダイナミクスを決定する方程式です。明示的な解は、時間とともに発展するディラックスピノルです。粒子が時間とともにどのように発展するかを記述するためには、このような明確な時間発展を持つディラックスピノルが必要です。後述するように、これには常に上記の粒子のうち2つを同時に使用する必要があります。
+<!--
+
+The objects inside a Dirac spinor and its charge conjugate are
+directly related to these four particles. The <strong>physical electron</strong> and the
+<strong>physical positron</strong> are commonly identified as the solutions of the
+Dirac equation. The Dirac equation is an equation of motion, i.e. an
+equation that determines the dynamics of the particles in question.
+The explicit solutions are Dirac spinors that evolve in time. We need
+such Dirac spinors with a definite time-evolution in order to describe
+how our particles evolve in time. As we will see this requires that we
+always use two of the particles listed above at once.
+-->
+</p><p>
+ディラック方程式の解の明示的な導出は付録8.9節にあります。ここではその結果のみを用います。ディラック方程式には4つの独立した解があり、そのうち2つは
+<!--
+
+An explicit derivation of the solutions of the Dirac equation can be
+found in the appendix Section 8.9. Here we just use the results. There
+are four independent solutions of the Dirac equation and two are of
+the form
+-->
+\[
+ψ_i =
+\begin{pmatrix}
+u_i \\
+u_i
+\end{pmatrix}
+\tag{8.63}
+\]
+
+例えば<sup>41</sup> \(u_1 =
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+e^{−imt}\) および \(u_2 =
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+e^{−imt}\) であり、2つの解は次の形式となる。
+<!--
+
+with for example<sup>41</sup> \(u_1 =
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+e^{−imt}\) and \(u_2 =
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+e^{−imt}\) and two solutions are of the form
+-->
+
+</p><p class="margin-large">
+<sup>41</sup>
+これは基底の選択です。唯一の要件は、線形独立であることです。
+<!--
+This is a basis choice. The only 
+requirement is that they are linearly
+independent. 
+-->
+</p><p>
+
+
+\[
+\tilde{ψ}_i =
+\begin{pmatrix}
+−v_i \\
+v_i
+\end{pmatrix}
+\tag{8.64}
+\]
+
+例えば、\(v_1 =
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+e^{+imt}\) かつ \(v_2 =
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+e^{+imt}\) の場合
+<!--
+
+with for example \(v_1 =
+\begin{pmatrix}
+1 \\
+0
+\end{pmatrix}
+e^{+imt}\) and \(v_2 =
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}
+e^{+imt}\)
+-->
+</p><p>
+
+ディラック方程式は、ディラックスピノル内の上部ワイルスピノルと下部ワイルスピノルによって記述される2つの粒子のスピン配置が直接関連していることを示しています。さらに、それらの時間依存性は同じでなければなりません。これらの解は、一般に<strong>物理的電子</strong>と<strong>物理的陽電子</strong>と呼ばれる、異なるスピン配置を持つものを記述します<sup>42</sup>。
+<!--
+
+The Dirac equation tells us that the spin configuration of the two
+particles described by the upper and lower Weyl spinors inside a
+Dirac spinor, are directly related. In addition, their time dependence
+must be the same. These solutions describe what is commonly
+known as a <strong>physical electron</strong> and a <strong>physical positron</strong>, with different
+spin configurations<sup>42</sup>.
+-->
+
+<sup>42</sup>
+これらのオブジェクト間の接続は電荷共役であることに留意してください。これは、電荷共役演算子の明示的な形式
+\(ψ_1^c= iγ_2ψ_1^*\) を用いることで確認できます。したがって、\((ψ_1)^c =\tilde{ψ}_2\) かつ
+\((ψ_2)^c =\tilde{ψ}_1\) となります。
+<!--
+
+Take note that the connection between 
+these objects is charge conjugation. This
+can be seen by using the explicit form
+of the charge conjugation operator:
+\(ψ_1^c= iγ_2ψ_1^*\). Therefore: \((ψ_1)^c =\tilde{ψ}_2\) and
+\((ψ_2)^c =\tilde{ψ}_1\).
+-->
+<div class="styleBullet">
+<ul>
+<li>• \(ψ_1\) はスピンアップの電子です</li>
+<li>• \(ψ_2\) はスピンダウンの電子です</li>
+<li>• \(\tilde{ψ}_1\) はスピンアップの陽電子です</li>
+<li>• \(\tilde{ψ}_2\) はスピンダウンの陽電子です</li>
+<!--
+<li>• \(ψ_1\) is an electron with spin up</li>
+<li>• \(ψ_2\) is an electron with spin down</li>
+<li>• \(\tilde{ψ}_1\) is a positron with spin up</li>
+<li>•\(\tilde{ψ}_2\) is a positron with spin down</li>
+-->
+</ul></div>
+</p><p>
+
+物理的な電子には、左カイラル部分（上の2つの成分）と右カイラル部分（下の2つの成分）があることがよく分かります。
+物理的な電子の場合、左カイラル部分と右カイラル部分のスピン配置と時間依存性は、両方の部分で同じでなければなりません。上で述べたように、この左カイラル部分と右カイラル部分は実際には異なります。なぜなら、それらは異なる弱電荷を持っているからです。
+それでもなお、動的な物理的な電子を記述するためには、常に両方の部分が必要なのです。
+<!--
+We can see nicely that a physical electron has a left-chiral (the upper
+two components) and a right-chiral part (the lower two components).
+For a physical electron the spin configuration of the left-chiral
+and the right-chiral part and the time-dependence must be the same
+for both parts. As discussed above, this left-chiral and right-chiral
+parts are really different, because they have different weak charge!
+Nevertheless, in order to describe a dynamical, physical electron we
+always need both parts.
+-->
+</p><p>
+
+これらの解は、物理的な電子を記述するために用いる物体が、全く同一の上側と下側の二成分物体から構成されることを意味するものではないことに注意されたい。それらのスピン配置と時間依存性のみが等価でなければならない。上側の物体は依然として二重項の一部であるが、下側の物体はそうではない。上側の物体は\(\mathcal{SU}(2)\)変換によって変換されるが、下側の物体は変換されない。上記の表記を用いると、
+
+\[
+\text{物理的な電子} =
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+∝
+\begin{pmatrix}
+u \\
+u
+\end{pmatrix}
+\tag{8.65}
+\]
+
+<!--
+
+Take note that these solutions do not mean that the object we use
+to describe a physical electron consists of exactly the same upper and
+lower two-component objects. Only their spin configuration and their
+time dependence must be equivalent. The upper object is still part
+of a doublet, whereas the lower object isn’t. The upper object transforms
+under \(\mathcal{SU}(2)\) transformations and the lower doesn’t. Using the
+notation from above we have
+
+\[
+\text{physical electron} =
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+∝
+\begin{pmatrix}
+u \\
+u
+\end{pmatrix}
+\tag{8.65}
+\]
+-->
+
+これは \(χ_L = ξ_R\) を意味するものではありません。ワイルスピノル χL は二重項の一部であり、アイソスピンを持つ粒子を記述しますが、\(ξ_R\) で記述される粒子はアイソスピンがゼロです。さらに、ディラックスピノル内の上部ワイルスピノルと下部ワイルスピノルは、ローレンツブーストによって異なる変換をすることが既に分かっています。したがって、異なる記号を使用することが重要です。言い換えると、左カイラル電子 \(χ_L\) を記述するオブジェクトには、追加の \(\mathcal{SU}(2)\) インデックスが付きます。これは、χL が \(\mathcal{SU}(2)\) 変換の下で二重項の一部として変換されるためです。\(ξ_R\) にはそのようなインデックスはなく、\(\mathcal{SU}(2)\) 変換の下では単一項として変換されます。
+<!--
+
+This does not mean that \(χ_L = ξ_R\). The Weyl spinor χL is part of a
+doublet and describes a particle with isospin, whereas the particle
+described by \(ξ_R\) has isospin zero. In addition, we already know that
+the upper and lower Weyl spinor inside a Dirac spinor transform differently
+under Lorentz boosts. Therefore it is important that we use
+different symbols. In other words: The object describing a left-chiral
+electron \(χ_L\) carries an additional \(\mathcal{SU}(2)\) index, because χL transforms
+as part of a doublet under \(\mathcal{SU}(2)\) transformations. \(ξ_R\) has no such
+index and transforms as a singlet under \(\mathcal{SU}(2)\) transformations.
+-->
+</p><p>
+同様に、
+
+\[
+\text{物理的な陽電子} =
+\begin{pmatrix}
+−ξ_L \\
+χ_R
+\end{pmatrix}
+∝
+\begin{pmatrix}
+−v \\
+v
+\end{pmatrix}
+\tag{8.66}
+\]
+<!--
+Equivalently we have
+
+\[
+\text{physical positron} =
+\begin{pmatrix}
+−ξ_L \\
+χ_R
+\end{pmatrix}
+∝
+\begin{pmatrix}
+−v \\
+v
+\end{pmatrix}
+\tag{8.66}
+\]
+-->
+
+これは電荷共役を通して見ることができる<sup>43</sup>
+<!--
+which we can see through charge conjugation<sup>43</sup>
+-->
+</p><p class="margin-large">
+<sup>43</sup>
+7.1.5節を参照し、式6.13で定義されている行列の明示的な形式を使用してください: \(γ_2 =
+\begin{pmatrix}
+0 & \overline{σ}_2 \\
+σ_2 & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & −σ_2 \\
+σ_2 & 0
+\end{pmatrix}\)
+<!--
+
+See Section 7.1.5 and use the explicit
+form of the matrix as defined
+in Eq. 6.13: \(γ_2 =
+\begin{pmatrix}
+0  & \overline{σ}_2 \\
+σ_2 & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & −σ_2 \\
+σ_2 & 0
+\end{pmatrix}\)
+-->
+</p><p>
+
+\[
+(\text{物理的な電子 })^c = iγ_2
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}^*
+=
+\begin{pmatrix}
+−ξ_L \\
+χ_R
+\end{pmatrix}
+∝ iγ_2
+\begin{pmatrix}
+u \\
+u
+\end{pmatrix}^*
+=
+\begin{pmatrix}
+−u^c \\
+u^c
+\end{pmatrix}
+= \text{物理的な陽電子}  \tag{8.67}
+\]
+<!--
+
+\[
+(\text{physical electron})^c = iγ_2
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}^*
+=
+\begin{pmatrix}
+−ξ_L \\
+χ_R
+\end{pmatrix}
+∝ iγ_2
+\begin{pmatrix}
+u \\
+u
+\end{pmatrix}^*
+=
+\begin{pmatrix}
+−u^c \\
+u^c
+\end{pmatrix}
+= \text{physical positron}  \tag{8.67}
+\]
+-->
+
+ここから得られる教訓は、私たちが自然界で観測する物理的な電子は、ほとんどの場合、2つの異なる粒子の混合物であるということです。アイソスピンを持つ左カイラル電子と、アイソスピンがゼロの右カイラル電子です！同様に、物理的な陽電子は、アイソスピンを持つ反左カイラル電子と、アイソスピンがゼロの反右カイラル電子の混合物です。
+<!--
+
+The message to take away is that the physical electron we observe
+in nature most of the time is a mixture of two different particles: The
+left-chiral electron that carries isospin and the right-chiral electron
+with isospin zero! Equivalently the physical positron is a mixture of
+an anti-left-chiral electron, which carries isospin and an anti-rightchiral
+electron with isospin zero.
+-->
+</p><p>
+
+ディラック方程式の解は、粒子が時間とともにどのように発展するかを教えてくれます。例えば、弱い相互作用で生成された、純粋に左カイラルな上向きスピンを持つ電子があるとします。この粒子は時間とともにどのように発展するでしょうか？純粋に左カイラルで上向きスピンを持つ電子は、
+<!--
+The solutions of the Dirac equation tell us how our particles evolve
+in time. Let’s say we start with an electron with spin up that was
+created in a weak interaction and is therefore purely left-chiral. How
+does this particle evolve in time? A purely left-chiral electron with
+spin up
+-->
+
+\[
+e_L^↑ =
+\begin{pmatrix}
+1 \\
+0 \\
+0 \\
+0
+\end{pmatrix}
+\tag{8.68}
+\]
+
+はディラック方程式の解ではないので、その時間発展を決定するには、これをディラック方程式の解で書き直す必要があります。
+<!--
+is not a solution of the Dirac equation and therefore, in order to determine
+its time evolution, we must rewrite this in terms of solutions
+of the Dirac equation.
+-->
+\[
+e_L^↑ =
+\begin{pmatrix}
+1 \\
+0 \\
+0 \\
+0
+\end{pmatrix}
+=\frac{1}{2}\left(
+\begin{pmatrix}
+1 \\
+0 \\
+1 \\
+0 
+\end{pmatrix}
+−
+\begin{pmatrix}
+−1 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+\right)
+= Ψ_1(t = 0) − \tilde{Ψ}_1(t = 0)  \tag{8.69}
+\]
+
+\(Ψ_1\)と\(\tilde{Ψ}_1\)が時間とともにどのように変化するかは分かっている
+<!--
+We know how \(Ψ_1\) and \(\tilde{Ψ}_1\) evolve in time
+-->
+\[
+Ψ_1(t) −\tilde{Ψ}_1(t) =→ \frac{1}{2}\left(
+\begin{pmatrix}
+1 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+e^{−imt} −
+\begin{pmatrix}
+−1 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+e^{imt} \right)
+\tag{8.70}
+\]
+
+\(t = 0\) の場合には、当然左カイラル状態に縮減しますが、時間が経過するにつれて、例えば \(t = \frac{π}{2m}\) の場合には、
+<!--
+For \(t = 0\) this reduces to the left-chiral state as it should be, but as
+time evolves, say \(t = \frac{π}{2m}\) we have
+-->
+\[
+\begin{align}
+→\frac{1}{2}\left(
+\begin{pmatrix}
+1 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+\underbrace{e^{−i\frac{π}{2}}}_{=-i}
+−
+\begin{pmatrix}
+−1 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+\underbrace{e^{i\frac{π}{2}}}_{=i}\right)
+&=\frac{i}{2} \left(
+\begin{pmatrix}
+−1 \\
+0 \\
+−1 \\
+0
+\end{pmatrix}
+−
+\begin{pmatrix}
+−1 \\
+0 \\
+1 \\
+0
+\end{pmatrix} \right) \\
+\\
+&= −i
+\begin{pmatrix}
+0 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+= −ie_R^↑
+\tag{8.71}
+\end{align}
+\]
+
+これはスピンが上向きの右カイラル電子を記述します！ここでの教訓は、時間の経過に伴って、左カイラル粒子が右カイラル粒子に変化し、その逆も起こるということです。電子のような粒子の時間変化を記述するには、eLとeRが必要であり、それがディラックスピノルという一つのオブジェクトにまとめて記述した理由です。陽電子についても同じことが言えます。
+<!--
+which describes a right-chiral electron with spin up! The lesson here
+is that as time evolves, a left-chiral particle changes into a right-chiral
+particle and vice versa. To describe the time-evolution of a particle
+like an electron we need eL and eR, which is why we wrote them
+together in one object: the Dirac spinor. The same is true for the
+positron.
+-->
+</p><p>
+二つの異なる粒子eLとeRは、異なる弱電荷、すなわちアイソスピンを持っていることを思い出してください。しかしながら、時間の経過とともに、これら二つの粒子は互いに変化し合う可能性があります。ほとんどの場合、両者の混合状態となり、明確な固有状態は存在しません。したがって、アイソスピンとカイラリティは、相互作用においてのみ保存され、時間の経過とともに保存されるわけではありません。
+<!--
+
+Recall that the two different particles eL and eR, carry different
+weak charge, i.e. isospin. Nevertheless as time evolves these two
+particles can transform into each other. Most of the time it will be a
+mixture of both and not a definite eigenstate. Isospin and chirality
+are therefore not conserved as time evolves, only in interactions.
+-->
+</p><p>
+ディラックスピノルを用いた表記法が必要であることが分かります。
+なぜなら、このセクションの冒頭で挙げた4つの粒子のうち、2つの粒子の間には密接な力学的結合が存在するからです。
+カイラリティ、ひいてはアイソスピンは伝播中に保存されません。
+伝播する電子は、左カイラルな場合もあれば、右カイラルな場合もあります。
+<!--
+
+We can now see that the notation with Dirac spinors is necessary,
+because we have a close, dynamical connection between each two
+particles of the four particles listed at the beginning of this section.
+Chirality and therefore isospin are not conserved during propagation.
+A propagating electron can sometimes be found as left-chiral and
+sometimes as right-chiral.
+-->
+</p>
+<h2>8.9 付録: ディラック方程式を解く</h2>
+<!--
+<h2>8.9 Appendix: Solving the Dirac Equation</h2>
+-->
+<p>
+前のセクションの冒頭で説明したように、ここではディラックスピノル内の2成分オブジェクトには記号uとvを使用し、4成分オブジェクトにはuとvを使用します。つまり、例えばu1とu2は、2つの異なる4成分オブジェクトを表します。具体的に区別せずに、両方の4成分オブジェクトを同時に考えたい場合は、単に\(u\)と書きます。すると、\(u_1\)と\(u_2\)は、そのような4成分オブジェクト\(u =
+\begin{pmatrix}
+u_1 \\
+u_2
+\end{pmatrix}\)内の2つの2成分オブジェクトになります。
+<!--
+
+As explained at the beginning of the last section, we use here the symbols
+u and v for the two-component objects inside a Dirac spinor, and u and v
+for four-component objects. This means, for example u1 and u2 describe
+two different four-component objects. If we don’t want to be specific and
+want to consider both four-component objects at the same time we simply
+write \(u\). Then \(u_1\) and \(u_2\) are the two two-component objects inside such a
+four-component object \(u =
+\begin{pmatrix}
+u_1 \\
+u_2
+\end{pmatrix}\)
+-->
+</p><p>
+
+この付録では、カイラル基底における静止系におけるディラック方程式を解きます。任意の系に対する解は、この節で導出された解にブースト変換を作用させることで計算できます。前節での議論に加えて、これらの解は第9章で場の量子論を扱う際にも用いられます。ディラック方程式は
+<!--
+
+In this appendix we will solve the Dirac equation in the rest frame
+in the chiral basis. The solution for an arbitrary frame can be computed
+by acting with a boost transformation on the solution derived
+in this section. In addition to the discussion in the last section, we
+will use these solutions in Chapter 9, when we talk about quantum
+field theory. The Dirac equation is
+-->
+
+\[
+(i∂_μγ^μ − m)ψ = 0  \tag{8.72}
+\]
+
+平面波解を予測して、4成分オブジェクトuを用いて\(Ψ = ue^{−ipx}\)という仮定を立てます。これは、方程式中の行列\(γ_μ\)が4×4であるためです。静止系、つまり運動量ゼロ\(\vec{p} = 0\)では、指数は\(−ipx = −i(p_0x_0 −\vec{p}\vec{x}) = −ip_0x_0\)に減少します。
+さて、この章の冒頭で導出した相対論的なエネルギー・運動量関係 \(E =\sqrt{\vec{p} + m^2}\) と、\(p_0 = E\) および \(x_0 = t\) を用いると、\(−ipx = −iEt = −i\sqrt{
+\underbrace{\vec{p}}_{=0}+m^2t} = −imt\) が得られます。
+この仮定をディラック方程式に代入すると、次の式が得られます。
+<!--
+
+Anticipating plane wave solutions, we make the ansatz \(Ψ = ue^{−ipx}\),
+with some four-component object u, because the matrices \(γ_μ\) in the
+equation are 4 × 4. In the rest frame, which means momentum zero
+\(\vec{p} = 0\), the exponent reduces to \(−ipx = −i(p_0x_0 −\vec{p}\vec{x}) = −ip_0x_0\).
+Now using the relativistic energy-momentum relation \(E =\sqrt{\vec{p} + m^2}\),
+which we derived at the beginning of this chapter, and using that
+\(p_0 = E\) and \(x_0 = t\), we have \(−ipx = −iEt = −i\sqrt{
+\underbrace{\vec{p}}_{=0}+m^2t} = −imt\).
+Putting this ansatz into the Dirac equation yields
+-->
+
+\[
+\begin{align}
+&(i∂_μγ^μ − m)ue^{−imt} = 0 \\
+\\
+&→ (i(∂_0γ^0 + ∂_iγ^i) − m)ue^{−imt} = 0 \\
+\\
+&→ i((−im)γ^0 − m)ue^{−imt} = 0 \\
+\\
+&→ (mγ^0 − m)u = 0 \\
+\\
+&\underbrace{→}_{mで割る}
+\left(
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+−
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix} \right) \underbrace{c}_{? uでは} = 0 \\
+\\
+&→
+\begin{pmatrix}
+−1 & 1 \\
+1 & −1
+\end{pmatrix}
+\begin{pmatrix}
+u_1 \\
+u_2
+\end{pmatrix}
+= 0 \\
+\\
+&→
+\begin{pmatrix}
+−u_1 + u_2 \\
+u_1 − u_2
+\end{pmatrix}
+=0  \tag{8.73}
+\end{align}
+\]
+
+ここで残った行列内の1は2×2の単位行列であり、したがって\(u_1\)と\(u_2\)は2成分のオブジェクトです。\(u_1 = u_2\)のとき、この仮定は方程式を解くことがわかります。したがって、ディラック方程式の2つの線形独立な解が見つかりました。
+<!--
+
+The 1 inside the remaining matrix here is the 2 × 2 unit matrix and
+therefore \(u_1\) and \(u_2\) are two-component objects. We see that our
+ansatz solves the equation, if \(u_1 = u_2\). Therefore, we have found
+two linearly independent solutions of the Dirac equation
+-->
+
+\[
+Ψ_1 =
+\begin{pmatrix}
+1 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+e^{−imt}
+　Ψ_2 =
+\begin{pmatrix}
+0 \\
+1 \\
+0 \\
+1
+\end{pmatrix}
+e^{−imt}  \tag{8.74}
+\]
+
+\(\tilde{Ψ} = ve^{ipx}\) という仮定を置くことで、他に2つの解が見つかります。
+これは同様に静止系では \(\tilde{Ψ} = ve^{imt}\) に縮約されます。
+この仮定は次式をもたらします。
+<!--
+
+We can find two other solutions by making the ansatz \(\tilde{Ψ} = ve^{ipx}\),
+which analogously reduces in the rest frame to \(\tilde{Ψ} = ve^{imt}\). This
+ansatz yields
+-->
+
+\[
+\begin{align}
+&(i∂_μγ^μ − m)ve^{imt} = 0 \\
+\\
+&　→ (−mγ^0 − m)v = 0 \\
+\\
+&　→
+\begin{pmatrix}
+−1 & −1 \\
+−1 & −1
+\end{pmatrix}
+\begin{pmatrix}
+v_1 \\
+v2
+\end{pmatrix}
+= 0 \\
+\\
+&　→
+\begin{pmatrix}
+−v_1 − v_2 \\
+−v_1 − v_2
+\end{pmatrix}
+= 0  \tag{8.75}
+\end{align}
+\]
+
+したがって、ディラックスピノルの上下2成分オブジェクトが\(-v_1 = v_2\)の関係にある場合、時間依存性のある解\(e^{imt}\)が得られると結論づけられる。この仮説から導かれる2つの線形独立な解は以下の通りである。
+<!--
+
+We therefore conclude that we have a solution with time dependence
+\(e^{imt}\), if the upper and lower two-component objects in the
+Dirac spinor are related by \(−v_1 = v_2\). Two linearly independent
+solutions following from this ansatz are
+-->
+
+\[
+\tilde{Ψ}_1 =
+\begin{pmatrix}
+1 \\
+0 \\
+−1 \\
+0
+\end{pmatrix}
+e^{imt}
+　\tilde{Ψ}_2 =
+\begin{pmatrix}
+0 \\
+1 \\
+0 \\
+−1
+\end{pmatrix}
+e^{imt}  \tag{8.76}
+\]
+</p>
+<h2>8.10 付録: 異なる基数におけるディラックスピノル</h2>
+<!--
+<h2>8.10 Appendix: Dirac Spinors in Different Bases</h2>
+-->
+<p>
+ラグランジアンでは、ディラックスピノル \(ψ\) は常に行列 \(γ_μ\) と組み合わせて現れます。これは、異なる基底に切り替えることで計算を簡素化するために利用できます。これは、任意の可逆行列 \(N\) を用いて \(1 = N^{−1}N\) の形式の項を \(ψ\) と \(γ_μ\) の間に追加し、両方を再定義できるため有効です。例えば、
+<!--
+In the Lagrangian the Dirac spinors \(ψ\) appear always in combination
+with the matrices \(γ_μ\). This can be used to simplify computations, by
+switching to a different basis. This works, because we can add terms
+of the form \(1 = N^{−1}N\), with some arbitrary invertible matrix \(N\),
+between \(ψ\) and \(γ_μ\) and then redefine both. For example
+-->
+
+\[
+∂_μ\overline{ψ}γ_μψ 
+= ∂_μ\overline{ψ}\underbrace{N^{−1}N}_{=1}γ_μ\underbrace{N^{−1}N}_{ =1}ψ
+= ∂_μ\underbrace{\overline{ψ}N^{−1}}_{≡\overline{ψ^\prime}}
+\underbrace{Nγ_μN^{−1}}_{≡γ_μ^\prime}
+\underbrace{Nψ}_{≡ψ^\prime}
+= ∂_μ\overline{ψ^\prime}γ_μ^\primeψ^\prime  \tag{8.77}
+\]
+
+これまでこのテキストで扱ってきた基底は、<strong>カイラル基底</strong>または<strong>ワイル基底</strong>と呼ばれます。通常、ディラック方程式は<strong>質量基底</strong>または<strong>ディラック基底</strong>と呼ばれる別の基底で解きます。これまで扱ってきたカイラル基底では、ディラックのラグランジアンは
+<!--
+
+The basis we worked with in this text so far is called the <strong>chiral basis</strong>
+or <strong>Weyl basis</strong>. Conventionally the Dirac equation is solved in another
+basis, called <strong>mass basis</strong> or ,strong>Dirac basis</strong>. In the chiral basis we worked
+with so far, the Dirac Lagrangian
+-->
+
+\[
+\mathcal{L}_D = iχ_+^†σ^μ∂_μχ_L + iξ_R^†\overline{σ}^μ∂_μξ_R − mχ_L^†ξ_R − mξ_R^†χ_L  \tag{8.78}
+\]
+
+非対角の質量項、つまり異なる状態が混在する質量項を持ちます。基底を自由に選択できることを利用して、質量項が<strong>対角</strong>である基底を選ぶことができ、これを質量基底と呼びます。
+<!--
+
+has non-diagonal mass terms, i.e. mass terms that mix different
+states. We can use the freedom to choose a basis to pick a basis
+where the mass terms are <strong>diagonal</strong>, which is then called mass basis.
+-->
+
+</p><p>
+
+これは、\(m =
+\begin{pmatrix}
+m_1 & 0 \\
+0 & m_2
+\end{pmatrix}\) の質量項 \(ψ^†mψ\) が必要であることを意味します。これは、次のような質量項を与えます。
+<!--
+
+This means we want a mass term \(ψ^†mψ\), with \(m =
+\begin{pmatrix}
+m_1 & 0 \\
+0 & m_2
+\end{pmatrix}\), which gives us mass terms of the form
+-->
+
+\[
+\overline{ψ}^\prime M^\prime ψ^\prime= ψ^†γ_0^\prime M^\prime ψ^\prime
+=
+\begin{pmatrix}
+u^\prime \\
+v^\prime
+\end{pmatrix}^†
+\begin{pmatrix}
+m_1 & 0 \\
+0 & m_2
+\end{pmatrix}
+\begin{pmatrix}
+u^\prime \\
+v^\prime
+\end{pmatrix}
+= (u^\prime)^†m_1u^\prime
++(v^\prime)^†m_2v^\prime  \tag{8.79}
+\]
+
+一方、現在私たちが取り組んでいるのは
+<!--
+whereas at the moment we are dealing with
+-->
+
+\[
+\overline{ψ}Mψ = ψ^†γ_0Mψ =
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}^†
+\begin{pmatrix}
+0 & m \\
+m & 0
+\end{pmatrix}
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+= mχ_L^†ξ_R + mξ_R^†χ_L  \tag{8.80}
+\]
+
+これまで扱ってきた後者の基底は、カイラリティの観点から物事を解釈することを容易にしますが、質量基底におけるディラックスピノルは、<strong>物理的</strong>に伝播する<strong>粒子</strong>との関連づけを容易にします。
+<!--
+
+The latter basis, which we worked with so far, makes it easy to interpret
+things in terms of chirality, whereas it’s easier for Dirac spinors
+in the mass basis to make the connection to <strong>physical</strong> propagating
+<strong>particles</strong>.
+-->
+
+</p><p>
+
+2番目の形式と1番目の形式の関係を見つけるには、行列M =
+\begin{pmatrix}
+0 & m \\
+m & 0
+\end{pmatrix}
+= m
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}\)を対角化する必要があります。この行列は、行列N = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+-1 & 1 \\
+1 & 1
+\end{pmatrix}\)によって対角化されます。
+<!--
+
+To find the connection between the second and the first form, we
+need to diagonalize the matrix \(M =
+\begin{pmatrix}
+0 & m \\
+m & 0
+\end{pmatrix}
+= m
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}\). The
+matrix is diagonalized through the matrix \(N = \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+−1 & 1 \\
+1 & 1
+\end{pmatrix}\):
+-->
+
+\[
+N^{−1}
+\underbrace{
+\begin{pmatrix}
+−m & 0 \\
+0 & m
+\end{pmatrix}
+}_{≡M^\prime}
+N = M  \tag{8.81}
+\]
+
+\[
+→ m\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+−1 & 1 \\
+1 & 1
+\end{pmatrix}^{−1}
+\begin{pmatrix}
+−1 & 0 \\
+0 & 1 
+\end{pmatrix}
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+−1 & 1 \\
+1 & 1
+\end{pmatrix}
+= m
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix} 
+\tag{8.82}
+\]
+
+したがって、ディラックスピノルをそれに応じて再定義する。
+<!--
+and therefore we redefine the Dirac spinors accordingly
+-->
+
+\[
+\begin{align}
+\overline{ψ}Mψ &=\overline{ψ}\underbrace{NN^{−1}}_{=1}
+M\underbrace{NN^{−1}}_{=1} ψ \\
+\\
+&= \underbrace{\overline{ψ}N}_{≡\overline{ψ^\prime}}
+\underbrace{N^{−1}MN}_{≡M^\prime}
+\underbrace{N^{−1}ψ}_{≡ψ^\prime} \\
+\\
+&=\overline{ψ^\prime}M^\prime ψ^\prime  \tag{8.83}
+\end{align}
+\]
+</p><p>
+
+この基底におけるカイラル射影演算子
+\(P_L = \frac{1−γ_5}{2}\) について見てみると分かりやすいでしょう。この新しい基底において行列 \(γ_5\) がどのようになるかを計算する必要があります。
+<!--
+
+It is instructive to have a look at the chiral projection operators
+\(P_L = \frac{1−γ_5}{2}\) in this basis. We need to calculate how the matrix \(γ_5\) looks
+like in this new basis
+-->
+
+\[
+\begin{align}
+\tilde{γ}_5 = N^{−1}γ_5N &= \frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1 \\
+1 & −1
+\end{pmatrix}
+\begin{pmatrix}
+1 & 0 \\
+0 & −1
+\end{pmatrix}
+\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 & 1 \\
+1 & −1
+\end{pmatrix} \\
+\\
+&=\frac{1}{2}
+\begin{pmatrix}
+1 & 1 \\
+1 & −1
+\end{pmatrix}
+\begin{pmatrix}
+1 & 1 \\
+−1 & 1
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+\tag{8.84}
+\end{align}
+\]
+
+対応する固有ベクトルは \(\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+−1
+\end{pmatrix}\) と \(\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+1
+\end{pmatrix}\) です。これは、カイラル固有状態が、上側成分と下側成分を持つディラックスピノルで記述されることを意味します。例えば、左カイラル状態は、この基底で \(\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+−1
+\end{pmatrix}\) の形式になります。対照的に、カイラル基底では \(γ_5\)
+は対角であり、左カイラル固有状態は、上側成分のみを持つディラックスピノル \(ψ_L =
+\begin{pmatrix}
+χ_L \\
+0
+\end{pmatrix}\)、および下側成分のみを持つ右カイラルディラックスピノル \(ψ_R =
+\begin{pmatrix}
+0 \\
+ξ_R
+\end{pmatrix}\) によって与えられました。
+<!--
+
+The corresponding eigenvectors are \(\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+−1
+\end{pmatrix}\) and \(\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+1
+\end{pmatrix}\). This
+means a chiral eigenstate is now described by a Dirac spinor with
+upper and lower components. For example, a left-chiral state is in
+this basis of the form \(\frac{1}{\sqrt{2}}
+\begin{pmatrix}
+1 \\
+−1
+\end{pmatrix}\). In contrast, in the chiral basis \(γ_5\)
+was diagonal and a left-chiral eigenstate was given by a Dirac spinor
+with upper components only \(ψ_L =
+\begin{pmatrix}
+χ_L \\
+0 
+\end{pmatrix}\), and a right-chiral Dirac
+spinor with lower components only \(ψ_R =
+\begin{pmatrix}
+0 \\
+ξ_R
+\end{pmatrix}\).
+-->
+</p><p>
+
+カイラル射影演算子はこの基底にある
+<!--
+The chiral projection operator is in this basis
+-->
+
+\[
+P_L =\frac{1 − γ_5}{2}=\frac{1}{2}
+\begin{pmatrix}
+1 & −1 \\
+−1 & 1
+\end{pmatrix}
+\tag{8.85}
+\]
+</p>
+<h3>8.10.1 質量基底におけるディラック方程式の解</h3>
+<!--
+<h3>8.10.1 Solutions of the Dirac Equation in the Mass Basis</h3>
+-->
+<p>
+
+ディラック方程式を質量基底で解くことができる
+<!--
+We can solve the Dirac equation in the mass basis
+-->
+
+\[
+\left( iγ_μ∂^μ − m\right) Ψ =0  \tag{8.86}
+\]
+
+\(ψ = ue^{−ipx}\) という仮定を立てると、
+<!--
+by making the ansatz \(ψ = ue^{−ipx}\), which yields
+-->
+
+\[
+\begin{align}
+\left(γ_μ p^μ − m\right)ue^{−ipx} &= 0 \\
+\\
+→\left( γ_μ p^μ − m \right) u &= 0  \tag{8.87}
+\end{align}
+\]
+
+同様に\(ψ = ve^{ipx}\)という仮定を立てると、
+<!--
+Equivalently we can make the ansatz \(ψ = ve^{ipx}\), which yields
+-->
+
+\[
+\begin{align}
+\left(− γ_μ p^μ − m \right) ve^{ipx} &= 0 \\
+\\
+→\left( − γ_μ p^μ − m \right) v &= 0.
+\end{align}
+\]
+
+カイラル基底における解と同様に、静止系、すなわち\(\vec{p} = 0\)で計算します。このような選択が認められているのは、物理法則はどの参照系でも同じであるため、ニーズに最も適したものを選択できるからです。この参照系では、\(p_i = 0\)として、以下の式が得られます。
+<!--
+
+Analogously to our solution in the chiral basis, we work in the rest
+frame, i.e. \(\vec{p} = 0\). We are allowed to make such a choice, because
+physics is the same in all frames of reference and therefore we can
+pick one that fits our needs best. In this frame of reference, with
+\(p_i = 0\), we have
+-->
+
+\[
+\begin{align}
+→\left(γ_0p^0 − m \right) u &= 0 \\
+\\
+→\left( −γ_0p^0 − m \right) v &= 0
+\end{align}
+\]
+
+さらに、\(p_0 = E\) となり、この章の冒頭で導出した相対論的なエネルギー・運動量関係式(式8.2)を使用することができます。静止系では、\(E = \sqrt{(p_i)^2 + m^2} = m\) となります。ここで、質量基底において、\(γ_0\) の明示的な形を使用します。これは、上記の行列 \(N\) と変換則 \(γ_0^\prime = N^{−1}γ_0N\) を用いて計算できます。\(m\) の背後には暗黙の単位行列があることを覚えておいてください。したがって、
+<!--
+
+In addition, we have \(p_0 = E\) and we can use the relativistic energymomentum
+relation, which we derived at the beginning of this chapter
+(Eq. 8.2). In the rest frame we have \(E = \sqrt{(p_i)^2 + m^2} = m\). We
+now use the explicit form of \(γ_0\) in the mass basis, which can be computed
+using the matrix \(N\) from above and the transformation law
+\(γ_0^\prime = N^{−1}γ_0N\). Remember that we have an implicit unit matrix behind
+\(m\) and therefore
+-->
+
+\[
+→\left(
+\begin{pmatrix}
+1 & 0 \\
+0 & −1
+\end{pmatrix}
+m − m
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix} 
+\right) u = 0
+\]
+
+\[
+→\left(
+−
+\begin{pmatrix}
+1 & 0 \\
+0 & −1
+\end{pmatrix}
+m − m
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+\right) v = 0
+\]
+
+\[
+→
+\begin{pmatrix}
+0 & 0 \\
+0 & −2
+\end{pmatrix}
+u = 0
+\]
+
+\[
+→
+\begin{pmatrix}
+−2 & 0 \\
+0 & 0
+\end{pmatrix}
+v = 0
+\]
+
+各ディラックスピノルは2つの2成分オブジェクトから構成されていることを思い出すと、\(u\) の下側の2成分オブジェクトと\(v\) の上側の2成分オブジェクトはゼロでなければならないと結論付けられます。
+<!--
+
+Recalling that each Dirac spinor consists of two two-component objects,
+we conclude that the lower two-component object of \(u\) and the
+upper two-component object of \(v\) must be zero:
+-->
+
+\[
+→
+\begin{pmatrix}
+0 & 0 \\
+0 & −2
+\end{pmatrix}
+\begin{pmatrix}
+u_1 \\
+u_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 \\
+−2u_2
+\end{pmatrix}
+= 0 → u_2 = 0
+\]
+
+\[
+→
+\begin{pmatrix}
+−2 & 0 \\
+0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+v_1 \\
+v_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+−2v_1 \\
+0
+\end{pmatrix}
+= 0 → v_1 = 0
+\]
+
+この基底において、物理的に伝播する粒子（＝ディラック方程式の解）は、上側成分のみを持つスピノルによって記述されることがわかります。あるいは、下側成分のみを持つ反粒子についても同様に記述されます。したがって、再び4つの線形独立な解が得られます。
+<!--
+
+We can see that in this basis the physical propagating particles
+(=solutions of the Dirac equation) are described by spinors with
+upper components only or equivalently for antiparticles with lower
+components only. We therefore have again four linearly independent
+solutions
+-->
+
+\[
+Ψ_1^\prime =
+\begin{pmatrix}
+1 \\
+0 \\
+0 \\
+0
+\end{pmatrix}
+e^{−imt}
+
+　Ψ_2^\prime =
+\begin{pmatrix}
+0 \\
+1 \\
+0 \\
+0
+\end{pmatrix}
+e^{−imt}  \tag{8.88}
+\]
+
+および
+<!--
+and
+-->
+
+\[
+\tilde{Ψ_1^\prime}=
+\begin{pmatrix}
+0 \\
+0 \\
+1 \\
+0
+\end{pmatrix}
+e^{imt}
+　\tilde{Ψ_2^\prime}=
+\begin{pmatrix}
+0 \\
+0 \\
+0 \\
+1
+\end{pmatrix}
+e^{imt}  \tag{8.89}
+\]
+
+このフレーム、この基底における一般解は線形結合である。
+<!--
+A general solution in this frame, in this basis, is a linear combination
+-->
+\[
+ψ = ue^{−ipx} + ve^{ipx} =
+\begin{pmatrix}
+u_1 \\
+0
+\end{pmatrix}
+e^{−ipx} +
+\begin{pmatrix}
+0 \\
+v_1
+\end{pmatrix}
+e^{ipx}  \tag{8.90}
+\]
+
+そして、この解をローレンツブーストで変換することで、任意の系における解が得られます。さらに、最も一般的な解は、あらゆる可能な運動量とスピン配置の重ね合わせです<sup>44</sup>
+<!--
+
+and we get the solution in an arbitrary frame by transforming this
+solution with a Lorentz boost. In addition, the most general solution
+is a superposition of all possible momenta and spin configurations<sup>44</sup>
+-->
+
+</p><p class="margin-large">
+<sup>44</sup>
+ワイルスピノルの2つの成分が異なるスピン状態を表すことを思い出してください。
+<!--
+
+Recall that the two components of 
+a Weyl spinor represent different spin
+states.
+-->
+</p><p>
+
+\[
+Ψ =\sum_r \sqrt{\frac{m}{(2π)^3}} \int \frac{d^3p}{\sqrt{E_p}}
+\left(c_r(p)u_r(p)e^{−ipx} + d_r^†(p)v_r(p)e^{+ipx}\right) \tag{8.91}
+\]
+
+</p>
+    </body>
+</html>

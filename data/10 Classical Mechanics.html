@@ -1,0 +1,463 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>古典力学</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>10 古典力学</h1>
+<!--
+<h1>10 Classical Mechanics</h1>
+-->
+<p>
+この章では、量子力学と古典力学のつながりを探ります。運動量演算子の期待値の時間微分が、古典力学の基礎の一つであるニュートンの第二法則と正確に一致することを学びます。
+<!--
+In this chapter we want to explore the connection between quantum
+and classical mechanics. We will see that the time derivative of
+the expectation value for the momentum operator gives us exactly
+Newton’s second law, which is one of the foundations of classical
+mechanics.
+-->
+</p><p>
+演算子の期待値から始める（式8.14）
+<!--
+Starting with the expectation value for an operator (Eq. 8.14)
+-->
+\[
+\langle \hat{\mathcal{O}}\rangle = \int d^3xΨ^*\hat{\mathcal{O}}Ψ
+\]
+外部ポテンシャル中の粒子に対するシュレーディンガー方程式
+(式8.23)
+<!--
+and the Schr&ouml;dinger equation for a particle in an external potential
+(Eq. 8.23)
+-->
+\[
+\left( i\frac{d}{dt}−\frac{∇^2}{2m} \right)Ψ − VΨ = 0
+\]
+
+\[
+→ i\frac{d}{dt}Ψ =\underbrace{\left(\frac{∇^2}{2m}+V\right)}_{=:H}Ψ
+\]
+
+\[
+→ \frac{d}{dt}Ψ =\frac{1}{i}HΨ
+\]
+
+\[
+\underbrace{→}_{Because\; H^†=H}
+\frac{d}{dt}Ψ^* = −\frac{1}{i}\underbrace{Ψ^*}_{Here\; Ψ^†=Ψ^*}H
+\]
+
+期待値の時間微分をとると、
+<!--
+Taking the time derivative of the expectation value yields
+-->
+\[
+\frac{d}{dt}\langle \hat{\mathcal{O}}\rangle = \int d^3x
+\left(\left(\frac{d}{dt}Ψ^*\right)\hat{\mathcal{O}}Ψ 
++Ψ^*\left(\frac{d}{dt}\hat{\mathcal{O}}\right)Ψ
++ Ψ^*\hat{\mathcal{O}}\left(\frac{d}{dt}Ψ\right)\right)
+\]
+
+ここでは、ほとんどの演算子に対して成り立つ\(\frac{d}{dt}\hat{\mathcal{O}}= 0\)を使用します。例えば、\(\hat{\mathcal{O}} = \hat{\vec{p}} = −i\vec{∇} \neq \hat{\mathcal{O}}(t)\)の場合です。さらに、シュレーディンガー方程式を用いて、波動関数とその複素共役の時間微分を書き直します。これにより、
+<!--
+We use now \(\frac{d}{dt}\hat{\mathcal{O}}= 0\), which is true for most operators. For example,
+for \(\hat{\mathcal{O}} = \hat{\vec{p}} = −i\vec{∇} \neq \hat{\mathcal{O}}(t)\). In addition, we use the Schr&ouml;dinger
+equation to rewrite the time derivatives of the wave function and its
+complex conjugate. This yields
+-->
+\[
+\begin{align}
+\frac{d}{dt}\langle \hat{\mathcal{O}}\rangle &=
+\int d^3x\left(\left(−\frac{1}{i}Ψ^*H\right)\hat{\mathcal{O}}Ψ
++Ψ^*\hat{\mathcal{O}}\left(\frac{1}{i}HΨ\right)\right) \\
+\\
+&=\frac{1}{i}\int d^3x
+\left(− Ψ^*H\hat{\mathcal{O}}Ψ + Ψ^*\hat{\mathcal{O}}HΨ\right) \\
+\\
+&=\frac{1}{i} \int d^3xΨ^*[\hat{\mathcal{O}}, H]Ψ \\
+\\
+&=\frac{1}{i}\langle [\hat{\mathcal{O}}, H]\rangle  \tag{10.1}
+\end{align}
+\]
+
+これは<strong>エーレンフェストの定理</strong>として知られています。\(\hat{\mathcal{O}} = \hat{p}\) と指定し、\(H =\frac{\hat{p}^2}{2m} + V\) を用いると、
+<!--
+which is known as <strong>Ehrenfest theorem</strong>. If we specify \(\hat{\mathcal{O}} = \hat{p}\) and use
+\(H =\frac{\hat{p}^2}{2m} + V\), we get
+-->
+\[
+\begin{align}
+\frac{d}{dt}\langle \hat{p}\rangle &= \frac{1}{i}\langle [\hat{p}, H]\rangle \\
+\\
+&=\frac{1}{i}\langle [\hat{p},\frac{\hat{p}^2}{2m}+ V]\rangle \\
+\\
+&=\frac{1}{i}\langle \underbrace{[\hat{p},\frac{\hat{p}^2}{2m}]}_{=0}+[\hat{p},V]\rangle \\
+\\
+&=\frac{1}{i}\langle [\hat{p},V]\rangle \\
+\\
+&=\frac{1}{i} \int d^3xΨ^*[\hat{p},V]Ψ \\
+\\
+&=\frac{1}{i} \int d^3xΨ^*\hat{p}VΨ −\frac{1}{i} \int d^3xΨ^*V\hat{p}Ψ \\
+\\
+&=\frac{1}{i} \int d^3xΨ^*(−i∇)VΨ −\frac{1}{i} \int d^3xΨ^*V(−i∇)Ψ \\
+\\
+&\underbrace{=}_{Product\; rule}−\int d^3xΨ^*(∇V)Ψ −\int d^3xΨ^*V∇Ψ +\int d^3xΨ^*V∇Ψ \\
+\\
+&= −\int d^3xΨ^*(∇V)Ψ \\
+\\
+&= \langle −∇V\rangle = \langle F\rangle  \tag{10.2}
+\end{align}
+\]
+</p><p>
+言葉で言えば、これは運動量の時間微分（期待値）がポテンシャルの負の勾配（力として知られる）の期待値に等しいことを意味します。これはまさに<strong>ニュートンの第二法則</strong><sup>1</sup>です。この式は、巨視的な物体の軌道を計算するために使用できます。歴史的に、力の法則は実験から現象論的に導出されました。物体に作用するすべての力は、式の右辺に線形に加算されました。現象論的に導出された運動量pmak = mvを用いると、左辺は\(\frac{d}{dt} p_{mak} = \frac{d}{dt}mv\)と書くことができ、これは一定質量\(m\frac{d}{dt}v\)を持つ物体の場合に等しくなります。速度は位置<sup>2</sup>の時間微分であるため、
+<!--
+
+In words this means that the time derivative (of the expectation
+value) of the momentum equals the (expectation value of the) negative
+gradient of the potential, which is known as force. This is exactly
+<strong>Newton’s second law</strong><sup>1</sup>. This equation can be used to compute the
+trajectories of macroscopic objects. Historically the force laws were
+deduced phenomenologically from experiments. All forces acting on
+an object were added linearly on the right-hand side of the equation.
+By using the phenomenologically deduced momentum pmak = mv,
+we can write the left-hand side as \(\frac{d}{dt} p_{mak} = \frac{d}{dt}mv\), which equals for
+an object with constant mass \(m\frac{d}{dt}v\). The velocity is the time-derivative
+of the location<sup>2</sup> and we therefore have
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+4.5節のネーターの定理から導かれる保存量を説明するために、この式を導出なしに用いたことを思い出してください。ここでは、約束通り導出を示します。
+<!--
+Recall that we used this equation, 
+without a derivation, to illustrate the
+conserved quantities following from
+Noether’s theorem in Section 4.5. Here
+we deliver the derivation, as promised.
+-->
+<br><br>
+
+<sup>2</sup>
+言い換えれば、速度 \(v =\frac{d}{dt} x(t) = \dot{x}(t)\) は物体の位置の変化率であり、同様に加速度 \(a\) \(\frac{d}{dt}\frac{d}{dt}x(t) = \frac{d}{dt}v =\ddot{x}(t)\) は速度の変化率です。
+<!--
+
+In other words, the velocity \(v =\frac{d}{dt} x(t) = \dot{x}(t)\) is the change-rate of the
+position of the object and equally the
+acceleration \(a\) \(\frac{d}{dt}\frac{d}{dt}x(t) = \frac{d}{dt}v =\ddot{x}(t)\) is
+the change-rate of the velocity.
+-->
+</p><p>
+
+\[
+m\frac{d^2}{dt^2}x = F_1 + F_2 + ...   \tag{10.3}
+\]
+
+これは、問題の物体の軌道を得るために \(x = x(t)\) について解かなければならない微分方程式です。このような古典的な力の例は、次の章で導出されます。
+<!--
+This is the differential equation one must solve for \(x = x(t)\) to get the
+trajectory of the object in question. An example for such a classical
+force will be derived in the next chapter.
+-->
+</p>
+<h2>10.1 相対論的力学</h2>
+<!--
+<h2>10.1 Relativistic Mechanics</h2>
+-->
+<p>
+ラグランジアン形式を用いると、古典力学を全く異なる視点から考察することができます。個々の粒子の運動を記述する方程式が必要です。本書ではいつものように、何かを最小化すれば正しい方程式を導出できると仮定します。第4章の冒頭で既に述べたように、この何かはすべてのローレンツ変換に対して不変でなければなりません。そうでなければ、すべての参照系において同じ運動方程式が得られないからです。
+<!--
+
+Using the Lagrangian formalism, we can look at classical mechanics
+from quite a different perspective. We need an equation that describes
+the motion of individual particles. As always in this book,
+we assume that we can derive the correct equation if we minimize
+something. We already discussed at the beginning of Chapter 4 that
+this something must be invariant under all Lorentz transformations,
+because otherwise we don’t get the same equations of motion in all
+frames of reference.
+-->
+</p><p>
+幸いなことに、私たちは既にあらゆるローレンツ変換に対して不変なものを知っています。それは特殊相対論の不変量であり、
+第2.1節で導出されました。
+<!--
+Luckily, we already know something that is invariant under all
+Lorentz transformations: the invariant of special relativity, which was
+derived in Section 2.1:
+-->
+\[
+(ds)^2 = (cdτ)^2 = (cdt)^2 − (dx)^2 − (dy)^2 − (dz)^2   \tag{10.4}
+\]
+
+ここで\(τ\)は2.2節で説明した固有時です。同様に、この平方根は不変なので、最小化できる最も単純なものは
+<!--
+where \(τ\) is the proper time as explained in Section 2.2. Equally the
+square root of this is invariant and therefore the simplest possible
+thing we can minimize is
+-->
+\[
+S =\int Cdτ  \tag{10.5}
+\]
+
+ある定数\(C\)と
+<!--
+with some constant \(C\) and
+-->
+\[
+dτ =\frac{1}{c}\sqrt{(cdt)^2 − (dx)^2 − (dy)^2 − (dz)^2}  \tag{10.6}
+\]
+
+正しい定数は\(C = −mc^2\)であることが判明したので、最小化する必要がある。
+<!--
+The correct constant turns out to be \(C = −mc^2\) and therefore we need
+to minimize
+-->
+\[
+S = −mc^2 \int dτ  \tag{10.7}
+\]
+
+簡潔にするため、以下の議論は1次元に限定します。
+すると、
+<!--
+For brevity we will restrict the following discussion to one dimension.
+Then we can write
+-->
+\[
+\begin{align}
+dτ &=\frac{1}{c}\sqrt{(cdt)^2 − (dx)^2} =\frac{1}{c}\sqrt{(cdt)^2\left(1 − \frac{(dx)^2}{c^2(dt)^2}\right)} \\
+\\
+&=\frac{1}{c}(cdt)\sqrt{1 −\frac{1}{c^2}\left(\frac{dx}{dt}\right)^2}
+\underbrace{=}_{\frac{dx}{dt} =\dot{x}\text{ は問題の粒子の速度である}}
+dt\sqrt{1 −\frac{\dot{x}^2}{c^2}}  \tag{10.8}
+\end{align}
+\]
+
+これを式10.7に代入すると、
+<!--
+Putting this into Eq. 10.7 yields
+-->
+\[
+S =\int \underbrace{−mc^2\sqrt{1 −\frac{\dot{x}^2}{c^2}}}_{≡\mathcal{L}}dt  \tag{10.9}
+\]
+
+いつものように、ラグランジアンをオイラー・ラグランジュ方程式（式4.7）に代入することで極限作用を求めることができます。
+<!--
+As always, we can find the extremal action by putting the Lagrangian
+into the Euler-Lagrange equation (Eq. 4.7):
+-->
+\[
+\begin{align}
+0 &= \frac{∂\mathcal{L}}{∂x}−\frac{d}{dt}\left(\frac{∂\mathcal{L}}{∂\dot{x}}\right) \\
+\\
+→ 0 &=\underbrace{\frac{∂}{∂x}\left(−mc^2\sqrt{1 −\frac{\dot{x}^2}{c^2}}\right)}_{=0}
+−\frac{d}{dt}\left(\frac{∂}{∂\dot{x}}\left(−mc^2\sqrt{1 −\frac{\dot{x}^2}{c^2}}\right)\right) \\
+\\
+→ 0 &= c^2\frac{d}{dt}\left(\frac{−m\frac{\dot{x}}{c^2}}{\sqrt{1 −\frac{\dot{x}^2}{c^2}}}\right) \\
+\\
+→ 0 &=\frac{d}{dt}\left(\frac{m\dot{x}}{\sqrt{1 −\frac{\dot{x}^2}{c^2}}}\right)  \tag{10.10}
+\end{align}
+\]
+
+これは自由粒子に対する正しい相対論的方程式です。粒子が外部ポテンシャル \(V(x)\) 内を運動する場合、このポテンシャルをラグランジアン<sup>3</sup> に単純に加算するだけで済みます。
+<!--
+This is the correct relativistic equation for a free particle. If the particle
+moves in an external potential \(V(x)\), we must simply add this
+potential to the Lagrangian<sup>3</sup>
+-->
+</p><p class="margin-large">
+<sup>3</sup>
+\(V(x)\) の代わりに \(−V(x)\) を加算します。
+そうすることで、系の全エネルギーを表す式に、ネーターの定理を用いて計算できるポテンシャルエネルギー項 \(+V(x)^) が加わります。
+<!--
+We add \(−V(x)\) instead of \(V(x)\), 
+because then we get in the formula
+for the total energy of the system,
+which we can compute using Noether’s
+theorem, the potential energy term
+\(+V(x)^).
+-->
+</p><p>
+
+\[
+\mathcal{L} = −mc^2\sqrt{1 −\frac{(\dot{x})^2}{c^2}}− V(x)  \tag{10.11}
+\]
+
+このラグランジアンに対してオイラー・ラグランジュ方程式は次のようになる。
+<!--
+For this Lagrangian the Euler-Lagrange equation yields
+-->
+\[
+\frac{d}{dt}\left(\frac{m\dot{x}}{\sqrt{1 −\frac{\dot{x}^2}{c^2}}}\right)
+= −\frac{dV}{dx}≡ F  \tag{10.12}
+\]
+
+非相対論的極限 \((\dot{x} \ll c)\) では、\(\sqrt{1 −\frac{ (\dot{x})^2}{c^2}}≈ 1\) となり、この式は前のセクションで導出した運動方程式 (式 10.3) とまったく同じになることに注意してください。
+<!--
+Take note that in the non-relativistic limit \((\dot{x} \ll c)\) we have
+\(\sqrt{1 −\frac{ (\dot{x})^2}{c^2}}≈ 1\) and the equation is exactly the equation of motion we derived in the
+last section (Eq. 10.3).
+-->
+</p>
+<h2>10.2 非相対論的力学のラグランジアン</h2>
+<!--
+<h2>10.2 The Lagrangian of Non-Relativistic Mechanics</h2>
+-->
+<p>
+前のセクションで導出したラグランジアンの非相対論的極限（式10.9）を見てみると分かりやすいでしょう。「非相対論的極限」とは、粒子が光速に比べてゆっくりと移動する状況（\(\dot{x} \ll c\））を考えることを意味します。この場合、ラグランジアンにテイラー公式を適用できます<sup>4</sup>
+<!--
+It is instructive to have a look at the non-relativistic limit of the
+Lagrangian we derived in the last section (Eq. 10.9). The "nonrelativistic
+limit" means, we consider a situation where the particle
+moves slowly compared with the speed of light: \(\dot{x} \ll c\). We can then
+use the Taylor formula for the Lagrangian<sup>4</sup>
+-->
+</p><p class="margin-large">
+<sup>4</sup>
+付録B.3を参照
+<!--
+See Appendix B.3 
+-->
+</p><p>
+
+\[
+−mc^2\sqrt{1 −\frac{\dot{x}^2}{c^2} = −mc^2\left(1 −\frac{1}{2}\frac{\dot{x}^2}{c^2} + . . .\right)  \tag{10.13}
+\]
+
+極限\(\dot{x} \ll c\)では高次の項を無視でき、ラグランジアンは次のように表される。
+<!--
+In the limit \(\dot{x} \ll c\) we can neglect higher order terms and the Lagrangian
+reads
+-->
+\[
+\mathcal{L} = −mc^2 +\frac{1}{2}m\dot{x}^2 − V(x)  \tag{10.14}
+\]
+
+\(−mc^2\) のような定数は運動方程式に影響を与えないことは既に分かっているので、<strong>非相対論的力学のラグランジアン</strong>は次のようになります。
+<!--
+We already know that a constant like \(−mc^2\) has no influence on the
+equation of motion and therefore the <strong>Lagrangian for non-relativistic
+mechanics</strong> reads
+-->
+\[
+\mathcal{L} =\frac{1}{2}m\dot{x}^2 − V(x)  \tag{10.15}
+\]
+
+外部ポテンシャルがない場合、すなわち\(V(x) = 0\)、これはまさにセクション4.5.1でネーター定理から導かれる保存量を説明するために用いたラグランジアンである。このラグランジアンをオイラー・ラグランジュ方程式（式4.7）に代入すると、次の式が得られる。
+<!--
+Without the external potential, i.e. \(V(x) = 0\), this is exactly the
+Lagrangian we used in section 4.5.1 to illustrate the conserved quantities
+that follow from Noether’s theorem. Putting this Lagrangian
+into the Euler-Lagrange equation (Eq. 4.7) yields
+-->
+\[
+\begin{align}
+\frac{∂\mathcal{L}}{∂x}−\frac{d}{dt}\left(\frac{∂\mathcal{L}}{∂\dot{x}}\right) &= 0 \\
+\\
+→ \frac{∂}{∂x}\left(\frac{1}{2}m\dot{x}^2 − V(x)\right)−\frac{d}{dt}\left(\frac{∂}{∂\dot{x}}
+\left(\frac{1}{2}m\dot{x}^2 − V(x)\right)\right) &= 0 \\
+\\
+→−\frac{∂}{∂x}V(x) −\frac{d}{dt}m\dot{x} &= 0 \\
+\\
+→ \frac{d}{dt}m\dot{x} &= −\frac{∂}{∂x}V(x) \tag{10.16}
+\end{align}
+\]
+これはまさに、この章の冒頭で導出した運動方程式（式10.3）です。
+<!--
+This is once more exactly the equation of motion we derived at the
+beginning of this chapter (Eq. 10.3).
+-->
+</p>
+    </body>
+</html>

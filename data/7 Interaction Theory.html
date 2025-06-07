@@ -1,0 +1,5800 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>相互作用理論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>7 相互作用理論</h1>
+<h2>要約</h2>
+<!--
+<h1>7 Interaction Theory</h1>
+<h2>Summary</h2>
+-->
+<p>
+この章では、異なる場と粒子がどのように相互作用するかを導出します。これにより、例えば、電子が光子とどのように相互作用するかを説明できるようになります<sup>1</sup>。
+<!--
+In this chapter we will derive how different fields and particles interact
+with each other. This will enable us, for example, to describe how
+electrons, interact with photons<sup>1</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>1</sup>
+別の観点から：電子場（＝質量のあるスピン \(\frac{1}{2}\) 場）が光子場（＝質量のないスピン 1 場）とどのように相互作用するか。
+<!--
+From a different point of view: how
+the electron field (= a massive spin \(\frac{1}{2}\)
+field) interacts with the photon field (=
+a massless spin 1 field).
+-->
+</p><p>
+ラグランジアンの正しい形は、内部対称性によって導かれます。この文脈では、内部対称性はしばしばゲージ対称性<sup>2</sup>と呼ばれます。
+出発点は局所\(\mathcal{U}(1)\)対称性<sup>3</sup>で、最終的にラグランジアンは
+<!--
+We will be guided to the correct form of the Lagrangians by internal
+symmetries, which are in this context often called gauge symmetries<sup>2</sup>.
+The starting point will be local \(\mathcal{U}(1)\) symmetry<sup>3</sup> and we end up with the Lagrangian
+-->
+</p><p class="margin-large">
+<sup>2</sup>
+この名前については後ほど説明します。
+<!--
+This name will be explained in a
+moment.
+-->
+<br><br>
+
+<sup>3</sup>
+これは、時空上の各点における場に、どこでも同じ変換 \(e^{iα}\) を使用する代わりに、異なる係数 \(e^{iα(x)}\) を乗じることを意味します。
+言い換えれば、変換パラメータ \(α = α(x)\) は \(x\) の関数となり、時空上の異なる点に対して異なる値を持つことになります。
+<!--
+This means we multiply the field at
+each point in spacetime with a different
+factor: \(e^{iα(x)}\), instead of using the
+same transformation everywhere: \(e^{iα}\).
+In other words: the transformation
+parameter \(α = α(x)\) is now a function of
+\(x\) and has therefore a different value for
+different points in spacetime.
+-->
+</p><p>
+
+\[
+\mathscr{L} = −m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ + A_μ\bar{Ψ} γ^μΨ +
+\frac{1}{2}\left(∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ\right)
+\]
+
+これは<strong>量子電気力学</strong>のラグランジアンです。このラグランジアンは、電荷を持つ質量のあるスピン \(\frac{1}{2}\) 場と、質量のないスピン 1 場（光子場）との間の相互作用を記述します。ラグランジアンにおいて \(mA_μA^μ\) 形式の「質量項」を避けた場合にのみ、ラグランジアンは局所的に \(\mathcal{U}(1)\) 不変になります。これは、\(A^μ\) で記述される光子が質量を持たないという実験的事実と一致します。ネーターの定理を用いると、\(\mathcal{U}(1)\) 対称性から新しい保存量を導くことができ、これは一般に<strong>電荷</strong>として解釈されます。
+<!--
+This is the Lagrangian of <strong>quantum electrodynamics</strong>. This Lagrangian
+describes the interaction between charged, massive spin \(\frac{1}{2}\)
+fields and
+a massless spin 1 field (the photon field). The Lagrangian is only then
+locally \(\mathcal{U}(1)\) invariant, if we avoid "mass terms" of the form \(mA_μA^μ\)
+in the Lagrangian. This coincides with the experimental fact that
+photons, described by \(A^μ\), are massless. Using Noether’s theorem, we
+can derive a new conserved quantity from \(\mathcal{U}(1)\) symmetry, which is
+commonly interpreted as <strong>electric charge</strong>.
+-->
+</p><p>
+次に、局所\(\mathcal{SU}(2)\)対称性について見ていきます。この目的のために、2つの成分を持つオブジェクト
+<!--
+Then we move on to local \(\mathcal{SU}(2)\) symmetry. For this purpose a two
+component object
+-->
+\[
+\bar{Ψ} :=\left(\bar{Ψ}_1　\bar{Ψ}_2\right)
+\]
+
+<strong>二重項</strong>と呼ばれるものが導入されます。このような二重項には、例えば電子場と電子ニュートリノ場のような2つのスピン \(\frac{1}{2}\) 場が含まれており、これらは互いに \(\mathcal{SU}(2)\) 変換によって「回転」します。
+<!--
+called <strong>doublet</strong>, is introduced. Such a doublet contains two spin \(\frac{1}{2}\)
+fields, for example, the electron and the electron neutrino field that
+are "rotated" by \(\mathcal{SU}(2)\) transformations into each other.
+-->
+</p><p>
+この二重表記法を用いると、局所的に
+\(\mathcal{SU}(2)\) 不変なラグランジアン<sup>4</sup> を書くことができる。
+<!--
+Using this doublet notation we are able to write down a locally
+\(\mathcal{SU}(2)\) invariant Lagrangian<sup>4</sup>
+-->
+
+</p><p class="margin-large">
+<sup>4</sup>
+オブジェクト \(W_j^{μν}\) は３つの場に対して
+\(W_j^μ\) であり、\(\mathcal{U}(1)\) ゲージ場に対して \(F_{μν}\) が
+\(A^μ\) であるのと同じである。
+<!--
+The object \(W_j^{μν}\) is for the three fields
+\(W_j^μ\) what \(F_{μν}\) is for the \(\mathcal{U}(1)\) gauge field
+\(A^μ\).
+-->
+</p><p>
+
+\[
+\mathscr{L} = i\bar{Ψ}γ_μ (∂^μ − igW^μ) Ψ −\frac{1}{4}Tr\left(W_{μν}W^{μν}\right)
+\]
+
+これは3つのスピン1場 \(W^μ ≡ (W^μ)_i\frac{σ^i}{2}\) を含み、\(i = 1, 2, 3\) です。
+ラグランジアンを局所的に \(\mathcal{SU}(2)\) 不変にするには3つの場が必要です。
+\(J_i = \frac{σ_i}{2}\) という3つの \(\mathcal{SU}(2)\) 基底生成子があるからです。
+局所 \(\mathcal{SU}(2)\) 対称性は、\(m\bar{Ψ}Ψ, mW^μW_μ\) という形式の「質量項」と、任意の質量<strong>行列</strong>\(m\) なしでのみ達成できることがわかります。なぜなら、\(Ψ\) は2成分オブジェクトになったからです。そのため、今回はスピン1場 \((W^μ)_i\) が質量ゼロであることが求められるだけでなく、スピン \(\frac{1}{2}\) 場も質量ゼロであることが求められます。また、2つのスピン \(\frac{1}{2}\) 場の質量が等しいことも許容されますが、実験からそうではないことが分かっています。電子質量は電子ニュートリノ質量よりもはるかに大きいからです。さらに、実験から、3つのスピン1場 (Wμ)i は質量ゼロではないことが分かっています。これは通常、\(\mathcal{SU}(2)\) 対称性が<strong>破れている</strong>と解釈されます。
+<!--
+which contains three spin 1 fields \(W^μ ≡ (W^μ)_i\frac{σ^i}{2}\) , with \(i = 1, 2, 3\).
+We need three fields to make the Lagrangian locally \(\mathcal{SU}(2)\) invariant,
+because we have three \(\mathcal{SU}(2)\) basis generators: \(J_i = \frac{σ_i}{2}\) . We will
+see that local \(\mathcal{SU}(2)\) symmetry can only be achieved without "mass
+terms" of the form \(m\bar{Ψ}Ψ, mW^μW_μ\), with some arbitrary mass <strong>matrix</strong>
+\(m\), because \(Ψ\) is now a two-component object. So this time not only
+are the spin 1 fields \((W^μ)_i\) required to be massless, but the spin \(\frac{1}{2}\)
+fields, too. Also allowed are equal masses for the two spin \(\frac{1}{2}\)
+fields,
+but from experiments we know that this is not the case: The electron
+mass is much bigger than the electron-neutrino mass. In addition,
+we know from experiments that the three spin 1 fields (Wμ)i are not
+massless. This is commonly interpreted as the \(\mathcal{SU}(2)\) symmetry being
+<strong>broken</strong>.
+-->
+</p><p>
+
+この考え方は、後に導入される<strong>ヒッグス形式</strong>の出発点です。この形式は、質量項を含む局所的に\(\mathcal{SU}(2)\)不変なラグランジアンを得ることを可能にします。これは、ヒッグス場と呼ばれるスピン0の場との相互作用を考慮に入れることで機能します。最終的な局所的に\(\mathcal{SU}(2) × \mathcal{U}(1)\)不変な相互作用ラグランジアンは、いわゆる<strong>電弱相互作用</strong>を記述します。電弱相互作用の概念には、電磁相互作用と、<strong>弱相互作用</strong>と呼ばれる新しいタイプの相互作用が含まれます。ヒッグス形式を通して、\(\mathcal{SU}(2) × \mathcal{U}(1)\)は残存対称性\(\mathcal{U}(1)\)へと破れます。弱い相互作用は、\(W^+,W^−\)、\(Z\)と呼ばれる３つの質量を持つスピン1場によって媒介され、残りの\(\mathcal{U}(1)\)対称性は、１つの質量のないスピン1場\(γ\)によって媒介されます。ネーターの定理を用いると、\(\mathcal{SU}(2)\)対称性から、電磁相互作用の電荷に相当する、弱い相互作用の電荷であるアイソスピンと呼ばれる新しい保存量を導くことができます。
+<!--
+This idea is the starting point for the <strong>Higgs formalism</strong>, which is
+introduced afterwards. This formalism enables us to get a locally
+\(\mathcal{SU}(2)\) invariant Lagrangian that includes mass terms. This works by
+adding the interaction with a spin 0 field, called Higgs field, into our
+considerations. The final locally \(\mathcal{SU}(2) × \mathcal{U}(1)\) invariant interaction
+Lagrangian describes the so called <strong>electroweak interactions</strong>. The notion
+electroweak interactions contains the electromagnetic interaction
+and a new type of interaction called the <strong>weak interaction</strong>. Through
+the Higgs formalism the \(\mathcal{SU}(2) × \mathcal{U}(1)\) is broken to a remnant \(\mathcal{U}(1)\)
+symmetry. The weak interaction is mediated by three massive spin
+1 fields, called \(W^+,W^−\) and \(Z\) and the remnant \(\mathcal{U}(1)\) symmetry by
+one massless spin 1 field \(γ\). Using Noether’s theorem we will be able
+to derive from \(\mathcal{SU}(2)\) symmetry a new conserved quantity, called
+,strong>isospin</strong>, which is the charge of weak interactions analogous to electric
+charge for electromagnetic interactions.
+-->
+</p><p>
+最後に、内部局所\(\mathcal{SU}(3)\)対称性を考察します。これにより、<strong>強い相互作用</strong>と呼ばれる別の新しい相互作用を記述するラグランジアンが導かれます。この目的のために、三重項オブジェクトを導入します。
+<!--
+Lastly, we will consider internal local \(\mathcal{SU}(3)\) symmetry, which will
+lead us to a Lagrangian describing another new interaction, called the
+<strong>strong interaction</strong>. For this purpose, we will introduce triplet objects
+-->
+\[
+\mathcal{Q} =
+\begin{pmatrix}
+q_1 \\
+q_2 \\
+q_3
+\end{pmatrix}
+\]
+
+これらは\(\mathcal{SU}(3)\)変換によって変換され、3つのスピン\(\frac{1}{2}\)場を含みます。これらの3つのスピン\(\frac{1}{2}\)場は、異なる<strong>カラー</strong>を持つ<strong>クォーク</strong>として解釈されます。これは、電磁相互作用の電荷、または弱い相互作用のアイソスピンに相当する、強い相互作用です。ここでも質量項は禁止されていますが、今回は、対応する8つのボソン<sup>5</sup>（グルーオンと呼ばれる）が質量ゼロであるという実験的事実と一致します。さらに、実験から、\(\mathcal{SU}(3)\)三重項内の場は同じ質量を持つことが分かっています。
+これは良いことです。なぜなら、局所的な\(\mathcal{SU}(3)\)対称性により、\(m\overline{\mathcal{Q}}\mathcal{Q}\)のような項に対して任意の質量行列mを持つ項は禁じられますが、\(\overline{\mathcal{Q}}
+\begin{pmatrix}
+m & 0 \\
+0 & m
+\end{pmatrix}
+\mathcal{Q}\)という形式の項は許容されるからです。これは、三重項内の項が同じ質量を持つことを意味します。したがって、局所的な\(\mathcal{SU}(3)\)不変性は、ラグランジアンにおける質量項に関して新たな障害をもたらさず、\(\mathcal{SU}(3)\)対称性は破れていないと言えます。実験から、クォーク（スピン \(\frac{1}{2}\)）とグルーオン（スピン 1）だけが色を持つことが分かっています。結果として得られるラグランジアンは
+<!--
+that are transformed by \(\mathcal{SU}(3)\) transformations and which contain
+three spin \(\frac{1}{2}\) fields. These three spin \(\frac{1}{2}\) fields are interpreted as <strong>quarks</strong>
+carrying different <strong>color</strong>, which is the strong interaction analogue to
+the electrical charge of the electromagnetic interaction or isospin of
+the weak interaction. Again, mass terms are forbidden, but this time
+this coincides with the experimental fact that the 8 corresponding
+bosons<sup>5</sup>, called gluons, are massless. In addition, we know from experiments that the fields inside a \(\mathcal{SU}(3)\) triplet have the same mass, 
+This is a good thing, because local \(\mathcal{SU}(3)\) symmetry forbids a term
+with arbitrary mass matrix m for terms like \(m\overline{Q}Q\), but allows a term
+of the form \(\overline{Q}
+\begin{pmatrix}
+m & 0 \\
+0 & m
+\end{pmatrix}
+Q\), which means that the terms in the triplet
+have the same mass. Therefore local \(\mathcal{SU}(3)\) invariance provides no
+new obstacles regarding mass terms in the Lagrangian and we therefore
+say the \(\mathcal{SU}(3)\) symmetry is unbroken. From experiments we
+know that only quarks (spin \(\frac{1}{2}\)) and gluons (spin 1) carry color. The
+resulting Lagrangian 
+-->
+</p><p class="margin-large">
+<sup>5</sup>
+8である理由は\(\mathcal{SU}(3)\)には8つの基底生成子があるためです。
+<!--
+8 because \(\mathcal{SU}(3)\) has 8 basis generators.
+-->
+</p><p>
+
+\[
+\mathscr{L} = −\frac{1}{4}G_{αβ}G^{αβ} + \overline{\mathcal{Q}}(i(∂_μ − igG_μ)γ^μ − m)\mathcal{Q}
+\]
+
+導出は以前行ったものと完全に類似しているため、引用のみとします。
+<!--
+will only be cited, because the derivation is completely analogous to
+what we did before.
+-->
+</p><p>
+要約をまとめると次のようになります。
+
+\[
+\begin{align}
+&\mathcal{U}(1) \rightarrow \text{1 ゲージ場} \rightarrow \text{質量のない光子} 
+\rightarrow \text{電荷} \\
+\\
+&\mathcal{SU}(2) \rightarrow \text{3 ゲージ場} 
+\rightarrow \text{質量のあるWボソンとZボソン（ヒッグス粒子が必要）} 
+\rightarrow \text{アイソスピン} \\
+\\
+&\mathcal{SU}(3) \rightarrow \text{8 ゲージ場}
+\rightarrow \text{質量のないグルーオン}  
+\rightarrow \text{カラーチャージ}
+\end{align}
+\]
+
+<!--
+To summarize the summary:
+
+\[
+\begin{align}
+&\mathcal{U}(1) \rightarrow \text{1 gauge field} \rightarrow \text{massless photons} 
+\rightarrow \text{electric charge} \\
+\\
+&\mathcal{SU}(2) \rightarrow \text{3 gauge fields} 
+\rightarrow \text{massive W- and Z-bosons (Higgs needed)} 
+\rightarrow \text{isospin} \\
+\\
+&\mathcal{SU}(3) \rightarrow \text{8 gauge fields}
+\rightarrow \text{massless gluons}  
+\rightarrow \text{color charge}
+\end{align}
+\]
+-->
+<p>
+<h2>7.1 \(\mathcal{U}(1)\) 相互作用</h2>
+<!--
+<h2>7.1 \(\mathcal{U}(1)\) Interactions</h2>
+-->
+<p>
+ラグランジアンにおける正しい相互作用項を導くために、通常ゲージ対称性と呼ばれる内部対称性を用います。
+ゲージ対称性という概念は歴史的な理由から用いられており、
+ここで考察している対称性の種類にはあまり意味がありません。
+ワイルは電磁気学を導出しようとしました<sup>6</sup>
+<!--
+To derive the correct interaction terms in the Lagrangian, we are
+going to use internal symmetrie that are usually called gauge symmetries.
+The notion gauge symmetry, is used for historic reasons and
+doesn’t make much sense for the type of symmetry we are considering
+here. Weyl tried to derive electromagnetism<sup>6</sup>
+-->
+
+</p><p class="margin-large">
+<sup>6</sup>
+Frank Wilczek. Riemann-einstein
+structure from volume and gauge symmetry.
+Phys. Rev. Lett., 80:4851–4854, Jun
+1998. doi: 10.1103/PhysRevLett.80.4851
+</p><p>
+「時空対称性、特に長さスケールの局所的変化における対称性の結果として。」
+<!--
+"as a consequence of spacetime symmetry, specifically symmetry under
+local changes of length scale."
+-->
+</p><p>
+この種の対称性を「ゲージ対称性」と名付けるのは理にかなっています。なぜなら、例えば、標準メートルを定義する白金の棒（実験では長さを測定する物体のゲージとして使われていました）を、物理学を変えることなく任意に変えることができるからです。この試みは失敗に終わりましたが、しばらくしてワイルは電磁気学を導くための正しい対称性を発見し、その名前はそのまま残りました。
+<!--
+Naming this kind of symmetry ,strong>gauge symmetry,/strong> makes sense, because
+this means, for example, that we can change the platinum bar
+that defines a standard meter (and which was used to gauge objects
+that measure length in experiments), arbitrarily without changing
+physics. This attempt was unsuccessful, but some time later, Weyl
+found the correct symmetry to derive electromagnetism and the
+name was kept.
+-->
+</p>
+<h3>7.1.1 自由スピン \(\frac{1}{2}\) 場の内部対称性</h3>
+<!--
+<h3>7.1.1 Internal Symmetry of Free Spin \(\frac{1}{2}\) Fields</h3>
+-->
+<p>
+自由スピン \(\frac{1}{2}\) 理論のために導出したラグランジアン (式 6.16) をもう一度見てみましょう。
+<!--
+Let’s have a look again at the Lagrangian that we derived for a free
+spin \(\frac{1}{2}\) theory (Eq. 6.16)
+-->
+\[
+\mathscr{L}_{Dirac} = −m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ =\bar{Ψ} (iγ_μ∂^μ− m)Ψ  \tag{7.1}
+\]
+
+ローレンツ対称性を要求することでこれを導出しましたが、よく見ると、このラグランジアンには別の対称性があることが分かります。ラグランジアンは、Ψ場を次のように変換しても変化しません。
+<!--
+We derived it by demanding Lorentz symmetry, but if we take a
+sharp look we can discover another symmetry of this Lagrangian.
+The Lagrangian does not change if we transform the field Ψ as follows
+-->
+\[
+Ψ → Ψ^\prime = e^{ia}Ψ
+\]
+
+これは\(\bar{Ψ}\)も変換されることを意味することを考慮すると
+<!--
+if we take into account that this implies that \(\bar{Ψ}\) also gets transformed
+-->
+\[
+⇒ \bar{Ψ} → \bar{Ψ}^\prime= Ψ^{\prime †}γ_0 
+= (e^{ia}Ψ)^†γ_0 =\bar{Ψ}e^{−ia}  \tag{7.2}
+\]
+
+マイナス記号は複素共役<sup>7</sup>に由来し、\(a\)は任意の実数です。この変換に対してラグランジアンが不変であることを確認するために、ラグランジアンを明示的に変換します。
+<!--
+The minus sign comes from the complex conjugation<sup>7</sup> and \(a\) is an 
+arbitrary real number. To see that the Lagrangian is invariant under
+this transformation, we transform the Lagrangian explicitly:
+-->
+</p><p class="margin-large">
+<sup>7</sup>
+\(\bar{Ψ} = Ψ^†γ_0\) を覚えておいてください。
+<!--
+Remember: \(\bar{Ψ} = Ψ^†γ_0\).
+-->
+</p><p>
+
+\[
+\begin{align}
+\mathscr{L}_{Dirac}^\prime &= −m\bar{Ψ}^\primeΨ^\prime
++ i\bar{Ψ}^\primeγ_μ∂^μΨ^\prime \\
+\\
+&= −m(\bar{Ψ}e^{−ia})(e^{ia}Ψ) + i(\bar{Ψ} e^{−ia})γ_μ∂^μ(e^{ia}Ψ)\\
+\\
+&= −m\bar{Ψ}Ψ\underbrace{e^{−ia}e^{ia}}_{=1}
++i\bar{Ψ}γ_μ∂^μΨ\underbrace{e^{−ia}e^{ia}}_{=1} \\
+\\
+&= −m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ =\mathscr{L}_{Dirac}  \tag{7.3}
+\end{align}
+\]
+
+ここで、\(e^{ia}\) は単なる複素数であり、自由に移動できる<sup>8</sup>ことを使いました。第3章で、すべての単位複素数は eia と書き表され、\(\mathcal{U}(1)\) と呼ばれる群を形成することを学んだことを思い出してください。ここで発見したことを数学的に表現すると、ラグランジアンは \(\mathcal{U}(1)\) 不変であると言えます。この対称性は内部対称性です。なぜなら、明らかに時空変換がなく、したがって場を内部的に変換するからです。この内部対称性は大したことには見えません。一見すると、素敵ではあるものの、あまり役に立たない数学的な補足のように思えるかもしれません。しかし、驚くべきことに、この観察が非常に重要であることがすぐにわかります。
+<!--
+where we used that \(e^{ia}\) is just a complex number, which we can move
+around freely<sup>8</sup>. Remembering that we learned in Chapter 3 that all
+unit complex numbers can be written as eia and form a group called
+\(\mathcal{U}(1)\), we can put what we just discovered into mathematical terms,
+by saying that the Lagrangian is \(\mathcal{U}(1)\) invariant. This symmetry is an
+internal symmetry, because it is clearly no spacetime transformation
+and therefore transforms the field internally. This internal symmetry
+does not look like a big thing. At a first glance it may seem like a
+nice, but rather useless, mathematical side note. However, quite surprisingly
+we will see in a moment that this observation is incredibly
+important!
+-->
+</p><p class="margin-large">
+<sup>8</sup>
+より技術的に言えば、複素数はあらゆる行列と可換です。例えば、\(γ_μ\) のようになります。
+<!--
+Speaking more technically: A complex 
+number commutes with every matrix,
+like, for example, \(γ_μ\).
+-->
+</p><p>
+さて、今発見したことをもっと深く見ていきましょう。
+任意の単位複素数を体で乗じても、何も変化しないことを示しました。対称変換
+\(Ψ → Ψ^\prime = e^{ia}Ψ\) は、すべての点 x において体 \(Ψ = Ψ(x)\) に同じ係数 \(e^{ia}\) を乗じるため、<strong>大域</strong>変換と呼ばれます。
+<!--
+Now let’s have a deeper look at what we just discovered. We
+showed that we are free to multiply our field with an arbitrary unit
+complex number without changing anything. The symmetry transformation
+\(Ψ → Ψ^\prime = e^{ia}Ψ\) is called a <strong>global</strong> transformation, because we
+multiply the field \(Ψ = Ψ(x)\) at every point x with the same factor \(e^{ia}\).
+-->
+</p><p>
+さて、なぜ時空のある点におけるこの因子が、時空のある点における因子と相関しているのでしょうか？時空のある点における選択が、宇宙全体においてこれを即座に決定するはずはありません。これは奇妙なことです。なぜなら、特殊相対論によれば、第2.4節で示したように、いかなる情報も光より速く伝播することはできないからです。大域的対称性があれば、宇宙全体のどの点においても、選択は即座に決定されます。
+<!--
+Now, why should this factor at one point in spacetime be correlated
+to the factor at another point in spacetime? The choice at
+one point in spacetime shouldn’t fix this immediately in the whole
+universe. This would be strange, because special relativity tells us
+that no information can spread faster than light, as was shown in
+Section 2.4. For a global symmetry the choice would be fixed immediately
+for any point in the whole universe.
+-->
+</p><p>
+時空上の各点を異なる係数 \(a = a(x)\) で変換した場合に、ラグランジアンが不変かどうか確認してみましょう。これは<strong>局所</strong>変換と呼ばれます。
+<!--
+Let’s check if our Lagrangian is invariant if we transform each
+point in spacetime with a different factor \(a = a(x)\). This is called a
+<strong>local</strong> transformation.
+-->
+</p><p>
+
+変換すると
+<!--
+If we transform
+-->
+\[
+\begin{align}
+Ψ → Ψ^\prime &= e^{ia(x)}Ψ \\
+\\
+⇒\bar{Ψ} →\bar{Ψ}^\prime &= e^{−ia(x)}\bar{Ψ}  \tag{7.4}
+\end{align}
+\]
+
+ここで、係数 \(a = a(x)\) は位置に依存するので、変換されたラグランジアン<sup>9</sup> が得られます。
+<!--
+where the factor \(a = a(x)\) now depends on the position, we get the
+transformed Lagrangian<sup>9</sup>
+-->
+</p><p class="margin-large">
+<sup>9</sup>
+簡潔にするために無視した、両方の可能な導関数を含むラグランジアンが、局所的に \(\mathcal{U}(1)\) 不変であるかどうか疑問に思うかもしれません: \(\mathscr{L} = −m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ + i(∂^μ\bar{Ψ})γ_μΨ\)。このラグランジアンは、確かに局所的に \(\mathcal{U}(1)\) 不変です。ただし、第2項と第3項を加算するとゼロになることに注意してください。
+<!--
+Maybe you wonder if the Lagrangian
+that includes both possible derivatives,
+which we neglected for brevity, is
+locally \(\mathcal{U}(1)\) invariant: \(\mathscr{L} = −m\bar{Ψ}Ψ +
+i\bar{Ψ}γ_μ∂^μΨ +i(∂^μ\bar{Ψ})γ_μΨ\). This Lagrangian
+is indeed locally \(\mathcal{U}(1)\) invariant, as
+you can check, but take note that the
+addition of the second and the third
+term yields zero:
+-->
+
+\[
+\begin{align}
+&i\bar{Ψ}γ_μ∂^μΨ + i(∂^μ\bar{Ψ})γ_μΨ \\
+\\
+\underbrace{=}_{部分積分}&
+i(∂^μ\bar{Ψ})γ_μΨ − i(∂^μ\bar{Ψ})γ_μΨ = 0
+\end{align}
+\]
+
+両方の可能な導関数を含む正しいラグランジアンでは、項の間にマイナス符号が付きます：\(\mathscr{L}_{Dirac} =
+−m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ − i(∂^μ\bar{Ψ})γ_μΨ\) であり、したがって、局所的に \(\mathcal{U}(1)\) 不変ではありません。<strong></strong>
+<!--
+The correct Lagrangian that includes
+both possible derivatives has a minus
+sign between those terms: \(\mathscr{L}_{Dirac} =
+−m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ − i(∂^μ\bar{Ψ})γ_μΨ\) and is
+therefore <strong>not</strong> locally \(\mathcal{U}(1)\) invariant.
+-->
+</p><p>
+
+\[
+\begin{align}
+\mathscr{L}_{Dirac}^\prime &= −m\overline{Ψ^\prime}Ψ^\prime
++ i\overline{Ψ^\prime} γ_μ∂^μΨ^\prime \\
+\\
+&= −m(\bar{Ψ}\underbrace{e^{−ia(x)})(e^{ia(x)}}_{=1}Ψ) + i(\bar{Ψ} e^{−ia(x)})γ_μ∂^μ(e^{ia(x)}Ψ) \\
+\\
+&\underbrace{=}_{積の公式}
+−m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ(∂^μΨ)\underbrace{e^{−ia(x)}e^{ia(x)}}_{=1}
++i(e^{−ia(x)}\bar{Ψ})γ_μΨ(∂^μe^{ia(x)}) \\
+\\
+&= −m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ + i^2(∂^μa(x))\bar{Ψ}γ_μΨ \neq \mathscr{L}_{Dirac}  \tag{7.5}
+\end{align}
+\]
+
+したがって、積の法則によって余分な項が生じるため、ラグランジアンは局所 \(\mathcal{U}(1)\) 対称性の下で不変ではありません。上で議論したように、ラグランジアンは局所不変であるはずですが、そうではないことがわかりました。これについては何か対処法がありますが、まずは別の対称性を調べる必要があります。
+<!--
+Therefore, our Lagrangian is not invariant under local \(\mathcal{U}(1)\) symmetry,
+because the product rule produces an extra term. As discussed
+above, our Lagrangian should be locally invariant, but we just found
+out that it isn’t. There is something we can do about it, but first we
+must investigate another symmetry.
+-->
+</p>
+<h3>7.1.2 自由スピン1場の内部対称性</h3>
+<!--
+<h3>7.1.2 Internal Symmetry of Free Spin 1 Fields</h3>
+-->
+<p>
+次に、自由回転1粒子に対して導出したラグランジアンを見てみましょう。<sup>10</sup>
+<!--
+Next, let’s take a look at the Lagrangian we derived for free spin 1
+particles<sup>10</sup>
+-->
+
+</p><p class="margin-large">
+<sup>10</sup>
+式6.26を参照し、簡潔にするために、ここでは慣用的な係数\(\frac{1}{2}\)を無視していることに注意してください。
+<!--
+See Eq. 6.26 and take note that we
+neglect, for brevity, a conventional
+factor \(\frac{1}{2}\) here.
+-->
+</p><p>
+
+\[
+\mathscr{L}_{Proca} = ∂^μA^ν∂_μA_ν− ∂^μA^ν∂_νA_μ + m^2A^μA_μ  \tag{7.6}
+\]
+
+ここでも<strong>全体</strong>的な内部対称性を発見できる。
+<!--
+We can discover a <strong>global</strong> internal symmetry here, too. If we transform
+-->
+\[
+A_μ → A_μ^\prime = A_μ + a_μ  \tag{7.7}
+\]
+
+任意の定数 \(a_μ\)<sup>11</sup> を用いると、ラグランジアンは<sup>12</sup> となる。
+<!--
+with some arbitrary constants \(a_μ\)<sup>11</sup>, the Lagrangian reads<sup>12</sup> 
+-->
+
+</p><p class="margin-large">
+<sup>11</sup>
+いつものように、\(μ = 0, 1, 2, 3\) を覚えておいてください。
+<!--
+Remember, as always, \(μ = 0, 1, 2, 3\).
+-->
+<br><br>
+
+<sup>12</sup>
+\(a_μ\) は定数なので、
+\(∂^μa^ν = 0\) などとなります。
+<!--
+The \(a_μ\) are constants and therefore
+\(∂^μa^ν = 0\) etc.
+-->
+</p><p>
+
+\[
+\begin{align}
+\mathscr{L}_{Proca}^\prime &= (∂^μA^{\prime ν}∂_μA_ν^\prime
+− ∂^μA^{\prime ν}∂_νA_μ^\prime) + m^2A^{\prime μ}A_μ^\prime \\
+\\
+&= ∂^μ(A^ν + a^ν)∂_μ(A_ν + a_ν) − ∂^μ(A^ν + a^ν)∂_ν(A_μ + a_μ)) + m^2(A_μ + a_μ)(A^μ + a^μ) \\
+\\
+&= ∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ + m^2(A_μ + a_μ)(A^μ + a^μ)  \tag{7.8}
+\end{align}
+\]
+
+この変換は、<strong>質量ゼロ</strong>の場、つまり
+\(m = 0\) に限定すれば、このラグランジアンに対する<strong>大域的</strong>対称性変換であると結論付けられます。
+<!--
+We conclude this transformation is a <strong>global</strong> symmetry transformation
+of this Lagrangian, if we restrict ourselves to <strong>massless</strong> fields, i.e.
+\(m = 0\).
+-->
+</p><p>
+
+ここで<strong>局所</strong>対称性はどうでしょうか？
+<!--
+What about <strong>local</strong> symmetry here? We transform
+-->
+\[
+A_μ → A_μ^\prime = A_μ + a_μ(x)  \tag{7.9}
+\]
+
+そして、変換された<strong>質量ゼロ</strong>のラグランジアンは
+<!--
+and the transformed <strong>massless</strong> Lagrangian reads
+-->
+\[
+\begin{align}
+\mathscr{L}_{Maxwell}^\prime &= (∂^μA^{\prime ν}∂_μA_ν^\prime
+− ∂^μA^{\prime ν}∂_νA_μ^\prime) \\
+\\
+&= ∂^μ(A^ν + a^ν(x))∂_μ(A_ν + a_ν(x)) − ∂^μ(A^ν + a^ν(x))∂_ν(A_μ + a_μ(x)) \\
+\\
+&= ∂^μA^ν∂_μA_ν + ∂^μa^ν∂_μA_ν + ∂^μA^ν∂_μa_ν(x) + ∂^μa^ν(x)∂_μa_ν(x) \\
+\\
+&　− ∂^μA^ν∂_νA_μ − ∂^μA^ν∂_νa_μ(x) − ∂^μa^ν(x)∂_νA_μ − ∂^μa^ν(x)∂_νa_μ(x)  \tag{7.10}
+\end{align}
+\]
+
+これは\(A_μ → A_μ^\prime = A_μ + a_μ(x)\)が局所内部対称性ではないことを示しています。
+<!--
+which shows that \(A_μ → A_μ^\prime = A_μ + a_μ(x)\) is not a local internal symmetry.
+-->
+</p><p>
+
+しかしながら、代わりに変換 \(A_μ → A_μ^\prime = A_μ + ∂_μa(x)\) を考慮することで、局所的な内部対称性を見出すことができます。これは、任意の関数の代わりに、任意の関数 ∂μa(x) の微分を加えることを意味します。この変換は、ラグランジアン<sup>13</sup> に次のような影響を与えます。
+<!--
+Nevertheless, we can find a local internal symmetry by considering
+the transformation \(A_μ → A_μ^\prime = A_μ + ∂_μa(x)\) instead. This means
+we add the derivative of some arbitrary function ∂μa(x) instead of an
+arbitrary function. This transformation has the following effect on the
+Lagrangian<sup>13</sup>
+-->
+</p><p class="margin-large">
+<sup>13</sup>
+偏微分の対称性 \(∂_ν∂_μ = ∂_μ∂_ν\) は、「シュワルツの定理」としても知られています。
+<!--
+The symmetry of partial derivatives \(∂_ν∂_μ = ∂_μ∂_ν\) is also known as
+"Schwarz’s theorem".
+-->
+</p><p>
+
+\[
+\begin{align}
+
+\mathscr{L}_{Maxwell}^\prime &= ∂^μA^{\prime ν}∂_μA_ν^\prime 
+− ∂^μA^{\prime ν}∂_νA_μ^\prime \\
+\\
+&= ∂^μ(A^ν + ∂^νa(x))∂_μ(A_ν + ∂_νa(x)) − ∂^μ(A^ν + ∂^νa(x))∂_ν(A_μ + ∂_μa(x)) \\
+\\
+&= ∂^μA^ν∂_μA_ν + ∂^μ(∂^νa(x))∂_μA_ν + ∂^μA^ν∂_μ(∂_νa(x)) + ∂^μ(∂^νa(x))∂_μ(∂_νa(x)) \\
+\\
+&− ∂^μA^ν∂_νA_μ − ∂^μA^ν∂_ν(∂_μa(x)) − ∂^μ(∂^νa(x))∂_νA_μ − ∂^μ(∂^νa(x))∂_ν(∂_μa(x)) \\
+\\
+&\underbrace{=}_{∂_ν∂_μ=∂_μ∂_ν\text{ and renaming dummy indices}}∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ = \mathscr{L}_{Maxwell}  \tag{7.11}
+\end{align}
+\]
+
+これは確かに内部の局所対称性変換であることがわかります。
+これも技術的な補足のように見えるかもしれません。さて、内部の局所対称性を発見しました。それで何が問題なのでしょうか？
+<!--
+We see this is indeed an internal local symmetry transformation.
+Again this may look like a technical side note. Okay, we found some
+internal, local symmetry; so what?
+-->
+</p>
+<h3>7.1.3 パズルのピースを組み合わせる</h3>
+<!--
+<h3>7.1.3 Putting the Puzzle Pieces Together</h3>
+-->
+<p>
+これまでに分かったことをまとめてみましょう。
+<!--
+Let’s summarize what we found out so far:
+-->
+<div class="styleBullet">
+<ul><li>
+• 自由スピン \(\frac{1}{2}\) 場のラグランジアンには、内部的に大域的な対称性 \(Ψ → Ψ^\prime = e^{ia}Ψ\) があることを発見しました。別の表現をすると、自由スピン \(\frac{1}{2}\) 場のラグランジアンは、大域的な \(\mathcal{U}(1)\) 変換に対して不変です。
+
+</li><br><li>• この対称性は局所的ではないことがわかりました（局所的であるべきですが）。なぜなら、\(a = a(x)\) に対して、ラグランジアンに式 7.5 の形式の項が追加されるからです。
+<!--
+• We discovered the Lagrangian for free spin \(\frac{1}{2}\)
+fields has an internal
+global symmetry \(Ψ → Ψ^\prime = e^{ia}Ψ\). Formulated differently: the
+Lagrangian for free spin \(\frac{1}{2}\)
+fields is invariant under global \(\mathcal{U}(1)\)
+transformations.
+
+</li><br><li>• We saw that this symmetry is not local (although it should be),
+because for \(a = a(x)\), we get an extra term in the Lagrangian of the
+form (Eq. 7.5).
+-->
+
+\[
+−(∂_μa(x))\bar{Ψ}γ^μΨ  \tag{7.12}
+\]
+
+言い換えれば、ラグランジアンは局所的に \(\mathcal{U}(1)\) 不変ではない。
+</li><br><li>• 前のセクションでは、質量ゼロのスピン 1 場の内部局所対称性を発見した。
+<!--
+In other words: The Lagrangian isn’t locally \(\mathcal{U}(1)\) invariant.
+</li><br><li>• In the last section we found an internal local symmetry for massless
+spin 1 fields
+-->
+\[
+A_μ → A_μ^\prime = A_μ + ∂_μa(x)  \tag{7.13}
+\]
+
+これは、任意の関数 \(a_μ(x)\) の代わりに任意の関数 \(∂_μa(x)\) の<strong>微分</strong>を加えた場合にのみ局所対称性になります。
+<!--
+which is only a local symmetry if we add the <strong>derivative</strong> of an
+arbitrary function \(∂_μa(x)\), instead of an arbitrary function \(a_μ(x)\).
+-->
+</li></ul></div>
+</p><p>
+
+これはまさに、組み合わせるべきパズルの2つのピースのように見えます。
+\(Ψ, \bar{Ψ}\) と \A_μ\) を同時に変換すると、ラグランジアンに \(A_μ\bar{Ψ}γ^μΨ\) という項が加わり、
+<!--
+This really looks like two pieces of a puzzle we should put together.
+When we transform \(Ψ, \bar{Ψ}\) and \A_μ\) simultaneously, an additional
+term \(A_μ\bar{Ψ}γ^μΨ\) in the Lagrangian becomes
+-->
+\[
+A_μ\bar{Ψ}γ^μΨ → (A_μ + ∂_μa(x))\bar{Ψ}γ^μΨ = A_μ\bar{Ψ}γ^μΨ + ∂_μa(x)\bar{Ψ}γ^μΨ   \tag{7.14}
+\]
+
+ここでの2番目の項を式7.12と比較してください。ラグランジアンにおける新しい項、\(Ψ, \bar{Ψ}\)と\(A_μ\)を結合する項は、自由スピン\(\frac{1}{2}\)のラグランジアンが局所的に\(\mathcal{U}(1)\)不変になるのを妨げていた項を正確に打ち消します。言い換えれば、<strong>この新しい項を追加することで、ラグランジアンを局所的に\(\mathcal{U}(1)\)不変にすることができます</strong>。
+<!--
+Compare the second term here to Eq. 7.12. The new term in the Lagrangian,
+coupling \(Ψ, \bar{Ψ}\) and \(A_μ\) together, therefore cancels exactly
+the term which stopped the Lagrangian for free spin \(\frac{1}{2}\)
+from being
+locally \(\mathcal{U}(1)\) invariant. In other words: <strong>By adding this new term we
+can make the Lagrangian locally \(\mathcal{U}(1)\) invariant</strong>.
+-->
+</p><p>
+
+これをさらに詳しく見てみましょう。まず、局所\(\mathcal{U}(1)\)変換の指数から定数\(g\)を因数分解するのが慣例となっていることに注意してください:
+\(e^{iga(x)}\)。すると、追加の項は
+<!--
+Let’s study this in more detail. First take note that it’s conventional
+to factor out a constant \(g\) in the exponent of the local \(\mathcal{U}(1)\) transformation:
+\(e^{iga(x)}\). Then the extra term becomes
+-->
+\[
+−(∂_μa(x))\bar{Ψ}γ^μΨ→−g(∂_μa(x))\bar{Ψ}γ^μΨ  \tag{7.15}
+\]
+
+この追加の係数gは、任意の結合定数<sup>14</sup>を考慮したもので、
+これについては後で説明します。次に、自由スピン\(\frac{1}{2}\)のラグランジアンに新しい項を追加します。
+<!--
+This extra factor g accounts for an arbitrary coupling constant<sup>14</sup>, as
+we will see now. We then add to the Lagrangian for free spin \(\frac{1}{2}\)
+fields the new term
+-->
+</p><p class="margin-large">
+<sup>14</sup>
+結合定数は常に、ある相互作用の強さを示します。ここでは電磁相互作用について話しており、gがその強さを決定します。
+<!--
+A coupling constant always tells us
+how strong a given interaction is. Here
+we are talking about electromagnetic
+interactions and g determines its
+strength.
+-->
+</p><p>
+
+\[
+gA_μ\bar{Ψ}γ^μΨ
+\]
+
+ここで、\(γ^μ\) をローレンツ不変<sup>15</sup>とするために加え、<strong>結合定数</strong><sup>16</sup> \(g\) を挿入した。これにより、ラグランジアン
+<!--
+where we included \(γ^μ\) to make the term Lorentz invariant<sup>15</sup> and 
+inserted the <strong>coupling constant</strong><sup>16</sup> \(g\). This yields the Lagrangian
+-->
+</p><p class="margin-large">
+<sup>15</sup>
+そうでなければ、\(A_μ\) は一致しないインデックス \(μ\) を持ち、したがってローレンツ不変ではなくなります。
+<!--
+Otherwise \(A_μ\) has an unmatched
+index \(μ\) and therefore wouldn’t be
+Lorentz invariant.
+-->
+<br><br>
+
+<sup>16</sup>
+ここで、g は \(Ψ, \bar{Ψ}\) と \(A_μ\) がどれだけ強く結合するかを決定することがわかります。
+<!--
+We can see here that g determines
+how strong \(Ψ, \bar{Ψ}\) and \(A_μ\) couple together.
+-->
+</p><p>
+
+\[
+\mathscr{L}_{Dirac+Extra-Term} = −m \bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ + gA_μ \bar{Ψ}γ^μΨ
+\]
+</p><p>
+このラグランジアンを\(Ψ,\bar{Ψ}\)と\(A_μ\)の局所変換の規則に従って変換すると、<sup>17</sup>が得られる。
+<!--
+Transforming this Lagrangian according to the rules for local transformations
+of \(Ψ,\bar{Ψ}\) and \(A_μ\) yields<sup>17</sup>
+-->
+</p><p class="margin-large">
+<sup>17</sup>
+\(Ψ, \bar{Ψ}\) と \(A_μ\) を組み合わせた変換は \(\mathcal{U}(1)\) <strong>ゲージ変換</strong>と呼ばれます。
+<!--
+The combined transformation of
+\(Ψ, \bar{Ψ}\) and \(A_μ\) is called \(\mathcal{U}(1)\) <strong>gauge
+transformation</strong>.
+-->
+</p><p>
+
+\[
+\begin{align}
+\mathscr{L}_{Dirac+Extra-Term} &= −m\overline{Ψ^\prime}Ψ^\prime
++ i\overline{Ψ^\prime}γ_μ∂^μΨ^\prime
++ gA_μ^\prime\overline{Ψ^\prime}γ^μΨ^\prime \\
+\\
+&\underbrace{=}_{See\; Eq. 7.5}−m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ
+− g(∂^μa(x))\bar{Ψ}γ_μΨ + gA_μ^\prime\bar{Ψ}^\prime γ^μΨ^\prime \\
+\\
+&= −m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ − g(∂^μa(x))\bar{Ψ}γ_μΨ \\
+\\
+&　+ g(A_μ + ∂_μa(x))(e^{−iga(x)}\bar{Ψ})γ^μ(e^{iga(x)}Ψ) \\
+\\
+&= −m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ −\cancel{g(∂^μa(x))\bar{Ψ}γ_μΨ} \\
+\\
+&　+ gA_μ\bar{Ψ}γ^μΨ + g\underbrace{\cancel{(∂_μa(x))\bar{Ψ}γ^μΨ}}
+_{=(∂^μa(x))\bar{Ψ}γ_μΨ} \\
+\\
+&= −m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ + gA_μ\bar{Ψ}γ^μΨ
+=\mathscr{L}_{Dirac+Extra-Term}  \tag{7.16}
+\end{align}
+\]
+</p><p>
+
+したがって、追加の項を加えることで、局所的に \(\mathcal{U}(1)\) 不変なラグランジアンが得られます。質量を持つスピン \(\frac{1}{2}\) と質量のないスピン 1 場からなる系を記述するには、質量のない自由スピン 1 場のラグランジアンもラグランジアンに加える必要があります。これにより、完全なラグランジアンが得られます<sup>18</sup>
+<!--
+Therefore, by adding an extra term we get a locally \(\mathcal{U}(1)\) invariant
+Lagrangian. To describe a system consisting of massive spin \(\frac{1}{2}\) and
+massless spin 1 fields we must add the Lagrangian for free massless
+spin 1 fields to the Lagrangian as well. This gives us the complete Lagrangian<sup>18</sup>
+-->
+</p><p class="margin-large">
+<sup>18</sup>
+ここでは、最後の項の前に係数 \(\frac{1}{2}\) を追加した従来の「正規化」を使用します。
+<!--
+We use here the conventional "nor- 
+malization" with an additional factor \(\frac{1}{2}\)
+in front of the last terms. 
+-->
+</p><p>
+
+\[
+\begin{align}
+\mathscr{L}_{Dirac+Extra-Term+Maxwell} &= − m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ 
++ gA_μ\bar{Ψ}γ^μΨ \\
+\\
+&　− \frac{1}{2}(∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ)  \tag{7.17}
+\end{align}
+\]
+</p><p>
+
+表記を整理するために、新しい記号を導入するのが一般的です。
+<!--
+To unclutter the notation it is conventional to introduce a new
+symbol
+-->
+\[
+D^μ ≡ i∂^μ − igA^μ  \tag{7.18}
+\]
+<strong>共変微分</strong>と呼ばれる。ラグランジアンは次のように表される。
+<!--
+called <strong>covariant derivative</strong>. The Lagrangian then reads
+-->
+\[
+\begin{align}
+\mathscr{L}_{Dirac+Extra-Term+Maxwell} &= −m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ\underbrace{(∂^μ − igA_μ)}_{≡D^μ}Ψ \\
+\\
+&　−\frac{1}{2}(∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ) \\
+\\
+&= −m\bar{Ψ}Ψ + i\bar{Ψ}γ_μD^μΨ\\
+\\
+&　−\frac{1}{2}(∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ)  \tag{7.19}
+\end{align}
+\]
+<strong>これは、場の量子電気力学理論（一般に量子電気力学と呼ばれる）の正しいラグランジアンです</strong>。このラグランジアンは、自由スピン \(\frac{1}{2}\) 場と自由スピン 1 場を記述するラグランジアンの内部対称性を利用するだけで導出できます。
+<!--
+<strong>This is the correct Lagrangian for the quantum field theory of electrodynamics</strong>,
+commonly called ,strong>quantum electrodynamics</strong>. We are
+able to derive this Lagrangian simply by making use of internal symmetries
+of the Lagrangians describing free spin \(\frac{1}{2}\)
+fields and free spin 1 fields.
+-->
+</p><p>
+次に答えなければならない質問は、このラグランジアンからどのような運動方程式が導かれるかということです。
+<!--
+The next question we have to answer is: What equations of motion
+follow from this Lagrangian?
+-->
+</p>
+<h3>7.1.4 非同次マクスウェル方程式と最小結合</h3>
+<!--
+<h3>7.1.4 Inhomogeneous Maxwell Equations and Minimal Coupling</h3>
+-->
+<p>
+驚きを台無しにしておきましょう(結論を先取りしておきましょう)。このラグランジアンは、電流が存在する場合の非同次マクスウェル方程式を与えます。
+<!--
+To spoil the surprise: This Lagrangian gives us the inhomogeneous
+Maxwell equations in the presence of currents.
+-->
+</p><p>
+このプロセスもまた単純です。ラグランジアンを
+(式7.17) に代入するだけです。
+<!--
+The process is again straightforward: we simply put the Lagrangian
+(Eq. 7.17)
+-->
+\[
+\begin{align}
+\mathcal{L}_{Dirac+Extra-Term+Maxwell} &= − m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ + gA_μ \bar{Ψ}γ^μΨ \\
+&　−\frac{1}{2}(∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ)
+\end{align}
+\]
+
+各場のオイラー・ラグランジュ方程式に
+<!--
+into the Euler-Lagrange equation for each field
+-->
+\[
+\begin{align}
+\frac{∂\mathscr{L}}{∂Ψ}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΨ)}\right) &= 0 \\
+\\
+\frac{∂\mathscr{L}}{∂\bar{Ψ}}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μ\bar{Ψ})}\right) &= 0 \\
+\\
+\frac{∂\mathscr{L}}{∂A_ρ}− ∂_σ\left(\frac{∂\mathscr{L}}{∂(∂_σA_ρ)}\right) &= 0
+\end{align}
+\]
+
+これにより
+<!--
+This yields
+-->
+\[
+\begin{align}
+\bar{Ψ}(iγ_μ∂^μ + m) + gA_μ\bar{Ψ}γ^μ &= 0 \tag{7.20} \\
+\\
+(iγ_μ∂^μ − m)Ψ + gA_μγ^μΨ &=0  \tag{7.21} \\
+\\
+∂_ν(∂^νA^μ − ∂^μA^ν) + g\bar{Ψ}γ^μΨ &= 0   \tag{7.22}
+\end{align}
+\]
+
+最初の2つの式は、外部電磁場におけるスピン \(\frac{1}{2}\) 粒子/場の挙動を記述する。多くの書籍では、これらの式の導出に<strong>最小結合</strong>という概念が用いられている。これは、外部場が存在する場合、微分 \(∂^μ\) を共変微分に変換することを意味する。
+<!--
+The first two equations describe the behavior of spin \(\frac{1}{2}\)
+particles/fields
+in an external electromagnetic field. In many books the derivation of
+these equations uses the notion <strong>minimal coupling</strong>, by which is meant
+that in the presence of an external field the derivative \(∂^μ\) has to be
+changed into the covariant derivative
+-->
+\[
+∂^μ → D^μ = ∂^μ − igA^μ   \tag{7.23}
+\]
+
+正しい方程式を導くために。「極小」という言葉が使われているのは、4つの成分（μ = 0, 1, 2, 3, ）を持つゲージ場（A_μ）が1つだけ使われているからです。
+<!--
+to yield the correct equations. The word "minimal" is used, because
+only one gauge field \(A_μ\), with four components \(μ = 0, 1, 2, 3,\) is used.
+-->
+</p><p>
+
+ディラックスピノルが外部電磁場の存在下でどのように振舞うかを記述する式（式7.21）が得られたので、3.7.10節で約束したことを示すことができます。そこでは、非常に示唆に富むように電荷共役と名付けた変換によって、それが記述する対象の電荷が変化すると主張しました。言い換えれば、\(Ψ\) が電荷 \(+e\) を持つ何かを記述する場合、電荷共役スピノル \(Ψ^C\) は電荷 \(-e\) を持つ何かを記述します。電荷は、スピン \(\frac{1}{2}\) 粒子/場と外部スピン 1 場との結合強度を決定するため、ここでは \(Ψ^C\) に対してどの運動方程式が成り立つかを調べます。その後、3番目の式、すなわち式7.22について説明します。
+<!--
+Now that we have the equation that describes how Dirac spinors
+behave in the presence of an external electromagnetic field (Eq. 7.21),
+we can show something that we promised in Section 3.7.10. There
+we claimed that a transformation, which we called very suggestively
+charge conjugation, changes the electric charge of the object
+it describes. In other words, if \(Ψ\) describes something of charge \(+e\),
+the charge conjugate spinor \(Ψ^C\) describes something of charge \(−e\).
+Electrical charge determines the coupling strength of spin \(\frac{1}{2}\)
+particles/
+fields to an external spin 1 field and we therefore investigate
+now, which equation of motion holds for \(Ψ^C\). Afterwards we will talk
+about the third equation, i.e. Eq. 7.22.
+-->
+</p>
+<h3>7.1.5 電荷共役について再び</h3>
+<!--
+<h3>7.1.5 Charge Conjugation, Again</h3>
+-->
+<p>
+対応する方程式を導く前に、ディラックスピノルの電荷共役演算子の明示的な形を見つける必要がある。
+3.7.10節で、変換(式3.244)を導出した。
+<!--
+Before we can derive the corresponding equation, we need to find an
+explicit form of the charge conjugation operator for Dirac spinors. We
+derived in Section 3.7.10 the transformation (Eq. 3.244)
+-->
+\[
+Ψ =
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+→ Ψ^C =
+\begin{pmatrix}
+ξ_L \\
+χ_R
+\end{pmatrix}
+\tag{7.24}
+\]
+
+この変換は、\(γ_μ\)行列の1つを用いて簡単に記述できる。式6.13のγ2の定義を用いると、
+<!--
+This transformation can now be described easily with the help of one
+of the \(γ_μ\) matrices. Using the definition of γ2 in Eq. 6.13, we have
+-->
+\[
+Ψ^C = iγ_2Ψ^* = i
+\begin{pmatrix}
+0 & σ_2 \\
+−σ_2 & 0
+\end{pmatrix}
+\begin{pmatrix}
+χ_L^* \\
+ξ_R^*
+\end{pmatrix}
+\tag{7.25}
+\]
+
+これを書き直すと、\(iσ_2 =\epsilon\)はまさにスピノル計​​量であることがわかる。
+<!--
+because we can rewrite this, using that \(iσ_2 =\epsilon\) is exactly the spinor metric
+-->
+\[
+=
+\begin{pmatrix}
+0 & \epsilon \\
+-\epsilon & 0
+\end{pmatrix}
+\begin{pmatrix}
+χ_L^* \\
+ξ_R^*
+\end{pmatrix}
+=
+\begin{pmatrix}
+\epsilon ξ_R^* \\
+−\epsilon χ_L^*
+\end{pmatrix}
+\tag{7.26}
+\]
+
+これは次の式に相当します
+<!--
+This is equivalent to
+-->
+\[
+=
+\begin{pmatrix}
+ξ_L \\
+χ_R
+\end{pmatrix}
+\tag{7.27}
+\]
+
+3.7.7節、具体的には式3.202で示したとおりです。したがって、式7.21から始めます。
+<!--
+as was shown in Section 3.7.7, specifically Eq. 3.202. Therefore we
+start with Eq. 7.21:
+-->
+\[
+(iγ_μ∂^μ − m)Ψ + gA_μγ^μΨ =
+\left(γ_μ(i∂^μ + gA^μ) − m\right)Ψ = 0  \tag{7.28}
+\]
+
+この方程式を複素共役にして、\(Ψ^C\) の方程式への第一歩を踏み出します。
+<!--
+and complex conjugate this equation, as a first step towards an equation
+for \(Ψ^C\):
+-->
+\[
+→\left(γ_μ^* (−i∂^μ + gA^μ) − m\right)Ψ^* = 0  \tag{7.29}
+\]
+
+さて、この式の左辺に\(γ_2\)を掛け、\(Ψ^*\)の前に\(1 = γ_2^{−1}γ_2\)を付け加えます。
+<!--
+Now, we multiply this equation from the left-hand side with \(γ_2\) and
+add a \(1 = γ_2^{−1}γ_2\) in front of \(Ψ^*\):
+-->
+\[
+→ γ_2\left(γ_μ^* (−i∂^μ + gA^μ) − m\right)\underbrace{γ_2^{-1}γ_2}_{=1}
+Ψ^* =0 \tag{7.30}
+\]
+
+\[
+→\Big(\underbrace{γ_2γ_μ^*γ_2^{−1}}_{=−γ_μ}(−i∂^μ + gA^μ) − mγ_2γ_2^{−1}\Big)γ_2Ψ^* =0  \tag{7.31}
+\]
+
+\[
+\underbrace{→}_{両辺に i を掛ける}
+\left(− γ_μ(−i∂^μ + gA^μ) − m\right)\underbrace{iγ_2Ψ^*}_{=Ψ^C\text{ see Eq. 7.25}}=0  \tag{7.32}
+\]
+
+\[
+→\left((γ_μ(i∂^μ − gA^μ) − m\right)Ψ^C = 0  \tag{7.33}
+\]
+
+これは\(Ψ\)と全く同じ運動方程式ですが、結合強度が逆の\(g → −g\)です。これが電荷共役という名称の根拠です<sup>19</sup>。
+<!--
+This is exactly the same equation of motion as for \(Ψ\), but with opposite
+coupling strength \(g → −g\). This justifies the name charge
+conjugation<sup>19</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>19</sup>
+\(Ψ^c \neq \bar{Ψ}. Ψ^c = iγ_2Ψ^*\) かつ \(\bar{Ψ} = Ψ^†γ_0 =(Ψ^*)^Tγ_0\) であることに注意することが重要です。電荷共役は、後で詳しく説明するように、反粒子の観点から物事を解釈することを可能にする正しい変換です。
+<!--
+It is important to note that \(Ψ^c \neq \bar{Ψ}. Ψ^c = iγ_2Ψ^*\) and \(\bar{Ψ} = Ψ^†γ_0 =(Ψ^*)^Tγ_0\). Charge conjugation is the
+correct transformation that enables
+us to interpret things in terms of
+antiparticles, as we will discuss later in
+detail
+-->.
+</p><p>
+次に、前節で導出した3番目の運動方程式（式7.22）に目を向けます。これは<strong>電流が存在する場合の非同次マクスウェル方程式</strong>と呼ばれます。「電流」という概念を明確にするために、再びネーターの定理が必要になります。
+<!--
+Next, we turn to the third equation of motion derived in the last
+section (Eq. 7.22) which is called <strong>inhomogeneous Maxwell equation
+in the presence of an electric current</strong>. To make the notion "electric
+current" precise we need again Noether’s theorem.
+-->
+</p>
+<h3>7.1.6 内部 \(\mathcal{U}(1)\) 対称性に関するネーターの定理</h3>
+<!--
+<h3>7.1.6 Noether’s Theorem for Internal \(\mathcal{U}(1)\) Symmetry</h3>
+-->
+<p>
+セクション4.5.5では、ネーターの定理がそれぞれの内部対称性と保存量を結び付けていることを学びました。先ほど発見した\(\mathcal{U}(1)\)対称性からどのような保存量が導かれるでしょうか？
+内部対称性に関するネーターの定理は、次の形式の変換が
+<!--
+In Section 4.5.5 we learned that Noether’s theorem connects each
+internal symmetry with a conserved quantity. What conserved quantity
+follows from the \(\mathcal{U}(1)\) symmetry we just discovered? Noether’s
+theorem for internal symmetries tells us that a transformation of the
+form
+-->
+\[
+Ψ → Ψ^\prime = Ψ + δΨ
+\]
+
+ネーター電流につながる
+<!--
+leads to a Noether current
+-->
+\[
+J^μ =\frac{∂\mathscr{L}}{∂(∂_μΨ)}δΨ
+\]
+
+連続方程式を満たす
+<!--
+which fulfils a continuity equation
+-->
+\[
+∂_μ J^μ = 0  \tag{7.34}
+\]
+
+グローバル<sup>20</sup> \(\mathcal{U}(1)\)変換は
+<!--
+A global<sup>20</sup> \(\mathcal{U}(1)\) transformation is 
+-->
+</p><p class="margin-large">
+<sup>20</sup>
+自由スピン \(\frac{1}{2}\) 場のラグランジアンは大域的にのみ \(\mathcal{U}(1)\) 不変であったことを思い出してください。前の節の最後のラグランジアンは局所的に \(\mathcal{U}(1)\) 不変でした。大域対称性は、\(a =定数\) における局所対称性の特別な場合です。したがって、局所的に \(\mathcal{U}(1)\) 不変なラグランジアンがあれば、それは自動的に大域的にも \(\mathcal{U}(1)\) 不変になります。ここで大域的 \(\mathcal{U}(1)\) 対称性を考慮すると、自由場と相互作用場に対して保存される量が得られます。
+<!--
+Recall that the Lagrangian for free
+spin \(\frac{1}{2}\) fields was only globally \(\mathcal{U}(1)\)
+invariant. The final Lagrangian of the
+last section was locally \(\mathcal{U}(1)\) invariant.
+Global symmetry is a special case of
+local symmetry with \(a =const\). Therefore,
+if we have a locally \(\mathcal{U}(1)\) invariant
+Lagrangian, it is automatically globally
+\(\mathcal{U}(1)\) invariant, too. Considering global
+\mathcal{U}(1)\) symmetry here will give us a
+quantity that is conserved for free and
+interacting fields.
+-->
+</p><p>
+
+\[
+Ψ → Ψ^\prime = e^{iga}Ψ = (1 + iga + . . .)Ψ
+\]
+
+指数関数の級数展開は、通常通り、最初の項の後で停止する。\(\mathcal{U}(1)\)はリー群であり、任意の変換は無限小変換から構成できるからである。無限小変換は、
+<!--
+We stop the series expansion of the exponential function, as usual,
+after the first term, because \(\mathcal{U}(1)\) is a Lie group and arbitrary transformations can be built of infinitesimal ones. An infinitesimal transformation
+reads
+-->
+\[
+Ψ → Ψ^\prime= Ψ + igaΨ
+\]
+
+したがって\(δΨ = igaΨ\)となり、第4.5.5節で導出したように、対応するネーター電流は
+<!--
+Therefore we have \(δΨ = igaΨ\) and as we derived in Section 4.5.5 the
+corresponding Noether current is
+-->
+\[
+\begin{align}
+J^μ &=\frac{∂\mathscr{L}}{∂(∂_μΨ)}δΨ \\
+\\
+&=\frac{∂(−m\bar{Ψ}Ψ + i\bar{Ψ}γ_μ∂^μΨ)}{∂(∂_μΨ)}igaΨ \\
+\\
+&= −\bar{Ψ}γ^μgaΨ = −ga\bar{Ψ}γ^μΨ  \tag{7.35}
+\end{align}
+\]
+
+任意の定数\(a\)は無視できる<sup>21</sup>。なぜなら、連続方程式は任意のaに対して成り立つからである。したがって、次のように定義する。
+<!--
+We can ignore<sup>21</sup> the arbitrary constant \(a\), because the continuity equation holds for arbitrary a and therefore, we define
+-->
+</p><p class="margin-large">
+<sup>21</sup>
+我々は、従来の定数gを維持します。これは任意ではなく、実験で決定される固定値です。
+<!--
+We keep the conventional constant 
+g, which is not arbitrary but has one
+fixed value that is determined in
+experiments.
+-->
+</p><p>
+
+\[
+J^μ ≡ −g\bar{Ψ}γ^μΨ   \tag{7.36}
+\]
+
+これは通常<strong>電気四元電流</strong>と呼ばれます。ゼロ番目の成分は<strong>電荷密度</strong>で、これを積分すると、時間的に保存される量が得られます<sup>22</sup>
+<!--
+This is usually called the <strong>electric four-current</strong>. The zeroth component
+is the <strong>electric charge density</strong>, which gives us if we integrate it, a
+quantity that is conserved in time<sup>22</sup>
+-->
+
+</p><p class="margin-large">
+<sup>22</sup>
+これは式4.39と同じ手順に従って確認できます。
+<!--
+This can be seen by following the 
+same steps as in Eq. 4.39.
+-->
+</p><p>
+
+\[
+\mathcal{Q} = \int d^3x \underbrace{ρ}_{\text{Charge density}}=
+\int d^3xJ^0 = −g \int d^3x\bar{Ψ}γ^0Ψ  \tag{7.37}
+\]
+
+量子論的枠組みでは、オブジェクト\(Ψ\)は確率振幅と関連付けられ、この解釈では\(\int d^3x\bar{Ψ}γ^0Ψ = 1\)が求められます。なぜなら、全体の確率は100% = 1でなければならないからです。したがって、保存量は実際には結合強度\(g\)であり、これは電磁気学では電荷です。<strong>したがって、大域的\(\mathcal{U}(1)\)対称性は電荷の保存をもたらします</strong>。
+<!--
+In the quantum framework the objects \(Ψ\) will be related to probability
+amplitudes and this interpretation requires that \(\int d^3x\bar{Ψ}γ^0Ψ = 1\),
+because the overall probability must be 100% = 1. Therefore, the
+conserved quantity is in fact the coupling strength \(g\), which is for
+electromagnetism the electric charge. <strong>Therefore, global \(\mathcal{U}(1)\) symmetry
+leads to the conservation of electric charge</strong>.
+-->
+</p><p>
+
+7.22式をもう一度見てみると、7.36式の定義を用いて次のように書けます。
+<!--
+If we now take a look again at Eq. 7.22, we can write it, using the
+definition in Eq. 7.36, as
+-->
+\[
+∂_ν(∂^νA^μ − ∂^μA^ν) + \underbrace{g\bar{Ψ}γ^μΨ}_{=−J^μ}= 0
+\]
+
+\[
+→ ∂_ν(∂^νA^μ − ∂^μA^ν) = J^μ   \tag{7.38}
+\]
+
+式6.23で定義された電磁テンソルを用いると、この式は次のように表される。
+<!--
+Using the electromagnetic tensor as defined in Eq. 6.23 this equation
+reads
+-->
+\[
+∂_νF^{νμ} = J^μ   \tag{7.39}
+\]
+</p><p>
+
+これらは、外部電磁流が存在する場合の非同次マクスウェル方程式です。これらの方程式<sup>23</sup>は、\(F^{νμ}\) の定義から直ちに導かれる同次マクスウェル方程式と共に、古典電気力学理論<sup>24</sup>の基礎となっています。
+<!--
+These are the inhomogeneous Maxwell equations in the presence
+ of an external electromagnetic current. These equations<sup>23</sup>, together
+ with the homogeneous Maxwell equations, which follow immediately
+from the definition of Fνμ, are the basis for the classical theory of
+electrodynamics<sup>24</sup>.
+-->
+</p><p class="margin-large">
+<sup>23</sup>
+複数形です。なぜなら、各成分 \(μ\) に対して方程式があるからです。
+<!--
+Plural, because we have an equation
+for each component \(μ\).
+-->
+<br><br>
+
+<sup>24</sup>
+これについては第 11 章で詳しく見ていきます。
+<!--
+We will see this explicitly in Chapter 11.
+-->
+</p><p>
+次に、<strong>質量のある</strong>スピン1場とスピン0場の相互作用について簡単に見てみましょう。
+<!--
+Next we take a quick look at interactions of <strong>massive</strong> spin 1 and
+spin 0 fields.
+-->
+</p>
+<h3>7.1.7 質量を持つスピン0場の相互作用</h3>
+<!--
+<h3>7.1.7 Interaction of Massive Spin 0 Fields</h3>
+-->
+<p>
+スピン0の場に対して導出したラグランジアンは
+<!--
+Take note that the Lagrangian we derived for spin 0 fields
+-->
+\[
+\mathscr{L} =\frac{1}{2}(∂_μΦ∂^μΦ − m^2Φ^2)
+\]
+は \(\mathcal{U}(1)\) 不変ではない。これは \(Φ → Φ^\prime = e^{ia}Φ\) と変換すればわかる。
+しかしながら、複素スカラー理論
+<!--
+is not \(\mathcal{U}(1)\) invariant, as we can see by transforming \(Φ → Φ^\prime = e^{ia}Φ\).
+Nevertheless, the complex scalar theory
+-->
+\[
+\mathscr{L} =\frac{1}{2}(∂_μΦ^*∂^μΦ − m^2Φ^*Φ)  \tag{7.40}
+\]
+
+\(\mathcal{U}(1)\) 対称性を持つ。なぜなら、\(Φ → Φ^\prime = e^{ia}Φ\) および\(Φ^* → (Φ^*)^\prime = e^{−ia}Φ^*\) となるからである。したがって、7.1 節でスピン \(\frac{1}{2}\) 場に対して行ったのと同様に、このラグランジアンに対する相互作用理論を導くことが可能である。導出は完全に同様であり<strong>25</strong>、次式を得る。
+<!--
+has \(\mathcal{U}(1)\) symmetry, because then we have \(Φ → Φ^\prime = e^{ia}Φ\) and
+\(Φ^* → (Φ^*)^\prime = e^{−ia}Φ^*\). Therefore it is possible to derive, analogous to
+what we did in Section 7.1 for spin \(\frac{1}{2}\)
+fields, an interaction theory for
+this Lagrangian. The derivation is completely analogous<strong>25</strong> and one 
+gets
+-->
+</p><p class="margin-large">
+<sup>25</sup>
+正しいラグランジアンは、式7.23で導入された\(∂^μ → D^μ = ∂^μ − igA^μ\)を代入することで計算できます。
+<!--
+The correct Lagrangian can
+be computed by substituting
+\(∂^μ → D^μ = ∂^μ − igA^μ\) as introduced in
+Eq. 7.23.
+-->
+</p><p>
+
+\[
+\mathscr{L} =\frac{1}{2}\left(\left((∂_μ + iqA_μ)Φ^*\right)\left((∂^μ − iqA^μ)Φ\right) − m^2Φ^*Φ\right)  \tag{7.41}
+\]
+
+オイラー・ラグランジュ方程式を用いる
+<!--
+Using the Euler-Lagrange equation
+-->
+\[
+\frac{∂\mathscr{L}}{∂Φ^*}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ^*)}\right)= 0
+\]
+
+対応する運動方程式を見つける
+<!--
+we find the corresponding equation of motion
+-->
+\[
+(∂_μ − iqA_μ)(∂^μ − iqA^μ)Φ − m^2Φ = 0  \tag{7.42}
+\]
+
+これは、質量のないスピン1場と結合した荷電スピン0場を記述します。
+<!--
+which describes a charged spin 0 field coupled to a massless spin 1
+field.
+-->
+</p>
+<h3>7.1.8 質量を持つスピン1場の相互作用</h3>
+<!--
+<h3>7.1.8 Interaction of Massive Spin 1 Fields</h3>
+-->
+<p>
+<strong>質量のある</strong>スピン1場と<strong>質量のない</strong>スピン1場との相互作用も対称性によって規定されます。質量のないスピン1場のラグランジアンは(式6.25)で与えられます。
+<!--
+The interaction of a <strong>massive</strong> spin 1 field with a <strong>massless</strong> spin 1 field
+is dictated by symmetry, too. The Lagrangian for massless spin 1
+fields is given by (Eq. 6.25)
+-->
+\[
+\mathscr{L}_{Maxwell} = −\frac{1}{4}F^{μν}F_{μν} 
+\]
+
+質量のないスピン1の場と質量のあるスピン1の場を区別するために、質量のある場を\(B^μ\)と名付け、次のように定義します。
+<!--
+To distinguish between a massless and a massive spin 1 field, we
+name the massive field \(B^μ\) and define
+-->
+\[
+G^{μν} := ∂^μB^ν − ∂^νB^μ
+\]
+
+この質量を持つスピン1の場のラグランジアンは（式6.19）で表されます。
+<!--
+The Lagrangian for this massive spin 1 field reads (Eq. 6.19)
+-->
+\[
+\mathscr{L}_{Proca} = −\frac{1}{4}G^{μν}G_{μν} + m^2B^μB_μ
+\]
+ローレンツ対称性により、ラグランジアンの相互作用項は
+次の形となる。
+<!--
+Lorentz symmetry dictates the interaction term in the Lagrangian to
+be of the form
+-->
+\[
+\mathscr{L}_{Proca-interaction} = CG_{μν}F^{μν}
+\]
+結合定数 C は実験で測定する必要があります。
+ご興味があれば、オイラー・ラグランジュ方程式を用いて、対応する運動方程式を自分で導くことができます。
+<!--
+with a coupling constant C that we need to measure in experiments.
+If you’re interested you can derive yourself the corresponding equations
+of motion, by using the Euler-Lagrange equations.
+-->
+</p>
+<h2>7.2 \(\mathcal{SU}(2)\) 相互作用</h2>
+<!--
+<h2>7.2 \(\mathcal{SU}(2)\) Interactions</h2>
+-->
+<p>
+\(\mathcal{U}(1)\)対称性の成功に触発され、私たちは次の問いに答えたい。\(\mathcal{U}(1)\)はラグランジアンにおける唯一の内部対称性なのか？
+<!--
+Motivated by the success with \(\mathcal{U}(1)\) symmetry we want to answer the
+question: Is \(\mathcal{U}(1)\) the only internal symmetry of our Lagrangians?
+-->
+</p><p>
+<strong>2つの質量ゼロ</strong>のスピン \(\frac{1}{2}\) 場に対して内部対称性を見出すことができることが分かりました。2つのスピン \(\frac{1}{2}\) 場に対するラグランジアンは、セクション6.3で導出したラグランジアンを2つ加えることで得られます。最終的なラグランジアンは式6.16に示されており、便宜上ここで引用します。
+<!--
+It turns out that we can find an internal symmetry for <strong>two massless</strong>
+spin \(\frac{1}{2}\) fields. We get the Lagrangian for two spin \(\frac{1}{2}\) fields by
+adding two copies of the Lagrangian that we derived in Section 6.3.
+The final Lagrangian can be found in Eq. 6.16 and we recite it here
+for convenience:
+-->
+\[
+\mathscr{L}_{Dirac} = \bar{Ψ}(iγ_μ∂^μ − m)ψ
+\]
+ここで質量項を無視します。つまり\(m = 0\)です。そうしないと、後ほど説明するようにラグランジアンは不変ではなくなります。対称性を損なわずに質量項を含める方法については後ほど説明します。この加算により、
+<!--
+Here we neglect mass terms, which means \(m = 0\), because otherwise
+the Lagrangian isn’t invariant as we will see in a moment. We
+will see later how we can include mass terms, without spoiling the
+symmetry. The addition yields
+-->
+\[
+\mathscr{L}_{D_1+D_2} = i\bar{Ψ}_1γ_μ∂^μψ_1 + i\bar{Ψ}_2γ_μ∂^μψ_2  \tag{7.43}
+\]
+
+これを書き換えるには次のように定義します。
+<!--
+This can be rewritten, if we define
+-->
+\[
+\begin{align}
+Ψ &:=
+\begin{pmatrix}
+ψ_1 \\
+ψ_2
+\end{pmatrix} \\
+\\
+→ \bar{Ψ} &:=\left(\bar{Ψ}_1　\bar{Ψ}_2\right)
+\end{align}
+\]
+ここで新しく定義されたオブジェクト\(Ψ\)は<strong>ダブレット</strong>と呼ばれます。
+<!--
+where the newly defined object \(Ψ\) is called a <strong>doublet</strong>:
+-->
+\[
+\mathscr{L}_{D_1+D_2} = i\bar{Ψ}γ_μ∂^μΨ  \tag{7.44}
+\]
+
+このラグランジアンは、大域的な\(\mathcal{SU}(2)\)変換に対して不変である<sup>26</sup>
+<!--
+This Lagrangian is invariant under global \(\mathcal{SU}(2)\) transformations<sup>26</sup>
+-->
+</p><p class="margin-large">
+<sup>26</sup>
+\(\bar{Ψ}\)の変換挙動を計算するために、式3.213ですでに述べた\(σ_i^† = σ_i\)を使用します。
+<!--
+To calculate the transformation 
+behavior of \(\bar{Ψ}\), we use \(σ_i^† = σ_i\), which
+we already noted in Eq. 3.213.
+-->
+</p><p>
+
+\[
+\begin{align}
+Ψ → Ψ^\prime &= e^{ia_i\frac{σ_i}{2}}Ψ  \tag{7.45} \\
+\\
+⇒\bar{Ψ} → \overline{Ψ^\prime} &= \bar{Ψ}e^{−ia_i\frac{σ_i}{2}}  \tag{7.46}
+\end{align}
+\]
+
+ここで、添え字「i」についての和は暗黙的に仮定され、\(a_i\)は任意の実定数を表し、\(\frac{σ_i}{2}\)は\(\mathcal{SU}(2)\)の通常の生成子であり、パウリ行列\(σ_i\)を持つ。
+<!--
+where a sum over the index "i" is implicitly assumed, \(a_i\) denotes
+arbitrary real constants and \(\frac{σ_i}{2}\) are the usual generators of \(\mathcal{SU}(2)\),
+with the Pauli matrices \(σ_i\).
+-->
+</p><p>
+
+不変性を見るために、変換されたラグランジアン<sup>27</sup>を見てみましょう。
+<!--
+To see the invariance we take a look at the transformed Lagrangian<sup>27</sup>
+-->
+
+</p><p class="margin-large">
+<sup>27</sup>
+ここでは質量項を無視する。なぜなら、質量項は一般に\(\mathcal{SU}(2)\)変換に対して不変ではないからである。質量項は\(−m_1\bar{Ψ}_1Ψ_1\)と\(−m_2\bar{Ψ}_2Ψ_2\)となり、\(Ψ\)の2成分定義を用いて次のように書ける。
+<!--
+We neglect mass terms here, because
+they are, in general, not invariant under
+\(\mathcal{SU}(2)\) transformations. The mass terms
+would be \(−m_1\bar{Ψ}_1Ψ_1\) and \(−m_2\bar{Ψ}_2Ψ_2\)
+and we could write them, using the
+two component definition for \(Ψ\) and by
+defining
+-->
+
+\[
+m :=
+\begin{pmatrix}
+m_1 & 0 \\
+0 & m_2
+\end{pmatrix}
+\]
+
+なぜなら
+<!--
+as
+-->
+
+\[
+\mathscr{L}_{D_1+D_2} = −\bar{Ψ}mΨ
+\]
+
+このような項は、\(\mathcal{SU}(2)\)変換に対して不変ではない。なぜなら、一般に、
+<!--
+Such a term is not invariant under
+\(\mathcal{SU}(2)\) transformations, because, in
+general,
+-->
+
+\[
+\mathscr{L}_{D_1+D_2} = −\bar{Ψ}^\prime mΨ^\prime
+=\bar{Ψ}\underbrace{e^{−ia_i\frac{σ_i}{2}} me^{ia_i\frac{σ_i}{2}}}_{\neq m}Ψ
+\]
+
+等しい質量 \(m_1 = m_2\) の場合、これは不変ですが、この対称性を破ることなく任意の質量項をどのように含めることができるかを見てみましょう。
+実験から、二重項内の2つの場は等しい質量、つまり \(m_1 \neq m_2\) の粒子を生成しないことが分かっています。
+これについては後で詳しく説明します。
+<!--
+For equal masses \(m_1 = m_2\) it would
+be invariant, but we are going to see
+how we can include arbitrary mass
+terms without violating this symmetry.
+We know from experiments that the
+two fields in the doublet do not create
+particles of equal mass, i.e. \(m_1 \neq m_2\).
+This will be discussed later in detail.
+-->
+</p><p>
+
+\[
+\begin{align}
+\mathscr{L}_{D_1+D_2}^\prime &= i\overline{Ψ^\prime} γ_μ∂^μΨ^\prime \\
+\\
+&= i\bar{Ψ}e^{−ia_i\frac{σ_i}{2}} γ_μ∂^μe^{ia_i\frac{σ_i}{2}}Ψ \\
+\\
+&= i\bar{Ψ}γ_μ∂^μΨ = \mathscr{L}_{D_1+D_2}  \tag{7.47}
+\end{align}
+\]
+
+最後の行に至ったのは、変換 \(e^{ia_i\frac{σ_i}{2}}\) が
+新しく定義した2成分オブジェクト \(Ψ\) に作用するのに対し、\(γ_μ\) は
+ダブレット内のオブジェクト、つまりディラックスピノルに作用するからです。これは
+添字を使って表すことができます
+<!--
+where we got to the last line because our transformation \(e^{ia_i\frac{σ_i}{2}}\) acts
+on our newly defined two-component object \(Ψ\), whereas \(γ_μ\) acts on
+the objects in our doublet, i.e. the Dirac spinors. We can express this
+using indices
+-->
+\[
+\left[\left(e^{−ia_i\frac{σ_i}{2}}\right)_{ab}δ_{αβ}\right] 
+\left[δ_{bc}γ_μ^{βδ}\right]
+\left[\left(e^{ia_i\frac{σ_i}{2}}\right)_{cd}δ_{δ\epsilon}\right]
+=
+\left[δ_{ad}γ_μ^{α\epsilon}\right]
+\]
+
+</p><p>
+
+この対称性も局所対称性であるはずです。\(\mathcal{SU}(2)\)変換は、二重項の2つの成分を混合します。後ほど、これらの2つの場を電子場と電子ニュートリノ場という名前で呼びます。
+ここでの対称性は、\(\mathcal{SU}(2)\)変換を用いることで、それらを好きなように混合できるため、電子場や電子ニュートリノ場を何と呼ぶか​​は重要ではないことを示しています。もしこれがグローバルな対称性に過ぎないのであれば、ある選択<sup>28</sup>、つまり電子場や電子ニュートリノ場を何と呼ぶか​​を決めれば、その選択は宇宙全体に対して即座に固定されます。したがって、これが局所対称性であるかどうかを調べます。再び、そうではないことがわかりますが、局所 \(\mathcal{U}(1)\) 対称性に関しては、ラグランジアンが局所的に \(\mathcal{SU}(2)\) 不変になるようにあらゆる手段を講じます。
+<!--
+This symmetry should be a local symmetry, too. The \(\mathcal{SU}(2)\) transformations
+mix the two components of the doublet. Later we will
+give these two fields names like electron and electron-neutrino field.
+Our symmetry here tells us that it does not matter what we call
+electron and what electron-neutrino field, because by using \(\mathcal{SU}(2)\)
+transformations we can mix them as we like. If this is only a global
+symmetry, as soon as we fix one choice<sup>28</sup>, which means we decide 
+what we call electron and what electron-neutrino field, this choice
+would be fixed immediately for the complete universe. Therefore we
+investigate if this is a local symmetry. Again we find that it isn’t, but
+as for local \(\mathcal{U}(1)\) symmetry, we will do everything we can to make
+the Lagrangian locally \(\mathcal{SU}(2)\) invariant.
+-->
+</p><p class="margin-large">
+<sup>28</sup>
+これは<strong>ゲージの選択</strong>と呼ばれます。
+<!--
+This is known as <strong>choosing a gauge</strong>.
+-->
+</p><p>
+ここでも問題となるのは、余分な項を生み出す微分です。表記を整理するために、\(\mathcal{U}(x) ≡ e^{−ia_i(x)\frac{σ_i}{2}}\) と定義します。
+<!--
+
+The problem here is again the derivative, which produces an extra
+term. To unclutter the notation, we define \(\mathcal{U}(x) ≡ e^{−ia_i(x)\frac{σ_i}{2}}\) :
+-->
+\[
+\begin{align}
+Ψ → Ψ^\prime &= \mathcal{U}(x)Ψ  \tag{7.48} \\
+\\
+⇒ \bar{Ψ} → \bar{Ψ}^\prime &= \bar{Ψ}\mathcal{U}^†(x)  \tag{7.49}
+\end{align}
+\]
+
+変換されたラグランジアンは次のようになる。
+<!--
+Our transformed Lagrangian then reads
+-->
+\[
+\begin{align}
+\mathscr{L}_{D_1+D_2}^\prime &= i\bar{Ψ}^\prime γ_μ∂^μΨ^\prime \\
+\\
+&= i\bar{Ψ}\mathcal{U}^†(x)γ_μ∂^μ(\mathcal{U}(x)Ψ) \\
+\\
+&\underbrace{=}_{積の公式}i\bar{Ψ}γ_μ∂^μΨ + i\bar{Ψ}γ_μ\mathcal{U}^†(x)(∂_μ\mathcal{U}(x))Ψ \neq \mathscr{L}_{D_1+D_2}  \tag{7.50}
+\end{align}
+\]
+
+変換後に追加の項\(i\bar{Ψ}γ_μ\mathcal{U}^†(x)(∂_μ\mathcal{U}(x))Ψ\)が得られることから、ラグランジアンが不変ではないことがわかります。
+<!--
+We can see that the Lagrangian is not invariant because we get an
+additional term, \(i\bar{Ψ}γ_μ\mathcal{U}^†(x)(∂_μ\mathcal{U}(x))Ψ\), after the transformation.
+-->
+</p><p>
+
+では、ラグランジアン \(\mathscr{L}_{D_1+D_2}\) を、局所 \(\mathcal{SU}(2)\) 変換に対して不変となるようにどのように修正すればよいでしょうか。原理的には、前節で局所 \(\mathcal{U}(1)\) を保証するために発見したのと同じ方法が再び機能します。しかし、細部は少し複雑です。式 7.23 で既に述べたように、ラグランジアンを修正する方法の本質は、通常の微分 ∂μ を「共変微分」 \(D^μ = ∂^μ − igA^μ\) に置き換えることで要約できます。これを念頭に置いて、ラグランジアンの導関数 ∂μ を新しいオブジェクト \(\mathscr{L}_{D_1+D_2}\) に置き換え、局所 \(\mathcal{SU}(2)\) 不変性を保証するために \(D^μ\) がどのようになるかを導出しようとします。
+<!--
+So how can we modify our Lagrangian \(\mathscr{L}_{D_1+D_2}\) such that is invariant
+under local \(\mathcal{SU}(2)\) transformations? In principle the same
+method that we discovered in the last sections to ensure local \(\mathcal{U}(1)\)
+works again. However, some details are a bit more complicated. We
+already noted in Eq. 7.23 that the essence of how we need to change
+our Lagrangian can be summarized through the replacement of the
+ordinary derivative ∂μ, with a "covariant derivative" \(D^μ = ∂^μ − igA^μ\).
+With this in mind, we replace the derivative ∂μ in our Lagrangian
+\(\mathscr{L}_{D_1+D_2}\) with a new object \(D^μ\) and then try to derive how \(D^μ\) looks
+like in order to ensure local \(\mathcal{SU}(2)\) invariance.
+-->
+</p><p>
+
+具体的には、次のように書きます。
+<!--
+Concretely, we now write
+-->
+\[
+\tilde{\mathscr{L}}_{D_1+D_2} = i\bar{Ψ}γ_μD^μΨ  \tag{7.51}
+\]
+
+そして、局所的な\(\mathcal{SU}(2)\)変換の下では、このラグランジアンは
+<!--
+and under a local \(\mathcal{SU}(2)\) transformation this Lagrangian becomes
+-->
+\[
+\begin{align}
+\tilde{\mathscr{L}^\prime}_{D_1+D_2} &= i\bar{Ψ}^\prime γ_μ(D^μΨ)^\prime \\
+\\
+&= i\bar{Ψ}\mathcal{U}^†(x)γ_μ(D^μΨ)^\prime \\
+\\
+&\overset{!}{=}\tilde{\mathscr{L}}_{D_1+D_2}  \tag{7.52}
+\end{align}
+\]
+
+ここで、この新しいラグランジアンは、\((D^μΨ)^\prime = \mathcal{U}(x)D^μΨ\) のとき、局所\(\mathcal{SU}(2)\) 変換 \(\mathcal{U}(x) = e^{−ia_i(x)\frac{σ_i}{2}}\) に対して不変であることがわかります。
+なぜなら、その場合<sup>29</sup>
+<!--
+We can see here that this new Lagrangian is invariant under the local
+\(\mathcal{SU}(2)\) transformation \(\mathcal{U}(x) = e^{−ia_i(x)\frac{σ_i}{2}}\) if \((D^μΨ)^\prime = \mathcal{U}(x)D^μΨ\),
+because then<sup>29</sup>
+-->
+</p><p class="margin-large">
+<sup>29</sup>
+
+式 7.47 の下のテキストで既に議論したように、\(\mathcal{U}^†(x)\) と \(γ_μ\) の位置を変更できる理由は、\(γ_μ\) がディラックスピノルの成分に作用する行列であるのに対し、\(\mathcal{SU}(2)\) 変換は、2 つのディラックスピノル \(ψ_1\) と \(ψ_2\) を二重項 \(Ψ\) 内で混合するからです。
+<!--
+The reason that we can change the 
+positions of \(\mathcal{U}^†(x)\) and \(γ_μ\), as already
+discussed in the text below Eq. 7.47,
+is that \(γ_μ\) is a matrix that acts on the
+components of the Dirac spinors,
+whereas the \(\mathcal{SU}(2)\) transformation
+mixes the two Dirac spinors \(ψ_1\) and \(ψ_2\)
+inside the doublet \(Ψ\).
+-->
+</p><p>
+
+\[
+\begin{align}
+\tilde{\mathscr{L}^\prime}_{D_1+D_2} &= i\bar{Ψ}^\prime γ_μ(D^μΨ)^\prime \\
+\\
+&= i\bar{Ψ}\mathcal{U}^†(x)γ_μ(D^μΨ)^\prime \\
+\\
+&= i\bar{Ψ} γ_μ\underbrace{\mathcal{U}^†(x)\mathcal{U}(x)}_{=1}D^μΨ \\
+\\
+&= \tilde{\mathscr{L}}_{D_1+D_2}  \tag{7.53}
+\end{align}
+\]
+
+したがって、我々の目標は、まさにこの変換挙動 \((D^μΨ)^\prime = \mathcal{U}(x)D^μΨ\) を持つオブジェクト \(D^μ\) を見つけることです。この特性こそが、\(D^μ\) を「共変微分」<sup>30</sup> と呼ぶ理由です。\(Ψ\) の共変微分は、\(D^μΨ\) と表記され、\(Ψ\) と全く同じように変換されます。つまり、\(Ψ^\prime = \mathcal{U}(x)Ψ\) です。したがって、形は同じままで、通常の微分 \(∂^μ<sup>31</sup> を使用する場合のように、追加の項は発生しません。
+<!--
+So our goal is to find an object \(D^μ\) that has exactly this transformation
+behavior \((D^μΨ)^\prime = \mathcal{U}(x)D^μΨ\). Take note that this property is
+the reason why we call \(D^μ\) the "covariant derivative"<sup>30</sup>. The covariant
+derivative of \(Ψ\), which we denote by \(D^μΨ\), transforms exactly like
+\(Ψ\), i.e. \(Ψ^\prime = \mathcal{U}(x)Ψ\). Thus the form stays the same and we don’t get
+additional terms, like we do if we use the ordinary derivative \(∂^μ<sup>31</sup>.
+-->
+</p><p class="margin-large">
+<sup>30</sup>
+「共変性」という概念は2.6節で説明しましたが、これは大まかに言うと、方程式やオブジェクトの形が、与えられた変換によって変化しないことを意味します。
+<!--
+The notion "covariance" was discussed in Section 2.6 and means
+roughly that the form of an equation
+or an object is not changed under a
+given transformation.
+-->
+<br><br>
+
+<sup>31</sup>
+これは式7.50で実証されています。
+<!--
+This was demonstrated in Eq. 7.50. 
+-->
+</p><p>
+局所 \(\mathcal{U}(1)\) 対称性に関する経験から、重要なトリックはスピン 1 場を利用することだということは既にわかっています。しかし、重要な違いが 1 つあります。式 7.50 で見たように、不変性が保たれない理由は、導関数 ∂μ が余分な項 \(i\bar{Ψ}γ_μ\mathcal{U}^†(x)(∂_μ\mathcal{U}(x))Ψ\) を生成するためです。局所 \(\mathcal{SU}(2)\) 変換
+\(\mathcal{U}(x) ≡ e^{−ia_i(x)\frac{σ_i}{2}}\) は、指数の生成子 σi/2 のため、局所 \(\mathcal{U}(1)\) 変換
+\(\mathcal{U}(x) ≡ e^{−iα(x)}\) よりも少し複雑です。局所 \(\mathcal{SU}(2)\) 変換では、
+<!--
+From our experience with local \(\mathcal{U}(1)\) symmetry, we already know
+that the crucial trick is to make use of spin 1 fields. However, there
+is one crucial difference. We saw in Eq. 7.50 that again the reason
+for the non-invariance is that the derivative ∂μ produces an extra
+term \(i\bar{Ψ}γ_μ\mathcal{U}^†(x)(∂_μ\mathcal{U}(x))Ψ\). Our local \(\mathcal{SU}(2)\) transformations
+\(\mathcal{U}(x) ≡ e^{−ia_i(x)\frac{σ_i}{2}}\) are a bit more complicated than local \(\mathcal{U}(1)\) transformations
+\(\mathcal{U}(x) ≡ e^{−iα(x)}\), because of the generators σi/2 in the
+exponent. For local \(\mathcal{SU}(2)\) transformations, we have
+-->
+\[
+∂_μ\mathcal{U}(x) = ∂_μe^{−ia_i(x)\frac{σ_i}{2}} = −i(∂_μa_i(x))\frac{σ_i}{2}e^{−ia_i(x)\frac{σ_i}{2}}  \tag{7.54}
+\]
+
+ここで、実際には3つの追加項<sup>32</sup>が得られていることがわかります。これは、各パウリ行列 \(σ_i\) に1つずつです。したがって、\(\mathcal{U}(1)\) の場合とは対照的に、ラグランジアンを局所的に \(\mathcal{SU}(2)\) 不変にするために必要なのは、追加のスピン1場が1つではなく、3つです。さらに、ラグランジアン \(∂_μ\) の微分によって生成される厄介な項は、生成子 \(\frac{σ_i}{2}\) に比例していることが分かります。
+<!--
+We can see here that we actually get three extra terms<sup>32</sup>, one for
+each Pauli matrix \(σ_i\). Thus in contrast to the \(\mathcal{U}(1)\) case, to make the
+Lagrangian locally \(\mathcal{SU}(2)\) invariant we don’t need one additional spin
+1 field, but three! In addition, we can see that the troublesome terms,
+that are produced through the derivative in the Lagrangian \(∂_μ\), are
+proportional to the generators \(\frac{σ_i}{2}\).
+-->
+</p><p class="margin-large">
+<sup>32</sup>
+ここでは、アインシュタインの和の慣習の意味で、インデックス \(i\) 上の暗黙の和が与えられています。
+<!--
+We have here an implicit sum, in 
+the sense of Einstein’s summation
+convention, over the index \(i\).
+-->
+</p><p>
+まとめると、ラグランジアンが局所 \(\mathcal{SU}(2)\) 変換に対して不変でなくなる項を打ち消すために、３つのスピン１の場が必要であり、これらの新しい場は、生成子 \(\frac{σ_i}{2}\) を含む項を打ち消すような方法で導入する必要がある。
+したがって、
+<!--
+To summarize: we need three spin 1 fields to cancel the terms that
+make our Lagrangian non-invariant under local \(\mathcal{SU}(2)\) transformations
+and must introduce these new fields in such a way that they are
+able to cancel terms that involve the generators \(\frac{σ_i}{2}\).
+We therefore try
+-->
+\[
+D^μ = ∂^μ − ig\frac{σ^a}{2}W_a^μ  \tag{7.55}
+\]
+
+ここで、\(σ^a\) はパウリ行列、\(a = 1, 2, 3\) である。この仮定のもと、\((D^μΨ)^\prime \overset{!}{=}\mathcal{U}(x)D^μΨ\) という要件は、スピン 1 場 \(W_a^μ\) に対する変換則に変換できる。
+<!--
+where \(σ^a\) are the Pauli matrices and \(a = 1, 2, 3\). With this ansatz,
+the requirement \((D^μΨ)^\prime \overset{!}{=}\mathcal{U}(x)D^μΨ\), can now be translated into a transformation law for the spin 1 fields \(W_a^μ\):
+-->
+\[
+\begin{align}
+(D^μΨ)^\prime &\overset{!}{=}\mathcal{U}(x)D^μΨ \\
+\\
+
+\underbrace{→}_{Eq. 7.55}
+\left((∂^μ − ig\frac{σ^a}{2}W_a^μ)Ψ\right)^\prime &\overset{!}{=}
+\mathcal{U}(x)(∂^μ − ig\frac{σ^a}{2}W_a^μ )Ψ \\
+\\
+→ ∂^μΨ^\prime − ig\frac{σ^a}{2}W_a^{\prime μ}Ψ^\prime &\overset{!}{=}
+\mathcal{U}(x)(∂^μ − ig\frac{σ^a}{2}W_a^μ)Ψ \\
+\\
+\underbrace{→}_{Eq. 7.48}∂^μ(\mathcal{U}(x)Ψ) − ig\frac{σ^a}{2}W_a^{\prime μ}
+\mathcal{U}(x)Ψ &\overset{!}{=}
+\mathcal{U}(x)(∂^μ − ig\frac{σ^a}{2}W_a^μ)Ψ \\
+\\
+\underbrace{→}_{積の公式}(∂^μ\mathcal{U}(x))Ψ +
+\cancel{\mathcal{U}(x)(∂^μΨ)} − ig\frac{σ^a}{2}W_a^{\prime μ}\mathcal{U}(x)Ψ 
+&\overset{!}{=}\cancel{\mathcal{U}(x)∂^μΨ} − ig\mathcal{U}(x)\frac{σ^a}{2}W_a^μΨ \\
+\\
+→ (∂^μ\mathcal{U}(x))Ψ − ig\frac{σ^a}{2}W_a^{\prime μ}\mathcal{U}(x)Ψ 
+&\overset{!}{=}−ig\mathcal{U}(x)\frac{σ^a}{2}W_a^μΨ
+\tag{7.56}
+\end{align}
+\]
+
+</p><p>
+ラグランジアンは任意の \(Ψ\) に対して不変であるはずなので、式7.56の最後の行はラグランジアンなしで書く。
+<!--
+The Lagrangian should be invariant for arbitrary Ψ and therefore, we
+write the last line in Eq. 7.56 without it
+-->
+\[
+(∂^μ\mathcal{U}(x)) − ig\frac{σ^a}{2}W_a^{\prime μ}\mathcal{U}(x)
+\overset{!}{=}−ig\mathcal{U}(x)\frac{σ^a}{2}W_a^μ
+\tag{7.57}
+\]
+
+この式を\(W_a^{\prime μ}\)について「解く」ことで、スピン1場W_a^{\prime μ}\)の正しい変換挙動を計算できます。これを達成するには、式7.57の右辺に\(\mathcal{U}^{−1}(x)\)を掛けると、次の式が得られます。
+<!--
+We can now calculate the correct transformation behavior of the spin
+1 fields W_a^{\prime μ}\) by "solving" this equation for \(W_a^{\prime μ}\). To achieve this we
+multiply Eq. 7.57 from the right with \(\mathcal{U}^{−1}(x)\), which yields
+-->
+\[
+\begin{align}
+&　(∂^μ\mathcal{U}(x))\mathcal{U}^{−1}(x) − ig\frac{σ^a}{2}W_a^{\prime μ}
+\underbrace{\mathcal{U}(x)\mathcal{U}^{−1}(x)}_{=1}
+\overset{!}{=}−ig\mathcal{U}(x)\frac{σ^a}{2}W_a^μ\mathcal{U}(x)^{−1} \\
+\\
+&→\frac{σ^a}{2}W_a^{\prime μ} \overset{!}{=}\mathcal{U}(x)\frac{σ^a}{2}W_a^μ\mathcal{U}^{−1}(x) − \underbrace{\frac{1}{ig}}_{=\frac{i}{i^2g}=−\frac{i}{g}} (∂^μ\mathcal{U}(x))\mathcal{U}^{−1}(x) \\
+\\
+&→\frac{σ^a}{2}W_a^{\prime μ} \overset{!}{=}\mathcal{U}(x)\frac{σ^a}{2}W_a^μ\mathcal{U}^{−1}(x) +\frac{i}{g}(∂^μ\mathcal{U}(x))\mathcal{U}^{−1}(x)  \tag{7.58}
+\end{align}
+\]
+
+これが、式7.55で共変微分\(D^μ = ∂^μ − ig\frac{σ^a}{2}W_a^μ\)の一部として導入したゲージ場\(W_a^{\prime μ}\)を、\((D^μΨ)^\prime = \mathcal{U}(x)D^μΨ\)となるように変換する必要がある方法です。式7.53で、この変換挙動は局所的に\(\mathcal{SU}(2)\)不変なラグランジアンを得るために必要であることを確認しました。
+<!--
+This is how our gauge fields \(W_a^{\prime μ}\), that we introduced in Eq. 7.55 as
+part of the covariant derivative \(D^μ = ∂^μ − ig\frac{σ^a}{2}W_a^μ\) , need to transform
+such that \((D^μΨ)^\prime = \mathcal{U}(x)D^μΨ\). We saw in Eq. 7.53 that this
+transformation behavior is needed to get a locally \(\mathcal{SU}(2)\) invariant
+Lagrangian.
+-->
+</p><p>
+
+最後にもう一つ注意すべきことがあります。3つの新しいスピン1場 \(W_a^μ\) を導入し、局所的に \(\mathcal{SU}(2)\) 不変なラグランジアンを求めるには、これらが非常に特殊な変換特性を持つ必要があることを見てきました。しかし、これらのスピン1場に対する「ナイーブな」ラグランジアン (式6.25) は
+<!--
+There is one last thing, we need to take care of. We introduced
+three new spin 1 fields \(W_a^μ\) and we saw that they need to have very
+specific transformation properties when we want a locally \(\mathcal{SU}(2)\)
+invariant Lagrangian. However, the "naive" Lagrangian for these spin
+1 fields (Eq. 6.25)
+-->
+\[
+\begin{align}
+\mathscr{L}_{3xMaxwell} &=\frac{1}{4}(W_{μν})_1(W^{μν})_1 +
+\frac{1}{4}(W_{μν})_2(W^{μν})_2 +
+\frac{1}{4}(W_{μν})_3(W^{μν})_3 \\
+\\
+&= \frac{1}{4}(W_{μν})_i(W^{μν})_i  \tag{7.59}
+\end{align}
+\]
+
+および
+<!--
+with
+-->
+
+\[
+(W_{μν})_i = ∂_μ(W_ν)_i − ∂_ν(W_μ)_i
+\]
+このような変換に対して不変ではない<sup>33</sup>。
+<!--
+ is not invariant under such transformations<sup>33</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>33</sup>
+これは、式7.58で導出した明示的な変換挙動を用いることで確認できます。
+<!--
+This can be seen by using the ex-
+plicit transformation behavior that we
+derived in Eq. 7.58. 
+-->
+</p><p>
+上で、局所 \(\mathcal{U}(1)\) 対称性の要求が強力であり、電磁相互作用を記述する正しいラグランジアンを与えることを見てきました。したがって、自由スピン 1 場のラグランジアンの対称性ではないという理由で、スピン \(\frac{1}{2}\) を局所 \(\mathcal{SU}(2)\) 変換に対してラグランジアン不変にする変換挙動を捨てるのではなく、これらのスピン 1 場に対して、望ましい対称性を持つより良いラグランジアンを見つけようとします。言い換えれば、私たちの最終的な課題は、これらの新しいスピン 1 場が単独でどのように振る舞うかを記述し、式 7.58 の変換に対して不変であるラグランジアンを導くことです。
+<!--
+ We saw above that the demand for local \(\mathcal{U}(1)\) symmetry was powerful
+and yielded the correct Lagrangian that describes electromagnetic
+interactions. Thus instead of discarding the transformation
+behavior that successfully makes the spin \(\frac{1}{2}\)
+part of of the Lagrangian
+invariant under local \(\mathcal{SU}(2)\) transformations, because it is not a symmetry
+of the free spin 1 field Lagrangian, we try to find a better Lagrangian
+for these spin 1 fields which has the desired symmetry. In
+other words, our final task is to derive a Lagrangian that describes
+how these new spin 1 fields behave when they are on their own that
+is invariant under the transformation in Eq. 7.58.
+-->
+</p><p>
+このラグランジアンを見つけるには、いくつかの点に注意する必要があります。
+<!--
+To find this Lagrangian, we need to note several things:
+-->
+<div class="styleBullet">
+<ul><li>
+1. 新しいスピン1場 \((W_μ)_i\) は、以前のラグランジアン<sup>34</sup> において、生成子 \(\frac{σ^i}{2}\) と組み合わせて常に現れました。したがって、新しいオブジェクト \(W_μ ≡ (W_μ)_i\frac{σ^i}{2}\) を導入することは有用です。次に、この新しいオブジェクト \(W_μ\) をラグランジアン式 7.59<sup>35</sup> において \((W_μ)_i\) の代わりに使用してみましょう。重要な違いは、生成子が行列であるため、\(W_μ\) も行列であるということです。したがって、新しいオブジェクト \(W_μ\) を用いて場の強度テンソルを定義すると、次のようになります。
+<!--
+1. The new spin 1 fields \((W_μ)_i\) always appeared in the previous
+Lagrangians<sup>34</sup> in combination with the generators \(\frac{σ^i}{2}\) . It is thus 
+useful to introduce a new object \(W_μ ≡ (W_μ)_i\frac{σ^i}{2}\) . Next, we might
+try to use this new object \(W_μ\) instead of \((W_μ)_i\) in the Lagrangian Eq. 7.59<sup>35</sup>. The important difference is that \(W_μ\) is a matrix, because the generators are matrices. Therefore, when we define our field
+strength tensor in terms of the new object \(W_μ\):
+-->
+\[
+W_{μν} = ∂_μW_ν − ∂_νW_μ   \tag{7.60}
+\]
+
+マトリックスにもなります。
+<!--
+it becomes a matrix, too.
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<sup>34</sup>
+例えば式7.58を参照してください。
+<!--
+See, e.g. Eq. 7.58.
+-->
+<br><br>
+
+<sup>35</sup>
+一見すると物事がはるかに複雑になるように見えますが、これがなぜ便利なのかはすぐに明らかになります。
+<!--
+It will become clear in a moment,
+why this is useful, although at a first
+glance it seems to make things much
+more complicated.
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+2. 局所的な\(\mathcal{SU}(2)\)変換に対して不変なラグランジアンを求めるため、変換の振る舞いが正確に打ち消されるように、フィールドを結合する必要があります。これで、行列である新しいオブジェクト\((W_μ,W_{μν})\)が得られたので、行列のトレースの次の優れた性質を利用することができます<sup>36</sup>
+<!--
+2. We want a Lagrangian that is invariant under local \(\mathcal{SU}(2)\) transformations,
+and therefore need to combine our fields in such a way
+that their transformation behavior cancels exactly. Now that we
+have new objects \((W_μ,W_{μν})\) that are matrices, we can try to make
+use of the following nice property of the trace of matrices<sup>36</sup>
+-->
+
+\[
+Tr(ABCD) = Tr(DABC) = Tr(CDAB) = Tr(BCDA)  \tag{7.61}
+\]
+
+もし、何らかの方法で、場の強度テンソルを\(W_{μν} → \mathcal{U}(x)W_{μν}\mathcal{U}^{−1}(x)\)と変換できれば、\(Tr(W_{μν}W_{μν})\)という項は不変となる。なぜなら<sup>37</sup>
+<!--
+If we somehow manage that our field strength tensor transforms
+as \(W_{μν} → \mathcal{U}(x)W_{μν}\mathcal{U}^{−1}(x)\), the term \(Tr(W_{μν}W_{μν})\) would be
+invariant, because<sup>37</sup>
+-->
+\[
+\begin{align}
+Tr\left(W_{μν}W_{μν}\right)→&Tr\left(\mathcal{U}(x)W_{μν}\mathcal{U}^{−1}(x)\mathcal{U}(x)W_{μν}\mathcal{U}^{−1}(x)\right) \\
+\\
+&\underbrace{=}_{Eq. 7.61}Tr\Big(\underbrace{\mathcal{U}^{−1}(x)\mathcal{U}(x)}_{=1}W_{μν}\underbrace{\mathcal{U}^{−1}(x)\mathcal{U}(x)}_{=1}W_{μν}\Big) \\
+\\
+&= Tr\left(W_{μν}W_{μν}\right)  \tag{7.62}
+\end{align}
+\]
+
+</li></ul></div>
+</p><p class="margin-large">
+<sup>36</sup>
+この性質はトレースの「巡回性」として知られています。言葉で言えば、ここに現れる行列A、B、C、Dの間で巡回置換を行っても、トレースは同じままであることを意味します。積に現れる最後の要素を常に取り、それを先頭に置きます。ただし、任意の置換で同じトレースが得られるとは限らないことに注意してください。例えば、\(Tr(ACBD) \neq Tr(ABCD)\) です。
+<!--
+This property is known as "cyclic 
+property" of the trace. In words it
+means that the trace stays the same
+when we perform cyclic permutations
+among the matrices A, B, C, D that
+appear here. We always take the last
+element that appears in the product and
+put it at the beginning. However, take
+note that arbitrary permutations do not
+lead to the same trace. For example,
+\(Tr(ACBD) \neq Tr(ABCD)\).
+-->
+<br><br>
+
+<sup>37</sup>
+2行目に到達するには、トレースの巡回特性を使用します。
+<!--
+To get to the second line, we use the
+cyclic property of the trace.
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+3. 残念ながら、式7.60に記した単純な場の強度テンソルは、それほどきれいに変換されません。しかし、必要な変換挙動を示す別の場の強度テンソルを構築することができます。上で、スピン\(\frac{1}{2}\)場に対する局所\(\mathcal{SU}(2)\)不変ラグランジアンを得るために必要な方法で変換される共変微分\(D^μ\)を導出しました：\((D^μΨ)^\prime = \mathcal{U}(x)D^μΨ\)。スピン\(\frac{1}{2}\)二重項\(Ψ\)は、<sup>38</sup> \(Ψ → \mathcal{U}(x)Ψ\)のように変換されます。したがって、共変微分は\(D^μ → \mathcal{U}(x)D^μ\mathcal{U}^{−1}(x)\)と変換されると結論付けることができる。
+<!--
+3. Unfortunately, the naive field strength tensor that we wrote
+down in Eq. 7.60 does not transform so nicely. However, we
+can construct a different field strength tensor that has exactly
+the needed transformation behavior. Above, we derived the covariant
+derivative \(D^μ\) that transforms exactly in the way we
+need it to get a locally \(\mathcal{SU}(2)\) invariant Lagrangian for the spin
+\(\frac{1}{2}\) fields: \((D^μΨ)^\prime = \mathcal{U}(x)D^μΨ\). The spin \(\frac{1}{2}\)
+doublet \(Ψ\) transforms
+as<sup>38</sup> \(Ψ → \mathcal{U}(x)Ψ\). Therefore, we can conclude that the covariant 
+derivative transforms as \(D^μ → \mathcal{U}(x)D^μ\mathcal{U}^{−1}(x)\), because
+-->
+\[
+\begin{align}
+(D^μΨ)^\prime &= D^{\prime μ}Ψ^\prime \\
+\\
+&= \mathcal{U}(x)D^μ\underbrace{\mathcal{U}^{−1}(x)\mathcal{U}(x)}_{=1}Ψ \\
+\\
+&= \mathcal{U}(x)D^μΨ  \tag{7.63}
+\end{align}
+\]
+
+さて、スピン1場の局所\(\mathcal{SU}(2)\)不変ラグランジアンを得るための最後の重要なトリックは、物体<sup>39</sup>
+<!--
+Now the final crucial trick to get a locally \(\mathcal{SU}(2)\) invariant Lagrangian
+for the spin 1 fields is the observation that the object<sup>39</sup>
+-->
+
+\[
+W_{μν} ≡ \frac{i}{g}[D^μ, D^ν] =\frac{i}{g}\left(D^μD^ν − D^νD^μ\right)  \tag{7.64}
+\]
+
+は、まさに正しい変換挙動を示す<sup>40</sup> \(W_{μν} →\mathcal{U}(x)W_{μν}\mathcal{U}^{−1}(x)\):
+<!--
+has exactly the correct transformation behavior<sup>40</sup> \(W_{μν} →\mathcal{U}(x)W_{μν}\mathcal{U}^{−1}(x)\):
+-->
+\[
+\begin{align}
+\frac{g}{i}W_{μν} &= D^μD^ν − D^νD^μ\\
+\\
+&→ \mathcal{U}(x)D^μ\underbrace{\mathcal{U}^{−1}(x)\mathcal{U}(x)}_{=1}
+D^ν\mathcal{U}^{−1} − \mathcal{U}(x)D^ν\underbrace{\mathcal{U}^{−1}(x)\mathcal{U}(x)}_{=1}D^μ\mathcal{U}^{−1} \\
+\\
+&= \mathcal{U}(x)D^μD^ν\mathcal{U}^{−1} −\mathcal{U}(x)D^νD^μ\mathcal{U}^{−1} \\
+\\
+&= \mathcal{U}(x)\left(D^μD^ν − D^νD^μ\right)\mathcal{U}^{−1} \\
+\\
+&= \mathcal{U}(x)W_{μν}\mathcal{U}^{−1}  \tag{7.65}
+\end{align}
+\]
+
+</li></ul></div>
+</p><p class="margin-large">
+<sup>38</sup>
+See Eq. 7.48.
+<br><br>
+<sup>39</sup>
+この時点で、この正しい場の強度テンソルを導入する方法は、少し魔法のように見えるかもしれません。しかしもちろん、正しい場の強度テンソルが共変微分の交換子でなければならないのには、深い理由があります。残念ながら、適切な議論は本書の範囲を超えています。ここで追加の因子 \(\frac{i}{g}\) を含めた理由は、すぐに明らかになります。
+<!--
+At this point the way we introduce
+this correct field strength tensor may
+seem a bit like magic. However, of
+course, there is a deep reason why the
+correct field strength tensor must be the
+commutator of the covariant derivative.
+Unfortunately, a proper discussion lies
+beyond the scope of this text. It will
+become clear in the a moment, why we
+included the additional factor \(\frac{i}{g}\)
+here.
+-->
+<br><br>
+<sup>40</sup>
+なぜ\(D^μD^ν − D^νD^μ\) を使うのか、\(D^μD^ν\) だけではいけないのかと疑問に思うかもしれません。簡単に言うと、ラグランジアンには、制約条件で許されるすべての項を含める必要があるということです。スピン1の場の場合、これは\(∂_μW_ν\) だけでなく\(∂_νW_μ\) も必要になることを意味します。これら両方の可能性を正しく考慮するには、\(D^μD^ν\) だけでなく\(D^νD^μ\) も使う必要があります。これは以下で詳しく説明します。
+<!--
+Maybe you wonder why we use
+\(D^μD^ν − D^νD^μ\) and not just \(D^μD^ν\). In
+short: we need to include all terms that
+are allowed by our restrictions in the
+Lagrangian. For the spin 1 fields this
+means that we not only need \(∂_μW_ν\)
+but also \(∂_νW_μ\). To correctly account for
+both these possibilities, we need to use
+not only \(D^μD^ν\), but also \(D^νD^μ\). This
+will be made explicit below.
+-->
+</p><p>
+<div class="styleBullet">
+<ul><li>
+4. 場の強度テンソルが場 \(W_μ\) に関してどのように見えるかを明示的に計算すると、式 7.60<sup>41</sup> の単純な定義で見逃していたことが分かります。
+<!--
+4. When we now calculate explicitly how our field strength tensor
+looks like in terms of the fields \(W_μ\), we can see what we missed in
+our naive definition in Eq. 7.60<sup>41</sup>
+-->
+
+<sup>41</sup>
+ここで任意のテスト関数 \(f(x)\) を使用します。これは、導関数が何かに作用する必要があるためです。
+<!--
+We include here an arbitrary test
+function \(f(x)\), because our derivatives
+must act on something.
+-->
+\[
+\begin{align}
+W_{μν} f (x) &= \frac{i}{g}\left(D^μD^ν − D^νD^μ\right) f(x) \\
+\\
+
+&=\left(\frac{i}{g}(∂^μ − igW^μ)(∂^ν − igW^ν) −\frac{i}{g}(∂^ν − igW^ν)(∂^μ − igW^μ)\right)f(x) \\
+\\
+
+&=\Bigg(\cancel{\frac{i}{g}∂^μ∂^ν}+ ∂^μW^ν +W^μ∂^ν − igW^μW^ν \\
+\\
+
+&　− \left(\cancel{\frac{i}{g} ∂^ν∂^μ} + ∂^νW^μ +W^ν∂^μ − igW^νW^μ\right)\Bigg)f(x) \\
+\\
+&\underbrace{=}_{積の公式}\Bigg(∂^μW^ν +\cancel{W^ν∂^μ} +\cancel{W^μ∂^ν} − igW^μW^ν \\
+\\
+&　− (∂^νW^μ +\cancel{W^μ∂^ν} +\cancel{W^ν∂^μ} − igW^νW^μ)\Bigg)f(x) \\
+\\
+&=\Big(∂^μW^ν − ∂^νW^μ − igW^μW^ν + igW^νW^μ \Big)f(x) \\
+\\
+&=\Big(∂^μW^ν − ∂^νW^μ − ig[W^μ,W^ν]\Big) f(x)  \tag{7.66}
+\end{align}
+\]
+
+ここで最後の項は、これまで見落としていた項です<sup>42</sup>。これは局所\(\mathcal{SU}(2)\)対称性にとって重要です。\(W^μ\)は行列となり、したがって\(W^μW^ν \neq W^νW^μ\)となるからです。対照的に、局所U(1)対称性を保証するためには、このような項は必要ありませんでした。スピン1の場は1つだけなので、行列は存在せず、したがってこの最後の項は消えます。
+<!--
+The last term here is what we missed previously<sup>42</sup>. It is important
+for local \(\mathcal{SU}(2)\) symmetry, because the \(W^μ\) are now matrices and
+therefore \(W^μW^ν \neq W^νW^μ\). In contrast, in order to ensure local
+U(1) symmetry there was no need for such a term. There was
+just one spin 1 field, hence no matrix and therefore this last term
+vanishes.
+-->
+</li></ul></div>
+</p><p class="margin-large">
+
+<sup>42</sup>
+さらに、ここで、\(W_{μν}\) の定義に係数 \(\frac{i}{g}\) を含めた理由がわかります。この係数は、\(D^μ\) の定義から生じる係数をキャンセルするために必要なものです。
+<!--
+In addition, we can see here, why we 
+included the factor \(\frac{i}{g}\)
+in the definition
+of \(W_{μν}\). this factor is exactly what we
+need to cancel the factors that come
+from the definition of \(D^μ\).
+-->
+</p><p>
+かなり長い道のりでしたが、これで局所\(\mathcal{SU}(2)\)変換に対して不変なラグランジアンを書くために必要なものがすべて揃いました。
+<!--
+This was quite a long journey, but now we have everything we
+need to write down a Lagrangian that is invariant under local \(\mathcal{SU}(2)\)
+transformations:
+-->
+\[
+\mathscr{L}_{局所的に \mathcal{SU}(2) 不変} = i\bar{Ψ}γ_μD^μΨ −\frac{1}{4}Tr\left(W_{μν}W^{μν}\right)  \tag{7.67}
+\]
+
+ここで
+<!--
+where
+-->
+\[
+\begin{align}
+D^μ &≡ ∂^μ − igW^μ\\
+\\
+W^{μν} &≡ ∂^μW^ν − ∂^νW^μ − ig[W^μ,W^ν] \\
+\\
+W^μ &≡ (W^μ)_i\frac{σ_i}{2}  \tag{7.68}
+\end{align}
+\]
+</p>
+<h2>7.3 質量項と \(\mathcal{SU}(2)\) と \(\mathcal{U}(1)\) の「統一」</h2>
+<!--
+<h2>7.3 Mass Terms and "Unification" of \(\mathcal{SU}(2)\) and \(\mathcal{U}(1)\)</h2>
+-->
+<p>
+
+前のセクションでは、\(m_1\bar{Ψ}Ψ\) や \(m_2(W^μ)i(W_μ)_i\) のような質量項をラグランジアンに加えると、\(mathcal{SU}(2)\) 対称性が破れてしまうことを説明しました。実験から、対応する粒子<sup>43</sup> は質量を持つことが判明しており、これは慣習的に \(\mathcal{SU}(2)\) 対称性が破れていると解釈されます。これは、高エネルギーでは対称性が存在し、低エネルギーでは自発的に破れることを意味します。
+<!--
+In the last section we couldn’t add mass terms like \(m_1\bar{Ψ}Ψ\) and \(m_2(W^μ)i(W_μ)_i\)
+to the Lagrangian without destroying the \(mathcal{SU}(2)\) symmetry. From experiments we know that the corresponding particles<sup>43</sup> have mass and this is conventionally interpreted as the \(\mathcal{SU}(2)\) symmetry being
+<strong>broken</strong>. This means the symmetry exists at high energy and spontaneously
+breaks at lower energies.
+-->
+</p><p class="margin-large">
+<sup>43</sup>
+例えば、電子 \(e^-\) と電子ニュートリノ νe は
+Ψ で記述され、３つのボソンは
+\((W^μ)_i\) で記述されます。
+<!--
+For example, the electron \(e^-\) and
+the electron-neutrino νe, described by
+Ψ and the three bosons, described by
+\((W^μ)_i\).
+-->
+</p><p>
+
+これまでに我々は局所的に \(\mathcal{U}(1)\) 不変なラグランジアンを導出しており、この文脈では対応するスピン1場を \(B_μ\) と名付けるのが良いだろう。
+<!--
+So far we derived a locally \(\mathcal{U}(1)\) invariant Lagrangian and in this
+context it’s conventional to name the corresponding spin 1 field \(B_μ\):
+-->
+\[
+\mathscr{L}_{局所的に \mathcal{U}(1) 不変} = −m\bar{Ψ}ψ + i\bar{Ψ}γ_μ(∂^μ − igB_μ)ψ −\frac{1}{4}
+B_{μν}B^{μν}  \tag{7.69}
+\]
+
+および
+<!--
+with
+-->
+\[
+B^{μν} := ∂^μB^ν − ∂^νB^μ
+\]
+
+スピン1場 \(B^μ\) は、ラグランジアン \(\mathcal{U}(1)\) を不変にするため、しばしば \(\mathcal{U}(1)\) <strong>ゲージ場</strong>と呼ばれます。
+<!--
+The spin 1 field \(B^μ\) is often called \(\mathcal{U}(1)\) <strong>gauge field</strong>, because it makes
+the Lagrangian \(\mathcal{U}(1)\) invariant.
+-->
+</p><p>
+局所的に\(\mathcal{SU}(2)\)不変なラグランジアンは（式7.67）
+<!--
+The locally \(\mathcal{SU}(2)\) invariant Lagrangian is (Eq. 7.67)
+-->
+\[
+\mathscr{L}_{局所的に \mathcal{SU}(2) 不変} = i\bar{Ψ}γ_μD^μΨ − \frac{1}{4}Tr\left(W_{μν}W^{μν}\right)  \tag{7.70}
+\]
+
+上述のように、３つのスピン１場 \((W_ν)_i\) は、ラグランジアンを局所的に \(\mathcal{SU}(2)\) 不変にするため、\(\mathcal{SU}(2)\) ゲージ場と呼ばれます。
+これらを１つの局所的に \(\mathcal{U}(1)\) かつ局所的に \(\mathcal{SU}(2)\) 不変なラグランジアンに統合することができます<sup>44</sup>
+<!--
+As above, the three spin 1 fields \((W_ν)_i\) are called the \(\mathcal{SU}(2)\) gauge
+fields, because they make the Lagrangian locally \(\mathcal{SU}(2)\) invariant.
+We can combine them into one locally \(\mathcal{U}(1)\) and locally \(\mathcal{SU}(2)\)
+invariant Lagrangian<sup>44</sup>
+-->
+
+</p><p class="margin-large">
+<sup>44</sup>
+ここでも、\(W^μ =\frac{σ_j}{2} W_j^μ\)という表記を使用します。
+<!--
+We use here again the notation
+\(W^μ =\frac{σ_j}{2} W_j^μ\).
+-->
+</p><p>
+
+\[
+\mathscr{L}_{SU(2)\; and\; U(1)} = i\bar{Ψ}γ_μ(∂^μ −igB^μ −ig^\prime W^μ)Ψ−\frac{1}{4}
+Tr\left(W_{μν}W^{μν}\right)−\frac{1}{4}B_{μν}B^{μν}  \tag{7.71}
+\]
+</p><p>
+
+さて、このラグランジアンに\(\mathcal{SU}(2)\)対称性を損なわずに質量項を加えるにはどうすればよいでしょうか？これまで使っていない唯一の要素はスピン0場です。それでは見ていきましょう。複素スピン0場に対する大域的に\(\mathcal{U}(1)\)不変なラグランジアンは、(式7.40)で与えられます。
+<!--
+Now, how can we add mass terms to this Lagrangian without
+spoiling the \(\mathcal{SU}(2)\) symmetry? The only ingredient we haven’t used
+so far is a spin 0 field; so let’s see. The globally \(\mathcal{U}(1)\) invariant Lagrangian
+for a complex spin 0 field is given by (Eq. 7.40)
+-->
+\[
+\mathscr{L}_{spin0} =\frac{1}{2}\left(∂_μφ^†∂^μφ − m^2φ^†φ\right)  \tag{7.72}
+\]
+このラグランジアンに\(φ\)の次の高次のべき乗を加えても、対称性制約<sup>45</sup>に違反することはない。したがって、定数名を慣用名に変更して、
+<!--
+We can add to this Lagrangian the next higher power in \(φ\) without
+violating any symmetry constraints<sup>45</sup>. Thus we write, renaming the 
+constants to their conventional names
+-->
+</p><p class="margin-large">
+<sup>45</sup>
+理にかなった理論を得るために、実際には高階微分だけが禁じられていたことを思い出してください。\(φ\)の高階べき乗は、\(φ\)場の自己相互作用を記述するもので、「自由な」理論を得るために省略されました。
+<!--
+Recall that only higher order derivatives
+were really forbidden in order to
+get a sensible theory. Higher powers
+of \(φ\) describe the self-interaction of the
+field \(φ\) and were omitted in order to get
+a "free" theory.
+-->
+</p><p>
+
+\[
+\mathscr{L}_{spin0+extraTerm} = ∂μ_φ^†∂^μφ + ρ^2φ^†φ − λ(φ^†φ)^2  \tag{7.73}
+\]
+
+式7.41から、このスピン0の場と\(\mathcal{U}(1)\)ゲージ場\(B_μ\)との間に結合項を加えることで、ラグランジアンが局所的に\(\mathcal{U}(1)\)不変になることがわかる。
+<!--
+We already know from Eq. 7.41 how we can add a coupling term
+between this spin 0 field and a \(\mathcal{U}(1)\) gauge field \(B_μ\), which makes the
+Lagrangian locally \(\mathcal{U}(1)\) invariant:
+-->
+\[
+\begin{align}
+\mathscr{L}_{spin0+extraTerm+spin1Coupling} &= \left((∂_μ + igB_μ)φ^†\right)
+\left((∂^μ − igB^μ)φ\right) \\
+\\
+&　+ ρ^2φ^†φ − λ(φ^†φ)^2   \tag{7.74}
+\end{align}
+\]
+
+対称性<sup>46</sup>
+<!--
+with the symmetries<sup>46</sup>
+-->
+</p><p class="margin-large">
+<sup>46</sup>
+式7.13を参照し、ラグランジアン全体の定数は影響を与えないことを思い出してください。
+<!--
+See Eq. 7.13 and recall that an overall
+constant in the Lagrangian has no
+influence.
+-->
+</p><p>
+
+\[
+\begin{align}
+&B_μ → B_μ^\prime = B_μ + ∂_μa(x)  \tag{7.75} \\
+\\
+&φ(x) → φ^\prime(x) = e^{ia(x)}φ(x)  \tag{7.76}
+\end{align}
+\]
+
+前章でスピン \(\frac{1}{2}\) 場に対する局所的に\(\mathcal{SU}(2)\) 不変なラグランジアンを導出したのと同じように、スピン 0 場の二重項<sup>47</sup>に対する局所的に\(\mathcal{SU}(2)\) 不変なラグランジアンは次のように書ける。
+<!--
+In the same way how we derived in the last chapter the locally
+\(\mathcal{SU}(2)\) invariant Lagrangian for spin \(\frac{1}{2}\)
+fields, we can write a locally
+\(\mathcal{SU}(2)\) invariant Lagrangian for doublets of spin 0 fields<sup>47</sup> as
+-->
+</p><p class="margin-large">
+<sup>47</sup>
+\(Φ = 
+\begin{pmatrix}
+φ_1 \\
+φ_2
+\end{pmatrix}
+\)
+</p><p>
+
+\[
+\begin{align}
+\mathscr{L}_{SU(2)\: and\: U(1)} =&\left((∂_μ + ig^\prime W^μ + igB_μ)Φ^†\right)
+\left((∂^μ − ig^\prime W^μ − igB^μ)Φ\right) \\
+\\
+&+\underbrace{ρ^2Φ^†Φ − λ(Φ^†Φ)^2}_{≡−V(Φ)}  \tag{7.77}
+\end{align}
+\]
+
+二重項 \(Φ :=
+\begin{pmatrix}
+φ_1 \\
+φ_2
+\end{pmatrix}\)
+と対称性<sup>48</sup> (式7.58)
+<!--
+with the doublet \(Φ :=
+\begin{pmatrix}
+φ_1 \\
+φ_2
+\end{pmatrix}\)
+and the symmetries<sup>48</sup> (Eq. 7.58)
+-->
+</p><p class="margin-large">
+<sup>48</sup>
+局所\mathcal{SU}(2)\)変換には、再び略語\(\mathcal{U}(x) = e^{ib_i(x)\frac{σ_i}{2}}\)を使用します。
+<!--
+We use again the abbreviation 
+\(\mathcal{U}(x) = e^{ib_i(x)\frac{σ_i}{2}}\) for our local \mathcal{SU}(2)\)
+transformations.
+-->
+</p><p>
+
+\[
+W^μ →W^μ = \mathcal{U}(x)W^μ\mathcal{U}^{−1}(x) +\frac{i}{g}(∂^μ\mathcal{U}(x))\mathcal{U}^{−1}(x) \tag{7.78}
+\]
+
+および
+<!--
+and
+-->
+\[
+Φ → Φ^\prime= \mathcal{U}(x)Φ,　\overline{Φ} → \overline{Φ}^\prime=\overline{Φ}\mathcal{U}^†(x)  \tag{7.79}
+\]
+
+この局所的に \(\mathcal{SU}(2)\) 不変なラグランジアンから始め、以下ではこのラグランジアンがどのようにして \(W^μ = W_i^μ\frac{σ_i}{2}\) 場と \(B^μ\) 場の質量項を与えるのかを考察する。ラグランジアンに「手動で」質量項を加えることはうまくいかない。なぜなら、これらの項は対称性を損ない、無感覚理論につながるからである<sup>49</sup>。
+<!--
+We start with this locally \(\mathcal{SU}(2)\) invariant Lagrangian and investigate
+in the following how this Lagrangian gives us mass terms for the
+fields \(W^μ = W_i^μ\frac{σ_i}{2}\) and \(B^μ\). Adding mass terms "by hand" to the
+Lagrangian does not work, because these terms spoil the symmetry
+and this leads to an insensible theory<sup>49</sup>.
+-->
+</p><p class="margin-large">
+<sup>49</sup>
+その理由は非常に複雑なので、本書では説明しません。専門用語で言えば、くりこみ可能な理論を得るには、局所的に\(\mathcal{SU}(2)\)対称なラグランジアンが必要です。この点については、本章末で紹介した書籍で読むことをお勧めします。
+<!--
+The reason is quite complicated and 
+will not be discussed in this book. In
+technical terms: We need a locally
+\(\mathcal{SU}(2)\) symmetric Lagrangian to get
+a renormalizable theory. You are
+encouraged to read about this in the
+books mentioned at the end of this
+chapter.
+-->
+</p><p>
+
+上記で定義した用語
+<!--
+The term we defined above
+-->
+\[
+\begin{align}
+V(Φ) &= −ρ^2Φ^†Φ + λ(Φ^†Φ)^2 \\
+\\
+&= −ρ^2φ_1^†φ_1 + λ(φ_1^†φ_1)^2 − ρ^2φ_2^†φ_2 + λ(φ_2^†φ_2)^2 \\
+\\
+&= V_1(φ_1) + V_2(φ_2)  \tag{7.80}
+\end{align}
+\]
+
+はしばしばヒッグスポテンシャルと呼ばれる。\(ρ\)の異なる値（\(λ > 0\)）に対する2次元プロットは図7.1に示されている。
+<!--
+is often called Higgs potential. A two-dimensional plot for different
+values of \(ρ\), with \(λ > 0\) can be seen in Fig. 7.1.
+-->
+</p><p>
+
+考え方としては、例えば初期宇宙のような非常に高い温度では、ポテンシャルは左の図のように見えるというものです。この文脈では<strong>真空期待値</strong>と呼ばれる最小値は、\(φ = 0\) で明確に現れます。温度が下がると、パラメーター \(λ\) と \(ρ\) が変化し、それに伴いポテンシャルの形状も変化します。温度が臨界値を下回ると、右の図に示すように、ポテンシャルはもはや \(φ = 0\) で最小値を示しません。つまり、最小値を示す場所は1つだけではなく、複数存在することになります。
+<!--
+The idea is that at very high temperatures, e.g. in the early universe,
+the potential looks like in the image to the left. The minimum,
+in this context called the <strong>vacuum expectation value</strong>, is without ambiguity
+at \(φ = 0\). With sinking temperature the parameters \(λ\) and \(ρ\)
+change, and with them the shape of the potential. After the temperature
+dropped below some critical value the potential no longer has
+its minimum at \(φ = 0\), as indicated in the pictures to the right. Now
+there is not only one location with the minimum value, but many.
+-->
+</p>
+<center><img src="images/fig7_1.png"></center>
+<p>
+
+図7.1: ヒッグスポテンシャルの2次元図。\(ρ\)の異なる値に対するヒッグスポテンシャルは、宇宙の膨張に伴い宇宙が冷却するにつれて変化したと考えられています。
+<!--
+Fig. 7.1: Two-dimensional illustration of
+the Higgs potential for different values
+of \(ρ\), which is believed to have changed
+as the universe cooled down as a
+result of the expansion of the universe.
+Figure adapted from "Spontaneous
+symmetry breaking" by FT2 (Wikimedia
+Commons) released under a CC BY-SA
+3.0 licence: http://creativecommons.
+org/licenses/by-sa/3.0/deed.en.
+URL: http://commons.wikimedia.org/
+wiki/File:Spontaneous_symmetry_
+breaking_(explanatory_diagram).png ,
+Accessed: 8.12.2014
+-->
+</p><p>
+実際、ポテンシャルには無限の最小値が存在する。ポテンシャルの最小値は通常の方法で計算できる。
+<!--
+In fact, the potential has an infinite number of possible minima. The
+minima of the potential can be computed in the usual way
+-->
+\[
+V(φ) = −ρ^2φ^†φ + λ(φ^†φ)(φ^†φ)   \tag{7.81} 
+\]
+
+\[
+\frac{∂V(φ)}{∂φ} = −2ρ^2φ^† + 2λ|φ|^2φ^†\overset{!}{=} 0   \tag{7.82} 
+\]
+
+\[
+→ φ^†(−2ρ^2 + 4λ|φ|^2) \overset{!}{=}0  \tag{7.83} 
+\]
+
+\[
+→ |φ|^2 \overset{!}{=}\frac{ρ^2}{2λ}  \tag{7.84} 
+\]
+
+\[
+→ |φ| \overset{!}{=}\sqrt{\frac{ρ^2}{2λ}} \tag{7.85} 
+\]
+
+\[
+φ_{min} =\sqrt{\frac{ρ^2}{2λ}}e^{i\phi}  \tag{7.86}
+\]
+
+これは\(ϕ\)のあらゆる値に対して最小値となるため、無限の数の最小値が存在します。これらの最小値はすべて、半径 \(\sqrt{\frac{ρ^2}{2λ}}\) の円上に存在します。これは図7.2のヒッグスポテンシャルの3次元プロットで確認できます。ソンブレロの上から転がり落ちるビー玉のように、無限の可能性の中から自発的に1つの新しい真空値が選ばれます。
+<!--
+This is a minimum for every value of \(ϕ\) and we therefore have an
+infinite number of minima. All these minima lie on a circle with
+radius \(\sqrt{|frac{ρ^2}{2λ}}\). This can be seen in the three dimensional plot of the
+Higgs potential in Fig. 7.2. Like a marble that rolls down from the
+top of a sombrero, spontaneously one new vacuum value is chosen
+out of the infinite possibilities.
+-->
+</p>
+<center><img src="images/fig7_2.png"></center>
+<p>
+<center>図7.2：ヒッグスポテンシャルの3次元プロット</center>
+<!--
+Fig. 7.2: 3-dimensional plot of the
+Higgs potential. Figure adapted from
+"Mexican hat potential polar" by Rupert
+Millard (Wikimedia Commons) released
+under a public domain licence. URL:
+http://commons.wikimedia.org/wiki/
+File:Mexican_hat_potential_polar.
+svg , Accessed: 7.5.2014
+-->
+</p><p>
+
+式7.80から、ダブレットの場合、両方のコンポーネントがこの選択を行う必要があることがわかります。したがって、ダブレットの場合、最小値は
+<!--
+From Eq. 7.80 we see that for the doublet, both components have
+this choice to make. We therefore have for the doublet the minimum
+-->
+\[
+Φ_{min} =
+\begin{pmatrix}
+φ_{1min} \\
+φ_{2min}
+\end{pmatrix}
+\tag{7.87}
+\]
+
+経済的な<strong>選択肢</strong><sup>50</sup>は最低限
+<!--
+An economical <strong>choice</strong><sup>50</sup> for the minimum is
+-->
+
+</p><p class="margin-large">
+<sup>50</sup>
+
+対称性の破れとは、無限の可能性の中から<strong>1つの</strong>最小値が選ばれることを意味することを思い出してください。
+<!--
+Recall that symmetry breaking means
+that <strong>one</strong> minimum is chosen out of the
+infinite possibilities.
+-->
+</p><p>
+
+\[
+Φ_{min} =
+\begin{pmatrix}
+0 \\
+\sqrt{\frac{ρ^2}{2λ}}
+\end{pmatrix}
+≡
+\begin{pmatrix}
+0 \\
+\frac{v}{\sqrt{2}}
+\end{pmatrix}
+\tag{7.88}
+\]
+
+ここで、係数 \(\frac{1}{2}\) は計算を容易にするための慣例に過ぎず、簡潔にするために \(v ≡\sqrt{\frac{ρ^2}{λ}}\) と定義します。場の量子論では、厳密な解が存在しないため、計算は常に最小値の周りの級数展開として行われることを後で学びます。したがって、意味のある結果を得るためには、場 \(Φ\) を新しい最小値に移動する必要があります。そこで、場を
+<!--
+where the factor \(\frac{1}{2}\)
+is just a convention to make computations easier
+and we define for brevity \(v ≡\sqrt{\frac{ρ^2}{λ}}\) . We will learn later that in quantum
+field theory computations are always done as a series expansion
+around the minimum, because no exact solutions are available. In
+order to get sensible results, we must therefore shift the field \(Φ\) to the
+new minimum. We therefore consider the field
+-->
+
+\[
+Φ =
+\begin{pmatrix}
+φ_{1r} + iφ_{1c} \\
+\frac{v}{\sqrt{2}+φ_{2r} + iφ_{2c}
+\end{pmatrix}
+\tag{7.89}
+\]
+
+これは<sup>51</sup>と書き直すことができる。
+<!--
+This can be rewritten as<sup>51</sup>
+-->
+</p><p class="margin-large">
+<sup>51</sup>
+このフォームは非常に便利です。後ほど説明します。
+<!--
+This form is very useful as we will see
+in a moment.
+-->
+</p><p>
+
+\[
+Φ = e^{iθ_i\frac{σ_i}{2}}
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix}
+\tag{7.90}
+\]
+
+指数関数の級数展開とパウリ行列σi（式3.80）の明示的な形を考えると、
+一次で
+<!--
+because if we consider the series expansion of the exponential function
+and the explicit form of the Pauli matrices σi (Eq. 3.80), we can
+see that in first order
+-->
+\[
+\begin{align}
+e^{iθ_i\frac{σ_i}{2}}
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix}
+&≈ (1 + i\frac{1}{2}θ_iσ_i)
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix} \\
+\\
+&= (1 + i\frac{1}{2}θ_1σ_1 + i\frac{1}{2}θ_2σ_2 + i\frac{1}{2}θ_3σ_3)
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+1 + i\frac{1}{2}θ_3 & i\frac{1}{2}θ_1 + \frac{1}{2}θ_2 \\
+i\frac{1}{2}θ_1 −\frac{1}{2}θ_2 &  1 − i\frac{1}{2}θ_3
+\end{pmatrix}
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix} \\
+\\
+&=
+\begin{pmatrix}
+(i \frac{1}{2}θ_1 + \frac{1}{2}θ_2)\frac{v+h}{\sqrt{2}} \\
+(1 − i\frac{1}{2}θ_3)\frac{v+h}{\sqrt{2}}
+\end{pmatrix} \\
+\\
+redefinitions→ &≡
+\begin{pmatrix}
+φ_{1r} + iφ_{1c} \\
+\frac{v}{\sqrt{2}}+φ_{2r} + iφ_{2c}
+\end{pmatrix}
+\tag{7.91}
+\end{align}
+\]
+</p><p>
+
+複素スピン0二重項をこの形で書くことは便利です。なぜなら、局所的な\(\mathcal{SU}(2)\)（ゲージ）対称性を用いて計算を簡素化できるからです。物理的な結果を得るためには<strong>1つの</strong>ゲージを選択する必要があり、私たちは計算を最も容易にするゲージを用いることを好みます<sup>52</sup>。
+<!--
+Writing the complex spin 0 doublet in this form is useful, because
+we can now use the local \(\mathcal{SU}(2)\) (gauge) symmetry to make computations
+simpler. In order to get physical results <strong>one</strong> gauge must
+be chosen and we prefer to work with a gauge that makes life the
+easiest<sup>52</sup>.
+-->
+</p><p class="margin-large">
+<sup>52</sup>
+
+計算の種類によって、異なるゲージが有用となる場合があります。ここでは、ユニタリーゲージと呼ばれるものを扱います。これは、理論の物理的な粒子の内容を理解するのに特に有用です。
+<!--
+For different computations, different 
+gauges can be useful. Here we will
+work with what is called the unitary
+gauge, that is particularly useful to
+understand the physical particle content
+of a theory.
+-->
+</p><p>
+一般的な局所\(\mathcal{SU}(2)\)変換は
+<!--
+A general local \(\mathcal{SU}(2)\) transformation is
+-->
+\[
+Φ → Φ^\prime = e^{ib_i(x)\frac{σ_i}{2}} Φ  \tag{7.92}
+\]
+
+これにより、適切な \(b_i(x)\) を選択することで、式 7.90 の指数関数の因子を消去することができます。複素スカラー二重項は、この <strong>ユニタリーゲージ</strong>
+<!--
+which enables us to eliminate the exponential factor in Eq. 7.90, by
+choosing appropriate \(b_i(x)\). The complex scalar doublet is then, in
+this <strong>unitary gauge</strong>
+-->
+\[
+Φ_{un} =
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix}
+\tag{7.93}
+\]
+
+これを理解する別の方法は、複素スカラー二重項に現れた元の4つの成分のうち、3つが\(\mathcal{SU}(2)\)ゲージ自由度<sup>53</sup>に相当するというものです。したがって、これら3つの場は物理的なものではなく<sup>54</sup>、実験で測定することはできません。残るのは<strong>1つの</strong>物理的な場\(h\)であり、これは<strong>ヒッグス場</strong>と呼ばれます。
+<!--
+Another possible way to understand this is that of the original four
+components that appeared in our complex scalar doublet, three are
+equivalent to our \(\mathcal{SU}(2)\) gauge freedom<sup>53</sup>. Therefore, these three
+fields aren’t physical<sup>54</sup> and can’t be measured in experiments. What
+remains is <strong>one</strong> physical field \(h\), which is called the <strong>Higgs field</strong>.
+-->
+</p><p class="margin-large">
+<sup>53</sup>
+
+これは、局所的な \(\mathcal{SU}(2)\) 理論が存在するからこそ可能であり、また、\(θ = θ(x)\) という場が時空内の位置に依存するからこそ可能であることに注意してください。
+大域対称性の場合、これらの成分はゲージ法で除去することはできず、一般的にゴールドストーンボソンと呼ばれる質量のないボソンとして解釈されます。
+<!--
+Take note that this is only possible,
+because we have a local \(\mathcal{SU}(2)\) theory,
+because our fields \(θ = θ(x)\), of course
+depend on the location in spacetime.
+For a global symmetry, these components
+can’t be gauged away, and are
+commonly interpreted as massless
+bosons, called Goldstone bosons.
+-->
+<br><br>
+
+<sup>54</sup>
+局所的な \(\mathcal{SU}(2)\) 対称性は、実験で測定できるものではありません。これは単に方程式の対称性に過ぎず、ゲージ自由度は実験で測定できるすべてのものから消えてしまいます。そうでなければ、理論から予測を行うことは不可能です。なぜなら、（\(\mathcal{SU}(2)\) 変換によって結び付けられた）同値な予測が無限に存在することになるからです。しかし、この対称性は決して役に立たないわけではありません。なぜなら、それはラグランジアン の正しい形へと導いてくれるからです。
+<!--
+The local \(\mathcal{SU}(2)\) symmetry is nothing
+that can be measured in experiments.
+This is merely a symmetry of our equations
+and the gauge freedom disappears
+from everything that is measurable in
+experiments. Otherwise there would
+be no possible way to make predictions
+from our theory, because we would
+have an infinite number of equivalently
+possible predictions (that are connected
+by \(\mathcal{SU}(2)\) transformations). Nevertheless,
+this symmetry is far from being
+useless, because it guides us to the
+correct form of the Lagrangian.
+-->
+</p><p>
+
+次に、この対称性の破れがラグランジアンに及ぼす影響について見ていきたいと思います。ここでは便宜上、式7.74で導出されたラグランジアンを引用し、\(B_μ\) の前に追加の係数 \(\frac{1}{2}\) を付け加えることで、以降の計算における表記を整理します<sup>55</sup>
+<!--
+Next, we want to take a look at the implications of this symmetry
+breaking on the Lagrangian. We recite here the Lagrangian in question
+for convenience, which was derived in Eq. 7.74 and include an
+additional factor \(\frac{1}{2}\)
+in front of the field \(B_μ\) to unclutter the notation in
+the calculations that follow<sup>55</sup>
+-->
+</p><p class="margin-large">
+<sup>55</sup>
+
+このような係数は何も変化させません。なぜなら、それは単に結合定数 \(\frac{1}{2}\tilde{g} ≡ g\) の再定義に相当するからです。
+したがって、厳密に言えば、ここでは \(g\) ではなく \(\tilde{g}\) を使用する必要があります。しかし、定数の名前は重要ではなく、ここでは結合定数を単に \(g\) と呼びます。
+<!--
+Such a factor changes nothing, because
+it corresponds simply to a redefinition
+of the coupling constant \(\frac{1}{2}\tilde{g} ≡ g\).
+Thus, strictly speaking, we should use
+\(\tilde{g}\) here instead of \(g\). However, the name
+of the constant doesn’t matter and we
+continue to call the coupling constant
+simply \(g\).
+-->
+</p><p>
+
+\[
+\begin{align}
+\mathscr{L} =& \left((∂_μ + ig^\prime\frac{σ_i}{2}(W_μ)_i + i\frac{1}{2}gB_μ)Φ^†\right)
+\left((∂^μ − ig^\prime\frac{σ_i}{2}(W^μ)_i − i\frac{1}{2}gB^μ)Φ\right) \\
+\\
+&− V(Φ)  \tag{7.94}
+\end{align}
+\]
+
+ここで、式7.93で定義されたユニタリーゲージのシフトされた場\(Φ\)を置き換えます。特に興味深いのは、定数真空値vを含む新たに出現する項です。その他の項はヒッグス場の自己相互作用と、ヒッグス場と他の場との相互作用を記述しますが、これ以上は考察しません。最小値\(Φ → Φ_{min} =
+\begin{pmatrix}
+0 \\
+\frac{v}{\sqrt{2}}
+\end{pmatrix}\)を代入すると、つまり\(h\)を無視すると、次の式が得られます。
+<!--
+We now substitute the field \(Φ\) with the shifted field in the unitary
+gauge, which was defined in Eq. 7.93. Of particular interest for us
+will be the newly appearing terms that include the constant vacuum
+value v. The other terms describe the self-interaction of the Higgsfield
+and the interaction of the Higgs field with the other fields,
+which we will not examine any further. If we put in the minimum
+value \(Φ → Φ_{min} =
+\begin{pmatrix}
+0 \\
+\frac{v}{\sqrt{2}}
+\end{pmatrix}\), which means we ignore \(h\), we get
+-->
+
+\[
+\left((∂_μ + i\frac{σ_i}{2}g^\prime(W_μ)_i + i\frac{1}{2}gB_μ)Φ_{min}^†\right)
+\left((∂^μ − ig^\prime\frac{σ_i}{2}(W^μ)_i − i\frac{1}{2}gB^μ)Φ_{min}\right)
+\]
+
+\[
+=\left|\left((∂^μ + ig^\prime\frac{σ_i}{2}(W^μ)_i + i\frac{1}{2}gB^μ)Φmin\right)\right|^2
+\]
+
+\[
+=\left|\left((∂^μ + ig^\prime\frac{σ_i}{2}(W^μ)_i + i\frac{1}{2}gB^μ)\sqrt{\frac{1}{2}}
+\begin{pmatrix}
+0 \\
+v
+\end{pmatrix}\right)\right|^2
+\]
+
+\[
+=\frac{v^2}{8}\left|\left((g^\prime σ_i(W^μ)_i + gB^μ)
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}\right)\right|^2
+\]
+
+これを用いると、\(B^μ\)の背後に暗黙の2×2単位行列があり、パウリ行列<sup>56</sup> \(σ_i\)の明示的な形は次式となる。
+<!--
+Now using that we have behind \(B^μ\) an implicit 2 × 2 identity matrix
+and the explicit form of the Pauli matrices<sup>56</sup> \(σ_i\) yields
+-->
+</p><p class="margin-large">
+<sup>56</sup>
+\(σ_iW_i =
+\begin{pmatrix}
+W_3 & W_1 − iW_2 \\
+W_1 + iW_2 & −W_3
+\end{pmatrix}
+\)
+</p><p>
+
+\[
+\begin{align}
+&=\frac{v^2}{8}\left|
+\begin{pmatrix}
+g^\prime W_3^μ+ gB^μ &  g^\prime W_1^μ− ig^\prime W_2^μ \\
+g^\prime W_1^μ + ig^\prime W_2^μ & −g^\prime W_3^μ + gB^μ
+\end{pmatrix}
+\begin{pmatrix}
+0 \\
+1
+\end{pmatrix}\right|^2 \\
+\\
+&=\frac{v^2}{8}\left|\left(
+\begin{pmatrix}
+g^\prime W_1^μ− ig^\prime W_2^μ \\
+−g^\prime W_3^μ+ gB^μ
+\end{pmatrix}\right)\right|^2 \\
+\\
+&=\frac{v^2}{8}\left((g^\prime)^2\left((W_1^μ)^2 + (W_2^μ)^2\right)
++(g^\prime W_3^μ− gB^μ)^2\right)
+\tag{7.95}
+\end{align}
+\]
+</p><p>
+次に、これまで使用してきた古いスピン1フィールドから2つの新しいスピン1フィールドを定義します。
+<!--
+Next we define two new spin 1 fields from the old ones we have
+been using so far
+-->
+
+\[
+\begin{align}
+W_+^μ &≡ \frac{1}{\sqrt{2}}(W_1^μ− iW_2^μ)  \tag{7.96} \\
+\\
+W_-^μ &≡ \frac{1}{\sqrt{2}}(W_1^μ+ iW_2^μ)  \tag{7.97}
+\end{align}
+\]
+
+ここで、\(W_+^μ\) は \(W_-^μ\) の複素共役である。式 7.95 の最初の項は、
+<!--
+where \(W_+^μ\) is the complex conjugate of \(W_-^μ\). The first term in Eq. 7.95
+is then
+-->
+
+\[
+(W_1^μ)^2 + (W_2^μ)^2 = 2(W^+)_μ(W^−)^μ  \tag{7.98}
+\]
+
+そして定数を含めて、
+<!--
+and thus we have, including the constants,
+-->
+\[
+\left(\underbrace{\frac{g^\prime v}{2}}_{≡m_W}\right)^2(W^+)_μ(W^−)^μ  \tag{7.99}
+\]
+これは典型的な「質量」項のように見えます。
+<!--
+which then looks like a typical "mass" term.
+-->
+</p><p>
+
+式7.95の2番目の項は行列形式で書くことができる。
+<!--
+The second term in Eq. 7.95 can be written in matrix form
+-->
+\[
+(g^\prime W_3^μ− gB^μ)^2 =\left(W_3^μ, B_μ\right)
+\underbrace{
+\begin{pmatrix}
+g^{\prime 2} & −gg-\prime \\
+−gg^\prime &  g^2
+\end{pmatrix}
+}_{≡G}
+\begin{pmatrix}
+W_3^μ \\
+B_μ
+\end{pmatrix}
+\tag{7.100}
+\]
+
+これを質量項として解釈できるようにするには、行列Gを対角化する必要があります<sup>57</sup>。標準的な線形代数の方法では、行列Gの固有値\(λ_1, λ_2\)と正規化された<sup>58</sup>固有ベクトル\(\vec{v}_1,\vec{v}_2\)が必要であり、これらは
+<!--
+In order to be able to interpret this as mass-terms, we need to diagonalize<sup>57</sup> the matrix G. The standard linear-algebra way to do this 
+needs the eigenvalues \(λ_1, λ_2\) and normalized<sup>58</sup> eigenvectors \(\vec{v}_1,\vec{v}_2\) of
+the matrix G, which are
+-->
+</p><p class="margin-large">
+<sup>57</sup>
+すぐにわかるように、対角化行列は他の質量項と全く同じように見える項を与えます。これにより、対応する場を実験で観測できる物理的な場として解釈することが可能になります。\(W_3^μ\) 場と \(B_μ\) 場を扱うこともできますが、物理的な解釈ははるかに難しくなります。
+<!--
+We will see in a moment that a 
+diagonalized matrix gives us terms
+that look exactly like the other mass
+terms. This enables us to interpret the
+corresponding fields as physical fields
+that can be observed in experiments.
+We could work with fields \(W_3^μ\) and \(B_μ\),
+but the physical interpretation would
+be much harder.
+-->
+<br><br>
+
+<sup>58</sup>
+これは長さ1、つまり\(\vec{v} ·\vec{v} = 1\)を意味します。
+<!--
+Which means length 1, i.e. \(\vec{v} ·\vec{v} = 1\).
+-->
+</p><p>
+
+\[
+λ_1 = 0 →\vec{v}_1 =\frac{1}{\sqrt{g^2 + g^{\prime 2}}}
+\begin{pmatrix}
+g \\
+g^\prime
+\end{pmatrix}
+\]
+
+\[
+λ_2 = (g^2 + g^{\prime 2}) →\vec{v}_2 =\frac{1}{\sqrt{g^2 + g^{\prime 2}}}
+\begin{pmatrix}
+g^\prime \\
+−g
+\end{pmatrix}
+\]
+
+行列\(G\)は、固有ベクトルを列として構成される行列Mによって対角化される。すなわち\(G_{diag} = M^{−1}GM\)であり、
+<!--
+The matrix \(G\) is then diagonalized by the matrix M build from the
+eigenvectors as its columns, i.e. \(G_{diag} = M^{−1}GM\), with
+-->
+\[
+M =\frac{1}{\sqrt{g^2 + g^{\prime 2}}}
+\begin{pmatrix}
+g & g^\prime \\
+g^\prime &  −g
+\end{pmatrix}
+\tag{7.101}
+\]
+
+および
+<!--
+and
+-->
+
+\[
+G_{diag} =
+\begin{pmatrix}
+λ_1 & 0 \\
+0 & λ_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 0 \\
+0 & (g^2 + g^{\prime 2})
+\end{pmatrix}
+\tag{7.102}
+\]
+
+行列 \(M\) は正規化された固有ベクトルを扱うため、直交 \((M^T = M^{−1})\) である。
+<!--
+The matrix \(M\) is orthogonal \((M^T = M^{−1})\), because we work with
+normalized eigenvectors:
+-->
+\[
+M^TM =\frac{1}{\sqrt{g^2 + g^{\prime 2}}}
+\begin{pmatrix}
+g & g^\prime \\
+g^\prime & −g
+\end{pmatrix}
+\frac{1}{\sqrt{g^2 + g^{\prime 2}}}
+\begin{pmatrix}
+g & g^\prime \\
+g^\prime & −g
+\end{pmatrix}
+\]
+
+\[
+=\frac{1}{(g^2 + g^{\prime 2})}
+\begin{pmatrix}
+g^2 + g^{\prime 2} &  gg^\prime − gg^\prime \\
+gg^\prime − gg^\prime & g^2 + g^{\prime 2}
+\end{pmatrix}
+=
+\begin{pmatrix}
+1 & 0 \\
+0 & 1
+\end{pmatrix}
+\tag{7.103}
+\]
+
+そこで、2つの単位行列\(1 = M^TM\)を式7.100に追加します。
+<!--
+We therefore add two unit matrices \(1 = M^TM\), into Eq. 7.100:
+-->
+\[
+\left(W_3^μ, B_μ\right)\underbrace{MM^T}_{=1}G\underbrace{MM^T}_{=1}
+\begin{pmatrix}
+W_3^μ \\
+B_μ
+\end{pmatrix}
+=
+\left(W_3^μ, B_μ\right)M\underbrace{M^TGM}_{=G_{diag}}M^T
+\begin{pmatrix}
+W_3^μ \\
+B_μ
+\end{pmatrix}
+\tag{7.104}
+\]
+
+残る課題は、\(M^T
+\begin{pmatrix}
+W_3^μ \\
+B_μ
+\end{pmatrix}\) を評価して、ラグランジアンにおいて容易に解釈可能な質量項を持つ2つの新しい場の定義を得ることです。
+<!--
+The remaining task is then to evaluate \(M^T
+\begin{pmatrix}
+W_3^μ \\
+B_μ
+\end{pmatrix}\), in order to get the
+definition of two new fields, which have easily interpretable mass
+terms in the Lagrangian:
+-->
+
+\[
+\begin{align}
+M^T
+\begin{pmatrix}
+W_3^μ \\
+B_μ
+\end{pmatrix}
+&=
+\frac{1}{\sqrt{g^2 + g^{\prime 2}}}
+\begin{pmatrix}
+g & g^\prime \\
+g^\prime & −g
+\end{pmatrix}
+\begin{pmatrix}
+W_3^μ \\
+B_μ
+\end{pmatrix} \\
+\\
+&=\frac{1}{\sqrt{g^2 + g^{\prime 2}}}
+\begin{pmatrix}
+(gW_3^μ3 + g^\prime B^μ) \\
+(g^\prime W_3^μ− gB^μ)
+\end{pmatrix}
+≡
+\begin{pmatrix}
+A^μ \\
+Z_μ
+\end{pmatrix}
+\tag{7.105}
+\end{align}
+\]
+
+したがって、第2項は次のように書ける。
+<!--
+We can therefore write the second term as
+-->
+
+\[
+\left(A^μ　Z_μ\right) G_{diag}
+\begin{pmatrix}
+A^μ \\
+Z_μ
+\end{pmatrix}
+=\left(A^μ　Z_μ\right)
+\begin{pmatrix}
+0 & 0 \\
+0 & (g^2 + g^{\prime 2})
+\end{pmatrix}
+\begin{pmatrix}
+A^μ \\
+Z_μ
+\end{pmatrix}
+\]
+
+\[
+= (g^2 + g^{\prime 2})(Z^μ)^2 + 0 · (A^μ)^2  \tag{7.106}
+\]
+</p><p>
+
+<strong>まとめ</strong>: スピン1場 \(W_i^μ\) と \(B^μ\) の質量項を含まないラグランジアンから始めました (式7.71)
+<!--
+<strong>To summarize</strong>: We started with a Lagrangian, without mass terms
+for the spin 1 fields \(W_i^μ\) and \(B^μ\) (Eq. 7.71)
+-->
+\[
+\mathscr{L}_{SU(2)\; and\: U(1)} = i\bar{Ψ}γ_μ(∂^μ −igB^μ −ig^\prime W^μ)Ψ− \frac{1}{4}
+Tr\left(W_{μν}W^{μν}\right)−\frac{1}{4}B_{μν}B^{μν} \tag{7.107}
+\]
+
+次に、スピン0の場の二重項（式7.77）との相互作用を考慮しました。
+そして、自発的対称性の破れの過程を経て、ラグランジアンに質量項として解釈される新しい項が加わります<sup>59</sup>
+<!--
+Then we included interactions with a doublet of spin 0 fields (Eq. 7.77)
+and after the process of spontaneous symmetry breaking, we have
+new terms in the Lagrangian that are interpreted as mass terms<sup>59</sup>
+-->
+
+</p><p class="margin-large">
+<sup>59</sup>
+
+ここで最初の項については、式7.95と式7.98を組み合わせます。
+<!--
+For the first term here, we combine
+Eq. 7.95 with Eq. 7.98.
+-->
+</p><p>
+
+\[
+\underbrace{\frac{1}{4}v^2g^{\prime 2}}_{=M_W^2}(W^+)_μ(W^−)^μ+
+\underbrace{\frac{1}{8}v^2(g^2 + g^{\prime 2})}_{=\frac{1}{2}M_Z^2}
+Z_μ^2+\underbrace{\frac{1}{8}v^20}_{photon\; mass =0}·A_μ^2  \tag{7.108}
+\]
+
+スピン1の場の一つ \(A_μ\) は、自発的対称性の破れ後も質量がゼロのままであることがわかります。これは電磁気学の光子場であり、これまでのすべての実験は光子が質量ゼロであることを証明しています >sup>60</sup>。重要な観察点は、\(Z\)ボソンを司る場 \(Z_μ\) と光子を司る場​​ \(A_μ\) が、場 \(B_μ\) と \(W_μ^3\) の直交線形結合であるということです。したがって、両方とも共通の起源を持つことがわかります。
+<!--
+We can see that one of the spin 1 fields \(A_μ\) remains massless after
+spontaneous symmetry breaking. This is the photon field of electromagnetism
+and all experiments up to now verify that the photon is
+massless >sup>60</sup>. An important observation is that the field responsible for 
+\(Z\)-bosons \(Z_μ\) and the field responsible for photons \(A_μ\) are orthogonal
+linear combinations of the fields \(B_μ\) and \(W_μ^3\). Therefore we can see
+that both have a common origin!
+-->
+</p><p class="margin-large">
+<sup>60</sup>
+
+このセクションでは、いくつかの非常に重要な概念を省略していることに注意してください。
+ハイパーチャージとワインベルク角
+ワインベルク角 \(θ_W\) は、\(\cos(θ_W) = \frac{g}{\sqrt{g^2+g^{\prime 2}}}\) または
+\(\sin(θ_W) = \frac{g^\prime}{\sqrt{g^2+g^{\prime 2}}}\) と単純に定義されます。これは、このセクションで説明したいくつかの定義を簡略化するために使用できます。ハイパーチャージは説明が少し複雑なので、より深く掘り下げたい方は、場の量子論に関する標準的なテキストを参照してください。そのうちのいくつかは、第9章の最後に推奨されています。
+<!--
+Take note that I omitted some very
+important notions in this section:
+Hypercharge and the Weinberg angle.
+The Weinberg angle \(θ_W\) is simply
+defined as \(\cos(θ_W) = \frac{g}{\sqrt{g^2+g^{\prime 2}}}\) or
+\(\sin(θ_W) = \frac{g^\prime}{\sqrt{g^2+g^{\prime 2}}}\). This can be used
+to simplify some of the definitions
+mentioned in this section. Hypercharge
+is a bit more complicated to explain
+and those who want to dig deeper
+are referred to the standard texts
+about quantum field theory, some of
+which are recommended at the end of
+Chapter 9.
+-->
+</p><p>
+
+同じ形式論を用いて、局所 \(\mathcal{SU}(2)\) 対称性を損なうことなくスピン \(\frac{1}{2}\) 場の質量項を得ることができますが、これを議論する前に、自然界の非常に興味深い事実、パリティの破れについて話す必要があります。
+<!--
+The same formalism can be used to get mass terms for spin \(\frac{1}{2}\)
+fields without spoiling the local \(\mathcal{SU}(2)\) symmetry, but before we
+discuss this, we need to talk about one very curious fact of nature:
+parity violation.
+-->
+</p>
+<h2>7.4 パリティ違反</h2>
+<!--
+<h2>7.4 Parity Violation</h2>
+-->
+<p>
+
+科学史上最大の発見の一つは、自然はパリティ変換に対して不変ではないというものでした。簡単に言えば、これは一部の実験が、その鏡像的な類似物とは異なる挙動を示すことを意味します。パリティ対称性の破れを発見した実験は、ウーの実験です。この実験の詳細な説明は興味深いものですが、現在の主題から逸脱するため、ここでは最終結果についてのみ議論しましょう。
+<!--
+One of the biggest discoveries in the history of science was that nature
+is not invariant under parity transformations. In layman’s terms
+this means that some experiments behave differently than their mirrored
+analogue. The experiment that discovered the violation of
+parity symmetry was the Wu experiment. A full description of this
+experiment, although fascinating, strays from our current subject, so
+let’s just discuss the final result.
+-->
+</p><p>
+
+ウーの実験は、弱い力を媒介する粒子（\(W^+, W^-, Z\)ボソン）は左カイラル粒子とのみ結合することを発見しました。
+言い換えれば、<strong>左カイラル粒子のみが弱い力を介して相互作用する</strong><sup>61</sup>。弱い相互作用で生成される粒子はすべて左カイラルです。
+ニュートリノは弱い力を介してのみ相互作用するため、右カイラルニュートリノが存在しない可能性があります<sup>62</sup>。他のすべての粒子は他の相互作用を介して生成されるため、右カイラルである可能性もあります。
+<!--
+The Wu experiment discovered that the particles mediating the
+weak force (the \(W^+,W^−, Z\) bosons) only couple to left-chiral particles.
+In other words: <strong>only left-chiral particles interact via the weak
+force</strong><sup>61</sup>. All particles produced in weak interactions are left-chiral.
+Neutrinos interact exclusively via the weak force and therefore it is
+possible that there are no right-chiral neutrinos<sup>62</sup>. All other particles
+can be produced via other interactions and therefore can be rightchiral,
+too.
+-->
+</p><p class="margin-large">
+<sup>61</sup>
+このセクションの最後で、なぜパリティ違反となるのかを説明します。
+<!--
+We will discuss at the end of this 
+section why this means that parity is
+violated
+-->
+<br><br>
+
+<sup>62</sup>
+質量を持つ左カイラル粒子は、伝播中に常に右カイラル成分を得ることがすぐに分かります。実験から、ニュートリノには質量があることが分かっているので、右カイラルニュートリノ成分が存在すると予想されます。しかし、この右カイラル成分は、既知の相互作用には関与していません。
+<!--
+We will see in a moment that massive,
+left-chiral particles always get a rightchiral
+component during propagation.
+It is known from experiments that
+neutrinos have mass and therefore we
+would expect a right-chiral neutrino
+component. Nevertheless, this rightchiral
+component does not participate
+in any known interaction.
+-->
+</p><p>
+
+ここまで、ローレンツ群の異なる表現に従って変形する物体のラベルとして、左カイラルと右カイラルという用語を用いてきました。これは非常に抽象的なもののように思えますが、より直感的な概念であるヘリシティ<sup>63</sup>と相関関係があるため、粒子のカイラル性を測定することができます。
+<!--
+Up to this point, we used left-chiral and right-chiral as labels for
+objects transforming according to different representations of the
+Lorentz group. Although this seems like something very abstract, we
+can measure the chirality of particles, because there is a correlation to
+a more intuitive concept called helicity<sup>63</sup>.
+-->
+
+</p><p class="margin-large">
+<sup>63</sup>
+
+この件についてはここでは議論しません。なぜなら、詳細は本文の目的には関係ないからです。ここで伝えたいのは、それが可能であるということです。これらの点に関する非常に優れた議論は、アレッサンドロ・ベッティーニ著『素粒子物理学入門』(ケンブリッジ大学出版局、第2版、2014年4月) にあります。ISBN 9781107050402
+<!--
+We will not discuss this here, because
+the details make no difference for the
+purpose of the text. The message to
+take away is that it can be done. A very
+nice discussion of these matters can
+be found in Alessandro Bettini. Introduction
+to Elementary Particle Physics.
+Cambridge University Press, 2nd edition,
+4 2014. ISBN 9781107050402
+-->
+</p><p>
+
+実際、ほとんどの場合、粒子は特定の<strong>カイラリティ</strong>を持ちません。つまり、粒子は明確に左カイラルまたは右カイラルであるわけではなく、対応するディラックスピノル \(Ψ\) は両方の要素を持ちます。パリティの破れは理論の<strong>予測外</strong>であり、すべての物理学者にとって全くの驚きでした。今日まで、自然がなぜこれほど奇妙な振る舞いをするのかは誰にもわかりません。それでも、この発見を私たちの枠組みに組み込むのは簡単です。必要なのは、弱い相互作用を記述する際に常に左カイラルスピノルを扱うようにするためのものだけです。
+<!--
+In fact, most of the time particles do not have a specified <strong>chirality</strong>,
+which means they aren’t definitely left-chiral or right-chiral and the
+corresponding Dirac spinor \(Ψ\) has both components. Parity violation
+was <strong>no</strong> prediction of the theory and a total surprise for every
+physicist. Until the present day, no one knows why nature behaves so
+strangely. Nevertheless, it’s easy to accommodate this discovery into
+our framework. We only need something that makes sure we always
+deal with left-chiral spinors when we describe weak interactions.
+-->
+</p><p>
+
+記号 \(χ\) と \(ξ\) はワイルスピノル（2つの成分オブジェクト）、 \(ψ\) はディラックスピノル（2つのワイルスピノルからなる4つの成分オブジェクト）を表すことを思い出してください。
+<!--
+Recall that the symbols \(χ\) and \(ξ\) denote Weyl spinors (two component
+objects), \(ψ\) Dirac spinors (four component objects, consisting of
+two Weyl spinors)
+-->
+
+\[
+ψ =
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+\tag{7.109}
+\]
+
+ディラックスピノルの\(Ψ\)二重項
+<!--
+and \(Ψ\) doublets of Dirac spinors
+-->
+\[
+Ψ =
+\begin{pmatrix}
+ψ_1 \\
+ψ_2
+\end{pmatrix}
+\tag{7.110}
+\]
+</p><p>
+
+ここで必要な「何か」は、射影演算子 \(P_L\) です。
+<!--
+Then the "something" we need is the projection operator \(P_L\):
+-->
+\[
+P_Lψ = P_L
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+=
+\begin{pmatrix}
+χ_L \\
+0
+\end{pmatrix}
+≡ ψ_L  \tag{7.111}
+\]
+
+このような射影演算子は、行列<sup>64</sup>を使用して構築できます。
+<!--
+Such a projection operator can be constructed using the matrix<sup>64</sup>
+-->
+
+</p><p class="margin-large">
+<sup>64</sup>
+式6.13の\(γ_μ\)行列の定義を思い出してください。\(γ_4\)行列が欠落していることに気付かないようにしてください。\(γ_0\)の代わりに\(γ_4\)を使用する別の慣習があり、これらの慣習間の干渉を避けるため、ここでの行列は一般に\(γ_5\)と呼ばれます。
+<!--
+Recall the definition of the \(γ_μ\) matrices
+in Eq. 6.13 and don’t let yourself get
+confused about the missing \(γ_4\) matrix.
+There is an alternative convention that
+uses \(γ_4\) instead of \(γ_0\) and to avoid interference
+between those conventions, the
+matrix here is commonly called \(γ_5\).
+-->
+</p><p>
+
+\[
+γ_5 = iγ_0γ_1γ_2γ_3 =
+\begin{pmatrix}
+−1 & 0 \\
+0 & 1
+\end{pmatrix}
+\tag{7.112}
+\]
+
+行列 \(γ_5\) は<strong>カイラリティ演算子</strong>と呼ばれます。これは、純粋カイラリティの状態 \(
+\begin{pmatrix}
+χ_L \\
+0
+\end{pmatrix}\)
+または \(
+\begin{pmatrix}
+0 \\
+ξ_R
+\end{pmatrix}\)
+が、​​それぞれ固有値が -1 と +1 である \(γ_5\) の固有状態であるためです。
+<!--
+The matrix \(γ_5\) is called the <strong>chirality operator</strong>, because states of pure
+chirality \(
+\begin{pmatrix}
+χ_L \\
+0
+\end{pmatrix}\)
+or \(
+\begin{pmatrix}
+0 \\
+ξ_R
+\end{pmatrix}\)
+are eigenstates of \(γ_5\) with eigenvalue −1
+and +1 respectively.
+-->
+</p><p>
+
+射影演算子PLは次のように書ける<sup>65</sup>
+<!--
+The projection operator PL can then be written<sup>65</sup>
+-->
+
+</p><p class="margin-large">
+<sup>65</sup>
+
+なぜ \(P_L\) をこんなに複雑なものとして定義し、すぐに明示的な行列形式から始めないのかと疑問に思うかもしれません。\(γ_μ\) が全く異なるように見える別の基底で作業することが可能だからです。(詳細については、セクション 8.10 を参照してください。) ラグランジアンでは、ディラックスピノルは常に行列 \(γ_μ\) と組み合わせて現れることに注意してください。任意の逆行列 U と \(1 = \mathcal{U}^{−1}\mathcal{U}\) をそれらの間に追加することができます。例えば、
+\(∂_μ\bar{Ψ}γ_μΨ = ∂_μ\bar{Ψ}\underbrace{\mathcal{U}^{−1}\mathcal{U}}_{=1}
+γ_μ\underbrace{\mathcal{U}^{−1}\mathcal{U}}_{=1}Ψ =∂_μ\underbrace{\bar{Ψ}\mathcal{U}^{−1}}_{=\bar{Ψ}^\prime}\underbrace{\mathcal{U}γ_μ\mathcal{U}^{−1}}_{γ_μ^\prime}\underbrace{\mathcal{U}Ψ}_{Ψ^\prime}\)。物理学は
+もちろんそのようなものとは完全に独立しています
+変換ですが、これを次の目的で使用できます。
+計算を簡素化します。このテキストで扱う基底は、ワイル基底と呼ばれます。他の基底では、ディラックスピノルの2つの成分は、\(χ_L\) と \(ξ_R\) の混合です。しかしながら、射影演算子 \(P_L = \frac{1−γ_5}{2}\) は、常に左カイラル成分を射影します。なぜなら、 \(P_L^{Weyl}Ψ^{​​Weyl} =
+Ψ_L^{Weyl}⇒ P_L^\prime Ψ^\prime = \frac{1−γ_5^\prime}{2}\underbrace{Ψ^\prime}_{\mathcal{U}Ψ^{Weyl}}
+=\frac{1−\mathcal{U}_iγ_0\mathcal{U}^{−1}\mathcal{U}γ_1\mathcal{U}^{−1}\mathcal{U}γ_2\mathcal{U}^{−1}\mathcal{U}γ_3\mathcal{U}^{−1}}{2} \mathcal{U}Ψ^{Weyl} \)\(=
+\frac{\mathcal{U}−\mathcal{U}_iγ_0γ_1γ_2γ_3}{2} Ψ^{Weyl} = \mathcal{U}\left(\frac{1−γ_5}{2}\right)
+Ψ^{Weyl} =\mathcal{U}Ψ_L^{Weyl} = Ψ_L^\prime\)
+<!--
+Maybe you wonder why we define \(P_L\)
+as so complicated and do not start with
+the explicit matrix form right away. We
+do this, because it’s possible to work
+in a different basis where the matrices
+\(γ_μ\) look completely different. (For more
+information about this have a look
+at Section 8.10). Take note that in the
+Lagrangian the Dirac spinors appear always
+in combination with the matrices
+\(γ_μ\). We can always add a \(1 = \mathcal{U}^{−1}\mathcal{U}\),
+with some arbitrary invertible matrix
+U, between them. For example,
+\(∂_μ\bar{Ψ}γ_μΨ = ∂_μ\bar{Ψ}\underbrace{\mathcal{U}^{−1}\mathcal{U}}_{=1}
+γ_μ\underbrace{\mathcal{U}^{−1}\mathcal{U}}_{=1}Ψ =∂_μ\underbrace{\bar{Ψ}\mathcal{U}^{−1}}_{=\bar{Ψ}^\prime}\underbrace{\mathcal{U}γ_μ\mathcal{U}^{−1}}_{γ_μ^\prime}\underbrace{\mathcal{U}Ψ}_{Ψ^\prime}\). Physics is of
+course completely independent of such
+transformations, but we can use this to
+simplify computations. The basis we
+prefer to work with in this text is called
+Weyl Basis. In other bases the two components
+of a Dirac spinor are mixtures
+of \(χ_L\) and \(ξ_R\). Nevertheless, the projection
+operator defined as \(P_L = \frac{1−γ_5}{2}\) ,
+always projects out the left-chiral
+component, because \(P_L^{Weyl}Ψ^{Weyl} =
+Ψ_L^{Weyl}⇒ P_L^\prime Ψ^\prime = \frac{1−γ_5^\prime}{2}\underbrace{Ψ^\prime}_{\mathcal{U}Ψ^{Weyl}}
+=\frac{1−\mathcal{U}_iγ_0\mathcal{U}^{−1}\mathcal{U}γ_1\mathcal{U}^{−1}\mathcal{U}γ_2\mathcal{U}^{−1}\mathcal{U}γ_3\mathcal{U}^{−1}}{2} \mathcal{U}Ψ^{Weyl} \)\(=
+\frac{\mathcal{U}−\mathcal{U}_iγ_0γ_1γ_2γ_3}{2} Ψ^{Weyl} = \mathcal{U}\left(\frac{1−γ_5}{2}\right)
+Ψ^{Weyl} =\mathcal{U}Ψ_L^{Weyl} = Ψ_L^\prime\)
+-->
+</p><p>
+
+\[
+P_L =\frac{1 − γ_5}{2}=
+\begin{pmatrix}
+1 & 0 \\
+0 & 0
+\end{pmatrix}
+\tag{7.113}
+\]
+
+同様に定義できる
+<!--
+and we can define analogously
+-->
+\[
+P_R =\frac{1 + γ_5}{2}=
+\begin{pmatrix}
+0 & 0 \\
+0 & 1
+\end{pmatrix}
+\tag{7.114}
+\]
+</p><p>
+
+さて、左カイラル粒子のみが弱い力を介して相互作用するという事実を考慮に入れるために、\(W_μ^±\)と\(Z_μ\)が異なる場と相互作用するラグランジアンのすべての項に\(P_L\)を単純に含める必要があります。対応する項は7.2節で導出されており、最終的な結果は式7.67です。便宜上、ここで引用します。
+<!--
+Now, in order to accommodate for the fact that only left-chiral
+particles interact via the weak force, we must simply include \(P_L\) into
+all terms of the Lagrangian that describe the interaction of \(W_μ^±\)
+ and \(Z_μ\) with different fields. The corresponding terms were derived in
+Section 7.2, and the final result was Eq. 7.67, which we recite here for
+convenience:
+-->
+\[
+\begin{align}
+\mathscr{L}_{locally\; SU(2)\; invariant} &= i\bar{Ψ}γ_μD^μΨ −\frac{1}{4}Tr\left(W_{μν}W^{μν}\right) \\
+\\
+&= i\bar{Ψ}γ_μ(∂^μ − igW^μ)Ψ −\frac{1}{4}Tr\left(W_{μν}W^{μν}\right)  \tag{7.115}
+\end{align}
+\]
+
+相互作用を記述する関連項は\(g\bar{Ψ}γ_μW^μΨ\)であり、\(P_L\)を単に追加するだけです。
+<!--
+The relevant term that describes the interaction is \(g\bar{Ψ}γ_μW^μΨ\) and we
+simply add \(P_L\):
+-->
+\[
+→\mathscr{L} = i\bar{Ψ}γ_μ(∂^μ − igW^μP_L)Ψ − \frac{1}{4}Tr\left(W_{μν}W^{μν}\right) \tag{7.116}
+\]
+
+ここで\(P_L\)は二重項に作用するので、
+<!--
+Here \(P_L\) acts on a doublet and is therefore
+-->
+\[
+P_LΨ =
+\begin{pmatrix}
+P_L & 0 \\
+0 & P_L
+\end{pmatrix}
+\begin{pmatrix}
+ψ_1 \\
+ψ_2
+\end{pmatrix}
+=
+\begin{pmatrix}
+(ψ_1)_L \\
+(ψ_2)_L
+\end{pmatrix}
+\tag{7.117}
+\]
+
+1つの\(P_L\)で、左カイラル成分を\(\bar{Ψ}\)と\(Ψ\)の両方の二重項から射影できます。これを理解するには、3つの恒等式が必要です。
+<!--
+One \(P_L\) is enough to project the left-chiral component out of both
+doublets \(\bar{Ψ}\) and \(Ψ\). To see this we need three identities:
+-->
+<div class="styleBullet">
+<ul><li>
+• \((P_L)^2 = P_L\) は明示的な行列形式から明らかであり、すべての射影演算子はこの性質を持つ必要があるため<sup>66</sup>です。
+2回の射影は1回の射影と同じである必要があります。
+<!--
+• \((P_L)^2 = P_L\), which is obvious from the explicit matrix form and
+because every projection operator must have this property<sup>66</sup>. Pro- 
+jecting twice must be the same as projecting one time.
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<sup>66</sup>
+射影演算子のもう一つの定義条件は \(P_LP_R = P_RP_L = 0\) です。これは、\(P_L,P_R\) と \(γ_5\) の明示的な形式を用いることで満たされていることを確認できます。
+<!--
+Another defining condition of any
+projection operator is \(P_LP_R = P_RP_L = 0\),
+which is here fulfilled as you can check
+by using the explicit form of \(P_L,P_R\) and
+\(γ_5\).
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• \(\{γ_5, γ_μ\} = γ_5γ_μ + γ_μγ_5 = 0\)。総当たりでチェックできます。
+計算<sup>67</sup>。
+<!--
+• \(\{γ_5, γ_μ\} = γ_5γ_μ + γ_μγ_5 = 0\), which you can check by brute force
+computation<sup>67</sup>.
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<sup>67</sup>
+または、別の ID を使用します \(\{γ_μ, γ_ν\} =
+γ_μγ_ν + γ_νγ_μ = \frac{1}{2}η_{μν}\)、ここで \(η_{μν}\) は
+ミンコフスキー指標とその定義
+\(γ_5 = iγ_0γ_1γ_2γ_3\)。
+<!--
+Or using another identity \(\{γ_μ, γ_ν\} =
+γ_μγ_ν + γ_νγ_μ = \frac{1}{2}η_{μν}\), where \(η_{μν}\) is the
+Minkowski metric and the definition
+\(γ_5 = iγ_0γ_1γ_2γ_3\).
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• \((P_L)^† = P_L\) は、\(γ_5\) が実数であることから成り、明示的な行列形式から次の式が分かります: \(γ_5 =
+\begin{pmatrix}
+−1 & 0 \\
+0 & 1
+\end{pmatrix}\)
+2番目の恒等式は、\(γ_5γ_μ = −γ_μγ_5\) であることを示しています。つまり、\(γ_5\) と任意の \(γ_μ\) 行列の位置を入れ替えることができます（ただし、マイナス符号を含める必要があります）。これは、
+<!--
+• \((P_L)^† = P_L\), because \(γ_5\) is real, as can be seen from the explicit
+matrix form: \(γ_5 =
+\begin{pmatrix}
+−1 & 0 \\
+0 & 1
+\end{pmatrix}\)
+The second identity simply tells us that \(γ_5γ_μ = −γ_μγ_5\), i.e. that
+we can switch the position of \(γ_5\) and any \(γ_μ\) matrix, as long as we
+include a minus sign. This tells us
+-->
+\[
+γ_μP_L = γ_μ\frac{1 − γ_5}{2}
+=\frac{1 + γ_5}{2}γ_μ = P_Rγ_μ  \tag{7.118}
+\]
+
+7.116式の関連項を書き直すと次のようになる。
+<!--
+We can now rewrite the relevant term of Eq. 7.116:
+-->
+\[
+\begin{align}
+g\bar{Ψ}γ_μW^μP_LΨ &= g\bar{Ψ}γ_μW^μ\underbrace{P_L^2}_{=P_L}Ψ \\
+\\
+&= g\underbrace{\bar{Ψ}}_{Ψ^†γ_0}\underbrace{γ_μP_L}_{P_Rγ_μ}W^μ\underbrace{P_LΨ}_{Ψ_L} \\
+\\
+&= gΨ^†\underbrace{γ_0P_R}_{P_Lγ_0}γ_μW^μΨ_L \\
+\\
+&\underbrace{=}_{Using\; P_L^†=P_L\; and\; (AB)^†=((AB)^T)^*=(B^TA^T)^*=B^†A^†}
+(P_LΨ)^†γ_0γ_μW^μΨ_L \\
+\\
+&= g(\underbrace{P_LΨ}_{=Ψ_L})^†γ_0γ_μW^μΨ_L \\
+\\
+&= g\bar{Ψ}_Lγ_μW^μΨ_L  \tag{7.119}
+\end{align}
+\]
+
+ここで、\(Ψ\) と \(\bar{Ψ}\) の両方が左カイラルであることを保証するために、1つの射影演算子で十分であることがわかります。
+<!--
+We can see here that one projection operator is really enough to
+guarantee that both \(Ψ\) and \(\bar{Ψ}\) are left-chiral.
+-->
+<br><br>
+左カイラル場のみが弱い力を介して相互作用することを数学的に記述する方法が分かりました。しかし、なぜこれがパリティの破れを意味するのでしょうか？これを理解するには、この項をパリティ変換する必要があります。なぜなら、この項が不変でない場合、問題の物理系はその鏡像とは異なるからです<sup>68</sup>。ここで、スピノル<sup>69</sup> \(P_{spinor}\) とベクトル<sup>70</sup> \(P_{vector}\) のパリティ演算子が必要になります。この変換により、
+<!--
+Now we know how we can describe mathematically that only leftchiral
+fields interact via the weak force, but why does this mean that
+parity is violated? To understand this we need to parity transform
+this term, because if it isn’t invariant, the physical system in question
+is different from its mirror image<sup>68</sup>. Here we need the parity operator
+for spinors<sup>69</sup> \(P_{spinor}\) and vectors<sup>70</sup> \(P_{vector}\). The transformation yields 
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<sup>68</sup>
+これは、結果がラグランジアン項に依存する実験では、実験内のすべてを鏡像に配置すると、異なる結果が得られることを意味します。
+<!--
+This means an experiment, whose
+outcome depends on this term of
+the Lagrangian, will find a different
+outcome if everything in the experiment
+is arranged mirrored.
+-->
+<br><br>
+
+<sup>69</sup>
+スピノルのパリティ演算子は3.7.9節で導出されました。\(γ_μ\)行列を用いると、そこで導出されたパリティ演算子は\(P = γ_0 =
+\begin{pmatrix}
+0 &σ_0 \\
+σ_0 & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}\)と書けます。
+<!--
+The parity operator for spinors was
+derived in Section 3.7.9. Using the
+\(γ_μ\) matrices, we can write the parity
+operator derived there as \(P = γ_0 =
+\begin{pmatrix}
+0 &σ_0 \\
+σ_0 & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}\)
+-->
+<br><br>
+
+<sup>70</sup>
+ベクトルのパリティ演算子は、式3.140で既に述べたように、単純に\(P_{vector} =
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}\)
+となります。
+<!--
+The parity operator for vectors is
+simply \(P_{vector} =
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}\)
+as already mentioned in Eq. 3.140.
+-->
+</p><p>
+
+\[
+\begin{align}
+\underbrace{\bar{Ψ}}_{=Ψ^†γ_0}γ_μW^μP_LΨ &→ (P_{spinor}Ψ)^†γ_0γ_μ(P_{vector}W^μ)P_L(P_{spinor}Ψ) \\
+\\
+&= (Ψ)^†γ_0γ_0γ_μ(P_{vector}W^μ)P_Lγ_0Ψ \\
+\\
+&\underbrace{=}_{using\; \{γ_5, γ_0\} = 0\; and\: P_L =\frac{1−γ_5}{2}}
+(Ψ)^†γ_0γ_0γ_μγ_0(P_{vector}W^μ)P_RΨ  \tag{7.120}
+\end{align}
+\]
+
+そして、行列の明示的な形式を見ればわかるように、\(γ_0γ_0γ_0 = γ_0\) と \(γ_0γ_iγ_0 = −γ_i\) を使うことができます。さらに、\(P_{vector}W^0 = W^0\) と \(P_{vector}W^i = −W^i\) も成り立ちます。これは、\(P_{vector}\) の明示的な形式から導かれます。これらの2つのマイナス符号は互いに打ち消し合い、ラグランジアンのパリティ変換された項は次のようになります。
+<!--
+Then we can use \(γ_0γ_0γ_0 = γ_0\) and \(γ_0γ_iγ_0 = −γ_i\), as you can check
+by looking at the explicit form of the matrices. Furthermore, we have
+\(P_{vector}W^0 = W^0\) and \(P_{vector}W^i = −W^i\), which follows from the explicit
+form of \(P_{vector}\). We conclude these two minus signs cancel each other
+and the parity transformed term of the Lagrangian reads:
+-->
+\[
+(P_{spinor}Ψ)^†γ_0γ_μ(P_{vector}W^μ)P_L(P_{spinor}Ψ) =\bar{Ψ} γ_μW^μP_RΨ \neq \bar{Ψ}γ_μW^μP_LΨ \tag{7.121}
+\]
+
+したがって、この項は不変ではなく、<strong>パリティが破られています</strong>。
+<!--
+Therefore this term is not invariant and <strong>parity is violated</strong>.
+-->
+</p><p>
+パリティ破れにはもう一つ重要な意味合いがあります。
+互いに変換可能な場合は、常に二つの大きな括弧で囲んで上下に書くことを思い出してください<sup>71</sup>。例えば、四元ベクトルを使用するのは、その成分が回転やブーストによって互いに変換できるためです。このセクションでは、左カイラル粒子だけが弱い力によって相互作用し、ラグランジアンにおける正しい項は \(\bar{Ψ}γ_μW^μP_LΨ = \bar{Ψ}_Lγ_μW^μΨ_L\) であることを学びました。物理的に言えば、この項は左カイラル二重項の成分、つまり2つのスピン \((ψ_1)_L\) と \((ψ_2)_L\) が弱い相互作用によって互いに変換可能であることを意味します。右カイラル場は弱い力を介して相互作用しないため、\((ψ_1)_R, (ψ_2)_R\) は互いに変換されません。したがって、これらを2つの大きな括弧で囲んで下に書くことは意味がありません。数学的に言えば、これは右カイラル場が \(\mathcal{SU}(2)\) <strong>シングレット</strong> を形成することを意味します。つまり、\(\mathcal{SU}(2)\) の1次元表現に従って変換するオブジェクトであり、これは全く変化しません<sup>72</sup>。それではまとめましょう。
+<!--
+Parity violation has another important implication. Recall that
+we always write things below each other between two big brackets
+if they can transform into each other<sup>71</sup>. For example, we use four- vectors, because their components can transform into each other
+through rotations or boosts. In this section we learned that only leftchiral
+particles interact via the weak force and the correct term in the
+Lagrangian is \(\bar{Ψ}γ_μW^μP_LΨ = \bar{Ψ}_Lγ_μW^μΨ_L\). In physical terms this
+term means that the components of the left-chiral doublets, which
+means the two spin \(\frac{1}{2}\) fields \((ψ_1)_L\) and \((ψ_2)_L\) can transform into each
+other through weak-interactions. Right-chiral fields do not interact
+via the weak force and therefore \((ψ_1)_R, (ψ_2)_R\) aren’t transformed into
+each other. Therefore writing them below each other between two
+big brackets makes no sense. In mathematical terms this means that
+right-chiral fields form \(\mathcal{SU}(2)\) <strong>singlets</strong>, i.e. are objects transforming
+according to the 1 dimensional representation of \(\mathcal{SU}(2)\), which do not
+change at all<sup>72</sup>. So let’s summarize: 
+-->
+</p><p class="margin-large">
+<sup>71</sup>
+これについては付録 A で説明されています。
+<!--
+This is explained in Appendix A.
+-->
+<br><br>
+
+<sup>72</sup>
+これについてはセクション3.6.2で説明しました。
+<!--
+This was explained in Section 3.6.2.
+-->
+</p><p>
+<div class="styleBullet">
+<ul><li>
+• 左カイラル場は、\(\mathcal{SU}(2)\) 二重項として書かれます: \(Ψ_L =
+\begin{pmatrix}
+(ψ_1)_L \\
+(ψ_2)_L
+\end{pmatrix}\)。これは、両者が弱い力を介して相互作用し、したがって互いに変換できるためです。これらは、\(\mathcal{SU}(2)\) の2次元表現のもとで変換されます:
+<!--
+• Left-chiral fields are written as \(\mathcal{SU}(2)\) doublets: \(Ψ_L =
+\begin{pmatrix}
+(ψ_1)_L \\
+(ψ_2)_L
+\end{pmatrix}\), because they interact via the weak force and therefore can transform
+into each other. They transform under the two-dimensional
+representation of \(\mathcal{SU}(2)\):
+-->
+\[
+Ψ_L → Ψ_L^\prime = e^{i\vec{a}\frac{\vec{σ}}{2}}Ψ_L  \tag{7.122}
+\]
+
+</li><br><li>
+• 右カイラル場は、\(\mathcal{SU}(2)\) <strong>シングレット</strong>: \((ψ_1)_R, (ψ_2)_R\) で記述されます。
+なぜなら、それらは弱い力を介して相互作用せず、したがって互いに変換できないからです。したがって、それらは\(\mathcal{SU}(2)\) の1次元表現のもとで変換されます。
+<!--
+• Right-chiral fields are described by \(\mathcal{SU}(2)\) <strong>singlets</strong>: \((ψ_1)_R, (ψ_2)_R\),
+because they do not interact via the weak force and therefore can’t
+transform into each other. Therefore they transform under the
+one-dimensional representation of \(\mathcal{SU}(2)\):
+-->
+\[
+\begin{align}
+(ψ_1)_R &→ (ψ_1)_R^\prime = e^0(ψ_1)_R = (ψ_1)_R \\
+\\
+(ψ_2)_R &→ (ψ_2)_R^\prime = e^0(ψ_2)_R = (ψ_2)_R  \tag{7.123}
+\end{align}
+\]
+
+</li></ul></div>
+</p><p>
+さて、次に、スピン粒子の質量項を、重要な対称性を損なうことなくラグランジアンに加える方法を理解しようとします。
+<!--
+Now we move on and try to understand how mass terms for spin
+\(\frac{1}{2}\) particles can be added in the Lagrangian without spoiling any
+crucial symmetry.
+-->
+</p>
+<h2>7.5 レプトンの質量項</h2>
+<!--
+<h2>7.5 Lepton Mass Terms</h2>
+-->
+<p>
+7.2節の冒頭で、任意の質量項 \(\bar{Ψ}mΨ\) を含めると \(\mathcal{SU}(2)\) 対称性が損なわれることを発見しました。
+次に、パリティの破れがこの問題をさらに大きくすることを確認します。
+この問題について議論した後、再びヒッグス機構が解決策となることを確認します。
+<!--
+At the beginning of Section 7.2, we discovered that we can’t include
+arbitrary mass terms \(\bar{Ψ}mΨ\) without spoiling the \(\mathcal{SU}(2)\) symmetry.
+Now we will see that parity violation makes this problem even bigger.
+After discussing the problem, we will see that again the Higgs
+mechanism is a solution.
+-->
+</p><p>
+
+前のセクションでは、結合項のカイラリティについて少し説明しました: \(\bar{Ψ}γ_μσ_jW_j^μP_LΨ\)。質量項のカイラリティはどうでしょうか？
+式6.7と式6.8で導出した、スピノルの微分なしの不変量をもう一度見てみましょう。
+<!--
+In the last section we talked a bit about the chirality of the coupling
+term: \(\bar{Ψ}γ_μσ_jW_j^μP_LΨ\). What about the chirality of a mass term?
+Take a look again at the invariants without derivatives for spinors,
+which we derived in Eq. 6.7 and Eq. 6.8:
+-->
+\[
+I_1 := (χ_{\dot{a}})^Tξ^{\dot{a}} = (χ_L)^†ξ_R　and　 I_2 := (ξ^a)^Tχ_a = (ξ_R)^†χ_L  \tag{7.124}
+\]
+
+これらの不変量はディラックスピノルを使って次のように書ける<sup>73</sup>
+<!--
+We can write these invariants using Dirac spinors as<sup>73</sup>
+-->
+</p><p class="margin-large">
+<sup>73</sup>
+ディラックスピノル \(ψ_L\) と \(ψ_R\) は、前のセクションで導入されたカイラル射影演算子を用いて定義されます：
+\(ψ_L = P_Lψ\) および \(ψ_R = P_Rψ\)。そして、いつものように \(\bar{Ψ} = ψ^†γ_0\) が成り立ちます。
+<!--
+The Dirac spinors \(ψ_L\) and \(ψ_R\) are 
+defined using the chiral-projection
+operators introduced in the last section:
+\(ψ_L = P_Lψ\) and \(ψ_R = P_Rψ\). And we have
+as always \(\bar{Ψ} = ψ^†γ_0\).
+-->
+</p><p>
+
+\[
+\begin{align}
+\bar{Ψ}ψ &= \bar{Ψ}_Lψ_R + \bar{Ψ}_Rψ_L \\
+\\
+&=\left(χ_L^†　0\right)
+\begin{pmatrix}
+0 & σ_0 \\
+σ_0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 \\
+ξ_R
+\end{pmatrix}
++\left(0　ξ_R^†\right)
+\begin{pmatrix}
+0 & σ_0 \\
+σ_0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+χ_L \\
+0
+\end{pmatrix} \\
+\\
+&= χ_L^†ξ_R + ξ_R^†χ_L  \tag{7.125}
+\end{align}
+\]
+
+</p><p>
+ローレンツ不変な質量項は常に左カイラル場と右カイラル場を結合することがわかります。これは問題です。なぜなら、左カイラル場と右カイラル場は、\(\mathcal{SU}(2)\)変換によって異なる変換をするためです。これは前の節の最後で説明しました。左カイラル場は二重項ですが、右カイラル場は一重項です。二重項と一重項の乗算は\(\mathcal{SU}(2)\)不変ではありません。例えば、
+<!--
+We can see that Lorentz invariant mass terms always combine leftchiral
+with right-chiral fields. This is a problem, because left-chiral
+and right-chiral fields transform differently under \(\mathcal{SU}(2)\) transformations,
+as explained at the end of the last section. The left-chiral
+fields are doublets, whereas the right-chiral fields are singlets. The
+multiplication of a doublet and singlet is not \(\mathcal{SU}(2)\) invariant. For
+example
+-->
+\[
+\underbrace{\bar{Ψ}_L}_{doublet}\underbrace{ψ_R}_{singlet}
+→ \bar{Ψ}_L^\primeψ_R^\prime=\bar{Ψ}_Le^{−ib_i\frac{σ_i}{2}}ψ_R \neq \bar{Ψ}_Lψ_R  \tag{7.126}
+\]
+</p><p>
+
+スピン1場の質量項の経験から、何をすべきか分かっています。上記のように項を考える代わりに、ラグランジアンにスピン0場との\(\mathcal{SU}(2)\)不変結合項を追加します。そして、スピン0場の真空値を選択することで、対称性を破り、質量項を生成します。
+<!--
+From the experience with mass terms for spin 1 fields, we know
+what to do: Instead of considering terms as above, we add \(\mathcal{SU}(2)\)
+invariant coupling terms with 0 fields to the Lagrangian. Then, by
+choosing the vacuum value for the spin 0 field we break the symmetry
+and generate mass terms.
+-->
+</p><p>
+\(\mathcal{SU}(2), \mathcal{U}(1)\) <strong>および</strong>ローレンツ不変な項は、スピン0の二重項とスピン\(\frac{1}{2}\)場を結合し、次のように表されます。
+<!--
+A \(\mathcal{SU}(2), \mathcal{U}(1)\) <strong>and</strong> Lorentz invariant term, coupling a spin 0 doublet
+and our spin \(\frac{1}{2}\) fields together, is given by
+-->
+\[
+\bar{Ψ}_LΦψ_R  \tag{7.127}
+\]
+</p><p>
+
+不変性を見るために、この項を\(\mathcal{SU}(2)\)変換<sup>74</sup>で変換する。
+<!--
+To see the invariance we transform this term with a \(\mathcal{SU}(2)\) transformation<sup>74</sup>
+-->
+</p><p class="margin-large">
+<sup>74</sup>
+\(Φ_L → Φ_L^\prime = e^{ib_i (x)σ_i}Φ_L\) を覚えておいてください。
+そして \(σ_i^† = σ_i\)
+<!--
+Remember \(Φ_L → Φ_L^\prime = e^{ib_i (x)σ_i}Φ_L\)
+and \(σ_i^† = σ_i\)
+-->
+</p><p>
+
+\[
+\bar{Ψ}_LΦψ_R →\bar{Ψ}_L^\primeΦ^\prime ψ_R = \bar{Ψ}_Le^{−ib_i(x)σ_i}e^{ib_i(x)σ_i}Φψ_R = \bar{Ψ}_LΦψ_R 
+\]
+
+\(\mathcal{U}(1)\) 変換についても同様である。
+<!--
+and equally for a \(\mathcal{U}(1)\) transformation:
+-->
+\[
+\bar{Ψ}_LΦψ_R → \bar{Ψ}_L^\primeΦψ_R^\prime=\bar{Ψ}_Le^{−ia(x)}Φe^{ia(x)}ψ_R = \bar{Ψ}_LΦψ_R
+\]
+</p><p>
+
+スピン0の場はローレンツ変換<sup>75</sup>によって全く変換されないので、この項はローレンツ不変である。なぜなら、式7.125と同じローレンツ不変項を持つからである。
+<!--
+The spin 0 field does not transform at all under Lorentz transformations<sup>75</sup>
+and therefore the term is Lorentz invariant, because we have the same Lorentz invariant terms as in Eq. 7.125.
+-->
+</p><p class="margin-large">
+<sup>75</sup>
+
+定義により、スピン0の場は、ローレンツ群の(0, 0)表現に従って変換されます。この表現では、すべてのローレンツ変換は、自明に恒等変換となります。これは3.7.4節で導出されました。
+<!--
+By definition a spin 0 field transforms
+according to the (0, 0) representation
+of the Lorentz group. In this representation
+all Lorentz transformations are
+trivially the identity transformation.
+This was derived in Section 3.7.4.
+-->
+</p><p>
+
+この種の項は<strong>湯川項</strong>と呼ばれ、ラグランジアン<sup>76</sup> \(−λ_2\) に等しく許容されるエルミート共役とともに加えられます。
+<!--
+This kind of term is called <strong>Yukawa term</strong> and we add it, with the
+equally allowed Hermitian conjugate to the Lagrangian<sup>76</sup> \(−λ_2\)
+-->
+</p><p class="margin-large">
+<sup>76</sup>
+
+\(−λ_2\) という奇妙な名前と、なぜここで \(ψ_{2R}\) だけを付け加えるのかは、すぐに明らかになります。\(ψ_{1R}\) や \(−λ_1\) などの用語については後で説明します。
+<!--
+The strange name \(−λ_2\) and why only
+add \(ψ_{2R}\) here will become clear in a
+moment, because terms including \(ψ_{1R}\)
+and \(−λ_1\) will be discussed afterwards.
+-->
+</p><p>
+
+\[
+\mathscr{L} = −λ_2(\bar{Ψ}_LΦψ_{2R} + \bar{Ψ}_{2R}\overline{Φ}Ψ_L)  \tag{7.128}
+\]
+
+結合定数 \(λ_2\) は<strong>湯川結合</strong>と呼ばれます。この追加項は、フェルミオンとヒッグス場との相互作用を記述するだけでなく、対称性の破れ後のスピン \(\frac{1}{2}\) 場の質量項にもつながります。展開式は真空期待値（式7.88）の周りに置きます。
+<!--
+The coupling constant \(λ_2\) is called a <strong>Yukawa coupling</strong>. This extra
+term does not only describe the interaction between the fermions and
+the Higgs field, but also leads to mass terms for the spin \(\frac{1}{2}\)
+fields after
+the symmetry breaking. We put the expansion around the vacuum
+expectation value (Eq. 7.88)
+-->
+\[
+Φ =\sqrt{\frac{1}{2}}
+\begin{pmatrix}
+0 \\
+v + h 
+\end{pmatrix}
+\]
+
+ラグランジアンに代入すると、
+<!--
+into the Lagrangian, which yields
+-->
+\[
+\begin{align}
+\mathscr{L} &= −\frac{λ_2}{\sqrt{2}}\left(\left(\bar{Ψ}_{1L}, \bar{Ψ}_{2L}\right)
+\begin{pmatrix}
+0 \\
+v + h
+\end{pmatrix}
+ψ_{2R} +\bar{Ψ}_{2R}
+\left(0, v + h\right)
+\begin{pmatrix}
+Ψ_{1L} \\
+Ψ_{2L}
+\end{pmatrix}
+\right) \\
+\\
+&= −\frac{λ_2(v + h)}{\sqrt{2}}(\bar{Ψ}_{2L}ψ_{2R} +\bar{Ψ}_{2R}Ψ_{2L})  \tag{7.129}
+\end{align}
+\]
+
+式7.125は、これが次式と等しいことを示しています。
+<!--
+Equation 7.125 tells us this is equivalent to
+-->
+\[
+\begin{align}
+&= −\frac{λ_2(v + h)}{\sqrt{2}}\bar{Ψ}_2ψ_2  \tag{7.130} \\
+\\
+&= \underbrace{−\frac{λ_2v}{\sqrt{2}}(\bar{Ψ}_2ψ_2)}_{Fermion\; mass\; term}
+−\underbrace{\frac{λ_f h}{\sqrt{2}}(\bar{Ψ}_2ψ_2)}_{Fermion-Higgs\; interaction} \tag{7.131}
+\end{align}
+\]
+
+ヒッグス機構を通して、必要な質量項が確かに得られることがわかります。ここでも、対称性の制約を用いてラグランジアンに項を追加し、これにより、自発的対称性の破れ後のスピン \(\frac{1}{2}\) 場の質量項が得られます。二重項 \(ψ_2\) 内の2番目の場に対してのみ質量項を生成したことに注意してください。
+では、最初の場 \(ψ_1\) の質量項はどうでしょうか？
+<!--
+We see that through the Higgs mechanism we get indeed the required
+mass terms. Again, we used symmetry constraints to add a
+term to the Lagrangian and this yields after spontaneous symmetry
+breaking mass terms for the spin \(\frac{1}{2}\) fields. Take note that we only
+generated mass terms for the second field inside the doublet \(ψ_2\).
+What about mass terms for the first field \(ψ_1\)?
+-->
+</p><p>
+最初の場\(ψ_1\)の質量項を得るには、電荷共役ヒッグス場\(\tilde{Φ} =\epsilon Φ^*\)との結合項を考慮する必要がある。なぜなら、
+<!--
+To get mass terms for the first field \(ψ_1\) we need to consider coupling
+terms to the charge-conjugated<sup>77</sup> Higgs field \(\tilde{Φ} =\epsilon Φ^*\), because 
+-->
+
+</p><p class="margin-large">
+<sup>77</sup>
+電荷共役については、セクション3.7.10で説明されています。
+<!--
+Charge conjugation is explained in
+Section 3.7.10.
+-->
+</p><p>
+
+\[
+Φ =
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix}
+→ \tilde{Φ} =\epsilonΦ^* =
+\begin{pmatrix}
+0 & 1 \\
+−1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix}
+=
+\begin{pmatrix}
+\frac{v+h}{\sqrt{2}} \\
+0
+\end{pmatrix}
+\tag{7.132}
+\]
+
+上記と同じ手順を電荷共役ヒッグス場に対して実行すると、\(ψ_1\)の質量項が得られる。
+<!--
+Following the same steps as above with the charge conjugated Higgs
+field leads to mass terms for \(ψ_1\):
+-->
+\[
+\begin{align}
+\mathscr{L} &= −λ_f (\bar{Ψ}_L\tilde{Φ}ψ_{1R} +\bar{Ψ}_{1R}\tilde{\overline{Φ}}Ψ_L) \\
+\\
+&= −\frac{λ_1}{\sqrt{2}}\left(\left(\bar{Ψ}_{1L}, \bar{Ψ}_{2L}\right)
+\begin{pmatrix}
+\frac{v+h}{\sqrt{2}} \\
+0
+\end{pmatrix}
+Ψ_{1R} +\bar{Ψ}_{1R}
+\begin{pmatrix}
+\frac{v+h}{\sqrt{2}} \\
+0
+\end{pmatrix}
+\begin{pmatrix}
+Ψ_{1L} \\
+Ψ_{2L}
+\end{pmatrix}\right) \\
+\\
+&= −\frac{λ_1(v + h)}{\sqrt{2}}(\bar{Ψ}_{1L}Ψ_{1R} +\bar{Ψ}_{1R}Ψ_{1L})  \tag{7.133}
+\end{align}
+\]
+
+やや抽象的なスピン \(\frac{1}{2}\) 二重項をよりよく理解するために、より示唆的に書き直すと<sup>78</sup>
+<!--
+To understand the rather abstract spin \(\frac{1}{2}\)
+doublets better, we rewrite them more suggestively<sup>78</sup>
+-->
+</p><p class="margin-large">
+<sup>78</sup>
+
+ニュートリノは常に \(ν\) で表されます。
+このステップでは、二重項の2つの場 \(ψ_1\) と \(ψ_2\) に、慣例的な名前、すなわち電子場 e と電子ニュートリノ場 \(ν_e\) を与えます。
+<!--
+A neutrino is always denoted by a \(ν\). 
+In this step we simply give the two
+fields in the doublet \(ψ_1\) and \(ψ_2\) their
+conventional names: electron field e and
+electron-neutrino field \(ν_e\).
+-->
+</p><p>
+
+\[
+ Ψ =
+\begin{pmatrix}
+ν_e \\
+e
+\end{pmatrix}
+\tag{7.134}
+\]
+
+他のレプトン \(μ, ν_μ\) および \(τ, ν_τ\) についても同様です。この二重項の形は実験によって示唆されています。なぜなら、電子 \(e\) は常に弱い相互作用によって別の電子 \(e\) に変換され、その電子はおそらく運動量が異なるか、電子ニュートリノと他の粒子の組み合わせになるからです。弱い相互作用では、\(e\) と \(ν_e\) (つまり \(μ\) と \(ν_μ\) または \(τ\) と \(ν_τ\)) は常にペアで現れます。これは、結合項 \(\bar{Ψ}γ_μW^μP_LΨ =\bar{Ψ}γ_μ(W^μ)_i\frac{σ_i}{2} P_LΨ\) を見ることで理解できます。前のセクションで議論したように、これはパウリ行列<sup>79</sup> \(σ_i\) の明示的な行列形式を用いて書き直すことができ、これにより二重項の成分を結合する項が得られます。
+<!--
+and equivalently for the other leptons \(μ, ν_μ\) and \(τ, ν_τ\). This form of
+the doublets is suggested by experiments, because an electron \(e\) is
+always transformed by weak interactions into another electron \(e\), with
+possibly different momentum, or an electron-neutrino ve plus other
+particles. In weak interactions \(e\) and \(ν_e\) (equivalently \(μ\) and \(ν_μ\) or \(τ\)
+and \(ν_τ\)) always appear in pairs. This can be understood by looking
+at the coupling term \(\bar{Ψ}γ_μW^μP_LΨ =\bar{Ψ}γ_μ(W^μ)_i\frac{σ_i}{2} P_LΨ\). As discussed
+in the last section this can be rewritten using the explicit matrix form
+of the Pauli matrices<sup>79</sup> \(σ_i\), which then gives us terms coupling the
+components of the doublets together:
+-->
+</p><p class="margin-large">
+<sup>79</sup>
+これにより、再び
+<!--
+This gives us once more 
+-->
+\(
+σ_iW_i^μ =
+\begin{pmatrix}
+W_3^μ &  W_1^μ− iW_2^μ \\
+W_1^μ+ iW_2^μ & −W_3^μ
+\end{pmatrix}
+\)
+これを書き換えると
+<!--
+which we can rewrite using
+-->
+\(
+W_± = \frac{1}{\sqrt{2}}(W_1 ∓W_2):
+\)
+⇒\(σ_iW_i^μ =
+\begin{pmatrix}
+W_3^μ & \sqrt{2}W_+ \\
+\sqrt{2}W_− &  −W_3^μ
+\end{pmatrix}\)
+</p><p>
+
+\[
+\begin{align}
+\bar{Ψ}γ_μσ_jW_j^μP_LΨ &=\left(\overline{ν}_e　\overline{e}\right)γ_μ
+\begin{pmatrix}
+W_3^μ & \sqrt{2}W_+ \\
+\sqrt{2}W_− & −W_3^μ
+\end{pmatrix}
+P_L
+\begin{pmatrix}
+ν_e \\
+e
+\end{pmatrix} \\
+\\
+&\underbrace{=}_{using\; Eq. 7.116}\left((\overline{ν}_e)_L　(\overline{e})_L\right)
+γ_μ
+\begin{pmatrix}
+W_3^μ & \sqrt{2}W_+ \\
+\sqrt{2}W_− & −W_3^μ
+\end{pmatrix}
+\begin{pmatrix}
+(ν_e)_L \\
+(e)_L
+\end{pmatrix} \\
+\\
+&= (\overline{ν}_e)_Lγ_μW_3^μ(ν_e)_L + (\overline{ν}_e)_Lγ_μ\sqrt{2}W_+(e)_L \\
+\\
+&　+ (\overline{e})_Lγ_μ\sqrt{2}W_−(ν_e)_L − (\overline{e})_Lγ_μW_3^μ(e)_L  \tag{7.135}
+\end{align}
+\]
+
+すべてのレプトン世代、つまり \(e, μ\) と \(τ\) を一度に考えたい場合、次のような3つの項をラグランジアンに書き下す必要があります。
+<!--
+If we want to consider all lepton generations at once, i.e. \(e, μ\) and \(τ\),
+we need to write down three terms like this into the Lagrangian:
+-->
+\[
+\bar{Ψ}_eγ_μσ_jW_j^μP_LΨ_e +\bar{Ψ}_μγ_μσ_jW_j^μP_LΨ_μ +\bar{Ψ}_τγ_μσ_jW_j^μ
+P_LΨ_τ  \tag{7.136}
+\]
+
+これは、\(Ψ_l =
+\begin{pmatrix}
+ν_l \\
+l
+\end{pmatrix}\) を導入することでより簡潔に記述できます。ここで、\(l = e, μ, τ\) です。
+
+\[
+\bar{Ψ}_lγ_μσ_jW_j^μP_LΨ_l
+\]
+
+\(l =
+\begin{pmatrix}
+l_L \\
+l_R
+\end{pmatrix}\) という表記を用いると、自発的対称性の破れ後のスピン 0 場と電荷スピン \(\frac{1}{2}\) 場との間の結合項は、次のように表されます。
+<!--
+
+which can be written more compactly by introducing \(Ψ_l =
+\begin{pmatrix}
+ν_l \\
+l
+\end{pmatrix}\), where \(l = e, μ, τ\):
+
+\[
+\bar{Ψ}_lγ_μσ_jW_j^μP_LΨ_l 
+\]
+
+Using the notation \(l =
+\begin{pmatrix}
+l_L \\
+l_R
+\end{pmatrix}\)
+the coupling term between the spin 0
+and the electrically charged spin \(\frac{1}{2}\)
+fields after spontaneous symmetry
+breaking reads
+-->
+
+\[
+− \underbrace{\frac{λ_lv}{\sqrt{2}}}_{Fermion\; mass\; m_L}(\overline{l}l) − \underbrace{\frac{λ_lh}{\sqrt{2}}}_{Fermion-Higgs\; interaction\; strength\; c_L}(\overline{l}l)
+\]
+
+対応するニュートリノの項も同様に従う<sup>80</sup>。
+<!--
+The terms for the corresponding neutrinos follow analogously<sup>80</sup>. 
+-->
+</p><p class="margin-large">
+<sup>80</sup>
+既に述べたように、そのような質量項を記述できるのは、右カイラルニュートリノが存在する場合のみです。しかしながら、ニュートリノに質量があることは分かっているにもかかわらず、これまで右カイラルニュートリノは実験で観測されていません。これは標準模型の未解決問題の一つです。
+<!--
+As already mentioned above, we
+can only write down such mass terms
+if there are right-chiral neutrinos.
+However, so far right-chiral neutrinos
+were never observed in experiments,
+although we know that neutrinos have
+mass. This is one of the open problems
+of the standard model.
+-->
+</p><p>
+このラグランジアンは、ヒッグス場 \(h\) について、実験で検証可能な何かを予測することを可能にする。与えられたレプトン \(l\) の質量は次のように与えられる。
+<!--
+This Lagrangian enables us to predict something about the Higgs
+field \(h\) that can be tested in experiments. For a given lepton \(l\), the
+mass is given by
+-->
+\[
+m_l =\frac{λ_lv}{\sqrt{2}}→ λ_l =\frac{ml\sqrt{2}}{v}  \tag{7.137}
+\]
+
+そしてこのレプトンとヒッグス粒子の結合強度は次のように与えられる。
+<!--
+and the coupling strength of this lepton to the Higgs is given by
+-->
+\[
+c_l =\frac{λ_lh}{\sqrt{2}}\underbrace{=}_{Eq. 7.137}\frac{m_lh}{v}  \tag{7.138}
+\]
+</p><p>
+最後の式は、ヒッグス粒子とレプトンの結合強度がレプトンの質量に比例することを意味します。レプトンの質量が重いほど、結合は強くなります。これはすべての粒子に当てはまり、導出も完全に類似しています。
+<!--
+The last equation means that the coupling strength of the Higgs
+to a lepton is proportional to the mass of the lepton. The heavier the
+lepton the stronger the coupling. The same is true for all particles
+and the derivation is completely analogous.
+-->
+</p><p>
+他にも<strong>クォーク</strong>と呼ばれるスピン \(\frac{1}{2}\) 粒子があり、弱い力を介して相互作用します。さらに、クォークは強い力と呼ばれる3つ目の力を介して相互作用します。これは7.8節で説明しますが、まずはクォークの質量項について説明します。幸いなことに、これらはレプトンの質量項と同様に組み込むことができます。
+<!--
+There are other spin \(\frac{1}{2}\) 
+particles, called <strong>quarks</strong>, that interact via
+the weak force. In addition, quarks interact via a third force, called
+the strong force and this will be the topic of Section 7.8, but first
+we want to talk about mass terms for quarks. Luckily, these can be
+incorporated analogous to the lepton mass terms.
+-->
+</p>
+<h2>7.6 クォーク質量項</h2>
+<!--
+<h2>7.6 Quark Mass Terms</h2>
+-->
+<p>
+前のセクションで、\(\mathcal{SU}(2)\)二重項には、弱い力によって互いに変換される粒子が含まれていることを学びました。クォーク<sup>81</sup>の場合、これらはアップクォークとダウンクォークです。
+<!--
+We learned in the last section that an \(\mathcal{SU}(2)\) doublet contains the
+particles that are transformed into each other via the weak force. For
+quarks<sup>81</sup> these are the up- and down quark: 
+-->
+</p><p class="margin-large">
+<sup>81</sup>
+クォークについて聞いたことがない方は、セクション1.3をご覧ください。
+<!--
+If you’ve never heard of quarks
+before, have a look at Section 1.3.
+-->
+</p><p>
+
+\[
+q =
+\begin{pmatrix}
+u \\
+d
+\end{pmatrix}
+\tag{7.139}
+\]
+
+ストレンジクォークとチャームクォーク、トップクォークとボトムクォークも同様です。
+<!--
+and equally for the strange and charm or top and bottom quarks.
+-->
+</p><p>
+
+ここでも、左カイラル粒子のみが弱い力を介して相互作用するという実験事実を考慮する必要があります。したがって、左カイラル二重項と右カイラル単一項が存在します。
+<!--
+Again, we must incorporate the experimental fact that only leftchiral
+particles interact via the weak force. Therefore, we have leftchiral
+doublets and right-chiral singlets:
+-->
+\[
+\begin{align}
+\underbrace{q_L}_{doublet}=
+\begin{pmatrix}
+u_L \\
+d_L
+\end{pmatrix}
+&→ e^{ia_i\frac{σ_i}{2}q_L  \tag{7.140} \\
+\\
+\underbrace{u_R}_{singlet} &→ u_R \\
+\\
+\underbrace{d_R}_{singlet} &→ d_R  \tag{7.141}
+\ebd{align}
+\]
+
+繰り返しますが、右カイラル粒子は弱い力を介して相互作用しないため、何にも変換されず、\(\mathcal{SU}(2)\)
+シングレット（= 1つの成分オブジェクト）を形成します。
+<!--
+Again, right-chiral particles do not interact via the weak force and
+therefore they aren’t transformed into anything and form a \(\mathcal{SU}(2)\)
+singlet (=one component object).
+-->
+</p><p>
+
+問題はレプトンの場合と同じです。ローレンツ不変な何かを得るためには、左カイラルスピノルと右カイラルスピノルを組み合わせる必要があります。
+このような組み合わせは\(\mathcal{SU}(2)\)不変ではないので、ここでもヒッグス機構を使います。つまり、
+<!--
+The problem is the same as for leptons: To get something Lorentz
+invariant, we need to combine left-chiral with right-chiral spinors.
+Such a combination is not \(\mathcal{SU}(2)\) invariant and we use again the
+Higgs mechanism. This means, instead of terms like
+-->
+\[
+\overline{q}_Lu_R + \overline{q}_Ld_R + \overline{u}_Rq_L + \overline{d}_Rq_L tag{7.142}
+\]
+
+\(\mathcal{SU}(2)\)不変ではないクォークとスピン0の場の二重項\(Φ\)との結合を考える。
+<!--
+which aren’t \(\mathcal{SU}(2)\) invariant, we consider the coupling of the quarks
+to a spin 0 field doublet \(Φ\):
+-->
+\[
+λ_u\overline{q}_L\tilde{Φ}u_R + λ_d\overline{q}_LΦd_R + λ_u\overline{u}_R\tilde{Φ}q_L + λ_d\overline{d}_RΦq_L  \tag{7.143}
+\]
+
+結合定数λu、λd、そして電荷共役ヒッグス二重項<sup>82</sup>は、アップクォーク<sup>83</sup>の質量項を得るために必要です。
+<!--
+with coupling constants λu, λd and the charge conjugated Higgs
+doublet<sup>82</sup> which is needed in order to get mass terms for the up
+quarks<sup>83</sup>.
+-->
+</p><p class="margin-large">
+<sup>82</sup>
+これは式7.132で定義されています:
+\(\tilde{Φ}=\epsilonΦ^*\underbrace{=}_{Eq.7.132}
+\begin{pmatrix}
+\frac{v+h}{\sqrt{2}} \\
+0
+\end{pmatrix}\)
+<!--
+This is defined in Eq. 7.132:
+\(\tilde{Φ}=\epsilonΦ^*\underbrace{=}_{Eq.7.132}	
+\begin{pmatrix}
+\frac{v+h}{\sqrt{2}} \\
+0
+\end{pmatrix}\)
+-->
+<br><br>
+
+<sup>83</sup>
+我々は、二重項を
+\(\begin{pmatrix}
+u \\
+d
+\end{pmatrix}\) と定義しました。
+この二重項を
+\(Φ =
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix}\) と乗算すると、常に \(d\) に比例する項が得られます。
+<!--
+We defined the doublets as 
+\(\begin{pmatrix}
+u \\
+d
+\end{pmatrix}\).
+Multiplication of this doublet with
+\(Φ =
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix}\) always results in terms
+proportional to \(d\).
+-->
+</p><p>
+
+すると、すべてはレプトンの場合と同様になります。ヒッグス場の最小値<sup>84</sup>の周りの展開をラグランジアンに代入すると、質量項とクォーク-ヒッグス結合項が得られます。
+<!--
+Then, everything is analogous to the lepton case: We put the
+expansion of the Higgs field around its minimum<sup>84</sup> into the La-
+grangian, which gives us mass terms plus quark-Higgs coupling
+terms.
+-->
+</p><p class="margin-large">
+<sup>84</sup>
+\(Φ =
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix}\) であり、電荷共役ヒッグス場についても同値である。
+<!--
+\(Φ =
+\begin{pmatrix}
+0 \\
+\frac{v+h}{\sqrt{2}}
+\end{pmatrix}\) and equivalently for the
+charge-conjugated Higgs field.
+-->
+</p>
+<h2>7.7 アイソスピン</h2>
+<!--
+<h2>7.7 Isospin</h2>
+-->
+<p>
+さて、\(\mathcal{SU}(2)\)対称性から導かれる保存量についてお話しましょう。自由ラグランジアンは大域的にのみ不変であり、局所的に対称にするには相互作用項が必要です。
+大域的対称性は局所的対称性の特別な場合であることを思い出してください。
+したがって、すべての局所不変ラグランジアンには大域的対称性があり、対応する保存量はどちらの場合も保存されます。その結果、大域的\(\mathcal{SU}(2)\)不変性は、ネーターの定理を通して、<strong>アイソスピン</strong>と呼ばれる新しい保存量をもたらします。
+これは、大域的\(\mathcal{U}(1)\)不変性から導かれる保存量である電荷に似ています。
+<!--
+Now it’s time we talk about the conserved quantity that follows from
+\(\mathcal{SU}(2)\) symmetry. The free Lagrangians are only globally invariant
+and we need interaction terms to make them locally symmetric.
+Recall that global symmetry is a special case of local symmetry.
+Therefore we have global symmetry in every locally invariant Lagrangian
+and the corresponding conserved quantity is conserved for
+both cases. The result will be that global \(\mathcal{SU}(2)\) invariance gives us
+through Noether’s theorem, a new conserved quantity called <strong>isospin</strong>.
+This is similar to electric charge, which is the conserved quantity that
+follows from global \(\mathcal{U}(1)\) invariance.
+-->
+</p><p>
+内部対称性に関するネーターの定理（第4.5.5節、特に
+式4.57）は、
+<!--
+Noether’s theorem for internal symmetry (Section 4.5.5, especially
+Eq. 4.57) tells us that
+-->
+\[
+∂_0 \int d^3x \underbrace{\frac{∂\mathscr{L}}{∂(∂_0Ψ)}δΨ}_{=Q}=0 \tag{7.144}
+\]
+
+ラグランジアンは、次の形式の変換に対して不変である。
+<!--
+The Lagrangian is invariant under transformations of the form
+-->
+\[
+Ψ → e^{ia_i\frac{σ_i}{2}} Ψ = (1 + ia_i\frac{σ_i}{2}+ . . .)Ψ \tag{7.145}
+\]
+
+したがって、無限小変化は \(δΨ = ia_i\frac{σ_i}{2}Ψ\) であり、\(a_i\) は任意です。これは、各生成子に対して1つの保存量が得られることを示しています。
+\(a_i\) のうち2つが0で1つが0でなくてもラグランジアンは不変だからです。例えば、\(a_2 = a_3 = 0\) かつ \(a_1 \neq = 0\) または
+\(a_1 = a_2 = 0\) かつ \(a_3 \neq 0\) です。もちろん、\(a_1 \neq 0, a_2 \neq 0\) かつ \(a_3 \neq 0\) の場合にも別の保存量が得られ、これは個々の生成子から得られる保存量の合計に相当します。言い換えれば、\(\mathcal{SU}(2)\) の各生成子ごとに 1 つずつ、3 つの独立に保存される量が得られる。
+<!--
+Therefore our infinitesimal variation is \(δΨ = ia_i\frac{σ_i}{2}Ψ\), with arbitrary
+\(a_i\). This tells us we get one conserved quantity for each generator,
+because the Lagrangian is invariant regardless of if two of the three
+\(a_i\) are zero and one isn’t. For example, \(a_2 = a_3 = 0\) and \(a_1 \neq = 0\) or
+\(a_1 = a_2 = 0\) and \(a_3 \neq 0\). Of course we get another conserved quantity
+for \(a_1 \neq 0, a_2 \neq 0\) and \(a_3 \neq 0\), which is just the sum of the conserved
+quantities we get from the individual generators. In other words: we
+get three independently conserved quantities, one for each generator
+of \(\mathcal{SU}(2)\).
+-->
+</p><p>
+大域的に不変な自由ラグランジアン（式7.44）は
+<!--
+The globally invariant, free Lagrangian (Eq. 7.44) is
+-->
+\[
+\mathscr{L}_{D_1+D_2} = i\bar{Ψ}γ_μ∂^μΨ
+\]
+
+対応する保存量\(\mathcal{Q}_i\)は、例えば電子-ニュートリノ二重項の場合、<sup>85</sup>である。
+<!--
+The corresponding conserved quantities \(\mathcal{Q}_i\), for example for the
+electron-neutrino doublet, are<sup>85</sup> 
+-->
+
+</p><p class="margin-large">
+<sup>85</sup>
+式7.144を参照。また、常に定義されているように、任意定数\(a_i\)は除きます。
+<!--
+See Eq. 7.144 and as always defined
+without the arbitrary constants \(a_i\).
+-->
+</p><p>
+
+\[
+\begin{align}
+\mathcal{Q}_i &= i\bar{Ψ}γ_0\frac{σ_i}{2}Ψ \\
+\\
+&=
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix}^†
+\underbrace{γ_0γ_0}_{=1}\frac{σ_i}{2}
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix}
+\tag{7.146}
+\end{align}
+\]
+
+</p><p>
+\(σ_3\) だけが対角行列であることを思い出してください。つまり、保存量 \(i = 3\) については、二重項の2つの成分 \((v_e, e)\) にのみ明確な値を割り当てることができます。他の生成子 \(σ_1\) と \(σ_2\) については、2つの成分 \(v_e\) と \(e\) は固有状態ではありません。もちろん、別の基底、例えば \(σ_2\) が対角行列である場合など、自由に選択できます。その場合、\(v_e\) と \(e\) と呼ぶものを再定義するだけで、同じ結果が得られます。
+覚えておくべきことは、生成子ごとに1つずつ、計3つの保存量があるにもかかわらず、粒子/状態にラベルを付ける際に一度に使用できるのは1つだけであるということです。
+<!--
+Recall that only \(σ_3\) is diagonal. This means we are only able to
+assign a definite value to the two components of the doublet \((v_e, e)\)
+for the conserved quantity \(i = 3\). For the other generators, \(σ_1\) and \(σ_2\),
+our two components \(v_e\) and \(e\) aren’t eigenstates. We are of course free
+to choose a different basis, where for example \(σ_2\) is diagonal. Then
+we can simply redefine what we call \(v_e\) and \(e\) and get the same result.
+The thing to take away is that although we have three conserved
+quantities, one for each generator, we can only use one at a time to
+label our particles/states.
+-->
+</p><p>
+
+\(i = 3\) の場合、
+<!--
+For \(i = 3\) we have
+-->
+\[
+\begin{align}
+\mathcal{Q}_3 &=
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix}^†
+\frac{σ_3}{2}
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix} \\
+\\
+&=\frac{1}{2}
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix}^†
+\begin{pmatrix}
+1 & 0 \\
+0 & −1
+\end{pmatrix}
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix} \\
+\\
+&=\frac{1}{2}v_e^†v_e −\frac{1}{2}e^†e  \tag{7.147}
+\end{align}
+\]
+
+これは、\(\mathcal{Q}_3(v_e) = \frac{1}{2}\) と \(\mathcal{Q}_3(e) = −\frac{1}{2}\) を新しい粒子ラベルとして割り当てることができることを意味します。一方、\(i = 1\) の場合、
+<!--
+This means we can assign \(\mathcal{Q}_3(v_e) = \frac{1}{2}\) and \(\mathcal{Q}_3(e) = −\frac{1}{2}\)
+as new
+particle labels. In contrast for \(i = 1\), we have
+-->
+\[
+\begin{align}
+\mathcal{Q}_1 &=
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix}^†
+\frac{σ_1}{2}
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix} \\
+\\
+&=\frac{1}{2}
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix}^†
+\begin{pmatrix}
+0 & 1 \\
+1 & 0
+\end{pmatrix}
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix}
+=\frac{1}{2}v_e^†e +\frac{1}{2}e^†v_e  \tag{7.148}
+\end{align}
+\]
+
+そして、行列 \(σ_1\) は対角行列ではないため、ここでは粒子ラベルを割り当てることができません。
+<!--
+and we can’t assign any particle labels here, because the matrix \(σ_1\)
+isn’t diagonal.
+-->
+</p>
+<h3>7.7.1 状態のラベル付け</h3>
+<!--
+<h3>7.7.1 Labelling States</h3>
+-->
+<p>
+3.5節で、カルタン生成子の概念を導入しました。これは、与えられた群の対角生成子の集合です。前の節では、これらの生成子は、ダブレット<sup>86</sup>オブジェクト内の粒子に新しいラベルを付与したい場合に特に便利になることを学びました。典型的な\(\mathcal{SU}(2)\)ダブレットは、次の形式です。
+<!--
+Recall that in Section 3.5, we introduced the notion of Cartan generators,
+which is the set of diagonal generators of a given group. In the
+last section we learned that these generators become especially use-
+ful if we want to give new labels to our particles inside a doublet<sup>86</sup>
+object. A typical \(\mathcal{SU}(2)\) doublet is of the form
+-->
+</p><p class="margin-large">
+<sup>86</sup>
+後の節では、同じことが三重項と、\(\mathcal{SU}(3)\)不変性から導かれる保存量に対しても行えることを学びます。
+<!--
+In a later section we will learn that 
+the same can be done for triplets and
+the conserved quantities following from
+\(\mathcal{SU}(3)\) invariance.
+-->
+</p><p>
+
+\[
+\begin{pmatrix}
+v_e \\
+e
+\end{pmatrix}
+\tag{7.149}
+\]
+</p><p>
+リー代数 \(\mathcal{su}(2)\) の2つ以上の元を同時に対角化することはできないため、「カルタン部分代数」は1つの元<sup>87</sup>のみから構成されます。対角要素として \(J_3 = \frac{1}{2}σ_3\) を選択するのが慣例です。
+対応する固有値は \(+\frac{1}{2}\)
+と \(−\frac{1}{2}\) です。左カイラルニュートリノ
+\(\begin{pmatrix}
+v_e \\
+0
+\end{pmatrix}\) はこの生成子の固有状態であり、固有値は \(+\frac{1}{2}\) です。
+また、左カイラル電子 \(
+\begin{pmatrix}
+0 \\
+e
+\end{pmatrix}\) はこの生成子の固有状態であり、固有値は
+\(−\frac{1}{2}\) です。これらはニュートリノと電子のアイソスピンと呼ばれる新しい粒子ラベルです。
+<!--
+We can’t diagonalize two or more elements of the Lie algebra \(\mathcal{su}(2)\)
+at the same time and thus the "Cartan subalgebra" consists of only
+only one element<sup>87</sup>. It is conventional to choose \(J_3 = \frac{1}{2}σ_3\) as diagonal. 
+The corresponding eigenvalues are \(+\frac{1}{2}\)
+and \(−\frac{1}{2}\). A left-chiral neutrino
+\(\begin{pmatrix}
+v_e \\
+0
+\end{pmatrix}\) is an eigenstate of this generator, with eigenvalue \(+\frac{1}{2}\)
+and a
+left-chiral electron \(
+\begin{pmatrix}
+0 \\
+e
+\end{pmatrix}\) an eigenstate of this generator, with eigenvalue
+\(−\frac{1}{2}\). These are new particle labels, which are called the isospin
+of the neutrino and the electron.
+-->
+
+</p><p class="margin-large">
+<sup>87</sup>
+これは、\(\mathcal{su}(2)\) には可換な生成子が存在しないことに注意すればわかる。
+可換な生成子のみが同時に対角化できる。
+<!--
+This can be seen by noting that there
+are no commuting generators in \(\mathcal{su}(2)\).
+Only commuting generators can be
+diagonalized at the same time.
+-->
+</p><p>
+同様の考え方に従って、右カイラルシングレットにアイソスピン値を割り当てることができます。これらは\(\mathcal{SU}(2)\)の1次元表現に従って変換され、この表現では生成子は単にゼロ<sup>88</sup>です: \(J_i = 0\)。したがって、この1次元表現では、シングレットはカルタン生成子\(J_3\)の固有値ゼロの固有状態です。右カイラルシングレットは、\(e_R\)と同様に、アイソスピンゼロを持ちます。これは、右カイラル場は弱い力を介して相互作用しないという上記の説明と一致します。電気的に帯電していない物体が電磁相互作用を介して相互作用しないのと同様に、アイソスピンを持たない場は弱い相互作用に関与しません。
+<!--
+Following the same line of thoughts we can assign an isospin
+value to the right-chiral singlets. These transform according to the
+one-dimensional representation of \(\mathcal{SU}(2)\), and the generators are
+in this representation simply zero<sup>88</sup>: \(J_i = 0\). Therefore, in this one- 
+dimensional representation, the singlets are eigenstates of the Cartan 
+generator \(J_3\) with eigenvalue zero. The right-chiral singlets, like \(e_R\)
+carry isospin zero. This coincides with the remarks above that rightchiral
+fields do not interact via the weak force. Just as electrically
+uncharged objects do not interact via electromagnetic interactions,
+fields without isospin do not take part in weak interactions.
+-->
+</p><p class="margin-large">
+<sup>88</sup>
+右キラルシングレットは第3.7.4節で説明したように全く変換されない。
+<!--
+The right-chiral singlets do not trans
+form at all as explained in Section 3.7.4.
+-->
+</p><p>
+最後に、3つのゲージ場にアイソスピン値を割り当てることができる
+\(W_+^μ,W_-^μ,W_3^μ\)。3つのゲージ場は\(\mathcal{SU}(2)\)トリプレットを形成する。
+
+<!--
+Finally, we can assign isospin values to the three gauge fields
+\(W_+^μ,W_-^μ,W_3^μ\). The three gauge fields form a \(\mathcal{SU}(2)\) triplet
+-->
+
+\[
+W^μ =
+\begin{pmatrix}
+W_+^μ \\
+W_-^μ \\
+W_3^μ
+\end{pmatrix}
+\tag{7.150}
+\]
+
+これは、\(\mathcal{SU}(2)\)の3次元表現に従って変換されます。この表現では、カルタン生成子\(J_3\)は固有値<sup>89</sup>
+\(+1,−1, 0\)を持つため、\(Q_3(W_+^μ) = 1, Q_3(W_-^μ) = −1,
+Q_3(W_3^μ) = 0\)と割り当てます。これは、\(W_+\)および\(W_−\)ボソンのアイソスピンです。
+<!--
+which transforms according to the three dimensional representation
+of \(\mathcal{SU}(2)\). In this representation the Cartan generator \(J_3\) has eigenvalues<sup>89</sup>
+\(+1,−1, 0\) and therefore we assign \(Q_3(W_+^μ) = 1, Q_3(W_-^μ) = −1, 
+Q_3(W_3^μ) = 0\). This is the isospin of the \(W_+\) and the \(W_−\) bosons.
+-->
+
+</p><p class="margin-large">
+<sup>89</sup>
+これは、式3.129のJ3の明示的な行列形式から直接見ることができます。
+\(J_3 =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & −1
+\end{pmatrix}.
+<!--
+This can be seen directly from the
+explicit matrix form of J3 in Eq. 3.129:
+\(J_3 =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & −1
+\end{pmatrix}.
+-->
+</p><p>
+
+3つ組 \(\left(W_1^μ　W_2^μ　W_3^μ\right)\) は単に異なる基底に属しており、\(J_3\) は対角ではないことに注意してください。これは、\(W_±^μ\) を導入したもう一つの理由といえます。
+<!--
+Take note that the triplet \(\left(W_1^μ　W_2^μ　W_3^μ\right)\) 
+simply belongs to a different
+basis, where \(J_3\) isn’t diagonal. This can be seen as another reason
+for our introduction of \(W_±^μ\).
+-->
+</p><p>
+
+これが不明瞭な場合は、3つのゲージ場 \(W_i-μ\) をどのように導入したかを見てください。これらは、生成子 \(σ_iW_i^μ\) と組み合わせてラグランジアンに組み入れられました。これは、いくつかのオブジェクト Wμ を基底 \(σ_i\) で表した基底展開と見ることができます。
+<!--
+If this is unclear, have a look at how we introduced the three gauge
+fields \(W_i-μ\). They were included into the Lagrangian in combination
+with the generators \(σ_iW_i^μ\). This can be seen as a basis expansion of
+some objects Wμ in terms of the basis \(σ_i\):
+-->
+\[
+W^μ = σ_iW_i^μ= σ_1W_1μ + σ_2W_2^μ + σ_3W_3^μ
+\]
+
+これは、ベクトルを基底ベクトルで表す方法と同様です。
+<!--
+analogous to how we can write a vector in terms of basis vectors:
+-->
+
+\[
+\vec{v} = v_1\vec{e}_1 + v_2\vec{e}_2 + v_3\vec{e}_3
+\]
+
+生成子 \(σ_i\) は \(\mathcal{SU}(2)\) のリー代数<sup>90</sup> に存在し、結果として、対象 \(W^μ\) もそこに存在します。したがって、\(W^μ\) がどのように変換されるかを知りたい場合は、このベクトル空間、つまりそれ自身のリー代数における \(\mathcal{SU}(2)\) の表現を知る必要があります。言い換えれば、\(\mathcal{SU}(2)\) の群元が、それ自身のリー代数元、つまりその生成子にどのように作用するかを知る必要があります。これは最初は奇妙な考え方に思えるかもしれませんが、実際には非常に自然な考え方です。表現の定義を思い出してください。表現とは、群からベクトル空間上の線型作用素の空間への写像<sup>91</sup> です。これまではミンコフスキー空間のような「外部」ベクトル空間のみを見てきました。群に付随する唯一の固有ベクトル空間は、そのリー代数<sup>92</sup>です！したがって、このベクトル空間上の群表現がどのようになるかを問うのはそれほど奇妙なことではありません。この非常に重要な表現は、<strong>随伴表現</strong>と呼ばれます。
+<!--
+The generators \(σ_i\) live in the Lie algebra<sup>90</sup> of \(\mathcal{SU}(2)\) and consequently 
+our object \(W^μ\) lives there, too. Therefore, if we want to know how
+\(W^μ\) transforms, we need to know the representation of \(\mathcal{SU}(2)\) on this
+vector space, i.e. on its own Lie algebra. In other words: We need to
+know how the group elements of \(\mathcal{SU}(2)\) act on their own Lie algebra
+elements, i.e. its generators. This may seem like a strange idea at
+first, but actually is a quite natural idea. Recall how we defined a
+representation: a representation is a map<sup>91</sup> from the group to the 
+space of linear operators over a vector space. So far we only looked
+at "external" vector spaces like Minkowski space. The only intrinsic
+vector space that comes with a group is its Lie algebra<sup>92</sup> ! Therefore 
+it isn’t that strange to ask what a group representation on this vector
+space looks like. This very important representation is called the
+<strong>adjoint representation</strong>.
+
+</p><p class="margin-large">
+<sup>90</sup>
+リー代数はベクトル空間です!
+<!--
+The Lie algebra is a vector space!
+-->
+<br><br>
+
+<sup>91</sup>
+正確に言うと、準同型写像、つまり、いくつかの特別な条件を満たす写像です。
+<!--
+To be precise: A homomorphism,
+which is a map that satisfies some
+special conditions.
+-->
+<br><br>
+
+<sup>92</sup>
+群自体は一般にベクトル空間ではありません。群が自身にどう作用するかを見ることはできますが、これは群の表現ではなく、実現です。
+<!--
+A group itself is in general no vector
+space. Although we can take a look at
+how the group acts on itself, this is not
+a representation, but a realization of the
+group.
+-->
+</p><p>
+ゲージ場（\(W_+,W_−,W_3\) など）は、対応する群の随伴表現に存在すると言われています。\(\mathcal{SU}(2)\) の場合、リー代数は3次元です。なぜなら、基底生成子が3つあり、したがって随伴表現も3次元だからです。ベクトルの成分を2つの括弧<sup>93</sup> の間に書くのと同じように、Wμ の成分も2つの括弧<sup>94</sup> の間に書くことができ、これを三重項と呼びます。随伴表現内の生成子は、基底変換を介して、先ほど導出した3次元生成子に接続されます。
+<!--
+Gauge fields (like \(W_+,W_−,W_3\)) are said to live in the adjoint representation
+of the corresponding group. For \(\mathcal{SU}(2)\) the Lie algebra is
+three dimensional, because we have three basis generators and therefore
+the adjoint representation is three dimensional. Exactly how we
+are able to write the components of a vector between two brackets<sup>93</sup>,
+we can write the component of Wμ between two brackets<sup>94</sup>, which is
+what we call a triplet . The generators in the adjoint representation
+are connected to the three dimensional generator we derived earlier
+through a basis transformation.
+-->
+</p><p class="margin-large">
+<sup>93</sup>
+\(\vec{v} =
+\begin{pmatrix}
+v_1 \\
+v_2 \\
+v_3
+\end{pmatrix}
+<br><br>
+
+<sup>94</sup>
+\(W^μ =
+\begin{pmatrix}
+W_1^μ \\
+W_2^μ \\
+W_3^μ
+\end{pmatrix}
+</p><p>
+
+次の節では、「次の高次の」内部対称群 \(\mathcal{SU}(3)\) に移ります。ラグランジアンの局所 \(\mathcal{SU}(3)\) 不変性を求めることで、強い相互作用を記述する正しいラグランジアンが得られます。
+<!--
+In the following section we move on to the "next higher" internal
+symmetry group \(\mathcal{SU}(3)\). Demanding local \(\mathcal{SU}(3)\) invariance of the
+Lagrangian gives us the correct Lagrangian which describes strong
+interactions.
+-->
+</p>
+<h2>7.8 SU(3)相互作用</h2>
+<!--
+<h2>7.8 SU(3) Interactions</h2>
+-->
+<p>
+<strong>3</strong>個のフェルミオン場に対して、前章で2個のフェルミオン場と\(\mathcal{SU}(2)\)に対して行ったのと全く同じ方法で、局所的に\(\mathcal{SU}(3)\)不変なラグランジアンを求めることができます。この対称性は破れておらず、対応するスピン1の場（グルーオン場と呼ばれる）は質量がありません。\(\mathcal{SU}(3)\)は、行列式が単位であるすべてのユニタリ3×3行列の群です。つまり、
+<!--
+For <strong>three</strong> fermion fields we can find a locally \(\mathcal{SU}(3)\) invariant Lagrangian
+in exactly the same way we did in the last chapter for two
+fields and \(\mathcal{SU}(2)\). This symmetry is not broken and the corresponding
+spin 1 fields, called gluon fields, are massless. \(\mathcal{SU}(3)\) is the group
+of all unitary 3 × 3 matrices with unit determinant, i.e.
+-->
+
+\[
+U^†U = UU^† = 1　\det\mathcal{U} = 1  \tag{7.151}
+\]
+
+リー群の通常のやり方と同様に、これを指数関数として書くことができる<sup>95</sup>
+<!--
+As usual for Lie groups we can write this as an exponential function<sup>95</sup>
+-->
+
+</p><p class="margin-large">
+<sup>95</sup>
+セクション2.4で既に述べたように、ローマ字大文字 \(A、B、... .\) は常に 1 から 8 まで加算されます。
+<!--
+As already noted in Section 2.4, 
+Capital Roman letters \(A, B, . . .\) are
+always summed from 1 to 8. 
+-->
+</p><p>
+
+\[
+\mathcal{U} = e^{iT_Aθ_A}  \tag{7.152}
+\]
+
+群の定義方程式（式7.151）は、<sup>96</sup>
+\(\mathcal{SU}(2)\)の場合と同様に、生成子がエルミートかつトレースゼロであることを要求する。
+<!--
+The defining equations (Eq. 7.151) of the group require, as for<sup>96</sup>
+\(\mathcal{SU}(2)\), the generators to be Hermitian and traceless
+-->
+</p><p class="margin-large">
+<sup>96</sup>
+式3.79と以下の本文、および2×2のパウリ行列で基底が与えられた式を参照してください。
+<!--
+See Eq. 3.79 and the following text
+plus equations, where the basis was
+given by the 2 × 2 Pauli matrices.
+-->
+</p><p>
+
+\[
+T_A^† = T_A  \tag{7.153}
+\]
+
+\[
+tr(T_A) = 0  \tag{7.154}
+\]
+
+これらのトレースレスなエルミート生成子の基底は、少なくとも一つの表現では、897個の3×3行列、いわゆる<strong>ゲルマン行列</strong>によって与えられます。
+<!--
+A basis for those traceless, Hermitian generators is, at least in one
+representation, given by eight97 3 × 3 matrices, called <strong>Gell-Mann
+matrices</strong>:
+-->
+</p><p class="margin-large">
+<sup>97</sup>
+一般に、\(\mathcal{SU}(N)\) に対して、リー代数は \(N^2 − 1\)
+次元であることが示されます。
+<!--
+It can be shown that in general for 
+\(\mathcal{SU}(N)\) the Lie-Algebra is \(N^2 − 1\)
+dimensional.
+-->
+</p><p>
+
+
+\[
+\begin{align}
+&λ_1 =
+\begin{pmatrix}
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+　λ_2 =
+\begin{pmatrix}
+0 & −i & 0 \\
+i & 0 & 0 \\
+0 & 0 & 0
+\end{pmatrix}
+　λ_3 =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & −1 & 0 \\
+0 & 0 & 0
+\end{pmatrix} \\
+\\
+&λ_4 =
+\begin{pmatrix}
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+1 & 0 & 0
+\end{pmatrix}
+　λ_5 =
+\begin{pmatrix}
+0 & 0 & i \\
+0 & 0 & 0 \\
+−i & 0 & 0
+\end{pmatrix}
+　λ_6 =
+\begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & 1 \\
+0 & 1 & 0
+\end{pmatrix} \\
+\\
+&λ_7 =
+\begin{pmatrix}
+0 & 0 & 0 \\
+0 & 0 & −i \\
+0 & i & 0
+\end{pmatrix}
+　λ_8 =\frac{1}{\sqrt{3}}
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & −2
+\end{pmatrix}
+\tag{7.155}
+\end{align}
+\]
+
+群の生成子はこれらのゲルマン行列に接続されている。これは、パウリ行列が \(\mathcal{SU}(2)\) 群の生成子<sup>98</sup>に \(T_A = \frac{1}{2}λ_A\) を介して接続されているのと同様である。この群のリー代数は、
+<!--
+The generators of the group are connected to these Gell-Mann matrices,
+just as the Pauli matrices were connected to the generators<sup>98</sup>
+of the \(\mathcal{SU}(2)\) group via \(T_A = \frac{1}{2}λ_A\). The Lie algebra for this group is
+given by
+-->
+</p><p class="margin-large">
+<sup>98</sup>
+\(K_i = \frac{σ_i}{2}\) についてはEw. 3.81とそこに記載されている説明を参照。
+<!--
+\(J_i = \frac{σ_i}{2}\) , see Eq. 3.81 and the explana 
+tions there.
+-->
+</p><p>
+
+\[
+[T_A, T_B] = i f^{ABC}T^C   \tag{7.156}
+\]
+
+ここで、\(A, B, C\) のような大文字は 1 から 8 までのすべての値を取ることができるという標準的な規則を採用しました。\(f^{ABC}\) は \(\mathcal{SU}(3)\) の構造定数と呼ばれ、\(\mathcal{SU}(2)\) ではレヴィ・チヴィタ記号 \(\epsilon_{ijk}\) で与えられました。これらは総当たり計算で計算でき、<sup>99</sup> となります。
+<!--
+where we adopted the standard convention that capital letters like
+\(A, B, C\) can take on every value from 1 to 8. \(f^{ABC}\) are called the structure
+constants of \(\mathcal{SU}(3)\), which for \(\mathcal{SU}(2)\) were given by the Levi-
+Civita symbol \(\epsilon_{ijk}\). They can be computed by brute-force computation,
+which yields<sup>99</sup>
+-->
+</p><p class="margin-large">
+<sup>99</sup>
+あまり啓発的ではありませんが、完全性のためにここに記載します。
+<!--
+This is not very enlightening, but we
+list it here for completeness.
+-->
+</p><p>
+
+\[
+f^{123} = 1  \tag{7.157}
+\]
+
+\[ 
+f^{147}= −f^{156} = f^{246} = f^{257} = f^{345} = −f^{367}=\frac{1}{2}  \tag{7.158}
+\]
+
+\[
+f^{458} = f^{678}=\frac{\sqrt{3}}{2}  \tag{7.159}
+\]
+
+ここで、他のすべては、構造定数\(f^{ABC}\)が任意の2つの添字の順列に対して反対称であるという事実から計算できます。例えば、
+<!--
+where all others can be computed from the fact that the structure
+constants \(f^{ABC}\) are antisymmetric under permutation of any two
+indices. For example
+-->
+\[
+f^{ABC} = −f^{BAC} = −f^{CBA}   \tag{7.160}
+\]
+
+順列によって計算できない他のすべての可能性は消えます。
+<!--
+All other possibilities, which cannot be computed by permutation,
+vanish.
+-->
+</p><p>
+
+7.2節で\(\mathcal{SU}(2)\)に対して行ったのと同様に、スピン\(\frac{1}{2}\)場の3つ組を導入する。
+<!--
+Analogous to what we did for \(\mathcal{SU}(2)\) in Section 7.2, we introduce a
+triplet of spin \(\frac{1}{2}\) fields
+-->
+\[
+Q =
+\begin{pmatrix}
+q_1 \\
+q_2 \\
+q_3
+\end{pmatrix}
+\tag{7.161}
+\]
+
+そして、\(\mathcal{SU}(2)\)と全く同じように、この三つ組の中のオブジェクトに新しいラベルが与えられます。これらの新しいラベルについては次のセクションで説明します。
+<!--
+and exactly as for \(\mathcal{SU}(2)\) we get new labels for the objects inside this
+triplet. We will discuss these new labels in the next section.
+-->
+</p><p>
+
+ラグランジアンを作るには
+<!--
+To make the Lagrangian
+-->
+\[
+\mathscr{L} = i\overline{\mathcal{Q}}∂_μγ^μ\mathcal{Q} −\overline{\mathcal{Q}}m\mathcal{Q}  \tag{7.162}
+\]
+
+局所的に\(\mathcal{SU}(3)\)不変であるため、スピン\(\frac{1}{2}\)場と新しいスピン1場との間の結合項を再度追加します。導出は\(\mathcal{SU}(2)\)の場合と同様ですが、計算が非常に煩雑になるため、最終的なラグランジアン<sup>100</sup>を引用するだけにします。
+<!--
+locally \(\mathcal{SU}(3)\) invariant, one again adds coupling terms between the
+spin \(\frac{1}{2}\)
+fields and new spin 1 fields. The derivation is analogous as for
+\(\mathcal{SU}(2)\), but the computations are quite cumbersome, so we just quote
+the final Lagrangian<sup>100</sup>
+-->
+</p><p class="margin-large">
+<sup>100</sup>
+覚えておいてください：大文字の\((A, B, C, ...)\)の合計は1から8までです
+<!--
+Remember: the sum over capital 
+letters \((A, B, C, ...)\) runs from 1 to 8
+-->
+</p><p>
+
+\[
+\mathscr{L} = −\frac{1}{4}\mathcal{G}_{αβ}\mathcal{G}^{αβ} + \overline{\mathcal{Q}}(iD_μγ^μ − m)\mathcal{Q}  \tag{7.163}
+\]
+
+スピン１グルーオン場\(\mathcal{G}_α ≡ T^C\mathcal{G}_α^C\)の場の強度テンソル\(\mathcal{G}_{αβ}\)は次のように定義される。
+<!--
+and the field strength tensor \(\mathcal{G}_{αβ}\) for the spin 1 gluon fields \(\mathcal{G}_α ≡ T^C\mathcal{G}_α^C\) is defined as
+-->
+\[
+\mathcal{G}_{αβ} = ∂_α\mathcal{G}_β− ∂_β\mathcal{G}_α − \mathcal{g}[\mathcal{G}_α, \mathcal{G}_
+β]  \tag{7.164}
+\]
+
+ここで \(T^C\) は、この節の冒頭で定義した \(\mathcal{SU}(3)\) の生成子を表す。さらに、\(D_α\) は次のように定義される。
+<!--
+Here \(T^C\) denotes the generators of \(\mathcal{SU}(3)\) that were defined at the
+beginning of this section. Furthermore, \(D_α\) is defined as
+-->
+\[
+D_α = ∂_α − i\mathcal{g}T^C\mathcal{G}_α^C = ∂_α − i\mathcal{g}\mathcal{G}_α   \tag{7.165}
+\]
+
+ご覧のとおり、ここでの各項は\(\mathcal{SU}(2)\)の場合と完全に類似していますが、ここでは異なる交換特性を持つ異なる生成子が使用されています。
+<!--
+As you can check every term here is completely analogous to the
+\(\mathcal{SU}(2)\) case, except we now have different generators with different
+commutation properties.
+-->
+</p>
+<h3>7.8.1 色</h3>
+<!--
+<h3>7.8.1 Color</h3>
+-->
+<p>
+大域的な \(\mathcal{SU}(3)\) 対称性から、ネーターの定理を通して新しい保存量が得られます。これは、7.7節で \(\mathcal{SU}(2)\) について議論したことと同様です。\(\mathcal{SU}(2)\) と同じ考え方に従うと、各生成子に1つずつ、計8つの保存量があることがわかります。ここでも、粒子ラベルとして使用できるのは、対角生成子に属する保存量のみです。\(\mathcal{SU}(3)\) には、2つのカルタン<sup>101</sup>生成子、\(\frac{1}{2}λ_3\) と \(\frac{1}{2}λ_8\) があります。したがって、強い力を介して相互作用するすべての粒子は、カルタン生成子の固有値に対応する2つの追加ラベルを持ちます。
+<!--
+From global \(\mathcal{SU}(3)\) symmetry we get through Noether’s theorem
+new conserved quantities. This is analogous to what we discussed
+for \(\mathcal{SU}(2)\) in Section 7.7. Following the same lines of thought as for
+\(\mathcal{SU}(2)\) tells us that we have 8 conserved quantities, one for each generator.
+Again, we can only use the conserved quantities that belong
+to the diagonal generators as particle labels. \(\mathcal{SU}(3)\) has two Cartan<sup>101</sup>
+generators \(\frac{1}{2}λ_3\) and \(\frac{1}{2}λ_8\). Therefore, every particle that interacts via
+the strong force carries two additional labels, corresponding to the
+eigenvalues of the Cartan generators.
+-->
+</p><p class="margin-large">
+<sup>101</sup>
+思い出してください、カルタンジェネレータ = 対角ジェネレータです。
+<!--
+Recall, Cartan generators = diagonal generators. 
+-->
+</p><p>
+
+\(\frac{1}{2}λ_3 =\frac{1}{2}
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & −1 & 0 \\
+0 & 0 & 0
+\end{pmatrix}\) の固有値<sup>102</sup> は \(+\frac{1}{2},−\frac{1}{2}, 0\) です。 \(
+λ_8 = \frac{1}{2\sqrt{3}}
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & −2
+\end{pmatrix}\) のとき、固有値 <sup>103</sup> は \(\frac{1}{2\sqrt{3}} , \frac{1}{2\sqrt{3}} , \frac{−1}{\sqrt{3}}\) です。したがって、強い相互作用をするフェルミオンを（カルタン生成子の固有ベクトルが張る基底内で）三重項に並べると、任意のスピノル \(ψ\) を用いて、以下のラベルを割り当てることができます。
+<!--
+
+The eigenvalues<sup>102</sup> of \(\frac{1}{2}λ_3 =\frac{1}{2}
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & −1 & 0 \\
+0 & 0 & 0
+\end{pmatrix}\) are \(+\frac{1}{2},−\frac{1}{2}, 0\). For \(
+λ_8 = \frac{1}{2\sqrt{3}}
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & −2
+\end{pmatrix}\) the eigenvalues<sup>103</sup> are \(\frac{1}{2\sqrt{3}} , \frac{1}{2\sqrt{3}} , \frac{−1}{\sqrt{3}}\) . Therefore if we arrange the strong interacting fermions into triplets (in the
+basis spanned by the eigenvectors of the Cartan generators), we can
+assign them the following labels, with some arbitrary spinor \(ψ\):
+-->
+</p><p class="margin-large">
+<sup>102</sup>
+固有ベクトルは、もちろん \(
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix},
+\begin{pmatrix}
+0 \\
+1 \\
+0
+\end{pmatrix}\) および \(
+\begin{pmatrix}
+0 \\
+0 \\
+1
+\end{pmatrix}\) です。
+<!--
+The eigenvectors are of course \(
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix},
+\begin{pmatrix}
+0 \\
+1 \\
+0
+\end{pmatrix}\) and \(
+\begin{pmatrix}
+0 \\
+0 \\
+1
+\end{pmatrix}\). 
+-->
+<br><br>
+
+<sup>103</sup>
+同じ固有ベクトル \(
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix},
+\begin{pmatrix}
+0 \\
+1 \\
+0
+\end{pmatrix}\) および \(
+\begin{pmatrix}
+0 \\
+0 \\
+1
+\end{pmatrix}\) に対応します。
+<!--
+Corresponding to the same eigenvectors \(
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix},
+\begin{pmatrix}
+0 \\
+1 \\
+0
+\end{pmatrix}\) and \(
+\begin{pmatrix}
+0 \\
+0 \\
+1
+\end{pmatrix}\).
+-->
+</p><p>
+
+\[
+\left(+\frac{1}{2},\frac{1}{2\sqrt{3}}\right)　for　
+\begin{pmatrix}
+1 \\
+0 \\
+0
+\end{pmatrix}
+ψ
+\]
+
+ここで、通常は <strong>red</strong>:=\(\left(\frac{1}{2}, \frac{1}{2\sqrt{3}}\right)\) と定義します。これは、\(
+\begin{pmatrix}
+Ψ \\
+0 \\
+0
+\end{pmatrix}\) の形式が red<sup>104</sup> と呼ばれることを意味します。同様に、
+<!--
+where one usually defines <strong>red</strong>:=\(\left(\frac{1}{2}, \frac{1}{2\sqrt{3}}\right)\). This means something of the form \(
+\begin{pmatrix}
+Ψ \\
+0 \\
+0
+\end{pmatrix}\) is called red<sup>104</sup>. Analogously 
+-->
+</p><p class="margin-large">
+<sup>104</sup>
+ここでは「赤」、「青」、「緑」といった馴染みのあるラベルを使用していますが、これらの言葉の通常の意味とは全く関係がありません。\(\mathcal{SU}(3)\)相互作用の文脈では、これらの言葉を単に便利なラベルとして使用しています。色のラベルを使用する理由については、Francis HalzenとAlan D. Martin著『Quarks and Leptons: An Introductory Course in Modern Particle Physics』第1章（Wiley、1984年第1版、ISBN 9780471887416）を参照してください。
+<!--
+Although we use here the familiar
+sounding labels "red", blue" and
+"green", there is absolutely no connection
+with the usual meaning of these
+words. In the context of \(\mathcal{SU}(3)\) interactions,
+we use these words simply as
+convenient labels. For a nice discussion
+on why we use color labels, see Chapter
+1 in Francis Halzen and Alan D. Martin.
+Quarks and Leptons: An Introductory
+Course in Modern Particle Physics. Wiley,
+1st edition, 1 1984. ISBN 9780471887416.
+-->
+</p><p>
+
+\[
+\left(−\frac{1}{2}, \frac{1}{2\sqrt{3}}\right)　for　
+\begin{pmatrix}
+0 \\
+1 \\
+0
+\end{pmatrix}
+ψ
+\]
+
+ここで、<strong>青</strong>:= \(\left(\frac{−1}{2} , \frac{1}{2\sqrt{3}}\right)\) であり、3 番目の可能性として、<strong>緑</strong>:= \(\left(0, \frac{−1}{\sqrt{3}}\right)\) と定義します。
+<!--
+with <strong>blue</strong>:= \(\left(\frac{−1}{2} , \frac{1}{2\sqrt{3}}\right)\) and for the third possibility we define <strong>green</strong>:= \(\left(0, \frac{−1}{\sqrt{3}}\right)\).
+-->
+</p><p>
+
+\(\mathcal{SU}(2)\) の場合と全く同様に、すべての \(\mathcal{SU}(3)\) シングレットにカラーチャージゼロを割り当てます。これらのシングレットは強い力で相互作用しない粒子です。別の言い方をすれば、無色です。さらに、\(\mathcal{SU}(3)\) の (8次元<sup>105</sup>) 随伴表現を用いて、ゲージ場 \(G_A^μ\)、すなわちグルーオンにカラーを割り当てることができます。これは、第7.7節でWボソンにアイソスピンを割り当てた方法と全く同様です。
+<!--
+Completely analogous to what we did for \(\mathcal{SU}(2)\) we assign the
+color-charge zero to all \(\mathcal{SU}(3)\) singlets, which are then particles that
+do not interact via the strong force. Formulated differently: they
+are colorless. In addition, one can use the (8-dimensional<sup>105</sup>) adjoint 
+representation of \(\mathcal{SU}(3)\) to assign color to the gauge fields \(G_A^μ\), i.e.
+the gluons, completely analogous to how we assigned isospin to the
+W-Bosons in Section 7.7.
+-->
+</p><p class="margin-large">
+<sup>105</sup>
+\(\mathcal{SU}(3)\) の随伴表現は、生成子が8個あるため8次元です。
+<!--
+The adjoint representation of \(\mathcal{SU}(3)\)
+is 8 dimensional, because we have 8
+generators.
+-->
+</p>
+<h3>7.8.2 クォーク記述</h3>
+<!--
+<h3>7.8.2 Quark Description</h3>
+-->
+<p>
+
+強い力を介して相互作用するスピン \(\frac{1}{2}\) 粒子<sup>106</sup> を思い出してください。クォークと呼ばれます。クォークについて話すには、非常に多くのことを考慮する必要があります。
+<!--
+Recall that spin \(\frac{1}{2}\) particles<sup>106</sup>, which interact via the strong force are 
+called quarks. If we want to talk about quarks we have to consider 
+quite a lot of things:
+-->
+</p><p class="margin-large">
+<sup>106</sup>
+
+スピン \(\frac{1}{2}\)
+は、スピン \(\frac{1}{2}\)
+場によって生成されます。これについては第6章で説明します。
+<!--
+Spin \(\frac{1}{2}\)
+are created by spin \(\frac{1}{2}\)
+fields, as we will learn in Chapter 6.
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• クォークは \(\mathcal{SU}(3)\) トリプレットであり、\(\mathcal{Q}\) と表記されます。トリプレット内には、同じクォーク（例えばアップクォーク）が異なる色で存在します：\(\mathcal{U} =
+\begin{pmatrix}
+u_r \\
+u_b \\
+u_g
+\end{pmatrix}\)。
+トリプレットは、\(\mathcal{SU}(3)\) 不変を得るために常にペア \(\overline{\mathcal{Q}}\mathcal{Q}\) で現れます。これは、\(\mathcal{SU}(2)\) 不変を得るために常にペアの二重項が必要であるのと同じです。 \(\overline{\mathcal{Q}}\mathcal{Q}\) と書く代わりに、インデックス表記を使うことができます: \(\overline{\mathcal{Q}}\mathcal{Q} = \overline{q}_cq_c\)。ここで、インデックス c はカラー \(c = r, g, b\) を表します。
+
+</li><br><li>• さらに、左カイラルクォークは弱い力によっても相互作用するため、\(\mathcal{SU}(2)\) ダブレットです。このダブレット内の各オブジェクト<sup>107</sup>
+(=各クォーク) はトリプレットです: \(q =
+\begin{pmatrix}
+u_c \\
+d_c
+\end{pmatrix}\)。これは非常に混乱を招く可能性があり、非常に高速であるため、強い相互作用を考慮しない限り、カラーインデックス c は省略されます。
+<!--
+• Quarks are \(\mathcal{SU}(3)\) triplets, denoted by \(\mathcal{Q}\). Inside a triplet we have
+the same quark, say an up-quark, in different colors: \(\mathcal{U} =
+\begin{pmatrix}
+u_r \\
+u_b \\
+u_g
+\end{pmatrix}\).
+The triplets always appear in pairs \(\overline{\mathcal{Q}}\mathcal{Q}\) in order to get something
+\(\mathcal{SU}(3)\) invariant, exactly as we always need doublet pairs in order
+to get something \(\mathcal{SU}(2)\) invariant. Instead of writing \(\overline{\mathcal{Q}}\mathcal{Q}\), we can
+use an index notation: \(\overline{\mathcal{Q}}\mathcal{Q} = \overline{q}_cq_c\), where the index c stands for
+color \(c = r, g, b\).
+
+</li><br><li>• In addition, left-chiral quarks are \(\mathcal{SU}(2)\) doublets, because they
+interact via the weak force, too. Each object in this doublet<sup>107</sup>
+(=each quark) is a triplet: \(q =
+\begin{pmatrix}
+u_c \\
+d_c
+\end{pmatrix}\). This can become very confusing,
+very fast and therefore the color index c is suppressed unless
+strong interactions are considered.
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<sup>107</sup>
+それぞれのクォーク二重項は、アップクォークとダウンクォーク、またはトップクォークとボトムクォークなど、2つの異なるクォークで構成されています。
+<!--
+Each quark doublet consists of two
+different quarks, for example an up and
+a down-quark or a top- and a
+bottom-quark.
+-->
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• これではまだ不十分であるかのように、各クォークは2つのワイルスピノルからなるディラックスピノルで記述されることを覚えておく必要があります。
+
+\(uc =
+\begin{pmatrix}
+(χ_u^L)_c \\
+(ξ_u^R)_c
+\end{pmatrix}\)。上側のワイルスピノルは左カイラルなクォークを記述し、下側の成分は右カイラリティを持つ同じクォークを記述します。
+これについて説明したので、\(\mathcal{SU}(3)\)相互作用に戻りましょう。幸いなことに、ラグランジアンにおけるゲージボソンの質量項は実験的には必要ありません。なぜなら、すべての実験が、グルーオンと呼ばれる\(\mathcal{SU}(3)\)のゲージボソンは質量がゼロであることを示しているからです。したがって、\(\mathcal{SU}(3)\)は破れていません。
+<br><br>
+さらに、\(\mathcal{SU}(3)\)対称性は、三重項内のフェルミオンの質量項に関して新たな問題を生じさせません。なぜなら、\[
+\overline{\mathcal{Q}}m\mathcal{Q} \tag{7.166}
+\]
+
+という形式の項は、三重項内のすべての粒子の質量が等しい限り、\(\mathcal{SU}(3)\)不変だからです。これは、mが単位行列<sup>108</sup>に比例することを意味します。三重項内のオブジェクトは、異なる色で同じクォークを表しますが、実際には質量は等しくなります。例えば、アップクォークの場合、三重項は
+
+\[
+\mathcal{U} =
+\begin{pmatrix}
+u_r \\
+u_b \\
+u_g
+\end{pmatrix}
+\tag{7.167}
+\]
+
+ここで、\(u_r\) は赤色、\(u_b\) は青色、\(u_g\) は緑色のアップクォークを表し、これらはすべて同じ質量を持ちます。
+<!--
+
+• As if this weren’t enough, we need to remember that each quark
+is described by a Dirac spinor, which consits of two Weyl spinors
+
+\(uc =
+\begin{pmatrix}
+(χ_u^L)_c \\
+(ξ_u^R)_c
+\end{pmatrix}\). The upper Weyl-Spinor describes a left-chiral and
+the lower component the same quark with right-chirality.
+Having talked about this, let’s return to \(\mathcal{SU}(3)\) interactions. Happily,
+there is no experimental need for mass terms for the gauge
+bosons in the Lagrangian, because all experiments indicate that the
+gauge bosons of \(\mathcal{SU}(3)\), called gluons, are massless. Therefore \(\mathcal{SU}(3)\)
+is not broken.
+<br><br>
+Furthermore, the \(\mathcal{SU}(3)\) symmetry poses no new problems regarding
+mass terms for the fermions in the triplet, because a term of the
+form
+
+\[
+\overline{\mathcal{Q}}m\mathcal{Q}  \tag{7.166}
+\]
+
+is \(\mathcal{SU}(3)\) invariant, as long as all particles in the triplet have equal
+mass. This means m is proportional to the unit matrix<sup>108</sup>. The objects
+inside a triplet describe the same quark in different colors, which
+indeed have equal mass. For example, for an up-quark the triplet is
+
+\[
+\mathcal{U} =
+\begin{pmatrix}
+u_r \\
+u_b \\
+u_g
+\end{pmatrix}
+\tag{7.167}
+\]
+
+where \(u_r\) denotes a red, \(u_b\) a blue and \(u_g\) green up-quark, which all
+have the same mass.
+-->
+</li></ul></div>
+</p><p class="margin-large">
+<sup>108</sup>
+\(m = m
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}\) の代わりに
+\(m = m
+\begin{pmatrix}
+m_1 & 0 & 0 \\
+0 & m_2 & 0 \\
+0 & 0 & m_3
+\end{pmatrix}\)
+<!--
+
+\(m = m
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}\), instead of
+\(m = m
+\begin{pmatrix}
+m_1 & 0 & 0 \\
+0 & m_2 & 0 \\
+0 & 0 & m_3
+\end{pmatrix}\)
+-->
+</p><p>
+電子やニュートリノのような他のスピン \(\frac{1}{2}\) 粒子は色を持たないため、グルーオンと結合しません。局所 \(\mathcal{SU}(3)\) 不変性から生じる相互作用は、結合定数が電磁相互作用 (\(\mathcal{U}(1)\)) や弱い相互作用 (\(\mathcal{SU}(2)\)) よりもはるかに大きいため、<strong>強い相互作用</strong>と呼ばれます。
+<!--
+The other spin \(\frac{1}{2}\) particles, like electrons or neutrinos, do not carry
+color and therefore do not couple to gluons. The interactions following
+from local \(\mathcal{SU}(3)\) invariance are called <strong>strong interactions</strong>,
+because the coupling constant is much bigger than for electromagnetic
+(\(\mathcal{U}(1)\)) or weak (\(\mathcal{SU}(2)\)) interactions.
+-->
+</p>
+<h2>7.9 フェルミオンとボソンの相互作用</h2>
+<!--
+<h2>7.9 The Interplay Between Fermions and Bosons</h2>
+-->
+<p>
+このセクションでは、本章で発見したことを要約し、より物理的な文脈で説明します。スピン \(\frac{1}{2}\) 場はスピン \(\frac{1}{2}\) 粒子を生成・破壊することを後ほど学びます。同様に、スピン 1 場はスピン 1 粒子を生成・破壊します。本章では、異なる場、ひいては粒子がどのように相互作用するかを記述するラグランジアンを導出しました。
+<!--
+
+This section summarizes what we discovered in this chapter and
+puts it in a more physical context. We will learn later that spin \(\frac{1}{2}\)
+fields create and destroy spin \(\frac{1}{2}\) particles. Analogously, spin 1 fields
+create and destroy spin 1 particles. In this chapter we derived the
+Lagrangians that describe how different fields and therefore particles
+interact with each other.
+-->
+</p><p>
+セクション1.3で既に述べたように、スピン \(\frac{1}{2}\) 粒子をフェルミオン、スピン 1 粒子をボソンと呼びます。標準的な解釈は、フェルミオンが物質を構成し、ボソンが物質間の力を媒介するというものです。これで、これがどのように起こるのか理解できました。
+<!--
+As already mentioned in Section 1.3 we call spin \(\frac{1}{2}\) particles
+fermions and spin 1 particles bosons. The standard interpretation
+is that fermions make up matter and bosons mediate the forces between
+matter. We can now understand how this comes about.
+-->
+</p><p>
+この章は、第6章で導出した自由場を記述するラグランジアンから始めました。次に、1つ、2つ、または3つの自由スピン \(\frac{1}{2}\) 場を記述するラグランジアンに内部対称性があることを発見しました。これらの内部対称性は大域対称性のみであり、特殊相対論の観点からは全く説得力がありません。より自然なのは局所対称性です。
+<!--
+
+We started the chapter with Lagrangians describing free fields,
+which we derived in Chapter 6. Then we discovered internal symmetries
+for the Lagrangian describing one, two or three free spin \(\frac{1}{2}\)
+fields. These internal symmetries are only global symmetries, which
+is quite unconvincing because of special relativity. More natural
+would be local symmetries.
+-->
+</p><p>
+その後、追加の結合項を導入することでラグランジアンを局所不変にできることを発見しました。これらの結合項は、スピン \(\frac{1}{2}\) 場と新しいスピン 1 場との相互作用を記述します。歴史的な理由から、ここでの内部対称性はゲージ対称性と呼ばれ、したがって、これらの新しいスピン 1 場をゲージ場と呼びます。ネーターの定理により、各内部対称性に対して新しい保存量が得られます。これらは電荷として解釈され、\(\mathcal{U}(1)\) 対称性に従う電荷に類似しています。
+<!--
+
+We then discovered that we could make the Lagrangians locally
+invariant by introducing additional coupling terms. These coupling
+terms describe the interaction of our spin \(\frac{1}{2}\)
+fields with new spin 1
+fields. For historic reasons the internal symmetries here are called
+gauge symmetries and we therefore call these new spin 1 fields,
+gauge fields. Through Noether’s theorem we get for each internal
+symmetry new conserved quantities. These are interpreted as
+charges, analogous to electric charge that follows for \(\mathcal{U}(1)\) symmetry.
+-->
+<div class="styleBullet">
+<ul><li>
+• 局所的に \(\mathcal{U}(1)\) 不変なラグランジアンを得るには、ゲージ場 \(A^μ\) が 1 つ必要です。最終的なラグランジアンは電磁相互作用を正しく記述します。\(\mathcal{U}(1)\) 対称性から電荷が保存されることが分かります。
+</li><br><li>• 局所的に \(\mathcal{SU}(2)\) 不変なラグランジアンを得るには、ゲージ場 \(W_1^μ,W_2^μ,W_3^μ\) が 3 つ必要です。最終的なラグランジアンは弱相互作用を正しく記述します。\(\mathcal{SU}(2)\) 対称性からアイソスピンが保存されることが分かります。
+</li><br><li>• 局所的に \(\mathcal{SU}(3)\) 不変なラグランジアンを得るには、そのような場 \(G_1^μ, G_2^μ,...\) が8つ必要です。最終的なラグランジアンは強い相互作用を正しく記述します。\(\mathcal{SU}(3)\) 対称性は、色が保存されることを示しています。
+<!--
+
+• To get a locally \(\mathcal{U}(1)\) invariant Lagrangian, we need one gauge
+field \(A^μ\). The final Lagrangian describes correctly electromagnetic
+interactions. \(\mathcal{U}(1)\) symmetry tells us that electric charge is conserved.
+</li><br><li>• To get a locally \(\mathcal{SU}(2)\) invariant Lagrangian, we need three gauge
+fields \(W_1^μ,W_2^μ,W_3^μ\). The final Lagrangian describes correctly weak
+interactions. \(\mathcal{SU}(2)\) symmetry tells us that isospin is conserved.
+</li><br><li>• To get a locally \(\mathcal{SU}(3)\) invariant Lagrangian, we need eight such
+fields \(G_1^μ, G_2^μ,...\). The final Lagrangian describes correctly strong
+interactions. \(\mathcal{SU}(3)\) symmetry tells us that color is conserved.
+-->
+</li></ul></div>
+</p><p>
+異なるゲージボソン（スピン1粒子）は、それぞれ異なる種類の力を担います。電磁力は光子によって媒介され、\(\mathcal{U}(1)\)ゲージ場\(A_μ\)によって生成されます。弱い力は\(W^+,W^−\)および\(Z\)ボソンによって媒介され、強い力は8つの異なるグルーオンによって媒介され、グルーオンは対応する\(\mathcal{SU}(2)\)および\(\mathcal{SU}(3)ゲージ場によって生成されます。
+<!--
+
+Different gauge bosons (spin 1 particles) are responsible for a
+different kind of force. The electromagnetic force is mediated by
+photons, which is created by the \(\mathcal{U}(1)\) gauge field \(A_μ\). The weak
+force is mediated by \(W^+,W^−\) and \(Z\) bosons and the strong force by 8
+different gluons, which are created by the corresponding \(\mathcal{SU}(2)\) and
+\(\mathcal{SU}(3) gauge fields.
+-->
+</p><p>
+
+さらに、\(\mathcal{SU}(2)\)対称性はラグランジアンに質量項を含めることを禁じていることを発見しました。実験から、これは誤りであることが分かっています。対称性を損なうことなく質量項を含めることができる解決策がヒッグス機構です。これは、スピン1場とスピン\(\frac{1}{2}\)場をヒッグス場と呼ばれる新しいスピン0場に結合する項を追加することで機能します。\(\mathcal{SU}(2)\)対称性を自発的に破り、ヒッグス場をもはや対称ではない新しい最小値の周りで展開することで、ラグランジアンに必要な質量項が得られます。
+<!--
+In addition, we discovered that \(\mathcal{SU}(2)\) symmetry forbids mass
+terms in the Lagrangian. From experiments we know this is incorrect.
+The solution that enables us to include mass terms without spoiling
+any symmetry is the Higgs mechanism. It works by including additional
+terms, describing coupling of our spin 1 and spin \(\frac{1}{2}\)
+fields to a
+new spin 0 field, called the Higgs field. By breaking \(\mathcal{SU}(2)\) symmetry
+spontaneously and expanding the Higgs field around a new, no
+longer symmetric minimum, we get the required mass terms in the
+Lagrangian.
+-->
+</p>
+    </body>
+</html>

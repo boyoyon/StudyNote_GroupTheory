@@ -1,0 +1,1286 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>自由(場)理論</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>6 自由(場)理論</h1>
+<!--
+<h1>6 Free Theory</h1>
+-->
+<p>
+この章では、対称性から<strong>自由</strong>場（＝相互作用のない場）<sup>1</sup>の物理理論の基本方程式を導出します。
+<!--
+In this chapter we will derive the basic equations for a physical theory
+of <strong>free</strong> (=non-interacting) fields<sup>1</sup> from symmetry. We will 
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+ここでは場について具体的に説明しますが、ここで導出した方程式が粒子の記述にもどのように使用できるかについては、後の章で説明します。
+<!--
+Although we specify here for fields
+we will see in a later chapter how the
+equations we derive here can be used to
+describe particles, too.
+-->
+</p><p>
+<div class="styleBullet">
+<ul><li>
+• ローレンツ群の \((0, 0)\) 表現を用いてクライン・ゴルドン方程式を導出する。
+</li><br><li>• ローレンツ群の \((\frac{1}{2}
+, 0) ⊕ (0, \frac{1}{2})\) 表現を用いてディラック方程式を導出する。
+</li><br><li>• ローレンツ群のベクトル \((\frac{1}{2}, \frac{1}{2})\) 表現からプロカ方程式を導出する。プロカ方程式は質量ゼロ極限において有名なマクスウェル方程式となる。
+<!--
+• derive the Klein-Gordon equation using the \((0, 0)\) representation of
+the Lorentz group,
+</li><br><li>• derive the Dirac equation using the \((\frac{1}{2}
+, 0) ⊕ (0, \frac{1}{2})\) representation of
+the Lorentz group,
+</li><br><li>• derive the Proca equations from the vector \((\frac{1}{2}, \frac{1}{2})\) representation of
+the Lorentz group which in the massless limit become the famous
+Maxwell equations.
+-->
+</li></ul></div>
+</p>
+<h2>6.1 ローレンツ共変性と不変性</h2>
+<!--
+<h2>6.1 Lorentz Covariance and Invariance</h2>
+-->
+<p>
+以下の節では、素粒子物理学の標準モデル（現在利用可能な最良の物理理論）の基本運動方程式を導出します。これらの方程式はすべての慣性系で同一である必要があります。そうでなければ、それぞれの慣性系ごとに異なる方程式を持つことになります。特殊相対論には優先される参照系がないため、これは役に立ちません。すべての慣性系で同一に見える方程式を専門用語で言うと、<strong>ローレンツ共変方程式</strong>です。ある物体がローレンツ群の特定の表現に従って変換される場合、その物体はローレンツ共変です。例えば、ベクトル \(A_μ\) は (\(\frac{1}{2},\frac{1}{2}\)) 表現に従って変換されるため、ローレンツ共変です。これは \(A_μ → A_μ^\prime\) を意味しますが、全く異なることを意味するわけではありません。一方、例えば、\(A_1 + A_3\) という形式の項はローレンツ共変ではありません。なぜなら、ローレンツ群の表現に従って変換されないからです。これは、どのように変換されるかが分からないという意味ではありません。変換の性質は \(A_μ\) の変換則から容易に導かれますが、それでもこの項は異なる慣性系では全く異なって見えます。ブーストされた系では、\(A_2 + A_4\) のように見えるかもしれません。ローレンツ共変なオブジェクトのみを含む方程式は、ローレンツ共変方程式と呼ばれます。例えば、
+<!--
+In the following sections, we will derive the fundamental equations
+of motion of the standard model of particle physics, which is the best
+physical theory that we have. We want that these equations are the
+same in all inertial frames, because otherwise would have a different
+equation for each possible frame of reference. This would be useless
+because there is no preferred frame of reference in special relativity.
+The technical term for an equation that looks the same in all inertial
+frames of reference is <strong>Lorentz covariant equation</strong>. An object is
+Lorentz covariant if it transforms under a given representation of
+the Lorentz group. For example, a vector \(A_μ\), transforms according
+to the (\(\frac{1}{2},\frac{1}{2}\)) representation and is therefore Lorentz covariant. This
+means \(A_μ → A_μ^\prime\), but not something completely different. On the
+other hand, for example, a term of the form \(A_1 + A_3\) is not Lorentz
+covariant, because it does not transform according to a representation
+of the Lorentz group. This does not mean that we do not know how
+it transforms. The transformation properties can be easily derived
+from the transformation laws for \(A_μ\), but nevertheless this term looks completely different in different inertial frames. In a boosted frame,
+it may look like \(A_2 + A_4\). An equation that involves only Lorentz
+covariant objects is called a Lorentz covariant equation. For example,
+-->
+\[
+A_μ + 7B_μ + C_νA^νD_μ = 0
+\]
+これはローレンツ共変方程式です。別の座標系では、
+<!--
+is a Lorentz covariant equation, because in another coordinate system
+it reads
+-->
+\[
+Λ_μ^νA_ν + 7Λ_μ^νB_ν + Λ_ν^ρC_ρΛ_η^νA^ηΛ_μ^σD_σ 
+= A_μ^\prime + 7B_μ^\prime+ C_ν^\prime A^{\prime ν}D_μ^\prime = 0
+\]
+
+同じように見えます。そのような物体のいくつかの要素だけを含む方程式は、一般にローレンツ共変ではなく、したがって、それぞれの慣性系では全く異なって見えます。
+<!--
+We see that it looks the same. An equation containing only some
+components of such objects is, in general, not Lorentz covariant and
+therefore looks completely different in each inertial frame.
+-->
+</p><p>
+
+ローレンツ<strong>共変</strong>方程式のみが得られるようにするために、作用Sはローレンツ<strong>不変</strong>である必要があります。これは、作用Sが参照フレームを変更しても全く同じままの項のみを含む必要があることを意味します。言い換えれば、作用Sはローレンツ変換によって変化しない項のみを含むことが許されます。作用<sup>2</sup> Sから運動方程式が得られます。ここで、Sが参照フレームに依存する場合、そこから導かれる方程式の項も依存するため、これらの方程式はローレンツ共変ではあり得ません。
+<!--
+To make sure we only end up with Lorentz <strong>covariant</strong> equations,
+we require the action S to be Lorentz <strong>invariant</strong>. This means it should
+only contain terms that stay exactly the same when changing the
+frame of reference. In other words: The action is only allowed to contain
+terms that do not change under Lorentz transformations. We get
+ the equations of motion from the action<sup>2</sup> S. Now if S depends on the frame of reference, so would the terms in the equations that follow
+from it and therefore these equations can not be Lorentz covariant.
+-->
+</p><p class="margin-large">
+<sup>2</sup>
+
+作用を最小化すると、
+この最小化手順の結果は
+オイラー・ラグランジュ方程式となり、
+こ​​の方程式が
+私たちのシステムの運動方程式となることを思い出してください。
+<!--
+Recall that we minimize the action and
+the result of this minimization procedure
+is the Euler-Lagrange equation,
+which yields the equation of motion for
+our system.
+-->
+</p><p>
+前章で既に議論したように、ラグランジアンが不変であるというより厳しい要件を適用することができます。なぜなら、ラグランジアンが不変であれば、作用も不変になるからです。
+<!--
+As already discussed in the last chapter, we can use the more
+restrictive requirement that the Lagrangian should be invariant, because
+if the Lagrangian is invariant the action is, too.
+-->
+</p>
+<h2>6.2 クライン・ゴルドン方程式</h2>
+<!--
+<h2>6.2 Klein-Gordon Equation</h2>
+-->
+<p>
+まず、最も単純なケース、すなわちローレンツ群の \((0, 0)\) 表現に従って変換されるスカラーの場合から始めましょう。スカラーの運動方程式を特定するには、対応するラグランジアンを見つける必要があります。私たちの制約<sup>3</sup>と両立する一般的なラグランジアンは、
+<!--
+We now start with the simplest possible case: scalars, which transform
+according to the \((0, 0)\) representation of the Lorentz group. To
+specify the equation of motion for scalars we need to find the corresponding
+Lagrangian. A general Lagrangian that is compatible with
+our restrictions<sup>3</sup> is
+-->
+</p><p class="margin-large">
+<sup>3</sup>
+
+4.2節で議論したように、\(Φ\) においては \(0, 1\) 位と \(2\) 位の項のみを考慮します。
+最も微分が小さい項は
+すぐに明らかになります。
+<!--
+Discussed in Section 4.2: We only consider terms of order \(0, 1\) and \(2\) in \(Φ\). The
+term with the lowest possible derivative
+will become clear in a moment.
+-->
+</p><p>
+
+\[
+\mathscr{L} = AΦ^0 + BΦ + CΦ^2 + D∂_μΦ + E∂_μΦ∂^μΦ + FΦ∂_μΦ  \tag{6.1}
+\]
+
+</p><p>
+まず、ここではラグランジアン密度\(\mathscr{L}\) を扱っており、L 自体を扱っているわけではないことに注意してください。そして、この物理理論は作用から導き出されます。
+<!--
+Firstly, take note that we are considering the Lagrangian density
+\(\mathscr{L}\) and not L itself and we get our physical theory from the action
+-->
+\[
+S =  \int dx \mathscr{L}  \tag{6.2}
+\]
+
+ここで、\(dx\) は空間と時間にわたる積分として理解されます。
+したがって、\(Φ∂_μ∂^μΦ\) のような項は冗長です。なぜなら、部分積分<sup>4</sup>すればわかるように、\(∂_μΦ∂^μΦ\) という項と等価だからです。
+
+<!--
+where \(dx\) is to be understood as the integral over space and time.
+Therefore a term like \(Φ∂_μ∂^μΦ\) would be redundant, because it is
+equivalent to the term \(∂_μΦ∂^μΦ\), as we can see if we integrate by
+parts<sup>4</sup>.
+-->
+</p><p class="margin-large">
+<sup>4</sup>
+境界項は、通常通り、消滅します。なぜなら、場は無限遠で消滅するからです。これは、無限遠で消滅しない場の配置は、無限大の場のエネルギーに対応し、これは非物理的であるため、当然の帰結であることを思い出してください（第2.3節）。
+<!--
+The boundary terms, as usual, vanish, 
+because fields vanish at infinity. Recall
+that this follows, because field configurations
+that do not vanish at infinity
+correspond to infinite field energy,
+which is non-physical (Section 2.3).
+-->
+</p><p>
+
+さらに、ローレンツ<strong>不変性</strong>はラグランジアンがスカラーとなることを制約します。したがって、\(∂_μ\) における奇数ベキは、\(∂_μΦ\) におけるのと同様に、すべて禁制となります。
+\(a\) や \(c\) などの定数がローレンツ指数を持つ場合はどうなるでしょうか？
+これは、\(a, c\) が4元ベクトルであり、時空における方向を指定することを意味し、したがって空間の等方性の仮定に違反します。定数項、つまり \(A = 0) は無視できます。なぜなら、私たちの物理理論はオイラー-ラグランジュ方程式から得られ、ラグランジアンにおける定数は運動方程式に影響を与えないからです<sup>5</sup>。さらに、Φの線形項、すなわち\(B = 0\)は無視する。これは、オイラー・ラグランジュ方程式を用いると、運動方程式に定数項が現れることを意味するからである<sup>6</sup>。少なくとも自由理論においては、場の絶対値は無関係であるため、常に再定義(\(Φ → Φ^\prime = Φ + 定数\))を実行することで、運動方程式から定数項が消える<sup>7</sup>。残るのは
+<!--
+In addition, Lorentz <strong>invariance</strong> restricts the Lagrangian to be a
+scalar. Therefore, all odd powers in \(∂_μ\), like in \(∂_μΦ\) are forbidden.
+What about the constants i.e. \(a\) and \(c\) etc. having a Lorentz index?
+This would mean that \(a, c\) are four-vectors, specifying a direction
+in spacetime and therefore violating the assumption of isotropy of
+space. We can neglect the constant term, i.e. \(A = 0), because we get
+our physical theory from the Euler-Lagrange equation and a constant
+in the Lagrangian has no influence on the equation of motion<sup>5</sup>. In addition, we ignore the term linear in Φ, i.e. \(B = 0\), because it leads,
+using the Euler-Lagrange equation, to a constant in our equations
+of motion<sup>6</sup>. At least in a free theory, the absolute value of the field has no relevance and thus we can always perform a redefinition
+\(Φ → Φ^\prime = Φ + const\). such that the constant term vanishes from the equation of motion<sup>7</sup>. What remains is
+-->
+</p><p class="margin-large">
+<sup>5</sup>
+式4.10を参照してください: \(\frac{∂\mathscr{L}}{∂Φ}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}\right)= 0\)
+したがって、\(\mathscr{L} → \mathscr{L} + A\) は、
+ある定数 \(A\) を伴い、何も変化しません: \(\frac{∂(\mathscr{L}+A)}{∂Φ}− ∂_μ\left(\frac{∂(\mathscr{L}+A)}{∂(∂_μΦ)}\right)=
+\frac{∂\mathscr{L}}{∂Φ}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}\right)\)
+<!--
+See Eq. 4.10: \(\frac{∂\mathscr{L}}{∂Φ}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}\right)= 0\)
+and therefore \(\mathscr{L} → \mathscr{L} + A\) with
+some constant \(A\) does not change
+anything: \(\frac{∂(\mathscr{L}+A)}{∂Φ}− ∂_μ\left(\frac{∂(\mathscr{L}+A)}{∂(∂_μΦ)}\right)=
+\frac{∂\mathscr{L}}{∂Φ}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}\right)\)
+-->
+<br><br>
+
+<sup>6</sup>
+\(\mathscr{L} → \mathscr{L} + BΦ\) は、
+\(\frac{∂(\mathscr{L}+BΦ)}{∂Φ}− ∂_μ\left(\frac{∂(\mathscr{L}+BΦ)}{∂(∂_μΦ)}\right)= \frac{∂\mathscr{L}}{∂Φ}−∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}\right)+ B = 0\) となり、これは運動方程式における単なる追加定数です。
+<!--
+\(\mathscr{L} → \mathscr{L} + BΦ\) yields
+\(\frac{∂(\mathscr{L}+BΦ)}{∂Φ}− ∂_μ\left(\frac{∂(\mathscr{L}+BΦ)}{∂(∂_μΦ)}\right)= \frac{∂\mathscr{L}}{∂Φ}−∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}\right)+ B = 0\), which is just an
+additional constant in the equation of
+motion.
+-->
+<br><br>
+
+<sup>7</sup>
+しかし、もし場が他の場と相互作用するなら、これはもはや当てはまらないことに注意すべきである。なぜなら、そのような場のシフトは、場間の結合を記述する項にも影響を与えるからである。
+これについては、7.3節で自発的対称性の破れの文脈において詳細に議論する。
+<!--
+However take note that if the field
+interacts with other fields, this is no
+longer true, because such a field shift
+then also affects the terms that describe
+the coupling between the fields.
+This will be discussed in detail in Section.
+7.3 in the context of spontaneous
+symmetry breaking.
+-->
+</p><p>
+
+\[
+\mathscr{L} = CΦ^2 + E∂_μΦ∂^μΦ  \tag{6.3}
+\]
+
+</p><p>
+この章の見出しが示すように、私たちは自由理論を構築したいと考えています。つまり、\(Φ\) は1つだけで、\(Φ_1Φ_2\) のような形式の項は存在しません。このような項については、次の章で相互作用を記述する理論を構築するときに考察します。
+<!--
+As the heading of this chapter indicates we want to develop a free
+theory, which means there is just one \(Φ\) and no terms of the form
+\(Φ_1Φ_2\). Terms like this will be investigated in the next chapter, when
+we develop a theory describing interactions.
+-->
+</p><p>
+
+最後に注意すべき点が1つあります。残る定数は2つだけです
+\(C\) と \(E\) です。変分法を用いることで、これらを1つの定数にまとめることができます。なぜなら、ラグランジアン全体の定数は物理特性に影響を与えないからです<sup>8</sup>。とはいえ、慣例的にラグランジアンには全体の係数 \(\frac{1}{2}\) を含め、残りの定数<sup>9</sup> を \(−m^2\) と呼びます。したがって、最終的に残る定数は
+<!--
+There is one last thing to note: we are left with only two constants
+\(C\) and \(E\). By using variational calculus we are able to combine these
+into just one constant, because an overall constant in the Lagrangian
+has no influence on the physics<sup>8</sup>. Nevertheless, it is conventional to include an overall factor \(\frac{1}{2}\) into the Lagrangian and call the remaining constant<sup>9</sup> \(−m^2\). Therefore, we are finally left with
+-->
+</p><p class="margin-large">
+<sup>8</sup>
+\(\mathscr{L} → C\mathscr{L}\) の結果
+\(\frac{∂(C\mathscr{L})}{∂Φ}− ∂_μ\left(\frac{∂(C\mathscr{L})}{∂(∂_μΦ)}\right)= 0 \leftrightarrow \frac{∂(\mathscr{L})}{∂Φ}− ∂_μ\left(\frac{∂(\mathscr{L})}{∂(∂_μΦ)}\right)= 0\)
+<!--
+\(\mathscr{L} → C\mathscr{L}\) yields
+\(\frac{∂(C\mathscr{L})}{∂Φ}− ∂_μ\left(\frac{∂(C\mathscr{L})}{∂(∂_μΦ)}\right)= 0 \leftrightarrow \frac{∂(\mathscr{L})}{∂Φ}− ∂_μ\left(\frac{∂(\mathscr{L})}{∂(∂_μΦ)}\right)= 0\)
+-->
+<br><br>
+
+<sup>9</sup>
+この定数の示唆に富む名前は、後で明らかになります。なぜなら、この定数は、このラグランジアンによって記述される粒子の質量と一致するからです。
+<!--
+The suggestive name of this constant
+will become clear later, because we will
+see that it coincides with the mass of
+particles described by this Lagrangian.
+-->
+</p><p>
+
+\[
+\mathscr{L} =\frac{1}{2}(∂_μΦ∂^μΦ − m^2Φ^2)  \tag{6.4}
+\]
+</p><p>
+ここで変分法を用いると、つまりこのラグランジアンをオイラー・ラグランジュ方程式（式4.10）に代入すると、運動方程式が得られる。
+<!--
+If we now use the variational calculus machinery, which means
+putting this Lagrangian into the Euler-Lagrange equation (Eq. 4.10),
+we get the equation of motion
+-->
+\[
+\begin{align}
+0 &= \frac{∂\mathscr{L}}{∂Φ}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΦ)}\right) \\
+\\
+→ 0 &= \frac{∂}{∂Φ}\left(\frac{1}{2}(∂_μΦ∂^μΦ − m^2Φ^2)\right)− ∂_μ\left(\frac{∂}{∂(∂_μΦ)}\left(\frac{1}{2}(∂_μΦ∂^μΦ − m^2Φ^2)\right)\right) \\
+\\
+→ 0 &= (∂_μ∂^μ + m^2)Φ   \tag{6.5}
+\end{align}
+\]
+これは有名な<strong>クライン・ゴルドン方程式</strong>であり、自由スピン0の場と粒子を記述する正しい運動方程式です。
+<!--
+This is the famous <strong>Klein-Gordon equation</strong>, which is the correct
+equation of motion to describe free spin 0 fields and particles.
+-->
+</p>
+<h3>6.2.1 複素クライン・ゴルドン体</h3>
+<!--
+<h3>6.2.1 Complex Klein-Gordon Field</h3>
+-->
+<p>
+スピン0の場の場合、スカラー場の複素共役を使わずにローレンツ不変なラグランジアンを構築できる。
+これはスピン \(\frac{1}{2}\) 場 \(Ψ\) では当てはまらず、この興味深い事実は
+非常に興味深い結果をもたらすだろう<sup>10</sup>。しかしながら、同様にローレンツ不変なラグランジアンを調査することを妨げるものは何もない。
+<!--
+For spin 0 fields, we are able to construct a Lorentz invariant Lagrangian
+without using the complex conjugate of the scalar field.
+This will not be the case for spin \)\frac{1}{2}\) fields \(Ψ\) and this curious fact will
+have very interesting consequences<sup>10</sup>. Nevertheless, nothing prevents
+us from investigating the equally Lorentz invariant Lagrangian
+-->
+</p><p class="margin-large">
+<sup>10</sup>
+驚きを台無しにするために：スピン \(\frac{1}{2}\) の粒子ごとに反粒子が存在します。複素場を使用することは、以下のテキストで説明されているように、2つの場を同時に考えることと同じです。したがって、ローレンツ不変性により、私たちは<strong>2</strong>の（密接に関連した）場を同時に使用することを余儀なくされ、これらは通常、粒子場と反粒子場として解釈されます。
+<!--
+To spoil the surprise: there is an antiparticle for each spin \(\frac{1}{2}\)
+particle. Using
+complex fields is the same as considering
+two fields at the same time as
+explained in the text below. Therefore
+we are forced by Lorentz invariance to
+use <strong>two</strong> (closely connected) fields at
+the same time, which are commonly
+interpreted as particle and antiparticle
+fields.
+-->
+</p><p>
+
+\[
+\mathscr{L} = ∂_μφ^†∂^μφ − m^2φ^†\phi
+\]
+
+多くの教科書で言われているように、これは単に、質量の等しい<strong>2つの</strong>スカラー場を同時に調べるのと同じです。
+<!--
+as many textbooks do. This is simply the same as investigating <strong>two</strong>
+scalar fields of equal mass at the same time
+-->
+\[
+\mathscr{L} = \frac{1}{2} ∂_μφ_1∂^μ\phi_1 −\frac{1}{2}m^2\phi_1^2
++\frac{1}{2}∂_μ\phi_2∂^μ\phi_2 − \frac{1}{2}m^2\phi_2^2
+\]
+
+なぜなら私たちは
+<!--
+because we have
+-->
+\[
+\phi ≡ \frac{1}{\sqrt{2}}(\phi_1 + i\phi_2)
+\]
+
+繰り返しますが、ローレンツ対称性がラグランジアンの形を決定します。素粒子（＝スピン0）であるスカラー粒子は非常に稀です。実際、実験的に検証されているのは<strong>ヒッグス粒子</strong>だけです。しかし、このラグランジアンは中間子のような複合系を記述するためにも使用できます。ここではこのラグランジアンをこれ以上調べることはせず、ほとんどの教科書では「練習目的」でのみ使用しています。
+<!--
+Again Lorentz symmetry dictates the form of the Lagrangian. Elementary
+scalar (=spin 0) particles are very rare. In fact, only one is
+experimentally verified: <strong>the Higgs boson</strong>. However this Lagrangian
+can also be used to describe composite systems like mesons. We will
+not investigate this Lagrangian any further and most textbooks use it
+only for "training purposes".
+-->
+</p>
+<h2>6.3 ディラック方程式</h2>
+<!--
+<h2>6.3 Dirac Equation</h2>
+-->
+<p>
+ディラックに関するもう一つの逸話は、彼がリチャード・ファインマンに初めて会ったとき、長い沈黙の後、こう言ったというものです。「私には方程式があります。あなたにも方程式がありますか？」
+<!--
+Another story told of Dirac is that when he first met Richard Feynman,
+he said after a long silence "I have an equation. Do you have one too?"
+-->
+<br><br>
+</p><p style="text-align: right;">
+- Anthony Zee<sup>11</sup>
+
+</p><p class="margin-abstract">
+<sup>11</sup>
+Anthony Zee. Quantum Field Theory in 
+a Nutshell. Princeton University Press,
+1st edition, 3 2003. ISBN 9780691010199 
+</p><p>
+
+この節では、自由スピン \(\frac{1}{2}\) 場/粒子の運動方程式を求めます。ローレンツ群の \((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\) 表現を使用します。これは、パリティ変換下で対称性を尊重する理論は、\((\frac{1}{2}, 0)\) 表現と \((0, \frac{1}{2})\) 表現を同時に含める必要があるためです<sup>12</sup>。この表現下で変換されるオブジェクトはディラックスピノルと呼ばれ、右カイラルと左カイラルのワイルスピノルを1つのオブジェクトに統合します<sup>13</sup>。
+<!--
+In this section we want to find the equation of motion for free spin \(\frac{1}{2}\)
+fields/particles. We will use the \((\frac{1}{2}, 0) ⊕ (0, \frac{1}{2})\) representation of the
+Lorentz group, because a theory that respects symmetry under parity
+transformations must include the \((\frac{1}{2}, 0)\) and \((0, \frac{1}{2})\) representations at
+the same time<sup>12</sup>. The objects transforming under this representation
+are called Dirac spinors and combine right-chiral and left-chiral Weyl
+spinors into one object<sup>13</sup>:
+-->
+</p><p class="margin-large">
+<sup>12</sup>
+
+3.7.9節では、パリティ変換によって\((\frac{1}{2}, 0)\)表現が\((0, \frac{1}{2})\)表現に変換されることを示しました。
+<!--
+We showed in Section 3.7.9 that a 
+parity transformation transforms the
+\((\frac{1}{2}, 0)\) representation, into the \((0, \frac{1}{2})\)
+representation.
+-->
+<br><br>
+
+<sup>13</sup>
+これについてはセクション3.7.9で説明しました。
+<!--
+This was discussion in Section 3.7.9.
+-->
+</p><p>
+
+\[
+Ψ ≡
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+=
+\begin{pmatrix}
+χ_a \\
+ξ ^{\dot{a}}
+\end{pmatrix}
+\tag{6.6}
+\]
+</p><p>
+さて、ディラックスピノルから構成されるローレンツ不変なオブジェクトを探し、それをラグランジアンに代入する必要があります。最初のステップは、左カイラルおよび右カイラルのワイルスピノルから構成される不変量を探すことです。
+<!--
+Now, we need to search for Lorentz invariant objects constructed
+from Dirac spinors, which we can then put into the Lagrangian. The
+first step is to search for invariants constructed from our left-chiral
+and right-chiral Weyl spinors.
+-->
+</p><p>
+3.7.7節で導入されたファンデルワールデン記法を使用します。不変となる可能性のある2つの式<sup>14</sup>は以下です。
+<!--
+We will use the Van-der-Waerden notation, which was introduced
+in Section 3.7.7. Two possibly invariants are<sup>14</sup>
+-->
+</p><p class="margin-large">
+<sup>14</sup>
+他に2つの可能性があり、これらはマヨラナ質量項と呼ばれます。スピノルの「計量」を用いてスピノルの指数を上下に移動する方法は既に知られています。\(\epsilon(χ_L)^†χ_L\) という形式のローレンツ不変項を記述できます。\(\epsilon(χ_L)^† = χ^a\) は上付き指数を持ちます。\(\epsilon(χ_L)^†\) は右カイラルスピノルのように変換されますが、このように記述すると自由度が少なくなります。\(ξ_R\) と \(χ_L\) はどちらも2つの成分を持つため、\((ξ_R)^†χ_L\) のような項には4つの自由度があります。項 \(\epsilon(χ_L)^†χ_L = χ^aχ_a\) において、右カイラルスピノルのように変換される対象は χL から独立しておらず、したがってここでは自由度は2つしかありません。マヨラナスピノルについてはさらに多くのことが言えますが、現在、ニュートリノに対してどのタイプの項が適切であるかは（実験的に）調査中です。もう1つ注目すべき点があります。マヨラナスピノルは「実」ディラックスピノルです。実数を引用符で囲んだのは、通常、実数とは \(Ψ^*\overset{!}{=}Ψ\) を意味するためです。スピノルの場合、この条件はローレンツ不変ではありません（この表現ではローレンツ変換が複素数であるため）。ある系で標準条件 \((Ψ^* \overset{!}{=}Ψ)\) を課した場合、一般には別の系では成立しません。代わりに、ディラックスピノルに対してローレンツ不変の「現実」条件を導くことが可能です。
+\(
+\begin{pmatrix}
+0 & \epsilon \\
+-\epsilon & 0
+\end{pmatrix}
+Ψ^* \overset{!}{=}Ψ
+\)
+
+これは一般的に電荷共役として解釈されます。この解釈については、7.1.5節で説明します。したがって、マヨラナスピノルは、電荷共役粒子（一般に反粒子と呼ばれる）と等価な粒子を表します。マヨラナ粒子はそれ自身の反粒子であり、マヨラナスピノルは、以下の追加条件を満たすディラックスピノルです。
+\(Ψ_M ≡
+\begin{pmatrix}
+χ_L \\
+\epsilon χ_L^*
+\end{pmatrix}
+\)
+または
+\(Ψ_M ≡
+\begin{pmatrix}
+-\epsilonξ_R^* \\
+ξ_R
+\end{pmatrix}
+\)
+<!--
+There are two other possibilities,
+which go by the name Majorana mass
+terms. We already know how we can
+move spinor indices up and down
+by using the spinor "metric". We
+can write down a Lorentz invariant
+term of the form \(\epsilon(χ_L)^†χ_L\), because
+\(\epsilon(χ_L)^† = χ^a\) has an upper-undotted
+index. \(\epsilon(χ_L)^†\) transforms like a rightchiral
+spinor, but by writing a term like
+this we have less degrees of freedom.
+\(ξ_R\) and \(χ_L\) both have two components,
+and therefore we have four degrees of
+freedom in a term like \((ξ_R)^†χ_L\). In the
+term \(\epsilon(χ_L)^†χ_L = χ^aχ_a\), the object that
+transforms like a right-chiral spinor is
+not independent of χL and we therefore
+only have two degrees of freedom here.
+There is a lot more one can say about
+Majorana spinors and it is currently
+under (experimental) investigation
+which type of term is the correct one
+for neutrinos. One more thing is worth
+noting: a Majorana spinor is a "real"
+Dirac spinor. I put real into quotation
+marks, because usually real means
+\(Ψ^*\overset{!}{=}Ψ\). For spinors this condition
+is not Lorentz invariant (because the
+Lorentz transformations are complex
+in this representation). If we impose
+the standard condition \((Ψ^* \overset{!}{=}Ψ)\)
+in one frame, it will, in general, not
+hold in another frame. Instead, it is
+possible to derive a Lorentz invariant
+"reality" condition for Dirac spinors:
+\(
+\begin{pmatrix}
+0 & \epsilon \\
+-\epsilon & 0
+\end{pmatrix}
+Ψ^* \overset{!}{=}Ψ
+\) 
+
+which is commonly
+interpreted as charge conjugation. This
+interpretation will be explained in
+Section 7.1.5. Therefore, a Majorana
+spinor describes a particle which is
+equivalent to its charge conjugated
+particle, commonly called anti-particle.
+Majorana particles are their own antiparticles
+and a Majorana spinor is a
+Dirac spinor with an extra-condition:
+\(Ψ_M ≡
+\begin{pmatrix}
+χ_L \\
+\epsilon χ_L^*
+\end{pmatrix}
+\)
+or 
+\(Ψ_M ≡
+\begin{pmatrix}
+-\epsilonξ_R^* \\
+ξ_R
+\end{pmatrix}
+\)
+-->
+</p><p>
+
+\[
+I_1 := χ_{\dot{a}}^T ξ^{\dot{a}} = (χ_a^*)^Tξ^{\dot{a}} = (χ_a)^†ξ^{\dot{a}} = (χ_L)^†ξ_R  \tag{6.7}
+\]
+
+および
+<!--
+and
+-->
+
+\[
+I_2 := (ξ^a)^Tχ_a = ((ξ^{\dot{a}})^*)^Tχ_a = (ξ_R)^†χ_L  \tag{6.8}
+\]
+なぜなら、ローレンツ不変項を得るには、常に下点付き添字と上点付き添字、そして下点なし添字と上点なし添字を組み合わせる必要があるからです。これはセクション3.7.7で明確に示しました。ここでも、右カイラルスピノルと左カイラルスピノルがペアで必要であることが分かります。
+<!--
+because we always need to combine a lower dotted with an upper
+dotted and a lower undotted with an upper undotted index, in order
+to get a Lorentz invariant term. This was shown explicitly in Section
+3.7.7. Here we see again that right-chiral and left-chiral spinors
+are needed in pairs.
+-->
+</p><p>
+
+さらに、後ほど説明するように、1階微分を含む2つのローレンツ不変な組み合わせを構成することができます。しかしまず、スピノルの微分をどのように書くかを理解する必要があります。
+3.7.8節では、スピノルから4元ベクトルを構成する方法を学びました。
+<!--
+Furthermore, we can construct two Lorentz-invariant combinations
+involving first order derivatives, as we will see in a moment. But first
+we need to understand how we can write the derivative of a spinor.
+We learned in Section 3.7.8 how we can construct four-vectors from
+spinors
+-->
+\[
+v_{a\dot{b}} = v_νσ_{a\dot{b}}^ν
+\]
+
+ここで、\(v_ν\)は4元ベクトルのように変換される。したがって、微分演算子はスピノル形式では
+<!--
+where \(v_ν\) transforms like a four-vector. The differentiation operator is
+therefore in the spinor formalism
+-->
+\[
+∂_{a\dot{b}} = ∂_νσ_{a\dot{b}}^ν  \tag{6.9}
+\]
+
+慣例的に\(\overline{σ}^0 = I_{2×2}, \overline{σ}^ i = −σ^i\)と定義し、これを用いて以下のローレンツ不変項を構築することができる。
+<!--
+It is conventional to define \(\overline{σ}^0 = I_{2×2}, \overline{σ}^ i = −σ^i\) and using this we can
+construct the following Lorentz invariant terms
+-->
+\[
+I_3 := (χ_{\dot{a}})^T∂_μ(σ^μ)^{\dot{a}b}χ_b = (χ_L)^†∂_μ\overline{σ}^μχ_L   \tag{6.10}
+\]
+
+および
+<!--
+and
+-->
+\[
+I_4 := (ξ^a)^T∂_μ(σ^μ)_{a\dot{b}}ξ^{\dot{b}}
+= (ξ_R)^†∂_μσ^μξ_R  \tag{6.11}
+\]
+
+ここでは、\((σ^μ)_{a\dot{b}}\) に加えて、\((σ^μ)^{\dot{a}b}\) も必要です。他のスピノルの添え字と適切に組み合わせるには、最初の添え字には点を付け、2番目の添え字には点を付けないようにする必要があります。\((σ^μ)^{\dot{a}b}\) は、スピノル計​​量を2回用いることで得られます。
+<!--
+In addition to \((σ^μ)_{a\dot{b}}\) , we need here also \((σ^μ)^{\dot{a}b|\). The first index must
+be dotted and the second index undotted to combine properly with
+the other spinor indices. We get \((σ^μ)^{\dot{a}b|\) by using the spinor metric
+twice:
+-->
+\[
+\begin{align}
+(σ^μ)^{\dot{a}b} &= ((σ^μ)^T)^{b\dot{a}} =\epsilon^{bc}((σ^μ)^T)_{c\dot{d}}(\epsilon^{\dot{a}\dot{d}})^T \\
+\\
+&=
+\begin{pmatrix}
+0 & 1 \\
+−1 & 0
+\end{pmatrix}
+(σ^μ)^T
+\begin{pmatrix}
+0 & 1 \\
+−1 & 0
+\end{pmatrix}^T \\
+\\
+&=
+\begin{pmatrix}
+0 & 1 \\
+−1 & 0
+\end{pmatrix}
+(σ^μ)^T
+\begin{pmatrix}
+0 & −1 \\
+1 & 0
+\end{pmatrix}
+= \overline{σ}_μ  \tag{6.12}
+\end{align}
+\]
+
+例えば\(σ_3\)の場合、
+<!--
+For example, for \(σ_3\), we have
+-->
+\[
+\begin{pmatrix}
+0 & 1 \\
+−1 & 0
+\end{pmatrix}
+\underbrace{
+\begin{pmatrix}
+1 & 0 \\
+0 & −1
+\end{pmatrix}
+}_{=σ_3^T}
+\begin{pmatrix}
+0 & −1 \\
+1 & 0
+\end{pmatrix}
+=
+\underbrace{
+\begin{pmatrix}
+−1 & 0 \\
+0 & 1
+\end{pmatrix}
+}_{=\overline{σ}_3=−σ_3}
+\]
+
+\(∂_μ\) がなぜ1つのスピノルにしか作用しないのか、混乱しないでください。
+これらの不変量はラグランジアンで使用します。ラグランジアンは常に積分の中で評価されます<sup>15</sup>。したがって、常に部分積分することで
+他の可能性を得ることができます。したがって、ここでの選択は制限なしです<sup>16</sup>。
+<!--
+Don’t let yourself get confused why \(∂_μ\) acts only on one spinor. We
+are going to use these invariants in Lagrangians, which we always
+evaluate inside of integrals<sup>15</sup> and therefore, we can always integrate
+by parts to get the other possibility. Therefore, our choice here is no
+restriction<sup>16</sup>.
+-->
+</p><p class="margin-large">
+<sup>15</sup>
+運動方程式は作用から得られることを思い出してください。作用はラグランジアン積分です。
+<!--
+Remember that we get the equations 
+of motion from the action, which is the
+integral over the Lagrangian.
+-->
+<br><br>
+
+<sup>16</sup>
+このことは、対応する運動方程式を導出すればより明確に分かります。\(∂_μ\) をどこに置いても同じ方程式が得られ、どちらの可能性もラグランジアンに代入できます。これは長くなりますが、新しいことは何もありません。
+<!--
+We will see this more clearly when
+we derive the corresponding equations
+of motion. We get the same equations
+regardless of where we put \(∂_μ\) and we
+could put both possibilities into the
+Lagrangian. This would be longer, but
+doesn’t gives us anything new.
+-->
+</p><p>
+
+行列<sup>17</sup>を導入すると
+<!--
+When we introduce the matrices<sup>17</sup>
+-->
+</p><p class="margin-large">
+<sup>17</sup>
+
+次の指標を用いて、インデックスを下げた行列を取得します。
+<!--
+We get the matrix with lowered index
+by using the metric: 
+-->
+\(γ_μ = η_{μν}γ^ν =η_{μν}
+\begin{pmatrix}
+0 & σ^ν \\
+\overline{σ}^ν & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & η_{μν}σ^ν \\
+η_{μν}\overline{σ}^ν & 0
+\end{pmatrix}
+=
+\begin{pmatrix}
+0 & \overline{σ}_μ \\
+σ_μ & 0
+\end{pmatrix}\),
+なぜなら
+<!--
+ because 
+-->
+\(η_{μν}σ^ν =
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}
+\begin{pmatrix}
+σ^0 \\
+σ^1 \\
+σ^2 \\
+σ^3
+\end{pmatrix}
+=
+\begin{pmatrix}
+σ^0 \\
+−σ^1 \\
+−σ^2 \\
+−σ^3
+\end{pmatrix}
+= \overline{σ}_μ\).
+</p><p>
+
+\[
+γ^μ =
+\begin{pmatrix}
+0 & σ_μ \\
+\overline{σ}_μ & 0
+\end{pmatrix}
+→ γ_μ =
+\begin{pmatrix}
+0 & \overline{σ}_μ \\
+σ_μ & 0
+\end{pmatrix}
+\tag{6.13}
+\]
+
+先ほど見つけた不変量をディラックスピノル形式を用いて書き表すことができます。行列\(γ_μ\)とディラックスピノルを用いると、不変量は次のように書き表すことができます。
+<!--
+we can write the invariants we just found using the Dirac spinor
+formalism. Using the matrices \(γ_μ\) and Dirac spinors our invariants
+can be written as
+-->
+
+\[
+Ψ^†γ_0Ψ　and　Ψ^†γ_0γ^μ∂_μΨ  \tag{6.14}
+\]
+
+なぜなら
+<!--
+because
+-->
+\[
+Ψ^†γ_0Ψ =\left((χ_L)^†　(ξ_R)^†\right)
+\begin{pmatrix}
+0 & \overline{σ}_0 \\
+σ_0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix}
+=\underbrace{(χ_L)^†\overline{σ}_0ξ_R}_{=I_1}
++\underbrace{(ξ_R)^†σ_0χ_L}_{=I_2}
+\]
+
+これらはまさに先ほど発見した最初の2つの不変量であり、<sup>18</sup>
+<!--
+These are exactly the first two invariants we found earlier and<sup>18</sup>
+-->
+</p><p class="margin-large">
+<sup>18</sup>
+\(σ_0\) は単なる単位行列であり、\(\overline{σ}_0 = σ_0\) となることを思い出してください。
+<!--
+Remember that \(σ_0\) is just the unit
+matrix and we have \(\overline{σ}_0 = σ_0\).
+-->
+</p><p>
+
+\[
+\begin{align}
+Ψ^†γ_0γ^μ∂_μΨ &=\left((χ_L)^†　(ξ_R)^†\right)
+\begin{pmatrix}
+0 & \overline{σ}_0 \\
+σ_0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+0 & σ^μ∂_μ \\
+\overline{σ}^μ∂_μ & 0
+\end{pmatrix}
+\begin{pmatrix}
+χ_L \\
+ξ_R
+\end{pmatrix} \\
+\\
+&= \underbrace{(χ_L)^†\overline{σ}_0\overline{σ}^μ∂_μχ_L}_{=I_3}
++\underbrace{(ξ_R)^†σ_0σ^μ∂_μξ_R}_{=I_4}
+\end{align}
+\]
+
+約束通り、他の2つの不変量<sup>19</sup>を与える。\(γ_0\) と常に書くのを避けるために、慣例的に次の記法を導入する。
+<!--
+gives the other two invariants<sup>19</sup>, as promised. To avoid writing \(γ_0\) all
+the time it is conventional to introduce the notation
+-->
+
+</p><p class="margin-large">
+<sup>19</sup>
+\(σ^μ∂_μ = ∂_μσ^μ\) であることに注意してください。
+\(σ^μ\) は定数行列です。
+<!--
+Take note that \(σ^μ∂_μ = ∂_μσ^μ\), because 
+\(σ^μ\) are constant matrices. 
+</p><p>
+-->
+\[
+\overline{Ψ} := (Ψ)^†γ_0  \tag{6.15}
+\]
+</p><p>
+
+これで、ディラックスピノルを用いて、第4.2節で議論した制約<sup>20</sup>を満たすローレンツ不変なラグランジアンを構築するために必要なものがすべて揃いました。
+<!--
+Now we have everything we need to construct a Lorentz-invariant
+Lagrangian using Dirac spinors that is in agreement with the restrictions<sup>20</sup> discussed in Section 4.2:
+-->
+</p><p class="margin-large">
+<sup>20</sup>
+これらは、\(Ψ\) では最大位数が 2 であり、\(∂_μ\) では最低位数、つまりここでは 1 位数であったことを思い出してください。
+<!--
+Recall that these were: maximum 
+order two in \(Ψ\) and only the lowest,
+non-trivial order in \(∂_μ\), which is here
+order 1. 
+-->
+</p><p>
+
+\[
+\mathscr{L} = AΨ^†γ_0Ψ + BΨ^†γ_0γ^μ∂_μΨ = A\overline{Ψ}Ψ + B\overline{Ψ}γ^μ∂_μΨ
+\]
+定数\((A = −m, B = i)\)を入れると、最終的な<strong>ディラック・ラグランジアン</strong>が得られる。
+<!--
+Putting in the constants \((A = −m, B = i)\) gives us the final <strong>Dirac-
+Lagrangian</strong>
+-->
+\[
+\mathscr{L}_{Dirac} = −m \overline{Ψ}Ψ + i\overline{Ψ}γ^μ∂_μΨ =\overline{Ψ}(iγ^μ∂_μ − m)Ψ  \tag{6.16}
+\]
+
+ここで、ラグランジアンに現れるのは2つの異なる場であることに注目してください。\(Ψ\) は複素数<sup>21</sup> だからです。これは必須条件です。そうでなければローレンツ不変な何かを得ることができないからです。より明確に言えば、
+<!--
+Take note that what appears here in our Lagrangian are two distinct
+fields, because \(Ψ\) is complex<sup>21</sup>. This is a requirement, because otherwise we can’t get something Lorentz invariant. More explicitly, we
+have
+-->
+</p><p class="margin-large">
+<sup>21</sup>
+したがって、各ディラックスピノル内の左カイラルスピノルと右カイラルスピノルも複素数です。
+<!--
+Therefore the left-chiral and rightchiral
+spinors inside each Dirac spinor,
+are complex, too.
+-->
+</p><p>
+
+\[
+Ψ = Ψ_1 + iΨ_2
+\]
+
+2つの実体 \(Ψ_1\) と \(Ψ_2\) を扱う。2つの実体を扱う代わりに、2つの複素体 \(Ψ\) と \(\overline{Ψ}\) を2つの異なる体として扱うのが慣例である。
+<!--
+with two real fields \(Ψ_1\) and \(Ψ_2\). Instead of working with two real
+fields it is conventional to work with two complex fields \(Ψ\) and \(\overline{Ψ}\), as
+two distinct fields.
+-->
+</p><p>
+
+さて、このラグランジアンを、便宜上ここで引用するオイラー・ラグランジュ方程式に代入すると、
+<!--
+Now, if we put this Lagrangian into the Euler-Lagrange equation,
+which we recite here for convenience
+-->
+\[
+\frac{∂\mathscr{L}}{∂Ψ}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μΨ)}\right)= 0
+\]
+
+以下を得る
+<!--
+we get
+-->
+\[
+−m\overline{Ψ} − i∂_μ\overline{Ψ}γ^μ = 0 → (i∂^μ\overline{Ψ}γ_μ + m\overline{Ψ}) = 0  \tag{6.17}
+\]
+
+\(\overline{Ψ}\) 場に対するオイラー・ラグランジュ方程式を用いると、
+<!--
+With the Euler-Lagrange equation for the field \(\overline{Ψ}\)
+-->
+\[
+\frac{∂\mathscr{L}}{∂\overline{Ψ}}− ∂_μ\left(\frac{∂\mathscr{L}}{∂(∂_μ\overline{Ψ})}\right)= 0
+\]
+
+\(Ψ\)の運動方程式を得る。
+<!--
+we get the equation of motion for \(Ψ\)
+-->
+\[
+(iγ_μ∂^μ − m)Ψ = 0  \tag{6.18}
+\]
+
+これは有名な<strong>ディラック方程式</strong>で、スピン \(\frac{1}{2}\) 粒子と場の運動方程式です。これはまさに、ラグランジアンを部分積分すると得られる方程式であることに注目してください。
+<!--
+This is the famous <strong>Dirac equation</strong>, which is the equation of motion
+for spin \(\frac{1}{2}\) particles and fields. Take note that this is exactly what we
+get if we integrate the Lagrangian by parts
+-->
+\[
+−m\overline{Ψ}Ψ + i\overline{Ψ}γ_μ∂^μΨ\underbrace{=}_{部分積分をします。ここでは作用積分を想像してください}
+−m\overline{Ψ}Ψ − (i∂^μ\overline{Ψ})γ_μΨ
+\]
+
+そしてオイラー・ラグランジュ方程式を用いると、
+<!--
+and then use the Euler-Lagrange equation,
+-->
+\[
+→−mΨ + i∂_μγ^μΨ = 0
+\]
+
+つまり、実際には違いはなく、ラグランジアンの書き方は、非対称性があるにもかかわらず、制限はありません<sup>22</sup>。
+<!--
+So it really makes no difference and the way we wrote the Lagrangian
+is no restriction, despite its asymmetry<sup>22</sup>.
+-->
+</p><p class="margin-large">
+<sup>22</sup>
+
+両方の可能性を含む長いラグランジアンを使用することもできますが、結果は同じです。
+<!--
+You are free to use the longer Lagrangian
+that includes both possibilities,
+but the results are the same.
+-->
+</p>
+<h2>6.4 プロカ方程式</h2>
+<!--
+<h2>6.4 Proca Equation</h2>
+-->
+<p>
+さて、ローレンツ群の \((\frac{1}{2}, \frac{1}{2})\) 表現に従って変形する物体の運動方程式を求めましょう。この表現はベクトル表現であることは既に述べたので、この作業は簡単です。任意のベクトル場 \(A_μ\) を取り、そこから第 4.2 節の制約に一致するすべての可能なローレンツ不変量を構築します。第 2.4 節でミンコフスキー空間のスカラー積をこのように定義したため、上付き添字と下付き添字を組み合わせる必要があります。スカラーはラグランジアンに必要なものです。可能な不変量は <sup>23</sup> です。
+<!--
+Now, we want to find the equation of motion for an object transforming
+according to the \((\frac{1}{2}, \frac{1}{2})\) representation of the Lorentz group. We
+already saw that this representation is the vector representation and
+therefore this task is easy. We simply take an arbitrary vector field
+\(A_μ\) and construct all possible Lorentz-invariants from it that are in
+agreement with the restrictions from Section 4.2. We must combine
+an upper with a lower index, because we defined the scalar product
+of Minkowski space in Section 2.4 this way and scalars are what we
+need in the Lagrangian. The possible invariants are<sup>23</sup>
+-->
+</p><p class="margin-large">
+<sup>23</sup>
+繰り返しますが、\(∂_μ∂^μA^νA_ν\) という形式の項は冗長です。
+部分積分して \(∂^μA^ν∂_μA_ν\) を得ることができるからです。
+<!--
+Again, a term of the form \(∂_μ∂^μA^νA_ν\)
+is redundant, because we can integrate
+by parts and get \(∂^μA^ν∂_μA_ν\).
+-->
+</p><p>
+
+\[
+\begin{align}
+I_1 = ∂^μA^ν∂_μA_ν　　&,　　 I_2 = ∂^μA^ν∂_νA_μ \\
+I_3 = A^μA_μ　　&,　　 I_4 = ∂^μA_μ
+\end{align}
+\]
+
+そしてラグランジアンは
+<!--
+and the Lagrangian reads
+-->
+\[
+\mathscr{L}_{Proka} = C_1∂^μA^ν∂_μA_ν + C_2∂^μA^ν∂_νA_μ + C_3A^μA_μ + C_4∂^μA_μ  \tag{6.19}
+\]
+
+\(∂^μA_μ\) の項は無視できます。なぜなら、オイラー・ラグランジュ方程式<sup>24</sup> を見ればわかるように、\(∂^μA_μ\) は運動方程式に影響を与えないからです。したがって、\(∂_μ\) の位数 1 は自明です。
+<!--
+We can neglect the term \(∂^μA_μ\), because has no influence on the equations
+of motion, as can be seen by looking at the Euler-Lagrange
+equation<sup>24</sup>. Therefore order 1 in \(∂_μ\) is trivial.
+-->
+</p><p class="margin-large">
+<sup>24</sup>
+\(∂σ\left(\frac{∂(C_4∂^μA_μ)}{∂(∂_σA_ρ)}\right)= 0\).
+</p><p>
+
+ここで、各場の成分についてオイラー・ラグランジュ方程式を独立に用いて運動方程式を計算したいとします。
+<!--
+If we now want to compute the equations of motion using the
+Euler-Lagrange equation for each field component independently
+-->
+\[
+\frac{∂\mathscr{L}}{∂A_ρ}= ∂_σ\left(\frac{∂\mathscr{L}}{∂(∂_σA_ρ)}\right)
+\]
+
+添え字には細心の注意が必要です。オイラー・ラグランジュ方程式の右辺を見て、\(C_1\)を含む項を取り上げてみましょう。
+<!--
+we need to be very careful about the indices. Let us take a look at
+the right-hand side of the Euler-Lagrange equation and pick the term
+involving \(C_1\):
+-->
+\[
+\begin{align}
+&∂_σ\left(\frac{∂}{∂(∂_σA_ρ)}(C_1∂^μA^ν∂_μA_ν)\right) \\
+\\
+&\underbrace{=}_{積の法則}C_1∂_σ\left((∂_μA_ν)\frac{∂(∂^μA^ν)}{∂(∂_σA_ρ)}
++ (∂^μA^ν)\frac{∂(∂_μA_ν)}{∂(∂_σA_ρ)}\right) \\
+\\
+&\underbrace{=}_{指標を下げる}C_1∂_σ\left((∂_μA_ν)g^{μκ}g^{νλ} \frac{∂(∂_κA_λ)}{∂(∂_σA_ρ)}+ (∂^μA^ν)\frac{∂(∂_μA_ν)}{∂(∂_σA_ρ)}\right) \\
+\\
+&= C_1∂_σ\left((∂_μA_ν)g^{μκ}g^{νλ}δ_κ^σ δ_λ^ρ + (∂^μA^ν)δ_μ^σδ_ν^ρ\right) \\
+\\
+&= C_1∂_σ (∂^σA^ρ + ∂^σA^ρ) \\
+\\
+&= 2C_1∂_σ∂^σA^ρ   \tag{6.20}
+\end{align}
+\]
+
+同様の手順で計算できる
+<!--
+Following similar steps we can compute
+-->
+\[
+∂_σ\left(\frac{∂}{∂(∂_σA_ρ)}(C_2∂^μA^ν∂_νA_μ)\right)
+= 2C_2∂^ρ(∂_σA^σ)
+\]
+
+したがって、式6.19のラグランジアンから導かれる運動方程式は、
+<!--
+Therefore the equation of motion, following from the Lagrangian in
+Eq. 6.19 reads
+-->
+\[
+2C_3A^ρ = 2C_1∂_σ∂^σA^ρ + 2C_2∂^ρ(∂_σA^σ)
+\]
+
+これに通常の定数<sup>25</sup>を代入すると、
+<!--
+which gives us, when we put in the conventional constants<sup>25</sup>
+-->
+</p><p class="margin-large">
+<sup>25</sup>
+なぜ\(C_1 = −C_2\) を使うのか疑問に思うかもしれません。その理由は、\(C_1 = −C_2\) の場合、式 6.19 のラグランジアンが特別な内部対称性を持つからです。この対称性は、異なる場や粒子がどのように相互作用するかを議論する上で非常に重要になります。これについては、7.1.2 節以降で説明します。
+<!--
+Maybe you wonder why we use
+\(C_1 = −C_2\). The reason for this it that
+with \(C_1 = −C_2\) the Lagrangian in
+Eq. 6.19 has a special internal symmetry.
+This symmetry will be crucial in
+our discussion of how different fields or
+particles interact with each other. This
+will be discussed in Section 7.1.2 ff.
+-->
+</p><p>
+
+\[
+→ m^2A^ρ = ∂_σ(∂^σA^ρ − ∂^ρA^σ)
+\tag{6.21}
+\]
+
+これは<strong>プロカ方程式</strong>と呼ばれ、質量を持つスピン1の粒子と場の運動方程式です。質量のない\((m = 0)\)スピン1の粒子、例えば光子の場合、この方程式は次のようになります。
+<!--
+This is called the <strong>Proca equation</strong>, which is the equation of motion
+for massive spin 1 particles and fields. For massless \((m = 0)\) spin 1
+particles, e.g. photons, the equation reads
+-->
+\[
+→ 0 = ∂_σ(∂^σA^ρ − ∂^ρA^σ)
+\tag{6.22}
+\]
+
+これは電流がない場合の<strong>非同次マクスウェル方程式</strong>です。表記を簡潔にするために、電磁テンソルを定義するのが一般的です。
+<!--
+This is the <strong>inhomogeneous Maxwell equation</strong> in absence of electric
+currents. To unclutter the notation it is conventional to define the
+electromagnetic tensor
+-->
+\[
+F^{σρ} := ∂^σA^ρ − ∂^ρA^σ  \tag{6.23}
+\]
+
+すると、非同次マクスウェル方程式は次のように表される。
+<!--
+Then the inhomogeneous Maxwell-equations read
+-->
+\[
+∂_σF^{σρ} =0  \tag{6.24}
+\]
+
+そして、ラグランジアンを質量ゼロのスピン1場に対して書き直すことができる。
+<!--
+and we can rewrite the Lagrangian for massless spin 1 fields
+-->
+\[
+\mathscr{L}_{Maxwell} =\frac{1}{2}(∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ)
+\]
+
+なぜなら
+<!--
+as
+-->
+\[
+\begin{align}
+\mathscr{L}_{Maxwell} & =\frac{1}{4}F^{μν}F_{μν} \\
+\\
+&=\frac{1}{4}(∂^μA^ν − ∂^νA^μ)(∂_μA_ν − ∂_νA_μ) \\
+\\
+&=\frac{1}{4}(∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ − ∂^νA^μ∂_μA_ν + ∂^νA^μ∂_νA_μ) \\
+\\
+&\underbrace{=}_{ダミーインデックスをリネーム}
+\frac{1}{4}(∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ − ∂^μA^ν∂_νA_μ + ∂^μA^ν∂_μA_ν) \\
+\\
+&=\frac{1}{4}(2∂^μA^ν∂_μA_ν − 2∂^μA^ν∂_νA_μ) \\
+\\
+&=\frac{1}{2}(∂^μA^ν∂_μA_ν − ∂^μA^ν∂_νA_μ)  \tag{6.25}
+\end{align}
+\]
+
+\(\mathscr{L}_{Maxwell} = \frac{1}{4}F^{μν}F_{μν}\) はラグランジアンを書くための従来の方法です。
+同様に、質量を持つスピン1の場のラグランジアンは次のように書けます。
+<!--
+\(\mathscr{L}_{Maxwell} = \frac{1}{4}F^{μν}F_{μν}\) is the conventional way to write the Lagrangian.
+Equivalently, the Lagrangian for a massive spin 1 field can be written
+as
+-->
+\[
+\mathscr{L}_{Proca} =\frac{1}{4}F^{μν}F_{μν} +m^2A_μA^μ =
+\frac{1}{2}(∂^μA^ν∂_μA_ν −∂^μA^ν∂_νA_μ)+m^2A_μA^μ  \tag{6.26}
+\]
+</p><p>
+
+この章では、自由場と粒子を記述する運動方程式を導出しました。実験の予測を得るために、これらの方程式を使って何ができるかを理解したいと思います。しかし、まずは、実験は常に相互作用を通して行われるため、さらにいくつかの方程式を導出する必要があります。例えば、電子を検出するには、光子のような別の粒子を使用する必要があります。したがって、次の章では、異なる場と粒子間の相互作用を記述するラグランジアンを導出します。
+<!--
+In this chapter we derived the equations of motion that describe
+free fields and particles. We want to understand what we can do with
+these equations in order to get predictions for experiments. However
+first, we need to derive some more equations, because experiments
+always work through interactions. For example, we are only able to
+detect an electron if we use another particle, like a photon. Therefore,
+in the next chapter we will derive Lagrangians that describe the
+interaction between different fields and particles.
+-->
+</p>
+    </body>
+</html>

@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>重力</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>12 重力</h1>
+<!--
+<h1>12 Gravity</h1>
+-->
+<p>
+念ながら、私たちが持つ最良の重力理論は、本書の残りの部分で概説されている図式には当てはまりません。これは現代物理学の最大の問題の一つであり、以下の段落ではその第一印象をお伝えしたいと思います。
+<!--
+Unfortunately, the best theory of gravity we have does not fit into the picture
+outlined in the rest of this book. This is one of the biggest problems of
+modern physics and the following paragraphs try to give you a first impression.
+-->
+</p><p>
+現代の重力理論は<strong>アインシュタインの一般相対性理論</strong>です。
+基本的な考え方は、重力は時空の曲率の結果であるというものです。質量とエネルギーは時空の曲率を変え、変化した曲率は質量とエネルギーの動きに影響を与えます。このエネルギーと曲率の相互作用は、有名なアインシュタイン方程式によって記述されます。
+<!--
+The modern theory of gravity is <strong>Einstein’s general relativity</strong>.
+The fundamental idea is that gravity is a result of the curvature of
+spacetime. Mass and energy change the curvature of spacetime and
+in turn the changed curvature influences the movement of mass and
+energy. This interplay between energy and curvature is described by
+the famous Einstein equation
+-->
+\[
+G_{μν} = 8πGT_{μν}  \tag{12.1}
+\]
+
+左辺は曲率を表すアインシュタインテンソルGμν、右辺はエネルギー運動量テンソル<sup>1</sup>Tμνです。Gは重力定数です。
+<!--
+On the left-hand side is the Einstein tensor Gμν, which describes
+the curvature and on the right-hand side is the energy-momentum
+tensor<sup>1</sup> Tμν. G is the gravitation constant. 
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+エネルギー運動量テンソルは並進対称性に直接関連する量であることを思い出してください（式4.36）。
+<!--
+Recall that the energy-momentum
+tensor is the quantity which is directly
+related to translational symmetry
+(Eq. 4.36).
+-->
+</p><p>
+重力 = 時空の曲率という考えから、アインシュタイン方程式の導出は、現代的な観点からすると、比較的簡単です<sup>2</sup>。まず、最も重要な物理法則の一つはエネルギーと運動量の保存則であり、これは既に見たように、均質時空を考えれば直接的に成り立ちます。均質時空においては、物理法則は空間と時間の並進に対して不変であり、ネーターの定理を用いて運動量とエネルギーの保存則を導くことができます。したがって、物理学の最も基本的な仮定の一つは、時空が均質であり、したがってエネルギーと運動量が保存されるということです。数学的に言えば、この保存則は(式4.36)のように表されます。
+<!--
+From the idea gravity = curvature of spacetime, the derivation
+of the Einstein equation is, from a modern point of view, relatively
+straightforward<sup>2</sup>. Firstly, one of the most important laws of physics
+is the conservation of energy and momentum, which as we saw,
+follows directly when considering a homogeneous spacetime. In
+a homogeneous spacetime the laws of physics are invariant under
+translations in space and time and using Noether’s theorem, we
+can derive the conservation of momentum and energy. Therefore,
+one of the most basic assumptions of physics is that spacetime is
+homogeneous and therefore energy and momentum are conserved.
+In mathematical terms this conservation law is expressed as (Eq. 4.36)
+-->
+</p><p class="margin-large">
+<sup>2</sup>
+アインシュタインは100年前、正しい方程式を導くのに約6年を要しました。今日では、後知恵の力によって、はるかに速く解くことができます。
+<!--
+Einstein needed 100 years ago ca. 6
+years for the derivation of the correct
+equation. Today, with the power of
+hindsight we are much faster.
+-->
+</p><p>
+
+\[
+∂^μT_{μν} = 0  \tag{12.2}
+\]
+
+</p><p>
+次に、曲率を数学的に記述するものが必要です。
+これが一般相対論の計算負荷を非常に高くしている理由です。
+とはいえ、最も重要な対象である計量については既にわかっています。計量とは、2点間の距離<sup>3</sup>を計算することを可能にする数学的対象であることを思い出してください。図12.1に示すように、曲がった空間では、2点間の距離は平面空間とは異なります。したがって、曲率を数学的に考える際に、計量は非常に重要な役割を果たします。
+</p>
+<center><img src="images/fig12_1.png"></center>
+<p>
+<center>図12.1: 曲がった空間と平面空間における2点間の距離</center>
+<!--
+Next we need something to describe curvature mathematically.
+This is what makes general relativity computationally very demanding.
+Nevertheless, we already know the most important object: the
+metric. Recall that metrics are the mathematical objects that enable
+us to compute the distance between two points<sup>3</sup>. In a curved space
+the distance between two points is different than in a flat space as
+illustrated in Fig. 12.1. Therefore metrics will play a very important
+role when thinking about curvature in mathematical terms.
+Fig. 12.1: Distance between two points
+in a curved and a flat space
+-->
+
+</p><p class="margin-large">
+<sup>3</sup>
+ここまでは、ミンコフスキー計量
+\(η^{μν} =
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}
+\)
+と
+ユークリッド計量
+\(δ^{ij} =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\) のみを検討してきました。
+<!--
+
+Up to this point we only considered the Minkowski metric
+\(η^{μν} =
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+0 & −1 & 0 & 0 \\
+0 & 0 & −1 & 0 \\
+0 & 0 & 0 & −1
+\end{pmatrix}
+\)
+and
+the Euclidean metric 
+\(δ^{ij} =
+\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{pmatrix}
+\)
+-->
+</p><p>
+
+これを踏まえて、アインシュタイン方程式を「導出」する準備が整いました。なぜなら、左辺に置くことができる数学的対象はただ一つ、アインシュタインテンソル \(G_{μν}\) であるからです。
+アインシュタインテンソルは、計量 \(g_{μν}\) とその一次偏微分と二次偏微分について、発散のない<sup>4</sup>関数です。したがって、アインシュタインテンソルは非常に複雑かもしれませんが、曲率を記述するために左辺に書ける唯一の対象です。これは、次のことから結論付けられるためです。
+<!--
+
+Having talked about this, we are ready to "derive" the Einstein
+equation, because it turns out that there is exactly one mathematical
+object that we can put on the left-hand side: the Einstein tensor \(G_{μν}\).
+The Einstein tensor is the only divergence-free<sup>4</sup> function of the metric
+\(g_{μν}\) and at most its first and second partial derivative. Therefore, the
+Einstein tensor may be very complicated, but it’s the only object we
+are allowed to write on the left-hand side describing curvature. This
+follows, because we can conclude from
+-->
+</p><p class="margin-large">
+<sup>4</sup>
+\(∂^μG_{μν} = 0\)
+</p><p>
+
+\[
+T_{μν} = CG_{μν} 　that　 ∂^μT_{μν} = 0 → ∂^μG_{μν} =0  \tag{12.3}
+\]
+
+も成り立たなければなりません。アインシュタインテンソルは2階テンソル<sup>5</sup>であり、まさにこの性質を持っています。
+<!--
+must hold, too. The Einstein tensor is a second rank tensor<sup>5</sup> and has
+exactly this property.
+-->
+</p><p class="margin-large">
+<sup>5</sup>
+
+これは2つのインデックス \(μν\) を意味します。これは必須条件です。なぜなら、右側の \(T_{μν}\) にも2つのインデックスがあるからです。
+<!--
+This means two indices \(μν\), which
+is a requirement, because \(T_{μν}\) on the
+right-hand side has two indices, too.
+-->
+</p><p>
+アインシュタインテンソルは、リッチテンソル\(R_{μν}\)と、リッチテンソルのトレース（リッチスカラー\(R = R_ν^ν\)と呼ばれる）の和として定義されます。
+<!--
+
+The Einstein tensor is defined as a sum of the Ricci Tensor \(R_{μν}\) and
+the trace of the Ricci tensor, called Ricci scalar \(R = R_ν^ν\)
+-->
+\[
+G_{μν} = R_{μν} − \frac{1}{2}Rg_{μν}  \tag{12.4}
+\]
+
+ここで、リッチ テンソル \(R_{μν}\) はクリストフェルに関して定義されます
+記号 \(Γ_{νρ}^μ\)
+<!--
+
+where the Ricci Tensor \(R_{μν}\) is defined in terms of the Christoffel
+symbols \(Γ_{νρ}^μ\)
+-->
+\[
+R_{αβ} = ∂_ρΓ_{βα}^ρ− ∂_βΓ_{ρα }^ρ+ Γ_{ρλ}^ρΓ_{βα}^λ− Γ_{βλ}^ρΓ_{ρα}^λ  \tag{12.5}
+\]
+
+クリストッフェル記号は、計量法によって定義される。
+<!--
+and the Christoffel Symbols are defined in terms of the metric
+-->
+\[
+Γ_{αβρ} =\frac{1}{2}\left(\frac{∂g_{αβ}}{∂x^ρ} +\frac{∂g_{αρ}}{∂x^β}− \frac{∂g_{βρ}}{∂x^α}\right)
+=\frac{1}{2}\left(∂_ρg_{αβ} + ∂_βg_{αρ} − ∂_αg_{βρ}\right) \tag{12.6}
+\]
+
+これは非常に恐ろしいことであり、一般相対性理論の計算に膨大な計算労力が必要になる理由を示しています。
+<!--
+This can be quite intimidating and shows why computations in general
+relativity very often need massive computational efforts.
+-->
+</p><p>
+
+次に、物体がこのような曲がった時空にどのように反応するかを知る必要があります。
+曲がった時空において、物体が \(A\) から \(B\) へ移動する経路はどうなるでしょうか？
+最初の推測が正解です。物体は、曲がった時空における2点間の最短経路を辿ります。与えられたエネルギーと質量の分布、つまり \(T_{μν}\) から始めて、アインシュタイン方程式を用いて計量記号またはクリストッフェル記号を計算し、<strong>測地線方程式</strong>を通して軌道を求めることができます。
+<!--
+
+Next we need to know how things react to such a curved spacetime.
+What’s the path of an object from \(A\) to \(B\) in curved spacetime?
+The first guess is the correct one: An object follows the shortest path
+between two points in curved spacetime. We can start with a given
+distribution of energy and mass, which means some \(T_{μν}\), compute the
+metric or Christoffel symbols with the Einstein equation and then get
+the trajectory through the <strong>geodesic equation</strong>
+-->
+\[
+\frac{d^2x^λ}{dt^2} + Γ_{μν}^λ\frac{dx^μ}{dt}\frac{dx^ν}{dt}= 0  \tag{12.7}
+\]
+
+測地線は、多様体上の2点間の局所的に最短の<sup>6</sup>曲線です。
+<!--
+The geodesic is the locally shortest<sup>6</sup> curve between two points on a 
+manifold.
+-->
+</p><p class="margin-large">
+<sup>6</sup>
+これは少し単純化しすぎていますが、正しい定義には、ここで紹介していない微分幾何学の用語が必要です。
+<!--
+This is a bit oversimplified, but the
+correct definition needs some terms
+from differential geometry we haven’t
+introduced here.
+-->
+</p><p>
+興味深いことに、アインシュタインはクリストッフェル記号を重力場として考えていました。
+<!--
+It is interesting to note that Einstein thought about the Christoffel
+Symbols as the gravitational field
+-->
+</p><p>
+\(Γ_{νρ}^μ\) がゼロであれば、点は一様直線上を一様に移動します。
+したがって、これらの量は運動の一様性からの偏差を条件付けます。これらは重力場の成分です。
+<!--
+If the \(Γ_{νρ}^μ\) vanish, then the point moves uniformly in a straight line.
+These quantities therefore condition the deviation of the motion from
+uniformity. They are the components of the gravitational field.
+-->
+</p><p style="text-align: right;">
+- Albert Einstein<sup>7</sup>
+
+</p><p class="margin-large">
+<sup>7</sup>
+Albert Einstein. The foundation of the
+general theory of relativity. 1916
+</p><p>
+
+アインシュタインの意図するところは、式12.7を見れば理解できる。
+\(Γ_{νρ}^μ = 0\) のとき、測地線方程式は次のように簡約される。
+<!--
+We can understand what Einstein means by looking at Eq. 12.7. For
+\(Γ_{νρ}^μ  = 0\) the geodesic equation reduces to
+-->
+\[
+\frac{d^2x^λ}{dt^2} = 0  \tag{12.8}
+\]
+この方程式の解は直線を描きます。
+<!--
+The solutions of this equation describe a straight line.
+-->
+</p>
+<center><img src="images/fig12_2.png"></center>
+<p>
+図12.2：赤い矢印と黒い矢印を比較できるようにするために、黒い矢印を赤い矢印の位置に
+移動します。
+<!--
+Fig. 12.2: In order to be able to compare
+the red arrow with the black arrow, we
+transport the black arrow to the location
+of the red arrow.
+-->
+
+</p><p>
+曲がった時空のもう一つの興味深い側面は、微分の概念が変わることです。平坦な空間では、微分は差分商を用いて定義されるのを思い出してください。
+<!--
+Another interesting aspect of a curved spacetime is that the notion
+of differentiation changes. Remember how the derivative is defined
+in flat space using the difference quotient
+-->
+\[
+f^\prime(a) = \lim\limits_{h→0}\frac{f (a + h) − f (a)}{h}  \tag{12.9}
+\]
+
+この定義では、問題の関数を2つの異なる点で比較する必要があります。曲がった空間では、この比較は平面空間ほど簡単ではありません。図12.2を見てください。球面上の2つのベクトルを比較する場合、それらのベクトルが本当に異なること、そしてその差が曲がった空間の影響だけではないことをどのように確認すればよいでしょうか。微分幾何学における答えは、平行移動です。比較できるようにするには、一方のベクトルをもう一方のベクトルの位置に移動する必要があります<sup>8</sup>。
+<!--
+This definition requires that we compare the function in question
+at two different points. In a curved space this comparison is not
+as trivial as in the flat space. Take a look at Fig. 12.2. If we want to
+compare two vectors on a sphere, how can we make sure that the
+vectors are really different and the difference is not just an effect of
+the curved space? The answer of differential geometry is parallel
+transport. We have to move one vector to the location of the other
+one, to be able to compare them<sup>8</sup>.
+-->
+</p><p class="margin-large">
+<sup>8</sup>
+実際、微分幾何学では、局所座標系しか存在しません。多様体を定義する特徴は、局所的に平坦、つまりユークリッド的であることです。これは3.11節で説明しました。したがって、問題となっているオブジェクトを記述するために使用する係数は、多様体の小さな領域でのみ有効であり、同じ座標系の係数のみを比較することができます。
+<!--
+
+In fact in differential geometry one
+has only local coordinate systems. The
+defining feature of a manifold is that it
+looks locally flat=Euclidean. This was
+discussed in Section 3.11. Therefore,
+the coefficients we use to describe the
+objects in questions are only valid in a
+small region of the manifold and thus
+we can only compare coefficients of the
+same coordinate system.
+-->
+</p><p>
+曲がった空間では、この微分は<strong>共変微分</strong><sup>9</sup>となる。
+<!--
+The derivative becomes in a curved space the <strong>covariant derivative</strong><sup>9</sup>
+-->
+
+</p><p class="margin-large">
+<sup>9</sup>
+この文脈では、クリストッフェル記号
+\(Γ_{bc}^a\) は、比較したい点を連結する性質があるため、しばしば連結係数と呼ばれます。
+<!--
+In this context the Christoffel symbols
+\(Γ_{bc}^a\) are often called connection coefficients,
+because of their property to
+connect the points we want to compare.
+-->
+</p><p>
+
+\[
+D_bv^a ≡ ∂_bv^a + Γ_{bc}^av^c  \tag{12.10}
+\]
+
+したがって、これまで導出した方程式を曲がった時空でも有効にしたいのであれば、
+<!--
+Therefore, if we want any equation we derived so far to be valid in
+curved spacetime, we need to change
+-->
+\[
+∂_b → D_b = ∂_b + Γ_{bc}^a  \tag{12.11}
+\]
+見覚えがありますか？式7.18をもう一度見てみましょう。前の章で、スピン0またはスピン12の場に対する局所\(\mathcal{U}(1)\)不変なラグランジアンは、スピン1の場との特定の結合を必要とすることを学びました。この特定の結合は、次のように要約できます。
+<!--
+
+Does this look familiar? Take a look again at Eq. 7.18. We learned in
+an earlier chapter that a locally \(\mathcal{U}(1)\) invariant Lagrangian for spin 0
+or spin \(\frac{1}{2}\) fields required a specific coupling with a spin 1 field. This
+specific coupling can be summarized by the prescription
+-->
+\[
+∂_μ → D_μ ≡ ∂_μ + ieA_μ   \tag{12.12}
+\]
+
+これは単なる数学的な小技ではないことを覚えておいてください。この処方箋は
+電磁気学の正しい理論を与えてくれます。
+弱めの電磁気についても同様です。
+<!--
+Remember that this wasn’t just a mathematical gimmick. This prescription
+gives us the correct theory of electromagnetism. The same is
+true for weak
+-->
+\[
+∂_μ → D_μ ≡ ∂_μ − ig \underbrace{W_μ}_{=W_μ^iσ^i}  \tag{12.13}
+\]
+
+および強い相互作用（式7.165を参照）
+<!--
+and strong interactions (see Eq. 7.165)
+-->
+\[
+∂_μ → D_μ = ∂_μ − ig^\prime \underbrace{G_μ}_{=T^CG_μ^C}  \tag{12.14}
+\]
+
+ここでは状況は極めて似ているように見えますが、多くの理由から、他のすべての力の量子的記述と整合する重力の定式化は存在しません。他のすべての力は量子論で記述され、確率予測しかできません。対照的に、一般相対性理論は古典理論です。なぜなら、粒子は定義された軌道をたどり、確率予測の必要がないからです。さらに悪いことに、現時点では、これらの力の相互作用を明らかにする実験は存在しません。素粒子に対する重力の影響はあまりにも弱く、測定できません。このため、重力を完全に無視し、弱い相互作用、強い相互作用、そして電磁相互作用のみを考慮する標準モデルは非常にうまく機能します。一般相対性理論の効果は、非常に重い物体でのみ測定可能になります。そのような量子効果は、質量を持つ物体は非常に多くの素粒子で構成され、すべての量子効果が平均化されるため、何の役割も果たさないのです。第10章で、平均値の運動方程式は古典的な方程式であり、量子効果は測定できないことを発見しました。重力の量子理論の構築を困難にする要因は枚挙にいとまがありませんが、アインシュタインは重力と他のすべての力の違いを非常に簡潔に定式化しました。
+<!--
+
+Although things look quite similar here, there is for many reasons no
+formulation of gravity that is compatible with the quantum description
+of all other forces. All other forces are described in a quantum
+theory and one can only make probability predictions. In contrast,
+general relativity is a classical theory, because particles follow defined
+trajectories and there is no need for probability predictions.
+To make things worse, at the current time no experiment can shine
+any light on the interplay between those forces. The effects of gravity
+on elementary particles is too weak to be measured. Because of this,
+the standard model, which ignores gravity entirely and only takes
+the weak, the strong and the electromagnetic interactions into account,
+works very well. The effects of general relativity only become
+measurable with very heavy objects. For such quantum effects play
+no role, because massive objects consist of many, many elementary
+particles and all quantum effects get averaged out. We discovered in
+Chapter 10 that the equation of motion for the average value is just
+the classical one and no quantum effects are measurable. One can
+make a long list of things that make constructing a quantum theory
+of gravity so difficult, but Einstein formulated the difference between
+gravity and all other forces very concisely:
+-->
+</p><p>
+一般相対性理論によれば、重力は他の力、特に電磁力に対して例外的な位置を占めています。なぜなら、重力場を表す10個の関数が、測定対象空間の計量特性を同時に定義するからです。
+<!--
+...according to the general theory of relativity, gravitation occupies
+an exceptional position with regard to other forces, particularly the
+electromagnetic forces, since the ten functions representing the gravitational
+field at the same time define the metrical properties of the space
+measured.
+-->
+</p><p style="text-align: right;">
+ - Albert Einstein<sup>10</sup>
+
+</p><p class="margin-large">
+<sup>10</sup>
+Albert Einstein and Francis A. Davis.
+The Principle of Relativity. Dover Publications,
+reprint edition, 6 1952. ISBN
+9780486600819
+</p><p>
+
+曲がった空間における量子粒子は、微分を共変微分に置き換えることで記述できます。しかし、これはもちろん重力の力学理論ではありません。アインシュタイン方程式の右辺を、対応する生成子と通常の同一視を行えば量子化できますが、左辺はどうでしょうか？アインシュタインテンソルはクリストッフェル記号で表されます。
+<!--
+We are able do describe quantum particles in a curved space, by
+changing the derivative to the covariant derivative. But this is of
+course no dynamical theory of gravity. We could make the righthand
+side of the Einstein equation quantum, if we make the usual
+identification with the corresponding generator, but what about
+the left-hand side? The Einstein tensor in terms of the Christoffel
+Symbols is
+-->
+\[
+G_{αβ} = (δ_α^γ δ_β^ζ−\frac{1}{2}g_{αβ}g^{γζ} )
+(∂_\epsilonΓ_{γζ}^\epsilon− ∂_ζΓ_{γ\epsilon}^\epsilon + Γ_{\epsilon σ}^\epsilon Γ_{γζ}^σ− Γ_{ζσ}^\epsilon Γ_{\epsilon γ}^σ)  \tag{12.15}
+\]
+
+したがって、アインシュタイン方程式を\(Γ_{ζσ}^\epsilon\)の場の方程式<sup>11</sup>
+と考えることができるかもしれない。そして、処方箋によって生成される項は
+<!--
+Thus maybe we can think of the Einstein equation as the field equation<sup>11</sup>
+for \(Γ_{ζσ}^\epsilon\), and the terms generated by the prescription
+-->
+</p><p class="margin-large">
+<sup>11</sup>
+電磁場のマクスウェル方程式に類似しています。
+<!--
+Analogous to the Maxwell equation
+for the electromagnetic field.
+-->
+</p><p>
+
+\[
+∂_b → D_b = ∂_b + Γ_{bc}^a
+\]
+
+重力場 \(Γ_{ζσ}^\epsilon\) と他の場との間の対応する結合として？
+<!--
+as the corresponding coupling between the gravitational field \(Γ_{ζσ}^\epsilon\) and
+the other fields?
+-->
+</p><p>
+
+重力場として計量を考えるか、クリストッフェル記号を考えるかに関わらず、2つまたは3つのベクトル添字は、(1, 1) あるいはそれ以上の高次の表現、つまりポアンカレ群のスピン2、3、…表現を調べる必要があるかもしれないことを示しています。実際、ほとんどの物理学者は、重力を担うボソンであるグラビトンはスピン2であると考えています。
+<!--
+
+Regardless of if you prefer to think of the metric or the Christoffel
+symbols as the gravitational field, the two or three vector indices
+indicate that we may need to investigate the (1, 1) or even higher
+representations, which we would call consequently spin 2, 3, . . . representation
+of the Poincaré group. In fact most physicists believe that
+the boson responsible for gravitational attraction, the graviton, has
+spin 2.
+-->
+</p><p>
+現在まで、量子重力の理論は機能していません<sup>12</sup>。詳細については、次のセクションで紹介する書籍を参照してください。
+<!--
+Until the present day, there is no working<sup>12</sup> theory of quantum 
+gravity and for further information have a look at the books mentioned
+in the next section.
+-->
+</p><p class="margin-large">
+<sup>12</sup>
+多くの試みは無限個の無限項を生み出し、これは確率予測にとっては非常に悪い結果をもたらします。
+<!--
+Many attempts result in an infinite
+number of infinity terms, which is quite
+bad for probability predictions.
+-->
+</p>
+<h2>さらに読むためのヒント</h2>
+<!--
+<h2>Further Reading Tips</h2>
+-->
+<p>
+標準重力理論、アインシュタインの一般相対性理論の詳細については、
+<!--
+For more information about the standard theory of gravity, Einstein’s
+general relativity, see
+-->
+<div class="styleBullet">
+<ul><li>
+• <strong>Ta-Pei Cheng - Relativity, Gravitation and Cosmology</strong><sup>13</sup> 
+(『相対性理論、重力、そして宇宙論』) は、一般相対性理論への優れた入門書であり、非常に啓発的な解説が数多く掲載されています。概要を素早く把握するのに最適です。
+<!--
+is a 
+great, rather low-level introduction to general relativity with many
+very enlightening explanations. Perfect to get a quick overview.
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>13</sup>
+Ta-Pei Cheng. Relativity, Gravitation
+and Cosmology: A Basic Introduction.
+Oxford University Press, 2nd edition, 1
+2010. ISBN 9780199573646
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• <strong>A. Zee - Einstein Gravity in a Nutshell</strong><sup>14</sup>
+(『アインシュタインの重力入門』)は、一般相対性理論を学ぶのに最適な本です。本書はまさに初歩から始まり、不必要で分かりにくい数学的ツールを避け、一般相対性理論の起源と用途をわかりやすく説明しています。
+<!--
+, is the best book to learn 
+about general relativity. It really starts at the beginning, avoids
+unnecessary, confusing mathematical tools and does a great job
+explaining the origin and usage of general relativity.
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>14</sup>
+Anthony Zee. Einstein Gravity in a
+Nutshell. Princeton University Press, 1st
+edition, 5 2013. ISBN 9780691145587
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+• <strong>Charles W. Misner, Kip S. Thorne, John Archibald Wheeler -
+Gravitation</strong><sup>15</sup> 
+(『重力』) は本当に分厚い本ですが、他のほとんどの本では不明瞭な点について詳細な説明がされています。
+<!--
+is a really, really big book, but often offers in depth 
+explanations for points that remain unclear in most other books.
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>15</sup>
+Charles W. Misner, Kip S. Thorne, and
+John Archibald Wheeler. Gravitation. W.
+H. Freeman, 1st edition, 9 1973. ISBN
+9780716703440
+</p><p>
+
+重力を量子化する試みの詳細については、以下をご覧ください。
+<!--
+For more information about attempts to quantize gravity have a
+look at
+-->
+<div class="styleBullet">
+<ul><li>
+• <strong>Lee Smolin -Three Roads to Quantum Gravity</strong><sup>16</sup>
+(『量子重力への3つの道』)は、重力を量子化するための様々な試みをまとめた素晴らしい科学書です。
+<!--
+, which is brilliant popular science book that summarizes the various attempts
+to quantize gravity.
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>16</sup>
+Lee Smolin. Three Roads to Quantum 
+Gravity. Basic Books, 3 edition, 8 2017.
+ISBN 9780465094547
+</p><p>
+
+<div class="styleBullet">
+<ul><li>
+•<strong> John C. Baez, Javier P. Muniain - Gauge Fields, Knots, and
+Gravity</strong><sup>17</sup>
+(『ゲージ場、結び目、そして重力』)は素晴らしい本です。物理学者が理解できない方法で重力を量子化する試みを理解するために必要な数学的ツールの紹介に焦点が当てられています。
+<!--
+ which is a magnificent book. The focus lies on intro-
+ducing the mathematical tools needed to understand attempts to
+quantize gravity in a way that physicists
+-->
+</li></ul></div>
+
+</p><p class="margin-large">
+<sup>17</sup>
+John C. Baez and Javier P. Muniain. 
+Gauge Fields, Knots, and Gravity. World
+Scientific Pub Co Inc, 1st edition, 9
+1994. ISBN 9789810220341
+</p>
+    </body>
+</html>

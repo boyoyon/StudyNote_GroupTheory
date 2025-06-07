@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+        <meta charset="utf-8" />
+        <title>電気力学</title>
+        <style type="text/css">
+            p
+            {
+                padding-left: 2em;
+            }
+            .margin-large
+            {
+                margin-left: 50px;
+            }
+           .margin-abstract {
+               margin-left: 60px; /* 左マージンを広くする */
+               margin-right: 60px; /* 右マージンを広くする */
+           }
+        </style>
+    <style>
+        .two-columns {
+            display: flex;
+            flex-direction: row;
+            gap: 20px; /* 列間のスペース */
+        }
+        .column {
+            flex: 1; /* 各列が均等に幅を取る */
+        }
+    </style>
+<style>
+.three-columns {
+  display: flex;
+  gap: 10px; /* 列間の余白を設定 */
+}
+.column {
+  flex: 1; /* 各列の幅を均等にする */
+  padding: 10px; /* 内側の余白を設定 */
+}
+</style>
+    <style>
+        .styleRef { 
+            text-indent: -40px; /* 最初の行の字下げを逆方向に */
+            margin-left: 10px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 40px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+        .styleBullet { 
+            text-indent: -20px; /* 最初の行の字下げを逆方向に */
+            margin-left: 30px; /* 2行目以降の字下げを調整 */
+            ul {
+                  list-style-type: none; /* 箇条書き記号を非表示 */
+                  padding-left: 0px; /* 全体の左余白 */
+            }
+            li {
+            }
+        }
+    </style>
+    <style>
+            ol
+            {
+                margin-left: 30px;
+            }
+            ul
+            {
+                margin-left: 30px;
+            }
+    </style>
+    <style>
+        .thin-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 1px;
+            background-color: gray;
+        }
+
+        .thick-line {
+            margin: 0; 
+            margin-left:2em;
+            border: 0;
+            height: 2px;
+            background-color: black;
+        }
+    </style>
+    <style>
+        .highlight {
+            color: red; /* 好きな色に変更してください */
+        }
+    </style>
+    </head>
+    <body>
+<h1>11 電気力学</h1>
+<!--
+<h1>11 Electrodynamics</h1>
+-->
+<p>
+第7章では、古典電気力学の最も重要な方程式の一つである非同次マクスウェル方程式を既に導出しました。(式7.22)
+<!--
+We already derived in Chapter 7 one of the most important equations
+of classical electrodynamics: the inhomogeneous Maxwell equations
+(Eq. 7.22)
+-->
+\[
+∂_σ(∂^σA^ρ − ∂^ρA^σ) = J^ρ  \tag{11.1}
+\]
+
+あるいは電磁テンソル<sup>1</sup>を用いたより簡潔な形では
+<!--
+or in a more compact form using the electromagnetic tensor<sup>1</sup>
+-->
+</p><p class="margin-large">
+<sup>1</sup>
+\(F^{σρ} ≡ (∂^σA^ρ − ∂^ρA^σ)\)
+</p><p>
+
+\[
+∂_σF^{σρ} = J^ρ  \tag{11.2}
+\]
+
+7.1.6節で、\(J^ρ\) はネーターカレント、すなわち \(∂_ρ J^ρ =
+0\) であることを発見しました。マクロ理論では、この保存カレントは電気四元流です。
+テンソル \(F^{σρ}\)  は反対称 \(F^{σρ} = −F^{ρσ}\) であり、これは定義 \(F^{σρ} = ∂^σA^ρ − ∂^ρA^σ\) から直接わかるように、6つの独立成分を持ちます。そのうち3つは
+<!--
+We discovered in Section 7.1.6 that \(J^ρ\) is a Noether current, i.e. \(∂_ρ J^ρ =
+0\). In a macroscopic theory this conserved current is the electric fourcurrent.
+The tensor Fσρ is antisymmetric \(F^{σρ} = −F^{ρσ}\), which can
+be seen directly from the definition \(F^{σρ} = ∂^σA^ρ − ∂^ρA^σ\) , and has
+therefore 6 independent components. Three are
+-->
+\[
+F^{i0} = ∂^iA^0 − ∂^0A^i  \tag{11.3}
+\]
+
+\(i = 1, 2, 3\) であり、他の3つは
+<!--
+with \(i = 1, 2, 3\) and the three other are
+-->
+\[
+F^{ij} = ∂^iA^j − ∂^jA^i = (δ_l^iδ_m^j− δ_m^i δ_l^j)∂^lA^m
+\underbrace{=}_{\text{これは、1つの一致する指数を持つ2つの乗算の標準的な関係である}}\epsilon^{ijk}\epsilon^{klm}∂^lA^m  \tag{11.4}
+\]
+
+これらのコンポーネントにラベルを付ける標準的な方法は
+<!--
+The standard way to label these components is
+-->
+\[
+∂^iA^0 − ∂^0A^i ≡ E^i \tag{11.5}
+\]
+
+\[
+\epsilon^{ijk}∂^jA^k ≡ −B^i \tag{11.6}
+\]
+
+従って
+<!--
+and therefore
+-->
+\[
+F^{i0} = E^i \tag{11.7}
+\]
+
+\[
+F^{ij} = \epsilon^{ijk}\epsilon^{klm}∂^lA^m = −\epsilon^{ijk}B^k  \tag{11.8}
+\]
+
+ここで、非同次マクスウェル方程式<sup>2</sup>を次のように書き直すと、
+<!--
+If we now rewrite the inhomogeneous Maxwell equations<sup>2</sup> as 
+-->
+</p><p class="margin-large">
+<sup>2</sup>
+複数形なのは、各要素 \(ρ\) に対して 1 つの方程式があるためです。
+<!--
+Plural because we have one equation
+for each component \(ρ\).
+-->
+</p><p>
+
+\[
+∂_σF^{ρσ} = ∂_0F^{ρ0} − ∂_kF^{ρk} = J^ρ  \tag{11.9}
+\]
+
+3つの空間成分<sup>3</sup> \((ρ → i)\)
+<!--
+we have for the three spatial components<sup>3</sup> \((ρ → i)\)
+-->
+</p><p class="margin-large">
+<sup>3</sup>
+\(∇×\vec{B}\) はベクトル表記では \(\epsilon^{ikl}∂_kB^l\) となり、一般的に外積と呼ばれます。
+<!--
+\(∇×\vec{B}\) is \(\epsilon^{ikl}∂_kB^l\) in vector notation and 
+commonly called cross product.
+-->
+</p><p>
+
+\[
+∂_0F^{i0} − ∂_kF^{ik} = ∂_0E^i +\epsilon^{ikl}∂_kB^l = J^i
+\]
+
+\[
+→ ∂_t\vec{E} +∇×\vec{B} =\vec{J}  \tag{11.10}
+\]
+
+時間成分\((ρ → 0)\)については
+<!--
+and for the time-component \((ρ → 0)\)
+-->
+\[
+∂_0\underbrace{F^{00}}_{=0\;F^{ρσ}の定義参照}
+−∂_kF^{0k}
+\overbrace{=}^{\because\; F^{μν}=−F^{νμ}} 	
+= ∂_kF^{k0}
+\underbrace{=}_{Eq. 11.7}
+∂_kE^k = J^0
+\]
+
+\[
+→∇\vec{E} = J^0  \tag{11.11}
+\]
+
+これは、例えばエンジニアが使用する非同次マクスウェル方程式の形式です。
+<!--
+This is the form of the inhomogeneous Maxwell equations that, for
+example, engineers use.
+-->
+</p>
+<h2>11.1 同次マクスウェル方程式</h2>
+<!--
+<h2>11.1 The Homogeneous Maxwell Equations</h2>
+-->
+<p>
+電磁テンソルの定義から直接導かれるのは、
+\(F_{μν}\) を全く反対称なもの<sup>4</sup> と掛け合わせると、
+<!--
+It follows directly from the definition of the electromagnetic tensor
+\(F_{μν}\) that if we multiply it with something totally antisymmetric<sup>4</sup>
+-->
+</p><p class="margin-large">
+<sup>4</sup>
+\(\epsilon^{μνρσ}\) は4次元のレヴィ-チヴィタ記号であり、付録B.5.5で定義されています。
+<!--\(\epsilon^{μνρσ}\) is the four-dimensional Levi- 
+Civita symbol, which is defined in
+Appendix B.5.5.
+-->
+</p><p>
+
+\[
+\tilde{F}^{μν} =\epsilon^{μνρσ}F^{ρσ}  \tag{11.12}
+\]
+
+この新しいオブジェクト \(\tilde{F}^{μν}\) の微分 \(∂_μ\) は<strong>双対電磁テンソル</strong>と呼ばれ、ゼロになります。
+<!--
+the derivative \(∂_μ\) of this new object \(\tilde{F}^{μν}\), which is called the <strong>dual
+electromagnetic tensor</strong>, vanishes:
+-->
+\[
+∂_μ\tilde{F}^{μν} = ∂_μ\epsilon^{μνρσ}(∂_σA_ρ − ∂_ρA_σ) = 0  \tag{11.13}
+\]
+
+これは、2つの対称な指数を2つの反対称な指数で縮約すると、結果は常に0になるという事実から導かれます<sup>5</sup>。これは、簡潔にするために最初の項に焦点を当てると、次のように分かります。
+<!--
+This follows from the fact that if we contract two symmetric indices with two antisymmetric indices, the result is always zero<sup>5</sup>. This can
+be seen, focussing for brevity on the first term, as follows
+-->
+</p><p class="margin-large">
+<sup>5</sup>
+これについては付録B.5.4で説明されています。
+<!--
+This is explained in Appendix B.5.4.
+-->
+</p><p>
+\[
+\begin{align}
+\epsilon^{μνρσ}∂_μ∂_σA_ρ &=\frac{1}{2}(\epsilon^{μνρσ}∂_μ∂_σA_ρ+\epsilon^{μνρσ}∂_μ∂_σA_ρ) \\
+\\
+&\underbrace{=}_{\text{ダミーインデックスをリネーム}}
+\frac{1}{2}(\epsilon^{μνρσ}∂_μ∂_σA_ρ +\epsilon^{σνρμ}∂_σ∂_μA_ρ) \\
+\\
+&\underbrace{=}_{\because \epsilon^{μνρσ}=−\epsilon^{σνρμ}\: and\; ∂_μ∂_σ=∂_σ∂_μ}
+\frac{1}{2}(\epsilon^{μνρσ}∂_μ∂_σA_ρ −\epsilon^{μνρσ}∂_μ∂_σA_ρ) = 0  \tag{11.14}
+\end{align}
+\]
+
+同様に、第2項はゼロです。式<sup>6</sup>
+<!--
+Equally the second term is zero. The equations<sup>6</sup>
+-->
+</p><p class="margin-large">
+<sup>6</sup>
+複数形なのは、各要素 \(v = 0, 1, 2, 3\) に対して 1 つの方程式があるためです。
+<!--
+Plural because we have one equation 
+for each component \(v = 0, 1, 2, 3\).
+-->
+</p><p>
+
+\[
+∂_μ\tilde{F}^{μν} =0  \tag{11.15}
+\]
+
+これらは<strong>同次マクスウェル方程式</strong>として知られており、\(F^{μν}\) の定義から直接導かれることがわかります。これを B と E の観点から書き直すために、\(ν = 0\) の成分を見てみましょう。
+<!--
+are known as <strong>homogeneous Maxwell equations</strong> and we can see that
+they are a direct consequence of the definition of \(F^{μν}\). In order to
+rewrite this in terms of B and E, we take a look at the component
+\(ν = 0\):
+-->
+\[
+\begin{align}
+0 &= ∂_μ\tilde{F}^{μ0} \\
+\\
+&= ∂_μ\epsilon^{μ0ρσ}F^{ρσ} \\
+\\
+&= ∂_0\underbrace{\epsilon^{00ρσ}}_{=0}F^{ρσ} + ∂_i\epsilon^{i0ρσ}F^{ρσ} \\
+\\
+&\underbrace{=}_{\because \epsilon^{i0ρσ}=0\; for\; ρ=0\; or\; σ=0}
+∂_i\epsilon^{i0jk}F^{jk} \\
+\\
+&= −∂_i\epsilon^{0ijk}F^{jk} \\
+&\underbrace{=}_{式11.8参照}∂_i
+\underbrace{\epsilon^{0ijk}\epsilon^{ljk}}_{=2δ_{il}}B^l \\
+\\
+&= 2∂_iδ_{il}B^l = 2∂_iB^i \\
+\\
+⇒ ∂_iB^i &= 0\text{ またはベクトル表記で }∇\vec{B}=0  \tag{11.16}
+\end{align}
+\]
+
+同様に、成分\(ν = i\)に注目して、
+<!--
+Analogously, we can take a look at the components \(ν = i\) and derive
+-->
+\[
+∇×\vec{E} + ∂_t\vec{B} =0 \tag{11.17}
+\]
+
+これは、実際の応用で使用されている同次マクスウェル方程式の従来の形です。
+<!--
+This is the conventional form of the homogeneous Maxwell equations
+that is used in practical applications.
+-->
+</p>
+<h2>11.2 ローレンツ力</h2>
+<!--
+<h2>11.2 The Lorentz Force</h2>
+-->
+<p>
+前章で発見した量子力学と古典力学の関連性（エーレンフェストの定理）を用いて、有名な<strong>ローレンツ力の法則</strong>を導くことができます。出発点は、外部電磁場中のスピンを持たない非相対論的粒子を記述する方程式、すなわち外部電磁場と結合したシュレーディンガー方程式<sup>7</sup>（式8.24）です。
+<!--
+We can use the connection between quantum and classical mechanics
+that we discovered in the last chapter (the Ehrenfest theorem), to
+derive the famous <strong>Lorentz force law</strong>. The starting point is the equation
+describing a non-relativistic particle, without spin, in an external
+electromagnetic field, i.e. the Schrödinger equation with coupling to
+an external electromagnetic field<sup>7</sup> (Eq. 8.24): 
+-->
+</p><p class="margin-large">
+<sup>7</sup>
+この方程式は、外部電磁場と結合したクライン・ゴルドン方程式から導くことができます。この方程式は、質量のないスピン1場、すなわち光子場と結合したスピン0粒子を記述するラグランジアンから導き出しました。したがって、真の出発点は再びローレンツ対称性とゲージ対称性であり、これらを用いて対応するラグランジアンを導き出しました。ここでは\(A_0 ≡ Φ\)という表記を使用します。
+<!--
+This equation can be derived from the
+Klein Gordon equation with coupling
+to an external electromagnetic field,
+which we derived from the Lagrangian
+describing spin 0 particles which are
+coupled to a massless spin 1 field, i.e.
+the photon field. Therefore, the real
+starting point is once more Lorentz and
+gauge symmetry, which we used to
+derive the corresponding Lagrangian.
+We use here the notation \(A_0 ≡ Φ\).
+-->
+</p><p>
+
+\[
+i∂_tΨ =\underbrace{\left(\frac{1}{2m}(\vec{p} − q\vec{A})^2 + qΦ\right)}_{
+≡H_Ψ}  \tag{11.18}
+\]
+</p><p>
+この系の運動量<sup>8</sup>を \(\vec{Π} =\vec{p} − q\vec{A}\) と定義すると、ハミルトニアンは次のように書けます。
+<!--
+If we define the momentum<sup>8</sup> of this system as \(\vec{Π} =\vec{p} − q\vec{A}\), we can write the Hamiltonian:
+-->
+</p><p class="margin-large">
+<sup>8</sup>
+これは実際には、ネーター定理を用いた並進不変性から導かれる系の運動量です。
+\(\frac{∂L}{∂\dot{x}} = Π\)
+<!--
+This is actually the momentum of the
+system following from invariance under
+translations using the Noether theorem
+\(\frac{∂L}{∂\dot{x}} = Π\).
+-->
+</p><p>
+
+\[
+H =\frac{1}{2m}\vec{Π}^2 + qΦ  \tag{11.19}
+\]
+</p><p>
+ハミルトニアンHを定義したら、前のセクションで説明したのと全く同じ手順を踏んで式10.1に到達できます。しかし、今回は偏時間微分項を無視することはできません。なぜなら、これから扱う演算子は時間依存だからです。
+<!--
+Having defined the Hamiltonian H we are able to follow the exact
+same steps described in the last section and arrive at Eq. 10.1. But
+this time we can’t neglect the partial time-derivative term, because
+the operator we are going to look at is time dependent:
+-->
+\[
+\begin{align}
+\frac{d}{dt}\langle\hat{\mathcal{O}}\rangle &=
+\frac{1}{i}\langle [\mathcal{O}, H]\rangle + \langle\frac{∂\mathcal{O}}{∂t}\rangle \\
+\\
+→ \frac{d}{dt}\langle\vec{Π}\rangle &=
+\frac{1}{i}\langle [\vec{Π}, H]\rangle +\langle \frac{∂\vec{Π}}{∂t}\rangle
+\end{align}
+\]
+
+\(A\)は時間とともに変化するので、\(\frac{∂\vec{Π}}{∂t} \neq 0\)となることがわかります。\(H\) (式11.19)をこの式に代入すると、次のようになります。
+<!--
+We can see that \(\frac{∂\vec{Π}}{∂t} \neq 0\) because \(A\) can change with time. If we now
+put the explicit form of \(H\) (Eq. 11.19) into the equation, we get
+-->
+\[
+→ \frac{d}{dt}\langle \vec{Π}\rangle =\frac{1}{i}\langle [\vec{Π},
+\frac{1}{2m}\vec{Π}^2 + qΦ]\rangle +\langle \frac{∂\vec{Π}}{∂t}\rangle 
+\]
+
+\[
+→ \frac{d}{dt}\langle\vec{Π}\rangle =
+\frac{1}{i}\langle [\vec{Π},\frac{1}{2m}\vec{Π}^2]\rangle
++\underbrace{\frac{1}{i}\langle [\vec{Π}, qΦ]\rangle}_{=\langle q∇Φ\rangle}
++\langle\frac{∂\vec{Π}}{∂t}\rangle
+\]
+
+最後のステップでは、\([\vec{Π}, qΦ]\) は、前章で検討した\([\vec{p},V]\) と同様に計算できることを使います。\([A,Φ] = 0\) だからです。
+次のタスクは、\([(\vec{Π})^2, \vec{Π}]\) を計算することです。これは、\(Π_i\) の要素が可換ではないため、単純ではありません。代わりに、
+<!--
+In the last step we use that \([\vec{Π}, qΦ]\) can be computed analogous to
+\([\vec{p},V]\), which we considered in the last chapter, because \([A,Φ] = 0\).
+The next task is to compute \([(\vec{Π})^2, \vec{Π}]\), which is non-trivial, because
+the components \(Π_i\) do not commute. Instead, we have
+-->
+\[
+[Π_i,Π_j] = −\frac{q}{i}\left(\frac{∂A_j}{∂x_i−\frac{∂A_i}{∂x_j}\right)
+= −\frac{q}{i}\epsilon_{ijk}\underbrace{B_k}_{=\epsilon_{klm}\frac{∂}{∂x_l}A_m}
+\tag{11.20}
+\]
+
+通常の磁場の定義\(B = ∇× A\)を指数形式で書き表すと、粒子の速度<sup>9</sup>を\(\vec{v} ≡ \frac{\vec{Π}{m}\)と定義すると、次の式が得られます。
+<!--
+with the usual definition of the magnetic field \(B = ∇× A\) written in
+index form. If we now define the speed<sup>9</sup> of our particle as \(\vec{v} ≡ \frac{\vec{Π}{m}\) we arrive at
+-->
+</p><p class="margin-large">
+<sup>9</sup>
+運動量を粒子の質量で割ったもの：\(p = mv\)
+<!--
+The momentum divided by the mass 
+of the particle: \(p = mv\)
+-->
+</p><p>
+
+\[
+\frac{1}{2m}[\vec{Π}^2, \vec{Π}] =\frac{q}{2i}
+(v × B − B × v) =\frac{q}{i}(\vec{v} ×\vec{B})
+\]
+
+すると、古典的な運動方程式は次のように書ける。
+<!--
+Then we can write the classical equation of motion as
+-->
+\[
+\frac{d}{dt}\langle \vec{Π}\rangle = \langle q∇Φ\rangle 
+−\langle q(v × B)\rangle + \underbrace{\langle\frac{∂\vec{Π}}{∂t}\rangle}_{
+=−q\frac{∂\vec{A}}{∂t}}
+\]
+
+\[
+\frac{d}{dt}\langle \vec{Π}\rangle = −q\langle (v × B)\rangle + q
+\underbrace{\langle ∇Φ −\frac{∂\vec{A}}{∂t}\rangle}_{
+=\langle E\rangle\; 式11.5参照}
+\]
+
+最終的に以下を得る
+<!--
+We finally get
+-->
+\[
+\frac{d}{dt}\langle \vec{Π}\rangle ≡ F_{Lorentz} 
+= −q(\langle (v × B)\rangle + \langle E\rangle)  \tag{11.21}
+\]
+
+これは、外部電磁場における粒子の古典的な軌道を記述する運動方程式です。
+<!--
+This is the equation of motion that describes the classical trajectory of
+a particle in an external electromagnetic field.
+-->
+</p>
+<h2>11.3 クーロンポテンシャル</h2>
+<!--
+<h2>11.3 Coulomb Potential</h2>
+-->
+<p>
+第7章で、ラグランジアンが内部変換に対して不変であることを学びました。この自由度を利用して計算を簡略化することができます。つまり、計算が特に単純になるように、問題の場を内部変換によって変換します。これは、ラグランジアンを不変にするゲージ変換に従う限り、場と変換後の場で記述する物理は同じであるため可能です。よく使われる選択肢は、光子場 \(A^μ\) を<sup>10</sup> \(∂_μA^μ = 0\) となるようにゲージすることです。これはローレンツゲージと呼ばれます。このゲージを使用すると、非同次マクスウェル方程式は次のように簡略化されます。
+
+<!--
+We learned in Chapter 7 that our Lagrangians are invariant under
+internal transformations. We can use this freedom to simplify computations,
+i.e. we transform the field in question with an internal
+transformation such that the computation becomes especially simple.
+This is allowed because the physics we describe with the field and
+the transformed field are the same, as long as we stick to the gauge
+transformations that leave the Lagrangian invariant. An often used
+choice is gauging the photon field \(A^μ\) such that<sup>10</sup> \(∂_μA^μ = 0\). This is 
+called the Lorenz gauge. Using this gauge simplifies the inhomogeneous
+Maxwell equations to
+-->
+
+</p><p class="margin-large">
+<sup>10</sup>
+そのようなゲージ選択が存在することは明示的に示せます。詳細は、電気力学の標準的な教科書に記載されています。
+<!--
+It can be shown explicitly that there
+is such a gauge choice. Further details
+can be found in the standard textbooks
+about electrodynamics.
+-->
+</p><p>
+
+\[
+∂_σ(∂^σA^ρ − ∂^ρA^σ) = ∂_σ∂^σA^ρ = J^ρ \tag{11.22}
+\]
+
+ここで、座標系の原点を中心とした球対称領域に、固定された静電荷が存在する物理的な状況を見てみましょう。ここでは、外部領域、つまり電荷源のない領域、つまり\(J^ρ = 0\)における物理現象を記述します。したがって、マクスウェル方程式はこの領域にあります。
+<!--
+We now have a look at the physical situation where a fixed, static
+charge is located in a spherically symmetric region around the origin
+of our coordinate system. We want to describe physics in the outside
+region, which means in the region without a source in it, i.e. \(J^ρ = 0\).
+Therefore the Maxwell equations are in this region
+-->
+\[
+∂_σ∂^σA^ρ = ∂_0∂_0A^ρ − ∂_i∂_iA^ρ = 0  \tag{11.23}
+\]
+
+ここで、球座標<sup>11</sup>を用いて方程式を書き直すことで、静的な\((∂_0A^ρ = 0)\)球対称系を考察していることを前提とします。
+すると、\(∂_r\)微分を含む項以外の項はすべて無視できます<sup>12</sup>。これにより、次式が得られます。
+<!--
+We now use that we are considering a static \((∂_0A^ρ = 0)\), spherically
+symmetric system, by rewriting the equation using spherical coordinates<sup>11</sup>.
+Then we can neglect all terms<sup>12</sup> but the term involving the \(∂_r\) 
+derivative. This yields
+-->
+</p><p class="margin-large">
+<sup>11</sup>
+
+物体の位置を決定するために、\(x, y, z\) を使用する代わりに、2つの角度 \(θ, φ\) と原点からの距離 \(r\) を使用することもできます。
+すると、\(∂_i∂_iA^ρ = \frac{∂^2}{∂r^2} (rA^ρ) +
+\frac{1}{r^2 \sin θ}\frac{∂}{∂θ}\left(\sin θ\frac{∂A^ρ}{∂θ}\right)
++\frac{1}{r^2 \sin^2 θ}\frac{∂^2A^ρ}{∂φ^2}\) となります。これは、球対称系を考える場合に特に便利です。なぜなら、球対称系は \(r\) のみに依存するからです。
+<!--
+Instead of using \(x, y, z\) to determine
+the position of some objects,
+it’s possible to use two angels \(θ, φ\)
+and the distance from the origin \(r\).
+Then we have \(∂_i∂_iA^ρ = \frac{∂^2}{∂r^2} (rA^ρ) +
+\frac{1}{r^2 \sin θ}\frac{∂}{∂θ}\left(\sin θ\frac{∂A^ρ}{∂θ}\right)
++\frac{1}{r^2 \sin^2 θ}\frac{∂^2A^ρ}{∂φ^2}\) . This
+is especially useful when considering
+spherically symmetric systems, because
+these do only depend on \(r\).
+-->
+<br><br>
+
+<sup>12</sup>
+球対称場の場合、\(∂_θA = ∂_φA = 0\) となります。
+<!--
+For a spherically symmetric field, we
+have \(∂_θA = ∂_φA = 0\).
+-->
+</p><p>
+
+\[
+→ \frac{∂^2}{∂r^2} (rA^μ) = 0  \tag{11.24}
+\]
+
+この方程式の一般解は
+<!--
+The general solution of this equation is
+-->
+\[
+A^μ =\epsilon^μ\frac{C}{r}+\epsilon^μD  \tag{11.25}
+\]
+
+定数4元ベクトル\(\epsilon^μ\)と定数\(C\)および\(D\)を用いて表される。\(A^μ\)場は無限遠で消滅しなければならないため、\(D = 0\)となる。\(A^μ\)の零成分<sup>13</sup>
+に対して、これは有名なクーロンポテンシャルである。
+<!--
+with some constant four-vector \(\epsilon^μ\) and constants \(C\) and \(D\). The field
+\(A^μ\) must vanish at infinity and therefore \(D = 0\). For the zeroth component<sup>13</sup>
+of \(A^μ\) this is the famous Coulomb potential 
+-->
+</p><p class="margin-large">
+<sup>13</sup>
+対称性を考慮した長い計算により、他のすべての成分が消えることが示されます。
+<!--
+In a lengthy computation using
+symmetry considerations it can be
+shown that all other components
+vanish.
+-->
+</p><p>
+
+\[
+A^0 = Φ =\frac{C}{r}=\frac{Z_e}{r}  \tag{11.26}
+\]
+
+ここで、\(Z\) は整数、\(e\) は電子の電荷です。定数 \(C\) をこのように書く理由は、電荷が電子電荷の倍数で量子化されているからです。標準模型では、この奇妙な自然現象を納得のいく形で説明することはできません。
+<!--
+where \(Z\) is an integer and \(e\) the electric charge of an electron. The
+reason for writing the constant \(C\) like this is that the electric charge
+is quantized in terms of multiples of the electron charge. In the standard
+model there is no satisfying explanation for this curious fact of
+nature.
+-->
+</p>
+<h2>さらに読むためのヒント</h2>
+<!--
+<h2>Further Reading Tips</h2>
+-->
+<p>
+• <strong>Richard P. Feynman - The Feynman Lectures on Physics
+Volume 2</strong><sup>14</sup>
+(『ファインマン物理学講義 第2巻』)は、電気力学を学び始めるのに最適な本です。
+<!--
+ is a great book to start learning electrodynamics.
+-->
+</p><p class="margin-large">
+<sup>14</sup>
+Richard P. Feynman, Robert B. 
+Leighton, and Matthew Sands. The
+Feynman Lectures on Physics: Volume 2.
+Addison-Wesley, 1st edition, 2 1977.
+ISBN 9780201021172
+</p><p>
+
+• <strong>David J. Griffiths - Introduction to Electrodynamics</strong><sup>15</sup> 
+(『電気力学入門』)は、電気力学の概念についてさらに学ぶのに最適な本です。
+<!--
+is another great book to learn more about the concepts of electrodynam
+-->
+
+</p><p class="margin-large">
+<sup>15</sup>
+David J. Griffiths. Introduction to
+Electrodynamics. Addison-Wesley, 4th
+edition, 10 2012. ISBN 9780321856562
+</p>
+    </body>
+</html>
